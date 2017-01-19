@@ -1,0 +1,28 @@
+/* should work but no allowance for such implementations*/
+/* java 9 & 10 should allow for multiple identical function names but with different exception handlings */
+/* @Override should allow for multiple identical functions within class with target keyword (see example below)*/
+   
+
+@Override(target="org.mypackage.Classname.functionName")
+public void start()
+{
+    this.run();
+}
+    
+@Override(target="org.mypackage.Classname.functionName")
+public void start() throws IOException
+{
+    this.run();
+}
+
+@Override("")
+public void start()
+{
+    this.run();
+}  
+
+//lemme git diss (crisdad do sayu)
+
+            //check that we have exactly one APML to source code compiler
+            if(!xml.getRoot().getChildNodes().item(nth).toString().equalsIgnoreCase("compiler"))
+                throw new Exception("Root does not equal containment at this time."); 
