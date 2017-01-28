@@ -1,0 +1,88 @@
+<project type="java.j2ee">
+    
+    <definitions>
+        
+        <project id="videosdirect.org">
+            <extends></extends>
+        </project>
+        
+        <registration>
+            </registration_servlet></registration_servlet>
+        </registration>
+        
+        <registration>
+            <object type="ServetListener">
+                <listener care="onHttpGET">
+                    <subscriber class="servlet" id="" class="" extends="java.lang.Servlet">
+                        <handler id="registrationevent" type="servlet" target="$(website)/Registration">
+                            <expected_params>
+                                <param>
+                                    userid;
+                                </param>
+                                <param>
+                                    userid;
+                                </param>                             
+                            </expected_params>
+                        </handler>
+                    </subscriber>
+                </listener> 
+                <listener care="onHttpPOST">
+                    <subscriber class="servlet" id="" class="" extends="java.lang.Servlet">
+                        <handler id="registrationevent" type="servlet" target="$(website)/Registration">
+                            <call>
+                                <presentation>Registration</presentation>                            
+                            </call>
+                        </handler>
+                    </subscriber>
+                </listener>                  
+            </object>
+        </registration>      
+    </definitions>
+    
+    <server class="java.tomcat5.0" os="linux redhat 6.0+"></server>
+    
+    <system>
+        <object type="ServetListener">
+            <home></home>
+            <search></search>
+            <products></products>
+            <registration></registration>
+            
+        </object>
+    </system> 
+               
+</project>
+
+<data>
+    <dbhandler for="registrationevent" id="registrationevent">
+        <function match="org.servlets.myusersite.servlets.Registration.doIt">
+            <params>
+                <param>
+                    $(userid) = http(userid);
+                </param>
+                <param>
+                    $(passid) = http(passid);
+                </param>                
+            </params>
+            <sql>
+                "INSERT INTO TABLE USERS VALUES ($(passid), $(userid));"
+            </sql>
+            <html_out>
+                
+            </html_out>
+            <exceptions>
+                <exchandler>
+                    
+                </exchandler>
+            </exceptions>
+        </function>
+    </dbhandler>
+</data>
+
+<page id="Registration.html" class="HTML">   
+    <http>
+        <body>
+            <dbcall ref="registrationevent"></dbcall>
+        </body>
+    </http>
+</page>
