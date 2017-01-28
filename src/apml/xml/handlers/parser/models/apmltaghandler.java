@@ -76,7 +76,7 @@ public class apmltaghandler
             apmltaghandler sth = new apmltaghandler();
             
             //
-            //sth.convertapmltagstosource("//definitions");                     //todo fill this in how it makes sense
+            sth.convertapmltagstosource("//definitions");
             
             //          
             sth.convertapmltagstosource("//system");   
@@ -106,279 +106,23 @@ public class apmltaghandler
         
         try
         {
-            // 
-            filegrepper grepper = new filegrepper();
-            String classname = grepper.getclassname(sourcefile.getPath());
-            String packagename = grepper.getpackagename(sourcefile.getPath());
-
             JDefinedClass classfile=null;
             JPackage jpackage=null;
 
-            //
-            try
-            {
-                jpackage = jcodemodel._package(packagename);
-            }
-            catch(Exception ex)
-            {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }
+            apmltaghandlerparameter param = new apmltaghandlerparameter(jcodemodel,jpackage,classfile,apmlmodelfile);
             
-            //
-            try
-            {
-                //
-                if(jpackage==null) 
-                    throw new InvalidParameterException("Package not set; unable to set Class name");
-                
-                classfile = jpackage._class(classname);  
-            }
-            catch(NullPointerException | InvalidParameterException | JClassAlreadyExistsException ex)
-            {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }
+            dopackagename(param);
+            doclassname(param);            
+            doextends(param);
+            doimplements(param);
+            dorun(param);
+            dostart(param);
+            doautostart(param);
+            doinit(param);
+            dosuperclass(param);
+            dotaginterfaces(param);
+            dostdinterfaces(param);
             
-            //
-            try
-            {
-                //
-                if(classfile==null) 
-                    throw new InvalidParameterException("Classfile not set; unable to determine if Class extends another");
-                
-                classfile = classfile._extends(Class.forName(apmlmodelfile.apml_extends));
-            }
-            catch(NullPointerException | InvalidParameterException | ClassNotFoundException ex)
-            {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }
-            
-            //
-            try
-            {
-                //
-                if(classfile==null) 
-                    throw new InvalidParameterException("Classfile not set; unable to set interfaces for Class");
-                
-                classfile = classfile._implements(Class.forName(apmlmodelfile.apml_interface));
-            }
-            catch(NullPointerException | InvalidParameterException | ClassNotFoundException ex)
-            {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }
-                 
-            //
-            try
-            {
-                //
-                if(classfile==null) 
-                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
-                
-                if(apmlmodelfile.apml_run!=null)
-                    classfile = classfile._implements(Runnable.class);
-            }
-            catch(Exception ex)
-            {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }               
-            
-            //
-            try
-            {
-                //
-                if(classfile==null) 
-                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
-                
-                if(apmlmodelfile.apml_start!=null)
-                    classfile = classfile._implements(Startable.class);
-            }
-            catch(Exception ex)
-            {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }            
-            
-            //
-            try
-            {
-                //
-                if(classfile==null) 
-                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
-                
-                if(apmlmodelfile.apml_autostart!=null)
-                    classfile = classfile._implements(Autostartable.class);
-            }
-            catch(Exception ex)
-            {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }           
-            
-            //
-            try
-            {
-                //
-                if(classfile==null) 
-                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
-                
-                if(apmlmodelfile.apml_initializable!=null)
-                    classfile = classfile._implements(Initializable.class);
-            }
-            catch(Exception ex)
-            {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }                
-            
-            //
-            try
-            {
-                //
-                if(classfile==null) 
-                    throw new InvalidParameterException("Classfile not set; unable to load superclass methods for JCodeModel builder");
-                
-                Class superclass = Class.forName(apmlmodelfile.apml_extends);
-                Method[] methods = superclass.getMethods();
-
-                //
-                for (Method method : methods) 
-                {
-                    if(method==null) break;
-                    
-                    switch (method.getModifiers()) 
-                    {
-                        case Modifier.PUBLIC:
-                            classfile.method(JMod.PUBLIC, method.getReturnType(), method.getName());
-                            break;
-                        case Modifier.PROTECTED:
-                            classfile.method(JMod.PROTECTED, method.getReturnType(), method.getName());
-                            break;
-                        case Modifier.NATIVE:
-                            classfile.method(JMod.NATIVE, method.getReturnType(), method.getName());
-                            break;
-                        case Modifier.PRIVATE:
-                            classfile.method(JMod.PRIVATE, method.getReturnType(), method.getName());
-                            break;
-                        default:
-                            classfile.method(JMod.NONE, method.getReturnType(), method.getName());
-                            break;
-                    }
-                }                 
-            }
-            catch(NullPointerException | ClassNotFoundException | SecurityException ex)
-            {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }
-            
-            //
-            try
-            {
-                //
-                Iterator<JClass> intrfaces;
-                
-                //
-                if(classfile==null) 
-                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
-                
-                //
-                intrfaces = classfile._implements();
-                
-                //
-                for(;intrfaces.hasNext();)
-                {
-                    JClass class_ = intrfaces.next();                    
-                    Class intrface = Class.forName(class_.fullName());
-                    
-                    Method[] methods = intrface.getMethods();
-
-                    //
-                    for(Method m: methods)
-                    {                
-                        switch(m.getModifiers())
-                        {
-                            case Modifier.ABSTRACT |  Modifier.PUBLIC:
-                                classfile.method(JMod.PUBLIC, m.getReturnType(), m.getName());
-                                break;
-                                
-                            case Modifier.ABSTRACT |  Modifier.PROTECTED:                                            
-                                classfile.method(JMod.PROTECTED, m.getReturnType(), m.getName());
-                                break;                    
-                                
-                            case Modifier.ABSTRACT |  Modifier.NATIVE:
-                                classfile.method(JMod.NATIVE, m.getReturnType(), m.getName());
-                                break;                        
-                                
-                            case Modifier.ABSTRACT |  Modifier.PRIVATE:
-                                classfile.method(JMod.PRIVATE, m.getReturnType(), m.getName());
-                                break;                                    
-                                
-                            default: 
-                                classfile.method(JMod.NONE, m.getReturnType(), m.getName()); 
-                                break;                                
-                        }                
-                    }                   
-                }                 
-            }
-            catch(NullPointerException | ClassNotFoundException | SecurityException ex)
-            {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }            
-           
-            //
-            try
-            {
-                //
-                Iterator<JClass> intrfaces;
-                
-                //
-                if(classfile==null) 
-                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
-                
-                //
-                intrfaces = classfile._implements();
-                   
-                //
-                for(;intrfaces.hasNext();)
-                {
-                    JClass class_ = intrfaces.next();
-                    Class intrface = Class.forName(class_.fullName());
-
-                    Method[] methods = intrface.getMethods();
-
-                    //
-                    for(Method m: methods)
-                    {                                      
-                        switch(m.getModifiers())
-                        {
-                            case Modifier.ABSTRACT | Modifier.PUBLIC:
-                                classfile.method(JMod.PUBLIC, m.getReturnType(), m.getName());
-                                break;
-                                
-                            case Modifier.ABSTRACT | Modifier.PROTECTED:                                            
-                                classfile.method(JMod.PROTECTED, m.getReturnType(), m.getName());
-                                break;                    
-                                
-                            case Modifier.ABSTRACT | Modifier.NATIVE:
-                                classfile.method(JMod.NATIVE, m.getReturnType(), m.getName());
-                                break;   
-                                
-                            case Modifier.ABSTRACT | Modifier.PRIVATE:
-                                classfile.method(JMod.PRIVATE, m.getReturnType(), m.getName());
-                                break;  
-                                
-                            case Modifier.ABSTRACT | Modifier.INTERFACE:
-                                System.err.println("Unknown origin detected; symmetry unbounded by this algorithm./detected..");
-                                break;
-                                
-                            default: 
-                                classfile.method(JMod.NONE, m.getReturnType(), m.getName()); 
-                                break;
-                        }                
-                    }                    
-                }                 
-            }
-            catch(NullPointerException | ClassNotFoundException | SecurityException ex)
-            {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }
-
-            //
             return jcodemodel;
         }
         catch(Exception ex)
@@ -388,6 +132,290 @@ public class apmltaghandler
         
         throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel");
     }    
+    
+    private void dopackagename(apmltaghandlerparameter param)
+    {
+        try
+        {
+            if(param.jcodemodel==null) 
+                throw new InvalidParameterException("JCodeModel not set; unable to set package name");
+            
+            param.jpackage = param.jcodemodel._package(param.apmlmodelfile.apml_packagename);
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }        
+    }
+    
+    private void doclassname(apmltaghandlerparameter param)
+    {
+        try
+        {     
+            if(param.jpackage==null) 
+                throw new InvalidParameterException("Package not set; unable to set class name");
+                
+            param.classfile = param.jpackage._class(param.apmlmodelfile.apml_classname);  
+        }
+        catch(NullPointerException | InvalidParameterException | JClassAlreadyExistsException ex)
+        {
+            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }        
+    }
+    
+    private void doextends(apmltaghandlerparameter param)
+    {
+        try
+        {
+            if(param.classfile==null) 
+                throw new InvalidParameterException("Classfile not set; unable to determine if Class extends another");
+               
+            param.classfile = param.classfile._extends(Class.forName(param.apmlmodelfile.apml_extends));
+        }
+        catch(NullPointerException | InvalidParameterException | ClassNotFoundException ex)
+        {
+            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }        
+    }
+    
+    private void doimplements(apmltaghandlerparameter param)
+    {
+            //
+            try
+            {
+                //
+                if(param.classfile==null) 
+                    throw new InvalidParameterException("Classfile not set; unable to set interfaces for Class");
+                
+                param.classfile = param.classfile._implements(Class.forName(param.apmlmodelfile.apml_interface));
+            }
+            catch(NullPointerException | InvalidParameterException | ClassNotFoundException ex)
+            {
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            }        
+    }
+    
+    private void dorun(apmltaghandlerparameter param)
+    {
+            try
+            {
+                if(param.classfile==null) 
+                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
+                
+                if(param.apmlmodelfile.apml_run!=null)
+                    param.classfile = param.classfile._implements(Runnable.class);
+            }
+            catch(Exception ex)
+            {
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            }          
+    }
+    
+    private void dostart(apmltaghandlerparameter param)
+    {          
+        try
+        {
+            //
+            if(param.classfile==null) 
+                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
+                
+            if(param.apmlmodelfile.apml_start!=null)
+                param.classfile = param.classfile._implements(Startable.class);
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }           
+    }
+    
+    private void dostdinterfaces(apmltaghandlerparameter param)
+    {
+        try
+        {
+            Iterator<JClass> intrfaces;
+                
+            if(param.classfile==null) 
+                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
+                
+            intrfaces = param.classfile._implements();
+                   
+            for(;intrfaces.hasNext();)
+            {
+                JClass class_ = intrfaces.next();
+                Class intrface = Class.forName(class_.fullName());
+
+                Method[] methods = intrface.getMethods();
+
+                //
+                for(Method m: methods)
+                {                                      
+                    switch(m.getModifiers())
+                    {
+                        case Modifier.ABSTRACT | Modifier.PUBLIC:
+                            param.classfile.method(JMod.PUBLIC, m.getReturnType(), m.getName());
+                            break;
+                                
+                        case Modifier.ABSTRACT | Modifier.PROTECTED:                                            
+                            param.classfile.method(JMod.PROTECTED, m.getReturnType(), m.getName());
+                            break;                    
+                                
+                        case Modifier.ABSTRACT | Modifier.NATIVE:
+                            param.classfile.method(JMod.NATIVE, m.getReturnType(), m.getName());
+                            break;   
+                                
+                        case Modifier.ABSTRACT | Modifier.PRIVATE:
+                            param.classfile.method(JMod.PRIVATE, m.getReturnType(), m.getName());
+                            break;  
+                                
+                        case Modifier.ABSTRACT | Modifier.INTERFACE:
+                            System.err.println("Unknown origin detected; symmetry unbounded by this algorithm./detected..");
+                            break;
+                                
+                        default: 
+                            param.classfile.method(JMod.NONE, m.getReturnType(), m.getName()); 
+                            break;
+                    }                
+                }                    
+            }                 
+        }
+        catch(NullPointerException | ClassNotFoundException | SecurityException ex)
+        {
+            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }        
+    }
+    
+    private void doautostart(apmltaghandlerparameter param)
+    {
+        try
+        {
+            if(param.classfile==null) 
+                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
+                
+            if(param.apmlmodelfile.apml_autostart!=null)
+                param.classfile = param.classfile._implements(Autostartable.class);
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }         
+    }
+    
+    private void doinit(apmltaghandlerparameter param)
+    {        
+        try
+        {
+            if(param.classfile==null) 
+                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
+                
+            if(param.apmlmodelfile.apml_initializable!=null)
+                param.classfile = param.classfile._implements(Initializable.class);
+        }
+        catch(Exception ex)
+        {
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }         
+    }
+
+    private void dosuperclass(apmltaghandlerparameter param)
+    {        
+        try
+        {
+            if(param.classfile==null) 
+                throw new InvalidParameterException("Classfile not set; unable to load superclass methods for JCodeModel builder");
+                
+            Class superclass = Class.forName(param.apmlmodelfile.apml_extends);
+            
+            Method[] methods = superclass.getMethods();
+
+            //
+            for (Method method : methods) 
+            {
+                if(method==null) break;
+                   
+                switch (method.getModifiers()) 
+                {
+                    case Modifier.PUBLIC:
+                        param.classfile.method(JMod.PUBLIC, method.getReturnType(), method.getName());
+                        break;
+            
+                    case Modifier.PROTECTED:
+                        param.classfile.method(JMod.PROTECTED, method.getReturnType(), method.getName());    
+                        break;
+                        
+                        
+                    case Modifier.NATIVE:                    
+                        param.classfile.method(JMod.NATIVE, method.getReturnType(), method.getName());                        
+                        break;
+                        
+                       
+                    case Modifier.PRIVATE:                            
+                        param.classfile.method(JMod.PRIVATE, method.getReturnType(), method.getName());                            
+                        break;
+                        
+                        default:
+                            param.classfile.method(JMod.NONE, method.getReturnType(), method.getName());
+                            break;
+                    }
+            }                 
+        }
+        catch(NullPointerException | ClassNotFoundException | SecurityException ex)
+        {
+            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }        
+    }
+    
+    private void dotaginterfaces(apmltaghandlerparameter param)
+    {
+        try
+        {
+            Iterator<JClass> intrfaces;
+                
+            if(param.classfile==null) 
+                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
+                
+            intrfaces = param.classfile._implements();
+                
+            for(;intrfaces.hasNext();)
+            {
+                JClass class_ = intrfaces.next();                    
+                Class intrface = Class.forName(class_.fullName());
+                    
+                    Method[] methods = intrface.getMethods();
+
+                    //
+                    for(Method m: methods)
+                    {                
+                        switch(m.getModifiers())
+                        {
+                            case Modifier.ABSTRACT |  Modifier.PUBLIC:
+                                param.classfile.method(JMod.PUBLIC, m.getReturnType(), m.getName());
+                                break;
+                                
+                            case Modifier.ABSTRACT |  Modifier.PROTECTED:                                            
+                                param.classfile.method(JMod.PROTECTED, m.getReturnType(), m.getName());
+                                break;                    
+                                
+                            case Modifier.ABSTRACT |  Modifier.NATIVE:
+                                param.classfile.method(JMod.NATIVE, m.getReturnType(), m.getName());
+                                break;                        
+                                
+                            case Modifier.ABSTRACT |  Modifier.PRIVATE:
+                                param.classfile.method(JMod.PRIVATE, m.getReturnType(), m.getName());
+                                break;                                    
+                                
+                            default: 
+                                param.classfile.method(JMod.NONE, m.getReturnType(), m.getName()); 
+                                break;                                
+                        }                
+                    }                   
+                }                 
+        }
+        catch(NullPointerException | ClassNotFoundException | SecurityException ex)
+        {
+            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }         
+    }
+    
     
     /**
      * 
@@ -459,69 +487,18 @@ public class apmltaghandler
     }     
 }
 
-/**
- * 
- * @author oem
- */
-class JCodeModelHelper
+class apmltaghandlerparameter
 {
-    public static Object doApmlListeners(JCodeModel jcodemodel, String[] s) throws Exception
+    JCodeModel jcodemodel;
+    JDefinedClass classfile;
+    JPackage jpackage; 
+    apmlmodelfile apmlmodelfile;
+            
+    public apmltaghandlerparameter(JCodeModel jcodemodel, JPackage jpackage, JDefinedClass classfile, apmlmodelfile apmlmodelfile)
     {
-        return null;
-    }
-    
-    public static Object doApmlSubscribers(JCodeModel jcodemodel, String[] s) throws Exception
-    {
-        return null;
-    }    
-    
-     public static Object doClassname(JCodeModel jcodemodel, String classname) throws Exception
-    {
-        return jcodemodel._class(classname);
-    }
-        
-    public static Object doInterfacesFunctional(JCodeModel jcodemodel, String[] interfaces) throws Exception
-    {
-        return null;
-    }
-    
-    public static Object doInterfacesNominal(JCodeModel jcodemodel, String[] interfaces) throws Exception
-    {
-        return null;
-    }       
-    
-    public static Object doLocalClasses(JCodeModel jcodemodel, String[] classes) throws Exception
-    {
-        return null;
-    }
-    
-    public static Object doLocalInterfaces(JCodeModel jcodemodel, String[] classes) throws Exception
-    {
-        return null;
-    }    
-    
-    public static Object doNestedClasses(JCodeModel jcodemodel, String[] interfaces) throws Exception
-    {
-        return null;
-    }
-    
-    public static Object doOverrides(JCodeModel jcodemodel, String[] s) throws Exception
-    {
-        return null;
-    }    
-    
-    public static Object doPackage(JCodeModel jcodemodel, String packagename) throws Exception
-    {
-        return jcodemodel._package(packagename);
-    }       
-    
-    public static Object doSuperclassFunctional(JCodeModel jcodemodel, String[] extendss) throws Exception
-    {
-        return null;
-    }        
-    
-    public static Object doSuperclassNominal(JCodeModel jcodemodel, String[] extendss) throws Exception
-    {
-        return null;
-    }      
+        this.jcodemodel = jcodemodel;
+        this.classfile = classfile;
+        this.jpackage = jpackage;
+        this.apmlmodelfile = apmlmodelfile;
+    }            
 }
