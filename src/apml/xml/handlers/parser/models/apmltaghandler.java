@@ -2,11 +2,13 @@ package apml.xml.handlers.parser.models;
 
 import apml.helpers.filegrepper;
 import apml.interfaces.Autostartable;
+import apml.interfaces.Initializable;
 import apml.interfaces.Startable;
 import apml.modeling.apmlmodelfile;
 import apml.xml.handlers.parser.models.io.apmlmodelpopulator;
 import apml.xml.handlers.parser.models.io.sourcefilenamer;
 import com.sun.codemodel.JClass;
+import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMod;
@@ -14,6 +16,7 @@ import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.security.InvalidParameterException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -118,7 +121,7 @@ public class apmltaghandler
             }
             catch(Exception ex)
             {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
             
             //
@@ -126,13 +129,13 @@ public class apmltaghandler
             {
                 //
                 if(jpackage==null) 
-                    throw new Exception("Package not set; unable to set Class name");
+                    throw new InvalidParameterException("Package not set; unable to set Class name");
                 
                 classfile = jpackage._class(classname);  
             }
-            catch(Exception ex)
+            catch(NullPointerException | InvalidParameterException | JClassAlreadyExistsException ex)
             {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
             
             //
@@ -140,13 +143,13 @@ public class apmltaghandler
             {
                 //
                 if(classfile==null) 
-                    throw new Exception("Classfile not set; unable to determine if Class extends another");
+                    throw new InvalidParameterException("Classfile not set; unable to determine if Class extends another");
                 
                 classfile = classfile._extends(Class.forName(apmlmodelfile.apml_extends));
             }
-            catch(Exception ex)
+            catch(NullPointerException | InvalidParameterException | ClassNotFoundException ex)
             {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
             
             //
@@ -154,13 +157,13 @@ public class apmltaghandler
             {
                 //
                 if(classfile==null) 
-                    throw new Exception("Classfile not set; unable to set interfaces for Class");
+                    throw new InvalidParameterException("Classfile not set; unable to set interfaces for Class");
                 
                 classfile = classfile._implements(Class.forName(apmlmodelfile.apml_interface));
             }
-            catch(Exception ex)
+            catch(NullPointerException | InvalidParameterException | ClassNotFoundException ex)
             {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
                  
             //
@@ -168,14 +171,14 @@ public class apmltaghandler
             {
                 //
                 if(classfile==null) 
-                    throw new Exception("Classfile not set; unable to load interface methods for JCodeModel builder");
+                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
                 
                 if(apmlmodelfile.apml_run!=null)
                     classfile = classfile._implements(Runnable.class);
             }
             catch(Exception ex)
             {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }               
             
             //
@@ -183,14 +186,14 @@ public class apmltaghandler
             {
                 //
                 if(classfile==null) 
-                    throw new Exception("Classfile not set; unable to load interface methods for JCodeModel builder");
+                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
                 
                 if(apmlmodelfile.apml_start!=null)
                     classfile = classfile._implements(Startable.class);
             }
             catch(Exception ex)
             {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }            
             
             //
@@ -198,14 +201,14 @@ public class apmltaghandler
             {
                 //
                 if(classfile==null) 
-                    throw new Exception("Classfile not set; unable to load interface methods for JCodeModel builder");
+                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
                 
                 if(apmlmodelfile.apml_autostart!=null)
                     classfile = classfile._implements(Autostartable.class);
             }
             catch(Exception ex)
             {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }           
             
             //
@@ -213,14 +216,14 @@ public class apmltaghandler
             {
                 //
                 if(classfile==null) 
-                    throw new Exception("Classfile not set; unable to load interface methods for JCodeModel builder");
+                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
                 
                 if(apmlmodelfile.apml_initializable!=null)
-                    classfile = classfile._implements(Autostartable.class);
+                    classfile = classfile._implements(Initializable.class);
             }
             catch(Exception ex)
             {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }                
             
             //
@@ -228,7 +231,7 @@ public class apmltaghandler
             {
                 //
                 if(classfile==null) 
-                    throw new Exception("Classfile not set; unable to load superclass methods for JCodeModel builder");
+                    throw new InvalidParameterException("Classfile not set; unable to load superclass methods for JCodeModel builder");
                 
                 Class superclass = Class.forName(apmlmodelfile.apml_extends);
                 Method[] methods = superclass.getMethods();
@@ -258,9 +261,9 @@ public class apmltaghandler
                     }
                 }                 
             }
-            catch(ClassNotFoundException | SecurityException ex)
+            catch(NullPointerException | ClassNotFoundException | SecurityException ex)
             {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
             
             //
@@ -271,7 +274,7 @@ public class apmltaghandler
                 
                 //
                 if(classfile==null) 
-                    throw new Exception("Classfile not set; unable to load interface methods for JCodeModel builder");
+                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
                 
                 //
                 intrfaces = classfile._implements();
@@ -312,9 +315,9 @@ public class apmltaghandler
                     }                   
                 }                 
             }
-            catch(ClassNotFoundException | SecurityException ex)
+            catch(NullPointerException | ClassNotFoundException | SecurityException ex)
             {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }            
            
             //
@@ -325,7 +328,7 @@ public class apmltaghandler
                 
                 //
                 if(classfile==null) 
-                    throw new Exception("Classfile not set; unable to load interface methods for JCodeModel builder");
+                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
                 
                 //
                 intrfaces = classfile._implements();
@@ -370,9 +373,9 @@ public class apmltaghandler
                     }                    
                 }                 
             }
-            catch(ClassNotFoundException | SecurityException ex)
+            catch(NullPointerException | ClassNotFoundException | SecurityException ex)
             {
-                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
 
             //
@@ -380,7 +383,7 @@ public class apmltaghandler
         }
         catch(Exception ex)
         {
-            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }        
         
         throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel");
@@ -399,7 +402,7 @@ public class apmltaghandler
         for (File filename : filenames) {
             try
             {
-                System.err.println("fix this shit");
+                System.err.println("fix this plz");
             }
             catch(Exception ex)
             {
@@ -420,10 +423,10 @@ public class apmltaghandler
         {   
             //
             apmlmodelpopulator apmlmodeler = new apmlmodelpopulator();                          
-            sourcefilenamer sourcenamer = new sourcefilenamer();
-            
+            apmlmodelfile[] apmlfiles = apmlmodeler.getapmlfiles(this.apmlfile, xpathstring); 
+                        
             //
-            apmlmodelfile[] apmlfiles = apmlmodeler.getapmlfiles(this.apmlfile, xpathstring);            
+            sourcefilenamer sourcenamer = new sourcefilenamer();           
             File[] sourcefiles = sourcenamer.getoutputfiles(xpathstring);
             
             //
