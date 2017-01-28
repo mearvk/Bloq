@@ -86,7 +86,7 @@ public class apmltaghandler
         }
         catch(Exception ex)
         {
-            ex.printStackTrace(System.err);
+            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }   
     
