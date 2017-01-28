@@ -89,7 +89,7 @@ public class apmltaghandler
         }
         catch(Exception ex)
         {
-            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
     }   
     
@@ -100,7 +100,7 @@ public class apmltaghandler
      * @return
      * @throws Exception 
      */
-    private JCodeModel createjcodemodel(File sourcefile, apmlmodelfile apmlmodelfile) throws Exception
+    private JCodeModel createsourcefile(File sourcefile, apmlmodelfile apmlmodelfile) throws Exception
     {       
         JCodeModel jcodemodel = new JCodeModel();                
         
@@ -461,7 +461,7 @@ public class apmltaghandler
             for(int i=0; i<sourcenamer.sourcefiles.length; i++)
             {                                     
                 //
-                model = this.createjcodemodel(sourcenamer.sourcefiles[i],apmlmodeler.apmlfiles[i]);
+                model = this.createsourcefile(sourcenamer.sourcefiles[i],apmlmodeler.apmlfiles[i]);
                 
                 //
                 File sourcedirs = new File(outputdir.getPath()+File.separator+new filegrepper().getpackagenameaspathname(sourcenamer.sourcefiles[i].getPath()));
@@ -484,6 +484,10 @@ public class apmltaghandler
     }     
 }
 
+/**
+ * 
+ * @author max rupplin @standard
+ */
 class apmltaghandlerparameter
 {
     JCodeModel jcodemodel;
