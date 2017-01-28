@@ -23,6 +23,7 @@ import org.w3c.dom.NodeList;
  */
 public class apmlmodelpopulator 
 {
+    public apmlmodelfile[] apmlfiles = null;
     protected NodeList nodes;    
     protected String apmltag = null;
     
@@ -50,6 +51,14 @@ public class apmlmodelpopulator
             ex.printStackTrace(System.err);
         }
     }       
+    
+    /**
+     * 
+     */
+    public apmlmodelpopulator()
+    {
+        
+    }
     
     /**
      * 
@@ -81,10 +90,12 @@ public class apmlmodelpopulator
     
     /**
      * 
+     * @param apmlfile
+     * @param sysobj
      */
-    public apmlmodelpopulator()
+    public apmlmodelpopulator(File apmlfile, String sysobj) throws Exception
     {
-        
+        this.apmlfiles = this.getapmlfiles(apmlfile, sysobj);
     }     
     
     /**

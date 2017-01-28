@@ -45,6 +45,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
     protected File sourcefile = new File(srcURL);    
     protected File newfile = null;    
    
+    public File[] sourcefiles = null;
     
     protected static final Integer PARATOR_INCREMENT = 1;
     protected static final Integer PARATOR_CLASS = 2;
@@ -53,10 +54,13 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
     /**
      * 
      * @param sysobj 
+     * @throws java.lang.Exception 
      */
-    public sourcefilenamer(String sysobj)
+    public sourcefilenamer(String sysobj) throws Exception
     {
         this.apmltag = sysobj;
+        
+        this.sourcefiles = this.getoutputfiles(sysobj);
     }
     
     /**
@@ -92,7 +96,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
      */
     public static void main(String[] args) 
     {                        
-        sourcefilenamer namer = new sourcefilenamer("Test.java");
+        sourcefilenamer namer = new sourcefilenamer();
         
         String rulesURL = "/home/oem/Desktop/apml/rules/rules.xml";
         String apmlURL = "/home/oem/Desktop/apml/apml/echoserver.xml";

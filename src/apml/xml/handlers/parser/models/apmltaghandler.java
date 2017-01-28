@@ -449,30 +449,27 @@ public class apmltaghandler
     {
         try
         {   
-            //
-            apmlmodelpopulator apmlmodeler = new apmlmodelpopulator();                          
-            apmlmodelfile[] apmlfiles = apmlmodeler.getapmlfiles(this.apmlfile, xpathstring); 
-                        
-            //
-            sourcefilenamer sourcenamer = new sourcefilenamer();           
-            File[] sourcefiles = sourcenamer.getoutputfiles(xpathstring);
-            
-            //
             JCodeModel model;            
-                              
+            
+            apmlmodelpopulator apmlmodeler;                        
+            sourcefilenamer sourcenamer;
+                                    
+            apmlmodeler = new apmlmodelpopulator(this.apmlfile, xpathstring);  
+            sourcenamer = new sourcefilenamer(xpathstring);           
+                                                                  
             //
-            for(int i=0; i<sourcefiles.length; i++)
+            for(int i=0; i<sourcenamer.sourcefiles.length; i++)
             {                                     
                 //
-                model = this.createjcodemodel(sourcefiles[i],apmlfiles[i]);
+                model = this.createjcodemodel(sourcenamer.sourcefiles[i],apmlmodeler.apmlfiles[i]);
                 
                 //
-                File sourcedirs = new File(outputdir.getPath()+File.separator+new filegrepper().getpackagenameaspathname(sourcefiles[i].getPath()));
+                File sourcedirs = new File(outputdir.getPath()+File.separator+new filegrepper().getpackagenameaspathname(sourcenamer.sourcefiles[i].getPath()));
                 if(!sourcedirs.exists()) 
                     sourcedirs.mkdirs();
                                 
                 //
-                File mandir = new File(outputdir.getPath()+File.separator+new filegrepper().getpackagenameaspathname(sourcefiles[i].getPath()));
+                File mandir = new File(outputdir.getPath()+File.separator+new filegrepper().getpackagenameaspathname(sourcenamer.sourcefiles[i].getPath()));
                 if(!mandir.exists()) 
                     mandir.mkdirs();   
                 
