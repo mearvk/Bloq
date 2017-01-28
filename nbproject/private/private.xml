@@ -3,14 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/oem/NetBeansProjects/APML/src/observations/observations</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/xml/maps/radio.xml</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/xpath/helpers/XPathParameter.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/xml/handlers/parser/models/rules/rules.xml</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/xml/handlers/parser/models/ApmlTagHandler.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/xpath/helpers/XPathQuick.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/xml/handlers/parser/models/io/ApmlModelPopulator.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/modeling/ApmlModelFile.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/xml/handlers/parser/models/apmltaghandler.java</file>
         </group>
     </open-files>
 </project-private>

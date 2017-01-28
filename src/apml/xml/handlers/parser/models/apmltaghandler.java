@@ -73,7 +73,7 @@ public class apmltaghandler
             apmltaghandler sth = new apmltaghandler();
             
             //
-            sth.convertapmltagstosource("//definitions");                     //todo fill this in how it makes sense
+            //sth.convertapmltagstosource("//definitions");                     //todo fill this in how it makes sense
             
             //          
             sth.convertapmltagstosource("//system");   
