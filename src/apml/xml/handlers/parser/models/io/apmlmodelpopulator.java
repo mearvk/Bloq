@@ -32,19 +32,19 @@ public class apmlmodelpopulator
         try
         {     
             //
-            apmlmodelpopulator amp = new apmlmodelpopulator();
+            apmlmodelpopulator populator = new apmlmodelpopulator();
             
             //
-            amp.getapmlfiles("//definitions");
+            populator.getapmlfiles("//definitions");
             
             //          
-            amp.getapmlfiles("//system");   
+            populator.getapmlfiles("//system");   
             
             //         
-            amp.getapmlfiles("//driver");   
+            populator.getapmlfiles("//driver");   
             
             //            
-            amp.getapmlfiles("//compiler");  
+            populator.getapmlfiles("//compiler");  
         }
         catch(Exception ex)
         {

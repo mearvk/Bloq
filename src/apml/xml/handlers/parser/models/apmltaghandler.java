@@ -73,19 +73,19 @@ public class apmltaghandler
         try
         {     
             //
-            apmltaghandler sth = new apmltaghandler();
+            apmltaghandler handler = new apmltaghandler();
             
             //
-            sth.convertapmltagstosource("//definitions");
+            handler.convertapmltagstosource("//definitions");
             
             //          
-            sth.convertapmltagstosource("//system");   
+            handler.convertapmltagstosource("//system");   
             
             //         
-            sth.convertapmltagstosource("//driver");   
+            handler.convertapmltagstosource("//driver");   
             
             //            
-            sth.convertapmltagstosource("//compiler");  
+            handler.convertapmltagstosource("//compiler");  
         }
         catch(Exception ex)
         {
