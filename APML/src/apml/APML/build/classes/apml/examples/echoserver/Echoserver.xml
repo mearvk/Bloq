@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?apml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+/* Application Program Markup Language */
+<apml language="Java 9" version="1.0">
+    
+    
+    /* hello world echo server quick example program */    
+    
+    <system id="echoserver" package="apml.examples.echoserver">
+        <object class="EchoServer">
+            <listener class="EchoServerServerSocketListener">
+                
+            </listener>
+        </object>
+    </system>   
+    
+    <system id="echoclient" package="apml.examples.echoserver">
+        <object class="EchoClient">
+            <listener class="EchoServerClientSocketListener">
+                
+            </listener>
+        </object>
+    </system>                      
+    
+</apml>
+
+ok now what?
+
+structurally we need a couple things
+
+1) instantiation
+2) program start function (ie init, start, run, instead of just main)
+3) system api underlayment
+
