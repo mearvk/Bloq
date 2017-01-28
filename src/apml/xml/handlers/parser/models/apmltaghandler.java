@@ -55,9 +55,9 @@ public class apmltaghandler
             if(!this.apmlfile.exists())
                 throw new Exception("ApmlTagHandler::constructor:Could not find the system's APML file");     
         }
-        catch(Exception e)
+        catch(Exception ex)
         {
-            e.printStackTrace(System.err);
+            Logger.getLogger(apmltaghandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
