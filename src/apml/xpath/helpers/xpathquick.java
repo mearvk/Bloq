@@ -8,34 +8,10 @@ package apml.xpath.helpers;
 import java.security.InvalidParameterException;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.NodeList;
 
 public class xpathquick
-{
-    /**
-     * 
-     * @param param
-     * @return
-     * @throws Exception 
-     */
-    public static xpathparameter compile(xpathparameter param) throws Exception
-    {        
-        if(param.xmlfile==null) throw new Exception("No XML file found.");        
-        
-        if(param.document==null) throw new Exception("No XML Document found.");
-        
-        if(param.sexpr1==null) throw new Exception("No XPath String to match with.");
-        
-        if(param.expr1==null) throw new Exception("No XPath XPathExpression to match with.");       
-        
-        param.expr1 = XPathFactory.newInstance().newXPath().compile(param.sexpr1);
-        
-        param.expr2 = XPathFactory.newInstance().newXPath().compile(param.sexpr2);
-        
-        return param;
-    }
-    
+{  
     /**
      * 
      * @param param
@@ -44,32 +20,39 @@ public class xpathquick
      */
     public static xpathparameter evaluate(xpathparameter param) throws Exception
     {  
-        if(param.expr1==null && param.expr2==null)
-            throw new Exception("XPathParameter.evaluate :: Unable to evaluate expression; both expr1 and expr2 are null.");
         
-        if(param.expr1!=null)
-            param.nodes1 = (NodeList)param.expr1.evaluate(param.document, XPathConstants.NODESET);
+        if(param.e0001_tagname!=null)
+            param.n0001_tagname = (NodeList)param.e0001_tagname.evaluate(param.document, XPathConstants.NODESET);
         
-        if(param.expr2!=null)
-            param.nodes2 = (NodeList)param.expr2.evaluate(param.document, XPathConstants.NODESET);
+        if(param.e0002_autostart!=null)
+            param.n0002_autostart = (NodeList)param.e0002_autostart.evaluate(param.document, XPathConstants.NODESET);
         
-        if(param.expr3!=null)
-            param.nodes3 = (NodeList)param.expr3.evaluate(param.document, XPathConstants.NODESET);
+        if(param.e0003_classname!=null)
+            param.n0003_classname = (NodeList)param.e0003_classname.evaluate(param.document, XPathConstants.NODESET);
         
-        if(param.expr4!=null)
-            param.nodes4 = (NodeList)param.expr4.evaluate(param.document, XPathConstants.NODESET);
+        if(param.e0004_id!=null)
+            param.n0004_id = (NodeList)param.e0004_id.evaluate(param.document, XPathConstants.NODESET);
 
-        if(param.expr5!=null)
-            param.nodes5 = (NodeList)param.expr5.evaluate(param.document, XPathConstants.NODESET);
+        if(param.e0005_init!=null)
+            param.n0005_init = (NodeList)param.e0005_init.evaluate(param.document, XPathConstants.NODESET);
         
-        if(param.expr6!=null)
-            param.nodes6 = (NodeList)param.expr6.evaluate(param.document, XPathConstants.NODESET);  
+        if(param.e0006_package!=null)
+            param.n0006_package = (NodeList)param.e0006_package.evaluate(param.document, XPathConstants.NODESET);  
         
-        if(param.expr7!=null)
-            param.nodes7 = (NodeList)param.expr7.evaluate(param.document, XPathConstants.NODESET);
+        if(param.e0007_run!=null)
+            param.n0007_run = (NodeList)param.e0007_run.evaluate(param.document, XPathConstants.NODESET);
         
-        if(param.expr8!=null)
-            param.nodes8 = (NodeList)param.expr8.evaluate(param.document, XPathConstants.NODESET);           
+        if(param.e0008_start!=null)
+            param.n0008_start = (NodeList)param.e0008_start.evaluate(param.document, XPathConstants.NODESET);           
+        
+        if(param.e0009_implements!=null)
+            param.n0009_implements = (NodeList)param.e0009_implements.evaluate(param.document, XPathConstants.NODESET);  
+        
+        if(param.e0010_listeners!=null)
+            param.n0010_listeners = (NodeList)param.e0010_listeners.evaluate(param.document, XPathConstants.NODESET);
+        
+        if(param.e0011_objects!=null)
+            param.n0011_objects = (NodeList)param.e0011_objects.evaluate(param.document, XPathConstants.NODESET);          
         
         return param;
     }    
@@ -96,12 +79,12 @@ public class xpathquick
     {
         if(param==null) 
             throw new InvalidParameterException("XPathQuick::count: XPathParameter param was null; returning.");
-        if(param.expr0==null) 
+        if(param.e0000_count==null) 
             throw new InvalidParameterException("XPathQuick::count: XPathParameter param.expr0 was null; returning.");
         
         try
         {            
-            int count = ((Double)param.expr0.evaluate(param.document, XPathConstants.NUMBER)).intValue();
+            int count = ((Double)param.e0000_count.evaluate(param.document, XPathConstants.NUMBER)).intValue();
 
             return count;
         }

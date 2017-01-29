@@ -5,6 +5,7 @@
  */
 package apml.xpath.helpers;
 
+import apml.helpers.parser;
 import java.io.File;
 import javax.xml.xpath.XPathExpression;
 import org.w3c.dom.Document;
@@ -16,39 +17,51 @@ import org.w3c.dom.NodeList;
  */
 public class xpathparameter
 {   
-    public NodeList attrs;
-    public Object obj; 
-    
     public Document document;
     public File xmlfile;
-    public NodeList nodes1;
-    public NodeList nodes2;
-    public NodeList nodes3;
-    public NodeList nodes4;
-    public NodeList nodes5;
-    public NodeList nodes6;
-    public NodeList nodes7;
-    public NodeList nodes8;
+    public NodeList attrs;
+    public Object obj;     
     
-    public String sexpr0;
-    public String sexpr1;   
-    public String sexpr2;
-    public String sexpr3;   
-    public String sexpr4;
-    public String sexpr5;   
-    public String sexpr6;
-    public String sexpr7;   
-    public String sexpr8;
+    public apml.helpers.parser parser;
     
-    public XPathExpression expr0; 
-    public XPathExpression expr1;    
-    public XPathExpression expr2;
-    public XPathExpression expr3;    
-    public XPathExpression expr4;
-    public XPathExpression expr5;    
-    public XPathExpression expr6;
-    public XPathExpression expr7;    
-    public XPathExpression expr8;
+    public NodeList n0000_count;         //nodes0  
+    public NodeList n0001_tagname;       //nodes1
+    public NodeList n0002_autostart;     //nodes2
+    public NodeList n0003_classname;     //nodes3
+    public NodeList n0004_id;            //nodes4
+    public NodeList n0005_init;          //nodes5
+    public NodeList n0006_package;       //nodes6
+    public NodeList n0007_run;           //nodes7
+    public NodeList n0008_start;         //nodes8
+    public NodeList n0009_implements;    //nodes9
+    public NodeList n0010_listeners;     //nodes10
+    public NodeList n0011_objects;       //nodes11
+    
+    public String s0000_count;
+    public String s0001_tagname;   
+    public String s0002_autostart;
+    public String s0003_classname;   
+    public String s0004_id;
+    public String s0005_init;   
+    public String s0006_package;
+    public String s0007_run;   
+    public String s0008_start;
+    public String s0009_implements;
+    public String s0010_listeners;
+    public String s0011_objects;
+    
+    public XPathExpression e0000_count; 
+    public XPathExpression e0001_tagname;    
+    public XPathExpression e0002_autostart;
+    public XPathExpression e0003_classname;    
+    public XPathExpression e0004_id;
+    public XPathExpression e0005_init;    
+    public XPathExpression e0006_package;
+    public XPathExpression e0007_run;    
+    public XPathExpression e0008_start;
+    public XPathExpression e0009_implements;
+    public XPathExpression e0010_listeners;
+    public XPathExpression e0011_objects;
     
     /**
      * 
@@ -57,6 +70,16 @@ public class xpathparameter
     {
         
     }
+    
+    /**
+     * 
+     * @param parser
+     */
+    public xpathparameter(parser parser)
+    {   
+        this.parser = parser;        
+        this.document = parser.document;
+    }    
     
     /**
      * 
@@ -81,12 +104,12 @@ public class xpathparameter
     {        
         this.document = document;
         this.xmlfile = null;
-        this.nodes1 = null;
+        this.n0001_tagname = null;
         this.attrs = null;
         this.obj = obj;                            
-        this.sexpr1 = sexpression1;        
-        this.sexpr2 = sexpression2;
-        this.expr1 = expression1;                      
-        this.expr2 = expression2;          
+        this.s0001_tagname = sexpression1;        
+        this.s0002_autostart = sexpression2;
+        this.e0001_tagname = expression1;                      
+        this.e0002_autostart = expression2;          
     }   
 }

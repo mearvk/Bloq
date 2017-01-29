@@ -13,17 +13,21 @@ import java.util.ArrayList;
  */
 public class apmlmodelfile 
 {   
-    public String apml_autostart;
-    public String apml_parent_node;
+    public String apml_autostart;    
     public String apml_classname;
-    public String apml_idname;
-    public String apml_initializable;
-    public String apml_interface;
     public String apml_extends;
+    public String apml_idname;
+    public String apml_initializable;        
     public String apml_packagename;
+    public String apml_parent_node;
     public String apml_start;
     public String apml_run;
     public String apml_tagname;
+        
+    public String[] apml_implements;
+    public String[] apml_listeners;
+    public String[] apml_stdinterfaces;
+    public String[] apml_taginterfaces;
     
     public ArrayList<String> children;
     public ArrayList<String> subscribers;
