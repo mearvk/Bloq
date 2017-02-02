@@ -15,7 +15,7 @@ public class Apmlmodelfile
 {   
     public String autostart;    
     public String classname;
-    public String extendš;
+    public String superclass;
     public String id;
     public String init;        
     public String packagė;

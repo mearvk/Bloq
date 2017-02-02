@@ -37,6 +37,7 @@ public class Xpathparameter
     public NodeList n0009_implements;
     public NodeList n0010_listeners; 
     public NodeList n0011_objects;   
+    public NodeList n0012_superclass;
     
     public String s0000_count;
     public String s0001_tagname;   
@@ -50,6 +51,7 @@ public class Xpathparameter
     public String s0009_implements;
     public String s0010_listeners;
     public String s0011_objects;
+    public String s0012_superclass;
     
     public XPathExpression e0000_count; 
     public XPathExpression e0001_tagname;    
@@ -63,6 +65,7 @@ public class Xpathparameter
     public XPathExpression e0009_implements;
     public XPathExpression e0010_listeners;
     public XPathExpression e0011_objects;
+    public XPathExpression e0012_superclass;
     
     public XPath xpath;
     
@@ -96,6 +99,7 @@ public class Xpathparameter
         this.s0009_implements   = apmltag+"/implements";
         this.s0010_listeners    = apmltag+"/listener"; 
         this.s0011_objects      = apmltag+"/object";     
+        this.s0012_superclass   = apmltag+"/@extends";
         
         try{this.e0000_count        = xpath.compile(s0000_count);}catch(Exception e){e.printStackTrace(System.err);}
         try{this.e0001_tagname      = xpath.compile(s0001_tagname);}catch(Exception e){e.printStackTrace(System.err);} 
@@ -109,6 +113,7 @@ public class Xpathparameter
         try{this.e0009_implements   = xpath.compile(s0009_implements);}catch(Exception e){e.printStackTrace(System.err);}
         try{this.e0010_listeners    = xpath.compile(s0010_listeners);}catch(Exception e){e.printStackTrace(System.err);} 
         try{this.e0011_objects      = xpath.compile(s0011_objects);}catch(Exception e){e.printStackTrace(System.err);}   
+        try{this.e0012_superclass   = xpath.compile(s0012_superclass);}catch(Exception e){e.printStackTrace(System.err);}
         
         try{this.evaluate(this);}catch(Exception e){}
     }
@@ -172,6 +177,9 @@ public class Xpathparameter
         
         if(param.e0011_objects!=null)
             try{param.n0011_objects = (NodeList)param.e0011_objects.evaluate(param.document, XPathConstants.NODESET);}catch(Exception e){e.printStackTrace(System.err);}          
+      
+        if(param.e0012_superclass!=null)
+            try{param.n0012_superclass = (NodeList)param.e0012_superclass.evaluate(param.document, XPathConstants.NODESET);}catch(Exception e){e.printStackTrace(System.err);}         
         
         return param;
     }      

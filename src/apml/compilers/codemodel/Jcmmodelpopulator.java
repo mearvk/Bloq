@@ -188,10 +188,10 @@ public class Jcmmodelpopulator
             if(param.classfile==null) 
                 throw new InvalidParameterException("Classfile not set; unable to determine if Class extends another");
             
-            if(param.apmlmodelfile.extendš==null) 
+            if(param.apmlmodelfile.superclass==null) 
                 throw new InvalidParameterException("No superclass reference found in param.apmlmodelfile.apml_extends");            
                
-            param.classfile = param.classfile._extends(Class.forName(param.apmlmodelfile.extendš));      
+            param.classfile = param.classfile._extends(Class.forName(param.apmlmodelfile.superclass));      
         }
         catch(NullPointerException | InvalidParameterException | ClassNotFoundException ex)
         {
@@ -399,10 +399,10 @@ public class Jcmmodelpopulator
             if(param.classfile==null) 
                 throw new InvalidParameterException("Classfile not set; unable to load superclass methods for JCodeModel builder");
                 
-            if(param.apmlmodelfile.extendš==null)
+            if(param.apmlmodelfile.superclass==null)
                 throw new InvalidParameterException("No superclass found");
             
-            Class superclass = Class.forName(param.apmlmodelfile.extendš);
+            Class superclass = Class.forName(param.apmlmodelfile.superclass);
             for (Method method : superclass.getMethods()) 
             {
                 if(method==null) break;

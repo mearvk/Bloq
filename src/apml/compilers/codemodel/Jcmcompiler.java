@@ -45,13 +45,16 @@ public class Jcmcompiler extends Object
             Jcmcompiler compiler = new Jcmcompiler();            
             
             //
-            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");
+            //compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//listener");
                    
             //
-            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_systems, "//system");
+            //compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_systems, "//system");
+            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_listeners, "//listener");
 
             //
             compiler.writejcmtodisk(compiler.jcmmodelfiles_systems);                    
+            compiler.writejcmtodisk(compiler.jcmmodelfiles_listeners);                    
             
             //
             System.gc();
