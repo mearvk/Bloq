@@ -1,8 +1,8 @@
 package apml.xml.handlers;
 
-import apml.xml.handlers.apmltaghandler;
-import apml.xpath.helpers.xpathparameter;
-import apml.xpath.helpers.xpathquick;
+import apml.compilers.codemodel.Jcmcompiler;
+import apml.xpath.helpers.Xpathparameter;
+import apml.xpath.helpers.Xpathquick;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.xpath.XPathConstants;
@@ -23,7 +23,7 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
-public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass, RenamesFileByIncr, RenamesFilesByIncr, RenamesFileById, RenamesFilesById
+public class Sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass, RenamesFileByIncr, RenamesFilesByIncr, RenamesFileById, RenamesFilesById
 {    
     protected final Integer hash = 0x888fe8;
     
@@ -56,7 +56,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
      * @param sysobj 
      * @throws java.lang.Exception 
      */
-    public sourcefilenamer(String sysobj) throws Exception
+    public Sourcefilenamer(String sysobj) throws Exception
     {
         this.apmltag = sysobj;
         
@@ -67,7 +67,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
      * 
      * @param nodes 
      */
-    public sourcefilenamer(NodeList nodes)
+    public Sourcefilenamer(NodeList nodes)
     {
         this.nodestorename = nodes;
     }
@@ -77,7 +77,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
      * @param nodes
      * @param sysobj 
      */
-    public sourcefilenamer(NodeList nodes, String sysobj)
+    public Sourcefilenamer(NodeList nodes, String sysobj)
     {
          this.nodestorename = nodes;
     }    
@@ -85,7 +85,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
     /**
      * 
      */
-    public sourcefilenamer()
+    public Sourcefilenamer()
     {
         
     }    
@@ -96,7 +96,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
      */
     public static void main(String[] args) 
     {                        
-        sourcefilenamer namer = new sourcefilenamer();
+        Sourcefilenamer namer = new Sourcefilenamer();
         
         String rulesURL = "/home/oem/Desktop/apml/rules/rules.xml";
         String apmlURL = "/home/oem/Desktop/apml/apml/echoserver.xml";
@@ -116,7 +116,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
             } 
             catch (Exception ex) 
             {
-                Logger.getLogger(sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             System.err.println(name);
@@ -131,7 +131,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
             }
             catch(Exception ex)
             {
-                Logger.getLogger(sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -161,7 +161,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         }
         catch(Exception ex)
         {
-            Logger.getLogger(sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
         }    
         
         throw new Exception("Unable to return named files for APML file:"+apmlfile);
@@ -195,7 +195,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         }
         catch(Exception ex)
         {
-            Logger.getLogger(sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         throw new Exception("Unable to return named file for APML file: "+apmlfile);
@@ -230,7 +230,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         }
         catch(Exception ex)
         {
-            Logger.getLogger(sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         throw new Exception("Unable to return named files for APML file:"+apmlfile);
@@ -264,7 +264,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         }
         catch(Exception ex)
         {
-            Logger.getLogger(sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         throw new Exception("Unable to return named files for APML file:"+apmlfile);
@@ -298,7 +298,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         }
         catch(Exception ex)
         {
-            Logger.getLogger(sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         throw new Exception("Unable to return named files for APML file:"+apmlfile);
@@ -332,7 +332,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         }
         catch(Exception ex)
         {
-            Logger.getLogger(sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
         }
        
         throw new Exception("Unable to return named file for APML file:"+apmlfile);
@@ -348,7 +348,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         try
         {             
             //
-            apmltaghandler sth = new apmltaghandler();
+            Jcmcompiler sth = new Jcmcompiler();
             DocumentBuilderFactory domfactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = domfactory.newDocumentBuilder();
             Document document = builder.parse(file);
@@ -381,7 +381,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         }
         catch(ParserConfigurationException | SAXException | IOException | XPathExpressionException | DOMException ex)
         {
-            Logger.getLogger(sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return 0;
@@ -412,7 +412,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         }
         catch(Exception ex)
         {
-            Logger.getLogger(sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
         }                
         
         throw new Exception("Unable to return file name");
@@ -440,7 +440,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         }
         catch(Exception ex)
         {
-            Logger.getLogger(sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sourcefilenamer.class.getName()).log(Level.SEVERE, null, ex);
         }                
         
         throw new Exception("Unable to return file names");
@@ -466,7 +466,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         String sexpr2 = this.apmltag+"/@class";        
         XPathExpression expr1;
         XPathExpression expr2;
-        xpathparameter xparam;                    
+        Xpathparameter xparam;                    
      
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();        
@@ -481,9 +481,10 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         
         try
         {
-            xparam = new xpathparameter(apmlfile, expr1, expr2, sexpr1, sexpr2, result, document);                
-            //xparam = xpathquick.compile(xparam);
-            xparam = xpathquick.evaluate(xparam);              
+            /*
+            xparam = new Xpathparameter(apmlfile, expr1, expr2, sexpr1, sexpr2, result, document);                
+            //xparam = Xpathquick.compile(xparam);
+            xparam = Xpathquick.evaluate(xparam);              
             
             //
             for(int i=0; i<xparam.n0001_tagname.getLength(); i++)
@@ -501,6 +502,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
                     filename=new File(s+".java");
                 }  
             }
+            */
         }
         catch(Exception e)
         {
@@ -529,7 +531,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         String sexpr2 = this.apmltag+"/@class";        
         XPathExpression expr1;
         XPathExpression expr2;
-        xpathparameter xparam;                   
+        Xpathparameter xparam;                   
      
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();        
@@ -543,9 +545,10 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         
         try
         {
-            xparam = new xpathparameter(apmlfile, expr1, expr2, sexpr1, sexpr2, result, document);                
-            //xparam = xpathquick.compile(xparam);
-            xparam = xpathquick.evaluate(xparam);  
+            /*
+            xparam = new Xpathparameter(apmlfile, expr1, expr2, sexpr1, sexpr2, result, document);                
+            //xparam = Xpathquick.compile(xparam);
+            xparam = Xpathquick.evaluate(xparam);  
             
             System.err.println();
             
@@ -581,6 +584,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
             }
             
             return filenames;
+            */
         }
         catch(Exception e)
         {
@@ -610,7 +614,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         String sexpr2 = this.apmltag+"/@id";        
         XPathExpression expr1;
         XPathExpression expr2;
-        xpathparameter xparam;                    
+        Xpathparameter xparam;                    
      
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();        
@@ -624,9 +628,10 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
                 
         try
         {
-            xparam = new xpathparameter(apmlfile, expr1, expr2, sexpr1, sexpr2, result, document);                
-            //xparam = xpathquick.compile(xparam);
-            xparam = xpathquick.evaluate(xparam);              
+            /*
+            xparam = new Xpathparameter(apmlfile, expr1, expr2, sexpr1, sexpr2, result, document);                
+            //xparam = Xpathquick.compile(xparam);
+            xparam = Xpathquick.evaluate(xparam);              
             
             //
             for(int i=0; i<xparam.n0001_tagname.getLength(); i++)
@@ -644,6 +649,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
                     filename = new File(s+".java");
                 }
             }
+            */
         }
         catch(Exception e)
         {
@@ -673,7 +679,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         String sexpr2 = this.apmltag+"/@id";        
         XPathExpression expr1;
         XPathExpression expr2;
-        xpathparameter xparam;                    
+        Xpathparameter xparam;                    
      
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();        
@@ -687,9 +693,10 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         
         try
         {
-            xparam = new xpathparameter(apmlfile, expr1, expr2, sexpr1, sexpr2, result, document);                
-            //xparam = xpathquick.compile(xparam);
-            xparam = xpathquick.evaluate(xparam);              
+            /*
+            xparam = new Xpathparameter(apmlfile, expr1, expr2, sexpr1, sexpr2, result, document);                
+            //xparam = Xpathquick.compile(xparam);
+            xparam = Xpathquick.evaluate(xparam);              
             
             for(int i=0; i<xparam.n0001_tagname.getLength(); i++)
             {
@@ -705,6 +712,7 @@ public class sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
                     files[i] = new File(nodeval+".java");
                 }
             }
+            */
         }
         catch(Exception e)
         {

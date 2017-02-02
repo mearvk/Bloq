@@ -3,11 +3,12 @@ package apml.xpath.helpers;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 
+
 /**
  *
  * @author oem
  */
-public class xpathbuilder 
+public class BKUPXpathbuilder 
 {
     public String sexpr0;
     public String sexpr1;
@@ -37,14 +38,14 @@ public class xpathbuilder
     public XPathExpression expr10 = null;    
     public XPathExpression expr11 = null; 
     
-    public xpathparameter xparam = null;
+    public Xpathparameter xparam = null;
     
-    public xpathbuilder(String apmltag, xpathparameter xparam) throws Exception
+    public BKUPXpathbuilder(String apmltag, Xpathparameter xparam) throws Exception
     {
         this(apmltag, xparam, xparam.parser.xpath);
     }
     
-    public xpathbuilder(String apmltag, xpathparameter xparam, XPath xpath) throws Exception
+    public BKUPXpathbuilder(String apmltag, Xpathparameter xparam, XPath xpath) throws Exception
     {
         this.xpath = xpath;
         
@@ -73,6 +74,7 @@ public class xpathbuilder
         this.xparam.e0007_run = xpath.compile(sexpr7);
         this.xparam.e0008_start = xpath.compile(sexpr8);            
         this.xparam.e0009_implements = xpath.compile(sexpr9);
-        this.xparam.e0010_listeners = xpath.compile(sexpr10);                      
-    }   
+        this.xparam.e0010_listeners = xpath.compile(sexpr10); 
+        this.xparam.e0011_objects = xpath.compile(sexpr11);                
+    }            
 }

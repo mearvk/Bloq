@@ -11,7 +11,7 @@ import java.io.File;
  *
  * @author oem
  */
-public class filegrepper 
+public class Filegrepper 
 {
     public String getpackagename(String fullURL) throws Exception
     {
@@ -61,12 +61,13 @@ public class filegrepper
     
     public String getclassname(String fullURL) throws Exception
     {
+        fullURL = fullURL.replace(".", "/");
+        
         if(fullURL.replace(".java","").contains(".")) //e.g. abc.def.ghi.Classname.java returns Classname
         {            
             String stmp = "";
             
-            stmp = fullURL.substring(0,fullURL.lastIndexOf(".")).replace(".", File.separator);
-            stmp = stmp.substring(stmp.lastIndexOf("/")+1, stmp.length());
+            stmp = fullURL.substring(fullURL.lastIndexOf(".")+1,fullURL.length());
             
             return stmp;
         }
@@ -75,8 +76,7 @@ public class filegrepper
         {
             String stmp = "";
             
-            stmp = fullURL.substring(0,fullURL.lastIndexOf(".")).replace(".", File.separator);
-            stmp = stmp.substring(stmp.lastIndexOf("/")+1, stmp.length());
+            stmp = fullURL.substring(fullURL.lastIndexOf("/")+1,fullURL.length());
             
             return stmp;
         }  

@@ -1,19 +1,19 @@
 package apml.xml.handlers;
 
-import apml.helpers.filegrepper;
+import apml.helpers.Filegrepper;
 import java.io.File;
 
 /**
  *
  * @author Max Rupplin
  */
-public class renamablesource extends File 
+public class Renamablesource extends File 
 {
     protected final Integer hash = 0x888fe8;                     
     
     public static void main(String...args)
     {
-        filegrepper grepper = new filegrepper();
+        Filegrepper grepper = new Filegrepper();
         
         try
         {
@@ -27,7 +27,7 @@ public class renamablesource extends File
         }
     }
     
-    public renamablesource(String string) 
+    public Renamablesource(String string) 
     {
         super(string);
     }               

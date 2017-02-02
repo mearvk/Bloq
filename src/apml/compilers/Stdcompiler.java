@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apml.compilers.codemodel;
+package apml.compilers;
 
 /**
  *
  * @author oem
  */
-public class stdcodemodelcompiler 
+public class Stdcompiler 
 {
     
 }

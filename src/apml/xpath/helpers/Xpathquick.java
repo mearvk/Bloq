@@ -5,12 +5,10 @@
  */
 package apml.xpath.helpers;
 
-import java.security.InvalidParameterException;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
 import org.w3c.dom.NodeList;
 
-public class xpathquick
+public class Xpathquick
 {  
     /**
      * 
@@ -18,7 +16,7 @@ public class xpathquick
      * @return
      * @throws Exception 
      */
-    public static xpathparameter evaluate(xpathparameter param) throws Exception
+    public static Xpathparameter evaluate(Xpathparameter param) throws Exception
     {  
         
         if(param.e0001_tagname!=null)
@@ -59,40 +57,12 @@ public class xpathquick
     
     /**
      * 
-     * @param expr1
      * @param param
      * @return
      * @throws Exception 
      */
-    public static xpathparameter evaluate(XPathExpression expr1, xpathparameter param) throws Exception
-    {                        
-        return param;
-    }
-    
-    /**
-     * 
-     * @param param
-     * @return
-     * @throws Exception 
-     */
-    public static int count(xpathparameter param) throws Exception
-    {
-        if(param==null) 
-            throw new InvalidParameterException("XPathQuick::count: XPathParameter param was null; returning.");
-        if(param.e0000_count==null) 
-            throw new InvalidParameterException("XPathQuick::count: XPathParameter param.expr0 was null; returning.");
-        
-        try
-        {            
-            int count = ((Double)param.e0000_count.evaluate(param.document, XPathConstants.NUMBER)).intValue();
-
-            return count;
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace(System.err);
-        }   
-        
-        return -1;
+    public static int count(Xpathparameter param) throws Exception
+    {        
+        return ((Double)param.e0000_count.evaluate(param.document, XPathConstants.NUMBER)).intValue();
     }
 }

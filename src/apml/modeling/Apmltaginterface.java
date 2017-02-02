@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apml.compilers;
+package apml.modeling;
 
 /**
  *
  * @author oem
  */
-public class stdcompiler 
+public class Apmltaginterface 
 {
     
 }
