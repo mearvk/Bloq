@@ -18,8 +18,7 @@ import org.w3c.dom.NodeList;
  */
 public class Apmlmodelpopulator 
 {
-    public ArrayList<Apmlmodelfile> apmlfiles;    
-    public NodeList nodes;    
+    public ArrayList<Apmlmodelfile> apmlfiles;      
     
     public static void main(String...args) 
     {                          
@@ -64,26 +63,7 @@ public class Apmlmodelpopulator
     public Apmlmodelpopulator(String sysobj)
     {
         //this.apmltag = sysobj;
-    }
-    
-    /**
-     * 
-     * @param nodes 
-     */
-    public Apmlmodelpopulator(NodeList nodes)
-    {
-        this.nodes = nodes;
-    }
-    
-    /**
-     * 
-     * @param nodes
-     * @param sysobj 
-     */
-    public Apmlmodelpopulator(NodeList nodes, String sysobj)
-    {
-         this.nodes = nodes;
-    }    
+    }  
     
     /**
      * 
@@ -112,27 +92,22 @@ public class Apmlmodelpopulator
             //            
             Xpathparameter xparam = new Xpathparameter(apmltag,apmlfile);
                         
-            //    
+            //for each nodelist of type //system, //compiler, etc    
             for(int i=0;i<xparam.getnodecount();i++)
             {
                 switch(apmltag)
                 {
-                    case "//compiler": 
-                        modelfiles.add(docompiler(xparam, apmltag));
-                        break;
-                        
                     case "//definitions": 
-                        modelfiles.add(dodefinitions(xparam, apmltag));
-                        break;
+                        return dodefinitions(xparam, apmltag);
                         
-                    case "//driver": 
-                        modelfiles.add(dodriver(xparam, apmltag));
-                        break;                        
+                    case "//dynamiclistener": 
+                        return docompiler(xparam, apmltag);                        
+                        
+                    case "//listener": 
+                        return dodriver(xparam, apmltag);                        
                     
                     case "//system": 
-                        modelfiles.add(dosystem(xparam, apmltag));
-                        break;    
-                        
+                        return dosystem(xparam, apmltag);                        
                 }
             }                
         }
@@ -149,7 +124,7 @@ public class Apmlmodelpopulator
      * @param xparam
      * @param apmltag 
      */
-    private Apmlmodelfile docompiler(Xpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> docompiler(Xpathparameter xparam, String apmltag)
     {
         //pull standard compiler template and include it; regard <template> items for custom build order/specs
         return null;
@@ -161,7 +136,7 @@ public class Apmlmodelpopulator
      * @param apmltag
      * @throws Exception 
      */
-    private Apmlmodelfile dodefinitions(Xpathparameter xparam, String apmltag) throws Exception
+    private ArrayList<Apmlmodelfile> dodefinitions(Xpathparameter xparam, String apmltag) throws Exception
     {
         //look up inside APML if tag existed inside <definitions> and infer from that
         return null;
@@ -172,7 +147,7 @@ public class Apmlmodelpopulator
      * @param xparam
      * @param apmltag 
      */    
-    private Apmlmodelfile dodriver(Xpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dodriver(Xpathparameter xparam, String apmltag)
     {
         //pull standard driver template and include it; regard <template> items for custom build order/specs
         return null;
@@ -184,23 +159,29 @@ public class Apmlmodelpopulator
      * @param apmltag
      * @return 
      */
-    private Apmlmodelfile dosystem(Xpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dosystem(Xpathparameter xparam, String apmltag)
     {
-        Apmlmodelfile modelfile=new Apmlmodelfile();
+        ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
+        for(int index=0; index<xparam.getnodecount(); index++)
+        {
+            Apmlmodelfile modelfile=new Apmlmodelfile();
+
+            try{modelfile.tagname=this.gettagname(xparam, index);}             catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.autostart=this.getautostarttag(xparam, index);}      catch(Exception e){e.printStackTrace(System.err);}            
+            try{modelfile.classname=this.getclassname(xparam, index);}         catch(Exception e){e.printStackTrace(System.err);}            
+            try{modelfile.id=this.getidtag(xparam, index);}                    catch(Exception e){e.printStackTrace(System.err);}            
+            try{modelfile.init=this.getinittag(xparam, index);}                catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.packagė=this.getpackagename(xparam, index);}         catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.run=this.getruntag(xparam, index);}                  catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.start=this.getstarttag(xparam, index);}              catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.apmlimplementš=this.getimplements(xparam, index);}   catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.apmllisteners=this.getlisteners(xparam, index);}     catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.apmlobjects=this.getobjects(xparam, index);}         catch(Exception e){e.printStackTrace(System.err);} 
+            
+            modelfiles.add(modelfile);
+        }       
         
-        try{modelfile.tagname=this.gettagname(xparam);}             catch(Exception e){e.printStackTrace(System.err);}
-        try{modelfile.autostart=this.getautostarttag(xparam);}      catch(Exception e){e.printStackTrace(System.err);}            
-        try{modelfile.classname=this.getclassname(xparam);}         catch(Exception e){e.printStackTrace(System.err);}            
-        try{modelfile.id=this.getidtag(xparam);}                    catch(Exception e){e.printStackTrace(System.err);}            
-        try{modelfile.init=this.getinittag(xparam);}                catch(Exception e){e.printStackTrace(System.err);}
-        try{modelfile.packagė=this.getpackagename(xparam);}         catch(Exception e){e.printStackTrace(System.err);}
-        try{modelfile.run=this.getruntag(xparam);}                  catch(Exception e){e.printStackTrace(System.err);}
-        try{modelfile.start=this.getstarttag(xparam);}              catch(Exception e){e.printStackTrace(System.err);}
-        try{modelfile.apmlimplementš=this.getimplements(xparam);}   catch(Exception e){e.printStackTrace(System.err);}
-        try{modelfile.apmllisteners=this.getlisteners(xparam);}     catch(Exception e){e.printStackTrace(System.err);}
-        try{modelfile.apmlobjects=this.getobjects(xparam);}         catch(Exception e){e.printStackTrace(System.err);} 
-        
-        return modelfile;
+        return modelfiles;
     } 
     
     /**
@@ -209,7 +190,7 @@ public class Apmlmodelpopulator
      * @param nodes
      * @return 
      */
-    private String gettagname(Xpathparameter xparam)
+    private String gettagname(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0001_tagname==null || xparam.n0001_tagname.item(0)==null) 
             throw new NullPointerException("No tag name found");                    
@@ -223,7 +204,7 @@ public class Apmlmodelpopulator
      * @param nodes
      * @return 
      */
-    private String getautostarttag(Xpathparameter xparam)
+    private String getautostarttag(Xpathparameter xparam, Integer index)
     {        
         if(xparam.n0002_autostart==null || xparam.n0002_autostart.item(0)==null) 
             throw new NullPointerException("No autostart tag found");
@@ -237,7 +218,7 @@ public class Apmlmodelpopulator
      * @param nodes
      * @return 
      */
-    private String getclassname(Xpathparameter xparam)
+    private String getclassname(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0003_classname==null || xparam.n0003_classname.item(0)==null) 
             throw new NullPointerException("No class tag found");
@@ -245,8 +226,8 @@ public class Apmlmodelpopulator
         String retval=null;
         
         try
-        {
-            retval = new Filegrepper().getclassname(xparam.n0003_classname.item(0).getNodeValue());
+        {            
+            retval = new Filegrepper().getclassname(xparam.n0003_classname.item(index).getNodeValue());
         }
         catch(Exception e)
         {
@@ -262,7 +243,7 @@ public class Apmlmodelpopulator
      * @param nodes
      * @return 
      */
-    private String getidtag(Xpathparameter xparam)
+    private String getidtag(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0004_id==null || xparam.n0004_id.item(0)==null)
             throw new NullPointerException("No id tag found");
@@ -276,7 +257,7 @@ public class Apmlmodelpopulator
      * @param nodes
      * @return 
      */
-    private String getinittag(Xpathparameter xparam) 
+    private String getinittag(Xpathparameter xparam, Integer index) 
     {
         if(xparam.n0005_init==null || xparam.n0005_init.item(0)==null)
             throw new NullPointerException("No init tag found");
@@ -290,7 +271,7 @@ public class Apmlmodelpopulator
      * @param nodes
      * @return 
      */
-    private String getpackagename(Xpathparameter xparam)
+    private String getpackagename(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0006_package==null || xparam.n0006_package.item(0)==null)
             throw new NullPointerException("No package tag found");
@@ -304,7 +285,7 @@ public class Apmlmodelpopulator
      * @param nodes
      * @return 
      */
-    private String getruntag(Xpathparameter xparam)
+    private String getruntag(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0007_run==null || xparam.n0007_run.item(0)==null)
             throw new NullPointerException("No run tag found"); 
@@ -318,7 +299,7 @@ public class Apmlmodelpopulator
      * @param nodes
      * @return 
      */
-    private String getstarttag(Xpathparameter xparam)
+    private String getstarttag(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0008_start==null || xparam.n0008_start.item(0)==null)
             throw new NullPointerException("No start tag found"); 
@@ -332,7 +313,7 @@ public class Apmlmodelpopulator
      * @param nodes
      * @return 
      */
-    private ArrayList<Apmlimplement> getimplements(Xpathparameter xparam)
+    private ArrayList<Apmlimplement> getimplements(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0009_implements==null || xparam.n0009_implements.item(0)==null)
             throw new NullPointerException("No implements tag(s) found"); 
@@ -363,7 +344,7 @@ public class Apmlmodelpopulator
      * @param nodes
      * @return 
      */
-    private ArrayList<Apmllistener> getlisteners(Xpathparameter xparam)
+    private ArrayList<Apmllistener> getlisteners(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0010_listeners==null || xparam.n0010_listeners.item(0)==null)
             throw new NullPointerException("No listener tag(s) found"); 
@@ -394,7 +375,7 @@ public class Apmlmodelpopulator
      * @param nodes
      * @return 
      */
-    private ArrayList<Apmlobject> getobjects(Xpathparameter xparam)
+    private ArrayList<Apmlobject> getobjects(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0011_objects==null || xparam.n0011_objects.item(0)==null)
             throw new NullPointerException("No object tag(s) found"); 

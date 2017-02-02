@@ -1,6 +1,5 @@
 package apml.compilers.codemodel;
 
-import apml.helpers.Filegrepper;
 import apml.modeling.Apmlmodelfile;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
@@ -19,15 +18,15 @@ public class Jcmcompiler extends Object
 {
     protected final Integer hash = 0x888fe8;
     
-    public ArrayList<Apmlmodelfile> apmlmodelfiles_compiler;
+    public ArrayList<Apmlmodelfile> apmlmodelfiles_listeners;
     public ArrayList<Apmlmodelfile> apmlmodelfiles_definitions;
-    public ArrayList<Apmlmodelfile> apmlmodelfiles_driver;
-    public ArrayList<Apmlmodelfile> apmlmodelfiles_system;
+    public ArrayList<Apmlmodelfile> apmlmodelfiles_dynamiclisteners;
+    public ArrayList<Apmlmodelfile> apmlmodelfiles_systems;
     
-    public ArrayList<JCodeModel> jcmmodelfiles_compiler;
+    public ArrayList<JCodeModel> jcmmodelfiles_listeners;
     public ArrayList<JCodeModel> jcmmodelfiles_definitions;
-    public ArrayList<JCodeModel> jcmmodelfiles_driver;
-    public ArrayList<JCodeModel> jcmmodelfiles_system;    
+    public ArrayList<JCodeModel> jcmmodelfiles_dynamiclisteners;
+    public ArrayList<JCodeModel> jcmmodelfiles_systems;    
     
     protected File manifestfile;
     protected File manifestdir;    
@@ -38,6 +37,30 @@ public class Jcmcompiler extends Object
     protected static final String SOURCEOUTDIR = "/home/oem/Desktop/apml/output";
     protected static final String MANIFESTDIR = "/home/oem/Desktop/apml/output/manifest";
     protected static final String MANIFESTFILE = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
+    
+    public static void main(String...args) 
+    {                          
+        try
+        {           
+            Jcmcompiler compiler = new Jcmcompiler();            
+            
+            //
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");
+                   
+            //
+            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_systems, "//system");
+
+            //
+            compiler.writejcmtodisk(compiler.jcmmodelfiles_systems);                    
+            
+            //
+            System.gc();
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }    
     
     public Jcmcompiler()
     {
@@ -59,39 +82,7 @@ public class Jcmcompiler extends Object
         {
             Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
-    }    
-
-    public static void main(String...args) 
-    {                          
-        try
-        {           
-            Jcmcompiler compiler = new Jcmcompiler();            
-            
-            //compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//compiler");
-            //compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//definitions");
-            //compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//driver");
-            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");
-            
-            //compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_compiler, "//compiler");
-            //compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_definitions, "//definitions");
-            //compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_driver, "//driver");           
-            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_system, "//system");            
-            
-            //compiler.writejcmtodisk(compiler.jcmmodelfiles_compiler);
-            //compiler.writejcmtodisk(compiler.jcmmodelfiles_definitions);
-            //compiler.writejcmtodisk(compiler.jcmmodelfiles_driver);
-            compiler.writejcmtodisk(compiler.jcmmodelfiles_system);                                         
-                    
-            //compiler.writeallsourcetodisk();
-            
-            //
-            System.gc();
-        }
-        catch(Exception ex)
-        {
-            Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-        }
-    }  
+    }      
     
     //@gitmecall("_-jgp://dosystemcall('gitme>1.2') ");
     public ArrayList<Apmlmodelfile> getapmlmodelfiles(File apmlxmlfile, String apmltag)
@@ -102,21 +93,21 @@ public class Jcmcompiler extends Object
         try
         {
             switch(apmltag)
-            {
-                case "//compiler": 
-                    this.apmlmodelfiles_compiler = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
-                    break;
-                    
+            {                    
                 case "//definitions":
                     this.apmlmodelfiles_definitions = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
-                    break;                    
+                    break; 
                     
-                case "//driver":
-                    this.apmlmodelfiles_driver = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
-                    break;                    
+                case "//dynamiclistener":
+                    this.apmlmodelfiles_dynamiclisteners = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
+                    break;    
+                    
+                case "//listener":
+                    this.apmlmodelfiles_listeners = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
+                    break;                      
                     
                 case "//system":
-                    this.apmlmodelfiles_system = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
+                    this.apmlmodelfiles_systems = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
                     break;                    
             }            
         }
@@ -137,20 +128,20 @@ public class Jcmcompiler extends Object
         {
             switch(apmltag)
             {
-                case "//compiler": 
-                    this.jcmmodelfiles_compiler = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
+                case "//definitions": 
+                    this.jcmmodelfiles_definitions = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
                     break;
                     
-                case "//definitions":
-                    this.jcmmodelfiles_definitions = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
+                case "//dynamiclistener":
+                    this.jcmmodelfiles_dynamiclisteners = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
                     break;                    
                     
-                case "//driver":
-                    this.jcmmodelfiles_driver = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
+                case "//listener":
+                    this.jcmmodelfiles_listeners = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
                     break;                    
                     
                 case "//system":
-                    this.jcmmodelfiles_system = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
+                    this.jcmmodelfiles_systems = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
                     break;                    
             }                     
         }
@@ -166,10 +157,10 @@ public class Jcmcompiler extends Object
     {
         try
         {
-            this.writejcmtodisk(this.jcmmodelfiles_compiler);
             this.writejcmtodisk(this.jcmmodelfiles_definitions);
-            this.writejcmtodisk(this.jcmmodelfiles_driver);
-            this.writejcmtodisk(this.jcmmodelfiles_system);
+            this.writejcmtodisk(this.jcmmodelfiles_dynamiclisteners);            
+            this.writejcmtodisk(this.jcmmodelfiles_listeners);
+            this.writejcmtodisk(this.jcmmodelfiles_systems);
         }
         catch(Exception e)
         {
