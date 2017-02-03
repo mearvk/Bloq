@@ -9,8 +9,6 @@ import apml.xpath.helpers.Xpathparameter;
 import java.io.File;
 import java.util.ArrayList;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  *
@@ -29,9 +27,21 @@ public class Apmlmodelpopulator
             
             //
             File apmlfile = new File("");
+                        
+            //
+            populator.getapmlmodelfiles(apmlfile,"//apml");
             
             //
             populator.getapmlmodelfiles(apmlfile,"//definitions");
+            
+            //
+            populator.getapmlmodelfiles(apmlfile,"//dynamiclistener"); 
+            
+            //
+            populator.getapmlmodelfiles(apmlfile,"//listener");
+
+            //
+            populator.getapmlmodelfiles(apmlfile,"//subscriber");            
             
             //          
             populator.getapmlmodelfiles(apmlfile,"//system");   
@@ -97,6 +107,9 @@ public class Apmlmodelpopulator
             {
                 switch(apmltag)
                 {
+                    case "//apml": 
+                        return doapml(xparam, apmltag);
+                    
                     case "//definitions": 
                         return dodefinitions(xparam, apmltag);
                         
@@ -104,7 +117,10 @@ public class Apmlmodelpopulator
                         return dodynamiclistener(xparam, apmltag);                        
                         
                     case "//listener": 
-                        return dolistener(xparam, apmltag);                        
+                        return dolistener(xparam, apmltag);  
+                        
+                    case "//subscriber": 
+                        return dosubscriber(xparam, apmltag);                         
                     
                     case "//system": 
                         return dosystem(xparam, apmltag);                        
@@ -125,6 +141,38 @@ public class Apmlmodelpopulator
      * @param apmltag
      * @throws Exception 
      */
+    private ArrayList<Apmlmodelfile> doapml(Xpathparameter xparam, String apmltag) throws Exception
+    {
+        ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
+        for(int index=0; index<xparam.getnodecount(); index++)
+        {
+            Apmlmodelfile modelfile=new Apmlmodelfile();
+
+            try{modelfile.superclass=this.getsuperclass(xparam, index);}        catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.tagname=this.gettagname(xparam, index);}              catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.autostart=this.getautostarttag(xparam, index);}       catch(Exception e){e.printStackTrace(System.err);}            
+            try{modelfile.classname=this.getclassname(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);}            
+            try{modelfile.id=this.getidtag(xparam, index);}                     catch(Exception e){e.printStackTrace(System.err);}            
+            try{modelfile.init=this.getinittag(xparam, index);}                 catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.packagė=this.getpackagename(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.run=this.getruntag(xparam, index);}                   catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.start=this.getstarttag(xparam, index);}               catch(Exception e){e.printStackTrace(System.err);}
+            //try{modelfile.apmlimplementš=this.getimplements(xparam, index);}    catch(Exception e){e.printStackTrace(System.err);}
+            //try{modelfile.apmllisteners=this.getlisteners(xparam, index);}      catch(Exception e){e.printStackTrace(System.err);}
+            //try{modelfile.apmlobjects=this.getobjects(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);} 
+            
+            modelfiles.add(modelfile);
+        }       
+        
+        return modelfiles;
+    }    
+    
+    /**
+     * 
+     * @param xparam
+     * @param apmltag
+     * @throws Exception 
+     */
     private ArrayList<Apmlmodelfile> dodefinitions(Xpathparameter xparam, String apmltag) throws Exception
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
@@ -132,7 +180,7 @@ public class Apmlmodelpopulator
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();
 
-            try{modelfile.superclass=this.getsuperclass(xparam, index);}           catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.superclass=this.getsuperclass(xparam, index);}        catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.tagname=this.gettagname(xparam, index);}              catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.autostart=this.getautostarttag(xparam, index);}       catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.classname=this.getclassname(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);}            
@@ -163,7 +211,7 @@ public class Apmlmodelpopulator
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();
 
-            try{modelfile.superclass=this.getsuperclass(xparam, index);}           catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.superclass=this.getsuperclass(xparam, index);}        catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.tagname=this.gettagname(xparam, index);}              catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.autostart=this.getautostarttag(xparam, index);}       catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.classname=this.getclassname(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);}            
@@ -172,9 +220,9 @@ public class Apmlmodelpopulator
             try{modelfile.packagė=this.getpackagename(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.run=this.getruntag(xparam, index);}                   catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.start=this.getstarttag(xparam, index);}               catch(Exception e){e.printStackTrace(System.err);}
-            try{modelfile.apmlimplementš=this.getimplements(xparam, index);}    catch(Exception e){e.printStackTrace(System.err);}
-            try{modelfile.apmllisteners=this.getlisteners(xparam, index);}      catch(Exception e){e.printStackTrace(System.err);}
-            try{modelfile.apmlobjects=this.getobjects(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);} 
+            //try{modelfile.apmlimplementš=this.getimplements(xparam, index);}    catch(Exception e){e.printStackTrace(System.err);}
+            //try{modelfile.apmllisteners=this.getlisteners(xparam, index);}      catch(Exception e){e.printStackTrace(System.err);}
+            //try{modelfile.apmlobjects=this.getobjects(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);} 
             
             modelfiles.add(modelfile);
         }       
@@ -194,7 +242,7 @@ public class Apmlmodelpopulator
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();
                                     
-            try{modelfile.superclass=this.getsuperclass(xparam, index);}           catch(Exception e){e.printStackTrace(System.err);}            
+            try{modelfile.superclass=this.getsuperclass(xparam, index);}        catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.tagname=this.gettagname(xparam, index);}              catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.classname=this.getclassname(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.id=this.getidtag(xparam, index);}                     catch(Exception e){e.printStackTrace(System.err);}                        
@@ -202,9 +250,39 @@ public class Apmlmodelpopulator
             try{modelfile.packagė=this.getpackagename(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.run=this.getruntag(xparam, index);}                   catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.start=this.getstarttag(xparam, index);}               catch(Exception e){e.printStackTrace(System.err);}
-            try{modelfile.apmlimplementš=this.getimplements(xparam, index);}    catch(Exception e){e.printStackTrace(System.err);}
-            try{modelfile.apmllisteners=this.getlisteners(xparam, index);}      catch(Exception e){e.printStackTrace(System.err);}
-            try{modelfile.apmlobjects=this.getobjects(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);} 
+            //try{modelfile.apmlimplementš=this.getimplements(xparam, index);}    catch(Exception e){e.printStackTrace(System.err);}
+            //try{modelfile.apmllisteners=this.getlisteners(xparam, index);}      catch(Exception e){e.printStackTrace(System.err);}
+            //try{modelfile.apmlobjects=this.getobjects(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);} 
+            
+            modelfiles.add(modelfile);
+        }       
+        
+        return modelfiles;
+    }    
+    
+    /**
+     * 
+     * @param xparam
+     * @param apmltag 
+     */    
+    private ArrayList<Apmlmodelfile> dosubscriber(Xpathparameter xparam, String apmltag)
+    {
+        ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
+        for(int index=0; index<xparam.getnodecount(); index++)
+        {
+            Apmlmodelfile modelfile=new Apmlmodelfile();
+                                    
+            try{modelfile.superclass=this.getsuperclass(xparam, index);}        catch(Exception e){e.printStackTrace(System.err);}            
+            try{modelfile.tagname=this.gettagname(xparam, index);}              catch(Exception e){e.printStackTrace(System.err);}            
+            try{modelfile.classname=this.getclassname(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);}            
+            try{modelfile.id=this.getidtag(xparam, index);}                     catch(Exception e){e.printStackTrace(System.err);}                        
+            try{modelfile.init=this.getinittag(xparam, index);}                 catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.packagė=this.getpackagename(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.run=this.getruntag(xparam, index);}                   catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.start=this.getstarttag(xparam, index);}               catch(Exception e){e.printStackTrace(System.err);}
+            //try{modelfile.apmlimplementš=this.getimplements(xparam, index);}    catch(Exception e){e.printStackTrace(System.err);}
+            //try{modelfile.apmllisteners=this.getlisteners(xparam, index);}      catch(Exception e){e.printStackTrace(System.err);}
+            //try{modelfile.apmlobjects=this.getobjects(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);} 
             
             modelfiles.add(modelfile);
         }       
@@ -225,7 +303,7 @@ public class Apmlmodelpopulator
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();
 
-            try{modelfile.superclass=this.getsuperclass(xparam, index);}           catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.superclass=this.getsuperclass(xparam, index);}        catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.tagname=this.gettagname(xparam, index);}              catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.autostart=this.getautostarttag(xparam, index);}       catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.classname=this.getclassname(xparam, index);}          catch(Exception e){e.printStackTrace(System.err);}            

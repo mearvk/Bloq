@@ -13,19 +13,25 @@ import java.util.logging.Logger;
 /**
  * 
  * @author Max Rupplin
+ * @since 02.02.2017
+ * @version 1.0
  */
 public class Jcmcompiler extends Object
 {
     protected final Integer hash = 0x888fe8;
     
-    public ArrayList<Apmlmodelfile> apmlmodelfiles_listeners;
+    public ArrayList<Apmlmodelfile> apmlmodelfiles_apml;    
     public ArrayList<Apmlmodelfile> apmlmodelfiles_definitions;
     public ArrayList<Apmlmodelfile> apmlmodelfiles_dynamiclisteners;
-    public ArrayList<Apmlmodelfile> apmlmodelfiles_systems;
+    public ArrayList<Apmlmodelfile> apmlmodelfiles_listeners;
+    public ArrayList<Apmlmodelfile> apmlmodelfiles_subscribers;
+    public ArrayList<Apmlmodelfile> apmlmodelfiles_systems;    
     
-    public ArrayList<JCodeModel> jcmmodelfiles_listeners;
+    public ArrayList<JCodeModel> jcmmodelfiles_apml;
     public ArrayList<JCodeModel> jcmmodelfiles_definitions;
     public ArrayList<JCodeModel> jcmmodelfiles_dynamiclisteners;
+    public ArrayList<JCodeModel> jcmmodelfiles_listeners;
+    public ArrayList<JCodeModel> jcmmodelfiles_subscribers;
     public ArrayList<JCodeModel> jcmmodelfiles_systems;    
     
     protected File manifestfile;
@@ -45,16 +51,27 @@ public class Jcmcompiler extends Object
             Jcmcompiler compiler = new Jcmcompiler();            
             
             //
-            //compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//apml");
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//dynamiclistener");
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//listener");
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");                        
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//subscriber");
+            
                    
             //
-            //compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_systems, "//system");
+            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_apml, "//apml");
+            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_dynamiclisteners, "//dynamiclistener");            
             compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_listeners, "//listener");
+            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_subscribers, "//subscriber");
+            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_systems, "//system");
+            
 
             //
+            compiler.writejcmtodisk(compiler.jcmmodelfiles_apml);
             compiler.writejcmtodisk(compiler.jcmmodelfiles_systems);                    
             compiler.writejcmtodisk(compiler.jcmmodelfiles_listeners);                    
+            compiler.writejcmtodisk(compiler.jcmmodelfiles_subscribers);                    
+            compiler.writejcmtodisk(compiler.jcmmodelfiles_dynamiclisteners);
             
             //
             System.gc();
@@ -97,6 +114,10 @@ public class Jcmcompiler extends Object
         {
             switch(apmltag)
             {                    
+                case "//apml":
+                    this.apmlmodelfiles_apml = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
+                    break; 
+                    
                 case "//definitions":
                     this.apmlmodelfiles_definitions = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
                     break; 
@@ -107,7 +128,11 @@ public class Jcmcompiler extends Object
                     
                 case "//listener":
                     this.apmlmodelfiles_listeners = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
-                    break;                      
+                    break;   
+                    
+                case "//subscriber":
+                    this.apmlmodelfiles_subscribers = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
+                    break;                    
                     
                 case "//system":
                     this.apmlmodelfiles_systems = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
@@ -131,6 +156,10 @@ public class Jcmcompiler extends Object
         {
             switch(apmltag)
             {
+                case "//apml": 
+                    this.jcmmodelfiles_apml = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
+                    break;
+                    
                 case "//definitions": 
                     this.jcmmodelfiles_definitions = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
                     break;
@@ -141,6 +170,10 @@ public class Jcmcompiler extends Object
                     
                 case "//listener":
                     this.jcmmodelfiles_listeners = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
+                    break;   
+                    
+                case "//subscriber":
+                    this.jcmmodelfiles_subscribers = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
                     break;                    
                     
                 case "//system":
@@ -160,9 +193,11 @@ public class Jcmcompiler extends Object
     {
         try
         {
+            this.writejcmtodisk(this.jcmmodelfiles_apml);
             this.writejcmtodisk(this.jcmmodelfiles_definitions);
             this.writejcmtodisk(this.jcmmodelfiles_dynamiclisteners);            
             this.writejcmtodisk(this.jcmmodelfiles_listeners);
+            this.writejcmtodisk(this.jcmmodelfiles_subscribers);
             this.writejcmtodisk(this.jcmmodelfiles_systems);
         }
         catch(Exception e)
@@ -180,7 +215,7 @@ public class Jcmcompiler extends Object
                 Iterator<JPackage> itr_pkg = jcmmodels.get(i).packages();
                                 
                 for(;itr_pkg.hasNext();) //do every package
-                {
+                {                    
                     JPackage jpackage = itr_pkg.next();
                                     
                     Iterator<JDefinedClass> itr_cls = jpackage.classes();
