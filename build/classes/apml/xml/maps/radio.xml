@@ -14,6 +14,25 @@
                 <producer class="ethernet out"> <!-- listens for output from computer, relays it to ham radio -->
                     <node class="ip" id="12.23.44.212">
                         
+                        <frequency id="long" to="pin0">10kHz to 12kHz</frequency>
+                        <frequency id="public" to="pin1">5.01Mhz to 5.03Mhz</frequency>
+                        <frequency id="private" to="pin2">5.03Mhz to 5.05Mhz</frequency>
+                        <frequency id="secret" to="pin3">5.05Mhz to 5.07Mhz</frequency>
+                        
+                        <listener target="secret">
+                            <pin1>
+                                <voltage type="input">
+                                    <volts>0v to 5v</volts>
+                                </voltage>
+                                <voltage type="output">
+                                    <volts>5v to 10v</volts>
+                                </voltage>                                
+                            </pin1>
+                            <encoding scheme="traveling salesman">
+                                <specification ref="traveling salesman"></specification>
+                            </encoding>
+                        </listener>
+                        
                     </node>
                 </producer>
             </listener>
