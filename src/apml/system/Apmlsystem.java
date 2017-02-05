@@ -1,39 +1,71 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package apml.system;
 
-import apml.subscribers.stdapmlsubscriber;
+import apml.compilers.java.codemodel.Jcmcompiler;
+import apml.subscribers.Apmlsubscriber;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
-public class apmlsystem 
+public class Apmlsystem implements Runnable
 {
+    public Map properties = new HashMap();
+    
+    public static String CLASSPATHS = "/r/null"; //todo fix me plz
+    public static Boolean LOADJNDI = true;
+    public static Boolean LOADSUBSYSTEMS = true;
+    public static Boolean DISPLAYLOADING = true;
+    
+    public void run()
+    {
+        //do init
+        //do std actions
+        //quit
+    }    
+    
+    public void put(Object object)
+    {
+        
+    }
+    
+    public void setProperty(Object object, Object state) throws Exception
+    {
+        Object certain = this.getProperty(object);
+        
+        if(certain==null) throw new Exception("System property ["+object+"] was not found; returning");
+        
+        this.properties.put(object, state);
+    }
+    
+    public Object getProperty(Object object)
+    {
+        return this.properties.get(object);
+    }
+    
     public static Map map = null;
     
-    public static Object notify(stdapmlsubscriber subscriber, ActionEvent ae)
+    public static Object notify(Apmlsubscriber subscriber, ActionEvent ae)
     {
         return null;
     }
     
-    public static Object notifyAll(ArrayList<stdapmlsubscriber> subscriber, ActionEvent ae)
+    public static Object notifyAll(ArrayList<Apmlsubscriber> subscriber, ActionEvent ae)
     {
         return null;
     }     
     
-    public static Object notify(stdapmlsubscriber subscriber, String string)
+    public static Object notify(Apmlsubscriber subscriber, String string)
     {
         return null;
     }
     
-    public static Object notifyAll(ArrayList<stdapmlsubscriber> subscriber, String string)
+    public static Object notifyAll(ArrayList<Apmlsubscriber> subscriber, String string)
     {
         return null;
     }    
@@ -93,7 +125,7 @@ public class apmlsystem
         return null;
     }    
    
-    public static ArrayList<stdapmlsubscriber> getSubscribers(String unique)
+    public static ArrayList<Apmlsubscriber> getSubscribers(String unique)
     {
         return null;
     }    
@@ -104,19 +136,17 @@ public class apmlsystem
         {
             return c.newInstance();
         }
-        catch(Exception e)
+        catch(InstantiationException | IllegalAccessException ex)
         {
-            e.printStackTrace();
+            Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
-        finally
-        {
-            return null;
-        }
+        
+        return null;
     }
     
     public static void doPutElementsOnStartup(Map map)
     {
-        apmlsystem.map.putAll(map);        
+        Apmlsystem.map.putAll(map);        
     }
     
     public static void doPutElementsOnStartup(String[] names, Object[] objects)
@@ -129,11 +159,11 @@ public class apmlsystem
     
     public static Map doGetElements()
     {
-        return apmlsystem.map;
+        return Apmlsystem.map;
     }    
     
     public static Object doGetElement(Object o)
     {
-        return apmlsystem.map.get(o);
+        return Apmlsystem.map.get(o);
     }
 }

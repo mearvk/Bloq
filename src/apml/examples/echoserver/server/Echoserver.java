@@ -2,7 +2,7 @@ package apml.examples.echoserver.server;
 
 import apml.annotations.ApmlListener;
 import apml.objects.networking.ServerSocketImpl;
-import apml.subscribers.stdapmlsubscriber;
+import apml.subscribers.Apmlsubscriber;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -13,15 +13,15 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import apml.interfaces.startable;
-import apml.interfaces.actionlistener;
-import apml.interfaces.runnable;
+import apml.interfaces.Startable;
+import apml.interfaces.Actionlistener;
+import apml.interfaces.Runnable;
 
 /**
  *
  * @author Max Rupplin
  */
-public class echoserver extends ServerSocketImpl implements runnable, startable
+public class Echoserver extends ServerSocketImpl implements Runnable, Startable
 {   
     public ServerSocket serversocket;
     public Boolean running = true;
@@ -29,7 +29,7 @@ public class echoserver extends ServerSocketImpl implements runnable, startable
     public Socket socket;        
     public String line;
     
-    public echoserver()
+    public Echoserver()
     {
         
     }
@@ -51,7 +51,7 @@ public class echoserver extends ServerSocketImpl implements runnable, startable
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
         }
     }
     
@@ -71,7 +71,7 @@ public class echoserver extends ServerSocketImpl implements runnable, startable
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
         }
     }
     
@@ -93,7 +93,7 @@ public class echoserver extends ServerSocketImpl implements runnable, startable
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
         }
     }
     
@@ -103,6 +103,7 @@ public class echoserver extends ServerSocketImpl implements runnable, startable
         return serversocket.accept();
     }
     
+    @Override
     public void run()
     {
         while(running) 
@@ -153,30 +154,30 @@ class EchoServerOnConnectListener implements ActionListener
    @Override
     public void actionPerformed(ActionEvent ae) 
     {
-        ArrayList<stdapmlsubscriber> subscribers = apml.system.apmlsystem.getSubscribers("echoserver/onconnect");
+        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getSubscribers("echoserver/onconnect");
         
-        for(stdapmlsubscriber s : subscribers)
+        for(Apmlsubscriber s : subscribers)
         {
-            apml.system.apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onconnect/notify"));
+            apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onconnect/notify"));
         }
     }   
 }
 
-class EchoServerOnExitListener implements actionlistener, ActionListener
+class EchoServerOnExitListener implements Actionlistener, ActionListener
 {
     @Override
-    public void actionEvent()
+    public void actionEvent(ActionEvent event)
     {
     }
     
     @Override
     public void actionPerformed(ActionEvent ae) 
     {
-        ArrayList<stdapmlsubscriber> subscribers = apml.system.apmlsystem.getSubscribers("echoserver/onexit");
+        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getSubscribers("echoserver/onexit");
         
-        for(stdapmlsubscriber s : subscribers)
+        for(Apmlsubscriber s : subscribers)
         {
-            apml.system.apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onconnect/notify"));
+            apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onconnect/notify"));
         }        
         
     }      
@@ -187,11 +188,11 @@ class EchoServerOnReadListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) 
     {
-        ArrayList<stdapmlsubscriber> subscribers = apml.system.apmlsystem.getSubscribers("echoserver/onread");
+        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getSubscribers("echoserver/onread");
         
-        for(stdapmlsubscriber s : subscribers)
+        for(Apmlsubscriber s : subscribers)
         {
-            apml.system.apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onread/notify"));
+            apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onread/notify"));
         }        
     }      
 }
@@ -201,11 +202,11 @@ class EchoServerOnReceiptListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) 
     {
-        ArrayList<stdapmlsubscriber> subscribers = apml.system.apmlsystem.getSubscribers("echoserver/onreceipt");
+        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getSubscribers("echoserver/onreceipt");
         
-        for(stdapmlsubscriber s : subscribers)
+        for(Apmlsubscriber s : subscribers)
         {
-            apml.system.apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onreceipt/notify"));
+            apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onreceipt/notify"));
         }        
     }      
 }
@@ -215,11 +216,11 @@ class EchoServerOnDispatchListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) 
     {
-        ArrayList<stdapmlsubscriber> subscribers = apml.system.apmlsystem.getSubscribers("echoserver/ondispatch");
+        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getSubscribers("echoserver/ondispatch");
         
-        for(stdapmlsubscriber s : subscribers)
+        for(Apmlsubscriber s : subscribers)
         {
-            apml.system.apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/ondispatch/notify"));
+            apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/ondispatch/notify"));
         }        
     }      
 }     

@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apml.subscribers;
+package apml.interfaces;
 
 /**
  *
  * @author oem
  */
-public class stdapmlsubscriber {
-    
+public interface Runnable 
+{
+    public void run();
 }

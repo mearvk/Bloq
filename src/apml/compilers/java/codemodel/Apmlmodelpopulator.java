@@ -1,4 +1,4 @@
-package apml.compilers.codemodel;
+package apml.compilers.java.codemodel;
 
 import apml.helpers.Filegrepper;
 import apml.modeling.Apmlimplement;

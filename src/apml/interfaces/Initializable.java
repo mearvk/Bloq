@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apml.compilers.roaster;
+package apml.interfaces;
 
 /**
  *
  * @author oem
  */
-public class stdroastercompiler 
+public interface Initializable 
 {
-    
+    public void init();
 }

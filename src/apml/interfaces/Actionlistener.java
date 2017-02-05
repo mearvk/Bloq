@@ -5,11 +5,13 @@
  */
 package apml.interfaces;
 
+import java.awt.event.ActionEvent;
+
 /**
  *
  * @author oem
  */
-public interface initializable 
+public interface Actionlistener 
 {
-    public void init();
+    public void actionEvent(ActionEvent event);
 }

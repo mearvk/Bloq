@@ -9,7 +9,7 @@ package apml.interfaces;
  *
  * @author oem
  */
-public interface actionlistener 
+public interface Autostartable 
 {
-    public void actionEvent();
+    public void autostart();
 }

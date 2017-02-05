@@ -9,6 +9,7 @@ package apml.interfaces;
  *
  * @author oem
  */
-public interface runnable {
-    public void run();
+public interface Pausable 
+{
+    public void pause();
 }

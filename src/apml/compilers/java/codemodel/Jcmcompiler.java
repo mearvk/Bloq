@@ -1,10 +1,12 @@
-package apml.compilers.codemodel;
+package apml.compilers.java.codemodel;
 
 import apml.modeling.Apmlmodelfile;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JPackage;
 import java.io.File;
+import java.nio.file.Files;
+import static java.nio.file.StandardCopyOption.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -14,7 +16,7 @@ import java.util.logging.Logger;
  * 
  * @author Max Rupplin
  * @since 02.02.2017
- * @version 1.0
+ * @version 1.00
  */
 public class Jcmcompiler extends Object
 {
@@ -39,6 +41,8 @@ public class Jcmcompiler extends Object
     protected File outputdir;   
     protected File apmlxmlfile;
     
+    protected static final String APMLINJAR = "/home/oem/NetBeansProjects/APML/dist/APML.jar";
+    protected static final String APMLOUTJAR = "/home/oem/Desktop/apml/output/libs/APML.jar";
     protected static final String APMLIN = "/home/oem/Desktop/apml/apml/echoserver.xml";
     protected static final String SOURCEOUTDIR = "/home/oem/Desktop/apml/output";
     protected static final String MANIFESTDIR = "/home/oem/Desktop/apml/output/manifest";
@@ -53,9 +57,9 @@ public class Jcmcompiler extends Object
             //
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//apml");
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//dynamiclistener");
-            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//listener");
-            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");                        
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//listener");                                   
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//subscriber");
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");             
             
                    
             //
@@ -68,10 +72,15 @@ public class Jcmcompiler extends Object
 
             //
             compiler.writejcmtodisk(compiler.jcmmodelfiles_apml);
-            compiler.writejcmtodisk(compiler.jcmmodelfiles_systems);                    
+            compiler.writejcmtodisk(compiler.jcmmodelfiles_dynamiclisteners);                             
             compiler.writejcmtodisk(compiler.jcmmodelfiles_listeners);                    
             compiler.writejcmtodisk(compiler.jcmmodelfiles_subscribers);                    
-            compiler.writejcmtodisk(compiler.jcmmodelfiles_dynamiclisteners);
+            compiler.writejcmtodisk(compiler.jcmmodelfiles_systems);   
+            
+            
+            //
+            compiler.writeapmlbackingjartodisk();
+            
             
             //
             System.gc();
@@ -199,12 +208,25 @@ public class Jcmcompiler extends Object
             this.writejcmtodisk(this.jcmmodelfiles_listeners);
             this.writejcmtodisk(this.jcmmodelfiles_subscribers);
             this.writejcmtodisk(this.jcmmodelfiles_systems);
+            
+            try
+            {
+                if(new File(Jcmcompiler.APMLOUTJAR).exists())
+                {
+                    Files.copy(new File(Jcmcompiler.APMLINJAR).toPath(),new File(Jcmcompiler.APMLOUTJAR).toPath(),REPLACE_EXISTING);
+                }
+                else new File(Jcmcompiler.APMLOUTJAR).mkdirs();
+                {
+                    Files.copy(new File(Jcmcompiler.APMLINJAR).toPath(),new File(Jcmcompiler.APMLOUTJAR).toPath(),REPLACE_EXISTING);                
+                }
+            }
+            catch(Exception e){e.printStackTrace(System.err);}            
         }
         catch(Exception e)
         {
             e.printStackTrace(System.err);
         }
-    }
+    }   
     
     public void writejcmtodisk(ArrayList<JCodeModel> jcmmodels)
     {        
@@ -234,6 +256,18 @@ public class Jcmcompiler extends Object
                 }
             }
             catch(Exception e){e.printStackTrace(System.err);}                       
+        }                
+    }  
+
+    public void writeapmlbackingjartodisk() throws Exception
+    {
+        if(new File(Jcmcompiler.APMLOUTJAR).exists())
+        {
+            Files.copy(new File(Jcmcompiler.APMLINJAR).toPath(),new File(Jcmcompiler.APMLOUTJAR).toPath(),REPLACE_EXISTING);
         }
+        else new File(Jcmcompiler.APMLOUTJAR).mkdirs();
+        {
+            Files.copy(new File(Jcmcompiler.APMLINJAR).toPath(),new File(Jcmcompiler.APMLOUTJAR).toPath(),REPLACE_EXISTING);                
+        }        
     }
 }

@@ -9,7 +9,7 @@ package apml.interfaces;
  *
  * @author oem
  */
-public interface autostartable 
+public interface Startable 
 {
-    public void autostart();
+    public void start();
 }

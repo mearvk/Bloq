@@ -3,11 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apml.compilers.codemodel;
+package apml.compilers.java.codemodel;
 
-import apml.interfaces.autostartable;
-import apml.interfaces.initializable;
-import apml.interfaces.startable;
 import apml.modeling.Apmlmodelfile;
 import apml.modeling.Apmlobject;
 import com.sun.codemodel.JClass;
@@ -24,6 +21,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import apml.interfaces.Startable;
+import apml.interfaces.Autostartable;
+import apml.interfaces.Initializable;
 
 /**
  *
@@ -270,7 +270,7 @@ public class Jcmmodelpopulator
                 throw new InvalidParameterException("Start or startable not set; unable to comply");
             
             if(param.apmlmodelfile.start.equalsIgnoreCase("true"))
-                param.classfile = param.classfile._implements(startable.class);
+                param.classfile = param.classfile._implements(Startable.class);
         }
         catch(Exception ex)
         {
@@ -357,7 +357,7 @@ public class Jcmmodelpopulator
             if(param.apmlmodelfile.autostart==null)
                 throw new InvalidParameterException("No autostart tag found");
             
-            param.classfile = param.classfile._implements(autostartable.class);
+            param.classfile = param.classfile._implements(Autostartable.class);
         }
         catch(Exception ex)
         {
@@ -379,7 +379,7 @@ public class Jcmmodelpopulator
             if(param.apmlmodelfile.init==null)
                 throw new InvalidParameterException("No init tag found");
             
-            param.classfile = param.classfile._implements(initializable.class);
+            param.classfile = param.classfile._implements(Initializable.class);
         }
         catch(Exception ex)
         {
