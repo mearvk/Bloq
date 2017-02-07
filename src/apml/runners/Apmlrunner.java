@@ -18,8 +18,11 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- *
+ * For starting parsing, compiling by 3rd parties directly from command line, etc.
+ * 
  * @author Max Rupplin
+ * @version 1.00
+ * @see http://github.com/mearvk/Bloq/wiki
  */
 public final class Apmlrunner 
 {

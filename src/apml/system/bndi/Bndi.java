@@ -34,7 +34,7 @@ public class Bndi
 
         Object three1 = Bndi.context("//apml/tests/").pull(three.hashCode());
         Object three2 = Bndi.context("//apml/tests/").pull(three);
-        Object three3 = Bndi.context("//apml/tests/").pull("three");                
+        Object three3 = Bndi.context("//apml/tests/").pull("three");             
     }
     
     public static Map<String, Bndicontext> getcontexts(String context)
