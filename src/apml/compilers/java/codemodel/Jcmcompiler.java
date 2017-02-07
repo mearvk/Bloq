@@ -46,7 +46,7 @@ public class Jcmcompiler extends Stdcompiler
     
     protected static final String APMLINJAR = "/home/oem/NetBeansProjects/APML/dist/APML.jar";
     protected static final String APMLOUTJAR = "/home/oem/Desktop/apml/output/libs/APML.jar";
-    protected static final String APMLIN = "/home/oem/Desktop/apml/apml/echoserver.xml";
+    protected static final String APMLIN = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";
     protected static final String SOURCEOUTDIR = "/home/oem/Desktop/apml/output";
     protected static final String MANIFESTDIR = "/home/oem/Desktop/apml/output/manifest";
     protected static final String MANIFESTFILE = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
@@ -62,7 +62,7 @@ public class Jcmcompiler extends Stdcompiler
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//dynamiclistener");
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//listener");                                   
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//subscriber");
-            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");             
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");           
             
                    
             //

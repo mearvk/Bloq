@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?apml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 
-<definitions>
-    <echoserver extends="java.lang.Object" class="apml.examples.echoserver.EchoServer.java"></echoserver>   
-</definitions>
+<apml language="Java 9" version="1.0" class="xxx.yyy.zzz.Class">  
 
-/* Application Program Markup Language */
-<apml language="Java 9" version="1.0">  
-    
-    /* hello world echo server quick example program */    
-    
-    <system start="true" id="echoserver" class="apml.examples.echoserver.EchoServerSystem" package="apml.examples.echoserver">
-
-        <object start="true" class="apml.examples.echoserver.EchoServer.java">                       
-            <listener id="esocl" class="EchoServerOnConnectListener" with="*" function="org.blah.Classname.fucntion">
+    <definitions>
+        <echoserver extends="ServerSocketImpl" class="apml.examples.echoserver.EchoServer"></echoserver>   
+    </definitions>
+       
+    <package default="xxx.yyy.zzz"></package>      
+        
+    <system start="true" id="echoserver" class="xxx.yyy.zzz.EchoServerSystem" package="xxx.abc.def">
+        <object start="true" class="EchoServer">                       
+            <listener id="esocl" class="EchoServerOnConnectListener" with="*" function="org.blah.Classname.function">
                 <subscriber id="esocl_connect_sub_1" class="apml.examples.echoserver.EchoServerOnConnect_1"></subscriber>
                 <subscriber id="esocl_connect_sub_2" class="apml.examples.echoserver.EchoServerOnConnect_2"></subscriber>
                 <subscriber id="esocl_connect_sub_3" class="apml.examples.echoserver.EchoServerOnConnect_3"></subscriber>
@@ -41,7 +34,7 @@ and open the template in the editor.
         </object>
     </system>   
     
-    <system start="true" id="echoclient" package="apml.examples.echoserver">
+    <system start="true" id="echoclient">
         <object class="EchoClient">
             <listener class="EchoServerClientSocketListener"></listener>
         </object>
@@ -68,12 +61,4 @@ and open the template in the editor.
         <template type=""></template>
     </compiler>    
 </apml>
-
-ok now what?
-
-structurally we need a couple things
-
-1) instantiation
-2) program start function (ie init, start, run, instead of just main)
-3) system api underlayment
 

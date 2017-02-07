@@ -19,6 +19,7 @@ public class Apmlmodelfile
     public String id;
     public String init;        
     public String packagė;
+    public String defaultpackage;
     public String parent;
     public String start;
     public String run;

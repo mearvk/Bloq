@@ -147,7 +147,10 @@ public class Jcmmodelpopulator
             if(param.jcodemodel==null) 
                 throw new InvalidParameterException("JCodeModel not set; unable to set package name");            
             
-            param.jpackage = param.jcodemodel._package(param.apmlmodelfile.packagė);
+            if(param.apmlmodelfile.packagė!=null && param.apmlmodelfile.packagė.length()>0)            
+                param.jpackage = param.jcodemodel._package(param.apmlmodelfile.packagė);
+            else 
+                param.jpackage = param.jcodemodel._package(param.apmlmodelfile.defaultpackage);
         }
         catch(Exception ex)
         {

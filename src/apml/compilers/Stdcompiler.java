@@ -11,5 +11,12 @@ package apml.compilers;
  */
 public abstract class Stdcompiler 
 {
+    public String defaultpackagename = "apml.default";
+    
     public abstract void compiletosource();
+    
+    public void setdefaultpackagename(String pkgname)
+    {
+        this.defaultpackagename = pkgname;
+    }
 }
