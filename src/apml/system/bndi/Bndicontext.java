@@ -17,7 +17,7 @@ public class Bndicontext
 {
     private final Map<String, Object> namemap = new HashMap();
     private final Map<Integer, Object> hashmap = new HashMap();
-    private final Map<Object, Integer> objectmap = new HashMap();    
+    private final Map<Object, Object> objectmap = new HashMap();    
     
     public String contextname;
     public File file;
@@ -34,9 +34,9 @@ public class Bndicontext
     
     public void put(String name, Object object)
     {
-        try{this.hashmap.put(object.hashCode(), object);}           catch(Exception e){}
-        try{this.namemap.put(name, object);}                        catch(Exception e){}            
-        try{this.objectmap.put(object, object.hashCode());}         catch(Exception e){}
+        try{this.hashmap.put(object.hashCode(), object);}   catch(Exception e){}
+        try{this.namemap.put(name, object);}                catch(Exception e){}            
+        try{this.objectmap.put(object, object);}            catch(Exception e){}
     }        
     
     public Object pull(Integer hashcode)
