@@ -513,7 +513,12 @@ public class Jcmmodelpopulator
         
         for(int i=0;i<apmlmodels.size();i++)
         {            
-            try{jcmmodels.add(this.createjcodemodelinstance(apmlmodels.get(i)));}catch(Exception e){e.printStackTrace(System.err);}
+            try
+            {
+                jcmmodels.add(this.createjcodemodelinstance(apmlmodels.get(i)));
+            }
+            catch(Exception e)
+            {e.printStackTrace(System.err);}
         }              
         
         return jcmmodels;
