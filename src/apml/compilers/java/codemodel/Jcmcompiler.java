@@ -62,8 +62,7 @@ public class Jcmcompiler extends Stdcompiler
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//dynamiclistener");
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//listener");                                   
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//subscriber");
-            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");           
-            
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");                       
                    
             //
             compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_apml, "//apml");
@@ -72,18 +71,15 @@ public class Jcmcompiler extends Stdcompiler
             compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_subscribers, "//subscriber");
             compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_systems, "//system");
             
-
             //
             compiler.writejcmtodisk(compiler.jcmmodelfiles_apml);
             compiler.writejcmtodisk(compiler.jcmmodelfiles_dynamiclisteners);                             
             compiler.writejcmtodisk(compiler.jcmmodelfiles_listeners);                    
             compiler.writejcmtodisk(compiler.jcmmodelfiles_subscribers);                    
             compiler.writejcmtodisk(compiler.jcmmodelfiles_systems);   
-            
-            
+                        
             //
-            compiler.writeapmlbackingjartodisk();
-            
+            compiler.writeapmlbackingjartodisk();            
             
             //
             System.gc();

@@ -24,6 +24,7 @@ public class Apmlmodelfile
     public String start;
     public String run;
     public String tagname;
+    public String bndi;
         
     public String[] implementš;
     public String[] listeners;

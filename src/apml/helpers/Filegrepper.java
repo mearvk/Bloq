@@ -76,6 +76,9 @@ public class Filegrepper
             return stmp;
         }  
         
-        throw new Exception("Could not parse for class name.");
+        if(fullURL.contains(".") || fullURL.contains("/"))
+            throw new Exception("Could not parse for class name.");
+        
+        return fullURL;
     }            
 }

@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?apml version="1.0" encoding="UTF-8"?>
 
-<apml language="Java 9" version="1.0" class="xxx.yyy.zzz.Class">  
+<apml language="Java 9" version="1.0" class="ampl.examples.echoserver.Apmlsystem">  
 
     <definitions>
-        <echoserver extends="ServerSocketImpl" class="apml.examples.echoserver.EchoServer"></echoserver>   
+        <echoserver extends="ServerSocketImpl" class="Echoserver"></echoserver>   
     </definitions>
        
-    <package default="xxx.yyy.zzz"></package>      
+    <package default="apml.examples.echoserver"></package>      
         
-    <system start="true" id="echoserver" class="xxx.yyy.zzz.EchoServerSystem" package="xxx.abc.def">
-        <object start="true" class="EchoServer">                       
-            <listener id="esocl" class="EchoServerOnConnectListener" with="*" function="org.blah.Classname.function">
-                <subscriber id="esocl_connect_sub_1" class="apml.examples.echoserver.EchoServerOnConnect_1"></subscriber>
-                <subscriber id="esocl_connect_sub_2" class="apml.examples.echoserver.EchoServerOnConnect_2"></subscriber>
-                <subscriber id="esocl_connect_sub_3" class="apml.examples.echoserver.EchoServerOnConnect_3"></subscriber>
+    <system start="true" bndi="//echoserver/systems/1" id="echoserver" class="Echoserversystem">
+        <object start="true" bndi="//echoserver/objects/1" class="EchoServer">                       
+            <listener bndi="//echoserver/listeners/onconnect/1" id="esocl" class="Onconnectlistener" with="*">
+                <subscriber bndi="//echoserver/subscribers/onconnect/1" class="Onconnect_1"></subscriber>
+                <subscriber bndi="//echoserver/subscribers/onconnect/2" class="Onconnect_2"></subscriber>
+                <subscriber bndi="//echoserver/subscribers/onconnect/3" class="Onconnect_3"></subscriber>
             </listener>
-            <listener id="esoel" class="EchoServerOnExitListener" with="*">
-                <subscriber id="" class="apml.examples.echoserver.EchoServerOnExit_1"></subscriber>
-                <subscriber id="" class="apml.examples.echoserver.EchoServerOnExit_2"></subscriber>
-                <subscriber id="" class="apml.examples.echoserver.EchoServerOnExit_3"></subscriber>
+            <listener bndi="//echoserver/listeners/onexit/1" id="esoel" class="Onexitlistener" with="*">
+                <subscriber bndi="//echoserver/subscribers/onexit/1" class="Onexit_1"></subscriber>
+                <subscriber bndi="//echoserver/subscribers/onexit/2" class="Onexit_2"></subscriber>
+                <subscriber bndi="//echoserver/subscribers/onexit/3" class="Onexit_3"></subscriber>
             </listener>
-            <listener id="esorl" class="EchoServerOnReadListener" with="*">
-                <subscriber id="" class="apml.examples.echoserver.EchoServerOnReceipt_1"></subscriber>
-                <subscriber id="" class="apml.examples.echoserver.EchoServerOnReceipt_2"></subscriber>
-                <subscriber id="" class="apml.examples.echoserver.EchoServerOnReceipt_3"></subscriber>
+            <listener bndi="//echoserver/listeners/onread/1" id="esorl" class="Onreadlistener" with="*">
+                <subscriber bndi="//echoserver/subscribers/onread/1" class="Onreceipt_1"></subscriber>
+                <subscriber bndi="//echoserver/subscribers/onread/2" class="Onreceipt_2"></subscriber>
+                <subscriber bndi="//echoserver/subscribers/onread/3" class="Onreceipt_3"></subscriber>
             </listener>
-            <listener id="esodl" class="EchoServerOnDispatchListener" with="*">
-                <subscriber id="" class="apml.examples.echoserver.EchoServerOnDispatch_1"></subscriber>
-                <subscriber id="" class="apml.examples.echoserver.EchoServerOnDispatch_2"></subscriber>
-                <subscriber id="" class="apml.examples.echoserver.EchoServerOnDispatch_3"></subscriber>
+            <listener bndi="//echoserver/listeners/ondispatch/1" id="esodl" class="Ondispatchlistener" with="*">
+                <subscriber bndi="//echoserver/subscribers/ondispatch/1" class="Ondispatch_1"></subscriber>
+                <subscriber bndi="//echoserver/subscribers/ondispatch/2" class="Ondispatch_2"></subscriber>
+                <subscriber bndi="//echoserver/subscribers/ondispatch/3" class="Ondispatch_3"></subscriber>
             </listener>                                    
         </object>
     </system>   
     
-    <system start="true" id="echoclient">
-        <object class="EchoClient">
-            <listener class="EchoServerClientSocketListener"></listener>
+    <system start="true" bndi="//echoclient/systems/2" id="echoclient" class="Echoclientsystem">
+        <object start="true" bndi="//echoclient/objects/2" class="Echoclient">
+            <listener bndi="//echoclient/listeners/1" class="Clientsocketlistener"></listener>
         </object>
     </system>                      
     

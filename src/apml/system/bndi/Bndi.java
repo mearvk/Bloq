@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Bloq native directory interface (BNDI)
+ * 
  * @see http://github.com/mearvk/Bloq/wiki
  * @version 1.00
  * @author Max Rupplin

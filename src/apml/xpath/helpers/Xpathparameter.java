@@ -39,6 +39,7 @@ public class Xpathparameter
     public NodeList n0011_objects;   
     public NodeList n0012_superclass;
     public NodeList n0013_defaultpackage;
+    public NodeList n0014_bndi;
     
     public String s0000_count;
     public String s0001_tagname;   
@@ -54,6 +55,7 @@ public class Xpathparameter
     public String s0011_objects;
     public String s0012_superclass;
     public String s0013_defaultpackage;
+    public String s0014_bndi;
     
     public XPathExpression e0000_count; 
     public XPathExpression e0001_tagname;    
@@ -69,6 +71,7 @@ public class Xpathparameter
     public XPathExpression e0011_objects;
     public XPathExpression e0012_superclass;
     public XPathExpression e0013_defaultpackage;
+    public XPathExpression e0014_bndi;
     
     public XPath xpath;
     
@@ -108,6 +111,7 @@ public class Xpathparameter
         this.s0011_objects          = apmltag+"/object";     
         this.s0012_superclass       = apmltag+"/@extends";
         this.s0013_defaultpackage   = "//apml/package/@default";
+        this.s0014_bndi             = apmltag+"/@bndi";
         
         try{this.e0000_count            = xpath.compile(s0000_count);}catch(Exception e){e.printStackTrace(System.err);}
         try{this.e0001_tagname          = xpath.compile(s0001_tagname);}catch(Exception e){e.printStackTrace(System.err);} 
@@ -123,6 +127,7 @@ public class Xpathparameter
         try{this.e0011_objects          = xpath.compile(s0011_objects);}catch(Exception e){e.printStackTrace(System.err);}   
         try{this.e0012_superclass       = xpath.compile(s0012_superclass);}catch(Exception e){e.printStackTrace(System.err);}
         try{this.e0013_defaultpackage   = xpath.compile(s0013_defaultpackage);}catch(Exception e){e.printStackTrace(System.err);}
+        try{this.e0014_bndi             = xpath.compile(s0014_bndi);}catch(Exception e){e.printStackTrace(System.err);}
         
         try{this.evaluate(this);}catch(Exception e){}
     }
