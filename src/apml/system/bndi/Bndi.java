@@ -5,12 +5,13 @@ import java.util.Map;
 
 /**
  *
+ * @see http://github.com/mearvk/Bloq/wiki
+ * @version 1.00
  * @author Max Rupplin
  */
 public class Bndi 
 {
     public static Map<String, Bndicontext> contexts = new HashMap();
-    //public static Set<String> contexts = new HashSet();
     
     public static void main(String[] args)
     {        
@@ -42,6 +43,10 @@ public class Bndi
         return Bndi.contexts;
     }       
     
+    /**
+     * @deprecated Not currently implemented;
+     * @param context 
+     */
     public static void setcontext(String context)
     {
         Bndi.contexts.put(context, new Bndicontext(context));
