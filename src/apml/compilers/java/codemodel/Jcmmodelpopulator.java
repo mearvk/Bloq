@@ -27,7 +27,7 @@ import apml.interfaces.Initializable;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public class Jcmmodelpopulator 
 {
