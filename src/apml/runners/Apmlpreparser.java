@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apml.compilers;
+package apml.runners;
 
 /**
  *
  * @author oem
  */
-public abstract class Stdcompiler 
+public class Apmlpreparser 
 {
-    public abstract void compiletosource();
+    public Apmlpreparser()
+    {
+        
+    }
 }

@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 /**
  *
  * @author Max Rupplin
+ * @version 1.00
+ * @see http://github.com/Bloq
  */
 public class Apmlsystem implements Runnable
 {

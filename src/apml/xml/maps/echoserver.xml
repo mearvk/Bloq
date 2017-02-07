@@ -46,9 +46,7 @@ and open the template in the editor.
     
     <system start="true" id="echoclient" class="apml.examples.echoserver.EchoClientSystem" package="apml.examples.echoserver">
         <object class="EchoClient">
-            <listener class="EchoServerClientSocketListener">
-                <code>/usr/code/bin/echoclient.o</code>
-            </listener>
+            <listener class="EchoServerClientSocketListener"></listener>
         </object>
     </system>                      
     
@@ -59,7 +57,7 @@ and open the template in the editor.
         <template></template>
     </driver>
     
-    <compiler class="apml.examples.compiler.StdApmlToJavaCompiler"> //move APML markup over to Java
+    <compiler input="APML" output="Java" class="apml.examples.compiler.StdApmlToJavaCompiler"> //move APML markup over to Java
         <architect>Max Rupplin</architect>        
         <template type="camelcase"></template>
         <template type="annotations">formal</template>
@@ -67,7 +65,7 @@ and open the template in the editor.
         <template type="class_treatment">inner</template>
     </compiler>
     
-    <compiler class="apml.examples.compiler.StdJavaToApmlCompiler"> //move Java source code over to APML markup
+    <compiler input="Java" output="APML" class="apml.examples.compiler.StdJavaToApmlCompiler"> //move Java source code over to APML markup
         <architect>Max Rupplin</architect>        
         <template type=""></template>
         <template type=""></template>

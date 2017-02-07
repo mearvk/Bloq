@@ -9,6 +9,7 @@ package apml.drivers;
  *
  * @author oem
  */
-public class apmldriver {
-    
+public abstract class Stddriver 
+{
+    public abstract void drive();
 }

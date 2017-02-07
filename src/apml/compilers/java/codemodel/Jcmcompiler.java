@@ -1,12 +1,14 @@
 package apml.compilers.java.codemodel;
 
+import static java.nio.file.StandardCopyOption.*;
+
+import apml.compilers.Stdcompiler;
 import apml.modeling.Apmlmodelfile;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.nio.file.Files;
-import static java.nio.file.StandardCopyOption.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -17,8 +19,9 @@ import java.util.logging.Logger;
  * @author Max Rupplin
  * @since 02.02.2017
  * @version 1.00
+ * @serial 0x888fe8 /mr /ss /ok
  */
-public class Jcmcompiler extends Object
+public class Jcmcompiler extends Stdcompiler
 {
     protected final Integer hash = 0x888fe8;
     
@@ -27,7 +30,7 @@ public class Jcmcompiler extends Object
     public ArrayList<Apmlmodelfile> apmlmodelfiles_dynamiclisteners;
     public ArrayList<Apmlmodelfile> apmlmodelfiles_listeners;
     public ArrayList<Apmlmodelfile> apmlmodelfiles_subscribers;
-    public ArrayList<Apmlmodelfile> apmlmodelfiles_systems;    
+    public ArrayList<Apmlmodelfile> apmlmodelfiles_systems;
     
     public ArrayList<JCodeModel> jcmmodelfiles_apml;
     public ArrayList<JCodeModel> jcmmodelfiles_definitions;
@@ -91,6 +94,7 @@ public class Jcmcompiler extends Object
         }
     }    
     
+    //
     public Jcmcompiler()
     {
         try
@@ -113,7 +117,7 @@ public class Jcmcompiler extends Object
         }
     }      
     
-    //@gitmecall("_-jgp://dosystemcall('gitme>1.2') ");
+    //
     public ArrayList<Apmlmodelfile> getapmlmodelfiles(File apmlxmlfile, String apmltag)
     {        
         Apmlmodelpopulator apmlmodelpopulator = new Apmlmodelpopulator();
@@ -156,6 +160,7 @@ public class Jcmcompiler extends Object
         return apmlmodels_genericfiles;
     }    
     
+    //
     public ArrayList<JCodeModel> getsourcecodemodelfiles(ArrayList<Apmlmodelfile> apmlmodelfiles, String apmltag)
     {
         Jcmmodelpopulator jcmmodelpopulator = new Jcmmodelpopulator();
@@ -198,6 +203,7 @@ public class Jcmcompiler extends Object
         return jcmmodels_genericfiles;
     }    
     
+    //
     public void writeallsourcetodisk()
     {
         try
@@ -228,6 +234,7 @@ public class Jcmcompiler extends Object
         }
     }   
     
+    //
     public void writejcmtodisk(ArrayList<JCodeModel> jcmmodels)
     {        
         for(int i=0; i<jcmmodels.size(); i++)
@@ -259,6 +266,7 @@ public class Jcmcompiler extends Object
         }                
     }  
 
+    //    
     public void writeapmlbackingjartodisk() throws Exception
     {
         if(new File(Jcmcompiler.APMLOUTJAR).exists())
@@ -269,5 +277,12 @@ public class Jcmcompiler extends Object
         {
             Files.copy(new File(Jcmcompiler.APMLINJAR).toPath(),new File(Jcmcompiler.APMLOUTJAR).toPath(),REPLACE_EXISTING);                
         }        
+    }
+
+    //
+    @Override
+    public void compiletosource() 
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
