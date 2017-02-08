@@ -149,7 +149,7 @@ public class Apmlmodelpopulator
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();
 
-            try{modelfile.autostart=this.getautostarttag(xparam, index)+"/apml";}               catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.autostart=this.getautostarttag(xparam, index)+".apml";}               catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.defaultpackage=this.getdefaultpackage(xparam, index);}                catch(Exception e){e.printStackTrace(System.err);}
@@ -186,7 +186,7 @@ public class Apmlmodelpopulator
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}            
-            try{modelfile.defaultpackage=this.getdefaultpackage(xparam, index)+"/definitions";} catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.defaultpackage=this.getdefaultpackage(xparam, index)+".definitions";} catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.packagė=this.getpackagename(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}
@@ -219,7 +219,7 @@ public class Apmlmodelpopulator
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}
-            try{modelfile.defaultpackage=this.getdefaultpackage(xparam, index)+"/dynamics";}    catch(Exception e){e.printStackTrace(System.err);}                                                
+            try{modelfile.defaultpackage=this.getdefaultpackage(xparam, index)+".dynamics";}    catch(Exception e){e.printStackTrace(System.err);}                                                
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.packagė=this.getpackagename(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}
@@ -252,7 +252,7 @@ public class Apmlmodelpopulator
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}
-            try{modelfile.defaultpackage=this.getdefaultpackage(xparam, index)+"/listeners";}   catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.defaultpackage=this.getdefaultpackage(xparam, index)+".listeners";}   catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){e.printStackTrace(System.err);}                        
             try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.packagė=this.getpackagename(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}
@@ -285,7 +285,7 @@ public class Apmlmodelpopulator
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}           
-            try{modelfile.defaultpackage=this.getdefaultpackage(xparam, index)+"/subscribers";} catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.defaultpackage=this.getdefaultpackage(xparam, index)+".subscribers";} catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){e.printStackTrace(System.err);}                        
             try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.packagė=this.getpackagename(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}
@@ -317,9 +317,9 @@ public class Apmlmodelpopulator
             Apmlmodelfile modelfile=new Apmlmodelfile();
 
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                   catch(Exception e){e.printStackTrace(System.err);}
-            try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}            
+            try{modelfile.bndi=this.getbndi(xparam, index);}                                catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.classname=this.getclassname(xparam, index);}                      catch(Exception e){e.printStackTrace(System.err);}
-            try{modelfile.defaultpackage=this.getdefaultpackage(xparam, index)+"/systems";} catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.defaultpackage=this.getdefaultpackage(xparam, index)+".systems";} catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.id=this.getidtag(xparam, index);}                                 catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.init=this.getinittag(xparam, index);}                             catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.packagė=this.getpackagename(xparam, index);}                      catch(Exception e){e.printStackTrace(System.err);}
@@ -345,10 +345,10 @@ public class Apmlmodelpopulator
      */
     private String getbndi(Xpathparameter xparam, Integer index)
     {
-        if(xparam.n0013_defaultpackage==null || xparam.n0013_defaultpackage.item(0)==null) 
-            return xparam.getdefaultpackagename();                    
+        if(xparam.n0014_bndi==null || xparam.n0014_bndi.item(0)==null) 
+            return "//unmapped";                    
         
-        return xparam.n0013_defaultpackage.item(0).getNodeValue();        
+        return xparam.n0014_bndi.item(index).getNodeValue();        
     }  
     
     /**
@@ -376,7 +376,7 @@ public class Apmlmodelpopulator
         if(xparam.n0012_superclass==null || xparam.n0012_superclass.item(0)==null) 
             throw new NullPointerException("No tag name found");                    
         
-        return xparam.n0012_superclass.item(0).getNodeName();
+        return xparam.n0012_superclass.item(index).getNodeName();
     }
     
     /**
@@ -390,7 +390,7 @@ public class Apmlmodelpopulator
         if(xparam.n0001_tagname==null || xparam.n0001_tagname.item(0)==null) 
             throw new NullPointerException("No tag name found");                    
         
-        return xparam.n0001_tagname.item(0).getNodeName();
+        return xparam.n0001_tagname.item(index).getNodeName();
     }
     
     /**

@@ -61,11 +61,12 @@ public class Jcmmodelpopulator
             
             param = new Apmltaghandlerparameter(jcodemodel,jpackage,classfile,apmlmodelfile);
             
-            //class file data (extends, implements, etc)
+            //class file data (extends, implements, etc)            
             this.jcmpackagename(param);
             this.jcmclassname(param);            
             this.jcmextends(param);
             this.jcmimplements(param);
+            this.jcmbndi(param);
             
             //check for tags; move to JCM
             this.jcmautostarttag(param);
@@ -91,6 +92,25 @@ public class Jcmmodelpopulator
         
         throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel");
     }  
+    
+    /**
+     * 
+     * @param param 
+     */
+    private void jcmbndi(Apmltaghandlerparameter param)
+    {
+        try
+        {
+            if(param.jcodemodel==null) 
+                throw new InvalidParameterException("JCodeModel not set; unable to set package name");
+
+            param.classfile.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bndi=\""+param.apmlmodelfile.bndi+"\"");                          
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }        
+    }      
     
     /**
      * 

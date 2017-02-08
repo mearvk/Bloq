@@ -209,6 +209,9 @@ public class Xpathparameter
         if(param.e0013_defaultpackage!=null)
             try{param.n0013_defaultpackage = (NodeList)param.e0013_defaultpackage.evaluate(param.document, XPathConstants.NODESET);}catch(Exception e){e.printStackTrace(System.err);}         
         
+        if(param.e0014_bndi!=null)
+            try{param.n0014_bndi = (NodeList)param.e0014_bndi.evaluate(param.document, XPathConstants.NODESET);}catch(Exception e){e.printStackTrace(System.err);}         
+        
         return param;
     }      
 }
