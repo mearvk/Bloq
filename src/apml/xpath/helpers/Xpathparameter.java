@@ -16,7 +16,7 @@ import org.xml.sax.SAXException;
  *
  * @author Max Rupplin
  */
-public class Xpathparameter
+public final class Xpathparameter
 {   
     public Document document;
     public File apmlfile;

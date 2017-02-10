@@ -123,15 +123,13 @@ public class Jcmmodelpopulator
             if(param.jcodemodel==null) 
                 throw new InvalidParameterException("JCodeModel not set; unable to set package name");
             
-            ArrayList<Apmlobject> objects = param.apmlmodelfile.apmlobjects;
-            
+            ArrayList<Apmlobject> objects = param.apmlmodelfile.apmlobjects;            
             for(int i=0; i<objects.size(); i++)
             {
-                //
-                param.classfile.field(JMod.PUBLIC, java.lang.Object.class, "child"+i);               
+                param.classfile.field(JMod.PUBLIC, Class.forName("apml.examples.echoserver.server"+param.apmlmodelfile.apmlobjects.get(i).classname), "child"+i);               
             }
         }
-        catch(Exception ex)
+        catch(InvalidParameterException | ClassNotFoundException ex)
         {
             Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }        
@@ -148,7 +146,7 @@ public class Jcmmodelpopulator
             if(param.jcodemodel==null) 
                 throw new InvalidParameterException("JCodeModel not set; unable to set package name");
             
-            param.jpackage = param.jcodemodel._package(param.apmlmodelfile.packagė); 
+            param.jpackage = param.jcodemodel._package(param.apmlmodelfile.packagename); 
         }
         catch(Exception ex)
         {
@@ -167,10 +165,10 @@ public class Jcmmodelpopulator
             if(param.jcodemodel==null) 
                 throw new InvalidParameterException("JCodeModel not set; unable to set package name");            
             
-            if(param.apmlmodelfile.packagė!=null && param.apmlmodelfile.packagė.length()>0)            
-                param.jpackage = param.jcodemodel._package(param.apmlmodelfile.packagė);
-            else 
-                param.jpackage = param.jcodemodel._package(param.apmlmodelfile.defaultpackage);
+            //if(param.apmlmodelfile.packagename!=null && param.apmlmodelfile.packagename.length()>0)            
+                //param.jpackage = param.jcodemodel._package(param.apmlmodelfile.packagename);
+            //else 
+            param.jpackage = param.jcodemodel._package(param.apmlmodelfile.defaultpackage);
         }
         catch(Exception ex)
         {
@@ -234,10 +232,10 @@ public class Jcmmodelpopulator
                 if(param.classfile==null) 
                     throw new InvalidParameterException("Classfile not set; unable to set interfaces for Class");
                 
-                if(param.apmlmodelfile.implementš==null || param.apmlmodelfile.implementš.length==0)
+                if(param.apmlmodelfile.implementors==null || param.apmlmodelfile.implementors.length==0)
                     throw new InvalidParameterException("No interfaces found with param.apmlmodelfile.apml_implements");
                 
-                for(String implments : param.apmlmodelfile.implementš)        
+                for(String implments : param.apmlmodelfile.implementors)        
                 {
                     try
                     {

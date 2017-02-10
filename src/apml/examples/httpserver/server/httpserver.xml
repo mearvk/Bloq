@@ -15,40 +15,49 @@ and open the template in the editor.
     
     /* hello world echo server quick example program */        
 
-    <system id="HTTPserver" class="apml.examples.httpserver.HttpServerSystem" package="apml.examples.httpserver">
-        <object class="apml.examples.httpserver.HttpServer.java">
+    <system id="httpserver" class="apml.examples.httpserver.HttpServerSystem" package="apml.examples.httpserver">
+        <object class="apml.examples.httpserver.Httpserver.java">
+            
             <listener id="options" class="apml.examples.httpserver.HttpServerInboundMarshaller" with="*" function="">
-                
-            </listener>
-            <listener id="options" class="HttpServerOnOPTIONSListener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.HttpServerOnOptionsHit"></subscriber>
-            </listener>  
-            <listener id="get" class="HttpServerOnGETListener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.HttpServerOnGetCall"></subscriber>
-            </listener> 
-            <listener id="head" class="HttpServerOnHEADListener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.HttpServerOnHeadCall"></subscriber>
-            </listener>                        
-            <listener id="post" class="HttpServerOnPOSTListener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.HttpServerOnPostHit"></subscriber>
-            </listener> 
-            <listener id="put" class="HttpServerOnPUTListener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.HttpServerOnPutHit"></subscriber>
-            </listener>  
-            <listener id="delete" class="HttpServerOnDELETEListener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.HttpServerOnDeleteCall"></subscriber>
-            </listener> 
-            <listener id="trace" class="HttpServerOnTRACEListener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.HttpServerOnTraceCall"></subscriber>
-            </listener>                        
-            <listener id="connect" class="HttpServerOnCONNECTListener" with="*" function="apml.examples.httpserver.Classname.function">
                 <subscriber class="apml.examples.httpserver.HttpServerOnConnectHit"></subscriber>
-            </listener>             
-                                              
+            </listener>
+            
+            <listener id="connect" class="HttpServerOnCONNECTListener" with="*" function="apml.examples.httpserver.Classname.function">
+                <subscriber class="apml.examples.httpserver.Httpserveronconnectcall"></subscriber>
+            </listener> 
+             
+            <listener id="delete" class="HttpServerOnDELETEListener" with="*" function="apml.examples.httpserver.Classname.function">
+                <subscriber class="apml.examples.httpserver.Httpserverondeletecall"></subscriber>
+            </listener>                                         
+            
+            <listener id="get" class="HttpServerOnGETListener" with="*" function="apml.examples.httpserver.Classname.function">
+                <subscriber class="apml.examples.httpserver.Httpserverongettcall"></subscriber>
+            </listener> 
+            
+            <listener id="head" class="HttpServerOnHEADListener" with="*" function="apml.examples.httpserver.Classname.function">
+                <subscriber class="apml.examples.httpserver.Httpserveronheadcall"></subscriber>
+            </listener>     
+                               
+            <listener id="options" class="HttpServerOnOPTIONSListener" with="*" function="apml.examples.httpserver.Classname.function">
+                <subscriber class="apml.examples.httpserver.Httpserveronoptionscall"></subscriber>
+            </listener>                                
+                               
+            <listener id="post" class="HttpServerOnPOSTListener" with="*" function="apml.examples.httpserver.Classname.function">
+                <subscriber class="apml.examples.httpserver.Httpserveronpostcall"></subscriber>
+            </listener> 
+            
+            <listener id="put" class="HttpServerOnPUTListener" with="*" function="apml.examples.httpserver.Classname.function">
+                <subscriber class="apml.examples.httpserver.Httpserveronputtcall"></subscriber>
+            </listener>                            
+
+            <listener id="trace" class="HttpServerOnTRACEListener" with="*" function="apml.examples.httpserver.Classname.function">
+                <subscriber class="apml.examples.httpserver.HttpserverOntracecall"></subscriber>
+            </listener>                        
+                                                     
         </object>
     </system>  
     
-    <system id="echoclient" package="apml.examples.echoserver">
+    <system id="httpclient" package="apml.examples.httpclient">
         <object class="EchoClient">
             <listener class="EchoServerClientSocketListener"></listener>
         </object>

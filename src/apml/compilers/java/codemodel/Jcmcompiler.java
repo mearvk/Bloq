@@ -55,6 +55,7 @@ public class Jcmcompiler extends Stdcompiler
     {                          
         try
         {           
+            //
             Jcmcompiler compiler = new Jcmcompiler();
             
             //
@@ -236,19 +237,22 @@ public class Jcmcompiler extends Stdcompiler
         for(int i=0; i<jcmmodels.size(); i++)
         {
             try
-            {
-                Iterator<JPackage> itr_pkg = jcmmodels.get(i).packages();
+            {                
+                
+                Iterator<JPackage> packages = jcmmodels.get(i).packages();
                                 
-                for(;itr_pkg.hasNext();) //do every package
+                while(packages.hasNext()) //do every package
                 {                    
-                    JPackage jpackage = itr_pkg.next();
+                    JPackage jpackage = packages.next();
                                     
-                    Iterator<JDefinedClass> itr_cls = jpackage.classes();
+                    Iterator<JDefinedClass> classes = jpackage.classes();
                     
-                    for(;itr_cls.hasNext();) //do every class
-                    {                                          
+                    while(classes.hasNext()) //do every class
+                    {                                  
+                        System.err.println(jpackage.getPackage().name());
+                        System.err.println(classes.next().name());
                         
-                        jcmmodels.get(i).build(new File(SOURCEOUTDIR));
+                        jcmmodels.get(i).build(new File(SOURCEOUTDIR), System.err);           
                     }
                 }
             }

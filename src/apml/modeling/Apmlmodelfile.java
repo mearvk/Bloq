@@ -18,15 +18,16 @@ public class Apmlmodelfile
     public String superclass;
     public String id;
     public String init;        
-    public String packagė;
+    
     public String defaultpackage;
-    public String parent;
+    public String packagename;
+    public String parent;        
+    public String run;    
     public String start;
-    public String run;
     public String tagname;
     public String bndi;
         
-    public String[] implementš;
+    public String[] implementors;
     public String[] listeners;
     public String[] objects;
     public String[] stdinterfaces;

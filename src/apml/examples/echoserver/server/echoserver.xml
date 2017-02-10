@@ -8,8 +8,8 @@
     </definitions>                 
         
     <system start="true" bndi="//echoserver/systems/1" id="echoserver" class="Echoserversystem">
-    <package default="apml.examples.echoserver"/>
-        <object start="true" bndi="//echoserver/objects/1" class="EchoServer">                       
+        <package default="apml.examples.echoserver"/>
+        <object start="true" bndi="//echoserver/objects/1" class="Echoserver">                       
             <listener bndi="//echoserver/listeners/onconnect/1" id="esocl" class="Onconnectlistener" with="*">
                 <subscriber class="Onconnect_1"></subscriber>
                 <subscriber class="Onconnect_2"></subscriber>
@@ -33,9 +33,9 @@
         </object>
     </system>   
     
-    <system start="true" bndi="//echoclient/systems/2" id="echoclient" class="Echoclientsystem">
-    <package default="apml.examples.echoclient"/>
-        <object start="true" bndi="//echoclient/objects/2" class="Echoclient">
+    <system start="true" bndi="//echoclient/systems/1" id="echoclient" class="Echoclientsystem">
+        <package default="apml.examples.echoclient"/>
+        <object start="true" bndi="//echoclient/objects/1" class="Echoclient">
             <listener class="Clientsocketlistener"></listener>
         </object>
     </system>                      
