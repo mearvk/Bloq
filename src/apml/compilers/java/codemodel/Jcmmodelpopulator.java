@@ -49,7 +49,7 @@ public class Jcmmodelpopulator
      * @return
      * @throws Exception 
      */
-    private JCodeModel createjcodemodelinstance(Apmlmodelfile apmlmodelfile) throws Exception
+    private JCodeModel makeindividualjcodemodelinstance(Apmlmodelfile apmlmodelfile) throws Exception
     {       
         JCodeModel jcodemodel = new JCodeModel();                
         
@@ -535,10 +535,12 @@ public class Jcmmodelpopulator
         {            
             try
             {
-                jcmmodels.add(this.createjcodemodelinstance(apmlmodels.get(i)));
+                jcmmodels.add(this.makeindividualjcodemodelinstance(apmlmodels.get(i)));
             }
             catch(Exception e)
-            {e.printStackTrace(System.err);}
+            {
+                e.printStackTrace(System.err);
+            }
         }              
         
         return jcmmodels;

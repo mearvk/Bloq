@@ -246,13 +246,7 @@ public class Jcmcompiler extends Stdcompiler
                     Iterator<JDefinedClass> itr_cls = jpackage.classes();
                     
                     for(;itr_cls.hasNext();) //do every class
-                    {                    
-                        JDefinedClass cls = itr_cls.next();
-                                             
-                        String fullname = cls.fullName();                                                
-                        String packagename = cls.getPackage().name();
-                        //String filename = new Filegrepper().getpackagenameaspathname(fullname);
-                        
+                    {                                          
                         
                         jcmmodels.get(i).build(new File(SOURCEOUTDIR));
                     }

@@ -131,6 +131,20 @@ public class Xpathparameter
         
         try{this.evaluate(this);}catch(Exception e){}
     }
+       
+    public NodeList requestruntimeevaluation(String sxxx_xxxx)
+    {
+        try
+        {
+            return (NodeList)this.xpath.compile(sxxx_xxxx).evaluate(this.document, XPathConstants.NODESET);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace(System.err);
+        }
+        
+        return null;
+    }
     
     public String getdefaultpackagename()
     {

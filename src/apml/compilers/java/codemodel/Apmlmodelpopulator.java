@@ -9,12 +9,14 @@ import apml.xpath.helpers.Xpathparameter;
 import java.io.File;
 import java.util.ArrayList;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  *
  * @author Max Rupplin
  */
-public class Apmlmodelpopulator 
+public final class Apmlmodelpopulator 
 {
     public ArrayList<Apmlmodelfile> apmlfiles;   
     public String defaultpackage;
@@ -100,31 +102,34 @@ public class Apmlmodelpopulator
         
         try
         {
-            //            
-            Xpathparameter xparam = new Xpathparameter(apmltag,apmlfile);
-                        
+            //need node count;
+            Xpathparameter xparam = new Xpathparameter(apmltag, apmlfile);          
+            
             //for each nodelist of type //system, //compiler, etc    
             for(int i=0;i<xparam.getnodecount();i++)
             {
+                //            
+                //Xpathparameter xparam = new Xpathparameter(apmltag,apmlfile);
+            
                 switch(apmltag)
                 {
                     case "//apml": 
-                        return doapml(xparam, apmltag);
+                        return doapmltags(xparam, apmltag);
                     
                     case "//definitions": 
-                        return dodefinitions(xparam, apmltag);
+                        return dodefinitiontags(xparam, apmltag);
                         
                     case "//dynamiclistener": 
-                        return dodynamiclistener(xparam, apmltag);                        
+                        return dodynamiclistenertags(xparam, apmltag);                        
                         
                     case "//listener": 
-                        return dolistener(xparam, apmltag);  
+                        return dolistenertags(xparam, apmltag);  
                         
                     case "//subscriber": 
-                        return dosubscriber(xparam, apmltag);                         
+                        return dosubscribertags(xparam, apmltag);                         
                     
                     case "//system": 
-                        return dosystem(xparam, apmltag);                        
+                        return dosystemtags(xparam, apmltag);                        
                 }
             }                
         }
@@ -142,7 +147,7 @@ public class Apmlmodelpopulator
      * @param apmltag
      * @throws Exception 
      */
-    private ArrayList<Apmlmodelfile> doapml(Xpathparameter xparam, String apmltag) throws Exception
+    private ArrayList<Apmlmodelfile> doapmltags(Xpathparameter xparam, String apmltag) throws Exception
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
         for(int index=0; index<xparam.getnodecount(); index++)
@@ -176,7 +181,7 @@ public class Apmlmodelpopulator
      * @param apmltag
      * @throws Exception 
      */
-    private ArrayList<Apmlmodelfile> dodefinitions(Xpathparameter xparam, String apmltag) throws Exception
+    private ArrayList<Apmlmodelfile> dodefinitiontags(Xpathparameter xparam, String apmltag) throws Exception
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
         for(int index=0; index<xparam.getnodecount(); index++)
@@ -209,7 +214,7 @@ public class Apmlmodelpopulator
      * @param xparam
      * @param apmltag 
      */
-    private ArrayList<Apmlmodelfile> dodynamiclistener(Xpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dodynamiclistenertags(Xpathparameter xparam, String apmltag)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
         for(int index=0; index<xparam.getnodecount(); index++)
@@ -242,7 +247,7 @@ public class Apmlmodelpopulator
      * @param xparam
      * @param apmltag 
      */    
-    private ArrayList<Apmlmodelfile> dolistener(Xpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dolistenertags(Xpathparameter xparam, String apmltag)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
         for(int index=0; index<xparam.getnodecount(); index++)
@@ -275,7 +280,7 @@ public class Apmlmodelpopulator
      * @param xparam
      * @param apmltag 
      */    
-    private ArrayList<Apmlmodelfile> dosubscriber(Xpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dosubscribertags(Xpathparameter xparam, String apmltag)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
         for(int index=0; index<xparam.getnodecount(); index++)
@@ -309,12 +314,12 @@ public class Apmlmodelpopulator
      * @param apmltag
      * @return 
      */
-    private ArrayList<Apmlmodelfile> dosystem(Xpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dosystemtags(Xpathparameter xparam, String apmltag)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
-        for(int index=0; index<xparam.getnodecount(); index++)
+        for(int index=0; index<xparam.getnodecount(); index++)  //show two system tags 
         {
-            Apmlmodelfile modelfile=new Apmlmodelfile();
+            Apmlmodelfile modelfile=new Apmlmodelfile();        //show two apml files for each system
 
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                   catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.bndi=this.getbndi(xparam, index);}                                catch(Exception e){e.printStackTrace(System.err);}            
@@ -346,7 +351,7 @@ public class Apmlmodelpopulator
     private String getbndi(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0014_bndi==null || xparam.n0014_bndi.item(0)==null) 
-            return "//unmapped";                    
+            return "//unbound";                    
         
         return xparam.n0014_bndi.item(index).getNodeValue();        
     }  
@@ -572,13 +577,15 @@ public class Apmlmodelpopulator
      */
     private ArrayList<Apmlobject> getobjects(Xpathparameter xparam, Integer index)
     {
-        if(xparam.n0011_objects==null || xparam.n0011_objects.item(0)==null)
-            throw new NullPointerException("No object tag(s) found"); 
+        NodeList objectnodes = xparam.requestruntimeevaluation("//system["+index+"]/objects");
         
-        ArrayList<Apmlobject> objects = new ArrayList<>();               
-        for(int i=0; i<xparam.n0011_objects.getLength(); i++)  
+        if(objectnodes==null || objectnodes.item(0)==null)
+            throw new NullPointerException("No object tag(s) found");                 
+        
+        ArrayList<Apmlobject> objects = new ArrayList<>();            
+        for(int i=0; i<objectnodes.getLength(); i++)  
         {
-            Element element = (Element)xparam.n0011_objects.item(i);            
+            Element element = (Element)objectnodes.item(i);            
             
             Apmlobject object = new Apmlobject();            
             
