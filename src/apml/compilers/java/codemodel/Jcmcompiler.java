@@ -237,8 +237,7 @@ public class Jcmcompiler extends Stdcompiler
         for(int i=0; i<jcmmodels.size(); i++)
         {
             try
-            {                
-                
+            {                                
                 Iterator<JPackage> packages = jcmmodels.get(i).packages();
                                 
                 while(packages.hasNext()) //do every package

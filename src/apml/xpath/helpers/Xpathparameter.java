@@ -110,7 +110,7 @@ public final class Xpathparameter
         this.s0010_listeners        = apmltag+"/listener"; 
         this.s0011_objects          = apmltag+"/object";     
         this.s0012_superclass       = apmltag+"/@extends";
-        this.s0013_defaultpackage   = "//apml/package/@default";
+        this.s0013_defaultpackage   = "//system/package/@default";
         this.s0014_bndi             = apmltag+"/@bndi";
         
         try{this.e0000_count            = xpath.compile(s0000_count);}catch(Exception e){e.printStackTrace(System.err);}
