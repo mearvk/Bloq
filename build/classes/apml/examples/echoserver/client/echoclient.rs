@@ -1,2 +1,0 @@
-apml.examples.echoserver.client.echoclient
-apml.examples.echoserver.client.EchoServerClientSocketListener
