@@ -29,6 +29,7 @@ public class Jcmcompiler extends Stdcompiler
     public ArrayList<Apmlmodelfile> apmlmodelfiles_definitions;
     public ArrayList<Apmlmodelfile> apmlmodelfiles_dynamiclisteners;
     public ArrayList<Apmlmodelfile> apmlmodelfiles_listeners;
+    public ArrayList<Apmlmodelfile> apmlmodelfiles_objects;
     public ArrayList<Apmlmodelfile> apmlmodelfiles_subscribers;
     public ArrayList<Apmlmodelfile> apmlmodelfiles_systems;
     
@@ -36,6 +37,7 @@ public class Jcmcompiler extends Stdcompiler
     public ArrayList<JCodeModel> jcmmodelfiles_definitions;
     public ArrayList<JCodeModel> jcmmodelfiles_dynamiclisteners;
     public ArrayList<JCodeModel> jcmmodelfiles_listeners;
+    public ArrayList<JCodeModel> jcmmodelfiles_objects;
     public ArrayList<JCodeModel> jcmmodelfiles_subscribers;
     public ArrayList<JCodeModel> jcmmodelfiles_systems;    
     
@@ -62,6 +64,7 @@ public class Jcmcompiler extends Stdcompiler
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//apml");
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//dynamiclistener");
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//listener");                   
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//object");                   
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//subscriber");
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");   
                    
@@ -69,6 +72,7 @@ public class Jcmcompiler extends Stdcompiler
             compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_apml, "//apml");
             compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_dynamiclisteners, "//dynamiclistener");      
             compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_listeners, "//listener");
+            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_objects, "//object");
             compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_subscribers, "//subscriber");
             compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_systems, "//system");
             
@@ -76,6 +80,7 @@ public class Jcmcompiler extends Stdcompiler
             compiler.writejcmtodisk(compiler.jcmmodelfiles_apml);
             compiler.writejcmtodisk(compiler.jcmmodelfiles_dynamiclisteners);                             
             compiler.writejcmtodisk(compiler.jcmmodelfiles_listeners);                    
+            compiler.writejcmtodisk(compiler.jcmmodelfiles_objects);
             compiler.writejcmtodisk(compiler.jcmmodelfiles_subscribers);                    
             compiler.writejcmtodisk(compiler.jcmmodelfiles_systems);   
                         
@@ -138,7 +143,11 @@ public class Jcmcompiler extends Stdcompiler
                     
                 case "//listener":
                     this.apmlmodelfiles_listeners = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
-                    break;   
+                    break;  
+                    
+                case "//object":
+                    this.apmlmodelfiles_objects = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
+                    break;                      
                     
                 case "//subscriber":
                     this.apmlmodelfiles_subscribers = apmlmodels_genericfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
@@ -183,6 +192,10 @@ public class Jcmcompiler extends Stdcompiler
                     this.jcmmodelfiles_listeners = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
                     break;   
                     
+                case "//object":
+                    this.jcmmodelfiles_objects = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
+                    break;                     
+                    
                 case "//subscriber":
                     this.jcmmodelfiles_subscribers = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
                     break;                    
@@ -209,6 +222,7 @@ public class Jcmcompiler extends Stdcompiler
             this.writejcmtodisk(this.jcmmodelfiles_definitions);
             this.writejcmtodisk(this.jcmmodelfiles_dynamiclisteners);            
             this.writejcmtodisk(this.jcmmodelfiles_listeners);
+            this.writejcmtodisk(this.jcmmodelfiles_objects);
             this.writejcmtodisk(this.jcmmodelfiles_subscribers);
             this.writejcmtodisk(this.jcmmodelfiles_systems);
             
