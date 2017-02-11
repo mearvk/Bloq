@@ -5,16 +5,14 @@
 Quick design sketch for Jarhgund Grisheld Server 
 -->
 
-<definitions class="apml.definitions.JGPserver">
-    <jgpserver extends="java.lang.Object" class="apml.examples.jgpserver.JGPServer.java" shutdown="true"></jgpserver>   
-</definitions>
-
-/* Application Program Markup Language */
 <apml language="Java 9" version="1.0">  
     
-    /* jgp server quick example program */         
-    
-    <system start="true" id="jgpserver" class="apml.examples.jgpserver.JGPServerSystem" package="apml.examples.jgpserver">
+    <definitions class="apml.definitions.JGPserver">
+        <jgpserver extends="java.lang.Object" class="apml.examples.jgpserver.JGPServer.java" shutdown="true"></jgpserver>   
+    </definitions>
+                   
+    <package name="server" default="apml.examples.jgpserver.server">
+    <system start="true" id="jgpserver" class="apml.examples.jgpserver.JGPServerSystem">
         <object start="true" startorder="1" class="apml.examples.jgpserver.JGPServer" extends="apml.extensions.ServerSocketImpl" alias="ServerSocket">                           
             <listener id="esocl" class="JGPOnConnectListener" with="*" function="org.blah.Classname.function">
                 <subscriber id="esocl_connect_sub_1" class="apml.examples.jgpserver.JGPServerOnConnect_1"></subscriber>
@@ -38,13 +36,16 @@ Quick design sketch for Jarhgund Grisheld Server
             </listener>
         </object>
     </system>   
+    </package>
     
-    <system start="true" id="jgpclient" class="apml.examples.jgpserver.JGPClientSystem" package="apml.examples.jgpserver">
+    <package name="jgpclient" default="apml.examples.jgpserver.client">
+    <system start="true" id="jgpclient" class="apml.examples.jgpserver.JGPClientSystem">
         <object class="JGPClient">
             <listener class="JGPServerClientSocketListener">                
             </listener>
         </object>
     </system>                      
+    </package>
     
     <driver class="apml.examples.driver.StandardDriver"> //to start and attach APML objects to system framework; to build out skeleton for starters
         <template></template>
@@ -71,12 +72,4 @@ Quick design sketch for Jarhgund Grisheld Server
         
     </inferencer>   
 </apml>
-
-ok now what?
-
-structurally we need a couple things
-
-1) instantiation
-2) program start function (ie init, start, run, instead of just main)
-3) system api underlayment
 

@@ -49,7 +49,10 @@ public class Jcmcompiler extends Stdcompiler
     protected static final String APMLINJAR = "/home/oem/NetBeansProjects/APML/dist/APML.jar";
     protected static final String APMLOUTJAR = "/home/oem/Desktop/apml/output/libs/APML.jar";
     protected static final String APMLIN = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";
-    protected static final String SOURCEOUTDIR = "/home/oem/Desktop/apml/output";
+    //protected static final String APMLIN = "/home/oem/NetBeansProjects/APML/src/apml/examples/httpserver/server/httpserver.xml";
+    //protected static final String APMLIN = "/home/oem/NetBeansProjects/APML/src/apml/examples/jgpserver/server/jgpserver.xml";
+    
+    protected static final String SOURCEOUTDIR = "/home/oem/Desktop/apml/output/echo";
     protected static final String MANIFESTDIR = "/home/oem/Desktop/apml/output/manifest";
     protected static final String MANIFESTFILE = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
     
