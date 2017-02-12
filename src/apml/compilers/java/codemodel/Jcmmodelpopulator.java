@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package apml.compilers.java.codemodel;
 
 import apml.modeling.Apmlmodelfile;
@@ -126,10 +121,17 @@ public class Jcmmodelpopulator
             ArrayList<Apmlobject> objects = param.apmlmodelfile.apmlobjects;            
             for(int i=0; i<objects.size(); i++)
             {
-                param.classfile.field(JMod.PUBLIC, Class.forName("apml.examples.echoserver.server"+param.apmlmodelfile.apmlobjects.get(i).classname), "child"+i);               
+                String fullclassname = param.apmlmodelfile.builddir+"."+param.apmlmodelfile.classname;
+                String simpleclassname = new apml.helpers.Filegrepper().getclassname(param.apmlmodelfile.builddir+"."+param.apmlmodelfile.classname);                
+                String packagename = new apml.helpers.Filegrepper().getpackagename(param.apmlmodelfile.builddir+"."+param.apmlmodelfile.classname);
+                
+                Class.forName(fullclassname);
+                
+                param.jcodemodel.ref(fullclassname);
+                param.classfile.direct("public "+simpleclassname+" child_"+i+";");               
             }
         }
-        catch(InvalidParameterException | ClassNotFoundException ex)
+        catch(Exception ex)
         {
             Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }        
@@ -146,7 +148,7 @@ public class Jcmmodelpopulator
             if(param.jcodemodel==null) 
                 throw new InvalidParameterException("JCodeModel not set; unable to set package name");
             
-            param.jpackage = param.jcodemodel._package(param.apmlmodelfile.packagename); 
+            //param.jpackage = param.jcodemodel._package(param.apmlmodelfile.packagename); 
         }
         catch(Exception ex)
         {
@@ -165,7 +167,7 @@ public class Jcmmodelpopulator
             if(param.jcodemodel==null) 
                 throw new InvalidParameterException("JCodeModel not set; unable to set package name");            
 
-            param.jpackage = param.jcodemodel._package(param.apmlmodelfile.defaultpackage);
+            param.jpackage = param.jcodemodel._package(param.apmlmodelfile.builddir);
         }
         catch(Exception ex)
         {

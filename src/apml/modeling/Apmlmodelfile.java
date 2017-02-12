@@ -19,7 +19,8 @@ public class Apmlmodelfile
     public String id;
     public String init;        
     
-    public String defaultpackage;
+    public String sourcedir;
+    public String builddir;
     public String packagename;
     public String parent;        
     public String run;    

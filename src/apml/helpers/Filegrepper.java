@@ -15,7 +15,7 @@ public class Filegrepper
             String stmp = "";
             
             stmp = fullURL.substring(0,fullURL.lastIndexOf(".")).replace(".", File.separator);
-            stmp = stmp.substring(0, stmp.lastIndexOf("/")).replace("/", ".");
+            stmp = stmp.replace("/", ".");
             
             return stmp;
         }
@@ -23,7 +23,7 @@ public class Filegrepper
         if(fullURL.replace(".java","").contains("/")) //e.g. abc/def/ghi/Classname.java returns abc.def.ghi
         {
             File ftmp = new File(fullURL.replace(".", File.separator));
-            String stmp = ftmp.getPath().toString().replace(File.separator, ".");
+            String stmp = ftmp.getPath().replace(File.separator, ".");
             
             return stmp;
         }  
@@ -46,7 +46,7 @@ public class Filegrepper
         if(fullURL.replace(".java","").contains("/")) //e.g. abc/def/ghi/Classname.java returns abc.def.ghi
         {
             File ftmp = new File(fullURL.replace(".", File.separator));
-            String stmp = ftmp.getPath().toString().replace(File.separator, ".");
+            String stmp = ftmp.getPath().replace(File.separator, ".");
             
             return stmp.replace(".",File.separator);
         }  

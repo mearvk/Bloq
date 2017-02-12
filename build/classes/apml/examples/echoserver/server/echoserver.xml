@@ -7,9 +7,8 @@
         <echoserver extends="ServerSocketImpl" class="Echoserver"></echoserver>   
     </definitions>                 
         
-    <package name="server" default="apml.examples.echoserver">
-    <system start="true" bndi="//echoserver/systems/1" id="echoserver" class="Echoserversystem">
-        
+    <package name="server" sourcedir="apml.src.examples.echoserver" builddir="apml.build.examples.echoserver">
+        <system start="true" bndi="//echoserver/systems/1" id="echoserver" class="Echoserversystem">        
             <object start="true" bndi="//echoserver/objects/1" class="apml.examples.echoserver.Echoserver">                       
                 <listener bndi="//echoserver/listeners/onconnect/1" id="esocl" class="Onconnectlistener" with="*">
                     <subscriber class="Onconnect_1"></subscriber>
@@ -32,12 +31,11 @@
                     <subscriber class="Ondispatch_3"></subscriber>
                 </listener>                                    
             </object>        
-    </system>   
+        </system>   
     </package>
     
-    <package name="client" default="apml.examples.echoclient">
-    <system start="true" bndi="//echoclient/systems/1" id="echoclient" class="Echoclientsystem">
-        
+    <package name="client" sourcedir="apml.src.examples.echoclient" builddir="apml.build.examples.echoclient">
+        <system start="true" bndi="//echoclient/systems/1" id="echoclient" class="Echoclientsystem">        
             <object start="true" bndi="//echoclient/objects/1" class="apml.examples.echoclient.Echoclient">
                 <listener class="Clientsocketlistener">
                     <subscriber class="Onclientdispatch_1"></subscriber>
@@ -45,7 +43,7 @@
                     <subscriber class="Onclientdispatch_3"></subscriber>
                 </listener>
             </object>        
-    </system>                      
+        </system>                      
     </package>
     
     <driver class="apml.examples.driver.StandardDriver"> //to start and attach APML objects to system framework; to build out skeleton for starters

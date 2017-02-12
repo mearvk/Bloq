@@ -1,67 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?apml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 
-<definitions>
-    <httpserver extends="java.lang.Object" class="apml.examples.httpserver.HttpServer.java"></httpserver>   
-</definitions>
-
-/* Application Program Markup Language */
 <apml language="Java 9" version="1.0">  
     
-    /* hello world echo server quick example program */        
+    <definitions>
+        <httpserver extends="java.lang.Object" class="apml.examples.httpserver.Httpserver"></httpserver>   
+    </definitions>        
 
-    <system id="httpserver" class="apml.examples.httpserver.HttpServerSystem" package="apml.examples.httpserver">
-        <object class="apml.examples.httpserver.Httpserver.java">
+    <package default="apml.examples.httpserver.server">
+    <system id="httpserver" class="Httpserversystem">
+        <object class="apml.examples.httpserver.httpserver.java">
             
-            <listener id="options" class="apml.examples.httpserver.HttpServerInboundMarshaller" with="*" function="">
-                <subscriber class="apml.examples.httpserver.HttpServerOnConnectHit"></subscriber>
+            <listener id="options" class="apml.examples.httpserver.Httpserverinboundmarshaller" with="*" function="">
+                <subscriber class="apml.examples.httpserver.HttpserveronconnectHit"></subscriber>
             </listener>
             
-            <listener id="connect" class="HttpServerOnCONNECTListener" with="*" function="apml.examples.httpserver.Classname.function">
+            <listener id="connect" class="Httpserveronconnectlistener" with="*" function="apml.examples.httpserver.Classname.function">
                 <subscriber class="apml.examples.httpserver.Httpserveronconnectcall"></subscriber>
             </listener> 
              
-            <listener id="delete" class="HttpServerOnDELETEListener" with="*" function="apml.examples.httpserver.Classname.function">
+            <listener id="delete" class="Httpserverondeleteistener" with="*" function="apml.examples.httpserver.Classname.function">
                 <subscriber class="apml.examples.httpserver.Httpserverondeletecall"></subscriber>
             </listener>                                         
             
-            <listener id="get" class="HttpServerOnGETListener" with="*" function="apml.examples.httpserver.Classname.function">
+            <listener id="get" class="Httpserverongetlistener" with="*" function="apml.examples.httpserver.Classname.function">
                 <subscriber class="apml.examples.httpserver.Httpserverongettcall"></subscriber>
             </listener> 
             
-            <listener id="head" class="HttpServerOnHEADListener" with="*" function="apml.examples.httpserver.Classname.function">
+            <listener id="head" class="Httpserveronheadlistener" with="*" function="apml.examples.httpserver.Classname.function">
                 <subscriber class="apml.examples.httpserver.Httpserveronheadcall"></subscriber>
             </listener>     
                                
-            <listener id="options" class="HttpServerOnOPTIONSListener" with="*" function="apml.examples.httpserver.Classname.function">
+            <listener id="options" class="Httpserveronoptionslistener" with="*" function="apml.examples.httpserver.Classname.function">
                 <subscriber class="apml.examples.httpserver.Httpserveronoptionscall"></subscriber>
             </listener>                                
                                
-            <listener id="post" class="HttpServerOnPOSTListener" with="*" function="apml.examples.httpserver.Classname.function">
+            <listener id="post" class="Httpserveronpostlistener" with="*" function="apml.examples.httpserver.Classname.function">
                 <subscriber class="apml.examples.httpserver.Httpserveronpostcall"></subscriber>
             </listener> 
             
-            <listener id="put" class="HttpServerOnPUTListener" with="*" function="apml.examples.httpserver.Classname.function">
+            <listener id="put" class="Httpserveronputlistener" with="*" function="apml.examples.httpserver.Classname.function">
                 <subscriber class="apml.examples.httpserver.Httpserveronputtcall"></subscriber>
             </listener>                            
 
-            <listener id="trace" class="HttpServerOnTRACEListener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.HttpserverOntracecall"></subscriber>
+            <listener id="trace" class="Httpserverontracelistener" with="*" function="apml.examples.httpserver.Classname.function">
+                <subscriber class="apml.examples.httpserver.Httpserverontracecall"></subscriber>
             </listener>                        
                                                      
         </object>
     </system>  
+    </package>
     
-    <system id="httpclient" package="apml.examples.httpclient">
+    <package default="apml.examples.httpserver.client">
+    <system id="httpclient" class="Httpserverclient">
         <object class="EchoClient">
-            <listener class="EchoServerClientSocketListener"></listener>
+            <listener class="Echoserverclientsocketlistener"></listener>
         </object>
-    </system>                      
+    </system>               
+    </package>       
     
     <driver class="apml.examples.driver.StandardDriver"> //to start and attach APML objects to system framework; to build out skeleton for starters
         <template></template>
@@ -84,12 +80,4 @@ and open the template in the editor.
         <template type=""></template>
     </compiler>    
 </apml>
-
-ok now what?
-
-structurally we need a couple things
-
-1) instantiation
-2) program start function (ie init, start, run, instead of just main)
-3) system api underlayment
 
