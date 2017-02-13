@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?apml version="1.0" encoding="UTF-8"?>
 
-<apml language="Java 9" version="1.0" class="ampl.examples.echoserver.Apmlsystem">  
+<package name="global" default="" sourcedir="examples.global" builddir="examples.global">
+<apml language="Java 9" version="1.0" class="examples.echoserver.Apmlsystem">  
 
     <definitions>
         <echoserver extends="ServerSocketImpl" class="Echoserver"></echoserver>   
     </definitions>                 
         
-    <package name="server" sourcedir="apml.src.examples.echoserver" builddir="apml.build.examples.echoserver">
+    <package name="server" default="" sourcedir="examples.echoserver" builddir="examples.echoserver">
         <system start="true" bndi="//echoserver/systems/1" id="echoserver" class="Echoserversystem">        
             <object start="true" bndi="//echoserver/objects/1" class="apml.examples.echoserver.Echoserver">                       
                 <listener bndi="//echoserver/listeners/onconnect/1" id="esocl" class="Onconnectlistener" with="*">
@@ -34,7 +35,7 @@
         </system>   
     </package>
     
-    <package name="client" sourcedir="apml.src.examples.echoclient" builddir="apml.build.examples.echoclient">
+    <package name="client" default="" sourcedir="examples.echoclient" builddir="examples.echoclient">
         <system start="true" bndi="//echoclient/systems/1" id="echoclient" class="Echoclientsystem">        
             <object start="true" bndi="//echoclient/objects/1" class="apml.examples.echoclient.Echoclient">
                 <listener class="Clientsocketlistener">
@@ -46,14 +47,14 @@
         </system>                      
     </package>
     
-    <driver class="apml.examples.driver.StandardDriver"> //to start and attach APML objects to system framework; to build out skeleton for starters
+    <driver class="StandardDriver"> //to start and attach APML objects to system framework; to build out skeleton for starters
         <template></template>
         <template></template>
         <template></template>
         <template></template>
     </driver>
     
-    <compiler class="apml.examples.compiler.StdApmlToJavaCompiler"> //move APML markup over to Java
+    <compiler class="StdApmlToJavaCompiler"> //move APML markup over to Java
         <architect>Max Rupplin</architect>        
         <template type="camelcase"></template>
         <template type="annotations">formal</template>
@@ -61,13 +62,14 @@
         <template type="class_treatment">inner</template>
     </compiler>
     
-    <compiler class="apml.examples.compiler.StdJavaToApmlCompiler"> //move Java source code over to APML markup
+    <compiler class="StdJavaToApmlCompiler"> //move Java source code over to APML markup
         <architect>Max Rupplin</architect>        
         <template type=""></template>
         <template type=""></template>
     </compiler>    
     
-    <dynamiclistener>
-        
+    <dynamiclistener class="StdDynamicListener">
+        <object start="true"></object>
     </dynamiclistener>
 </apml>
+</package>

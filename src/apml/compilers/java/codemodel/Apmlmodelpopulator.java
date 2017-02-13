@@ -97,9 +97,7 @@ public final class Apmlmodelpopulator
      * @throws Exception 
      */    
     public ArrayList<Apmlmodelfile> getapmlmodelfiles(File apmlfile, String apmltag) throws Exception
-    {   
-        ArrayList<Apmlmodelfile> modelfiles = new ArrayList();                    
-        
+    {                          
         try
         {
             //need node count;
@@ -132,16 +130,18 @@ public final class Apmlmodelpopulator
                         return dosubscribertags(xparam, apmltag);                         
                     
                     case "//system": 
-                        return dosystemtags(xparam, apmltag);                        
+                        return dosystemtags(xparam, apmltag);   
+                        
+                    default: return null;
                 }
             }                
         }
         catch(Exception e)
         {
             e.printStackTrace(System.err);
-        }
-             
-        return modelfiles;
+        }      
+        
+        return null;
     }          
     
     /**
@@ -411,7 +411,7 @@ public final class Apmlmodelpopulator
         
         try
         {
-            dir = (String)xparam.xpath.evaluate("./ancestor::package/@sourcedir", xparam.n0001_tagname.item(index));           
+            dir = (String)xparam.xpath.evaluate("./ancestor::package/@sourcedir", xparam.n0001_tagname.item(index), XPathConstants.STRING);           
         }
         catch(Exception e)
         {
@@ -433,7 +433,7 @@ public final class Apmlmodelpopulator
         
         try
         {
-            dir = (String)xparam.xpath.evaluate("./ancestor::package/@builddir", xparam.n0001_tagname.item(index));           
+            dir = (String)xparam.xpath.evaluate("./ancestor::package/@builddir", xparam.n0001_tagname.item(index), XPathConstants.STRING);           
         }
         catch(Exception e)
         {

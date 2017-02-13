@@ -3,6 +3,7 @@ package apml.compilers.java.codemodel;
 import static java.nio.file.StandardCopyOption.*;
 
 import apml.compilers.Stdcompiler;
+import apml.helpers.Filegrepper;
 import apml.modeling.Apmlmodelfile;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
@@ -22,7 +23,7 @@ import java.util.logging.Logger;
  * @serial 0x888fe8 /mr /ss /ok
  */
 public class Jcmcompiler extends Stdcompiler
-{
+{        
     protected final Integer hash = 0x888fe8;
     
     public ArrayList<Apmlmodelfile> apmlmodelfiles_apml;    
@@ -43,7 +44,7 @@ public class Jcmcompiler extends Stdcompiler
     
     protected File manifestfile;
     protected File manifestdir;    
-    protected File outputdir;   
+    protected File sourcedir;   
     protected File apmlxmlfile;
     
     protected static final String APMLINJAR = "/home/oem/NetBeansProjects/APML/dist/APML.jar";
@@ -51,33 +52,43 @@ public class Jcmcompiler extends Stdcompiler
     protected static final String APMLIN = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";
     //protected static final String APMLIN = "/home/oem/NetBeansProjects/APML/src/apml/examples/httpserver/server/httpserver.xml";
     //protected static final String APMLIN = "/home/oem/NetBeansProjects/APML/src/apml/examples/jgpserver/server/jgpserver.xml";
-    
-    protected static final String SOURCEOUTDIR = "/home/oem/Desktop/apml/output/echo";
+        
+    protected static final String BASEDIR = "/home/oem/Desktop/apml/output/echo/";
+    protected static final String BUILDDIR = "build/";
+    protected static final String SRCDIR = "source/";
     protected static final String MANIFESTDIR = "/home/oem/Desktop/apml/output/manifest";
     protected static final String MANIFESTFILE = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
     
     public static void main(String...args) 
     {                          
         try
-        {           
+        {
             //
             Jcmcompiler compiler = new Jcmcompiler();
             
             //
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//apml");
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//dynamiclistener");
-            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//listener");                   
-            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//object");                   
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//listener");    
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//object");   
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//subscriber");
-            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");   
-                   
+            compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");
+              
+            //
+            compiler.quickcompilesourcetobytecode(compiler.apmlmodelfiles_apml);
+            compiler.quickcompilesourcetobytecode(compiler.apmlmodelfiles_dynamiclisteners);
+            compiler.quickcompilesourcetobytecode(compiler.apmlmodelfiles_listeners);
+            compiler.quickcompilesourcetobytecode(compiler.apmlmodelfiles_objects);
+            compiler.quickcompilesourcetobytecode(compiler.apmlmodelfiles_subscribers);
+            compiler.quickcompilesourcetobytecode(compiler.apmlmodelfiles_systems);
+            
             //
             compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_apml, "//apml");
-            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_dynamiclisteners, "//dynamiclistener");      
+            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_dynamiclisteners, "//dynamiclistener");
             compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_listeners, "//listener");
             compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_objects, "//object");
             compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_subscribers, "//subscriber");
-            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_systems, "//system");
+            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_systems, "//system");    
             
             //
             compiler.writejcmtodisk(compiler.jcmmodelfiles_apml);
@@ -88,7 +99,7 @@ public class Jcmcompiler extends Stdcompiler
             compiler.writejcmtodisk(compiler.jcmmodelfiles_systems);   
                         
             //
-            compiler.writeapmlbackingjartodisk();            
+            compiler.writeapmlbackingjartodisk();
             
             //
             System.gc();
@@ -104,11 +115,15 @@ public class Jcmcompiler extends Stdcompiler
     {
         try
         {
-            this.outputdir = new File(Jcmcompiler.SOURCEOUTDIR);            
-            if(!this.outputdir.exists())
-                this.outputdir.mkdirs();   
+            this.sourcedir = new File(BASEDIR+SRCDIR);            
+            if(!this.sourcedir.exists())
+                this.sourcedir.mkdirs();  
             
-            this.manifestdir = new File(Jcmcompiler.MANIFESTDIR);            
+            this.sourcedir = new File(BASEDIR+BUILDDIR);            
+            if(!this.sourcedir.exists())
+                this.sourcedir.mkdirs();            
+            
+            this.manifestdir = new File(BASEDIR+MANIFESTDIR);            
             if(!this.manifestdir.exists())
                 this.manifestdir.mkdirs();   
             
@@ -121,6 +136,46 @@ public class Jcmcompiler extends Stdcompiler
             Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
     }      
+    
+    /**
+     * 
+     * @param apmlmodelfiles
+     */
+    public void quickcompilesourcetobytecode(ArrayList<Apmlmodelfile> apmlmodelfiles) 
+    {
+        for(Apmlmodelfile model: apmlmodelfiles) 
+        {
+            try
+            {   
+                JCodeModel jmodel;                
+                Runtime runtime;
+                
+                String sourcepackagedir = new Filegrepper().getpackagenameaspathname(model.sourcedir);
+                String buildpackagedir = new Filegrepper().getpackagenameaspathname(model.builddir);
+                
+                new File(BASEDIR+SRCDIR).mkdirs();
+                new File(BASEDIR+SRCDIR+sourcepackagedir).mkdirs();               
+                
+                new File(BASEDIR+BUILDDIR).mkdirs();
+                new File(BASEDIR+BUILDDIR+buildpackagedir).mkdirs();
+                   
+                jmodel = new JCodeModel();
+                jmodel._package(model.sourcedir)._class(model.classname);
+                jmodel.build(new File(BASEDIR+SRCDIR));
+                
+                runtime = Runtime.getRuntime();
+                runtime.exec("javac "+BASEDIR+SRCDIR+new Filegrepper().getpackagenameaspathname(model.sourcedir)+"/"+model.classname+".java -d "+BASEDIR+BUILDDIR);
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace(System.err);
+            }
+            finally
+            {
+                System.gc();
+            }
+        }
+    }
     
     //
     public ArrayList<Apmlmodelfile> getapmlmodelfiles(File apmlxmlfile, String apmltag)
@@ -247,7 +302,7 @@ public class Jcmcompiler extends Stdcompiler
             e.printStackTrace(System.err);
         }
     }   
-    
+        
     //
     public void writejcmtodisk(ArrayList<JCodeModel> jcmmodels)
     {        
@@ -268,7 +323,7 @@ public class Jcmcompiler extends Stdcompiler
                         System.err.println(jpackage.getPackage().name());
                         System.err.println(classes.next().name());
                         
-                        jcmmodels.get(i).build(new File(SOURCEOUTDIR), System.err);           
+                        jcmmodels.get(i).build(new File(SRCDIR), System.err);           
                     }
                 }
             }

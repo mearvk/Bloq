@@ -5,7 +5,6 @@ import apml.drivers.Stddriver;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -26,10 +25,14 @@ import org.xml.sax.SAXException;
  */
 public final class Apmlrunner 
 {
-    public ArrayList<Stdcompiler> compilers = new ArrayList();
-    public ArrayList<Stddriver> drivers = new ArrayList();
+    public Stdcompiler compiler;
+    public Stddriver driver;
+        
+    public File apmlfile;
     
-    public static File apmlfile = new File("/home/oem/Desktop/apml/apml/echoserver.xml");
+    protected String basedir = "";
+    protected String builddir = "";
+    protected String srcdir = "";    
     
     public Apmlrunner()
     {
@@ -39,22 +42,49 @@ public final class Apmlrunner
     
     public static void main()
     {        
-        //find runner for apml
         Apmlrunner runner = new Apmlrunner();
         
-        //set apml input file
-        runner.setapmlfile(apmlfile);
+        runner.setapmlfile(new File("/home/oem/Desktop/apml/apml/echoserver.xml"));
         
-        //run the runner to generate source via compiler
-        runner.compilers.get(0).compiletosource();
+        runner.setbasedir("");
         
-        //run the runner to start system via driver
-        runner.drivers.get(0).drive();
+        runner.setsrcdir("");
+        
+        runner.setbuilddir("");
+        
+        runner.compiler.compiletosource();
+        
+        runner.driver.drive();
+    }
+    
+    public void setdriver(Stddriver driver)
+    {
+        this.driver = driver;
+    }
+    
+    public void setcompiler(Stdcompiler compiler)
+    {
+        this.compiler = compiler;
     }
     
     public void setapmlfile(File file)
     {
-        
+        this.apmlfile = file;
+    }    
+    
+    public void setbasedir(String basedir)
+    {
+        this.basedir = basedir;
+    }
+    
+    public void setbuilddir(String builddir)
+    {
+        this.builddir = builddir;
+    }
+    
+    public void setsrcdir(String srcdir)
+    {
+        this.srcdir = srcdir;
     }
     
     public Class loadcompilers() 

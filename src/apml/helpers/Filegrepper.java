@@ -37,18 +37,16 @@ public class Filegrepper
         {
             String stmp = "";
             
-            stmp = fullURL.substring(0,fullURL.lastIndexOf(".")).replace(".", File.separator);
-            stmp = stmp.substring(0, stmp.lastIndexOf("/")).replace("/", ".");
+            stmp = fullURL.replace(".", File.separator);
             
-            return stmp.replace(".",File.separator);
+            return stmp;
         }
         
         if(fullURL.replace(".java","").contains("/")) //e.g. abc/def/ghi/Classname.java returns abc.def.ghi
-        {
-            File ftmp = new File(fullURL.replace(".", File.separator));
-            String stmp = ftmp.getPath().replace(File.separator, ".");
+        {            
+            String stmp = "";
             
-            return stmp.replace(".",File.separator);
+            return fullURL.replace(".", File.separator);
         }  
         
         throw new Exception("Could not parse for package name.");

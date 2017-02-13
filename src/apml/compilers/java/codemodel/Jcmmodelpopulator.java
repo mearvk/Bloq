@@ -122,10 +122,11 @@ public class Jcmmodelpopulator
             for(int i=0; i<objects.size(); i++)
             {
                 String fullclassname = param.apmlmodelfile.builddir+"."+param.apmlmodelfile.classname;
-                String simpleclassname = new apml.helpers.Filegrepper().getclassname(param.apmlmodelfile.builddir+"."+param.apmlmodelfile.classname);                
-                String packagename = new apml.helpers.Filegrepper().getpackagename(param.apmlmodelfile.builddir+"."+param.apmlmodelfile.classname);
+                String simpleclassname = new apml.helpers.Filegrepper().getclassname(param.apmlmodelfile.sourcedir+"."+param.apmlmodelfile.classname);                
+                String packagename = new apml.helpers.Filegrepper().getpackagename(param.apmlmodelfile.sourcedir+"."+param.apmlmodelfile.classname);
                 
-                Class.forName(fullclassname);
+                //Class.forName(fullclassname);
+//TODO do this on pass two?                
                 
                 param.jcodemodel.ref(fullclassname);
                 param.classfile.direct("public "+simpleclassname+" child_"+i+";");               
@@ -167,7 +168,7 @@ public class Jcmmodelpopulator
             if(param.jcodemodel==null) 
                 throw new InvalidParameterException("JCodeModel not set; unable to set package name");            
 
-            param.jpackage = param.jcodemodel._package(param.apmlmodelfile.builddir);
+            param.jpackage = param.jcodemodel._package(param.apmlmodelfile.sourcedir);
         }
         catch(Exception ex)
         {
