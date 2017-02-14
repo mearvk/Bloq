@@ -1,5 +1,6 @@
 package apml.compilers.java.codemodel;
 
+import apml.helpers.Filegrepper;
 import apml.modeling.Apmlmodelfile;
 import apml.modeling.Apmlobject;
 import com.sun.codemodel.JClass;
@@ -121,15 +122,10 @@ public class Jcmmodelpopulator
             ArrayList<Apmlobject> objects = param.apmlmodelfile.apmlobjects;            
             for(int i=0; i<objects.size(); i++)
             {
-                String fullclassname = param.apmlmodelfile.builddir+"."+param.apmlmodelfile.classname;
-                String simpleclassname = new apml.helpers.Filegrepper().getclassname(param.apmlmodelfile.sourcedir+"."+param.apmlmodelfile.classname);                
-                String packagename = new apml.helpers.Filegrepper().getpackagename(param.apmlmodelfile.sourcedir+"."+param.apmlmodelfile.classname);
+//TODO kindly param.apmlmodelfile.builddir.replace() shouldn't be called; replace with working set or knowledge. /ok                
+                String fullclassname = param.apmlmodelfile.builddir.replace("systems", "objects")+"."+new Filegrepper().getclassname(param.apmlmodelfile.apmlobjects.get(i).classname);                                                             
                 
-                //Class.forName(fullclassname);
-//TODO do this on pass two?                
-                
-                param.jcodemodel.ref(fullclassname);
-                param.classfile.direct("public "+simpleclassname+" child_"+i+";");               
+                param.classfile.field(JMod.PROTECTED, Class.forName(fullclassname), "object_"+String.format("%03d", i));                               
             }
         }
         catch(Exception ex)

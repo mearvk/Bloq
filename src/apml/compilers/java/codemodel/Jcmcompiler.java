@@ -323,7 +323,10 @@ public class Jcmcompiler extends Stdcompiler
                         System.err.println(jpackage.getPackage().name());
                         System.err.println(classes.next().name());
                         
-                        jcmmodels.get(i).build(new File(SRCDIR), System.err);           
+                        String t1 = SRCDIR;
+                        String t2 = BASEDIR+SRCDIR;
+                        
+                        jcmmodels.get(i).build(new File(BASEDIR+SRCDIR), System.err);           
                     }
                 }
             }
