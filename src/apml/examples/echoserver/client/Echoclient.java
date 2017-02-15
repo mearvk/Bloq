@@ -14,7 +14,7 @@ import java.net.Socket;
  *
  * @author oem
  */
-public class echoclient 
+public class Echoclient 
 {
     public Socket socket;
 }

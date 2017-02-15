@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?apml version="1.0" encoding="UTF-8"?>
 
-<package name="global" default="" sourcedir="examples.global" builddir="examples.global">
+<package name="globals" default="examples.echoserver" sourcedir="/source" builddir="/build">
 <apml language="Java 9" version="1.0" class="Apmlsystem">  
 
     <definitions>
         <echoserver extends="ServerSocketImpl" class="Echoserver"></echoserver>   
     </definitions>                 
         
-    <package name="server" default="" sourcedir="examples.echoserver" builddir="examples.echoserver">
+    <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
         <system start="true" bndi="//echoserver/systems/1" id="echoserver" class="Echoserversystem">        
             <object start="true" bndi="//echoserver/objects/1" class="Echoserver">                       
-                <listener bndi="//echoserver/listeners/onconnect/1" id="esocl" class="Onconnectlistener" with="*">
-                    <subscriber class="Onconnect_1"></subscriber>
-                    <subscriber class="Onconnect_2"></subscriber>
-                    <subscriber class="Onconnect_3"></subscriber>
+                <listener id="esocl" bndi="//echoserver/listeners/onconnect/1" class="Onconnectlistener" with="*">
+                    <subscriber class="Onconnect_001"></subscriber>
+                    <subscriber class="Onconnect_002"></subscriber>
+                    <subscriber class="Onconnect_003"></subscriber>
                 </listener>
-                <listener bndi="//echoserver/listeners/onexit/1" id="esoel" class="Onexitlistener" with="*">
-                    <subscriber class="Onexit_1"></subscriber>
-                    <subscriber class="Onexit_2"></subscriber>
-                    <subscriber class="Onexit_3"></subscriber>
+                <listener id="esoel" bndi="//echoserver/listeners/onexit/1" class="Onexitlistener" with="*">
+                    <subscriber class="Onexit_001"></subscriber>
+                    <subscriber class="Onexit_002"></subscriber>
+                    <subscriber class="Onexit_003"></subscriber>
                 </listener>
-                <listener bndi="//echoserver/listeners/onread/1" id="esorl" class="Onreadlistener" with="*">
-                    <subscriber class="Onreceipt_1"></subscriber>
-                    <subscriber class="Onreceipt_2"></subscriber>
-                    <subscriber class="Onreceipt_3"></subscriber>
+                <listener id="esorl" bndi="//echoserver/listeners/onread/1" class="Onreadlistener" with="*">
+                    <subscriber class="Onreceipt_001"></subscriber>
+                    <subscriber class="Onreceipt_002"></subscriber>
+                    <subscriber class="Onreceipt_003"></subscriber>
                 </listener>
-                <listener bndi="//echoserver/listeners/ondispatch/1" id="esodl" class="Ondispatchlistener" with="*">
-                    <subscriber class="Ondispatch_1"></subscriber>
-                    <subscriber class="Ondispatch_2"></subscriber>
-                    <subscriber class="Ondispatch_3"></subscriber>
+                <listener id="esodl" bndi="//echoserver/listeners/ondispatch/1" class="Ondispatchlistener" with="*">
+                    <subscriber class="Ondispatch_001"></subscriber>
+                    <subscriber class="Ondispatch_002"></subscriber>
+                    <subscriber class="Ondispatch_003"></subscriber>
                 </listener>  
             </object> 
-            <object start="true" bndi="//echoserver/objects/2" class="Ftpserver">                       
-                <listener bndi="//echoserver/listeners/onconnect/1" id="esocl" class="Onconnectlistener" with="*">
-                    <subscriber class="Onconnect_1"></subscriber>
-                    <subscriber class="Onconnect_2"></subscriber>
-                    <subscriber class="Onconnect_3"></subscriber>
+            <object id="ftpserver" start="true" bndi="//ftpserver/objects/1" class="Ftpserver">                       
+                <listener id="ftpsocl" bndi="//ftpserver/listeners/onconnect/1" class="Onconnectlistener" with="*">
+                    <subscriber class="Onconnect_001"></subscriber>
+                    <subscriber class="Onconnect_002"></subscriber>
+                    <subscriber class="Onconnect_003"></subscriber>
                 </listener>
-                <listener bndi="//echoserver/listeners/onexit/1" id="esoel" class="Onexitlistener" with="*">
-                    <subscriber class="Onexit_1"></subscriber>
-                    <subscriber class="Onexit_2"></subscriber>
-                    <subscriber class="Onexit_3"></subscriber>
+                <listener id="ftpsoel" bndi="//ftpserver/listeners/onexit/1" class="Onexitlistener" with="*">
+                    <subscriber class="Onexit_001"></subscriber>
+                    <subscriber class="Onexit_002"></subscriber>
+                    <subscriber class="Onexit_003"></subscriber>
                 </listener>
-                <listener bndi="//echoserver/listeners/onread/1" id="esorl" class="Onreadlistener" with="*">
-                    <subscriber class="Onreceipt_1"></subscriber>
-                    <subscriber class="Onreceipt_2"></subscriber>
-                    <subscriber class="Onreceipt_3"></subscriber>
+                <listener id="ftpsorl" bndi="//ftpserver/listeners/onread/1" class="Onreadlistener" with="*">
+                    <subscriber class="Onreceipt_001"></subscriber>
+                    <subscriber class="Onreceipt_002"></subscriber>
+                    <subscriber class="Onreceipt_003"></subscriber>
                 </listener>
-                <listener bndi="//echoserver/listeners/ondispatch/1" id="esodl" class="Ondispatchlistener" with="*">
-                    <subscriber class="Ondispatch_1"></subscriber>
-                    <subscriber class="Ondispatch_2"></subscriber>
-                    <subscriber class="Ondispatch_3"></subscriber>
+                <listener id="ftpsodl" bndi="//ftposerver/listeners/ondispatch/1" class="Ondispatchlistener" with="*">
+                    <subscriber class="Ondispatch_001"></subscriber>
+                    <subscriber class="Ondispatch_002"></subscriber>
+                    <subscriber class="Ondispatch_003"></subscriber>
                 </listener>                                                                                                  
             </object>        
         </system>   
     </package>
     
-    <package name="client" default="" sourcedir="examples.echoclient" builddir="examples.echoclient">
+    <package name="clients" default="examples.echoserver.clients" sourcedir="source" builddir="build">
         <system start="true" bndi="//echoclient/systems/1" id="echoclient" class="Echoclientsystem">        
             <object start="true" bndi="//echoclient/objects/1" class="Echoclient">
                 <listener class="Clientsocketlistener">
