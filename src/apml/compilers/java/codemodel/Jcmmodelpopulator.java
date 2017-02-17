@@ -86,7 +86,7 @@ public class Jcmmodelpopulator
             Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }        
         
-        throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel");
+        throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel.");
     }  
     
     /**
@@ -98,7 +98,7 @@ public class Jcmmodelpopulator
         try
         {
             if(param.jcodemodel==null) 
-                throw new InvalidParameterException("JCodeModel not set; unable to set package name");
+                throw new InvalidParameterException("JCodeModel not set; unable to set BNDI value.");
 
             param.classfile.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bndi=\""+param.apmlmodelfile.bndi+"\"");                          
         }
@@ -117,7 +117,7 @@ public class Jcmmodelpopulator
         try
         {
             if(param.jcodemodel==null) 
-                throw new InvalidParameterException("JCodeModel not set; unable to set package name");
+                throw new InvalidParameterException("JCodeModel not set; unable to get child object(s).");
             
             ArrayList<Apmlobject> objects = param.apmlmodelfile.apmlobjects;            
             for(int i=0; i<objects.size(); i++)
@@ -143,7 +143,7 @@ public class Jcmmodelpopulator
         try
         {
             if(param.jcodemodel==null) 
-                throw new InvalidParameterException("JCodeModel not set; unable to set package name");
+                throw new InvalidParameterException("JCodeModel not set; unable to set listener(s).");
             
             //param.jpackage = param.jcodemodel._package(param.apmlmodelfile.packagename); 
         }
@@ -162,7 +162,7 @@ public class Jcmmodelpopulator
         try
         {
             if(param.jcodemodel==null) 
-                throw new InvalidParameterException("JCodeModel not set; unable to set package name");            
+                throw new InvalidParameterException("JCodeModel not set; unable to set package name.");            
 
             param.jpackage = param.jcodemodel._package(param.apmlmodelfile.sourcedir);
         }
@@ -181,10 +181,10 @@ public class Jcmmodelpopulator
         try
         {     
             if(param.jpackage==null) 
-                throw new InvalidParameterException("Package not set; unable to set class name");
+                throw new InvalidParameterException("Package not set; unable to set class name.");
                 
             if(param.apmlmodelfile.classname==null)
-                throw new InvalidParameterException("No classname found");
+                throw new InvalidParameterException("No classname found.");
             
             param.classfile = param.jpackage._class(param.apmlmodelfile.classname);  
         }
@@ -203,10 +203,10 @@ public class Jcmmodelpopulator
         try
         {
             if(param.classfile==null) 
-                throw new InvalidParameterException("Classfile not set; unable to determine if Class extends another");
+                throw new InvalidParameterException("Classfile not set; unable to determine if Class extends another.");
             
             if(param.apmlmodelfile.superclass==null) 
-                throw new InvalidParameterException("No superclass reference found in param.apmlmodelfile.apml_extends");            
+                throw new InvalidParameterException("No superclass reference found in param.apmlmodelfile.apml_extends.");            
                
             param.classfile = param.classfile._extends(Class.forName(param.apmlmodelfile.superclass));      
         }
@@ -226,10 +226,10 @@ public class Jcmmodelpopulator
             try
             {
                 if(param.classfile==null) 
-                    throw new InvalidParameterException("Classfile not set; unable to set interfaces for Class");
+                    throw new InvalidParameterException("Classfile not set; unable to set interfaces for Class.");
                 
                 if(param.apmlmodelfile.implementors==null || param.apmlmodelfile.implementors.length==0)
-                    throw new InvalidParameterException("No interfaces found with param.apmlmodelfile.apml_implements");
+                    throw new InvalidParameterException("No interfaces found with param.apmlmodelfile.apml_implements.");
                 
                 for(String implments : param.apmlmodelfile.implementors)        
                 {
@@ -258,10 +258,10 @@ public class Jcmmodelpopulator
             try
             {
                 if(param.classfile==null) 
-                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
+                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");
                 
                 if(param.apmlmodelfile.run==null)
-                    throw new InvalidParameterException("Run or runnable not set; unable to comply");
+                    throw new InvalidParameterException("Run or runnable not set; unable to comply.");
                 
                 if(param.apmlmodelfile.run.equalsIgnoreCase("true"))                    
                     param.classfile = param.classfile._implements(Runnable.class);
@@ -281,10 +281,10 @@ public class Jcmmodelpopulator
         try
         {
             if(param.classfile==null) 
-                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
+                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");
                 
             if(param.apmlmodelfile.start==null)
-                throw new InvalidParameterException("Start or startable not set; unable to comply");
+                throw new InvalidParameterException("Start or startable not set; unable to comply.");
             
             if(param.apmlmodelfile.start.equalsIgnoreCase("true"))
                 param.classfile = param.classfile._implements(Startable.class);
@@ -304,10 +304,10 @@ public class Jcmmodelpopulator
         try
         {               
             if(param.classfile==null) 
-                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");            
+                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");            
                 
             if(param.apmlmodelfile.stdinterfaces==null || param.apmlmodelfile.stdinterfaces.length==0)
-                throw new InvalidParameterException("No standard interfaces were found");                
+                throw new InvalidParameterException("No standard interfaces were found.");                
                    
             for(String intrfacename : param.apmlmodelfile.stdinterfaces)
             {
@@ -369,7 +369,7 @@ public class Jcmmodelpopulator
         try
         {
             if(param.classfile==null) 
-                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
+                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");
                 
             if(param.apmlmodelfile.autostart==null)
                 throw new InvalidParameterException("No autostart tag found");
@@ -391,10 +391,10 @@ public class Jcmmodelpopulator
         try
         {
             if(param.classfile==null) 
-                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
+                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");
                 
             if(param.apmlmodelfile.init==null)
-                throw new InvalidParameterException("No init tag found");
+                throw new InvalidParameterException("No init tag found.");
             
             param.classfile = param.classfile._implements(Initializable.class);
         }
@@ -414,10 +414,10 @@ public class Jcmmodelpopulator
         try
         {
             if(param.classfile==null) 
-                throw new InvalidParameterException("Classfile not set; unable to load superclass methods for JCodeModel builder");
+                throw new InvalidParameterException("Classfile not set; unable to load superclass methods for JCodeModel builder.");
                 
             if(param.apmlmodelfile.superclass==null)
-                throw new InvalidParameterException("No superclass found");
+                throw new InvalidParameterException("No superclass found.");
             
             Class superclass = Class.forName(param.apmlmodelfile.superclass);
             for (Method method : superclass.getMethods()) 
@@ -468,10 +468,10 @@ public class Jcmmodelpopulator
             Iterator<JClass> intrfaces;
                 
             if(param.classfile==null) 
-                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder");
+                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");
             
             if(param.apmlmodelfile.taginterfaces==null || param.apmlmodelfile.taginterfaces.length==0)
-                throw new InvalidParameterException("No tag interfaces found");
+                throw new InvalidParameterException("No tag interfaces found.");
                 
             intrfaces = param.classfile._implements();
                 

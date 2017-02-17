@@ -75,28 +75,28 @@ public class Jcmcompiler extends Stdcompiler
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");
               
             //
-            compiler.quickcompilesourcetobytecode(compiler.apmlmodelfiles_apml);
-            compiler.quickcompilesourcetobytecode(compiler.apmlmodelfiles_dynamiclisteners);
-            compiler.quickcompilesourcetobytecode(compiler.apmlmodelfiles_listeners);
-            compiler.quickcompilesourcetobytecode(compiler.apmlmodelfiles_objects);
-            compiler.quickcompilesourcetobytecode(compiler.apmlmodelfiles_subscribers);
-            compiler.quickcompilesourcetobytecode(compiler.apmlmodelfiles_systems);
+            compiler.quickbytecode(compiler.apmlmodelfiles_apml);
+            compiler.quickbytecode(compiler.apmlmodelfiles_dynamiclisteners);
+            compiler.quickbytecode(compiler.apmlmodelfiles_listeners);
+            compiler.quickbytecode(compiler.apmlmodelfiles_objects);
+            compiler.quickbytecode(compiler.apmlmodelfiles_subscribers);
+            compiler.quickbytecode(compiler.apmlmodelfiles_systems);
             
             //
-            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_apml, "//apml");
-            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_dynamiclisteners, "//dynamiclistener");
-            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_listeners, "//listener");
-            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_objects, "//object");
-            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_subscribers, "//subscriber");
-            compiler.getsourcecodemodelfiles(compiler.apmlmodelfiles_systems, "//system");    
+            compiler.getjavamodelfiles(compiler.apmlmodelfiles_apml, "//apml");
+            compiler.getjavamodelfiles(compiler.apmlmodelfiles_dynamiclisteners, "//dynamiclistener");
+            compiler.getjavamodelfiles(compiler.apmlmodelfiles_listeners, "//listener");
+            compiler.getjavamodelfiles(compiler.apmlmodelfiles_objects, "//object");
+            compiler.getjavamodelfiles(compiler.apmlmodelfiles_subscribers, "//subscriber");
+            compiler.getjavamodelfiles(compiler.apmlmodelfiles_systems, "//system");    
             
             //
-            compiler.writejcmtodisk(compiler.jcmmodelfiles_apml);
-            compiler.writejcmtodisk(compiler.jcmmodelfiles_dynamiclisteners);                             
-            compiler.writejcmtodisk(compiler.jcmmodelfiles_listeners);                    
-            compiler.writejcmtodisk(compiler.jcmmodelfiles_objects);
-            compiler.writejcmtodisk(compiler.jcmmodelfiles_subscribers);                    
-            compiler.writejcmtodisk(compiler.jcmmodelfiles_systems);   
+            compiler.storejavasource(compiler.jcmmodelfiles_apml);
+            compiler.storejavasource(compiler.jcmmodelfiles_dynamiclisteners);                             
+            compiler.storejavasource(compiler.jcmmodelfiles_listeners);                    
+            compiler.storejavasource(compiler.jcmmodelfiles_objects);
+            compiler.storejavasource(compiler.jcmmodelfiles_subscribers);                    
+            compiler.storejavasource(compiler.jcmmodelfiles_systems);   
                         
             //
             compiler.writeapmlbackingjartodisk();
@@ -141,7 +141,7 @@ public class Jcmcompiler extends Stdcompiler
      * 
      * @param apmlmodelfiles
      */
-    public void quickcompilesourcetobytecode(ArrayList<Apmlmodelfile> apmlmodelfiles) 
+    public void quickbytecode(ArrayList<Apmlmodelfile> apmlmodelfiles) 
     {
         for(Apmlmodelfile model: apmlmodelfiles) 
         {
@@ -225,7 +225,7 @@ public class Jcmcompiler extends Stdcompiler
     }    
     
     //
-    public ArrayList<JCodeModel> getsourcecodemodelfiles(ArrayList<Apmlmodelfile> apmlmodelfiles, String apmltag)
+    public ArrayList<JCodeModel> getjavamodelfiles(ArrayList<Apmlmodelfile> apmlmodelfiles, String apmltag)
     {
         Jcmmodelpopulator jcmmodelpopulator = new Jcmmodelpopulator();
         ArrayList<JCodeModel> jcmmodels_genericfiles = null;
@@ -276,13 +276,13 @@ public class Jcmcompiler extends Stdcompiler
     {
         try
         {
-            this.writejcmtodisk(this.jcmmodelfiles_apml);
-            this.writejcmtodisk(this.jcmmodelfiles_definitions);
-            this.writejcmtodisk(this.jcmmodelfiles_dynamiclisteners);            
-            this.writejcmtodisk(this.jcmmodelfiles_listeners);
-            this.writejcmtodisk(this.jcmmodelfiles_objects);
-            this.writejcmtodisk(this.jcmmodelfiles_subscribers);
-            this.writejcmtodisk(this.jcmmodelfiles_systems);
+            this.storejavasource(this.jcmmodelfiles_apml);
+            this.storejavasource(this.jcmmodelfiles_definitions);
+            this.storejavasource(this.jcmmodelfiles_dynamiclisteners);            
+            this.storejavasource(this.jcmmodelfiles_listeners);
+            this.storejavasource(this.jcmmodelfiles_objects);
+            this.storejavasource(this.jcmmodelfiles_subscribers);
+            this.storejavasource(this.jcmmodelfiles_systems);
             
             try
             {
@@ -304,7 +304,7 @@ public class Jcmcompiler extends Stdcompiler
     }   
         
     //
-    public void writejcmtodisk(ArrayList<JCodeModel> jcmmodels)
+    public void storejavasource(ArrayList<JCodeModel> jcmmodels)
     {        
         for(int i=0; i<jcmmodels.size(); i++)
         {
