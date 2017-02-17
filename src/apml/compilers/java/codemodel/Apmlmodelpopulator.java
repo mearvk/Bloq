@@ -9,6 +9,8 @@ import apml.xpath.helpers.Xpathparameter;
 import java.io.File;
 import java.util.ArrayList;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -161,6 +163,7 @@ public final class Apmlmodelpopulator
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.sourcedir=this.getsourcedir(xparam, index)+".apml";}                  catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.builddir=this.getbuilddir(xparam, index)+".apml";}                    catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){e.printStackTrace(System.err);}                                                                                    
@@ -194,7 +197,8 @@ public final class Apmlmodelpopulator
 
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}            
-            try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}            
+            try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}    
+            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.sourcedir=this.getsourcedir(xparam, index)+".definitions";}           catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.builddir=this.getbuilddir(xparam, index)+".definitions";}             catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){e.printStackTrace(System.err);}            
@@ -229,6 +233,7 @@ public final class Apmlmodelpopulator
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.sourcedir=this.getsourcedir(xparam, index)+".dynamics";}              catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.builddir=this.getbuilddir(xparam, index)+".dynamics";}                catch(Exception e){e.printStackTrace(System.err);}                                                
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){e.printStackTrace(System.err);}            
@@ -263,6 +268,7 @@ public final class Apmlmodelpopulator
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.sourcedir=this.getsourcedir(xparam, index)+".listeners";}             catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.builddir=this.getbuilddir(xparam, index)+".listeners";}               catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){e.printStackTrace(System.err);}                        
@@ -297,6 +303,7 @@ public final class Apmlmodelpopulator
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}            
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.sourcedir=this.getsourcedir(xparam, index)+".objects";}               catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.builddir=this.getbuilddir(xparam, index)+".objects";}                 catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){e.printStackTrace(System.err);}                        
@@ -330,7 +337,8 @@ public final class Apmlmodelpopulator
                               
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}
-            try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}           
+            try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.sourcedir=this.getsourcedir(xparam, index)+".subscribers";}           catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.builddir=this.getbuilddir(xparam, index)+".subscribers";}             catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){e.printStackTrace(System.err);}                        
@@ -364,8 +372,9 @@ public final class Apmlmodelpopulator
             Apmlmodelfile modelfile=new Apmlmodelfile();        //show two apml files for each system
 
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){e.printStackTrace(System.err);}
-            try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}            
+            try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){e.printStackTrace(System.err);}                        
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.sourcedir=this.getsourcedir(xparam, index)+".systems";}               catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.builddir=this.getbuilddir(xparam, index)+".systems";}                 catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){e.printStackTrace(System.err);}            
@@ -405,15 +414,41 @@ public final class Apmlmodelpopulator
      * @param nodes
      * @return 
      */
+    private String getdefaultdir(Xpathparameter xparam, Integer index)
+    {        
+        String dir = "apml.src.unbound";
+        
+        try
+        {
+            NodeList nodes = (NodeList)xparam.xpath.evaluate("./ancestor::package/@default", xparam.n0001_tagname.item(index), XPathConstants.NODESET);            
+            
+            dir = nodes.item(nodes.getLength()-1).getNodeValue();
+        }
+        catch(XPathExpressionException | DOMException e)
+        {
+            e.printStackTrace(System.err);
+        }
+        
+        return dir;
+    }      
+    
+    /**
+     * 
+     * @param xparam
+     * @param nodes
+     * @return 
+     */
     private String getsourcedir(Xpathparameter xparam, Integer index)
     {        
         String dir = "apml.src.unbound";
         
         try
         {
-            dir = (String)xparam.xpath.evaluate("./ancestor::package/@sourcedir", xparam.n0001_tagname.item(index), XPathConstants.STRING);           
+            NodeList nodes = (NodeList)xparam.xpath.evaluate("./ancestor::package/@sourcedir", xparam.n0001_tagname.item(index), XPathConstants.NODESET);  
+            
+            dir = nodes.item(nodes.getLength()-1).getNodeValue();
         }
-        catch(Exception e)
+        catch(XPathExpressionException | DOMException e)
         {
             e.printStackTrace(System.err);
         }
@@ -433,9 +468,11 @@ public final class Apmlmodelpopulator
         
         try
         {
-            dir = (String)xparam.xpath.evaluate("./ancestor::package/@builddir", xparam.n0001_tagname.item(index), XPathConstants.STRING);           
+            NodeList nodes = (NodeList)xparam.xpath.evaluate("./ancestor::package/@builddir", xparam.n0001_tagname.item(index), XPathConstants.NODESET);           
+            
+            dir = nodes.item(nodes.getLength()-1).getNodeValue();
         }
-        catch(Exception e)
+        catch(XPathExpressionException | DOMException e)
         {
             e.printStackTrace(System.err);
         }
