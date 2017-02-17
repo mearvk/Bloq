@@ -57,24 +57,24 @@ public class Jcmmodelpopulator
             
             param = new Apmltaghandlerparameter(jcodemodel,jpackage,classfile,apmlmodelfile);
             
-            //class file data (extends, implements, etc)            
+            //         
             try{this.jcmpackagename(param);}        catch(Exception e){e.printStackTrace(System.err);}
             try{this.jcmclassname(param);}          catch(Exception e){e.printStackTrace(System.err);}            
             try{this.jcmextends(param);}            catch(Exception e){e.printStackTrace(System.err);}
             try{this.jcmimplements(param);}         catch(Exception e){e.printStackTrace(System.err);}
             try{this.jcmbndi(param);}               catch(Exception e){e.printStackTrace(System.err);}
             
-            //check for tags; move to JCM
+            //
             try{this.jcmautostarttag(param);}       catch(Exception e){e.printStackTrace(System.err);}
             try{this.jcminittag(param);}            catch(Exception e){e.printStackTrace(System.err);} 
             try{this.jcmruntag(param);}             catch(Exception e){e.printStackTrace(System.err);}
             try{this.jcmstarttag(param);}           catch(Exception e){e.printStackTrace(System.err);}                         
             
-            //check for children; move to JCM
+            //
             try{this.jcmlisteners(param);}          catch(Exception e){e.printStackTrace(System.err);}
             try{this.jcmobjects(param);}            catch(Exception e){e.printStackTrace(System.err);}
             
-            //add inherited methods to JCM 
+            //
             try{this.addinterfacemethods(param);}   catch(Exception e){e.printStackTrace(System.err);}
             try{this.addsuperclassmethods(param);}  catch(Exception e){e.printStackTrace(System.err);}
             try{this.addtagmethods(param);}         catch(Exception e){e.printStackTrace(System.err);}                                     
