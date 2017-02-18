@@ -11,7 +11,7 @@
     <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
         <system id="echoserver" start="true" bndi="//echoserver/systems/{this.id}" class="Echoserversystem">                                       
             
-            <object start="true" bndi="//echoserver/objects/1" class="Echoserver">                       
+            <object id="echoserver" start="true" bndi="//echoserver/objects/1" class="Echoserver">                       
                 <listener id="esocl" bndi="//echoserver/listeners/onconnect/{this.id}" class="Onconnectlistener" with="*">
                     <subscriber class="Onconnect_001"></subscriber>
                     <subscriber class="Onconnect_002"></subscriber>
@@ -60,7 +60,7 @@
         </system>   
     </package>
     
-    <package name="clients" default="examples.echoserver.clients" sourcedir="source" builddir="build">
+    <package name="clients" default="examples.echoserver.clients" sourcedir="/source" builddir="/build">
         <system id="echoclient" start="true" bndi="//echoclient/systems/{this.id}" class="Echoclientsystem">        
             <object start="true" bndi="//echoclient/objects/{this.id}" class="Echoclient">
                 <listener class="Clientsocketlistener">

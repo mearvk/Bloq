@@ -56,7 +56,8 @@ public class Jcmcompiler extends Stdcompiler
     protected static final String BASEDIR = "/home/oem/Desktop/apml/output/echo/";
     protected static final String BUILDDIR = "build/";
     protected static final String SRCDIR = "source/";
-    protected static final String MANIFESTDIR = "/home/oem/Desktop/apml/output/manifest";
+    protected static final String TEMPSRCDIR = "temp/";
+    protected static final String MANIFESTDIR = "manifest/";
     protected static final String MANIFESTFILE = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
     
     public static void main(String...args) 
@@ -75,12 +76,12 @@ public class Jcmcompiler extends Stdcompiler
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");
               
             //
-            compiler.quickbytecode(compiler.apmlmodelfiles_apml);
-            compiler.quickbytecode(compiler.apmlmodelfiles_dynamiclisteners);
-            compiler.quickbytecode(compiler.apmlmodelfiles_listeners);
-            compiler.quickbytecode(compiler.apmlmodelfiles_objects);
-            compiler.quickbytecode(compiler.apmlmodelfiles_subscribers);
-            compiler.quickbytecode(compiler.apmlmodelfiles_systems);
+            compiler.quicktobytecode(compiler.apmlmodelfiles_apml);
+            compiler.quicktobytecode(compiler.apmlmodelfiles_dynamiclisteners);
+            compiler.quicktobytecode(compiler.apmlmodelfiles_listeners);
+            compiler.quicktobytecode(compiler.apmlmodelfiles_objects);
+            compiler.quicktobytecode(compiler.apmlmodelfiles_subscribers);
+            compiler.quicktobytecode(compiler.apmlmodelfiles_systems);
             
             //
             compiler.getjavamodelfiles(compiler.apmlmodelfiles_apml, "//apml");
@@ -91,12 +92,12 @@ public class Jcmcompiler extends Stdcompiler
             compiler.getjavamodelfiles(compiler.apmlmodelfiles_systems, "//system");    
             
             //
-            compiler.storejavasource(compiler.jcmmodelfiles_apml);
-            compiler.storejavasource(compiler.jcmmodelfiles_dynamiclisteners);                             
-            compiler.storejavasource(compiler.jcmmodelfiles_listeners);                    
-            compiler.storejavasource(compiler.jcmmodelfiles_objects);
-            compiler.storejavasource(compiler.jcmmodelfiles_subscribers);                    
-            compiler.storejavasource(compiler.jcmmodelfiles_systems);   
+            compiler.compiletosource(compiler.jcmmodelfiles_apml);
+            compiler.compiletosource(compiler.jcmmodelfiles_dynamiclisteners);                             
+            compiler.compiletosource(compiler.jcmmodelfiles_listeners);                    
+            compiler.compiletosource(compiler.jcmmodelfiles_objects);
+            compiler.compiletosource(compiler.jcmmodelfiles_subscribers);                    
+            compiler.compiletosource(compiler.jcmmodelfiles_systems);   
                         
             //
             compiler.writeapmlbackingjartodisk();
@@ -106,7 +107,7 @@ public class Jcmcompiler extends Stdcompiler
         }
         catch(Exception ex)
         {
-            Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
     }    
     
@@ -138,10 +139,11 @@ public class Jcmcompiler extends Stdcompiler
     }      
     
     /**
+     * Quickly make bytecode (.class) files for JCM reference in compiling final Java Source files.
      * 
-     * @param apmlmodelfiles
+     * @param apmlmodelfiles Ready, whole APML files for reference; ok, go.
      */
-    public void quickbytecode(ArrayList<Apmlmodelfile> apmlmodelfiles) 
+    public void quicktobytecode(ArrayList<Apmlmodelfile> apmlmodelfiles) 
     {
         for(Apmlmodelfile model: apmlmodelfiles) 
         {
@@ -150,25 +152,27 @@ public class Jcmcompiler extends Stdcompiler
                 JCodeModel jmodel;                
                 Runtime runtime;
                 
-                String sourcepackagedir = new Filegrepper().getpackagenameaspathname(model.sourcedir);
-                String buildpackagedir = new Filegrepper().getpackagenameaspathname(model.builddir);
+                String sourcepackagedir = new Filegrepper().getpackagenameaspathname(model.packagename);
+                String buildpackagedir = new Filegrepper().getpackagenameaspathname(model.packagename);
+                String pathname = new Filegrepper().getpackagenameaspathname(model.packagename)+"/";
+                String runme = "javac "+BASEDIR+TEMPSRCDIR+pathname+model.classname+".java -d "+BASEDIR+BUILDDIR;
                 
-                new File(BASEDIR+SRCDIR).mkdirs();
-                new File(BASEDIR+SRCDIR+sourcepackagedir).mkdirs();               
+                new File(BASEDIR+TEMPSRCDIR).mkdirs();
+                new File(BASEDIR+TEMPSRCDIR+sourcepackagedir).mkdirs();               
                 
                 new File(BASEDIR+BUILDDIR).mkdirs();
                 new File(BASEDIR+BUILDDIR+buildpackagedir).mkdirs();
                    
                 jmodel = new JCodeModel();
-                jmodel._package(model.sourcedir)._class(model.classname);
-                jmodel.build(new File(BASEDIR+SRCDIR));
+                jmodel._package(model.packagename)._class(model.classname);
+                jmodel.build(new File(BASEDIR+TEMPSRCDIR),System.out);
                 
-                runtime = Runtime.getRuntime();
-                runtime.exec("javac "+BASEDIR+SRCDIR+new Filegrepper().getpackagenameaspathname(model.sourcedir)+"/"+model.classname+".java -d "+BASEDIR+BUILDDIR);
+                runtime = Runtime.getRuntime();                                                
+                runtime.exec(runme);
             }
             catch(Exception e)
             {
-                e.printStackTrace(System.err);
+                //e.printStackTrace(System.err);
             }
             finally
             {
@@ -218,7 +222,7 @@ public class Jcmcompiler extends Stdcompiler
         }
         catch(Exception e)
         {
-            e.printStackTrace(System.err);
+            //e.printStackTrace(System.err);
         }
         
         return apmlmodels_genericfiles;
@@ -276,13 +280,13 @@ public class Jcmcompiler extends Stdcompiler
     {
         try
         {
-            this.storejavasource(this.jcmmodelfiles_apml);
-            this.storejavasource(this.jcmmodelfiles_definitions);
-            this.storejavasource(this.jcmmodelfiles_dynamiclisteners);            
-            this.storejavasource(this.jcmmodelfiles_listeners);
-            this.storejavasource(this.jcmmodelfiles_objects);
-            this.storejavasource(this.jcmmodelfiles_subscribers);
-            this.storejavasource(this.jcmmodelfiles_systems);
+            this.compiletosource(this.jcmmodelfiles_apml);
+            this.compiletosource(this.jcmmodelfiles_definitions);
+            this.compiletosource(this.jcmmodelfiles_dynamiclisteners);            
+            this.compiletosource(this.jcmmodelfiles_listeners);
+            this.compiletosource(this.jcmmodelfiles_objects);
+            this.compiletosource(this.jcmmodelfiles_subscribers);
+            this.compiletosource(this.jcmmodelfiles_systems);
             
             try
             {
@@ -304,7 +308,7 @@ public class Jcmcompiler extends Stdcompiler
     }   
         
     //
-    public void storejavasource(ArrayList<JCodeModel> jcmmodels)
+    public void compiletosource(ArrayList<JCodeModel> jcmmodels)
     {        
         for(int i=0; i<jcmmodels.size(); i++)
         {
@@ -314,18 +318,12 @@ public class Jcmcompiler extends Stdcompiler
                                 
                 while(packages.hasNext()) //do every package
                 {                    
-                    JPackage jpackage = packages.next();
+                    JPackage jpackage = packages.next();                            
                                     
                     Iterator<JDefinedClass> classes = jpackage.classes();
                     
                     while(classes.hasNext()) //do every class
-                    {                                  
-                        System.err.println(jpackage.getPackage().name());
-                        System.err.println(classes.next().name());
-                        
-                        String t1 = SRCDIR;
-                        String t2 = BASEDIR+SRCDIR;
-                        
+                    {                                              
                         jcmmodels.get(i).build(new File(BASEDIR+SRCDIR), System.err);           
                     }
                 }
