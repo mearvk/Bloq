@@ -2,7 +2,7 @@
 <?apml version="1.0" encoding="UTF-8"?>
 
 <package name="globals" default="examples.echoserver" sourcedir="/source" builddir="/build">
-<apml language="Java 9" version="1.0" class="Apmlsystem">  
+<apml language="Java 9" version="1.0" class="Apmlsystem" infer="true">  
 
     <definitions>
         <echoserver extends="ServerSocketImpl" class="Echoserver"></echoserver>   

@@ -716,9 +716,9 @@ public final class Apmlmodelpopulator
                 object.classname        = element.getAttribute("class");
                 object.extension        = element.getAttribute("extends");
                 
-                String xpathxpression = "(./object["+(i+1)+"]/ancestor::package/@default)[last()]";
+                String nearestpackagedefaultvalue = "(./object["+(i+1)+"]/ancestor::package/@default)[last()]";
                 
-                object.packagename      = (String)xparam.xpath.evaluate(xpathxpression, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                object.packagename      = (String)xparam.xpath.evaluate(nearestpackagedefaultvalue, xparam.n0001_tagname.item(index), XPathConstants.STRING);
                 object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
 
                 objects.add(object);

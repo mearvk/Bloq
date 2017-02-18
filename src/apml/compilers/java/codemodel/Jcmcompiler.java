@@ -165,7 +165,8 @@ public class Jcmcompiler extends Stdcompiler
                    
                 jmodel = new JCodeModel();
                 jmodel._package(model.packagename)._class(model.classname);
-                jmodel.build(new File(BASEDIR+TEMPSRCDIR),System.out);
+                jmodel.build(new File(BASEDIR+TEMPSRCDIR),System.err);
+                jmodel = null;
                 
                 runtime = Runtime.getRuntime();                                                
                 runtime.exec(runme);
@@ -322,13 +323,20 @@ public class Jcmcompiler extends Stdcompiler
                                     
                     Iterator<JDefinedClass> classes = jpackage.classes();
                     
+                    String pname = jpackage.name();
+                    
                     while(classes.hasNext()) //do every class
                     {                                              
+                        String cname = classes.next().name();
+                        
                         jcmmodels.get(i).build(new File(BASEDIR+SRCDIR), System.err);           
                     }
                 }
             }
-            catch(Exception e){e.printStackTrace(System.err);}                       
+            catch(Exception e)
+            {
+                e.printStackTrace(System.err);
+            }                       
         }                
     }  
 
