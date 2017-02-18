@@ -293,11 +293,11 @@ public class Jcmcompiler extends Stdcompiler
             {
                 if(new File(Jcmcompiler.APMLOUTJAR).exists())
                 {
-                    Files.copy(new File(Jcmcompiler.APMLINJAR).toPath(),new File(Jcmcompiler.APMLOUTJAR).toPath(),REPLACE_EXISTING);
+                    Files.copy( new File(Jcmcompiler.APMLINJAR).toPath(), new File(Jcmcompiler.APMLOUTJAR).toPath(), REPLACE_EXISTING );
                 }
                 else new File(Jcmcompiler.APMLOUTJAR).mkdirs();
                 {
-                    Files.copy(new File(Jcmcompiler.APMLINJAR).toPath(),new File(Jcmcompiler.APMLOUTJAR).toPath(),REPLACE_EXISTING);                
+                    Files.copy( new File(Jcmcompiler.APMLINJAR).toPath(), new File(Jcmcompiler.APMLOUTJAR).toPath(), REPLACE_EXISTING );                
                 }
             }
             catch(Exception e){e.printStackTrace(System.err);}            
