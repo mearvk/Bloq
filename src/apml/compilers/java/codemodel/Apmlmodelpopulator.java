@@ -9,8 +9,6 @@ import apml.xpath.helpers.Xpathparameter;
 import java.io.File;
 import java.util.ArrayList;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -313,8 +311,9 @@ public final class Apmlmodelpopulator
             try{modelfile.start=this.getstarttag(xparam, index);}                               catch(Exception e){/*e.printStackTrace(System.err);*/}
             try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*e.printStackTrace(System.err);*/}                        
             try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*e.printStackTrace(System.err);*/}            
+            
             //try{modelfile.apmlimplementš=this.getimplements(xparam, index);}                  catch(Exception e){e.printStackTrace(System.err);}
-            //try{modelfile.apmllisteners=this.getlisteners(xparam, index);}                    catch(Exception e){e.printStackTrace(System.err);}
+            try{modelfile.apmllisteners=this.getlisteners(xparam, index);}                    catch(Exception e){e.printStackTrace(System.err);}
             //try{modelfile.apmlobjects=this.getobjects(xparam, index);}                        catch(Exception e){e.printStackTrace(System.err);} 
             
             modelfiles.add(modelfile);
@@ -633,25 +632,34 @@ public final class Apmlmodelpopulator
      */
     private ArrayList<Apmlimplement> getimplements(Xpathparameter xparam, Integer index)
     {
-        NodeList implementnodes = xparam.requestruntimeevaluation("//system["+(index+1)+"]/implements");
+        ArrayList<Apmlimplement> implementz = new ArrayList<>();
         
-        if(implementnodes==null || implementnodes.item(0)==null)
-            throw new NullPointerException("No object tag(s) found");                 
-        
-        ArrayList<Apmlimplement> implementz = new ArrayList<>();            
-        for(int i=0; i<implementnodes.getLength(); i++)  
+        try
         {
-            Element element = (Element)implementnodes.item(i);            
-            
-            Apmlimplement object = new Apmlimplement();            
-            
-            object.alias            = element.getAttribute("alias");
-            object.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
-            object.classname        = element.getAttribute("class");
-            object.extension        = element.getAttribute("extends");
-            object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
-                   
-            implementz.add(object);
+            NodeList nodes = (NodeList)xparam.xpath.evaluate("./implements", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
+                        
+            for(int i=0; i<nodes.getLength(); i++)  
+            {
+                Element element = (Element)nodes.item(i);            
+
+                Apmlimplement object = new Apmlimplement();            
+
+                object.alias            = element.getAttribute("alias");
+                object.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
+                object.classname        = element.getAttribute("class");
+                object.extension        = element.getAttribute("extends");
+                
+                String xpathstring = "(./implements["+(i+1)+"]/ancestor::package/@default)[last()]";
+                
+                object.packagename      = (String)xparam.xpath.evaluate(xpathstring, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
+
+                implementz.add(object);
+            }            
+        }
+        catch(Exception e)
+        {
+            //e.printStackTrace(System.err);
         }                       
         
         return implementz;
@@ -666,25 +674,34 @@ public final class Apmlmodelpopulator
      */
     private ArrayList<Apmllistener> getlisteners(Xpathparameter xparam, Integer index)
     {
-        NodeList listenernodes = xparam.requestruntimeevaluation("//system["+(index+1)+"]/listener");
+        ArrayList<Apmllistener> listeners = new ArrayList<>();
         
-        if(listenernodes==null || listenernodes.item(0)==null)
-            throw new NullPointerException("No object tag(s) found");                 
-        
-        ArrayList<Apmllistener> listeners = new ArrayList<>();            
-        for(int i=0; i<listenernodes.getLength(); i++)  
+        try
         {
-            Element element = (Element)listenernodes.item(i);            
-            
-            Apmllistener object = new Apmllistener();            
-            
-            object.alias            = element.getAttribute("alias");
-            object.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
-            object.classname        = element.getAttribute("class");
-            object.extension        = element.getAttribute("extends");
-            object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
-                   
-            listeners.add(object);
+            NodeList nodes = (NodeList)xparam.xpath.evaluate("./listener", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
+                        
+            for(int i=0; i<nodes.getLength(); i++)  
+            {
+                Element element = (Element)nodes.item(i);            
+
+                Apmllistener object = new Apmllistener();            
+
+                object.alias            = element.getAttribute("alias");
+                object.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
+                object.classname        = element.getAttribute("class");
+                object.extension        = element.getAttribute("extends");
+                
+                String xpathstring = "(./listener["+(i+1)+"]/ancestor::package/@default)[last()]";
+                
+                object.packagename      = (String)xparam.xpath.evaluate(xpathstring, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
+
+                listeners.add(object);
+            }            
+        }
+        catch(Exception e)
+        {
+            //e.printStackTrace(System.err);
         }                       
         
         return listeners;

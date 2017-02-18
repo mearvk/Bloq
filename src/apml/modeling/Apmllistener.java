@@ -18,4 +18,5 @@ public class Apmllistener
     public String classname;
     public String extension;
     public String id;    
+    public String packagename;
 }

@@ -155,7 +155,7 @@ public class Jcmcompiler extends Stdcompiler
                 String sourcepackagedir = new Filegrepper().getpackagenameaspathname(model.packagename);
                 String buildpackagedir = new Filegrepper().getpackagenameaspathname(model.packagename);
                 String pathname = new Filegrepper().getpackagenameaspathname(model.packagename)+"/";
-                String runme = "javac "+BASEDIR+TEMPSRCDIR+pathname+model.classname+".java -d "+BASEDIR+BUILDDIR;
+                String javac = "javac "+BASEDIR+TEMPSRCDIR+pathname+model.classname+".java -d "+BASEDIR+BUILDDIR;
                 
                 new File(BASEDIR+TEMPSRCDIR).mkdirs();
                 new File(BASEDIR+TEMPSRCDIR+sourcepackagedir).mkdirs();               
@@ -169,7 +169,7 @@ public class Jcmcompiler extends Stdcompiler
                 jmodel = null;
                 
                 runtime = Runtime.getRuntime();                                                
-                runtime.exec(runme);
+                runtime.exec(javac);
             }
             catch(Exception e)
             {

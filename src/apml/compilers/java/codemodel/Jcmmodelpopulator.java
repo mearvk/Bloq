@@ -122,7 +122,7 @@ public class Jcmmodelpopulator
                        
             for(int i=0; i<param.apmlmodelfile.apmlobjects.size(); i++)
             {   
-                //right here specifically we are interested in the /build .class files so we look that up explicitly for now                
+                //               
                 String classname = new Filegrepper().getclassname(param.apmlmodelfile.apmlobjects.get(i).classname);                                                             
                 String packagename = param.apmlmodelfile.apmlobjects.get(i).packagename;
                 String full = packagename+"."+classname;
@@ -147,7 +147,15 @@ public class Jcmmodelpopulator
             if(param.jcodemodel==null) 
                 throw new InvalidParameterException("JCodeModel not set; unable to set listener(s).");
             
-            //param.jpackage = param.jcodemodel._package(param.apmlmodelfile.packagename); 
+            for(int i=0; i<param.apmlmodelfile.apmllisteners.size(); i++)
+            {   
+                //
+                String classname = new Filegrepper().getclassname(param.apmlmodelfile.apmllisteners.get(i).classname);                                                             
+                String packagename = param.apmlmodelfile.apmllisteners.get(i).packagename;
+                String full = packagename+"."+classname;
+            
+                param.classfile.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d",i));
+            }
         }
         catch(Exception ex)
         {

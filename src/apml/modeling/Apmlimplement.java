@@ -18,4 +18,5 @@ public class Apmlimplement
     public String classname;
     public String extension;
     public String id;    
+    public String packagename;
 }
