@@ -2,7 +2,6 @@ package apml.compilers.java.codemodel;
 
 import apml.helpers.Filegrepper;
 import apml.modeling.Apmlmodelfile;
-import apml.modeling.Apmlobject;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
@@ -82,9 +81,9 @@ public class Jcmmodelpopulator
             //
             return jcodemodel;
         }
-        catch(Exception ex)
+        catch(Exception exception)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            
         }        
         
         throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel.");
@@ -103,9 +102,9 @@ public class Jcmmodelpopulator
 
             param.classfile.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bndi=\""+param.apmlmodelfile.bndi+"\"");                          
         }
-        catch(Exception ex)
+        catch(Exception exception)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            
         }        
     }      
     
@@ -130,9 +129,9 @@ public class Jcmmodelpopulator
                 param.classfile.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d", i));                               
             }
         }
-        catch(Exception ex)
+        catch(Exception exception)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            System.err.println(exception);
         }        
     }    
     
@@ -157,9 +156,9 @@ public class Jcmmodelpopulator
                 param.classfile.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d",i));
             }
         }
-        catch(Exception ex)
+        catch(Exception exception)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            System.err.println(exception);
         }        
     }
     
@@ -173,12 +172,12 @@ public class Jcmmodelpopulator
         {
             if(param.jcodemodel==null) 
                 throw new InvalidParameterException("JCodeModel not set; unable to set package name.");            
-
-            param.jpackage = param.jcodemodel._package(param.apmlmodelfile.defaultdir);
+            
+            param.jpackage = param.jcodemodel._package(param.apmlmodelfile.packagename);
         }
-        catch(Exception ex)
+        catch(Exception exception)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            System.err.println(exception);
         }        
     }
     
@@ -198,9 +197,9 @@ public class Jcmmodelpopulator
             
             param.classfile = param.jpackage._class(param.apmlmodelfile.classname);  
         }
-        catch(NullPointerException | InvalidParameterException | JClassAlreadyExistsException ex)
+        catch(NullPointerException | InvalidParameterException | JClassAlreadyExistsException exception)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            System.err.println(exception);
         }        
     }
     

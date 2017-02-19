@@ -7,10 +7,20 @@
     bndi:alias(process)::(proc)                                             /* process, proc equivalence established */
 }
 
+/open/networking/day/townight/processors/myproc/{unitofwork}
+
+@register
+/open/networking/day/tonight/
+
+/open/networking/day/tonight/processor/{unitwork}
+
+/open/networking/day/tonight/
+
+
 @pragma
 /processor{}                                                                /* processor branching supports /doprocess and /process functions */
 {
-    /doprocess/{parama(0..1)}                                               /* doprocess requires zero or one param */
+    /doprocess/{parama(0..1)}                                               /* doprocess requires zero or one parameters */
     /process/{parama(0..1)}             
 }
 
@@ -27,7 +37,7 @@ bndi://echoclient/network/onexit/
 }
 
 @pragma 
-bndi://echoclient/objects/processors
+bndi://echoclient/objects/processors/
 {
     bndi://processor/java:classname.doprocess(Object o);                    /* processor bindings should look like these exemplars */
     bndi://processor/java:classname.process(Object o);   

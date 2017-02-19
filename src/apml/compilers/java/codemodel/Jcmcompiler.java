@@ -165,8 +165,7 @@ public class Jcmcompiler extends Stdcompiler
                    
                 jmodel = new JCodeModel();
                 jmodel._package(model.packagename)._class(model.classname);
-                jmodel.build(new File(BASEDIR+TEMPSRCDIR),System.err);
-                jmodel = null;
+                jmodel.build(new File(BASEDIR+TEMPSRCDIR));
                 
                 runtime = Runtime.getRuntime();                                                
                 runtime.exec(javac);
