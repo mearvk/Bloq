@@ -18,12 +18,14 @@ import org.xml.sax.SAXException;
  */
 public final class Xpathparameter
 {   
+    protected final Integer hash = 0x888fe8;
+    
     public Document document;
     public File apmlfile;
     public NodeList attrs;
     public Object obj;     
     
-    public apml.helpers.parser parser;
+    public apml.helpers.Parser parser;
     
     public Long n0000_count;
     public NodeList n0001_tagname;

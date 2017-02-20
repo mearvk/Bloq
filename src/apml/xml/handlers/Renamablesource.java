@@ -8,7 +8,7 @@ import java.io.File;
  * @author Max Rupplin
  */
 public class Renamablesource extends File 
-{
+{   
     protected final Integer hash = 0x888fe8;                     
     
     public static void main(String...args)

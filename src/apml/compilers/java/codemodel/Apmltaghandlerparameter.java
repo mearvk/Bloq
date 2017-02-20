@@ -7,10 +7,12 @@ import com.sun.codemodel.JPackage;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public class Apmltaghandlerparameter
 {
+    protected final Integer hash = 0x888fe8;
+    
     JCodeModel jcodemodel;
     JDefinedClass classfile;
     JPackage jpackage; 

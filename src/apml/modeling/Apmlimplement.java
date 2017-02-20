@@ -7,10 +7,12 @@ package apml.modeling;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public class Apmlimplement 
 {
+    protected final Integer hash = 0x888fe8;
+    
     public boolean startable;
     public boolean autostartable;
     

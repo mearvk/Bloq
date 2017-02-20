@@ -6,10 +6,12 @@ import javax.xml.xpath.XPathExpression;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public class BKUPXpathbuilder 
 {
+    protected final Integer hash = 0x888fe8;
+    
     public String sexpr0;
     public String sexpr1;
     public String sexpr2;

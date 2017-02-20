@@ -13,6 +13,8 @@ import java.util.ArrayList;
  */
 public class Apmlmodelfile 
 {   
+    protected final Integer hash = 0x888fe8;
+        
     public ArrayList<String> children;
     public ArrayList<String> subscribers;
     public ArrayList<String> localinterfaces;

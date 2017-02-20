@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apml.examples.jgpserver.server;
+package apml.examples.httpserver.client;
 
 /**
  *
  * @author oem
  */
-public class jgpserver 
-{
+public class Httpclient {
     
 }

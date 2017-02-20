@@ -7,9 +7,11 @@ package apml.drivers;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public abstract class Stddriver 
 {
+    protected final Integer hash = 0x888fe8;
+        
     public abstract void drive();
 }

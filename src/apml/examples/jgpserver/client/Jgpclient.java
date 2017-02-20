@@ -7,9 +7,9 @@ package apml.examples.jgpserver.client;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
-public class jgpclient 
+public class Jgpclient 
 {
-    
+    protected final Integer hash = 0x888fe8;    
 }

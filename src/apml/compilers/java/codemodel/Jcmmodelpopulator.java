@@ -26,13 +26,17 @@ import apml.interfaces.Initializable;
  */
 public class Jcmmodelpopulator 
 {
+    protected final Integer hash = 0x888fe8;
+    
+    protected File apmlfile;    
     protected File manifestfile;
     protected File manifestdir;    
-    protected File outputdir;   
-    protected File apmlfile;
+    protected File outputdir;       
     
     protected static final String APMLIN = "/home/oem/Desktop/apml/apml/echoserver.xml";
+    
     protected static final String SOURCEOUTDIR = "/home/oem/Desktop/apml/output";
+    
     protected static final String MANIFESTDIR = "/home/oem/Desktop/apml/output/manifest";
     protected static final String MANIFESTFILE = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
     

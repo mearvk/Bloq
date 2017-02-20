@@ -18,6 +18,8 @@ import org.w3c.dom.NodeList;
  */
 public final class Apmlmodelpopulator 
 {
+    protected final Integer hash = 0x888fe8;
+        
     public ArrayList<Apmlmodelfile> apmlfiles;   
     public String defaultpackage;
     

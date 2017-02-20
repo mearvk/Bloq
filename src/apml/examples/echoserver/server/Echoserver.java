@@ -23,6 +23,8 @@ import apml.interfaces.Runnable;
  */
 public class Echoserver extends ServerSocketImpl implements Runnable, Startable
 {   
+    protected final Integer hash = 0x888fe8;
+    
     public ServerSocket serversocket;
     public Boolean running = true;
     public Integer port = 80;

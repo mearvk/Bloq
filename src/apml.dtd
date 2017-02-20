@@ -74,6 +74,7 @@
     <baby>
 
 <!-- function -->
+    <processor>
     <trim>
     <coupling>
     <barrier>
@@ -94,6 +95,14 @@
     <stop>
     <hit>
     <direction>
+
+<!-- producers -->
+    <producer>
+    <product>
+
+<!-- consumer -->
+    <consumer>
+    <consumed>
 
 <!-- listeners -->
     <event>

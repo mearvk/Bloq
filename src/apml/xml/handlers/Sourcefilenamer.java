@@ -20,7 +20,6 @@ import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.DOMException;
-import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 public class Sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass, RenamesFileByIncr, RenamesFilesByIncr, RenamesFileById, RenamesFilesById

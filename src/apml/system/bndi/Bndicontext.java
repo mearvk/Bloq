@@ -11,10 +11,12 @@ import java.util.Map;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public class Bndicontext 
 {
+    protected final Integer hash = 0x888fe8;
+    
     private final Map<String, Object> namemap = new HashMap();
     private final Map<Integer, Object> hashmap = new HashMap();
     private final Map<Object, Object> objectmap = new HashMap();    

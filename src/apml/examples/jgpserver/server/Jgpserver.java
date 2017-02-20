@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apml.examples.httpserver.client;
+package apml.examples.jgpserver.server;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
-public class httpclient {
-    
+public class Jgpserver 
+{
+    protected final Integer hash = 0x888fe8;    
 }

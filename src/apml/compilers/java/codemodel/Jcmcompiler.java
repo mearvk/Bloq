@@ -50,13 +50,12 @@ public class Jcmcompiler extends Stdcompiler
     protected static final String APMLINJAR = "/home/oem/NetBeansProjects/APML/dist/APML.jar";
     protected static final String APMLOUTJAR = "/home/oem/Desktop/apml/output/libs/APML.jar";
     protected static final String APMLIN = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";
-    //protected static final String APMLIN = "/home/oem/NetBeansProjects/APML/src/apml/examples/httpserver/server/httpserver.xml";
-    //protected static final String APMLIN = "/home/oem/NetBeansProjects/APML/src/apml/examples/jgpserver/server/jgpserver.xml";
         
     protected static final String BASEDIR = "/home/oem/Desktop/apml/output/echo/";
     protected static final String BUILDDIR = "build/";
-    protected static final String SRCDIR = "source/";
+    protected static final String SRCDIR = "source/";    
     protected static final String TEMPSRCDIR = "temp/";
+    
     protected static final String MANIFESTDIR = "manifest/";
     protected static final String MANIFESTFILE = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
     
@@ -64,10 +63,10 @@ public class Jcmcompiler extends Stdcompiler
     {                          
         try
         {
-            //
+            // [0] Please a New Instance
             Jcmcompiler compiler = new Jcmcompiler();
             
-            //
+            // [1] Please kindly do Create apml model files
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//apml");
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//dynamiclistener");
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//listener");    
@@ -75,7 +74,7 @@ public class Jcmcompiler extends Stdcompiler
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//subscriber");
             compiler.getapmlmodelfiles(compiler.apmlxmlfile, "//system");
               
-            //
+            // [2] Please kindly do Create temp. byte code for JCM finalization
             compiler.quicktobytecode(compiler.apmlmodelfiles_apml);
             compiler.quicktobytecode(compiler.apmlmodelfiles_dynamiclisteners);
             compiler.quicktobytecode(compiler.apmlmodelfiles_listeners);
@@ -83,7 +82,7 @@ public class Jcmcompiler extends Stdcompiler
             compiler.quicktobytecode(compiler.apmlmodelfiles_subscribers);
             compiler.quicktobytecode(compiler.apmlmodelfiles_systems);
             
-            //
+            // [3] Please kindly do Create Java CodeModel files for output processing
             compiler.getjavamodelfiles(compiler.apmlmodelfiles_apml, "//apml");
             compiler.getjavamodelfiles(compiler.apmlmodelfiles_dynamiclisteners, "//dynamiclistener");
             compiler.getjavamodelfiles(compiler.apmlmodelfiles_listeners, "//listener");
@@ -91,7 +90,7 @@ public class Jcmcompiler extends Stdcompiler
             compiler.getjavamodelfiles(compiler.apmlmodelfiles_subscribers, "//subscriber");
             compiler.getjavamodelfiles(compiler.apmlmodelfiles_systems, "//system");    
             
-            //
+            // [4] Please kindly do Output Java files to output folder
             compiler.compiletosource(compiler.jcmmodelfiles_apml);
             compiler.compiletosource(compiler.jcmmodelfiles_dynamiclisteners);                             
             compiler.compiletosource(compiler.jcmmodelfiles_listeners);                    
@@ -99,15 +98,15 @@ public class Jcmcompiler extends Stdcompiler
             compiler.compiletosource(compiler.jcmmodelfiles_subscribers);                    
             compiler.compiletosource(compiler.jcmmodelfiles_systems);   
                         
-            //
+            // [5] Please kindly do move Jar file to output folder
             compiler.writeapmlbackingjartodisk();
             
             //
             System.gc();
         }
-        catch(Exception ex)
+        catch(Exception e)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            
         }
     }    
     
@@ -132,14 +131,14 @@ public class Jcmcompiler extends Stdcompiler
             if(!this.apmlxmlfile.exists())
                 throw new Exception("ApmlTagHandler::constructor:Could not find the system's APML file");     
         }
-        catch(Exception ex)
+        catch(Exception e)
         {
-            Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            
         }
     }      
     
     /**
-     * Quickly make bytecode (.class) files for JCM reference in compiling final Java Source files.
+     * Quickly generate bytecode [.class] files for JCM reference in compiling final Java Source files.
      * 
      * @param apmlmodelfiles Ready, whole APML files for reference; ok, go.
      */
@@ -172,7 +171,7 @@ public class Jcmcompiler extends Stdcompiler
             }
             catch(Exception e)
             {
-                //e.printStackTrace(System.err);
+                
             }
             finally
             {
@@ -222,7 +221,7 @@ public class Jcmcompiler extends Stdcompiler
         }
         catch(Exception e)
         {
-            //e.printStackTrace(System.err);
+            
         }
         
         return apmlmodels_genericfiles;
@@ -269,7 +268,7 @@ public class Jcmcompiler extends Stdcompiler
         }
         catch(Exception e)
         {
-            e.printStackTrace(System.err);
+            
         }
         
         return jcmmodels_genericfiles;
@@ -303,7 +302,7 @@ public class Jcmcompiler extends Stdcompiler
         }
         catch(Exception e)
         {
-            e.printStackTrace(System.err);
+            
         }
     }   
         
@@ -334,7 +333,7 @@ public class Jcmcompiler extends Stdcompiler
             }
             catch(Exception e)
             {
-                e.printStackTrace(System.err);
+                
             }                       
         }                
     }  

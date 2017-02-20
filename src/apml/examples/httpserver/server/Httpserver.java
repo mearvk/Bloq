@@ -20,14 +20,14 @@ import java.net.Socket;
  *
  * @author oem
  */
-public class httpserver implements Runnable
+public class Httpserver implements Runnable
 {        
     public boolean running = true;
     public int port = 80;
     public Socket socket;
     public ServerSocket serversocket;    
     
-    public httpserver()
+    public Httpserver()
     {
         
     }

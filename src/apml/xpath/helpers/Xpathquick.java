@@ -8,8 +8,14 @@ package apml.xpath.helpers;
 import javax.xml.xpath.XPathConstants;
 import org.w3c.dom.NodeList;
 
+/**
+ * 
+ * @author Max Rupplin
+ */
 public class Xpathquick
 {  
+    protected final Integer hash = 0x888fe8;
+    
     /**
      * 
      * @param param

@@ -10,10 +10,12 @@ import java.util.Observer;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public class Apmlsubscriber implements Observer
 {
+    protected final Integer hash = 0x888fe8;
+        
     @Override
     public void update(Observable o, Object o1) 
     {

@@ -7,9 +7,9 @@ package apml.modeling;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public class Apmltaginterface 
 {
-    
+    protected final Integer hash = 0x888fe8;    
 }

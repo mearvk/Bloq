@@ -4,10 +4,12 @@ import java.io.File;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public class Filegrepper 
 {
+    protected final Integer hash = 0x888fe8;
+    
     public String getpackagename(String fullURL) throws Exception
     {
         if(fullURL.replace(".java","").contains(".")) //e.g. abc.def.ghi.Classname.java returns abc.def.ghi

@@ -9,9 +9,9 @@ import java.util.Map;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public abstract class ApmlMap implements Map
 {
-    
+    protected final Integer hash = 0x888fe8;    
 }

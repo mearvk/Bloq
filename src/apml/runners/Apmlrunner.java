@@ -25,6 +25,8 @@ import org.xml.sax.SAXException;
  */
 public final class Apmlrunner 
 {
+    protected final Integer hash = 0x888fe8;
+        
     public Stdcompiler compiler;
     public Stddriver driver;
         

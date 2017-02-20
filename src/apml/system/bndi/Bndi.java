@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Bloq native directory interface (BNDI)
+ * Bloq Native Directory Interface (BNDI)
  * 
  * @see http://github.com/mearvk/Bloq/wiki
  * @version 1.00
@@ -12,6 +12,8 @@ import java.util.Map;
  */
 public class Bndi 
 {
+    protected final Integer hash = 0x888fe8;
+        
     public static Map<String, Bndicontext> contexts = new HashMap();
     
     public static void main(String[] args)

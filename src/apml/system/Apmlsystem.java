@@ -17,6 +17,8 @@ import java.util.logging.Logger;
  */
 public class Apmlsystem implements Runnable
 {
+    protected final Integer hash = 0x888fe8;
+        
     public Map properties = new HashMap();
     
     public static String CLASSPATHS = "/r/null"; //todo fix me plz
