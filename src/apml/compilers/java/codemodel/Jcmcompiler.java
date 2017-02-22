@@ -87,6 +87,10 @@ public class Jcmcompiler extends Stdcompiler
     //
     public Jcmcompiler()
     {
+        this.files = new Jcmfilehelper();
+        this.apmlmodels = new Apmlmodelfiles();
+        this.jcmmodels = new Jcmmodelfiles();
+        
         try
         {
             this.files.sourcedir = new File(files.basedirurl+files.srcdirurl);            

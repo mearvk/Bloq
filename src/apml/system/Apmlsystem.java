@@ -21,10 +21,10 @@ public class Apmlsystem implements Runnable
         
     public Map properties = new HashMap();
     
-    public static String CLASSPATHS = "/r/null"; //todo fix me plz
-    public static Boolean LOADJNDI = true;
-    public static Boolean LOADSUBSYSTEMS = true;
-    public static Boolean DISPLAYLOADING = true;
+    public static String classpaths = "/r/null"; //todo fix me plz
+    public static Boolean loadbndi = true;
+    public static Boolean loadsubsystems = true;
+    public static Boolean displayloading = true;
     
     public void run()
     {
@@ -38,16 +38,16 @@ public class Apmlsystem implements Runnable
         
     }
     
-    public void setProperty(Object object, Object state) throws Exception
+    public void setproperty(Object object, Object state) throws Exception
     {
-        Object certain = this.getProperty(object);
+        Object certain = this.getproperty(object);
         
         if(certain==null) throw new Exception("System property ["+object+"] was not found; returning");
         
         this.properties.put(object, state);
     }
     
-    public Object getProperty(Object object)
+    public Object getproperty(Object object)
     {
         return this.properties.get(object);
     }
@@ -59,7 +59,7 @@ public class Apmlsystem implements Runnable
         return null;
     }
     
-    public static Object notifyAll(ArrayList<Apmlsubscriber> subscriber, ActionEvent ae)
+    public static Object notifyall(ArrayList<Apmlsubscriber> subscriber, ActionEvent ae)
     {
         return null;
     }     
@@ -69,9 +69,9 @@ public class Apmlsystem implements Runnable
         return null;
     }
     
-    public static Object notifyAll(ArrayList<Apmlsubscriber> subscriber, String string)
+    public static Object notifyall(ArrayList<Apmlsubscriber> subscriber, String string)
     {
-        return null;
+        return null; //sridhar narayan; clayton ferner phd(s) *grep hug uncw&*
     }    
     
     public static Object mountListener()
