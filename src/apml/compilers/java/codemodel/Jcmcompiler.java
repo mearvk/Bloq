@@ -88,9 +88,9 @@ public class Jcmcompiler extends Stdcompiler
             if(!this.files.sourcedir.exists())
                 this.files.sourcedir.mkdirs();  
             
-            this.files.sourcedir = new File(files.basedirurl+files.builddirurl);            
-            if(!this.files.sourcedir.exists())
-                this.files.sourcedir.mkdirs();            
+            this.files.builddir = new File(files.basedirurl+files.builddirurl);            
+            if(!this.files.builddir.exists())
+                this.files.builddir.mkdirs();            
             
             this.files.manifestfiledir = new File(files.basedirurl+files.manifestdirurl);            
             if(!this.files.manifestfiledir.exists())
@@ -102,7 +102,7 @@ public class Jcmcompiler extends Stdcompiler
         }
         catch(Exception e)
         {
-            
+            //
         }
     }          
     

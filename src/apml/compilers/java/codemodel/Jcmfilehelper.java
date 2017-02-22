@@ -16,17 +16,18 @@ public class Jcmfilehelper
     public File manifestfile;
     public File manifestfiledir;    
     public File sourcedir;   
+    public File builddir;
     public File apmlxmlinputfile;
     
-    public static final String apmlinjarurl = "/home/oem/NetBeansProjects/APML/dist/APML.jar";
-    public static final String apmloutjarurl = "/home/oem/Desktop/apml/output/libs/APML.jar";
-    public static final String apmlinurl = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";
+    public final String apmlinjarurl = "/home/oem/NetBeansProjects/APML/dist/APML.jar";
+    public final String apmloutjarurl = "/home/oem/Desktop/apml/output/libs/APML.jar";
+    public final String apmlinurl = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";
     
-    public static final String basedirurl = "/home/oem/Desktop/apml/output/echo/";
-    public static final String builddirurl = "build/";
-    public static final String srcdirurl = "source/";    
-    public static final String tempsrcdirurl = "temp/";
+    public final String basedirurl = "/home/oem/Desktop/apml/output/echo/";
+    public final String builddirurl = "build/";
+    public final String srcdirurl = "source/";    
+    public final String tempsrcdirurl = "temp/";
     
-    public static final String manifestdirurl = "manifest/";
-    public static final String manifestfileurl = "/home/oem/Desktop/apml/output/manifest/manifest.txt";    
+    public final String manifestdirurl = "manifest/";
+    public final String manifestfileurl = "/home/oem/Desktop/apml/output/manifest/manifest.txt";    
 }
