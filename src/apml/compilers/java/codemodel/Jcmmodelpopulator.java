@@ -33,16 +33,14 @@ public class Jcmmodelpopulator
     protected File manifestdir;    
     protected File outputdir;       
     
-    protected static final String APMLIN = "/home/oem/Desktop/apml/apml/echoserver.xml";
-    
-    protected static final String SOURCEOUTDIR = "/home/oem/Desktop/apml/output";
-    
+    protected static final String APMLIN = "/home/oem/Desktop/apml/apml/echoserver.xml";   
+    protected static final String SOURCEOUTDIR = "/home/oem/Desktop/apml/output";    
     protected static final String MANIFESTDIR = "/home/oem/Desktop/apml/output/manifest";
     protected static final String MANIFESTFILE = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
     
    /**
      * Makes the source file for output
-     * 
+     *      
      * @param sourcefile
      * @param apmlmodelfile
      * @return
@@ -52,7 +50,7 @@ public class Jcmmodelpopulator
     {       
         JCodeModel jcodemodel = new JCodeModel();                
         
-        try
+        try            
         {
             Apmltaghandlerparameter param;
             JDefinedClass classfile=null;
@@ -61,26 +59,47 @@ public class Jcmmodelpopulator
             param = new Apmltaghandlerparameter(jcodemodel,jpackage,classfile,apmlmodelfile);
             
             //         
-            try{this.jcmpackagename(param);}        catch(Exception e){/*e.printStackTrace(System.err);*/}
-            try{this.jcmclassname(param);}          catch(Exception e){/*e.printStackTrace(System.err);*/}            
-            try{this.jcmextends(param);}            catch(Exception e){/*e.printStackTrace(System.err);*/}
-            try{this.jcmimplements(param);}         catch(Exception e){/*e.printStackTrace(System.err);*/}
-            try{this.jcmbndi(param);}               catch(Exception e){/*e.printStackTrace(System.err);*/}
+            try{this.jcmpackagename(param);}        
+                catch(Exception e){}
             
-            //
-            try{this.jcmautostarttag(param);}       catch(Exception e){/*e.printStackTrace(System.err);*/}
-            try{this.jcminittag(param);}            catch(Exception e){/*e.printStackTrace(System.err);*/} 
-            try{this.jcmruntag(param);}             catch(Exception e){/*e.printStackTrace(System.err);*/}
-            try{this.jcmstarttag(param);}           catch(Exception e){/*e.printStackTrace(System.err);*/}                         
+            try{this.jcmclassname(param);}          
+                catch(Exception e){}            
             
-            //
-            try{this.jcmlisteners(param);}          catch(Exception e){/*e.printStackTrace(System.err);*/}
-            try{this.jcmobjects(param);}            catch(Exception e){/*e.printStackTrace(System.err);*/}
+            try{this.jcmextends(param);}            
+                catch(Exception e){}
             
-            //
-            try{this.addinterfacemethods(param);}   catch(Exception e){/*e.printStackTrace(System.err);*/}
-            try{this.addsuperclassmethods(param);}  catch(Exception e){/*e.printStackTrace(System.err);*/}
-            try{this.addtagmethods(param);}         catch(Exception e){/*e.printStackTrace(System.err);*/}                                     
+            try{this.jcmimplements(param);}         
+                catch(Exception e){}
+            
+            try{this.jcmbndi(param);}               
+                catch(Exception e){}
+            
+            try{this.jcmautostarttag(param);}       
+                catch(Exception e){}
+            
+            try{this.jcminittag(param);}            
+                catch(Exception e){} 
+            
+            try{this.jcmruntag(param);}             
+                catch(Exception e){}
+            
+            try{this.jcmstarttag(param);}           
+                catch(Exception e){}                         
+            
+            try{this.jcmlisteners(param);}          
+                catch(Exception e){}
+            
+            try{this.jcmobjects(param);}            
+                catch(Exception e){}
+            
+            try{this.addinterfacemethods(param);}   
+                catch(Exception e){}
+            
+            try{this.addsuperclassmethods(param);}  
+                catch(Exception e){}
+            
+            try{this.addtagmethods(param);}         
+                catch(Exception e){}                                     
             
             //
             return jcodemodel;
@@ -135,7 +154,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            
         }        
     }    
     
@@ -162,7 +181,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            
         }        
     }
     
@@ -181,7 +200,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            
         }        
     }
     
@@ -203,7 +222,7 @@ public class Jcmmodelpopulator
         }
         catch(NullPointerException | InvalidParameterException | JClassAlreadyExistsException exception)
         {
-            System.err.println(exception);
+            
         }        
     }
     
@@ -225,7 +244,7 @@ public class Jcmmodelpopulator
         }
         catch(NullPointerException | InvalidParameterException | ClassNotFoundException ex)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            
         }        
     }
     
@@ -236,30 +255,30 @@ public class Jcmmodelpopulator
      */
     private void jcmimplements(Apmltaghandlerparameter param)
     {      
-            try
+        try
+        {
+            if(param.classfile==null) 
+                throw new InvalidParameterException("Classfile not set; unable to set interfaces for Class.");
+                
+            if(param.apmlmodelfile.implementors==null || param.apmlmodelfile.implementors.length==0)
+                throw new InvalidParameterException("No interfaces found with param.apmlmodelfile.apml_implements.");
+                
+            for(String implments : param.apmlmodelfile.implementors)        
             {
-                if(param.classfile==null) 
-                    throw new InvalidParameterException("Classfile not set; unable to set interfaces for Class.");
-                
-                if(param.apmlmodelfile.implementors==null || param.apmlmodelfile.implementors.length==0)
-                    throw new InvalidParameterException("No interfaces found with param.apmlmodelfile.apml_implements.");
-                
-                for(String implments : param.apmlmodelfile.implementors)        
+                try
                 {
-                    try
-                    {
-                        param.classfile = param.classfile._implements(Class.forName(implments));
-                    }
-                    catch(ClassNotFoundException ex)
-                    {
-                        Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-                    }
+                    param.classfile = param.classfile._implements(Class.forName(implments));
+                }
+                catch(ClassNotFoundException ex)
+                {
+                    Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
                 }
             }
-            catch(NullPointerException | InvalidParameterException ex)
-            {
-                //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            }        
+        }
+        catch(NullPointerException | InvalidParameterException ex)
+        {
+                
+        }        
     }
     
     /**
@@ -281,7 +300,7 @@ public class Jcmmodelpopulator
             }
             catch(Exception ex)
             {
-                //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+                
             }          
     }
     
@@ -304,7 +323,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception ex)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            
         }           
     }
     
@@ -363,13 +382,13 @@ public class Jcmmodelpopulator
                 }
                 catch(ClassNotFoundException ex)
                 {
-                    //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+                    
                 }
             }                 
         }
         catch(InvalidParameterException | NullPointerException | SecurityException ex)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            
         }        
     }
     
@@ -391,7 +410,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception ex)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            
         }         
     }
     
@@ -413,7 +432,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception ex)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            
         }         
     }
 
@@ -465,12 +484,12 @@ public class Jcmmodelpopulator
         }
         catch(InvalidParameterException | NullPointerException | ClassNotFoundException | SecurityException ex)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            
         }        
     }
     
     /**
-     * Parse apml for tags (init, start, run, autostart, etc.) and put this data into JCodeModel form for output
+     * Parse xmlapml for apmlmodels (init, start, run, autostart, etc.) and put this data into JCodeModel form for output
      * 
      * @param param Contains model information from APML parsing 
      */
@@ -525,7 +544,7 @@ public class Jcmmodelpopulator
         }
         catch(InvalidParameterException | NullPointerException | ClassNotFoundException | SecurityException ex)
         {
-            //Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            
         }         
     }            
     
@@ -546,7 +565,7 @@ public class Jcmmodelpopulator
             }
             catch(Exception e)
             {
-                //e.printStackTrace(System.err);
+                
             }
         }              
         
