@@ -35,6 +35,11 @@ public class Jcmcompiler extends Stdcompiler
             // [0] Please a New Instance
             Jcmcompiler compiler = new Jcmcompiler();
             
+            //compiler.generateapmlmodelfiles();
+            //compiler.quicktobytecode();
+            //compiler.generatejavamodelfiles();
+            //compiler.compiletosource();
+                    
             // [1] Please kindly do Create apml model files
             compiler.generateapmlmodelfiles(compiler.files.apmlxmlinputfile, "//apml");
             compiler.generateapmlmodelfiles(compiler.files.apmlxmlinputfile, "//dynamiclistener");
