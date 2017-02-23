@@ -26,9 +26,13 @@ public class Echoserver extends ServerSocketImpl implements Runnable, Startable
     protected final Integer hash = 0x888fe8;
     
     public ServerSocket serversocket;
+    
     public Boolean running = true;
+    
     public Integer port = 80;
+    
     public Socket socket;        
+    
     public String line;
     
     public Echoserver()
@@ -156,7 +160,7 @@ class EchoServerOnConnectListener implements ActionListener
    @Override
     public void actionPerformed(ActionEvent ae) 
     {
-        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getSubscribers("echoserver/onconnect");
+        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/onconnect");
         
         for(Apmlsubscriber s : subscribers)
         {
@@ -175,7 +179,7 @@ class EchoServerOnExitListener implements Actionlistener, ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) 
     {
-        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getSubscribers("echoserver/onexit");
+        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/onexit");
         
         for(Apmlsubscriber s : subscribers)
         {
@@ -190,7 +194,7 @@ class EchoServerOnReadListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) 
     {
-        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getSubscribers("echoserver/onread");
+        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/onread");
         
         for(Apmlsubscriber s : subscribers)
         {
@@ -204,7 +208,7 @@ class EchoServerOnReceiptListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) 
     {
-        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getSubscribers("echoserver/onreceipt");
+        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/onreceipt");
         
         for(Apmlsubscriber s : subscribers)
         {
@@ -218,7 +222,7 @@ class EchoServerOnDispatchListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) 
     {
-        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getSubscribers("echoserver/ondispatch");
+        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/ondispatch");
         
         for(Apmlsubscriber s : subscribers)
         {

@@ -3,17 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apml.drivers;
+package apml.compilers.java.roaster;
 
 /**
  *
- * @author Max Rupplin
+ * @author oem
  */
-public abstract class Stddriver 
+public class Stdroastercompiler 
 {
-    protected final Integer hash = 0x888fe8;
-        
-    public abstract void drive();
     
-    public abstract void init();
 }

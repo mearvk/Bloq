@@ -1,6 +1,7 @@
 package apml.system;
 
 import apml.compilers.java.codemodel.Jcmcompiler;
+import apml.drivers.Stddriver;
 import apml.subscribers.Apmlsubscriber;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -21,6 +22,9 @@ public class Apmlsystem implements Runnable
         
     public Map properties = new HashMap();
     
+    public ArrayList<Stdsystem> systems;
+    public Stddriver driver;    
+    
     public static String[] classes = {"/r/null"}; //todo fix me plz
     public static Boolean loadbndi = true;
     public static Boolean loadsubsystems = true;
@@ -29,12 +33,53 @@ public class Apmlsystem implements Runnable
     
     public void run()
     {
+        for(Stdsystem system: this.systems)
+        {
+            system.run();
+        }   
+    }  
+    
+    public void start()
+    {
+        this.init();        
         
-    }    
+        for(Stdsystem system: this.systems)
+        {
+            system.init();
+        }
+                
+        
+        this.start();        
+        
+        for(Stdsystem system: this.systems)
+        {
+            system.start();
+        }       
+    }
     
     public void put(Object object)
     {
         
+    }
+    
+    public void init()
+    {
+        
+        //read properties file
+        
+        //read classes in from classpath
+        
+        //wire classes into system
+        
+        //wire classes into each other [where appropriate]
+        
+        //call driver.init
+        
+        //driver calls to init on subsystem(s)
+        
+        //driver calls to start on subsystems(s)
+        
+        //driver calls run on Apmlsystem
     }
     
     public void loadclasses(String classes)

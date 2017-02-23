@@ -29,93 +29,73 @@ public class Jcmmodelpopulator
     protected final Integer hash = 0x888fe8;
     
     protected File apmlfile;    
+    
     protected File manifestfile;
+    
     protected File manifestdir;    
+    
     protected File outputdir;       
     
     protected static final String APMLIN = "/home/oem/Desktop/apml/apml/echoserver.xml";   
+    
     protected static final String SOURCEOUTDIR = "/home/oem/Desktop/apml/output";    
+    
     protected static final String MANIFESTDIR = "/home/oem/Desktop/apml/output/manifest";
+    
     protected static final String MANIFESTFILE = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
     
-   /**
-     * Makes the source file for output
-     *      
-     * @param sourcefile
-     * @param apmlmodelfile
-     * @return
-     * @throws Exception 
-     */
     private JCodeModel makeindividualjcodemodelinstance(Apmlmodelfile apmlmodelfile) throws Exception
     {       
         JCodeModel jcodemodel = new JCodeModel();                
         
         try            
         {
-            Apmltaghandlerparameter param;
+            Apmltaghandlerparameter param=null;
+            
             JDefinedClass classfile=null;
+            
             JPackage jpackage=null;            
             
             param = new Apmltaghandlerparameter(jcodemodel,jpackage,classfile,apmlmodelfile);
             
-            //         
-            try{this.jcmpackagename(param);}        
-                catch(Exception e){}
+            try{this.jcmpackagename(param);}        catch(Exception e){}
             
-            try{this.jcmclassname(param);}          
-                catch(Exception e){}            
+            try{this.jcmclassname(param);}          catch(Exception e){}            
             
-            try{this.jcmextends(param);}            
-                catch(Exception e){}
+            try{this.jcmextends(param);}            catch(Exception e){}
             
-            try{this.jcmimplements(param);}         
-                catch(Exception e){}
+            try{this.jcmimplements(param);}         catch(Exception e){}
             
-            try{this.jcmbndi(param);}               
-                catch(Exception e){}
+            try{this.jcmbndi(param);}               catch(Exception e){}
             
-            try{this.jcmautostarttag(param);}       
-                catch(Exception e){}
+            try{this.jcmautostarttag(param);}       catch(Exception e){}
             
-            try{this.jcminittag(param);}            
-                catch(Exception e){} 
+            try{this.jcminittag(param);}            catch(Exception e){} 
             
-            try{this.jcmruntag(param);}             
-                catch(Exception e){}
+            try{this.jcmruntag(param);}             catch(Exception e){}
             
-            try{this.jcmstarttag(param);}           
-                catch(Exception e){}                         
+            try{this.jcmstarttag(param);}           catch(Exception e){}                         
             
-            try{this.jcmlisteners(param);}          
-                catch(Exception e){}
+            try{this.jcmlisteners(param);}          catch(Exception e){}
             
-            try{this.jcmobjects(param);}            
-                catch(Exception e){}
+            try{this.jcmobjects(param);}            catch(Exception e){}
             
-            try{this.addinterfacemethods(param);}   
-                catch(Exception e){}
+            try{this.addinterfacemethods(param);}   catch(Exception e){}
             
-            try{this.addsuperclassmethods(param);}  
-                catch(Exception e){}
+            try{this.addsuperclassmethods(param);}  catch(Exception e){}
             
-            try{this.addtagmethods(param);}         
-                catch(Exception e){}                                     
+            try{this.addtagmethods(param);}         catch(Exception e){}                                     
             
-            //
             return jcodemodel;
         }
         catch(Exception exception)
         {
-            
+            System.err.println(exception);
         }        
         
         throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel.");
     }  
     
-    /**
-     * 
-     * @param param 
-     */
     private void jcmbndi(Apmltaghandlerparameter param)
     {
         try
@@ -127,14 +107,10 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            
+            System.err.println(exception);
         }        
     }      
     
-    /**
-     * 
-     * @param param 
-     */
     private void jcmobjects(Apmltaghandlerparameter param)
     {
         try
@@ -154,14 +130,10 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            
+            System.err.println(exception);
         }        
     }    
     
-    /**
-     * 
-     * @param param 
-     */
     private void jcmlisteners(Apmltaghandlerparameter param)
     {
         try
@@ -181,14 +153,10 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            
+            System.err.println(exception);
         }        
     }
     
-    /**
-     * 
-     * @param param 
-     */
     private void jcmpackagename(Apmltaghandlerparameter param)
     {
         try
@@ -200,14 +168,10 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            
+            System.err.println(exception); 
         }        
     }
     
-    /**
-     * 
-     * @param param 
-     */
     private void jcmclassname(Apmltaghandlerparameter param)
     {
         try
@@ -222,14 +186,10 @@ public class Jcmmodelpopulator
         }
         catch(NullPointerException | InvalidParameterException | JClassAlreadyExistsException exception)
         {
-            
+            System.err.println(exception);
         }        
     }
-    
-    /**
-     * 
-     * @param param 
-     */
+
     private void jcmextends(Apmltaghandlerparameter param)
     {
         try
@@ -242,17 +202,12 @@ public class Jcmmodelpopulator
                
             param.classfile = param.classfile._extends(Class.forName(param.apmlmodelfile.superclass));      
         }
-        catch(NullPointerException | InvalidParameterException | ClassNotFoundException ex)
+        catch(NullPointerException | InvalidParameterException | ClassNotFoundException exception)
         {
-            
+            System.err.println(exception);
         }        
     }
     
-    /**
-     * Intend here to add class definition id est Class1 implements Interface1 but not the associated stub methods
-     * 
-     * @param param 
-     */
     private void jcmimplements(Apmltaghandlerparameter param)
     {      
         try
@@ -275,39 +230,31 @@ public class Jcmmodelpopulator
                 }
             }
         }
-        catch(NullPointerException | InvalidParameterException ex)
+        catch(NullPointerException | InvalidParameterException exception)
         {
-                
+            System.err.println(exception); 
         }        
     }
     
-    /**
-     * 
-     * @param param 
-     */
     private void jcmruntag(Apmltaghandlerparameter param)
     {
-            try
-            {
-                if(param.classfile==null) 
-                    throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");
+        try
+        {
+            if(param.classfile==null) 
+                throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");
                 
-                if(param.apmlmodelfile.run==null)
-                    throw new InvalidParameterException("Run or runnable not set; unable to comply.");
+            if(param.apmlmodelfile.run==null)
+                throw new InvalidParameterException("Run or runnable not set; unable to comply.");
                 
-                if(param.apmlmodelfile.run.equalsIgnoreCase("true"))                    
-                    param.classfile = param.classfile._implements(Runnable.class);
-            }
-            catch(Exception ex)
-            {
-                
-            }          
+            if(param.apmlmodelfile.run.equalsIgnoreCase("true"))                    
+                param.classfile = param.classfile._implements(Runnable.class);
+        }
+        catch(Exception exception)
+        {
+            System.err.println(exception);
+        }          
     }
     
-    /**
-     * 
-     * @param param 
-     */
     private void jcmstarttag(Apmltaghandlerparameter param)
     {          
         try
@@ -321,16 +268,12 @@ public class Jcmmodelpopulator
             if(param.apmlmodelfile.start.equalsIgnoreCase("true"))
                 param.classfile = param.classfile._implements(Startable.class);
         }
-        catch(Exception ex)
+        catch(Exception exception)
         {
-            
+            System.err.println(exception);
         }           
     }
     
-    /**
-     * 
-     * @param param 
-     */
     private void addinterfacemethods(Apmltaghandlerparameter param)
     {
         try
@@ -380,9 +323,9 @@ public class Jcmmodelpopulator
                         }                
                     }
                 }
-                catch(ClassNotFoundException ex)
+                catch(ClassNotFoundException exception)
                 {
-                    
+                    System.err.println(exception);
                 }
             }                 
         }
@@ -392,10 +335,6 @@ public class Jcmmodelpopulator
         }        
     }
     
-    /**
-     * 
-     * @param param 
-     */
     private void jcmautostarttag(Apmltaghandlerparameter param)
     {
         try
@@ -408,16 +347,12 @@ public class Jcmmodelpopulator
             
             param.classfile = param.classfile._implements(Autostartable.class);
         }
-        catch(Exception ex)
+        catch(Exception exception)
         {
-            
+            System.err.println(exception);
         }         
     }
     
-    /**
-     * 
-     * @param param 
-     */
     private void jcminittag(Apmltaghandlerparameter param)
     {        
         try
@@ -436,11 +371,6 @@ public class Jcmmodelpopulator
         }         
     }
 
-    /**
-     * 
-     * 
-     * @param param 
-     */
     private void addsuperclassmethods(Apmltaghandlerparameter param)
     {        
         try
@@ -488,11 +418,6 @@ public class Jcmmodelpopulator
         }        
     }
     
-    /**
-     * Parse xmlapml for apmlmodels (init, start, run, autostart, etc.) and put this data into JCodeModel form for output
-     * 
-     * @param param Contains model information from APML parsing 
-     */
     private void addtagmethods(Apmltaghandlerparameter param)
     {
         try
@@ -548,11 +473,6 @@ public class Jcmmodelpopulator
         }         
     }            
     
-    /**
-     * 
-     * @param apmlmodels
-     * @return Returns JCodeModel array from Apmlmodelfile conversion process
-     */
     public ArrayList<JCodeModel> getjcmmodelfiles(ArrayList<Apmlmodelfile> apmlmodels)
     {
         ArrayList<JCodeModel> jcmmodels = new ArrayList();

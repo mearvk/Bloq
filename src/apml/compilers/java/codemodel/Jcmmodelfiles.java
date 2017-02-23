@@ -14,11 +14,17 @@ import java.util.ArrayList;
  */
 public class Jcmmodelfiles
 {
-    public ArrayList<JCodeModel> apml;    
+    public ArrayList<JCodeModel> apml;  
+    
     public ArrayList<JCodeModel> definitions;
+    
     public ArrayList<JCodeModel> dynamiclisteners;
+    
     public ArrayList<JCodeModel> listeners;
+    
     public ArrayList<JCodeModel> objects;
+    
     public ArrayList<JCodeModel> subscribers;
+    
     public ArrayList<JCodeModel> systems;
 }

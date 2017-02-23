@@ -14,15 +14,21 @@ public class Apmltaghandlerparameter
     protected final Integer hash = 0x888fe8;
     
     JCodeModel jcodemodel;
+    
     JDefinedClass classfile;
+    
     JPackage jpackage; 
+    
     Apmlmodelfile apmlmodelfile;
             
     public Apmltaghandlerparameter(JCodeModel jcodemodel, JPackage jpackage, JDefinedClass classfile, Apmlmodelfile apmlmodelfile)
     {
         this.jcodemodel = jcodemodel;
+        
         this.classfile = classfile;
+        
         this.jpackage = jpackage;
+        
         this.apmlmodelfile = apmlmodelfile;
     }            
 }

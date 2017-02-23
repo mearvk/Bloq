@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apml.compilers.java.roaster;
+package apml.system;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
-public class stdroastercompiler 
+public abstract class Stdsystem 
 {
+    public abstract void init();
     
+    public abstract void start();
+    
+    public abstract void run();
 }

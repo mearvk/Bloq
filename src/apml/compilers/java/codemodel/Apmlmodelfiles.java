@@ -14,11 +14,17 @@ import java.util.ArrayList;
  */
 public class Apmlmodelfiles
 {
-    public ArrayList<Apmlmodelfile> apml;    
+    public ArrayList<Apmlmodelfile> apml;  
+    
     public ArrayList<Apmlmodelfile> definitions;
+    
     public ArrayList<Apmlmodelfile> dynamiclisteners;
+    
     public ArrayList<Apmlmodelfile> listeners;
+    
     public ArrayList<Apmlmodelfile> objects;
+    
     public ArrayList<Apmlmodelfile> subscribers;
+    
     public ArrayList<Apmlmodelfile> systems;
 }
