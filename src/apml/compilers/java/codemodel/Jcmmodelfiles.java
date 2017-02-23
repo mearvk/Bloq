@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Max Rupplin
  */
-public class Jcmmodelfiles extends ArrayList
+public class Jcmmodelfiles
 {
     public ArrayList<JCodeModel> apml;    
     public ArrayList<JCodeModel> definitions;

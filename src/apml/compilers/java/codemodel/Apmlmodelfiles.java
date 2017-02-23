@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Max Rupplin
  */
-public class Apmlmodelfiles extends ArrayList
+public class Apmlmodelfiles
 {
     public ArrayList<Apmlmodelfile> apml;    
     public ArrayList<Apmlmodelfile> definitions;

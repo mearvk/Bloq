@@ -27,39 +27,23 @@ public final class Apmlmodelpopulator
     {                          
         try
         {     
-            //
+            //todo: fill please
             Apmlmodelpopulator populator = new Apmlmodelpopulator();
             
-            //
             File apmlfile = new File("");
                         
-            //
-            populator.getapmlmodelfiles(apmlfile,"//apml");
-            
-            //
-            populator.getapmlmodelfiles(apmlfile,"//definitions");
-            
-            //
-            populator.getapmlmodelfiles(apmlfile,"//dynamiclistener"); 
-            
-            //
+            populator.getapmlmodelfiles(apmlfile,"//apml");            
+            populator.getapmlmodelfiles(apmlfile,"//definitions");            
+            populator.getapmlmodelfiles(apmlfile,"//dynamiclistener");             
             populator.getapmlmodelfiles(apmlfile,"//listener");
-
-            //
-            populator.getapmlmodelfiles(apmlfile,"//subscriber");            
-            
-            //          
-            populator.getapmlmodelfiles(apmlfile,"//system");   
-            
-            //         
-            populator.getapmlmodelfiles(apmlfile,"//driver");   
-            
-            //            
+            populator.getapmlmodelfiles(apmlfile,"//subscriber");                        
+            populator.getapmlmodelfiles(apmlfile,"//system");               
+            populator.getapmlmodelfiles(apmlfile,"//driver");               
             populator.getapmlmodelfiles(apmlfile,"//compiler");  
         }
-        catch(Exception ex)
+        catch(Exception exception)
         {
-            //ex.printStackTrace(System.err);
+            
         }
     }       
     
@@ -312,8 +296,7 @@ public final class Apmlmodelpopulator
             try{modelfile.run=this.getruntag(xparam, index);}                                   catch(Exception e){/*e.printStackTrace(System.err);*/}
             try{modelfile.start=this.getstarttag(xparam, index);}                               catch(Exception e){/*e.printStackTrace(System.err);*/}
             try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*e.printStackTrace(System.err);*/}                        
-            try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*e.printStackTrace(System.err);*/}            
-            
+            try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*e.printStackTrace(System.err);*/}                        
             //try{modelfile.apmlimplementš=this.getimplements(xparam, index);}                  catch(Exception e){e.printStackTrace(System.err);}
             try{modelfile.apmllisteners=this.getlisteners(xparam, index);}                    catch(Exception e){e.printStackTrace(System.err);}
             //try{modelfile.apmlobjects=this.getobjects(xparam, index);}                        catch(Exception e){e.printStackTrace(System.err);} 

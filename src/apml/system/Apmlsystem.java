@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author Max Rupplin
  * @version 1.00
- * @see http://github.com/Bloq
+ * @see http://github.com/mearvk/Bloq
  */
 public class Apmlsystem implements Runnable
 {
@@ -21,21 +21,37 @@ public class Apmlsystem implements Runnable
         
     public Map properties = new HashMap();
     
-    public static String classpaths = "/r/null"; //todo fix me plz
+    public static String[] classes = {"/r/null"}; //todo fix me plz
     public static Boolean loadbndi = true;
     public static Boolean loadsubsystems = true;
     public static Boolean displayloading = true;
+    public static Map map = null;
     
     public void run()
     {
-        //do init
-        //do std actions
-        //quit
+        
     }    
     
     public void put(Object object)
     {
         
+    }
+    
+    public void loadclasses(String classes)
+    {
+        
+    }
+    
+    public void loadclasses()
+    {       
+        try
+        {
+            ClassLoader.getSystemClassLoader().loadClass("org.test.fixmeplz.Classname");
+        }        
+        catch(Exception exception)
+        {
+            
+        }         
     }
     
     public void setproperty(Object object, Object state) throws Exception
@@ -50,9 +66,7 @@ public class Apmlsystem implements Runnable
     public Object getproperty(Object object)
     {
         return this.properties.get(object);
-    }
-    
-    public static Map map = null;
+    }    
     
     public static Object notify(Apmlsubscriber subscriber, ActionEvent ae)
     {
@@ -74,67 +88,67 @@ public class Apmlsystem implements Runnable
         return null; //sridhar narayan; clayton ferner phd(s) *grep hug uncw&*
     }    
     
-    public static Object mountListener()
+    public static Object mountlistener()
     {
         return null;
     }
     
-    public static Object mountListeners()
+    public static Object mountlisteners()
     {
         return null;
     }    
     
-    public static Object unmountListener()
+    public static Object unmountlistener()
     {
         return null;
     }    
    
-    public static Object unmountListeners()
+    public static Object unmountlisteners()
     {
         return null;
     }  
     
-    public static Object mountSubscriber()
+    public static Object mountsubscriber()
     {
         return null;
     }
     
-    public static Object mountSubscribers()
+    public static Object mountsubscribers()
     {
         return null;
     }    
     
-    public static Object unmountSubscriber()
+    public static Object unmountsubscriber()
     {
         return null;
     }    
    
-    public static Object unmountSubscribers()
+    public static Object unmountsubscribers()
     {
         return null;
     }    
     
-    public static Object getListener()
+    public static Object getlistener()
     {
         return null;
     }
     
-    public static Object getListeners()
+    public static Object getlisteners()
     {
         return null;
     }    
     
-    public static Object getSubscriber()
+    public static Object getsubscriber()
     {
         return null;
     }    
    
-    public static ArrayList<Apmlsubscriber> getSubscribers(String unique)
+    public static ArrayList<Apmlsubscriber> getsubscribers(String unique)
     {
         return null;
     }    
     
-    public static Object doInstantiation(Class c)
+    public static Object doinstantiation(Class c)
     {
         try
         {
@@ -148,12 +162,12 @@ public class Apmlsystem implements Runnable
         return null;
     }
     
-    public static void doPutElementsOnStartup(Map map)
+    public static void doputelementsonstartup(Map map)
     {
         Apmlsystem.map.putAll(map);        
     }
     
-    public static void doPutElementsOnStartup(String[] names, Object[] objects)
+    public static void doputelementsonstartup(String[] names, Object[] objects)
     {
         for(int i=0;i<names.length;i++)
         {
@@ -161,12 +175,12 @@ public class Apmlsystem implements Runnable
         }
     }    
     
-    public static Map doGetElements()
+    public static Map dogetelements()
     {
         return Apmlsystem.map;
     }    
     
-    public static Object doGetElement(Object o)
+    public static Object dogetelement(Object o)
     {
         return Apmlsystem.map.get(o);
     }

@@ -8,10 +8,10 @@ import apml.modeling.Apmlmodelfile;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JPackage;
-import java.io.File;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.io.File;
 
 /**
  * 
