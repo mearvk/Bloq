@@ -7,7 +7,7 @@ package apml.compilers.java.ast;
 
 /**
  *
- * @author oem
+ * @author max rupplin
  */
 public class Bloqapmlmanager 
 {
