@@ -13,9 +13,5 @@ import apml.compilers.Stdabstractcompiler;
  */
 public class Objectiveccompiler extends Stdabstractcompiler 
 {
-    @Override
-    public void compiletosource() 
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }    
+  
 }
