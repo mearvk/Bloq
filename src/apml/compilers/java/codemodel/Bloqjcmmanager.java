@@ -14,17 +14,17 @@ import java.util.ArrayList;
  */
 public class Bloqjcmmanager
 {
-    public ArrayList<JCodeModel> apml;  
+    public ArrayList<JCodeModel> apmlmodels;  
     
-    public ArrayList<JCodeModel> definitions;
+    public ArrayList<JCodeModel> definitionmodels;
     
-    public ArrayList<JCodeModel> dynamiclisteners;
+    public ArrayList<JCodeModel> dynamiclistenermodels;
     
-    public ArrayList<JCodeModel> listeners;
+    public ArrayList<JCodeModel> listenermodels;
     
-    public ArrayList<JCodeModel> objects;
+    public ArrayList<JCodeModel> objectmodels;
     
-    public ArrayList<JCodeModel> subscribers;
+    public ArrayList<JCodeModel> subscribermodels;
     
-    public ArrayList<JCodeModel> systems;
+    public ArrayList<JCodeModel> systemmodels;
 }

@@ -34,15 +34,15 @@ public class Jcmcompiler extends Stdcompiler
         {
             Jcmcompiler bloqcompiler = new Jcmcompiler();
             
-            bloqcompiler.setapmlfiles(bloqcompiler.fileguardian.apmlxmlinputfile);
+            bloqcompiler.setapmlfiles(bloqcompiler.fileguardian);
             
-            bloqcompiler.settempfiles(bloqcompiler);
+            bloqcompiler.settempfiles(bloqcompiler.bloqapmlmanager);
             
-            bloqcompiler.setjcmfiles(bloqcompiler);         
+            bloqcompiler.setjcmfiles(bloqcompiler.bloqapmlmanager);         
             
-            bloqcompiler.setsourcefiles(bloqcompiler);
+            bloqcompiler.setsourcefiles(bloqcompiler.bloqjcmmanager);
             
-            bloqcompiler.setmovejarfile();
+            bloqcompiler.setjarfile();
             
             System.gc();
         }
@@ -82,21 +82,21 @@ public class Jcmcompiler extends Stdcompiler
         }
     }          
     
-    public void settempfiles(Jcmcompiler compiler)
+    public void settempfiles(Bloqapmlmanager bloqapmlmanager)
     {
         try
         {
-            compiler.quicktobytecode(compiler.bloqapmlmanager.apmlmodels);
+            this.quicktobytecode(bloqapmlmanager.apmlmodels);
             
-            compiler.quicktobytecode(compiler.bloqapmlmanager.dynamiclistenermodels);
+            this.quicktobytecode(bloqapmlmanager.dynamiclistenermodels);
             
-            compiler.quicktobytecode(compiler.bloqapmlmanager.listenermodels);
+            this.quicktobytecode(bloqapmlmanager.listenermodels);
             
-            compiler.quicktobytecode(compiler.bloqapmlmanager.objectmodels);
+            this.quicktobytecode(bloqapmlmanager.objectmodels);
             
-            compiler.quicktobytecode(compiler.bloqapmlmanager.subscribermodels);
+            this.quicktobytecode(bloqapmlmanager.subscribermodels);
             
-            compiler.quicktobytecode(compiler.bloqapmlmanager.systemmodels);
+            this.quicktobytecode(bloqapmlmanager.systemmodels);
         }
         catch(Exception exception)
         {
@@ -104,21 +104,21 @@ public class Jcmcompiler extends Stdcompiler
         }
     }
     
-    public void setapmlfiles(File apmlxmlinputfile)
+    public void setapmlfiles(Bloqfileguardian fileguardian)
     {
         try
         {
-            this.generateapmlmodelfiles(apmlxmlinputfile, "//apml");
+            this.generateapmlmodelfiles(fileguardian.apmlxmlinputfile, "//apml");
             
-            this.generateapmlmodelfiles(apmlxmlinputfile, "//dynamiclistener");
+            this.generateapmlmodelfiles(fileguardian.apmlxmlinputfile, "//dynamiclistener");
             
-            this.generateapmlmodelfiles(apmlxmlinputfile, "//listener");    
+            this.generateapmlmodelfiles(fileguardian.apmlxmlinputfile, "//listener");    
             
-            this.generateapmlmodelfiles(apmlxmlinputfile, "//object");   
+            this.generateapmlmodelfiles(fileguardian.apmlxmlinputfile, "//object");   
             
-            this.generateapmlmodelfiles(apmlxmlinputfile, "//subscriber");
+            this.generateapmlmodelfiles(fileguardian.apmlxmlinputfile, "//subscriber");
             
-            this.generateapmlmodelfiles(apmlxmlinputfile, "//system");        
+            this.generateapmlmodelfiles(fileguardian.apmlxmlinputfile, "//system");        
         }
         catch(Exception exception)
         {
@@ -126,21 +126,21 @@ public class Jcmcompiler extends Stdcompiler
         }
     }    
     
-    public void setjcmfiles(Jcmcompiler compiler)
-    {
+    public void setjcmfiles(Bloqapmlmanager bloqapmlmanager)
+    {        
         try
-        {
-            compiler.generatejavamodelfiles(compiler.bloqapmlmanager.apmlmodels, "//apml");
+        {                        
+            this.generatejavamodelfiles(bloqapmlmanager.apmlmodels, "//apml");
             
-            compiler.generatejavamodelfiles(compiler.bloqapmlmanager.dynamiclistenermodels, "//dynamiclistener");
+            this.generatejavamodelfiles(bloqapmlmanager.dynamiclistenermodels, "//dynamiclistener");
             
-            compiler.generatejavamodelfiles(compiler.bloqapmlmanager.listenermodels, "//listener");
+            this.generatejavamodelfiles(bloqapmlmanager.listenermodels, "//listener");
             
-            compiler.generatejavamodelfiles(compiler.bloqapmlmanager.objectmodels, "//object");
+            this.generatejavamodelfiles(bloqapmlmanager.objectmodels, "//object");
             
-            compiler.generatejavamodelfiles(compiler.bloqapmlmanager.subscribermodels, "//subscriber");
+            this.generatejavamodelfiles(bloqapmlmanager.subscribermodels, "//subscriber");
             
-            compiler.generatejavamodelfiles(compiler.bloqapmlmanager.systemmodels, "//system");         
+            this.generatejavamodelfiles(bloqapmlmanager.systemmodels, "//system");         
         }
         catch(Exception exception)
         {
@@ -237,19 +237,19 @@ public class Jcmcompiler extends Stdcompiler
         {
             switch(apmltag)
             {
-                case "//apml": this.bloqjcmmanager.apml = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
+                case "//apml": this.bloqjcmmanager.apmlmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
                     
-                case "//definitions": this.bloqjcmmanager.definitions = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
+                case "//definitions": this.bloqjcmmanager.definitionmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
                     
-                case "//dynamiclistener": this.bloqjcmmanager.dynamiclisteners = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
+                case "//dynamiclistener": this.bloqjcmmanager.dynamiclistenermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
                     
-                case "//listener": this.bloqjcmmanager.listeners = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;   
+                case "//listener": this.bloqjcmmanager.listenermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;   
                     
-                case "//object": this.bloqjcmmanager.objects = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                     
+                case "//object": this.bloqjcmmanager.objectmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                     
                     
-                case "//subscriber": this.bloqjcmmanager.subscribers = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
+                case "//subscriber": this.bloqjcmmanager.subscribermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
                     
-                case "//system": this.bloqjcmmanager.systems = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
+                case "//system": this.bloqjcmmanager.systemmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
             }                     
         }
         catch(Exception exception)
@@ -260,23 +260,23 @@ public class Jcmcompiler extends Stdcompiler
         return jcmmodels_genericfiles;
     }    
     
-    public void writeallsourcetodisk()
+    public void dowritesourcetoharddrive()
     {
         try
         {
-            this.compiletosource(this.bloqjcmmanager.apml);
+            this.dosetfinalsource(this.bloqjcmmanager.apmlmodels);
             
-            this.compiletosource(this.bloqjcmmanager.definitions);
+            this.dosetfinalsource(this.bloqjcmmanager.definitionmodels);
             
-            this.compiletosource(this.bloqjcmmanager.dynamiclisteners);            
+            this.dosetfinalsource(this.bloqjcmmanager.dynamiclistenermodels);            
             
-            this.compiletosource(this.bloqjcmmanager.listeners);
+            this.dosetfinalsource(this.bloqjcmmanager.listenermodels);
             
-            this.compiletosource(this.bloqjcmmanager.objects);
+            this.dosetfinalsource(this.bloqjcmmanager.objectmodels);
             
-            this.compiletosource(this.bloqjcmmanager.subscribers);
+            this.dosetfinalsource(this.bloqjcmmanager.subscribermodels);
             
-            this.compiletosource(this.bloqjcmmanager.systems);
+            this.dosetfinalsource(this.bloqjcmmanager.systemmodels);
             
             try
             {
@@ -300,22 +300,22 @@ public class Jcmcompiler extends Stdcompiler
         }
     }   
     
-    public void setsourcefiles(Jcmcompiler compiler)
+    public void setsourcefiles(Bloqjcmmanager bloqjcmmanager)
     {
-        compiler.compiletosource(compiler.bloqjcmmanager.apml);
+        dosetfinalsource(bloqjcmmanager.apmlmodels);
         
-        compiler.compiletosource(compiler.bloqjcmmanager.dynamiclisteners);                             
+        dosetfinalsource(bloqjcmmanager.dynamiclistenermodels);                             
         
-        compiler.compiletosource(compiler.bloqjcmmanager.listeners);                    
+        dosetfinalsource(bloqjcmmanager.listenermodels);                    
         
-        compiler.compiletosource(compiler.bloqjcmmanager.objects);
+        dosetfinalsource(bloqjcmmanager.objectmodels);
         
-        compiler.compiletosource(compiler.bloqjcmmanager.subscribers);                    
+        dosetfinalsource(bloqjcmmanager.subscribermodels);                    
         
-        compiler.compiletosource(compiler.bloqjcmmanager.systems);           
+        dosetfinalsource(bloqjcmmanager.systemmodels);           
     }
         
-    public void compiletosource(ArrayList<JCodeModel> jcmmodels)
+    public void dosetfinalsource(ArrayList<JCodeModel> jcmmodels)
     {        
         for(int i=0; i<jcmmodels.size(); i++)
         {
@@ -346,7 +346,7 @@ public class Jcmcompiler extends Stdcompiler
         }                
     }  
  
-    public void setmovejarfile() throws Exception
+    public void setjarfile() throws Exception
     {
         if(new File(fileguardian.apmloutjarurl).exists())
         {
