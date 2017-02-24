@@ -5,13 +5,13 @@
  */
 package apml.compilers.fortran;
 
-import apml.compilers.Stdcompiler;
+import apml.compilers.Stdabstractcompiler;
 
 /**
  *
  * @author oem
  */
-public class Fortrancompiler extends Stdcompiler 
+public class Fortrancompiler extends Stdabstractcompiler 
 {
     @Override
     public void compiletosource() 

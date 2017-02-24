@@ -1,10 +1,12 @@
 package apml.compilers.c;
 
+import apml.compilers.Bloqabstractfileguardian;
+
 /**
  *
- * @author oem
+ * @author max rupplin
  */
-public class Bloqfileguardian 
+public class Bloqfileguardian extends Bloqabstractfileguardian
 {
     
 }

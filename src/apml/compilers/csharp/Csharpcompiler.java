@@ -5,13 +5,13 @@
  */
 package apml.compilers.csharp;
 
-import apml.compilers.Stdcompiler;
+import apml.compilers.Stdabstractcompiler;
 
 /**
  *
  * @author oem
  */
-public class Csharpcompiler extends Stdcompiler 
+public class Csharpcompiler extends Stdabstractcompiler 
 {
     @Override
     public void compiletosource() 

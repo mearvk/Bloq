@@ -1,7 +1,7 @@
 package apml.compilers.java.codemodel;
 
 import static java.nio.file.StandardCopyOption.*;
-import apml.compilers.Stdcompiler;
+import apml.compilers.Stdabstractcompiler;
 import apml.helpers.Filegrepper;
 import apml.modeling.Apmlmodelfile;
 import com.sun.codemodel.JCodeModel;
@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  * 
  * @author max rupplin
  */
-public class Codemodelcompiler extends Stdcompiler
+public class Codemodelcompiler extends Stdabstractcompiler
 {        
     protected final Integer hash = 0x888fe8;
        

@@ -5,13 +5,13 @@
  */
 package apml.compilers.objectivec;
 
-import apml.compilers.Stdcompiler;
+import apml.compilers.Stdabstractcompiler;
 
 /**
  *
  * @author oem
  */
-public class Objectiveccompiler extends Stdcompiler 
+public class Objectiveccompiler extends Stdabstractcompiler 
 {
     @Override
     public void compiletosource() 

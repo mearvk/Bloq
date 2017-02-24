@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apml.compilers.c;
-
-import apml.compilers.Bloqabstractapmlmanager;
+package apml.compilers;
 
 /**
  *
- * @author max rupplin
+ * @author oem
  */
-public class Bloqapmlmanager extends Bloqabstractapmlmanager
+public abstract class Bloqabstractapmlmanager 
 {
     
 }

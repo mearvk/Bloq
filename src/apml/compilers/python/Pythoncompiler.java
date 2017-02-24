@@ -5,13 +5,13 @@
  */
 package apml.compilers.python;
 
-import apml.compilers.Stdcompiler;
+import apml.compilers.Stdabstractcompiler;
 
 /**
  *
  * @author oem
  */
-public class Pythoncompiler extends Stdcompiler 
+public class Pythoncompiler extends Stdabstractcompiler 
 {
     @Override
     public void compiletosource() 

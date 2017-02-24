@@ -1,6 +1,6 @@
 package apml.runners;
 
-import apml.compilers.Stdcompiler;
+import apml.compilers.Stdabstractcompiler;
 import apml.drivers.Stddriver;
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,7 +27,7 @@ public final class Apmlrunner
 {
     protected final Integer hash = 0x888fe8;
         
-    public Stdcompiler compiler;
+    public Stdabstractcompiler compiler;
     public Stddriver driver;
         
     public File apmlfile;
@@ -64,7 +64,7 @@ public final class Apmlrunner
         this.driver = driver;
     }
     
-    public void setcompiler(Stdcompiler compiler)
+    public void setcompiler(Stdabstractcompiler compiler)
     {
         this.compiler = compiler;
     }

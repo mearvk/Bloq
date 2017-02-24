@@ -5,10 +5,13 @@
  */
 package apml.compilers.c;
 
+import apml.compilers.Bloqabstractoutputmanager;
+
 /**
  *
- * @author oem
+ * @author max rupplin
  */
-public class Bloqcmanager {
+public class Bloqcmanager extends Bloqabstractoutputmanager
+{
     
 }
