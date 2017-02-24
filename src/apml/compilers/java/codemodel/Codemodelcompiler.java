@@ -233,7 +233,7 @@ public class Codemodelcompiler extends Stdcompiler
     
     public ArrayList<JCodeModel> generatejavamodelfiles(ArrayList<Apmlmodelfile> apmlmodelfiles, String apmltag)
     {
-        Jcmmodelpopulator jcmmodelpopulator = new Jcmmodelpopulator();
+        Codemodelpopulator jcmmodelpopulator = new Codemodelpopulator();
         ArrayList<JCodeModel> jcmmodels_genericfiles = null;
                 
         try

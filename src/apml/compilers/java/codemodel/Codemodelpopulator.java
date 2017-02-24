@@ -28,7 +28,7 @@ import java.util.logging.Logger;
  *
  * @author max rupplin
  */
-public class Jcmmodelpopulator 
+public class Codemodelpopulator 
 {
     private final Integer hash = 0x888fe8;   
     
@@ -40,7 +40,7 @@ public class Jcmmodelpopulator
     
     public File outputdir;       
     
-    public Logger logger = Logger.getLogger(Jcmmodelpopulator.class.getName());       
+    public Logger logger = Logger.getLogger(Codemodelpopulator.class.getName());       
     
     public String apmlinurl = "/home/oem/Desktop/apml/apml/echoserver.xml";   
     
@@ -50,7 +50,7 @@ public class Jcmmodelpopulator
     
     public String manifestfileurl = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
     
-    public Jcmmodelpopulator()
+    public Codemodelpopulator()
     {
         try
         {

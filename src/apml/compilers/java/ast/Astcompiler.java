@@ -1,64 +1,66 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package apml.compilers.java.ast;
 
-/*
+import apml.compilers.java.codemodel.Bloqapmlmanager;
+import apml.compilers.java.codemodel.Bloqfileguardian;
 
-import org.eclipse.jdt.core.dom.AST;
-import org.eclipse.jdt.core.dom.Block;
-import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.ExpressionStatement;
-import org.eclipse.jdt.core.dom.ImportDeclaration;
-import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.MethodInvocation;
-import org.eclipse.jdt.core.dom.PackageDeclaration;
-import org.eclipse.jdt.core.dom.TypeDeclaration;
-import org.eclipse.jdt.core.dom.TypeParameter;
-*/
 /**
- *
- * @author oem
+ * 
+ * @author max rupplin
  */
-
-/*
-public class StdAstCompiler 
+public class Astcompiler 
 {
+    public Bloqapmlmanager apmlmanager = new Bloqapmlmanager(); 
+    
+    public Bloqastmanager astmanager = new Bloqastmanager();
+    
+    public Bloqfileguardian fileguardian = new Bloqfileguardian();    
+    
     public static void main(String[] args)
     {
-        CompilationUnit cu = ast.newCompilationUnit();
-        cu.
-
-        PackageDeclaration p1 = ast.newPackageDeclaration();
-        p1.setName(ast.newSimpleName("foo"));
-        cu.setPackage(p1);
-
-        ImportDeclaration id = ast.newImportDeclaration();
-        id.setName(ast.newName(new String[] { "java", "util", "Set" }));
-        cu.imports().add(id);
-
-        TypeDeclaration td = ast.newTypeDeclaration();
-        td.setName(ast.newSimpleName("Foo"));
-        TypeParameter tp = ast.newTypeParameter();
-        tp.setName(ast.newSimpleName("X"));
-        td.typeParameters().add(tp);
-        cu.types().add(td);
-
-        MethodDeclaration md = ast.newMethodDeclaration();
-        td.bodyDeclarations().add(md);
-
-        Block block = ast.newBlock();
-        md.setBody(block);
-
-        MethodInvocation mi = ast.newMethodInvocation();
-        mi.setName(ast.newSimpleName("x"));
-
-        ExpressionStatement e = ast.newExpressionStatement(mi);
-        block.statements().add(e);
-
-        System.out.println(cu);        
+        try
+        {
+            Astcompiler bloqcompiler = new Astcompiler();
+            
+            bloqcompiler.setapmlfiles(bloqcompiler.fileguardian);
+            
+            bloqcompiler.settempfiles(bloqcompiler.apmlmanager);
+            
+            bloqcompiler.setastfiles(bloqcompiler.apmlmanager);         
+            
+            bloqcompiler.setsourcefiles(bloqcompiler.astmanager);
+            
+            bloqcompiler.setjarfile();
+            
+            System.gc();
+        }
+        catch(Exception exception)
+        {
+            System.err.println(exception);
+        }        
+    }
+    
+    public void setapmlfiles(Bloqfileguardian fileguardian)
+    {
+        
+    }
+    
+    public void settempfiles(Bloqapmlmanager apmlmanager)
+    {
+        
+    }
+    
+    public void setastfiles(Bloqapmlmanager apmlmanager)
+    {
+        
+    }
+    
+    public void setsourcefiles(Bloqastmanager astmanager)
+    {
+        
+    }
+    
+    public void setjarfile()
+    {
+        
     }
 }
-*/
