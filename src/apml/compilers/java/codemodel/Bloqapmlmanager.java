@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Max Rupplin
+ * @author max rupplin
  */
 public class Bloqapmlmanager
 {    

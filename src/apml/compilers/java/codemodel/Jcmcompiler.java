@@ -15,16 +15,19 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * 
+ * @author max rupplin
+ */
 public class Jcmcompiler extends Stdcompiler
 {        
     protected final Integer hash = 0x888fe8;
        
-    protected static final Logger LOGGER = Logger.getLogger(Jcmcompiler.class.getName());    
+    protected Logger logger = Logger.getLogger(Jcmcompiler.class.getName());    
     
-    public Bloqapmlmanager bloqapmlmanager = new Bloqapmlmanager(); 
+    public Bloqapmlmanager apmlmanager = new Bloqapmlmanager(); 
     
-    public Bloqjcmmanager bloqjcmmanager = new Bloqjcmmanager();
+    public Bloqjcmmanager jcmmanager = new Bloqjcmmanager();
     
     public Bloqfileguardian fileguardian = new Bloqfileguardian();
     
@@ -36,11 +39,11 @@ public class Jcmcompiler extends Stdcompiler
             
             bloqcompiler.setapmlfiles(bloqcompiler.fileguardian);
             
-            bloqcompiler.settempfiles(bloqcompiler.bloqapmlmanager);
+            bloqcompiler.settempfiles(bloqcompiler.apmlmanager);
             
-            bloqcompiler.setjcmfiles(bloqcompiler.bloqapmlmanager);         
+            bloqcompiler.setjcmfiles(bloqcompiler.apmlmanager);         
             
-            bloqcompiler.setsourcefiles(bloqcompiler.bloqjcmmanager);
+            bloqcompiler.setsourcefiles(bloqcompiler.jcmmanager);
             
             bloqcompiler.setjarfile();
             
@@ -56,9 +59,9 @@ public class Jcmcompiler extends Stdcompiler
     {                        
         try
         {
-            LOGGER.addHandler(new FileHandler("/home/oem/Desktop/apml/output/logging/Jcmcompiler.txt"));
+            logger.addHandler(new FileHandler("/home/oem/Desktop/apml/output/logging/Jcmcompiler.txt"));
             
-            LOGGER.setUseParentHandlers(false);
+            logger.setUseParentHandlers(false);
             
             this.fileguardian.sourceoutdir                      = new File(fileguardian.basedirurl+fileguardian.srcdirurl);     
             
@@ -100,7 +103,7 @@ public class Jcmcompiler extends Stdcompiler
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }
     }
     
@@ -122,7 +125,7 @@ public class Jcmcompiler extends Stdcompiler
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }
     }    
     
@@ -144,7 +147,7 @@ public class Jcmcompiler extends Stdcompiler
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }
     }
     
@@ -186,7 +189,7 @@ public class Jcmcompiler extends Stdcompiler
             }
             catch(Exception exception)
             {
-                LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+                logger.log(Level.WARNING, exception.getMessage(), exception);
             }
             finally
             {
@@ -205,24 +208,24 @@ public class Jcmcompiler extends Stdcompiler
         {
             switch(apmltag)
             {                    
-                case "//apml": this.bloqapmlmanager.apmlmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
+                case "//apml": this.apmlmanager.apmlmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
                 
-                case "//definitions": this.bloqapmlmanager.definitionmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
+                case "//definitions": this.apmlmanager.definitionmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
                 
-                case "//dynamiclistener": this.bloqapmlmanager.dynamiclistenermodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
+                case "//dynamiclistener": this.apmlmanager.dynamiclistenermodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
                 
-                case "//listener": this.bloqapmlmanager.listenermodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
+                case "//listener": this.apmlmanager.listenermodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
                 
-                case "//object": this.bloqapmlmanager.objectmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
+                case "//object": this.apmlmanager.objectmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
                 
-                case "//subscriber": this.bloqapmlmanager.subscribermodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
+                case "//subscriber": this.apmlmanager.subscribermodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
                 
-                case "//system": this.bloqapmlmanager.systemmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
+                case "//system": this.apmlmanager.systemmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
             }            
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }
         
         return apmlmodelfiles;
@@ -237,24 +240,24 @@ public class Jcmcompiler extends Stdcompiler
         {
             switch(apmltag)
             {
-                case "//apml": this.bloqjcmmanager.apmlmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
+                case "//apml": this.jcmmanager.apmlmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
                     
-                case "//definitions": this.bloqjcmmanager.definitionmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
+                case "//definitions": this.jcmmanager.definitionmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
                     
-                case "//dynamiclistener": this.bloqjcmmanager.dynamiclistenermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
+                case "//dynamiclistener": this.jcmmanager.dynamiclistenermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
                     
-                case "//listener": this.bloqjcmmanager.listenermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;   
+                case "//listener": this.jcmmanager.listenermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;   
                     
-                case "//object": this.bloqjcmmanager.objectmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                     
+                case "//object": this.jcmmanager.objectmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                     
                     
-                case "//subscriber": this.bloqjcmmanager.subscribermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
+                case "//subscriber": this.jcmmanager.subscribermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
                     
-                case "//system": this.bloqjcmmanager.systemmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
+                case "//system": this.jcmmanager.systemmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
             }                     
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }
         
         return jcmmodels_genericfiles;
@@ -264,19 +267,19 @@ public class Jcmcompiler extends Stdcompiler
     {
         try
         {
-            this.dosetfinalsource(this.bloqjcmmanager.apmlmodels);
+            this.dosetfinalsource(this.jcmmanager.apmlmodels);
             
-            this.dosetfinalsource(this.bloqjcmmanager.definitionmodels);
+            this.dosetfinalsource(this.jcmmanager.definitionmodels);
             
-            this.dosetfinalsource(this.bloqjcmmanager.dynamiclistenermodels);            
+            this.dosetfinalsource(this.jcmmanager.dynamiclistenermodels);            
             
-            this.dosetfinalsource(this.bloqjcmmanager.listenermodels);
+            this.dosetfinalsource(this.jcmmanager.listenermodels);
             
-            this.dosetfinalsource(this.bloqjcmmanager.objectmodels);
+            this.dosetfinalsource(this.jcmmanager.objectmodels);
             
-            this.dosetfinalsource(this.bloqjcmmanager.subscribermodels);
+            this.dosetfinalsource(this.jcmmanager.subscribermodels);
             
-            this.dosetfinalsource(this.bloqjcmmanager.systemmodels);
+            this.dosetfinalsource(this.jcmmanager.systemmodels);
             
             try
             {
@@ -291,7 +294,7 @@ public class Jcmcompiler extends Stdcompiler
             }
             catch(Exception exception)
             {
-                LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+                logger.log(Level.WARNING, exception.getMessage(), exception);
             }            
         }
         catch(Exception exception)
@@ -341,7 +344,7 @@ public class Jcmcompiler extends Stdcompiler
             }
             catch(Exception exception)
             {
-                LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+                logger.log(Level.WARNING, exception.getMessage(), exception);
             }                       
         }                
     }  

@@ -7,7 +7,7 @@ import com.sun.codemodel.JPackage;
 
 /**
  *
- * @author Max Rupplin
+ * @author max rupplin
  */
 public class Apmltaghandlerparameter
 {

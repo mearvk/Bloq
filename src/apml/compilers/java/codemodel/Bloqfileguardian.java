@@ -9,7 +9,7 @@ import java.io.File;
 
 /**
  *
- * @author Max Rupplin
+ * @author max rupplin
  */
 public class Bloqfileguardian 
 {

@@ -1,6 +1,5 @@
 package apml.compilers.java.codemodel;
 
-import static apml.compilers.java.codemodel.Apmlmodelpopulator.LOGGER;
 import apml.interfaces.Startable;
 import apml.interfaces.Autostartable;
 import apml.interfaces.Initializable;
@@ -15,6 +14,7 @@ import com.sun.codemodel.JPackage;
 import com.sun.codemodel.JClass;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.security.InvalidParameterException;
@@ -26,41 +26,41 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Max Rupplin
+ * @author max rupplin
  */
 public class Jcmmodelpopulator 
 {
-    protected final Integer hash = 0x888fe8;   
+    private final Integer hash = 0x888fe8;   
     
-    protected File apmlfile;    
+    public File apmlfile;    
     
-    protected File manifestfile;
+    public File manifestfile;
     
-    protected File manifestdir;    
+    public File manifestdir;    
     
-    protected File outputdir;       
+    public File outputdir;       
     
-    protected static final Logger LOGGER = Logger.getLogger(Jcmmodelpopulator.class.getName());       
+    public Logger logger = Logger.getLogger(Jcmmodelpopulator.class.getName());       
     
-    protected static final String APMLIN = "/home/oem/Desktop/apml/apml/echoserver.xml";   
+    public String apmlinurl = "/home/oem/Desktop/apml/apml/echoserver.xml";   
     
-    protected static final String SOURCEOUTDIR = "/home/oem/Desktop/apml/output";    
+    public String sourceoutdirurl = "/home/oem/Desktop/apml/output";    
     
-    protected static final String MANIFESTDIR = "/home/oem/Desktop/apml/output/manifest";
+    public String manfiestdirurl = "/home/oem/Desktop/apml/output/manifest";
     
-    protected static final String MANIFESTFILE = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
+    public String manifestfileurl = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
     
     public Jcmmodelpopulator()
     {
         try
         {
-            LOGGER.addHandler(new FileHandler("/home/oem/Desktop/apml/output/logging/Jcmmodelpopulator.txt"));
+            logger.addHandler(new FileHandler("/home/oem/Desktop/apml/output/logging/Jcmmodelpopulator.txt"));
             
-            LOGGER.setUseParentHandlers(false);
+            logger.setUseParentHandlers(false);
         }
-        catch(Exception exception)
+        catch(IOException | SecurityException exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }
     }            
     
@@ -76,39 +76,39 @@ public class Jcmmodelpopulator
             
             Apmltaghandlerparameter param = new Apmltaghandlerparameter(jcodemodel,jpackage,classfile,apmlmodelfile);
             
-            try{this.jcmpackagename(param);}        catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmpackagename(param);}        catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);}
             
-            try{this.jcmclassname(param);}          catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}            
+            try{this.jcmclassname(param);}          catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);}            
             
-            try{this.jcmextends(param);}            catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmextends(param);}            catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);}
             
-            try{this.jcmimplements(param);}         catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmimplements(param);}         catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);}
             
-            try{this.jcmbndi(param);}               catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmbndi(param);}               catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);}
             
-            try{this.jcmautostarttag(param);}       catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmautostarttag(param);}       catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);}
             
-            try{this.jcminittag(param);}            catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);} 
+            try{this.jcminittag(param);}            catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);} 
             
-            try{this.jcmruntag(param);}             catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmruntag(param);}             catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);}
             
-            try{this.jcmstarttag(param);}           catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}                         
+            try{this.jcmstarttag(param);}           catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);}                         
             
-            try{this.jcmlisteners(param);}          catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmlisteners(param);}          catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);}
             
-            try{this.jcmobjects(param);}            catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmobjects(param);}            catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);}
             
-            try{this.addinterfacemethods(param);}   catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.addinterfacemethods(param);}   catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);}
             
-            try{this.addsuperclassmethods(param);}  catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.addsuperclassmethods(param);}  catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);}
             
-            try{this.addtagmethods(param);}         catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}                                     
+            try{this.addtagmethods(param);}         catch(Exception exception){logger.log(Level.WARNING, exception.getMessage(), exception);}                                     
             
             return jcodemodel;
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }        
         
         throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel.");
@@ -125,7 +125,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }        
     }      
     
@@ -149,7 +149,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }        
     }    
     
@@ -173,7 +173,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }        
     }
     
@@ -188,7 +188,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }        
     }
     
@@ -206,7 +206,7 @@ public class Jcmmodelpopulator
         }
         catch(NullPointerException | InvalidParameterException | JClassAlreadyExistsException exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }        
     }
 
@@ -224,7 +224,7 @@ public class Jcmmodelpopulator
         }
         catch(NullPointerException | InvalidParameterException | ClassNotFoundException exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }        
     }
     
@@ -252,7 +252,7 @@ public class Jcmmodelpopulator
         }
         catch(NullPointerException | InvalidParameterException exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }        
     }
     
@@ -271,7 +271,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }          
     }
     
@@ -290,7 +290,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }           
     }
     
@@ -344,13 +344,13 @@ public class Jcmmodelpopulator
                 }
                 catch(ClassNotFoundException exception)
                 {
-                    LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+                    logger.log(Level.WARNING, exception.getMessage(), exception);
                 }
             }                 
         }
         catch(InvalidParameterException | NullPointerException | SecurityException exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }        
     }
     
@@ -368,7 +368,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }         
     }
     
@@ -386,7 +386,7 @@ public class Jcmmodelpopulator
         }
         catch(Exception exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }         
     }
 
@@ -414,26 +414,24 @@ public class Jcmmodelpopulator
                     case Modifier.PROTECTED:
                         param.classfile.method(JMod.PROTECTED, method.getReturnType(), method.getName());    
                         break;
-                        
-                        
+                                                
                     case Modifier.NATIVE:                    
                         param.classfile.method(JMod.NATIVE, method.getReturnType(), method.getName());                        
-                        break;
-                        
+                        break;                        
                        
                     case Modifier.PRIVATE:                            
                         param.classfile.method(JMod.PRIVATE, method.getReturnType(), method.getName());                            
                         break;
                         
-                        default:
-                            param.classfile.method(JMod.NONE, method.getReturnType(), method.getName());
-                            break;
+                    default:
+                        param.classfile.method(JMod.NONE, method.getReturnType(), method.getName());
+                        break;
                     }
             }                 
         }
         catch(InvalidParameterException | NullPointerException | ClassNotFoundException | SecurityException exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }        
     }
     
@@ -487,7 +485,7 @@ public class Jcmmodelpopulator
         }
         catch(InvalidParameterException | NullPointerException | ClassNotFoundException | SecurityException exception)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            logger.log(Level.WARNING, exception.getMessage(), exception);
         }         
     }            
     
@@ -503,7 +501,7 @@ public class Jcmmodelpopulator
             }
             catch(Exception exception)
             {
-                LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+                logger.log(Level.WARNING, exception.getMessage(), exception);
             }
         }              
         

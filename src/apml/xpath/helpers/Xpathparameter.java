@@ -12,6 +12,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author max rupplin
+ */
 public final class Xpathparameter
 {   
     protected final Integer hash = 0x888fe8;
