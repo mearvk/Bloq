@@ -11,12 +11,16 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.File;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 
 public class Jcmcompiler extends Stdcompiler
 {        
     protected final Integer hash = 0x888fe8;
        
+    protected static final Logger logger = Logger.getLogger(Jcmcompiler.class.getName());    
+    
     public Apmlmodelfiles apmlmodels = new Apmlmodelfiles(); 
     
     public Jcmmodelfiles jcmmodels = new Jcmmodelfiles();
@@ -48,9 +52,11 @@ public class Jcmcompiler extends Stdcompiler
     }
     
     public Jcmcompiler()
-    {        
+    {                        
         try
         {
+            logger.addHandler(new FileHandler("/home/oem/Desktop/apml/output/logging/Jcmcompiler.txt"));
+            
             this.files.sourcedir                        = new File(files.basedirurl+files.srcdirurl);     
             
             this.files.builddir                         = new File(files.basedirurl+files.builddirurl);
