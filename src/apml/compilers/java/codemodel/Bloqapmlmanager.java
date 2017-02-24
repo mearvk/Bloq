@@ -5,6 +5,7 @@
  */
 package apml.compilers.java.codemodel;
 
+import apml.compilers.Bloqabstractapmlmanager;
 import apml.modeling.Apmlmodelfile;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author max rupplin
  */
-public class Bloqapmlmanager
+public class Bloqapmlmanager extends Bloqabstractapmlmanager
 {    
     public ArrayList<Apmlmodelfile> apmlmodels;  
     

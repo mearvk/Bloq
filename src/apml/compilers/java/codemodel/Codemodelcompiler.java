@@ -1,5 +1,8 @@
 package apml.compilers.java.codemodel;
 
+import apml.compilers.Bloqabstractapmlmanager;
+import apml.compilers.Bloqabstractfileguardian;
+import apml.compilers.Bloqabstractoutputmanager;
 import static java.nio.file.StandardCopyOption.*;
 import apml.compilers.Stdabstractcompiler;
 import apml.helpers.Filegrepper;
@@ -41,7 +44,7 @@ public class Codemodelcompiler extends Stdabstractcompiler
             
             bloqcompiler.settempfiles(bloqcompiler.apmlmanager);
             
-            bloqcompiler.setjcmfiles(bloqcompiler.apmlmanager);         
+            bloqcompiler.setoutputfiles(bloqcompiler.apmlmanager);         
             
             bloqcompiler.setsourcefiles(bloqcompiler.jcmmanager);
             
@@ -85,29 +88,8 @@ public class Codemodelcompiler extends Stdabstractcompiler
         }
     }          
     
-    public void settempfiles(Bloqapmlmanager bloqapmlmanager)
-    {
-        try
-        {
-            this.quicktobytecode(bloqapmlmanager.apmlmodels);
-            
-            this.quicktobytecode(bloqapmlmanager.dynamiclistenermodels);
-            
-            this.quicktobytecode(bloqapmlmanager.listenermodels);
-            
-            this.quicktobytecode(bloqapmlmanager.objectmodels);
-            
-            this.quicktobytecode(bloqapmlmanager.subscribermodels);
-            
-            this.quicktobytecode(bloqapmlmanager.systemmodels);
-        }
-        catch(Exception exception)
-        {
-            logger.log(Level.WARNING, exception.getMessage(), exception);
-        }
-    }
-    
-    public void setapmlfiles(Bloqfileguardian fileguardian)
+    @Override
+    public void setapmlfiles(Bloqabstractfileguardian fileguardian)
     {
         try
         {
@@ -129,7 +111,31 @@ public class Codemodelcompiler extends Stdabstractcompiler
         }
     }    
     
-    public void setjcmfiles(Bloqapmlmanager bloqapmlmanager)
+    @Override
+    public void settempfiles(Bloqabstractapmlmanager bloqapmlmanager)
+    {
+        try
+        {
+            this.quicktobytecode(bloqapmlmanager.apmlmodels);
+            
+            this.quicktobytecode(bloqapmlmanager.dynamiclistenermodels);
+            
+            this.quicktobytecode(bloqapmlmanager.listenermodels);
+            
+            this.quicktobytecode(bloqapmlmanager.objectmodels);
+            
+            this.quicktobytecode(bloqapmlmanager.subscribermodels);
+            
+            this.quicktobytecode(bloqapmlmanager.systemmodels);
+        }
+        catch(Exception exception)
+        {
+            logger.log(Level.WARNING, exception.getMessage(), exception);
+        }
+    }
+        
+    @Override
+    public void setoutputfiles(Bloqabstractapmlmanager bloqapmlmanager)
     {        
         try
         {                        
@@ -150,6 +156,22 @@ public class Codemodelcompiler extends Stdabstractcompiler
             logger.log(Level.WARNING, exception.getMessage(), exception);
         }
     }
+    
+    @Override
+    public void setsourcefiles(Bloqabstractoutputmanager bloqjcmmanager)
+    {
+        dosetfinalsource(bloqjcmmanager.apmlmodels);
+        
+        dosetfinalsource(bloqjcmmanager.dynamiclistenermodels);                             
+        
+        dosetfinalsource(bloqjcmmanager.listenermodels);                    
+        
+        dosetfinalsource(bloqjcmmanager.objectmodels);
+        
+        dosetfinalsource(bloqjcmmanager.subscribermodels);                    
+        
+        dosetfinalsource(bloqjcmmanager.systemmodels);           
+    }    
     
     public void quicktobytecode(ArrayList<Apmlmodelfile> apmlmodelfiles) 
     {
@@ -303,20 +325,7 @@ public class Codemodelcompiler extends Stdabstractcompiler
         }
     }   
     
-    public void setsourcefiles(Bloqjcmmanager bloqjcmmanager)
-    {
-        dosetfinalsource(bloqjcmmanager.apmlmodels);
-        
-        dosetfinalsource(bloqjcmmanager.dynamiclistenermodels);                             
-        
-        dosetfinalsource(bloqjcmmanager.listenermodels);                    
-        
-        dosetfinalsource(bloqjcmmanager.objectmodels);
-        
-        dosetfinalsource(bloqjcmmanager.subscribermodels);                    
-        
-        dosetfinalsource(bloqjcmmanager.systemmodels);           
-    }
+
         
     public void dosetfinalsource(ArrayList<JCodeModel> jcmmodels)
     {        
@@ -359,11 +368,5 @@ public class Codemodelcompiler extends Stdabstractcompiler
         {
             Files.copy(new File(fileguardian.apmlinjarurl).toPath(),new File(fileguardian.apmloutjarurl).toPath(),REPLACE_EXISTING);                
         }        
-    }
-
-    @Override
-    public void compiletosource() 
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

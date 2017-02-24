@@ -5,13 +5,14 @@
  */
 package apml.compilers.java.codemodel;
 
+import apml.compilers.Bloqabstractfileguardian;
 import java.io.File;
 
 /**
  *
  * @author max rupplin
  */
-public class Bloqfileguardian 
+public class Bloqfileguardian extends Bloqabstractfileguardian
 {
     public File manifestfile;
     

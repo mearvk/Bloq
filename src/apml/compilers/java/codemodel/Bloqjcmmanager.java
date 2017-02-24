@@ -5,6 +5,7 @@
  */
 package apml.compilers.java.codemodel;
 
+import apml.compilers.Bloqabstractoutputmanager;
 import com.sun.codemodel.JCodeModel;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author max rupplin
  */
-public class Bloqjcmmanager
+public class Bloqjcmmanager extends Bloqabstractoutputmanager
 {
     public ArrayList<JCodeModel> apmlmodels;  
     
