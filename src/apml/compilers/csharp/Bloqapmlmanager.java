@@ -2,7 +2,7 @@ package apml.compilers.csharp;
 
 /**
  *
- * @author oem
+ * @author max rupplin
  */
 public class Bloqapmlmanager {
     

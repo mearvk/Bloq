@@ -2,7 +2,7 @@ package apml.compilers.cpp;
 
 /**
  *
- * @author oem
+ * @author max rupplin
  */
 public class Bloqcplusplusmanager {
     

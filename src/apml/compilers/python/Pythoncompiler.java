@@ -7,7 +7,7 @@ import apml.compilers.Stdabstractcompiler;
 
 /**
  *
- * @author oem
+ * @author max rupplin
  */
 public class Pythoncompiler extends Stdabstractcompiler 
 {
