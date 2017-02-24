@@ -7,6 +7,7 @@ import apml.modeling.Apmlmodelfile;
 import apml.modeling.Apmlobject;
 import apml.xpath.helpers.Xpathparameter;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -67,7 +68,7 @@ public final class Apmlmodelpopulator
             
             LOGGER.setUseParentHandlers(false);
         }
-        catch(Exception exception)
+        catch(IOException | SecurityException exception)
         {
             LOGGER.log(Level.WARNING, exception.getMessage(), exception);
         }
@@ -81,7 +82,7 @@ public final class Apmlmodelpopulator
             
             LOGGER.setUseParentHandlers(false);
         }
-        catch(Exception exception)
+        catch(IOException | SecurityException exception)
         {
             LOGGER.log(Level.WARNING, exception.getMessage(), exception);
         }
