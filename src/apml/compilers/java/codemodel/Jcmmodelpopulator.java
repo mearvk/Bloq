@@ -246,7 +246,7 @@ public class Jcmmodelpopulator
                 }
                 catch(ClassNotFoundException ex)
                 {
-                    Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+                    Logger.getLogger(Codemodelcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
                 }
             }
         }

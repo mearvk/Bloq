@@ -1,6 +1,6 @@
 package apml.system;
 
-import apml.compilers.java.codemodel.Jcmcompiler;
+import apml.compilers.java.codemodel.Codemodelcompiler;
 import apml.drivers.Stddriver;
 import apml.subscribers.Apmlsubscriber;
 import java.awt.event.ActionEvent;
@@ -201,7 +201,7 @@ public class Apmlsystem implements Runnable
         }
         catch(InstantiationException | IllegalAccessException ex)
         {
-            Logger.getLogger(Jcmcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            Logger.getLogger(Codemodelcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
         
         return null;

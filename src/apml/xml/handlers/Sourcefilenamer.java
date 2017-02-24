@@ -1,6 +1,6 @@
 package apml.xml.handlers;
 
-import apml.compilers.java.codemodel.Jcmcompiler;
+import apml.compilers.java.codemodel.Codemodelcompiler;
 import apml.xpath.helpers.Xpathparameter;
 import apml.xpath.helpers.Xpathquick;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -347,7 +347,7 @@ public class Sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
         try
         {             
             //
-            Jcmcompiler sth = new Jcmcompiler();
+            Codemodelcompiler sth = new Codemodelcompiler();
             DocumentBuilderFactory domfactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = domfactory.newDocumentBuilder();
             Document document = builder.parse(file);

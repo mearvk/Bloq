@@ -9,7 +9,7 @@ package apml.compilers.java.roaster;
  *
  * @author oem
  */
-public class Stdroastercompiler 
+public class Roastercompiler 
 {
     
 }

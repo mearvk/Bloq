@@ -19,11 +19,11 @@ import java.util.logging.Logger;
  * 
  * @author max rupplin
  */
-public class Jcmcompiler extends Stdcompiler
+public class Codemodelcompiler extends Stdcompiler
 {        
     protected final Integer hash = 0x888fe8;
        
-    protected Logger logger = Logger.getLogger(Jcmcompiler.class.getName());    
+    protected Logger logger = Logger.getLogger(Codemodelcompiler.class.getName());    
     
     public Bloqapmlmanager apmlmanager = new Bloqapmlmanager(); 
     
@@ -35,7 +35,7 @@ public class Jcmcompiler extends Stdcompiler
     {                          
         try
         {
-            Jcmcompiler bloqcompiler = new Jcmcompiler();
+            Codemodelcompiler bloqcompiler = new Codemodelcompiler();
             
             bloqcompiler.setapmlfiles(bloqcompiler.fileguardian);
             
@@ -55,7 +55,7 @@ public class Jcmcompiler extends Stdcompiler
         }
     }
     
-    public Jcmcompiler()
+    public Codemodelcompiler()
     {                        
         try
         {
