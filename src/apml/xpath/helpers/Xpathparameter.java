@@ -12,10 +12,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-/**
- *
- * @author Max Rupplin
- */
 public final class Xpathparameter
 {   
     protected final Integer hash = 0x888fe8;
@@ -93,11 +89,7 @@ public final class Xpathparameter
         catch(ParserConfigurationException | SAXException | IOException e)
         {
             e.printStackTrace(System.err);
-        }
-        
-        /**
-         * These are local to major package names (//system, //listener, //subscriber etc)
-         */
+        }       
         
         this.s0000_count            = "count("+apmltag+")";
         this.s0001_tagname          = apmltag; 

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.File;
 import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -19,29 +20,29 @@ public class Jcmcompiler extends Stdcompiler
 {        
     protected final Integer hash = 0x888fe8;
        
-    protected static final Logger logger = Logger.getLogger(Jcmcompiler.class.getName());    
+    protected static final Logger LOGGER = Logger.getLogger(Jcmcompiler.class.getName());    
     
-    public Apmlmodelfiles apmlmodels = new Apmlmodelfiles(); 
+    public Bloqapmlmanager bloqapmlmanager = new Bloqapmlmanager(); 
     
-    public Jcmmodelfiles jcmmodels = new Jcmmodelfiles();
+    public Bloqjcmmanager bloqjcmmanager = new Bloqjcmmanager();
     
-    public Jcmfilehelper files = new Jcmfilehelper();
+    public Bloqfileguardian fileguardian = new Bloqfileguardian();
     
     public static void main(String...args) 
     {                          
         try
         {
-            Jcmcompiler compiler = new Jcmcompiler();
+            Jcmcompiler bloqcompiler = new Jcmcompiler();
             
-            compiler.doapmlfiles(compiler);
+            bloqcompiler.setapmlfiles(bloqcompiler.fileguardian.apmlxmlinputfile);
             
-            compiler.dotempfiles(compiler);
+            bloqcompiler.settempfiles(bloqcompiler);
             
-            compiler.dojcmfiles(compiler);         
+            bloqcompiler.setjcmfiles(bloqcompiler);         
             
-            compiler.dosourcefiles(compiler);
+            bloqcompiler.setsourcefiles(bloqcompiler);
             
-            compiler.domovejarfile();
+            bloqcompiler.setmovejarfile();
             
             System.gc();
         }
@@ -55,23 +56,25 @@ public class Jcmcompiler extends Stdcompiler
     {                        
         try
         {
-            logger.addHandler(new FileHandler("/home/oem/Desktop/apml/output/logging/Jcmcompiler.txt"));
+            LOGGER.addHandler(new FileHandler("/home/oem/Desktop/apml/output/logging/Jcmcompiler.txt"));
             
-            this.files.sourcedir                        = new File(files.basedirurl+files.srcdirurl);     
+            LOGGER.setUseParentHandlers(false);
             
-            this.files.builddir                         = new File(files.basedirurl+files.builddirurl);
+            this.fileguardian.sourceoutdir                      = new File(fileguardian.basedirurl+fileguardian.srcdirurl);     
             
-            this.files.manifestfiledir                  = new File(files.basedirurl+files.manifestdirurl);
+            this.fileguardian.buildoutdir                       = new File(fileguardian.basedirurl+fileguardian.builddirurl);
             
-            this.files.apmlxmlinputfile                 = new File(files.apmlinurl);
+            this.fileguardian.manifestfiledir                   = new File(fileguardian.basedirurl+fileguardian.manifestdirurl);
             
-            if(!this.files.sourcedir.exists())          this.files.sourcedir.mkdirs();                  
+            this.fileguardian.apmlxmlinputfile                  = new File(fileguardian.apmlinurl);
             
-            if(!this.files.builddir.exists())           this.files.builddir.mkdirs();                                             
+            if(!this.fileguardian.sourceoutdir.exists())        this.fileguardian.sourceoutdir.mkdirs();                  
             
-            if(!this.files.manifestfiledir.exists())    this.files.manifestfiledir.mkdirs();
+            if(!this.fileguardian.buildoutdir.exists())         this.fileguardian.buildoutdir.mkdirs();                                             
             
-            if(!this.files.apmlxmlinputfile.exists())   throw new Exception("ApmlTagHandler::constructor:Could not find the system's APML file");
+            if(!this.fileguardian.manifestfiledir.exists())     this.fileguardian.manifestfiledir.mkdirs();
+            
+            if(!this.fileguardian.apmlxmlinputfile.exists())    throw new Exception("ApmlTagHandler::constructor:Could not find the system's APML file");
         }
         catch(Exception exception)
         {
@@ -79,69 +82,69 @@ public class Jcmcompiler extends Stdcompiler
         }
     }          
     
-    public void dotempfiles(Jcmcompiler compiler)
+    public void settempfiles(Jcmcompiler compiler)
     {
         try
         {
-            compiler.quicktobytecode(compiler.apmlmodels.apml);
+            compiler.quicktobytecode(compiler.bloqapmlmanager.apmlmodels);
             
-            compiler.quicktobytecode(compiler.apmlmodels.dynamiclisteners);
+            compiler.quicktobytecode(compiler.bloqapmlmanager.dynamiclistenermodels);
             
-            compiler.quicktobytecode(compiler.apmlmodels.listeners);
+            compiler.quicktobytecode(compiler.bloqapmlmanager.listenermodels);
             
-            compiler.quicktobytecode(compiler.apmlmodels.objects);
+            compiler.quicktobytecode(compiler.bloqapmlmanager.objectmodels);
             
-            compiler.quicktobytecode(compiler.apmlmodels.subscribers);
+            compiler.quicktobytecode(compiler.bloqapmlmanager.subscribermodels);
             
-            compiler.quicktobytecode(compiler.apmlmodels.systems);
+            compiler.quicktobytecode(compiler.bloqapmlmanager.systemmodels);
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
         }
     }
     
-    public void doapmlfiles(Jcmcompiler compiler)
+    public void setapmlfiles(File apmlxmlinputfile)
     {
         try
         {
-            compiler.generateapmlmodelfiles(compiler.files.apmlxmlinputfile, "//apml");
+            this.generateapmlmodelfiles(apmlxmlinputfile, "//apml");
             
-            compiler.generateapmlmodelfiles(compiler.files.apmlxmlinputfile, "//dynamiclistener");
+            this.generateapmlmodelfiles(apmlxmlinputfile, "//dynamiclistener");
             
-            compiler.generateapmlmodelfiles(compiler.files.apmlxmlinputfile, "//listener");    
+            this.generateapmlmodelfiles(apmlxmlinputfile, "//listener");    
             
-            compiler.generateapmlmodelfiles(compiler.files.apmlxmlinputfile, "//object");   
+            this.generateapmlmodelfiles(apmlxmlinputfile, "//object");   
             
-            compiler.generateapmlmodelfiles(compiler.files.apmlxmlinputfile, "//subscriber");
+            this.generateapmlmodelfiles(apmlxmlinputfile, "//subscriber");
             
-            compiler.generateapmlmodelfiles(compiler.files.apmlxmlinputfile, "//system");        
+            this.generateapmlmodelfiles(apmlxmlinputfile, "//system");        
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
         }
     }    
     
-    public void dojcmfiles(Jcmcompiler compiler)
+    public void setjcmfiles(Jcmcompiler compiler)
     {
         try
         {
-            compiler.generatejavamodelfiles(compiler.apmlmodels.apml, "//apml");
+            compiler.generatejavamodelfiles(compiler.bloqapmlmanager.apmlmodels, "//apml");
             
-            compiler.generatejavamodelfiles(compiler.apmlmodels.dynamiclisteners, "//dynamiclistener");
+            compiler.generatejavamodelfiles(compiler.bloqapmlmanager.dynamiclistenermodels, "//dynamiclistener");
             
-            compiler.generatejavamodelfiles(compiler.apmlmodels.listeners, "//listener");
+            compiler.generatejavamodelfiles(compiler.bloqapmlmanager.listenermodels, "//listener");
             
-            compiler.generatejavamodelfiles(compiler.apmlmodels.objects, "//object");
+            compiler.generatejavamodelfiles(compiler.bloqapmlmanager.objectmodels, "//object");
             
-            compiler.generatejavamodelfiles(compiler.apmlmodels.subscribers, "//subscriber");
+            compiler.generatejavamodelfiles(compiler.bloqapmlmanager.subscribermodels, "//subscriber");
             
-            compiler.generatejavamodelfiles(compiler.apmlmodels.systems, "//system");         
+            compiler.generatejavamodelfiles(compiler.bloqapmlmanager.systemmodels, "//system");         
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
         }
     }
     
@@ -161,21 +164,21 @@ public class Jcmcompiler extends Stdcompiler
                 
                 String pathname             = new Filegrepper().getpackagenameaspathname(model.packagename)+"/";
                 
-                String javac                = "javac "+files.basedirurl+files.tempsrcdirurl+pathname+model.classname+".java -d "+files.basedirurl+files.builddirurl;
+                String javac                = "javac "+fileguardian.basedirurl+fileguardian.tempsrcdirurl+pathname+model.classname+".java -d "+fileguardian.basedirurl+fileguardian.builddirurl;
                 
-                new File(files.basedirurl+files.tempsrcdirurl).mkdirs();
+                new File(fileguardian.basedirurl+fileguardian.tempsrcdirurl).mkdirs();
                 
-                new File(files.basedirurl+files.tempsrcdirurl+sourcepackagedir).mkdirs();               
+                new File(fileguardian.basedirurl+fileguardian.tempsrcdirurl+sourcepackagedir).mkdirs();               
                 
-                new File(files.basedirurl+files.builddirurl).mkdirs();
+                new File(fileguardian.basedirurl+fileguardian.builddirurl).mkdirs();
                 
-                new File(files.basedirurl+files.builddirurl+buildpackagedir).mkdirs();
+                new File(fileguardian.basedirurl+fileguardian.builddirurl+buildpackagedir).mkdirs();
                    
                 jmodel = new JCodeModel();
                 
                 jmodel._package(model.packagename)._class(model.classname);
                 
-                jmodel.build(new File(files.basedirurl+files.tempsrcdirurl));
+                jmodel.build(new File(fileguardian.basedirurl+fileguardian.tempsrcdirurl));
                 
                 runtime = Runtime.getRuntime();                                                
                 
@@ -183,7 +186,7 @@ public class Jcmcompiler extends Stdcompiler
             }
             catch(Exception exception)
             {
-                System.err.println(exception);
+                LOGGER.log(Level.WARNING, exception.getMessage(), exception);
             }
             finally
             {
@@ -202,24 +205,24 @@ public class Jcmcompiler extends Stdcompiler
         {
             switch(apmltag)
             {                    
-                case "//apml": this.apmlmodels.apml = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
+                case "//apml": this.bloqapmlmanager.apmlmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
                 
-                case "//definitions": this.apmlmodels.definitions = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
+                case "//definitions": this.bloqapmlmanager.definitionmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
                 
-                case "//dynamiclistener": this.apmlmodels.dynamiclisteners = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
+                case "//dynamiclistener": this.bloqapmlmanager.dynamiclistenermodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
                 
-                case "//listener": this.apmlmodels.listeners = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
+                case "//listener": this.bloqapmlmanager.listenermodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
                 
-                case "//object": this.apmlmodels.objects = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
+                case "//object": this.bloqapmlmanager.objectmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
                 
-                case "//subscriber": this.apmlmodels.subscribers = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
+                case "//subscriber": this.bloqapmlmanager.subscribermodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
                 
-                case "//system": this.apmlmodels.systems = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
+                case "//system": this.bloqapmlmanager.systemmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
             }            
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
         }
         
         return apmlmodelfiles;
@@ -234,24 +237,24 @@ public class Jcmcompiler extends Stdcompiler
         {
             switch(apmltag)
             {
-                case "//apml": this.jcmmodels.apml = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
+                case "//apml": this.bloqjcmmanager.apml = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
                     
-                case "//definitions": this.jcmmodels.definitions = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
+                case "//definitions": this.bloqjcmmanager.definitions = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
                     
-                case "//dynamiclistener": this.jcmmodels.dynamiclisteners = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
+                case "//dynamiclistener": this.bloqjcmmanager.dynamiclisteners = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
                     
-                case "//listener": this.jcmmodels.listeners = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;   
+                case "//listener": this.bloqjcmmanager.listeners = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;   
                     
-                case "//object": this.jcmmodels.objects = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                     
+                case "//object": this.bloqjcmmanager.objects = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                     
                     
-                case "//subscriber": this.jcmmodels.subscribers = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
+                case "//subscriber": this.bloqjcmmanager.subscribers = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
                     
-                case "//system": this.jcmmodels.systems = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
+                case "//system": this.bloqjcmmanager.systems = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
             }                     
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
         }
         
         return jcmmodels_genericfiles;
@@ -261,32 +264,35 @@ public class Jcmcompiler extends Stdcompiler
     {
         try
         {
-            this.compiletosource(this.jcmmodels.apml);
+            this.compiletosource(this.bloqjcmmanager.apml);
             
-            this.compiletosource(this.jcmmodels.definitions);
+            this.compiletosource(this.bloqjcmmanager.definitions);
             
-            this.compiletosource(this.jcmmodels.dynamiclisteners);            
+            this.compiletosource(this.bloqjcmmanager.dynamiclisteners);            
             
-            this.compiletosource(this.jcmmodels.listeners);
+            this.compiletosource(this.bloqjcmmanager.listeners);
             
-            this.compiletosource(this.jcmmodels.objects);
+            this.compiletosource(this.bloqjcmmanager.objects);
             
-            this.compiletosource(this.jcmmodels.subscribers);
+            this.compiletosource(this.bloqjcmmanager.subscribers);
             
-            this.compiletosource(this.jcmmodels.systems);
+            this.compiletosource(this.bloqjcmmanager.systems);
             
             try
             {
-                if(new File(files.apmloutjarurl).exists())
+                if(new File(fileguardian.apmloutjarurl).exists())
                 {
-                    Files.copy( new File(files.apmlinjarurl).toPath(), new File(files.apmloutjarurl).toPath(), REPLACE_EXISTING );
+                    Files.copy(new File(fileguardian.apmlinjarurl).toPath(), new File(fileguardian.apmloutjarurl).toPath(), REPLACE_EXISTING );
                 }
-                else new File(files.apmloutjarurl).mkdirs();
+                else new File(fileguardian.apmloutjarurl).mkdirs();
                 {
-                    Files.copy( new File(files.apmlinjarurl).toPath(), new File(files.apmloutjarurl).toPath(), REPLACE_EXISTING );                
+                    Files.copy(new File(fileguardian.apmlinjarurl).toPath(), new File(fileguardian.apmloutjarurl).toPath(), REPLACE_EXISTING );                
                 }
             }
-            catch(Exception e){e.printStackTrace(System.err);}            
+            catch(Exception exception)
+            {
+                LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            }            
         }
         catch(Exception exception)
         {
@@ -294,19 +300,19 @@ public class Jcmcompiler extends Stdcompiler
         }
     }   
     
-    public void dosourcefiles(Jcmcompiler compiler)
+    public void setsourcefiles(Jcmcompiler compiler)
     {
-        compiler.compiletosource(compiler.jcmmodels.apml);
+        compiler.compiletosource(compiler.bloqjcmmanager.apml);
         
-        compiler.compiletosource(compiler.jcmmodels.dynamiclisteners);                             
+        compiler.compiletosource(compiler.bloqjcmmanager.dynamiclisteners);                             
         
-        compiler.compiletosource(compiler.jcmmodels.listeners);                    
+        compiler.compiletosource(compiler.bloqjcmmanager.listeners);                    
         
-        compiler.compiletosource(compiler.jcmmodels.objects);
+        compiler.compiletosource(compiler.bloqjcmmanager.objects);
         
-        compiler.compiletosource(compiler.jcmmodels.subscribers);                    
+        compiler.compiletosource(compiler.bloqjcmmanager.subscribers);                    
         
-        compiler.compiletosource(compiler.jcmmodels.systems);           
+        compiler.compiletosource(compiler.bloqjcmmanager.systems);           
     }
         
     public void compiletosource(ArrayList<JCodeModel> jcmmodels)
@@ -329,26 +335,26 @@ public class Jcmcompiler extends Stdcompiler
                     {                                              
                         String cname = classes.next().name();
                         
-                        jcmmodels.get(i).build(new File(files.basedirurl+files.srcdirurl), System.err);           
+                        jcmmodels.get(i).build(new File(fileguardian.basedirurl+fileguardian.srcdirurl), System.err);           
                     }
                 }
             }
             catch(Exception exception)
             {
-                System.err.println(exception);
+                LOGGER.log(Level.WARNING, exception.getMessage(), exception);
             }                       
         }                
     }  
  
-    public void domovejarfile() throws Exception
+    public void setmovejarfile() throws Exception
     {
-        if(new File(files.apmloutjarurl).exists())
+        if(new File(fileguardian.apmloutjarurl).exists())
         {
-            Files.copy(new File(files.apmlinjarurl).toPath(),new File(files.apmloutjarurl).toPath(),REPLACE_EXISTING);
+            Files.copy(new File(fileguardian.apmlinjarurl).toPath(),new File(fileguardian.apmloutjarurl).toPath(),REPLACE_EXISTING);
         }
-        else new File(files.apmloutjarurl).mkdirs();
+        else new File(fileguardian.apmloutjarurl).mkdirs();
         {
-            Files.copy(new File(files.apmlinjarurl).toPath(),new File(files.apmloutjarurl).toPath(),REPLACE_EXISTING);                
+            Files.copy(new File(fileguardian.apmlinjarurl).toPath(),new File(fileguardian.apmloutjarurl).toPath(),REPLACE_EXISTING);                
         }        
     }
 

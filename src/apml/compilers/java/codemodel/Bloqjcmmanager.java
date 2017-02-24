@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Max Rupplin
  */
-public class Jcmmodelfiles
+public class Bloqjcmmanager
 {
     public ArrayList<JCodeModel> apml;  
     

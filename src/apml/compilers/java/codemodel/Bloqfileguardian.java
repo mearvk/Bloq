@@ -11,15 +11,15 @@ import java.io.File;
  *
  * @author Max Rupplin
  */
-public class Jcmfilehelper 
+public class Bloqfileguardian 
 {
     public File manifestfile;
     
     public File manifestfiledir;    
     
-    public File sourcedir;   
+    public File sourceoutdir;   
     
-    public File builddir;
+    public File buildoutdir;
     
     public File apmlxmlinputfile;
     
