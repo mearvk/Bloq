@@ -54,7 +54,7 @@ public final class Apmlrunner
         
         runner.setbuilddir("");
         
-        runner.compiler.compiletosource();
+        //runner.compiler.setsourcefiles(astmanager);
         
         runner.driver.drive();
     }

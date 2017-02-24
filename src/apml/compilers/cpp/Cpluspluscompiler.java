@@ -11,7 +11,6 @@ import apml.compilers.Stdabstractcompiler;
  */
 public class Cpluspluscompiler extends Stdabstractcompiler
 {
-
     @Override
     public void setapmlfiles(Bloqabstractfileguardian fileguardian)
     {
@@ -34,6 +33,5 @@ public class Cpluspluscompiler extends Stdabstractcompiler
     public void setsourcefiles(Bloqabstractoutputmanager astmanager)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-  
+    } 
 }
