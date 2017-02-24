@@ -324,9 +324,7 @@ public class Codemodelcompiler extends Stdabstractcompiler
         {
             System.err.println(exception);
         }
-    }   
-    
-
+    }       
         
     public void dosetfinalsource(ArrayList<JCodeModel> jcmmodels)
     {        
