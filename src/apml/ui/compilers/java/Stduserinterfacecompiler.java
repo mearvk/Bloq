@@ -1,8 +1,5 @@
 package apml.ui.compilers.java;
 
-import java.util.ArrayList;
-import javax.swing.JButton;
-
 /**
  * @author max rupplin
  * @see http://github.com/mearvk/Bloq

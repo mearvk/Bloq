@@ -1,24 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package apml.ui.compilers.java;
 
+import apml.ui.compilers.java.builder.Jcmjbuttonbuilder;
 import com.sun.codemodel.JCodeModel;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 
 /**
@@ -29,41 +28,41 @@ public class Uiapmlmanager
     Document doc;
     XPath xpath;
     
-    ArrayList<? extends JComponent> jbuttonmodels;
-    ArrayList<? extends JComponent> jframemodels;
-    ArrayList<? extends JComponent> framemodels;
-    ArrayList<? extends JComponent> jcheckboxmodels;
-    ArrayList<? extends JComponent> jcomboboxmodels;
-    ArrayList<? extends JComponent> jlistmodels;
-    ArrayList<? extends JComponent> jmenumodels;
-    ArrayList<? extends JComponent> jradiobuttonmodels;
-    ArrayList<? extends JComponent> jslidermodels;
-    ArrayList<? extends JComponent> jspinnermodels;
-    ArrayList<? extends JComponent> jtextfieldmodels;
-    ArrayList<? extends JComponent> jpasswordfieldmodels;  
-    ArrayList<? extends JComponent> jcolorchoosermodels;
-    ArrayList<? extends JComponent> jeditorpanemodels;
-    ArrayList<? extends JComponent> jtextpanemodels;
-    ArrayList<? extends JComponent> jfilechoosermodels;
-    ArrayList<? extends JComponent> jtablemodels;
-    ArrayList<? extends JComponent> jtextareamodels;
-    ArrayList<? extends JComponent> jtreemodels;    
-    ArrayList<? extends JComponent> jlabelmodels;
-    ArrayList<? extends JComponent> jprogressbarmodels;
-    ArrayList<? extends JComponent> jseparatormodels;
-    ArrayList<? extends JComponent> jtooltipmodels;
-    ArrayList<? extends JComponent> jappletmodels;
-    ArrayList<? extends JComponent> jdialogmodels; 
-    ArrayList<? extends JComponent> jpanelmodels;
-    ArrayList<? extends JComponent> jscrollpanemodels;
-    ArrayList<? extends JComponent> jsplitpanemodels;
-    ArrayList<? extends JComponent> jtabbedpanemodels;
-    ArrayList<? extends JComponent> jtoolbarmodels;
-    ArrayList<? extends JComponent> jinternalframemodels;    
-    ArrayList<? extends JComponent> jlayeredpanemodels;
-    ArrayList<? extends JComponent> jrootpanemodels;
+    ArrayList<JCodeModel> jbuttonmodels;
+    ArrayList<JCodeModel> jframemodels;
+    ArrayList<JCodeModel> framemodels;
+    ArrayList<JCodeModel> jcheckboxmodels;
+    ArrayList<JCodeModel> jcomboboxmodels;
+    ArrayList<JCodeModel> jlistmodels;
+    ArrayList<JCodeModel> jmenumodels;
+    ArrayList<JCodeModel> jradiobuttonmodels;
+    ArrayList<JCodeModel> jslidermodels;
+    ArrayList<JCodeModel> jspinnermodels;
+    ArrayList<JCodeModel> jtextfieldmodels;
+    ArrayList<JCodeModel> jpasswordfieldmodels;  
+    ArrayList<JCodeModel> jcolorchoosermodels;
+    ArrayList<JCodeModel> jeditorpanemodels;
+    ArrayList<JCodeModel> jtextpanemodels;
+    ArrayList<JCodeModel> jfilechoosermodels;
+    ArrayList<JCodeModel> jtablemodels;
+    ArrayList<JCodeModel> jtextareamodels;
+    ArrayList<JCodeModel> jtreemodels;    
+    ArrayList<JCodeModel> jlabelmodels;
+    ArrayList<JCodeModel> jprogressbarmodels;
+    ArrayList<JCodeModel> jseparatormodels;
+    ArrayList<JCodeModel> jtooltipmodels;
+    ArrayList<JCodeModel> jappletmodels;
+    ArrayList<JCodeModel> jdialogmodels; 
+    ArrayList<JCodeModel> jpanelmodels;
+    ArrayList<JCodeModel> jscrollpanemodels;
+    ArrayList<JCodeModel> jsplitpanemodels;
+    ArrayList<JCodeModel> jtabbedpanemodels;
+    ArrayList<JCodeModel> jtoolbarmodels;
+    ArrayList<JCodeModel> jinternalframemodels;    
+    ArrayList<JCodeModel> jlayeredpanemodels;
+    ArrayList<JCodeModel> jrootpanemodels;
         
-    public ArrayList<? extends JComponent> generatemodels(File apmlin, String tagname)            
+    public ArrayList<JCodeModel> generatemodels(File apmlin, String tagname)            
     {
         try
         {
@@ -133,61 +132,34 @@ public class Uiapmlmanager
             }
         
         }
-        catch(Exception e)
+        catch(ParserConfigurationException | SAXException | IOException e)
         {
-            e.printStackTrace();
+            
         }
         
-        return new ArrayList<JButton>(1);
+        return new ArrayList<>();
     }
     
-    protected ArrayList<? extends JComponent> getjbuttonjcmmodels(File apml, String tagname)
-    {
-        NodeList nodejbuttons = null;
-        
-        ArrayList<? extends JComponent> jcmjbuttons = null;
+    protected ArrayList<JCodeModel> getjbuttonjcmmodels(File apml, String tagname)
+    {      
+        ArrayList<JCodeModel> jcmjbuttons = new ArrayList<>(0);
         
         try
         {                                        
-            nodejbuttons = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);
+            NodeList nodejbuttons = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);
             
             for(int i=0; i<nodejbuttons.getLength(); i++)
             {
                 Element current = (Element)nodejbuttons.item(i);
                 
-                JCodeModel jcodemodel = new JCodeModel();
+                JCodeModel jcodemodel = new Jcmjbuttonbuilder(current).build();     
                 
-                //would prefer to go right to jcm from here
-                current.getAttribute("setAction");                                                
-                                
-                current.getAttribute("setBorderpainted");
-                
-                current.getAttribute("setDisabledicon");
-                
-                current.getAttribute("setEnabled");                
-                
-                current.getAttribute("setIcon");
-                
-                current.getAttribute("setLabel");
-                
-                current.getAttribute("setLayout");
-                
-                current.getAttribute("setMargin");
-
-                current.getAttribute("setModel");
-                
-                current.getAttribute("setName");                                                
-                
-                current.getAttribute("setPressedIcon");
-                
-                current.getAttribute("setRolloverIcon");                
-                
-                current.getAttribute("setText");
+                jcmjbuttons.add(jcodemodel);
             }
         }
         catch(Exception e)
         {
-            Logger.getLogger("").log(Level.WARNING,e.getLocalizedMessage(),e);
+            
         }         
         
         return jcmjbuttons;
