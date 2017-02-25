@@ -38,88 +38,88 @@ public class Stduserinterfacecompiler
         apmlmanager.jcomboboxmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jcombobox");
         
         //
-        apmlmanager.jlists = apmlmanager.generatemodels(fileguardian.xmlin, "//jlist");
+        apmlmanager.jlistmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jlist");
         
         //
-        apmlmanager.jmenus = apmlmanager.generatemodels(fileguardian.xmlin, "//jmenu");
+        apmlmanager.jmenumodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jmenu");
         
         //
-        apmlmanager.jradiobuttons = apmlmanager.generatemodels(fileguardian.xmlin, "//jradiobutton");
+        apmlmanager.jradiobuttonmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jradiobutton");
         
         //
-        apmlmanager.jsliders = apmlmanager.generatemodels(fileguardian.xmlin, "//jslider");
+        apmlmanager.jslidermodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jslider");
         
         //
-        apmlmanager.jspinners = apmlmanager.generatemodels(fileguardian.xmlin, "//jspinner");
+        apmlmanager.jspinnermodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jspinner");
         
         //
-        apmlmanager.jtextfields = apmlmanager.generatemodels(fileguardian.xmlin, "//jtextfield");
+        apmlmanager.jtextfieldmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jtextfield");
         
         //
-        apmlmanager.jpasswordfields = apmlmanager.generatemodels(fileguardian.xmlin, "//jpasswordfield");
+        apmlmanager.jpasswordfieldmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jpasswordfield");
         
         //
-        apmlmanager.jcolorchoosers = apmlmanager.generatemodels(fileguardian.xmlin, "//jcolorchooser");
+        apmlmanager.jcolorchoosermodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jcolorchooser");
         
         //
-        apmlmanager.jeditorpanes = apmlmanager.generatemodels(fileguardian.xmlin, "//jeditorpane");
+        apmlmanager.jeditorpanemodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jeditorpane");
         
         //
-        apmlmanager.jtextpanes = apmlmanager.generatemodels(fileguardian.xmlin, "//jtextpane");
+        apmlmanager.jtextpanemodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jtextpane");
         
         //
-        apmlmanager.jfilechoosers = apmlmanager.generatemodels(fileguardian.xmlin, "//jfilechooser");
+        apmlmanager.jfilechoosermodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jfilechooser");
         
         //
-        apmlmanager.jtable = apmlmanager.generatemodels(fileguardian.xmlin, "//jtable");
+        apmlmanager.jtablemodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jtable");
         
         //
-        apmlmanager.jtextareas = apmlmanager.generatemodels(fileguardian.xmlin, "//jtextarea");
+        apmlmanager.jtextareamodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jtextarea");
         
         //
-        apmlmanager.jtrees = apmlmanager.generatemodels(fileguardian.xmlin, "//jtree");
+        apmlmanager.jtreemodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jtree");
         
         //
-        apmlmanager.jlabels = apmlmanager.generatemodels(fileguardian.xmlin, "//jlabels");
+        apmlmanager.jlabelmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jlabels");
         
         //
-        apmlmanager.jprogressbars = apmlmanager.generatemodels(fileguardian.xmlin, "//jprogressbar");
+        apmlmanager.jprogressbarmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jprogressbar");
         
         //
-        apmlmanager.jseparators = apmlmanager.generatemodels(fileguardian.xmlin, "//jseparator");
+        apmlmanager.jseparatormodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jseparator");
         
         //
-        apmlmanager.jtooltips = apmlmanager.generatemodels(fileguardian.xmlin, "//jtooltip");
+        apmlmanager.jtooltipmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jtooltip");
         
         //
-        apmlmanager.japplets = apmlmanager.generatemodels(fileguardian.xmlin, "//japplet");
+        apmlmanager.jappletmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//japplet");
         
         //
-        apmlmanager.jdialogs = apmlmanager.generatemodels(fileguardian.xmlin, "//jdialog");
+        apmlmanager.jdialogmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jdialog");
         
         //
-        apmlmanager.jpanels = apmlmanager.generatemodels(fileguardian.xmlin, "//jpanel");
+        apmlmanager.jpanelmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jpanel");
         
         //
-        apmlmanager.jscrollpanes = apmlmanager.generatemodels(fileguardian.xmlin, "//jscrollpane");
+        apmlmanager.jscrollpanemodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jscrollpane");
         
         //
-        apmlmanager.jsplitpanes = apmlmanager.generatemodels(fileguardian.xmlin, "//jsplitpane");
+        apmlmanager.jsplitpanemodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jsplitpane");
         
         //
-        apmlmanager.jtabbedpanes = apmlmanager.generatemodels(fileguardian.xmlin, "//jtabbedpane");
+        apmlmanager.jtabbedpanemodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jtabbedpane");
         
         //
-        apmlmanager.jtoolbars = apmlmanager.generatemodels(fileguardian.xmlin, "//jtoolbar");
+        apmlmanager.jtoolbarmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jtoolbar");
         
         //
-        apmlmanager.jinternalframes = apmlmanager.generatemodels(fileguardian.xmlin, "//jinternalframe");
+        apmlmanager.jinternalframemodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jinternalframe");
         
         //
-        apmlmanager.jlayeredpanes = apmlmanager.generatemodels(fileguardian.xmlin, "//jlayeredpane");
+        apmlmanager.jlayeredpanemodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jlayeredpane");
         
         //
-        apmlmanager.jrootpanes = apmlmanager.generatemodels(fileguardian.xmlin, "//jrootpane");
+        apmlmanager.jrootpanemodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jrootpane");
     }
     
     public void settempfiles(Uiapmlmanager apmlmanager)

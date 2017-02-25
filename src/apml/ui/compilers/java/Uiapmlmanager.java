@@ -21,6 +21,34 @@ public class Uiapmlmanager
     ArrayList<? extends JComponent> framemodels;
     ArrayList<? extends JComponent> jcheckboxmodels;
     ArrayList<? extends JComponent> jcomboboxmodels;
+    ArrayList<? extends JComponent> jlistmodels;
+    ArrayList<? extends JComponent> jmenumodels;
+    ArrayList<? extends JComponent> jradiobuttonmodels;
+    ArrayList<? extends JComponent> jslidermodels;
+    ArrayList<? extends JComponent> jspinnermodels;
+    ArrayList<? extends JComponent> jtextfieldmodels;
+    ArrayList<? extends JComponent> jpasswordfieldmodels;  
+    ArrayList<? extends JComponent> jcolorchoosermodels;
+    ArrayList<? extends JComponent> jeditorpanemodels;
+    ArrayList<? extends JComponent> jtextpanemodels;
+    ArrayList<? extends JComponent> jfilechoosermodels;
+    ArrayList<? extends JComponent> jtablemodels;
+    ArrayList<? extends JComponent> jtextareamodels;
+    ArrayList<? extends JComponent> jtreemodels;    
+    ArrayList<? extends JComponent> jlabelmodels;
+    ArrayList<? extends JComponent> jprogressbarmodels;
+    ArrayList<? extends JComponent> jseparatormodels;
+    ArrayList<? extends JComponent> jtooltipmodels;
+    ArrayList<? extends JComponent> jappletmodels;
+    ArrayList<? extends JComponent> jdialogmodels; 
+    ArrayList<? extends JComponent> jpanelmodels;
+    ArrayList<? extends JComponent> jscrollpanemodels;
+    ArrayList<? extends JComponent> jsplitpanemodels;
+    ArrayList<? extends JComponent> jtabbedpanemodels;
+    ArrayList<? extends JComponent> jtoolbarmodels;
+    ArrayList<? extends JComponent> jinternalframemodels;    
+    ArrayList<? extends JComponent> jlayeredpanemodels;
+    ArrayList<? extends JComponent> jrootpanemodels;
         
     public ArrayList<? extends JComponent> generatemodels(File file, String tagname)            
     {
