@@ -5,10 +5,20 @@
  */
 package apml.ui.compilers.java;
 
+import com.sun.codemodel.JCodeModel;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 
 /**
@@ -16,6 +26,9 @@ import javax.swing.JComponent;
  */
 public class Uiapmlmanager
 {
+    Document doc;
+    XPath xpath;
+    
     ArrayList<? extends JComponent> jbuttonmodels;
     ArrayList<? extends JComponent> jframemodels;
     ArrayList<? extends JComponent> framemodels;
@@ -50,69 +63,133 @@ public class Uiapmlmanager
     ArrayList<? extends JComponent> jlayeredpanemodels;
     ArrayList<? extends JComponent> jrootpanemodels;
         
-    public ArrayList<? extends JComponent> generatemodels(File file, String tagname)            
+    public ArrayList<? extends JComponent> generatemodels(File apmlin, String tagname)            
     {
-        switch(tagname)
+        try
         {
-            case "//jbutton": return null;
+            this.xpath = XPathFactory.newInstance().newXPath();
             
-            case "//jframe": return null; 
-            
-            case "//frame": return null; 
-            
-            case "//jcheckbox": return null; 
-            
-            case "//jcombobox": return null; 
-            
-            case "//jlist": return null; 
-            
-            case "//jmenu": return null; 
-            
-            case "//jradiobutton": return null; 
-            
-            case "//jslider": return null; 
-            
-            case "//jspinner": return null; 
-            
-            case "//jtextfield": return null; 
-            
-            case "//jpasswordfield": return null; 
-            
-            case "//jcolorchooser": return null; 
-            
-            case "//jeditorpane": return null; 
-            
-            case "//jtextpane": return null; 
-            
-            case "//jtree": return null; 
-            
-            case "//jlabel": return null; 
-            
-            case "//jprogressbar": return null; 
-            
-            case "//jseparator": return null;
-            
-            case "//jtooltip": return null;
-            
-            case "//japplet": return null;
-            
-            case "//jpanel": return null;
-            
-            case "//jscrollpane": return null;
-            
-            case "//jsplitpane": return null;
-            
-            case "//jtabbedpane": return null;
-            
-            case "//jtoolbar": return null;
-            
-            case "//jinternalframe": return null;
-            
-            case "//jlayeredpane": return null;
-            
-            case "//jrootpane": return null;            
+            this.doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(apmlin);        
+        
+            switch(tagname)
+            {
+                case "//jbutton": return getjbuttonjcmmodels(apmlin, tagname);
+
+                case "//jframe": return null; 
+
+                case "//frame": return null; 
+
+                case "//jcheckbox": return null; 
+
+                case "//jcombobox": return null; 
+
+                case "//jlist": return null; 
+
+                case "//jmenu": return null; 
+
+                case "//jradiobutton": return null; 
+
+                case "//jslider": return null; 
+
+                case "//jspinner": return null; 
+
+                case "//jtextfield": return null; 
+
+                case "//jpasswordfield": return null; 
+
+                case "//jcolorchooser": return null; 
+
+                case "//jeditorpane": return null; 
+
+                case "//jtextpane": return null; 
+
+                case "//jtree": return null; 
+
+                case "//jlabel": return null; 
+
+                case "//jprogressbar": return null; 
+
+                case "//jseparator": return null;
+
+                case "//jtooltip": return null;
+
+                case "//japplet": return null;
+
+                case "//jpanel": return null;
+
+                case "//jscrollpane": return null;
+
+                case "//jsplitpane": return null;
+
+                case "//jtabbedpane": return null;
+
+                case "//jtoolbar": return null;
+
+                case "//jinternalframe": return null;
+
+                case "//jlayeredpane": return null;
+
+                case "//jrootpane": return null;            
+            }
+        
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
         }
         
         return new ArrayList<JButton>(1);
+    }
+    
+    protected ArrayList<? extends JComponent> getjbuttonjcmmodels(File apml, String tagname)
+    {
+        NodeList nodejbuttons = null;
+        
+        ArrayList<? extends JComponent> jcmjbuttons = null;
+        
+        try
+        {                                        
+            nodejbuttons = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);
+            
+            for(int i=0; i<nodejbuttons.getLength(); i++)
+            {
+                Element current = (Element)nodejbuttons.item(i);
+                
+                JCodeModel jcodemodel = new JCodeModel();
+                
+                //would prefer to go right to jcm from here
+                current.getAttribute("setAction");                                                
+                                
+                current.getAttribute("setBorderpainted");
+                
+                current.getAttribute("setDisabledicon");
+                
+                current.getAttribute("setEnabled");                
+                
+                current.getAttribute("setIcon");
+                
+                current.getAttribute("setLabel");
+                
+                current.getAttribute("setLayout");
+                
+                current.getAttribute("setMargin");
+
+                current.getAttribute("setModel");
+                
+                current.getAttribute("setName");                                                
+                
+                current.getAttribute("setPressedIcon");
+                
+                current.getAttribute("setRolloverIcon");                
+                
+                current.getAttribute("setText");
+            }
+        }
+        catch(Exception e)
+        {
+            Logger.getLogger("").log(Level.WARNING,e.getLocalizedMessage(),e);
+        }         
+        
+        return jcmjbuttons;
     }
 }
