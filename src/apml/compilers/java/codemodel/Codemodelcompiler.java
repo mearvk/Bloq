@@ -24,15 +24,15 @@ import java.util.logging.Logger;
  */
 public class Codemodelcompiler extends Stdabstractcompiler
 {        
-    protected final Integer hash = 0x888fe8;
-       
-    protected Logger logger = Logger.getLogger(Codemodelcompiler.class.getName());    
+    protected final Integer hash = 0x888fe8;              
     
     public Bloqapmlmanager apmlmanager = new Bloqapmlmanager(); 
     
     public Bloqjcmmanager jcmmanager = new Bloqjcmmanager();
     
     public Bloqfileguardian fileguardian = new Bloqfileguardian();
+    
+    protected Logger logger = Logger.getLogger(Codemodelcompiler.class.getName()); 
     
     public static void main(String...args) 
     {                          
