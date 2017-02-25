@@ -15,26 +15,26 @@ import org.w3c.dom.NodeList;
  *
  * @author max rupplin
  */
-public class Jcmjbuttonbuilder 
-{        
-    public Jcmjbuttonbuilder builder = this;
+public class Jcmjradiobuttonbuilder
+{
+    public Jcmjradiobuttonbuilder builder = this;
     
     public Document doc;
     
-    public Element xml;    
+    public Element xml;
     
-    public File apml;            
+    public File apml;
     
-    public NodeList nodes;    
+    public NodeList nodes;
     
-    public XPath xpath;
-            
-    public Jcmjbuttonbuilder(File apml)
+    public XPath xpath;    
+    
+    public Jcmjradiobuttonbuilder(File apml)
     {
         this.apml = apml;
         
-        this.xpath = XPathFactory.newInstance().newXPath();          
-    }
+        this.xpath = XPathFactory.newInstance().newXPath();            
+    }    
     
     public ArrayList<JCodeModel> build(String tagname)
     {
@@ -77,5 +77,5 @@ public class Jcmjbuttonbuilder
         }
         
         return null;
-    }
+    }    
 }

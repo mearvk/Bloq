@@ -15,9 +15,9 @@ import org.w3c.dom.NodeList;
  *
  * @author max rupplin
  */
-public class Jcmjbuttonbuilder 
+public class Jcmjframebuilder 
 {        
-    public Jcmjbuttonbuilder builder = this;
+    public Jcmjframebuilder builder = this;
     
     public Document doc;
     
@@ -29,7 +29,7 @@ public class Jcmjbuttonbuilder
     
     public XPath xpath;
             
-    public Jcmjbuttonbuilder(File apml)
+    public Jcmjframebuilder(File apml)
     {
         this.apml = apml;
         

@@ -15,9 +15,9 @@ import org.w3c.dom.NodeList;
  *
  * @author max rupplin
  */
-public class Jcmjbuttonbuilder 
+public class Jcmjcolorchooserbuilder 
 {        
-    public Jcmjbuttonbuilder builder = this;
+    public Jcmjcolorchooserbuilder builder = this;
     
     public Document doc;
     
@@ -29,7 +29,7 @@ public class Jcmjbuttonbuilder
     
     public XPath xpath;
             
-    public Jcmjbuttonbuilder(File apml)
+    public Jcmjcolorchooserbuilder(File apml)
     {
         this.apml = apml;
         

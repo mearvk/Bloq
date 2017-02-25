@@ -15,9 +15,9 @@ import org.w3c.dom.NodeList;
  *
  * @author max rupplin
  */
-public class Jcmjbuttonbuilder 
+public class Jcmjcheckboxbuilder 
 {        
-    public Jcmjbuttonbuilder builder = this;
+    public Jcmjcheckboxbuilder builder = this;
     
     public Document doc;
     
@@ -29,7 +29,7 @@ public class Jcmjbuttonbuilder
     
     public XPath xpath;
             
-    public Jcmjbuttonbuilder(File apml)
+    public Jcmjcheckboxbuilder(File apml)
     {
         this.apml = apml;
         
