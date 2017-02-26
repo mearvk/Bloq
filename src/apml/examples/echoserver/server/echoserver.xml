@@ -8,8 +8,10 @@
         <echoserver extends="ServerSocketImpl" class="Echoserver"></echoserver>   
     </definitions>                           
         
+    <manager id="0x0001009f" worldid="costarica/xxx/yyy/zzz/bodosysprim"></manager>
+        
     <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
-        <system id="echoserver" start="true" bndi="//echoserver/systems/{this.id}" class="Echoserversystem">                                       
+        <system id="echoserver" start="true" bndi="//echoserver/systems/{this.id}" class="Echoserversystem">
             
             <object id="echoserver" start="true" bndi="//echoserver/objects/1" class="Echoserver">                       
                 <listener id="esocl" bndi="//echoserver/listeners/onconnect/{this.id}" class="Onconnectlistener" with="*">
