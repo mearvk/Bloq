@@ -7,7 +7,6 @@ import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
@@ -108,7 +107,7 @@ public class Jcmjmenuitembuilder
                 
                 try{constructor.body().directStatement("this.setRolloverIcon("+xml.getAttribute("setRolloverIcon")+");");               }catch(Exception e){}                    
 
-                try{constructor.body().directStatement("this.setText("+xml.getAttribute("setText")+");");                               }catch(Exception e){}   
+                try{constructor.body().directStatement("this.setText(\""+xml.getAttribute("setText")+"\");");                               }catch(Exception e){}   
                 
                 try{constructor.body().directStatement("this.setSize("+xml.getAttribute("setSize")+");");                               }catch(Exception e){}
                 
