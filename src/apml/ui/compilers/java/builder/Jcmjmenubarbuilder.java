@@ -8,6 +8,7 @@ import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JMenuBar;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -20,31 +21,26 @@ import org.w3c.dom.NodeList;
  *
  * @author max rupplin
  */
-public class Jcmjbuttonbuilder 
-{        
-    public Jcmjbuttonbuilder builder = this;
+public class Jcmjmenubarbuilder
+{
+    public Jcmjmenubarbuilder builder = this;
     
     public Document doc;
     
-    public Element xml;    
+    public Element xml;
     
-    public File apml;            
+    public File apml;
     
-    public NodeList nodes;    
+    public NodeList nodes;
     
-    public XPath xpath;
+    public XPath xpath;    
     
-    public static void main(String...args)
-    {
-        new Jcmjbuttonbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jbutton");
-    }
-            
-    public Jcmjbuttonbuilder(File apml)
+    public Jcmjmenubarbuilder(File apml)
     {
         this.apml = apml;
         
-        this.xpath = XPathFactory.newInstance().newXPath();          
-    }
+        this.xpath = XPathFactory.newInstance().newXPath();            
+    }    
     
     public ArrayList<JCodeModel> build(String tagname)
     {
@@ -62,9 +58,9 @@ public class Jcmjbuttonbuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                
                 
-                JDefinedClass jdefinedclass = jpackage._class("JButton_"+String.format("%1$03d",i));     
+                JDefinedClass jdefinedclass = jpackage._class("JMenuBar_"+String.format("%1$03d",i));     
                 
-                jdefinedclass._extends(JButton.class);
+                jdefinedclass._extends(JMenuBar.class);
                 
                 JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);                               
                 
@@ -136,5 +132,5 @@ public class Jcmjbuttonbuilder
         }
         
         return null;
-    }
+    }    
 }
