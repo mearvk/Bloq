@@ -12,6 +12,13 @@ public class Stduserinterfacecompiler
     
     public Uifileguardian fileguardian = new Uifileguardian(); 
     
+    public static void main(String...args)
+    {
+        Stduserinterfacecompiler compiler = new Stduserinterfacecompiler();
+        
+        compiler.setapmlfiles(compiler.apmlmanager);
+    }
+    
     public Stduserinterfacecompiler()
     {
         
@@ -39,6 +46,12 @@ public class Stduserinterfacecompiler
         
         //
         apmlmanager.jmenumodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jmenu");
+        
+        //
+        apmlmanager.jmenubarmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jmenubar");
+
+        //
+        apmlmanager.jmenuitemmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jmenuitem");        
         
         //
         apmlmanager.jradiobuttonmodels = apmlmanager.generatemodels(fileguardian.xmlin, "//jradiobutton");

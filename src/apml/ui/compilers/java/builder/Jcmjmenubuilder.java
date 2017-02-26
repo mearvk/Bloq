@@ -113,22 +113,19 @@ public class Jcmjmenubuilder
                 try{constructor.body().directStatement("this.setSize("+xml.getAttribute("setSize")+");");                               }catch(Exception e){}
                 
                 try{constructor.body().directStatement("this.setToolTipText("+xml.getAttribute("setToolTipText")+");");                 }catch(Exception e){}
+                
+                try{constructor.body().directStatement("this.setVisible("+xml.getAttribute("setVisible")+");");                         }catch(Exception e){}
+                
+                jcodemodel.build(new File("/home/oem/Desktop/UI"));
             }
         }
         catch(Exception exception)
         {
-            exception.printStackTrace();
+            
         }
         finally
         {
-            try
-            {
-                jcodemodel.build(new File("/home/oem/Desktop/UI"));
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
+
         }
         
         return null;

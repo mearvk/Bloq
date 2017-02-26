@@ -113,6 +113,8 @@ public class Jcmjmenubarbuilder
                 try{constructor.body().directStatement("this.setSize("+xml.getAttribute("setSize")+");");                               }catch(Exception e){}
                 
                 try{constructor.body().directStatement("this.setToolTipText("+xml.getAttribute("setToolTipText")+");");                 }catch(Exception e){}
+                
+                try{constructor.body().directStatement("this.setVisible("+xml.getAttribute("setVisible")+");");                         }catch(Exception e){}
             }
         }
         catch(Exception exception)

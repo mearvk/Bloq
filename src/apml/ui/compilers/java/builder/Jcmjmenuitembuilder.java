@@ -8,6 +8,7 @@ import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JMenuItem;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -112,6 +113,8 @@ public class Jcmjmenuitembuilder
                 try{constructor.body().directStatement("this.setSize("+xml.getAttribute("setSize")+");");                               }catch(Exception e){}
                 
                 try{constructor.body().directStatement("this.setToolTipText("+xml.getAttribute("setToolTipText")+");");                 }catch(Exception e){}
+                
+                try{constructor.body().directStatement("this.setVisible("+xml.getAttribute("setVisible")+");");                         }catch(Exception e){}
             }
         }
         catch(Exception exception)

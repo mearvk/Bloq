@@ -57,6 +57,8 @@ import apml.ui.compilers.java.builder.Jcmjcheckboxbuilder;
 import apml.ui.compilers.java.builder.Jcmjcomboboxbuilder;
 
 import apml.ui.compilers.java.builder.Jcmjframebuilder;
+import apml.ui.compilers.java.builder.Jcmjmenubarbuilder;
+import apml.ui.compilers.java.builder.Jcmjmenuitembuilder;
 
 import com.sun.codemodel.JCodeModel;
 
@@ -82,6 +84,10 @@ public class Uiapmlmanager
     public ArrayList<JCodeModel> jlistmodels;
     
     public ArrayList<JCodeModel> jmenumodels;
+    
+    public ArrayList<JCodeModel> jmenubarmodels;
+    
+    public ArrayList<JCodeModel> jmenuitemmodels;
     
     public ArrayList<JCodeModel> jradiobuttonmodels;
     
@@ -152,6 +158,10 @@ public class Uiapmlmanager
             case "//jlist": return new Jcmjlistbuilder(apml).builder.build(tagname); 
 
             case "//jmenu": return new Jcmjmenubuilder(apml).builder.build(tagname);
+            
+            case "//jmenubar": return new Jcmjmenubarbuilder(apml).builder.build(tagname);
+            
+            case "//jmenuitem": return new Jcmjmenuitembuilder(apml).builder.build(tagname);
 
             case "//jradiobutton": return new Jcmjradiobuttonbuilder(apml).builder.build(tagname); 
 
