@@ -7,8 +7,6 @@ import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 import javax.swing.JSpinner;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
@@ -71,6 +69,8 @@ public class Jcmjspinnerbuilder extends Jcmabstractbuilder
                 this.setconstructor(jdefinedclass, xml);   
                 
                 jcodemodel.build(new File("/home/oem/Desktop/UI"));
+                                
+                jcodemodels.add(jcodemodel);
             }                                    
         }
         catch(Exception exception)

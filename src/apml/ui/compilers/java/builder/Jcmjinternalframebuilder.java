@@ -71,6 +71,8 @@ public class Jcmjinternalframebuilder extends Jcmabstractbuilder
                 this.setconstructor(jdefinedclass, xml);
                 
                 jcodemodel.build(new File("/home/oem/Desktop/UI"));
+                                
+                jcodemodels.add(jcodemodel);
             }                        
         }
         catch(Exception exception)
