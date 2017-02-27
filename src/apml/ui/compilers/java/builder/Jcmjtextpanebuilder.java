@@ -7,8 +7,6 @@ import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 import javax.swing.JTextPane;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;

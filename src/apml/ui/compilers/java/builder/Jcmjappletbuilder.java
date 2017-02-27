@@ -5,7 +5,6 @@ import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
-import java.awt.Frame;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JApplet;
