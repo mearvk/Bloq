@@ -55,12 +55,12 @@ public class Jcmjtreebuilder extends Jcmabstractbuilder
             this.nodes = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);            
             
             for(int i=0; i<nodes.getLength(); i++)
-            {            
+            {   
+                this.xml = (Element)nodes.item(i); 
+                
                 JCodeModel jcodemodel = new JCodeModel();
             
-                JPackage jpackage = jcodemodel._package("org.widgets");
-                
-                this.xml = (Element)nodes.item(i);                                                
+                JPackage jpackage = jcodemodel._package("org.widgets");                                                                               
                 
                 JDefinedClass jdefinedclass = jpackage._class("JTree_"+String.format("%1$03d",i));     
                 
