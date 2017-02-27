@@ -8,7 +8,7 @@ import apml.ui.compilers.java.builder.Jcmjmenubuilder;
 
 import apml.ui.compilers.java.builder.Jcmjappletbuilder;
 
-import apml.ui.compilers.java.builder.Jcmjpasswordbuilder;
+import apml.ui.compilers.java.builder.Jcmjpasswordfieldbuilder;
 
 import apml.ui.compilers.java.builder.Jcmjprogressbarbuilder;
 
@@ -171,7 +171,7 @@ public class Uiapmlmanager
 
             case "//jtextfield": return new Jcmjtextfieldbuilder(apml).builder.build(tagname); 
 
-            case "//jpasswordfield": return new Jcmjpasswordbuilder(apml).builder.build(tagname); 
+            case "//jpasswordfield": return new Jcmjpasswordfieldbuilder(apml).builder.build(tagname); 
 
             case "//jcolorchooser": return new Jcmjcolorchooserbuilder(apml).builder.build(tagname); 
 

@@ -5,10 +5,9 @@ import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
+import java.awt.Frame;
 import java.io.File;
 import java.util.ArrayList;
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -63,15 +62,11 @@ public class Jcmframebuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                
                 
-                JDefinedClass jdefinedclass = jpackage._class("JMenuBar_"+String.format("%1$03d",i));     
+                JDefinedClass jdefinedclass = jpackage._class("Frame_"+String.format("%1$03d",i));     
                 
-                jdefinedclass._extends(JMenuBar.class);
+                jdefinedclass._extends(Frame.class);                
                 
-                this.xpath.evaluate("./ancestor::parent", nodes.item(i), XPathConstants.STRING);
-
-                jdefinedclass.field(JMod.PUBLIC, Object.class, "ParentName");        
-                
-                JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);                               
+                JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);
                 
                 if(xml.getAttribute("setAutoscrolls")!=null && xml.getAttribute("setAutoscrolls").length()>0)
                 {

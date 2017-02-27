@@ -7,6 +7,7 @@ import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JList;
 import javax.swing.JMenuItem;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
@@ -57,9 +58,9 @@ public class Jcmjlistbuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                
                 
-                JDefinedClass jdefinedclass = jpackage._class("JMenuItem_"+String.format("%1$03d",i));   
+                JDefinedClass jdefinedclass = jpackage._class("JList_"+String.format("%1$03d",i));   
                 
-                jdefinedclass._extends(JMenuItem.class);
+                jdefinedclass._extends(JList.class);
                 
                 JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);      
                 

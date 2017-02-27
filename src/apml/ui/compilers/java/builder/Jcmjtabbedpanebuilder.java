@@ -8,6 +8,7 @@ import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JMenuBar;
+import javax.swing.JTabbedPane;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -57,9 +58,9 @@ public class Jcmjtabbedpanebuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                
                 
-                JDefinedClass jdefinedclass = jpackage._class("JMenuBar_"+String.format("%1$03d",i));     
+                JDefinedClass jdefinedclass = jpackage._class("JTabbedPane_"+String.format("%1$03d",i));     
                 
-                jdefinedclass._extends(JMenuBar.class);
+                jdefinedclass._extends(JTabbedPane.class);
                 
                 JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);                               
                 

@@ -7,6 +7,7 @@ import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
@@ -57,9 +58,9 @@ public class Jcmjinternalframebuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                
                 
-                JDefinedClass jdefinedclass = jpackage._class("JMenuBar_"+String.format("%1$03d",i));     
+                JDefinedClass jdefinedclass = jpackage._class("JInternalFrame_"+String.format("%1$03d",i));     
                 
-                jdefinedclass._extends(JMenuBar.class);
+                jdefinedclass._extends(JInternalFrame.class);
                 
                 JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);                               
                 

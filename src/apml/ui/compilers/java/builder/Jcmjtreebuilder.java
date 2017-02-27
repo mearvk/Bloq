@@ -57,9 +57,9 @@ public class Jcmjtreebuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                
                 
-                JDefinedClass jdefinedclass = jpackage._class("JMenuBar_"+String.format("%1$03d",i));     
+                JDefinedClass jdefinedclass = jpackage._class("JTree_"+String.format("%1$03d",i));     
                 
-                jdefinedclass._extends(JMenuBar.class);
+                jdefinedclass._extends(JTree.class);
                 
                 JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);                               
                 

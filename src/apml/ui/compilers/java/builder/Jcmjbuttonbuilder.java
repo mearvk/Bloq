@@ -63,9 +63,9 @@ public class Jcmjbuttonbuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                
                 
-                JDefinedClass jdefinedclass = jpackage._class("JMenuBar_"+String.format("%1$03d",i));     
+                JDefinedClass jdefinedclass = jpackage._class("JButton_"+String.format("%1$03d",i));     
                 
-                jdefinedclass._extends(JMenuBar.class);
+                jdefinedclass._extends(JButton.class);
                 
                 JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);                               
                 

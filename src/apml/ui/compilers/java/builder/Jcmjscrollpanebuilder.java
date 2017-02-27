@@ -8,6 +8,7 @@ import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JMenuBar;
+import javax.swing.JScrollPane;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -57,9 +58,9 @@ public class Jcmjscrollpanebuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                
                 
-                JDefinedClass jdefinedclass = jpackage._class("JMenuBar_"+String.format("%1$03d",i));     
+                JDefinedClass jdefinedclass = jpackage._class("JScrollPane_"+String.format("%1$03d",i));     
                 
-                jdefinedclass._extends(JMenuBar.class);
+                jdefinedclass._extends(JScrollPane.class);
                 
                 JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);                               
                 

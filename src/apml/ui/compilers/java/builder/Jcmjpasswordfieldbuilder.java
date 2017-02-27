@@ -8,6 +8,7 @@ import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JMenuBar;
+import javax.swing.JPasswordField;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -20,9 +21,9 @@ import org.w3c.dom.NodeList;
  *
  * @author max rupplin
  */
-public class Jcmjpasswordbuilder
+public class Jcmjpasswordfieldbuilder
 {
-    public Jcmjpasswordbuilder builder = this;
+    public Jcmjpasswordfieldbuilder builder = this;
     
     public Document doc;
     
@@ -34,7 +35,7 @@ public class Jcmjpasswordbuilder
     
     public XPath xpath;    
     
-    public Jcmjpasswordbuilder(File apml)
+    public Jcmjpasswordfieldbuilder(File apml)
     {
         this.apml = apml;
         
@@ -57,9 +58,9 @@ public class Jcmjpasswordbuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                
                 
-                JDefinedClass jdefinedclass = jpackage._class("JMenuBar_"+String.format("%1$03d",i));     
+                JDefinedClass jdefinedclass = jpackage._class("JPasswordField_"+String.format("%1$03d",i));     
                 
-                jdefinedclass._extends(JMenuBar.class);
+                jdefinedclass._extends(JPasswordField.class);
                 
                 JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);                               
                 
