@@ -45,7 +45,7 @@ public class Jcmjappletbuilder extends Jcmabstractbuilder
     
     public ArrayList<JCodeModel> build(String tagname)
     {
-        JCodeModel jcodemodel = new JCodeModel();
+        ArrayList<JCodeModel> jcodemodels = new ArrayList<>();
         
         try
         {        
@@ -56,6 +56,8 @@ public class Jcmjappletbuilder extends Jcmabstractbuilder
             for(int i=0; i<nodes.getLength(); i++)
             {            
                 this.xml = (Element)nodes.item(i);
+
+                JCodeModel jcodemodel = new JCodeModel();                
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                
                 
@@ -65,10 +67,10 @@ public class Jcmjappletbuilder extends Jcmabstractbuilder
                 
                 this.setsuperclass(jdefinedclass, JApplet.class);
                 
-                this.setconstructor(jdefinedclass, xml);                
+                this.setconstructor(jdefinedclass, xml);  
+                
+                jcodemodel.build(new File("/home/oem/Desktop/UI"));
             }
-            
-            jcodemodel.build(new File("/home/oem/Desktop/UI"));
         }
         catch(Exception exception)
         {

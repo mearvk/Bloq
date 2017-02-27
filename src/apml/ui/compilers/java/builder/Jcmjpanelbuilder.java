@@ -46,30 +46,32 @@ public class Jcmjpanelbuilder extends Jcmabstractbuilder
     
     public ArrayList<JCodeModel> build(String tagname)
     {
-        JCodeModel jcodemodel = new JCodeModel();
+        ArrayList<JCodeModel> jcodemodels = new ArrayList<>();
         
         try
         {        
             this.doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(apml);
         
-            this.nodes = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);
-            
-            JPackage jpackage = jcodemodel._package("org.widgets");
+            this.nodes = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);           
             
             for(int i=0; i<nodes.getLength(); i++)
             {            
-                this.xml = (Element)nodes.item(i);                                                
+                this.xml = (Element)nodes.item(i);
+
+                JCodeModel jcodemodel = new JCodeModel();
                 
-                JDefinedClass jdefinedclass = jpackage._class("JFrame_"+String.format("%1$03d",i));     
+                JPackage jpackage = jcodemodel._package("org.widgets");                                            
+                
+                JDefinedClass jdefinedclass = jpackage._class("JPanel_"+String.format("%1$03d",i));     
                 
                 JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);
                 
-                this.setsuperclass(jdefinedclass, JFrame.class);
+                this.setsuperclass(jdefinedclass, JPanel.class);
                 
-                this.setconstructor(jdefinedclass, xml);   
-            }
-            
-            jcodemodel.build(new File("/home/oem/Desktop/UI"));
+                this.setconstructor(jdefinedclass, xml); 
+                
+                jcodemodel.build(new File("/home/oem/Desktop/UI"));
+            }                        
         }
         catch(Exception exception)
         {

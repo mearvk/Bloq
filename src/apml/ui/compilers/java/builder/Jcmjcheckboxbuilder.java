@@ -46,19 +46,21 @@ public class Jcmjcheckboxbuilder extends Jcmabstractbuilder
     
     public ArrayList<JCodeModel> build(String tagname)
     {
-        JCodeModel jcodemodel = new JCodeModel();
+        ArrayList<JCodeModel> jcodemodels = new ArrayList<>();
         
         try
         {        
             this.doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(apml);
         
-            this.nodes = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);
-            
-            JPackage jpackage = jcodemodel._package("org.widgets");
+            this.nodes = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);            
             
             for(int i=0; i<nodes.getLength(); i++)
             {            
-                this.xml = (Element)nodes.item(i);                                                
+                this.xml = (Element)nodes.item(i);
+
+                JCodeModel jcodemodel = new JCodeModel();
+                
+                JPackage jpackage = jcodemodel._package("org.widgets");                                                 
                 
                 JDefinedClass jdefinedclass = jpackage._class("JCheckBox_"+String.format("%1$03d",i));     
                 
@@ -67,9 +69,9 @@ public class Jcmjcheckboxbuilder extends Jcmabstractbuilder
                 this.setsuperclass(jdefinedclass, JCheckBox.class);
                 
                 this.setconstructor(jdefinedclass, xml);
+                
+                jcodemodel.build(new File("/home/oem/Desktop/UI"));
             }
-            
-            jcodemodel.build(new File("/home/oem/Desktop/UI"));
         }
         catch(Exception exception)
         {
