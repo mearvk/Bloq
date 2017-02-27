@@ -58,9 +58,9 @@ public class Jcmjpasswordfieldbuilder extends Jcmabstractbuilder
 
                 JCodeModel jcodemodel = new JCodeModel();
                 
-                JPackage jpackage = jcodemodel._package("org.widgets"); 
+                JPackage jpackage = jcodemodel._package("org.widgets");
                 
-                JDefinedClass jdefinedclass = jpackage._class("JPasswordField_"+String.format("%1$03d",i));                     
+                JDefinedClass jdefinedclass = jpackage._class("JPasswordField_"+String.format("%1$03d",i));                
                 
                 this.setsuperclass(jdefinedclass, JPasswordField.class);
                 

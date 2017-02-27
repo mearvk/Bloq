@@ -72,8 +72,13 @@ public abstract class Jcmabstractbuilder
                 
             if(xml.getAttribute("setComponentPopupMenu")!=null && xml.getAttribute("setComponentPopupMenu").length()>0)
             {
-                try{constructor.body().directStatement("this.setComponentPopupMenu("+xml.getAttribute("setComponentPopupMenu")+");");   }catch(Exception e){}                      
+                try{constructor.body().directStatement("this.setComponentPopupMenu("+xml.getAttribute("setComponentPopupMenu")+");");   }catch(Exception e){}                                   
             }
+            
+            if(xml.getAttribute("setDefaultCloseOperation")!=null && xml.getAttribute("setDefaultCloseOperation").length()>0)
+            {
+                try{constructor.body().directStatement("this.setDefaultCloseOperation("+xml.getAttribute("setDefaultCloseOperation")+");");   }catch(Exception e){}                                   
+            }                    
                 
             if(xml.getAttribute("setDisabledIcon")!=null && xml.getAttribute("setDisabledIcon").length()>0)
             {
@@ -92,12 +97,12 @@ public abstract class Jcmabstractbuilder
 
             if(xml.getAttribute("setIcon")!=null && xml.getAttribute("setIcon").length()>0)
             {
-                try{constructor.body().directStatement("this.setIcon("+xml.getAttribute("setIcon")+");");                                }catch(Exception e){}
+                try{constructor.body().directStatement("this.setIcon("+xml.getAttribute("setIcon")+");");                               }catch(Exception e){}
             }
 
             if(xml.getAttribute("setLabel")!=null && xml.getAttribute("setLabel").length()>0)
             {
-                try{constructor.body().directStatement("this.setLabel(\""+xml.getAttribute("setLabel")+"\");");                              }catch(Exception e){}
+                try{constructor.body().directStatement("this.setLabel(\""+xml.getAttribute("setLabel")+"\");");                         }catch(Exception e){}
             }
                 
             if(xml.getAttribute("setLayout")!=null && xml.getAttribute("setLayout").length()>0)
@@ -132,7 +137,7 @@ public abstract class Jcmabstractbuilder
                                 
             if(xml.getAttribute("setName")!=null && xml.getAttribute("setName").length()>0)
             {
-                try{constructor.body().directStatement("this.setName(\""+xml.getAttribute("setName")+"\");");                               }catch(Exception e){}
+                try{constructor.body().directStatement("this.setName(\""+xml.getAttribute("setName")+"\");");                           }catch(Exception e){}
             }
                 
             if(xml.getAttribute("setPressedIcon")!=null && xml.getAttribute("setPressedIcon").length()>0)
@@ -149,6 +154,11 @@ public abstract class Jcmabstractbuilder
             {
                 try{constructor.body().directStatement("this.setText(\""+xml.getAttribute("setText")+"\");");                           }catch(Exception e){}   
             }
+            
+            if(xml.getAttribute("setTitle")!=null && xml.getAttribute("setTitle").length()>0)
+            {
+                try{constructor.body().directStatement("this.setTitle(\""+xml.getAttribute("setTitle")+"\");");                         }catch(Exception e){}   
+            }            
                 
             if(xml.getAttribute("setSize")!=null && xml.getAttribute("setSize").length()>0)
             {
