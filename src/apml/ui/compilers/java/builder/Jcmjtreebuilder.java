@@ -8,6 +8,7 @@ import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JMenuBar;
+import javax.swing.JTree;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
