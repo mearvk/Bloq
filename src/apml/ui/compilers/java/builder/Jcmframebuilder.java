@@ -2,8 +2,6 @@ package apml.ui.compilers.java.builder;
 
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JMethod;
-import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 import java.awt.Frame;
 import java.io.File;
@@ -71,6 +69,10 @@ public class Jcmframebuilder extends Jcmabstractbuilder
                 
                 this.setconstructor(jdefinedclass, xml);
                 
+                this.setparent(jdefinedclass, nodes.item(i));
+                
+                this.setchildren(jdefinedclass, nodes.item(i));
+                
                 jcodemodel.build(new File("/home/oem/Desktop/UI"));
                 
                 jcodemodels.add(jcodemodel);
@@ -85,13 +87,13 @@ public class Jcmframebuilder extends Jcmabstractbuilder
     }   
 
     @Override
-    public void setparent(Node parent)
+    public void setparent(JDefinedClass jdefinedclass, Node parent)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setchildren(NodeList children)
+    public void setchildren(JDefinedClass jdefinedclass, Node node)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

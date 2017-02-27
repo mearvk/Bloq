@@ -2,7 +2,6 @@ package apml.ui.compilers.java.builder;
 
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 import java.io.File;
@@ -66,6 +65,10 @@ public class Jcmjmenubarbuilder extends Jcmabstractbuilder
                 
                 this.setconstructor(jdefinedclass, xml);   
                 
+                this.setparent(jdefinedclass, nodes.item(i));
+                
+                this.setchildren(jdefinedclass, nodes.item(i));
+                
                 jcodemodel.build(new File("/home/oem/Desktop/UI"));
                                 
                 jcodemodels.add(jcodemodel);
@@ -80,14 +83,41 @@ public class Jcmjmenubarbuilder extends Jcmabstractbuilder
     }    
 
     @Override
-    public void setparent(Node parent)
+    public void setparent(JDefinedClass jdefinedclass, Node node)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try
+        {
+            String tagname = (String)this.xpath.evaluate("name(./parent::*)", node, XPathConstants.STRING);
+            
+            String fullclassname = jdefinedclass.fullName();
+            
+            jdefinedclass.direct("private "+fullclassname+" parent;\n\t");
+        }
+        catch(Exception e)
+        {
+            e.getCause();
+        }
     }
 
     @Override
-    public void setchildren(NodeList children)
+    public void setchildren(JDefinedClass jdefinedclass, Node node)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try
+        {
+            NodeList nodes = (NodeList)this.xpath.evaluate("./*", node, XPathConstants.NODESET);
+            
+            for(int i=0; i<nodes.getLength(); i++)
+            {
+                String tagname = (String)this.xpath.evaluate("name(./*)", node, XPathConstants.STRING);
+            
+                String fullclassname = jdefinedclass.fullName();
+            
+                jdefinedclass.direct("private "+fullclassname+" child_"+String.format("%1$03d",i)+";\n\t");                
+            }
+        }
+        catch(Exception e)
+        {
+            e.getCause();
+        }
     }
 }

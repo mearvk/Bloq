@@ -82,13 +82,13 @@ public class Jcmjspinnerbuilder extends Jcmabstractbuilder
     }      
 
     @Override
-    public void setparent(Node parent)
+    public void setparent(JDefinedClass jdefinedclass, Node parent)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setchildren(NodeList children)
+    public void setchildren(JDefinedClass jdefinedclass, Node node)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
