@@ -78,7 +78,7 @@ public class Jcmjpanelbuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }       
 
     @Override

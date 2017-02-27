@@ -78,7 +78,7 @@ public class Jcmjeditorpanebuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }      
 
     @Override

@@ -77,7 +77,7 @@ public class Jcmjpasswordfieldbuilder extends Jcmabstractbuilder
             
         }  
         
-        return null;
+        return jcodemodels;
     }
 
     @Override

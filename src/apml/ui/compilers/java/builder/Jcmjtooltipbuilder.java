@@ -78,7 +78,7 @@ public class Jcmjtooltipbuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }       
 
     @Override

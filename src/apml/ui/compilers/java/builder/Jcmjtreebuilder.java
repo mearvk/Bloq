@@ -78,7 +78,7 @@ public class Jcmjtreebuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }       
 
     @Override

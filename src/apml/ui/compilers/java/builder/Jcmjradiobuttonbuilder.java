@@ -78,7 +78,7 @@ public class Jcmjradiobuttonbuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }      
 
     @Override

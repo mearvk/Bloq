@@ -78,7 +78,7 @@ public class Jcmjscrollpanebuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }       
 
     @Override

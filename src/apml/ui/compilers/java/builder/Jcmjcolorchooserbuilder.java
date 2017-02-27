@@ -78,7 +78,7 @@ public class Jcmjcolorchooserbuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }   
 
     @Override

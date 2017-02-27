@@ -78,7 +78,7 @@ public class Jcmjsplitpanebuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }       
 
     @Override

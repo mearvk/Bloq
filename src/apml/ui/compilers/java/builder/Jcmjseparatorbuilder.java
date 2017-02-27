@@ -78,7 +78,7 @@ public class Jcmjseparatorbuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }       
 
     @Override

@@ -78,7 +78,7 @@ public class Jcmjtoolbarbuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }       
 
     @Override

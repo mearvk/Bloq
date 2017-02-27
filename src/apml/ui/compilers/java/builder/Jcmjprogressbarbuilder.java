@@ -78,7 +78,7 @@ public class Jcmjprogressbarbuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }     
 
     @Override

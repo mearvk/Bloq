@@ -78,7 +78,7 @@ public class Jcmjlistbuilder extends Jcmabstractbuilder
             exception.printStackTrace();
         }
         
-        return null;
+        return jcodemodels;
     }    
 
     @Override

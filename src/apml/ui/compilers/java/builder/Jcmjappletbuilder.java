@@ -77,7 +77,7 @@ public class Jcmjappletbuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }    
 
     @Override

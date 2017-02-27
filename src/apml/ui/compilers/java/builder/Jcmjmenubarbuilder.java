@@ -77,7 +77,7 @@ public class Jcmjmenubarbuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }    
 
     @Override

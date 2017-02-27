@@ -77,7 +77,7 @@ public class Jcmjmenuitembuilder extends Jcmabstractbuilder
             exception.printStackTrace();
         }
         
-        return null;
+        return jcodemodels;
     }    
 
     @Override

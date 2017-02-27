@@ -78,7 +78,7 @@ public class Jcmjspinnerbuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }      
 
     @Override

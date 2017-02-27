@@ -78,7 +78,7 @@ public class Jcmjsliderbuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }       
 
     @Override

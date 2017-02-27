@@ -78,7 +78,7 @@ public class Jcmjcheckboxbuilder extends Jcmabstractbuilder
             
         }
         
-        return null;
+        return jcodemodels;
     }
 
     @Override
