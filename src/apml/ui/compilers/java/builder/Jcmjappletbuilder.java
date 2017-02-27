@@ -5,6 +5,7 @@ import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
+import java.awt.Frame;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JApplet;
@@ -60,11 +61,11 @@ public class Jcmjappletbuilder extends Jcmabstractbuilder
                 
                 JDefinedClass jdefinedclass = jpackage._class("JApplet_"+String.format("%1$03d",i));     
                 
-                jdefinedclass._extends(JApplet.class);
+                JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);
                 
-                JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);                               
+                this.setsuperclass(jdefinedclass, JApplet.class);
                 
-                this.setconstructor(constructor, xml);
+                this.setconstructor(jdefinedclass, xml);                
             }
             
             jcodemodel.build(new File("/home/oem/Desktop/UI"));

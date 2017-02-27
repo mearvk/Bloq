@@ -57,19 +57,19 @@ public class Jcmframebuilder extends Jcmabstractbuilder
         
             this.nodes = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);
             
+            JPackage jpackage = jcodemodel._package("org.widgets"); 
+            
             for(int i=0; i<nodes.getLength(); i++)
             {            
                 this.xml = (Element)nodes.item(i);
                 
-                JPackage jpackage = jcodemodel._package("org.widgets");                
-                
-                JDefinedClass jdefinedclass = jpackage._class("Frame_"+String.format("%1$03d",i));     
-                
-                jdefinedclass._extends(Frame.class);                
+                JDefinedClass jdefinedclass = jpackage._class("Frame_"+String.format("%1$03d",i));
                 
                 JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);
                 
-                this.setconstructor(constructor, xml);
+                this.setsuperclass(jdefinedclass, Frame.class);
+                
+                this.setconstructor(jdefinedclass, xml);
             }
             
             jcodemodel.build(new File("/home/oem/Desktop/UI"));

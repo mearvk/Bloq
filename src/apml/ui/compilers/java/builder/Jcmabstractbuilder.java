@@ -7,6 +7,7 @@ package apml.ui.compilers.java.builder;
 
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMethod;
+import com.sun.codemodel.JMod;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -21,10 +22,19 @@ public abstract class Jcmabstractbuilder
     
     public abstract void setchildren(NodeList children);
     
-    public void setconstructor(JMethod constructor, Element xml)
+    //public void setpackage
+    
+    public void setsuperclass(JDefinedClass jdefinedclass, Class classname)
+    {
+        jdefinedclass._extends(classname);
+    }        
+    
+    public void setconstructor(JDefinedClass jdefinedclass, Element xml)
     {
         try
         {                
+            JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);
+            
             if(xml.getAttribute("setAutoscrolls")!=null && xml.getAttribute("setAutoscrolls").length()>0)
             {
                 try{constructor.body().directStatement("this.setAutoscrolls("+xml.getAttribute("setAutoscrolls")+");");                 }catch(Exception e){}               

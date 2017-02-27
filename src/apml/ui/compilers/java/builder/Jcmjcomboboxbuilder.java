@@ -5,6 +5,7 @@ import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
+import java.awt.Frame;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
@@ -53,19 +54,19 @@ public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
         
             this.nodes = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);
             
+            JPackage jpackage = jcodemodel._package("org.widgets");
+            
             for(int i=0; i<nodes.getLength(); i++)
             {            
-                this.xml = (Element)nodes.item(i);
-                
-                JPackage jpackage = jcodemodel._package("org.widgets");                
+                this.xml = (Element)nodes.item(i);                                                
                 
                 JDefinedClass jdefinedclass = jpackage._class("JComboBox_"+String.format("%1$03d",i));     
                 
-                jdefinedclass._extends(JComboBox.class);
+                JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);
                 
-                JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);                               
+                this.setsuperclass(jdefinedclass, JComboBox.class);
                 
-                this.setconstructor(constructor, xml);
+                this.setconstructor(jdefinedclass, xml);
             }
             
             jcodemodel.build(new File("/home/oem/Desktop/UI"));

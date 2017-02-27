@@ -5,6 +5,7 @@ import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
+import java.awt.Frame;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JButton;
@@ -58,19 +59,19 @@ public class Jcmjbuttonbuilder extends Jcmabstractbuilder
         
             this.nodes = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);
             
+            JPackage jpackage = jcodemodel._package("org.widgets");                
+            
             for(int i=0; i<nodes.getLength(); i++)
             {            
-                this.xml = (Element)nodes.item(i);
+                this.xml = (Element)nodes.item(i);                                
                 
-                JPackage jpackage = jcodemodel._package("org.widgets");                
+                JDefinedClass jdefinedclass = jpackage._class("JButton_"+String.format("%1$03d",i)); 
                 
-                JDefinedClass jdefinedclass = jpackage._class("JButton_"+String.format("%1$03d",i));     
+                JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);
                 
-                jdefinedclass._extends(JButton.class);
+                this.setsuperclass(jdefinedclass, JButton.class);
                 
-                JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);                               
-                
-                this.setconstructor(constructor, xml);
+                this.setconstructor(jdefinedclass, xml);
             }
             
             jcodemodel.build(new File("/home/oem/Desktop/UI"));
