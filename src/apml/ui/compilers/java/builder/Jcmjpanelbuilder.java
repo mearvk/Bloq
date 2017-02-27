@@ -60,9 +60,7 @@ public class Jcmjpanelbuilder extends Jcmabstractbuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                                            
                 
-                JDefinedClass jdefinedclass = jpackage._class("JPanel_"+String.format("%1$03d",i));     
-                
-                JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);
+                JDefinedClass jdefinedclass = jpackage._class("JPanel_"+String.format("%1$03d",i));                     
                 
                 this.setsuperclass(jdefinedclass, JPanel.class);
                 

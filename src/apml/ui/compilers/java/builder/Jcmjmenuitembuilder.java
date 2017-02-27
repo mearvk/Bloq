@@ -60,9 +60,7 @@ public class Jcmjmenuitembuilder extends Jcmabstractbuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                                                                
                 
-                JDefinedClass jdefinedclass = jpackage._class("JMenuItem_"+String.format("%1$03d",i));     
-                
-                JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);
+                JDefinedClass jdefinedclass = jpackage._class("JMenuItem_"+String.format("%1$03d",i));                     
                 
                 this.setsuperclass(jdefinedclass, JMenuItem.class);
                 

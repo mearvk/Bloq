@@ -92,12 +92,12 @@ public abstract class Jcmabstractbuilder
 
             if(xml.getAttribute("setIcon")!=null && xml.getAttribute("setIcon").length()>0)
             {
-                try{constructor.body().directStatement("this.setIcon("+xml.getAttribute("setIcon")+")");                                }catch(Exception e){}
+                try{constructor.body().directStatement("this.setIcon("+xml.getAttribute("setIcon")+");");                                }catch(Exception e){}
             }
 
             if(xml.getAttribute("setLabel")!=null && xml.getAttribute("setLabel").length()>0)
             {
-                try{constructor.body().directStatement("this.setLabel("+xml.getAttribute("setLabel")+")");                              }catch(Exception e){}
+                try{constructor.body().directStatement("this.setLabel(\""+xml.getAttribute("setLabel")+"\");");                              }catch(Exception e){}
             }
                 
             if(xml.getAttribute("setLayout")!=null && xml.getAttribute("setLayout").length()>0)
@@ -132,7 +132,7 @@ public abstract class Jcmabstractbuilder
                                 
             if(xml.getAttribute("setName")!=null && xml.getAttribute("setName").length()>0)
             {
-                try{constructor.body().directStatement("this.setName("+xml.getAttribute("setName")+");");                               }catch(Exception e){}
+                try{constructor.body().directStatement("this.setName(\""+xml.getAttribute("setName")+"\");");                               }catch(Exception e){}
             }
                 
             if(xml.getAttribute("setPressedIcon")!=null && xml.getAttribute("setPressedIcon").length()>0)
