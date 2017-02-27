@@ -68,15 +68,20 @@ public class Jcmjmenuitembuilder
                     try{constructor.body().directStatement("this.setAutoscrolls("+xml.getAttribute("setAutoscrolls")+");");                 }catch(Exception e){}               
                 }
                 
+                if(xml.getAttribute("setAlignmentX")!=null && xml.getAttribute("setAlignmentX").length()>0)
+                {
+                    try{constructor.body().directStatement("this.setAlignmentX("+xml.getAttribute("setAlignmentX")+");");                   }catch(Exception e){}                
+                }
+                
                 if(xml.getAttribute("setAlignmentY")!=null && xml.getAttribute("setAlignmentY").length()>0)
                 {
                     try{constructor.body().directStatement("this.setAlignmentY("+xml.getAttribute("setAlignmentY")+");");                   }catch(Exception e){}                
                 }
                 
-                if(xml.getAttribute("setAlignmentX")!=null && xml.getAttribute("setAlignmentX").length()>0)
+                if(xml.getAttribute("setAccelerator")!=null && xml.getAttribute("setAccelerator").length()>0)
                 {
-                    try{constructor.body().directStatement("this.setAlignmentX("+xml.getAttribute("setAlignmentX")+");");                   }catch(Exception e){}                
-                }
+                    try{constructor.body().directStatement("this.setAccelerator(\""+xml.getAttribute("setAccelerator")+"\");");             }catch(Exception e){}                
+                }                
                 
                 if(xml.getAttribute("setBorderPainted")!=null && xml.getAttribute("setBorderPainted").length()>0)
                 {

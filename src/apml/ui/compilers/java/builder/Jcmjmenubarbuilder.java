@@ -7,7 +7,6 @@ import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.JMenuBar;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
@@ -194,21 +193,12 @@ public class Jcmjmenubarbuilder
                     try{constructor.body().directStatement("this.setVisible("+xml.getAttribute("setVisible")+");");                         }catch(Exception e){}
                 }
             }
+            
+            jcodemodel.build(new File("/home/oem/Desktop/UI"));
         }
         catch(Exception exception)
         {
-            exception.printStackTrace();
-        }
-        finally
-        {
-            try
-            {
-                jcodemodel.build(new File("/home/oem/Desktop/UI"));
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
+            
         }
         
         return null;
