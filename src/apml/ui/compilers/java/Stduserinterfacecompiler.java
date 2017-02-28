@@ -1,5 +1,8 @@
 package apml.ui.compilers.java;
 
+import com.sun.codemodel.JCodeModel;
+import java.util.ArrayList;
+
 /**
  * @author max rupplin
  * @see http://github.com/mearvk/Bloq
@@ -17,6 +20,8 @@ public class Stduserinterfacecompiler
         Stduserinterfacecompiler compiler = new Stduserinterfacecompiler();
         
         compiler.setapmlfiles(compiler.apmlmanager);
+        
+        compiler.setsourcefiles(compiler.outputmanager);
     }
     
     public Stduserinterfacecompiler()
@@ -24,6 +29,11 @@ public class Stduserinterfacecompiler
         
     }
 
+    /**
+     * @author bodoprimsys 1.0 **_
+     * 
+     * @param apmlmanager 
+     */
     public void setapmlfiles(Uiapmlmanager apmlmanager)
     {
         //
@@ -134,12 +144,115 @@ public class Stduserinterfacecompiler
     
     public void settempfiles(Uiapmlmanager apmlmanager)
     {
-        
+        //javac 
     }
     
     public void setsourcefiles(Uioutputmanager outputmanager)
-    {
+    {               
+        //
+        outputmanager.generaterelations(this.apmlmanager.jbuttonmodels);
         
+        //
+        outputmanager.generaterelations(this.apmlmanager.jframemodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.framemodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jcheckboxmodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jcomboboxmodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jlistmodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jmenumodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jmenubarmodels);
+
+        //
+        outputmanager.generaterelations(this.apmlmanager.jmenuitemmodels);        
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jradiobuttonmodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jslidermodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jspinnermodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jtextfieldmodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jpasswordfieldmodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jcolorchoosermodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jeditorpanemodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jtextpanemodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jfilechoosermodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jtablemodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jtextareamodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jtreemodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jlabelmodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jprogressbarmodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jseparatormodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jtooltipmodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jappletmodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jdialogmodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jpanelmodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jscrollpanemodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jsplitpanemodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jtabbedpanemodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jtoolbarmodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jinternalframemodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jlayeredpanemodels);
+        
+        //
+        outputmanager.generaterelations(this.apmlmanager.jrootpanemodels);        
     }
     
     public void setoutputfiles()

@@ -1,5 +1,6 @@
 package apml.ui.compilers.java.builder;
 
+import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
@@ -12,11 +13,9 @@ import org.w3c.dom.Node;
  */
 public abstract class Jcmabstractbuilder
 {
-    public abstract void setparent(JDefinedClass jdefinedclass, Node parent);
+    public abstract void setparent(JCodeModel jcodemodel, Node parent);
     
-    public abstract void setchildren(JDefinedClass jdefinedclass, Node node);
-    
-    //public void setpackage
+    public abstract void setchildren(JCodeModel jcodemodel, Node node);    
     
     public void setsuperclass(JDefinedClass jdefinedclass, Class classname)
     {

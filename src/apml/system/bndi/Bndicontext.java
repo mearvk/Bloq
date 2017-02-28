@@ -39,7 +39,12 @@ public class Bndicontext
         try{this.hashmap.put(object.hashCode(), object);}   catch(Exception e){}
         try{this.namemap.put(name, object);}                catch(Exception e){}            
         try{this.objectmap.put(object, object);}            catch(Exception e){}
-    }        
+    }           
+    
+    public void put(Object key, Object value)
+    {           
+        try{this.objectmap.put(key, value);}                catch(Exception e){}
+    }     
     
     public Object pull(Integer hashcode)
     {

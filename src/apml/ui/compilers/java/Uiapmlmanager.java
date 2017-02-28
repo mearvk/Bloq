@@ -141,6 +141,11 @@ public class Uiapmlmanager
     
     public ArrayList<JCodeModel> jrootpanemodels;           
     
+    public Object generaterelations(File apml, String tagname)
+    {
+        return null;
+    }
+    
     public ArrayList<JCodeModel> generatemodels(File apml, String tagname)            
     {            
         switch(tagname)

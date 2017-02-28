@@ -62,14 +62,14 @@ public class Bndi
      * @deprecated Not currently implemented;
      * @param context 
      */
-    public static void setcontext(String context)
+    public static Bndicontext setcontext(String context)
     {
-        Bndi.contexts.put(context, new Bndicontext(context));
+        return Bndi.contexts.put(context, new Bndicontext(context));
     }          
     
     public static Bndicontext context(String context)
     {       
         return contexts.get(context);
-    } 
+    }  
 }
 

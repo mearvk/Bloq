@@ -1,8 +1,8 @@
 package apml.ui.compilers.java.builder;
 
+import apml.system.bndi.Bndi;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class Jcmjmenubarbuilder extends Jcmabstractbuilder
             
             for(int i=0; i<nodes.getLength(); i++)
             {            
-                this.xml = (Element)nodes.item(i);
+                this.xml = (Element)nodes.item(i);                                
 
                 JCodeModel jcodemodel = new JCodeModel();
                 
@@ -61,13 +61,17 @@ public class Jcmjmenubarbuilder extends Jcmabstractbuilder
                 
                 JDefinedClass jdefinedclass = jpackage._class("JMenuBar_"+String.format("%1$03d",i));                    
                 
+                Bndi.setcontext("//framing/nodes");
+                
+                Bndi.setcontext("//framing/xpath");                
+                
+                Bndi.context("//framing/jcm/nodes").put(jcodemodel, nodes.item(i));
+                
+                Bndi.context("//framing/jcm/xpath").put(jcodemodel, xpath);
+                
                 this.setsuperclass(jdefinedclass, JMenuBar.class);
                 
-                this.setconstructor(jdefinedclass, xml);   
-                
-                this.setparent(jdefinedclass, nodes.item(i));
-                
-                this.setchildren(jdefinedclass, nodes.item(i));
+                this.setconstructor(jdefinedclass, xml);                   
                 
                 jcodemodel.build(new File("/home/oem/Desktop/UI"));
                                 
@@ -83,41 +87,45 @@ public class Jcmjmenubarbuilder extends Jcmabstractbuilder
     }    
 
     @Override
-    public void setparent(JDefinedClass jdefinedclass, Node node)
+    public void setparent(JCodeModel jcodemodel, Node node)
     {
         try
-        {
-            String tagname = (String)this.xpath.evaluate("name(./parent::*)", node, XPathConstants.STRING);
+        {                 
+            Node tagnode = (Node)Bndi.context("//framing/").pull((Object)jcodemodel);
+                        
+            Node parent = (Node)this.xpath.evaluate("./parent::*", tagnode, XPathConstants.NODE);                    
             
-            String fullclassname = jdefinedclass.fullName();
+            String fullclassname = jcodemodel.packages().next().classes().next().fullName();
             
+            JDefinedClass jdefinedclass = jcodemodel.packages().next().classes().next();
+            
+            jdefinedclass.direct("\n\t");
             jdefinedclass.direct("private "+fullclassname+" parent;\n\t");
         }
         catch(Exception e)
         {
-            e.getCause();
+            e.printStackTrace();
         }
     }
 
     @Override
-    public void setchildren(JDefinedClass jdefinedclass, Node node)
+    public void setchildren(JCodeModel jcodemodel, Node node)
     {
         try
         {
             NodeList nodes = (NodeList)this.xpath.evaluate("./*", node, XPathConstants.NODESET);
             
             for(int i=0; i<nodes.getLength(); i++)
-            {
-                String tagname = (String)this.xpath.evaluate("name(./*)", node, XPathConstants.STRING);
-            
-                String fullclassname = jdefinedclass.fullName();
-            
-                jdefinedclass.direct("private "+fullclassname+" child_"+String.format("%1$03d",i)+";\n\t");                
+            {                
+                JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("//framing/").pull(nodes.item(i).toString());
+                                              
+                jdefinedclass.direct("\n\t");
+                jdefinedclass.direct("private "+jdefinedclass.fullName()+" child_"+String.format("%1$03d",i)+";\n\t");              
             }
         }
         catch(Exception e)
         {
-            e.getCause();
+            e.printStackTrace();
         }
     }
 }

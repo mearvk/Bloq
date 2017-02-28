@@ -78,13 +78,13 @@ public class Jcmjcolorchooserbuilder extends Jcmabstractbuilder
     }   
 
     @Override
-    public void setparent(JDefinedClass jdefinedclass, Node parent)
+    public void setparent(JCodeModel jcodemodel, Node parent)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setchildren(JDefinedClass jdefinedclass, Node node)
+    public void setchildren(JCodeModel jcodemodel, Node node)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
