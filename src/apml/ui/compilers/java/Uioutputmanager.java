@@ -36,11 +36,11 @@ public class Uioutputmanager
     {
         try
         {                                            
-            Node tagnode = (Node)Bndi.context("//framing/jcm/nodes").pull((Object)jcodemodel);
+            Node node = (Node)Bndi.context("//framing/jcm/nodes").pull((Object)jcodemodel);
             
             XPath xpath = (XPath)Bndi.context("//framing/jcm/xpath").pull((Object)jcodemodel);
                         
-            Node parent = (Node)xpath.evaluate("./parent::*", tagnode, XPathConstants.NODE);                    
+            Node parent = (Node)xpath.evaluate("./parent::*", node, XPathConstants.NODE);                    
             
             String fullclassname = jcodemodel.packages().next().classes().next().fullName();
             
@@ -59,13 +59,15 @@ public class Uioutputmanager
     {
         try
         {
-            Node tagnode = (Node)Bndi.context("//framing/").pull((Object)jcodemodel);
+            Node node = (Node)Bndi.context("//framing/jcm/nodes").pull((Object)jcodemodel);
             
-            NodeList nodes = (NodeList)this.xpath.evaluate("./*", tagnode, XPathConstants.NODESET);
+            XPath xpath = (XPath)Bndi.context("//framing/jcm/xpath").pull((Object)jcodemodel);
+            
+            NodeList nodes = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);
             
             for(int i=0; i<nodes.getLength(); i++)
             {                
-                JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("//framing/").pull(nodes.item(i).toString());
+                JDefinedClass jdefinedclass = jcodemodel.packages().next().classes().next();
                                               
                 jdefinedclass.direct("\n\t");
                 jdefinedclass.direct("private "+jdefinedclass.fullName()+" child_"+String.format("%1$03d",i)+";\n\t");              
