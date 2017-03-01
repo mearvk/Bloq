@@ -1,7 +1,6 @@
 package apml.ui.compilers.java;
 
 import apml.system.bndi.Bndi;
-import apml.system.bndi.Bndicontext;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import java.io.File;

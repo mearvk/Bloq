@@ -57,7 +57,9 @@ import apml.ui.compilers.java.builder.Jcmjcheckboxbuilder;
 import apml.ui.compilers.java.builder.Jcmjcomboboxbuilder;
 
 import apml.ui.compilers.java.builder.Jcmjframebuilder;
+
 import apml.ui.compilers.java.builder.Jcmjmenubarbuilder;
+
 import apml.ui.compilers.java.builder.Jcmjmenuitembuilder;
 
 import com.sun.codemodel.JCodeModel;
@@ -67,35 +69,65 @@ import java.awt.Frame;
 import java.io.File;
 
 import java.util.ArrayList;
+
 import javax.swing.JApplet;
+
 import javax.swing.JButton;
+
 import javax.swing.JCheckBox;
+
 import javax.swing.JColorChooser;
+
 import javax.swing.JComboBox;
+
 import javax.swing.JEditorPane;
+
 import javax.swing.JFrame;
+
 import javax.swing.JInternalFrame;
+
 import javax.swing.JLabel;
+
 import javax.swing.JLayeredPane;
+
 import javax.swing.JList;
+
 import javax.swing.JMenu;
+
 import javax.swing.JMenuBar;
+
 import javax.swing.JMenuItem;
+
 import javax.swing.JPanel;
+
 import javax.swing.JPasswordField;
+
 import javax.swing.JProgressBar;
+
 import javax.swing.JRadioButton;
+
 import javax.swing.JRootPane;
+
 import javax.swing.JScrollPane;
+
 import javax.swing.JSeparator;
+
 import javax.swing.JSlider;
+
 import javax.swing.JSpinner;
+
 import javax.swing.JSplitPane;
+
 import javax.swing.JTabbedPane;
+
 import javax.swing.JTextField;
+
 import javax.swing.JTextPane;
+
 import javax.swing.JToolBar;
+
 import javax.swing.JToolTip;
+
 import javax.swing.JTree;
 
 /**
