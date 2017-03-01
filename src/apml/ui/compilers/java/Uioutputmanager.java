@@ -31,7 +31,7 @@ public class Uioutputmanager
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            
         }             
     }
     
@@ -55,7 +55,7 @@ public class Uioutputmanager
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            
         }        
     }
      
@@ -86,37 +86,7 @@ public class Uioutputmanager
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            
         }        
     }
 }
-
-/*
-        try
-        {
-            Object o = Bndi.contexts;
-            
-            Bndicontext contextA = Bndi.context("//framing/jcm/nodes");
-            
-            Bndicontext contextB = Bndi.context("//framing/jcm/xpath");            
-            
-            Node node = (Node)Bndi.context("//framing/jcm/nodes").pull(jcodemodel);
-            
-            XPath xpath = (XPath)Bndi.context("//framing/jcm/xpath").pull(jcodemodel);
-            
-            NodeList nodes = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);
-            
-            for(int i=0; i<nodes.getLength(); i++)
-            {                
-                JDefinedClass jdefinedclass = jcodemodel.packages().next().classes().next();
-                                              
-                jdefinedclass.direct("\n\t");
-                
-                jdefinedclass.direct("private "+jdefinedclass.fullName()+" child_"+String.format("%1$03d",i)+";\n\t");              
-            }
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }     
-*/
