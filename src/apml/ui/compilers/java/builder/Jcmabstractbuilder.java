@@ -32,7 +32,24 @@ public abstract class Jcmabstractbuilder
     
     public NodeList nodes;
     
-    public XPath xpath;          
+    public XPath xpath; 
+    
+    public Jcmabstractbuilder()
+    {
+        Bndi.setcontext("jcm::node");
+                
+        Bndi.setcontext("node::jcm");
+                
+        Bndi.setcontext("jcm::xpath");
+                
+        Bndi.setcontext("node::node");
+             
+        Bndi.setcontext("jcm::jdc");    
+        
+        Bndi.setcontext("jcm::jdcname");
+        
+        Bndi.setcontext("node::jdcname");
+    }
     
     public void setsuperclass(JDefinedClass jdefinedclass, Class classname)
     {
@@ -57,39 +74,19 @@ public abstract class Jcmabstractbuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                                              
                 
-                JDefinedClass jdefinedclass = jpackage._class("JMenu_"+String.format("%1$03d",i));
-                                
-                Bndi.setcontext("//framing/jcm/nodes");
+                JDefinedClass jdefinedclass = jpackage._class(classname.getSimpleName()+"_"+String.format("%1$03d",i));                                                                
                 
-                Bndi.setcontext("//framing/jcm/xpath");
+                Bndi.context("jcm::node").put(jcodemodel, nodes.item(i));                
                 
-                Bndi.setcontext("//framing/jcm/parents");
+                Bndi.context("node::jcm").put(nodes.item(i), jcodemodel);                
                 
-                Bndi.setcontext("//framing/jcm/jdefinedclasses");
+                Bndi.context("jcm::xpath").put(jcodemodel, xpath);
                 
-                Bndi.setcontext("//framing/jcm/classnames");
+                Bndi.context("node::node").put(nodes.item(i), nodes.item(i).getParentNode());    
                 
-                Bndicontext c1 = Bndi.context("//framing/jcm/nodes");
+                Bndi.context("jcm::jdc").put(jcodemodel, jdefinedclass);
                 
-                Bndicontext c2 = Bndi.context("//framing/jcm/xpath");
-                
-                Bndicontext c3 = Bndi.context("//framing/jcm/parents");
-                
-                Bndicontext c4 = Bndi.context("//framing/jcm/jdefinedclasses");
-                
-                Bndicontext c5 = Bndi.context("//framing/jcm/classnames");
-                
-                c1.put(jcodemodel, nodes.item(i));                
-                
-                c1.put(nodes.item(i), jcodemodel);                
-                
-                c2.put(jcodemodel, xpath);
-                
-                c3.put(nodes.item(i), nodes.item(i).getParentNode());    
-                
-                c4.put(jcodemodel, jdefinedclass);
-                
-                c5.put(nodes.item(i), jdefinedclass.fullName());
+                Bndi.context("node::jdcname").put(nodes.item(i), jdefinedclass.fullName());
                 
                 this.setsuperclass(jdefinedclass, classname);
                 

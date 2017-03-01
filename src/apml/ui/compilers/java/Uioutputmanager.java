@@ -41,13 +41,13 @@ public class Uioutputmanager
         {                                            
             Object o = Bndi.contexts;                                  
                         
-            Node childnode = (Node)Bndi.context("//framing/jcm/nodes").pull(jcodemodel);                                          
+            Node childnode = (Node)Bndi.context("jcm::node").pull(jcodemodel);                                          
             
-            Node parentnode = (Node)Bndi.context("//framing/jcm/parents").pull(childnode);
+            Node parentnode = (Node)Bndi.context("node::node").pull(childnode);
             
-            String parentclassname = (String)Bndi.context("//framing/jcm/classnames").softpull(parentnode);
+            String parentclassname = (String)Bndi.context("node::jdcname").softpull(parentnode);
             
-            JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("//framing/jcm/jdefinedclasses").pull(jcodemodel);
+            JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm::jdc").pull(jcodemodel);
             
             jdefinedclass.direct("\n\t");
             
@@ -63,19 +63,19 @@ public class Uioutputmanager
     {
         try
         {                   
-            Node node = (Node)Bndi.context("//framing/jcm/nodes").pull(jcodemodel);
+            Node node = (Node)Bndi.context("jcm::node").pull(jcodemodel);
             
-            XPath xpath = (XPath)Bndi.context("//framing/jcm/xpath").pull(jcodemodel);
+            XPath xpath = (XPath)Bndi.context("jcm::xpath").pull(jcodemodel);
             
             NodeList nodes = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);
             
             for(int i=0; i<nodes.getLength(); i++)
             {                
-                JCodeModel childjmodel = (JCodeModel)Bndi.context("//framing/jcm/nodes").softpull(nodes.item(i));
+                JCodeModel childjmodel = (JCodeModel)Bndi.context("node::jcm").softpull(nodes.item(i));
                 
-                JDefinedClass childjclass = (JDefinedClass)Bndi.context("//framing/jcm/jdefinedclasses").pull(childjmodel);
+                JDefinedClass childjclass = (JDefinedClass)Bndi.context("jcm::jdc").pull(childjmodel);
                 
-                JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("//framing/jcm/jdefinedclasses").pull(jcodemodel);
+                JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm::jdc").pull(jcodemodel);
                                               
                 jdefinedclass.direct("\n\t");
                 

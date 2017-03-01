@@ -18,9 +18,7 @@ public class Stduserinterfacecompiler
         
         compiler.setapmlfiles(compiler.apmlmanager);
         
-        compiler.setsourcefiles(compiler.outputmanager);
-        
-        //compiler.setoutputfiles();
+        compiler.setsourcefiles(compiler.outputmanager);        
     }
     
     public Stduserinterfacecompiler()

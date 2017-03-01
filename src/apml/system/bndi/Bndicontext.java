@@ -73,6 +73,12 @@ public class Bndicontext
         }
     }     
     
+    /**
+     * Can equality produce errant result early such that we care? /ok /mr /ss
+     * 
+     * @param object
+     * @return 
+     */
     public Object softpull(Object object)
     {
         Map<Object, Object> map = this.objectmap;
