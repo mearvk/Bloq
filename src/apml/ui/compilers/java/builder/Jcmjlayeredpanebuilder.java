@@ -1,18 +1,10 @@
 package apml.ui.compilers.java.builder;
 
-import com.sun.codemodel.JCodeModel;
-import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JPackage;
 import java.io.File;
-import java.util.ArrayList;
-import javax.swing.JLayeredPane;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -32,6 +24,11 @@ public class Jcmjlayeredpanebuilder extends Jcmabstractbuilder
     public NodeList nodes;
     
     public XPath xpath;    
+    
+    public static void main(String...args)
+    {
+        new Jcmjlayeredpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jlayeredpane", JLayeredPane.class);
+    }     
     
     public Jcmjlayeredpanebuilder(File apml)
     {

@@ -1,20 +1,12 @@
 package apml.ui.compilers.java.builder;
 
-import apml.system.bndi.Bndi;
-import apml.system.bndi.Bndicontext;
-import com.sun.codemodel.JCodeModel;
-import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JPackage;
 import java.io.File;
-import java.util.ArrayList;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -35,6 +27,11 @@ public class Jcmjframebuilder extends Jcmabstractbuilder
     
     public XPath xpath;
             
+    public static void main(String...args)
+    {
+        new Jcmjframebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jframe", JFrame.class);
+    }    
+    
     public Jcmjframebuilder(File apml)
     {
         this.apml = apml;
