@@ -1,7 +1,6 @@
 package apml.ui.compilers.java.builder;
 
 import java.io.File;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;

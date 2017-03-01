@@ -22,6 +22,8 @@ import org.w3c.dom.NodeList;
  */
 public abstract class Jcmabstractbuilder
 {   
+    public Jcmabstractbuilder builder = this;
+    
     public Document doc;
     
     public Element xml;

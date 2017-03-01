@@ -1,6 +1,7 @@
 package apml.ui.compilers.java.builder;
 
 import java.io.File;
+import javax.swing.JToolBar;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
