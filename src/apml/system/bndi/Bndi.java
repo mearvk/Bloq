@@ -53,23 +53,32 @@ public class Bndi
         if(three==three3) System.err.println("Test complete: three==three3");           
     }
     
-    public static Map<String, Bndicontext> getcontexts(String context)
+    /**
+     * 
+     * @param context
+     * @return 
+     * @deprecated 
+     */
+    private static Map<String, Bndicontext> getcontexts(String context)
     {
         return Bndi.contexts;
     }       
-    
+   
     /**
-     * @deprecated Not currently implemented;
-     * @param context 
+     * 
+     * @param context
+     * @return 
+     * @deprecated 
      */
-    public static Bndicontext setcontext(String context)
-    {
-        return Bndi.contexts.put(context, new Bndicontext(context));
+    public static void setcontext(String context)
+    {                   
+        if(contexts.get(context)==null) Bndi.contexts.put(context, new Bndicontext(context));
     }          
-    
+       
     public static Bndicontext context(String context)
-    {       
+    {     
         return contexts.get(context);
+        //return contexts.get(context) == null ? Bndi.setcontext(context) : Bndi.contexts.get(context);
     }  
 }
 

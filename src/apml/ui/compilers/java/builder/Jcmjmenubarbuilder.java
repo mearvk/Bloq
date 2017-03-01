@@ -1,6 +1,7 @@
 package apml.ui.compilers.java.builder;
 
 import apml.system.bndi.Bndi;
+import apml.system.bndi.Bndicontext;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JPackage;
@@ -59,21 +60,43 @@ public class Jcmjmenubarbuilder extends Jcmabstractbuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");       
                 
-                JDefinedClass jdefinedclass = jpackage._class("JMenuBar_"+String.format("%1$03d",i));                    
+                JDefinedClass jdefinedclass = jpackage._class("JMenuBar_"+String.format("%1$03d",i));                              
                 
-                Bndi.setcontext("//framing/nodes");
+                Bndi.setcontext("//framing/jcm/nodes");
                 
-                Bndi.setcontext("//framing/xpath");                
+                Bndi.setcontext("//framing/jcm/xpath");
                 
-                Bndi.context("//framing/jcm/nodes").put(jcodemodel, nodes.item(i));
+                Bndi.setcontext("//framing/jcm/parents");
                 
-                Bndi.context("//framing/jcm/xpath").put(jcodemodel, xpath);
+                Bndi.setcontext("//framing/jcm/jdefinedclasses");
+                
+                Bndi.setcontext("//framing/jcm/classnames");
+                
+                Bndicontext c1 = Bndi.context("//framing/jcm/nodes");
+                
+                Bndicontext c2 = Bndi.context("//framing/jcm/xpath");
+                
+                Bndicontext c3 = Bndi.context("//framing/jcm/parents");
+                
+                Bndicontext c4 = Bndi.context("//framing/jcm/jdefinedclasses");
+                
+                Bndicontext c5 = Bndi.context("//framing/jcm/classnames");
+                
+                c1.put(jcodemodel, nodes.item(i));                
+                
+                c1.put(nodes.item(i), jcodemodel);                
+                
+                c2.put(jcodemodel, xpath);
+                
+                c3.put(nodes.item(i), nodes.item(i).getParentNode());    
+                
+                c4.put(jcodemodel, jdefinedclass);
+                
+                c5.put(nodes.item(i), jdefinedclass.fullName());
                 
                 this.setsuperclass(jdefinedclass, JMenuBar.class);
                 
-                this.setconstructor(jdefinedclass, xml);                   
-                
-                jcodemodel.build(new File("/home/oem/Desktop/UI"));
+                this.setconstructor(jdefinedclass, xml);                
                                 
                 jcodemodels.add(jcodemodel);
             }                        
@@ -87,45 +110,14 @@ public class Jcmjmenubarbuilder extends Jcmabstractbuilder
     }    
 
     @Override
-    public void setparent(JCodeModel jcodemodel, Node node)
+    public void setparent(JCodeModel jcodemodel, Node parent)
     {
-        try
-        {                 
-            Node tagnode = (Node)Bndi.context("//framing/").pull((Object)jcodemodel);
-                        
-            Node parent = (Node)this.xpath.evaluate("./parent::*", tagnode, XPathConstants.NODE);                    
-            
-            String fullclassname = jcodemodel.packages().next().classes().next().fullName();
-            
-            JDefinedClass jdefinedclass = jcodemodel.packages().next().classes().next();
-            
-            jdefinedclass.direct("\n\t");
-            jdefinedclass.direct("private "+fullclassname+" parent;\n\t");
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void setchildren(JCodeModel jcodemodel, Node node)
     {
-        try
-        {
-            NodeList nodes = (NodeList)this.xpath.evaluate("./*", node, XPathConstants.NODESET);
-            
-            for(int i=0; i<nodes.getLength(); i++)
-            {                
-                JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("//framing/").pull(nodes.item(i).toString());
-                                              
-                jdefinedclass.direct("\n\t");
-                jdefinedclass.direct("private "+jdefinedclass.fullName()+" child_"+String.format("%1$03d",i)+";\n\t");              
-            }
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

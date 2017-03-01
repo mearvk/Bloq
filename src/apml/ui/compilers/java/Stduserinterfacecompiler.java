@@ -1,8 +1,5 @@
 package apml.ui.compilers.java;
 
-import com.sun.codemodel.JCodeModel;
-import java.util.ArrayList;
-
 /**
  * @author max rupplin
  * @see http://github.com/mearvk/Bloq
@@ -22,6 +19,8 @@ public class Stduserinterfacecompiler
         compiler.setapmlfiles(compiler.apmlmanager);
         
         compiler.setsourcefiles(compiler.outputmanager);
+        
+        //compiler.setoutputfiles();
     }
     
     public Stduserinterfacecompiler()

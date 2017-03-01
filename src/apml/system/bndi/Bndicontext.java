@@ -8,6 +8,9 @@ package apml.system.bndi;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  *
@@ -25,7 +28,7 @@ public class Bndicontext
     public File file;
     
     public Bndicontext(String contextname)
-    {
+    {       
         this.contextname = contextname;
     }
 
@@ -34,30 +37,105 @@ public class Bndicontext
         this.file = file;
     }
     
-    public void put(String name, Object object)
+    public void put(Integer hashcode, Object object)
     {
-        try{this.hashmap.put(object.hashCode(), object);}   catch(Exception e){}
-        try{this.namemap.put(name, object);}                catch(Exception e){}            
-        try{this.objectmap.put(object, object);}            catch(Exception e){}
+        try
+        {
+            this.hashmap.put(hashcode, object);
+        }   
+        catch(Exception e)
+        {
+            System.err.println(e);
+        }        
+    }
+    
+    public void put(String name, Object object)
+    {        
+        try
+        {
+            this.namemap.put(name, object);            
+        }                
+        catch(Exception e)
+        {
+            System.err.println(e);
+        }        
     }           
     
     public void put(Object key, Object value)
     {           
-        try{this.objectmap.put(key, value);}                catch(Exception e){}
+        try
+        {
+            this.objectmap.put(key, value);                     
+        }                
+        catch(Exception e)
+        {
+            System.err.println(e);
+        }
     }     
+    
+    public Object softpull(Object object)
+    {
+        Map<Object, Object> map = this.objectmap;
+        
+        for(Entry entry : map.entrySet())
+        {                     
+            Object key = entry.getKey();
+            Object value = entry.getValue();
+            
+            if(object instanceof Node && key instanceof Node)
+            {
+                Element n1 = (Element)object;
+                Element n2 = (Element)key;                
+                
+                if(n1.isEqualNode(n2)) 
+                {
+                    return value;
+                }                
+            }
+        }
+        
+        return null;
+    }
     
     public Object pull(Integer hashcode)
     {
-        return hashmap.get(hashcode);
+        try
+        {
+            return hashmap.get(hashcode);            
+        }
+        catch(Exception e)
+        {
+            System.err.println(e);
+        }
+        
+        return null;
     }
 
     public Object pull(Object object)
     {
-        return objectmap.get(object);
+        try
+        {            
+            return objectmap.get(object);
+        }
+        catch(Exception e)
+        {
+            System.err.println(e);
+        }
+        
+        return null;
     }    
     
     public Object pull(String name)
     {
-        return namemap.get(name);
+        try
+        {
+            return namemap.get(name);            
+        }
+        catch(Exception e)
+        {
+            System.err.println(e);
+        }
+        
+        return null;
     }            
 }

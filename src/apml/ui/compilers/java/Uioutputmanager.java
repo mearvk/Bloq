@@ -1,8 +1,10 @@
 package apml.ui.compilers.java;
 
 import apml.system.bndi.Bndi;
+import apml.system.bndi.Bndicontext;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
+import java.io.File;
 import java.util.ArrayList;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -23,7 +25,9 @@ public class Uioutputmanager
             {
                 this.setparent(jcodemodel);
 
-                this.setchildren(jcodemodel);        
+                this.setchildren(jcodemodel);   
+                
+                jcodemodel.build(new File("/home/oem/Desktop/UI"));
             }
         }
         catch(Exception e)
@@ -36,41 +40,49 @@ public class Uioutputmanager
     {
         try
         {                                            
-            Node node = (Node)Bndi.context("//framing/jcm/nodes").pull((Object)jcodemodel);
-            
-            XPath xpath = (XPath)Bndi.context("//framing/jcm/xpath").pull((Object)jcodemodel);
+            Object o = Bndi.contexts;                                  
                         
-            Node parent = (Node)xpath.evaluate("./parent::*", node, XPathConstants.NODE);                    
+            Node childnode = (Node)Bndi.context("//framing/jcm/nodes").pull(jcodemodel);                                          
             
-            String fullclassname = jcodemodel.packages().next().classes().next().fullName();
+            Node parentnode = (Node)Bndi.context("//framing/jcm/parents").pull(childnode);
             
-            JDefinedClass jdefinedclass = jcodemodel.packages().next().classes().next();
+            String parentclassname = (String)Bndi.context("//framing/jcm/classnames").softpull(parentnode);
+            
+            JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("//framing/jcm/jdefinedclasses").pull(jcodemodel);
             
             jdefinedclass.direct("\n\t");
-            jdefinedclass.direct("private "+fullclassname+" parent;\n\t");
+            
+            jdefinedclass.direct("private "+parentclassname+" parent;\n\t");
         }
         catch(Exception e)
         {
             e.printStackTrace();
         }        
     }
-    
+     
     private void setchildren(JCodeModel jcodemodel)
     {
         try
-        {
-            Node node = (Node)Bndi.context("//framing/jcm/nodes").pull((Object)jcodemodel);
+        {                   
+            Node node = (Node)Bndi.context("//framing/jcm/nodes").pull(jcodemodel);
             
-            XPath xpath = (XPath)Bndi.context("//framing/jcm/xpath").pull((Object)jcodemodel);
+            XPath xpath = (XPath)Bndi.context("//framing/jcm/xpath").pull(jcodemodel);
             
             NodeList nodes = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);
             
             for(int i=0; i<nodes.getLength(); i++)
             {                
-                JDefinedClass jdefinedclass = jcodemodel.packages().next().classes().next();
+                JCodeModel childjmodel = (JCodeModel)Bndi.context("//framing/jcm/nodes").softpull(nodes.item(i));
+                
+                JDefinedClass childjclass = (JDefinedClass)Bndi.context("//framing/jcm/jdefinedclasses").pull(childjmodel);
+                
+                JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("//framing/jcm/jdefinedclasses").pull(jcodemodel);
                                               
                 jdefinedclass.direct("\n\t");
-                jdefinedclass.direct("private "+jdefinedclass.fullName()+" child_"+String.format("%1$03d",i)+";\n\t");              
+                
+                String s = "private "+childjclass.fullName()+" child_"+String.format("%1$03d",i)+";\n\t";
+                
+                jdefinedclass.direct("private "+childjclass.fullName()+" child_"+String.format("%1$03d",i)+";\n\t");              
             }
         }
         catch(Exception e)
@@ -79,3 +91,33 @@ public class Uioutputmanager
         }        
     }
 }
+
+/*
+        try
+        {
+            Object o = Bndi.contexts;
+            
+            Bndicontext contextA = Bndi.context("//framing/jcm/nodes");
+            
+            Bndicontext contextB = Bndi.context("//framing/jcm/xpath");            
+            
+            Node node = (Node)Bndi.context("//framing/jcm/nodes").pull(jcodemodel);
+            
+            XPath xpath = (XPath)Bndi.context("//framing/jcm/xpath").pull(jcodemodel);
+            
+            NodeList nodes = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);
+            
+            for(int i=0; i<nodes.getLength(); i++)
+            {                
+                JDefinedClass jdefinedclass = jcodemodel.packages().next().classes().next();
+                                              
+                jdefinedclass.direct("\n\t");
+                
+                jdefinedclass.direct("private "+jdefinedclass.fullName()+" child_"+String.format("%1$03d",i)+";\n\t");              
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }     
+*/
