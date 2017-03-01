@@ -40,6 +40,7 @@ public class Jcmjcheckboxbuilder extends Jcmabstractbuilder
         this.xpath = XPathFactory.newInstance().newXPath();          
     }
     
+    /*
     public ArrayList<JCodeModel> build(String tagname)
     {
         ArrayList<JCodeModel> jcodemodels = new ArrayList<>();
@@ -76,6 +77,7 @@ public class Jcmjcheckboxbuilder extends Jcmabstractbuilder
         
         return jcodemodels;
     }
+    */
 
     @Override
     public void setparent(JCodeModel jcodemodel, Node parent)

@@ -35,7 +35,7 @@ public class Jcmjbuttonbuilder extends Jcmabstractbuilder
     
     public static void main(String...args)
     {
-        new Jcmjbuttonbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jbutton");
+        new Jcmjbuttonbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jbutton", JButton.class);
     }
             
     public Jcmjbuttonbuilder(File apml)
@@ -45,6 +45,7 @@ public class Jcmjbuttonbuilder extends Jcmabstractbuilder
         this.xpath = XPathFactory.newInstance().newXPath();          
     }
     
+    /*
     public ArrayList<JCodeModel> build(String tagname)
     {
         ArrayList<JCodeModel> jcodemodels = new ArrayList<>();
@@ -81,6 +82,7 @@ public class Jcmjbuttonbuilder extends Jcmabstractbuilder
         
         return jcodemodels;    
     }
+    */
 
     @Override
     public void setparent(JCodeModel jcodemodel, Node parent)

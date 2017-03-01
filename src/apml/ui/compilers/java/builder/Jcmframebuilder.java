@@ -6,6 +6,7 @@ import com.sun.codemodel.JPackage;
 import java.awt.Frame;
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -35,7 +36,7 @@ public class Jcmframebuilder extends Jcmabstractbuilder
             
     public static void main(String...args)
     {
-        new Jcmframebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jframe");
+        new Jcmframebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jframe", JFrame.class);
     }    
     
     public Jcmframebuilder(File apml)
@@ -45,6 +46,7 @@ public class Jcmframebuilder extends Jcmabstractbuilder
         this.xpath = XPathFactory.newInstance().newXPath();          
     }
     
+    /*
     public ArrayList<JCodeModel> build(String tagname)
     {
         ArrayList<JCodeModel> jcodemodels = new ArrayList<>();
@@ -80,7 +82,8 @@ public class Jcmframebuilder extends Jcmabstractbuilder
         }
         
         return jcodemodels;
-    }   
+    } 
+    */
 
     @Override
     public void setparent(JCodeModel jcodemodel, Node parent)
