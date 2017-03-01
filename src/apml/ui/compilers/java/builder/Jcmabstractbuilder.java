@@ -31,11 +31,7 @@ public abstract class Jcmabstractbuilder
     
     public NodeList nodes;
     
-    public XPath xpath; 
-    
-    public abstract void setparent(JCodeModel jcodemodel, Node parent);
-    
-    public abstract void setchildren(JCodeModel jcodemodel, Node node);     
+    public XPath xpath;          
     
     public void setsuperclass(JDefinedClass jdefinedclass, Class classname)
     {

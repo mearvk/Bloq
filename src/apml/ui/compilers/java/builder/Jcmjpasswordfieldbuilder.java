@@ -38,54 +38,5 @@ public class Jcmjpasswordfieldbuilder extends Jcmabstractbuilder
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            
-    }    
-    
-    public ArrayList<JCodeModel> build(String tagname)
-    {
-        ArrayList<JCodeModel> jcodemodels = new ArrayList<>();
-        
-        try
-        {
-            this.doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(apml);
-        
-            this.nodes = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);            
-            
-            for(int i=0; i<nodes.getLength(); i++)
-            {                                                           
-                this.xml = (Element)nodes.item(i);
-
-                JCodeModel jcodemodel = new JCodeModel();
-                
-                JPackage jpackage = jcodemodel._package("org.widgets");
-                
-                JDefinedClass jdefinedclass = jpackage._class("JPasswordField_"+String.format("%1$03d",i));                
-                
-                this.setsuperclass(jdefinedclass, JPasswordField.class);
-                
-                this.setconstructor(jdefinedclass, xml);
-                
-                jcodemodel.build(new File("/home/oem/Desktop/UI"));
-                                
-                jcodemodels.add(jcodemodel);
-            }                        
-        }
-        catch(Exception exception)
-        {
-            
-        }  
-        
-        return jcodemodels;
-    }
-
-    @Override
-    public void setparent(JCodeModel jcodemodel, Node parent)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setchildren(JCodeModel jcodemodel, Node node)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }   
 }
