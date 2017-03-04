@@ -1,6 +1,6 @@
 package apml.ui.compilers.java;
 
-import apml.system.bndi.Bndi;
+import apml.system.bodi.Bndi;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMethod;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package apml.system.bndi;
+package apml.system.bodi;
 
 import java.io.File;
 import java.util.HashMap;

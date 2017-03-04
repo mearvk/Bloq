@@ -1,4 +1,4 @@
-package apml.system.bndi;
+package apml.system.bodi;
 
 import java.util.HashMap;
 import java.util.Map;
