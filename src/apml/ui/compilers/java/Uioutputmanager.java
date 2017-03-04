@@ -250,11 +250,11 @@ public class Uioutputmanager
                 
                 jdefinedclass.direct("\n\t");
                 
-                jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "ke_ref");
+                jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "refkeyevent");                
                 
-                jdefinedclass.field(JMod.PUBLIC, Class.forName("javax.swing.KeyStroke"), "ks_ref");
+                jdefinedclass.field(JMod.PUBLIC, Class.forName("javax.swing.KeyStroke"), "refkeystroke");               
                 
-                jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.ActionEvent"), "ae_ref");
+                jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.ActionEvent"), "refactionevent");                
             }            
             else
             {                                 
