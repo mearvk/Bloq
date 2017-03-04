@@ -57,7 +57,6 @@ public class Bndi
      * 
      * @param context
      * @return 
-     * @deprecated 
      */
     private static Map<String, Bndicontext> getcontexts(String context)
     {
@@ -68,7 +67,6 @@ public class Bndi
      * 
      * @param context
      * @return 
-     * @deprecated 
      */
     public static void setcontext(String context)
     {                   
