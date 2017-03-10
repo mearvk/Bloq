@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Bloq Native Directory Interface (BNDI)
+ * Bloq Object Directory Interface (BODI)
  * 
  * @see http://github.com/mearvk/Bloq/wiki
  * @version 1.00
