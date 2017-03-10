@@ -1,6 +1,6 @@
 package apml.ui.compilers.java;
 
-import apml.system.bodi.Bndi;
+import apml.system.bodi.Bodi;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMethod;
@@ -19,7 +19,7 @@ import org.w3c.dom.NodeList;
  */
 public class Uioutputmanager
 {
-    public void generaterelations(ArrayList<JCodeModel> jcodemodels)
+    public void generatejavafiles(ArrayList<JCodeModel> jcodemodels)
     {      
         try
         {                   
@@ -43,19 +43,19 @@ public class Uioutputmanager
     private void setconstructor(JCodeModel jcodemodel)
     {
         
-        Node self = (Node)Bndi.context("jcm ^ node").pull(jcodemodel);
+        Node self = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);
         
         Element xml = (Element)self;
         
-        JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(jcodemodel);
+        JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
         
         try
         {                
             JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);            
             
-            Node parent = (Node)Bndi.context("node ^ node").pull(self);                             //return parent node given self node [exists already]
+            Node parent = (Node)Bodi.context("node ^ node").pull(self);                             //return parent node given self node [exists already]
             
-            String fullparentclassname = (String)Bndi.context("node ^ jdcname").pull(self);         //return parent node jdc classname (fullname) [exists already]
+            String fullparentclassname = (String)Bodi.context("node ^ jdcname").pull(self);         //return parent node jdc classname (fullname) [exists already]
             
             constructor.param(Class.forName("java.awt.Component"), "parent");
                         
@@ -235,15 +235,15 @@ public class Uioutputmanager
     {
         try
         {                                            
-            Object o = Bndi.contexts;                                  
+            Object o = Bodi.contexts;                                  
                         
-            Node childnode = (Node)Bndi.context("jcm ^ node").pull(jcodemodel);                                          
+            Node childnode = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);                                          
             
-            Node parentnode = (Node)Bndi.context("node ^ node").pull(childnode);
+            Node parentnode = (Node)Bodi.context("node ^ node").pull(childnode);
             
-            String parentclassname = (String)Bndi.context("node ^ jdcname").softpull(parentnode);                                    
+            String parentclassname = (String)Bodi.context("node ^ jdcname").softpull(parentnode);                                    
             
-            JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(jcodemodel);  
+            JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);  
             
             if(parentclassname == null || true)
             {
@@ -280,11 +280,11 @@ public class Uioutputmanager
     {
         try
         {                   
-            Node node = (Node)Bndi.context("jcm ^ node").pull(jcodemodel);                                    
+            Node node = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);                                    
             
-            JDefinedClass parentjdc = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(jcodemodel);
+            JDefinedClass parentjdc = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
             
-            XPath xpath = (XPath)Bndi.context("jcm ^ xpath").pull(jcodemodel);
+            XPath xpath = (XPath)Bodi.context("jcm ^ xpath").pull(jcodemodel);
             
             NodeList nodes = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);                                             
             
@@ -306,11 +306,11 @@ public class Uioutputmanager
         
         for(int i=0; i<nodes.getLength(); i++)
         {                
-            JCodeModel childjmodel = (JCodeModel)Bndi.context("node ^ jcm").softpull(nodes.item(i));
+            JCodeModel childjmodel = (JCodeModel)Bodi.context("node ^ jcm").softpull(nodes.item(i));
                 
-            JDefinedClass childjclass = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(childjmodel);
+            JDefinedClass childjclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(childjmodel);
                 
-            JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(jcodemodel);
+            JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
                                               
             jdefinedclass.direct("\n\t");
                 
@@ -328,11 +328,11 @@ public class Uioutputmanager
             
         for(int i=0; i<nodes.getLength(); i++)
         {                
-                JCodeModel childjmodel = (JCodeModel)Bndi.context("node ^ jcm").softpull(nodes.item(i));
+                JCodeModel childjmodel = (JCodeModel)Bodi.context("node ^ jcm").softpull(nodes.item(i));
                 
-                JDefinedClass childjclass = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(childjmodel);
+                JDefinedClass childjclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(childjmodel);
                 
-                JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(jcodemodel);                                                                                          
+                JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);                                                                                          
                 
                 jdefinedclass.direct("\n\t");
             

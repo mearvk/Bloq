@@ -1,6 +1,6 @@
 package apml.ui.compilers.java.builder;
 
-import apml.system.bodi.Bndi;
+import apml.system.bodi.Bodi;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
@@ -40,27 +40,27 @@ public abstract class Jcmabstractbuilder
     {
         /* ---------------- JDC BNDI --------------------*/
         
-        Bndi.setcontext("jdc ^ node");
+        Bodi.setcontext("jdc ^ node");
         
         
         /* ---------------- JCM BODI --------------------*/
         
-        Bndi.setcontext("jcm ^ jdc");        
+        Bodi.setcontext("jcm ^ jdc");        
         
-        Bndi.setcontext("jcm ^ jdcname");
+        Bodi.setcontext("jcm ^ jdcname");
         
-        Bndi.setcontext("jcm ^ node");             
+        Bodi.setcontext("jcm ^ node");             
         
-        Bndi.setcontext("jcm ^ xpath");
+        Bodi.setcontext("jcm ^ xpath");
         
         
         /* ---------------- NODE BODI -------------------*/
         
-        Bndi.setcontext("node ^ jdcname");
+        Bodi.setcontext("node ^ jdcname");
         
-        Bndi.setcontext("node ^ jcm");
+        Bodi.setcontext("node ^ jcm");
         
-        Bndi.setcontext("node ^ node");
+        Bodi.setcontext("node ^ node");
     }
     
     public void setsuperclass(JDefinedClass jdefinedclass, Class classname)
@@ -68,29 +68,29 @@ public abstract class Jcmabstractbuilder
         jdefinedclass._extends(classname);
     } 
     
-    public void setbndi(JCodeModel jcodemodel, Node node, JDefinedClass jdefinedclass)
+    public void setbodi(JCodeModel jcodemodel, Node node, JDefinedClass jdefinedclass)
     {
         /* ---------------- JDC BNDI --------------------*/
         
-        Bndi.context("jdc ^ node").put(jdefinedclass, node);  
+        Bodi.context("jdc ^ node").put(jdefinedclass, node);  
         
         
         /* ---------------- JCM BODI --------------------*/
         
-        Bndi.context("jcm ^ node").put(jcodemodel, node);                
+        Bodi.context("jcm ^ node").put(jcodemodel, node);                
         
-        Bndi.context("jcm ^ xpath").put(jcodemodel, xpath);
+        Bodi.context("jcm ^ xpath").put(jcodemodel, xpath);
                 
-        Bndi.context("jcm ^ jdc").put(jcodemodel, jdefinedclass);
+        Bodi.context("jcm ^ jdc").put(jcodemodel, jdefinedclass);
         
         
         /* ---------------- NODE BODI -------------------*/
         
-        Bndi.context("node ^ jdcname").put(node, jdefinedclass.fullName());
+        Bodi.context("node ^ jdcname").put(node, jdefinedclass.fullName());
         
-        Bndi.context("node ^ jcm").put(node, jcodemodel);                
+        Bodi.context("node ^ jcm").put(node, jcodemodel);                
                                                        
-        Bndi.context("node ^ node").put(node, node.getParentNode());                                                                             
+        Bodi.context("node ^ node").put(node, node.getParentNode());                                                                             
     }
     
     public ArrayList<JCodeModel> build(String tagname, Class classname)
@@ -109,7 +109,7 @@ public abstract class Jcmabstractbuilder
                 
                 JDefinedClass jdefinedclass = jpackage._class(classname.getSimpleName()+"_"+String.format("%1$03d",i));                                                              
                 
-                this.setbndi(jcodemodel, nodes.item(i), jdefinedclass);
+                this.setbodi(jcodemodel, nodes.item(i), jdefinedclass);
                 
                 this.setsuperclass(jdefinedclass, classname);
                  

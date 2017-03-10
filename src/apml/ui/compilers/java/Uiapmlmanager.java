@@ -210,19 +210,19 @@ public class Uiapmlmanager
         return null;
     }
     
-    public ArrayList<JCodeModel> generatemodels(File apml, String tagname)            
+    public ArrayList<JCodeModel> generatejcmmodels(File apml, String tagname)            
     {            
         switch(tagname)
         {
-            case "//jbutton": return new Jcmjbuttonbuilder(apml).builder.build(tagname, JButton.class);
+            case "//jbutton": return jbuttonmodels = new Jcmjbuttonbuilder(apml).builder.build(tagname, JButton.class);
 
-            case "//jframe": return new Jcmjframebuilder(apml).builder.build(tagname, JFrame.class); 
+            case "//jframe": return jframemodels =  new Jcmjframebuilder(apml).builder.build(tagname, JFrame.class); 
 
-            case "//frame": return new Jcmframebuilder(apml).builder.build(tagname, Frame.class); 
+            case "//frame": return framemodels =  new Jcmframebuilder(apml).builder.build(tagname, Frame.class); 
 
-            case "//jcheckbox": return new Jcmjcheckboxbuilder(apml).builder.build(tagname, JCheckBox.class); 
+            case "//jcheckbox": return jcheckboxmodels = new Jcmjcheckboxbuilder(apml).builder.build(tagname, JCheckBox.class); 
 
-            case "//jcombobox": return new Jcmjcomboboxbuilder(apml).builder.build(tagname, JComboBox.class); 
+            case "//jcombobox": return jcomboboxmodels = new Jcmjcomboboxbuilder(apml).builder.build(tagname, JComboBox.class); 
 
             case "//jlist": return new Jcmjlistbuilder(apml).builder.build(tagname, JList.class); 
 

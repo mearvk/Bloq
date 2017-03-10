@@ -10,11 +10,11 @@ import java.util.Map;
  * @version 1.00
  * @author Max Rupplin
  */
-public class Bndi 
+public class Bodi 
 {
     protected final Integer hash = 0x888fe8;
         
-    public static Map<String, Bndicontext> contexts = new HashMap();
+    public static Map<String, Bodicontext> contexts = new HashMap();
     
     public static void main(String[] args)
     {        
@@ -22,23 +22,23 @@ public class Bndi
         Object two = new Object();
         Object three = new Object();
         
-        Bndi.setcontext("//apml/tests/");
+        Bodi.setcontext("//apml/tests/");
         
-        Bndi.context("//apml/tests/").put("one",one);
-        Bndi.context("//apml/tests/").put("two",two);
-        Bndi.context("//apml/tests/").put("three",three);
+        Bodi.context("//apml/tests/").put("one",one);
+        Bodi.context("//apml/tests/").put("two",two);
+        Bodi.context("//apml/tests/").put("three",three);
         
-        Object one1 = Bndi.context("//apml/tests/").pull(one.hashCode());
-        Object one2 = Bndi.context("//apml/tests/").pull(one);
-        Object one3 = Bndi.context("//apml/tests/").pull("one");
+        Object one1 = Bodi.context("//apml/tests/").pull(one.hashCode());
+        Object one2 = Bodi.context("//apml/tests/").pull(one);
+        Object one3 = Bodi.context("//apml/tests/").pull("one");
         
-        Object two1 = Bndi.context("//apml/tests/").pull(two.hashCode());
-        Object two2 = Bndi.context("//apml/tests/").pull(two);
-        Object two3 = Bndi.context("//apml/tests/").pull("two");
+        Object two1 = Bodi.context("//apml/tests/").pull(two.hashCode());
+        Object two2 = Bodi.context("//apml/tests/").pull(two);
+        Object two3 = Bodi.context("//apml/tests/").pull("two");
 
-        Object three1 = Bndi.context("//apml/tests/").pull(three.hashCode());
-        Object three2 = Bndi.context("//apml/tests/").pull(three);
-        Object three3 = Bndi.context("//apml/tests/").pull("three");     
+        Object three1 = Bodi.context("//apml/tests/").pull(three.hashCode());
+        Object three2 = Bodi.context("//apml/tests/").pull(three);
+        Object three3 = Bodi.context("//apml/tests/").pull("three");     
 
         if(one==one1) System.err.println("Test complete: one==one1");
         if(one==one2) System.err.println("Test complete: one==one2");
@@ -58,9 +58,9 @@ public class Bndi
      * @param context
      * @return 
      */
-    private static Map<String, Bndicontext> getcontexts(String context)
+    private static Map<String, Bodicontext> getcontexts(String context)
     {
-        return Bndi.contexts;
+        return Bodi.contexts;
     }       
    
     /**
@@ -70,13 +70,13 @@ public class Bndi
      */
     public static void setcontext(String context)
     {                   
-        if(contexts.get(context)==null) Bndi.contexts.put(context, new Bndicontext(context));
+        if(contexts.get(context)==null) Bodi.contexts.put(context, new Bodicontext(context));
     }          
        
-    public static Bndicontext context(String context)
+    public static Bodicontext context(String context)
     {     
         return contexts.get(context);
-        //return contexts.get(context) == null ? Bndi.setcontext(context) : Bndi.contexts.get(context);
+        //return contexts.get(context) == null ? Bodi.setcontext(context) : Bodi.contexts.get(context);
     }  
 }
 

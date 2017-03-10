@@ -16,7 +16,7 @@ import org.w3c.dom.Node;
  *
  * @author Max Rupplin
  */
-public class Bndicontext 
+public class Bodicontext 
 {
     protected final Integer hash = 0x888fe8;
     
@@ -27,12 +27,12 @@ public class Bndicontext
     public String contextname;
     public File file;
     
-    public Bndicontext(String contextname)
+    public Bodicontext(String contextname)
     {       
         this.contextname = contextname;
     }
 
-    public Bndicontext(File file)
+    public Bodicontext(File file)
     {
         this.file = file;
     }
