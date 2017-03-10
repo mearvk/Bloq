@@ -43,28 +43,26 @@ public class Uioutputmanager
     private void setconstructor(JCodeModel jcodemodel)
     {
         
-        Node self = (Node)Bndi.context("jcm::node").pull(jcodemodel);
+        Node self = (Node)Bndi.context("jcm ^ node").pull(jcodemodel);
         
         Element xml = (Element)self;
         
-        JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm::jdc").pull(jcodemodel);
+        JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(jcodemodel);
         
         try
         {                
-            JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);
+            JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);            
             
-            //Node self = (Node)Bndi.context("jdc::node").pull(jdefinedclass);                  //return node form of self [new]
+            Node parent = (Node)Bndi.context("node ^ node").pull(self);                             //return parent node given self node [exists already]
             
-            Node parent = (Node)Bndi.context("node::node").pull(self);                          //return parent node given self node [exists already]
-            
-            String fullparentclassname = (String)Bndi.context("node::jdcname").pull(self);     //return parent node jdc classname (fullname) [exists already]
+            String fullparentclassname = (String)Bndi.context("node ^ jdcname").pull(self);         //return parent node jdc classname (fullname) [exists already]
             
             constructor.param(Class.forName("java.awt.Component"), "parent");
                         
             
             if(xml.getAttribute("setAccelerator")!=null && xml.getAttribute("setAccelerator").length()>0)
             {                                
-                try{constructor.body().directStatement("this.setAccelerator(KeyStroke.getKeyStroke("+xml.getAttribute("setAccelerator")+"));\n\t");                      }catch(Exception e){};
+                try{constructor.body().directStatement("this.setAccelerator(KeyStroke.getKeyStroke("+xml.getAttribute("setAccelerator")+"));\n\t"); }catch(Exception e){};
             }               
             
             if(xml.getAttribute("setAutoscrolls")!=null && xml.getAttribute("setAutoscrolls").length()>0)
@@ -129,17 +127,17 @@ public class Uioutputmanager
             
             if(xml.getAttribute("setHeight")!=null && xml.getAttribute("setHeight").length()>0)
             {
-                try{constructor.body().directStatement("this.setHeight(\""+xml.getAttribute("setHeight")+"\");\n\t");                           }catch(Exception e){} 
+                try{constructor.body().directStatement("this.setHeight(\""+xml.getAttribute("setHeight")+"\");\n\t");                               }catch(Exception e){} 
             }            
 
             if(xml.getAttribute("setIcon")!=null && xml.getAttribute("setIcon").length()>0)
             {
-                try{constructor.body().directStatement("this.setIcon(new ImageIcon(\""+xml.getAttribute("setIcon")+"\"));\n\t");                                       }catch(Exception e){}
+                try{constructor.body().directStatement("this.setIcon(new ImageIcon(\""+xml.getAttribute("setIcon")+"\"));\n\t");                    }catch(Exception e){}
             }
             
             if(xml.getAttribute("setIconAt")!=null && xml.getAttribute("setIconAt").length()>0)
             {
-                try{constructor.body().directStatement("this.setIconAt(new ImageIcon(\""+xml.getAttribute("setIconAt")+"\"));\n\t");                                       }catch(Exception e){}
+                try{constructor.body().directStatement("this.setIconAt(new ImageIcon(\""+xml.getAttribute("setIconAt")+"\"));\n\t");                }catch(Exception e){}
             }
 
             if(xml.getAttribute("setLabel")!=null && xml.getAttribute("setLabel").length()>0)
@@ -229,7 +227,7 @@ public class Uioutputmanager
         }
         catch(Exception exception)
         {
-            
+            System.err.println(exception);
         }       
     }
     
@@ -239,13 +237,13 @@ public class Uioutputmanager
         {                                            
             Object o = Bndi.contexts;                                  
                         
-            Node childnode = (Node)Bndi.context("jcm::node").pull(jcodemodel);                                          
+            Node childnode = (Node)Bndi.context("jcm ^ node").pull(jcodemodel);                                          
             
-            Node parentnode = (Node)Bndi.context("node::node").pull(childnode);
+            Node parentnode = (Node)Bndi.context("node ^ node").pull(childnode);
             
-            String parentclassname = (String)Bndi.context("node::jdcname").softpull(parentnode);                                    
+            String parentclassname = (String)Bndi.context("node ^ jdcname").softpull(parentnode);                                    
             
-            JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm::jdc").pull(jcodemodel);  
+            JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(jcodemodel);  
             
             if(parentclassname == null || true)
             {
@@ -272,9 +270,9 @@ public class Uioutputmanager
                 jdefinedclass.direct("public "+parentclassname+" parent;\n\t");           
             }
         }
-        catch(Exception e)
+        catch(Exception exception)
         {
-            
+            //System.err.println(exception); 
         }        
     }
      
@@ -282,55 +280,70 @@ public class Uioutputmanager
     {
         try
         {                   
-            Node node = (Node)Bndi.context("jcm::node").pull(jcodemodel);
+            Node node = (Node)Bndi.context("jcm ^ node").pull(jcodemodel);                                    
             
-            XPath xpath = (XPath)Bndi.context("jcm::xpath").pull(jcodemodel);
+            JDefinedClass parentjdc = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(jcodemodel);
             
-            NodeList nodes = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);
+            XPath xpath = (XPath)Bndi.context("jcm ^ xpath").pull(jcodemodel);
             
-            JDefinedClass parentjdc = (JDefinedClass)Bndi.context("jcm::jdc").pull(jcodemodel);                     
+            NodeList nodes = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);                                             
             
-            parentjdc.constructors().next().body().directStatement("/* ------------------  instantiation  ---------------- */\n\t");            
-            
-            for(int i=0; i<nodes.getLength(); i++)
-            {                
-                JCodeModel childjmodel = (JCodeModel)Bndi.context("node::jcm").softpull(nodes.item(i));
+            this.doinstantiation(nodes, jcodemodel, parentjdc);
+           
+            this.dohierarchy(nodes, jcodemodel, parentjdc);
+                  
+            this.dodevolvement(nodes, jcodemodel, parentjdc);
+        }
+        catch(Exception exception)
+        {
+            //System.err.println(exception);
+        }        
+    }    
+    
+    private void doinstantiation(NodeList nodes, JCodeModel jcodemodel, JDefinedClass parentjdc)
+    {
+        parentjdc.constructors().next().body().directStatement("/* ------------------  instantiation  ---------------- */\n\t");
+        
+        for(int i=0; i<nodes.getLength(); i++)
+        {                
+            JCodeModel childjmodel = (JCodeModel)Bndi.context("node ^ jcm").softpull(nodes.item(i));
                 
-                JDefinedClass childjclass = (JDefinedClass)Bndi.context("jcm::jdc").pull(childjmodel);
+            JDefinedClass childjclass = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(childjmodel);
                 
-                JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm::jdc").pull(jcodemodel);
+            JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(jcodemodel);
                                               
-                jdefinedclass.direct("\n\t");
+            jdefinedclass.direct("\n\t");
                 
-                String s = "public "+childjclass.fullName()+" child_"+String.format("%1$03d",i)+";\n\t";
+            String s = "public "+childjclass.fullName()+" child_"+String.format("%1$03d",i)+";\n\t";
                 
-                jdefinedclass.direct("public "+childjclass.name()+" "+childjclass.name().toLowerCase()+";\n\t");                                   
+            jdefinedclass.direct("public "+childjclass.name()+" "+childjclass.name().toLowerCase()+";\n\t");                                   
                 
-                jdefinedclass.constructors().next().body().directStatement("this."+childjclass.name().toLowerCase()+" = new "+childjclass.name()+"(this);\n\t");
-            }
+            jdefinedclass.constructors().next().body().directStatement("this."+childjclass.name().toLowerCase()+" = new "+childjclass.name()+"(this);\n\t");
+        }
+    }
+    
+    private void dohierarchy(NodeList nodes, JCodeModel jcodemodel, JDefinedClass parentjdc)
+    {
+        parentjdc.constructors().next().body().directStatement("/* ------------------  hierarchy  -------------------- */\n\t");
             
-            parentjdc.constructors().next().body().directStatement("/* ------------------  hierarchy  -------------------- */\n\t");
-            
-            for(int i=0; i<nodes.getLength(); i++)
-            {                
-                JCodeModel childjmodel = (JCodeModel)Bndi.context("node::jcm").softpull(nodes.item(i));
+        for(int i=0; i<nodes.getLength(); i++)
+        {                
+                JCodeModel childjmodel = (JCodeModel)Bndi.context("node ^ jcm").softpull(nodes.item(i));
                 
-                JDefinedClass childjclass = (JDefinedClass)Bndi.context("jcm::jdc").pull(childjmodel);
+                JDefinedClass childjclass = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(childjmodel);
                 
-                JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm::jdc").pull(jcodemodel);                                                                                          
+                JDefinedClass jdefinedclass = (JDefinedClass)Bndi.context("jcm ^ jdc").pull(jcodemodel);                                                                                          
                 
                 jdefinedclass.direct("\n\t");
             
                 jdefinedclass.constructors().next().body().directStatement("this.add("+childjclass.name().toLowerCase()+");\n\t");
-            }       
-            
-            parentjdc.constructors().next().body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");     
-            
-            parentjdc.constructors().next().body().directStatement("this.parent = parent;\n\t");
-        }
-        catch(Exception e)
-        {
-            
-        }        
-    }    
+            }         
+    }
+    
+    private void dodevolvement(NodeList nodes, JCodeModel jcodemodel, JDefinedClass parentjdc)
+    {
+        parentjdc.constructors().next().body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");                         
+        
+        parentjdc.constructors().next().body().directStatement("this.parent = parent;\n\t");                        
+    }
 }

@@ -141,7 +141,7 @@ public class Stduserinterfacecompiler
     
     public void settempfiles(Uiapmlmanager apmlmanager)
     {
-        //javac 
+        //javac etc
     }
     
     public void setsourcefiles(Uioutputmanager outputmanager)
