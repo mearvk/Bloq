@@ -76,7 +76,6 @@ public class Bodi
     public static Bodicontext context(String context)
     {     
         return contexts.get(context);
-        //return contexts.get(context) == null ? Bodi.setcontext(context) : Bodi.contexts.get(context);
     }  
 }
 
