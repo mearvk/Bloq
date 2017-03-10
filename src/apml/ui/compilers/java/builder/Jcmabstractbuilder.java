@@ -1,17 +1,23 @@
 package apml.ui.compilers.java.builder;
 
 import apml.system.bodi.Bndi;
+import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JPackage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -55,7 +61,24 @@ public abstract class Jcmabstractbuilder
     public void setsuperclass(JDefinedClass jdefinedclass, Class classname)
     {
         jdefinedclass._extends(classname);
-    }        
+    } 
+    
+    public void setbndi(JCodeModel jcodemodel, Node node, JDefinedClass jdefinedclass)
+    {
+        Bndi.context("jcm::node").put(jcodemodel, node);                
+                
+        Bndi.context("node::jcm").put(node, jcodemodel);                
+                
+        Bndi.context("jcm::xpath").put(jcodemodel, xpath);
+               
+        Bndi.context("node::node").put(node, node.getParentNode());    
+                
+        Bndi.context("jcm::jdc").put(jcodemodel, jdefinedclass);
+               
+        Bndi.context("node::jdcname").put(node, jdefinedclass.fullName());
+                
+        Bndi.context("jdc::node").put(jdefinedclass, node);        
+    }
     
     public ArrayList<JCodeModel> build(String tagname, Class classname)
     {
@@ -75,36 +98,20 @@ public abstract class Jcmabstractbuilder
                 
                 JPackage jpackage = jcodemodel._package("org.widgets");                                              
                 
-                JDefinedClass jdefinedclass = jpackage._class(classname.getSimpleName()+"_"+String.format("%1$03d",i));                                                                
+                JDefinedClass jdefinedclass = jpackage._class(classname.getSimpleName()+"_"+String.format("%1$03d",i));                                                              
                 
-                Bndi.context("jcm::node").put(jcodemodel, nodes.item(i));                
-                
-                Bndi.context("node::jcm").put(nodes.item(i), jcodemodel);                
-                
-                Bndi.context("jcm::xpath").put(jcodemodel, xpath);
-                
-                Bndi.context("node::node").put(nodes.item(i), nodes.item(i).getParentNode());    
-                
-                Bndi.context("jcm::jdc").put(jcodemodel, jdefinedclass);
-                
-                Bndi.context("node::jdcname").put(nodes.item(i), jdefinedclass.fullName());
-                
-                Bndi.context("jdc::node").put(jdefinedclass, nodes.item(i));
+                this.setbndi(jcodemodel, nodes.item(i), jdefinedclass);
                 
                 this.setsuperclass(jdefinedclass, classname);
-                
-                //this.setconstructor(jdefinedclass, xml); 
-                
-                //jcodemodel.build(new File("/home/oem/Desktop/UI"));
                                 
                 jcodemodels.add(jcodemodel);
             }
             
             this.models = jcodemodels;
         }
-        catch(Exception exception)
+        catch(ParserConfigurationException | SAXException | IOException | XPathExpressionException | JClassAlreadyExistsException exception)
         {
-            exception.printStackTrace();
+            exception.printStackTrace(System.err);
         }
         
         return jcodemodels;        

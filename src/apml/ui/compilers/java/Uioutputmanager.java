@@ -134,7 +134,12 @@ public class Uioutputmanager
 
             if(xml.getAttribute("setIcon")!=null && xml.getAttribute("setIcon").length()>0)
             {
-                try{constructor.body().directStatement("this.setIcon("+xml.getAttribute("setIcon")+");\n\t");                                       }catch(Exception e){}
+                try{constructor.body().directStatement("this.setIcon(new ImageIcon(\""+xml.getAttribute("setIcon")+"\"));\n\t");                                       }catch(Exception e){}
+            }
+            
+            if(xml.getAttribute("setIconAt")!=null && xml.getAttribute("setIconAt").length()>0)
+            {
+                try{constructor.body().directStatement("this.setIconAt(new ImageIcon(\""+xml.getAttribute("setIconAt")+"\"));\n\t");                                       }catch(Exception e){}
             }
 
             if(xml.getAttribute("setLabel")!=null && xml.getAttribute("setLabel").length()>0)
@@ -250,19 +255,21 @@ public class Uioutputmanager
                 
                 jdefinedclass.direct("\n\t");
                 
-                jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "refkeyevent");                
+                jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "keyevent");                
                 
-                jdefinedclass.field(JMod.PUBLIC, Class.forName("javax.swing.KeyStroke"), "refkeystroke");               
+                jdefinedclass.field(JMod.PUBLIC, Class.forName("javax.swing.KeyStroke"), "keystroke");               
                 
-                jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.ActionEvent"), "refactionevent");                
+                jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.ActionEvent"), "actionevent"); 
+                
+                jdefinedclass.field(JMod.PUBLIC, Class.forName("javax.swing.ImageIcon"), "imageicon");
+                
+                jdefinedclass.field(JMod.PUBLIC, Class.forName("java.net.URL"), "url");
             }            
             else
             {                                 
                 jdefinedclass.direct("\n\t");
 
-                jdefinedclass.direct("public "+parentclassname+" parent;\n\t");
-
-                jdefinedclass.direct("\n\t");            
+                jdefinedclass.direct("public "+parentclassname+" parent;\n\t");           
             }
         }
         catch(Exception e)
@@ -297,14 +304,12 @@ public class Uioutputmanager
                 
                 String s = "public "+childjclass.fullName()+" child_"+String.format("%1$03d",i)+";\n\t";
                 
-                jdefinedclass.direct("public "+childjclass.fullName()+" "+childjclass.name().toLowerCase()+";\n\t");              
-                
-                jdefinedclass.direct("\n\t");            
+                jdefinedclass.direct("public "+childjclass.name()+" "+childjclass.name().toLowerCase()+";\n\t");                                   
                 
                 jdefinedclass.constructors().next().body().directStatement("this."+childjclass.name().toLowerCase()+" = new "+childjclass.name()+"(this);\n\t");
             }
             
-            parentjdc.constructors().next().body().directStatement("/* ------------------  hierarchy  ---------------- */\n\t");
+            parentjdc.constructors().next().body().directStatement("/* ------------------  hierarchy  -------------------- */\n\t");
             
             for(int i=0; i<nodes.getLength(); i++)
             {                
@@ -319,7 +324,7 @@ public class Uioutputmanager
                 jdefinedclass.constructors().next().body().directStatement("this.add("+childjclass.name().toLowerCase()+");\n\t");
             }       
             
-            parentjdc.constructors().next().body().directStatement("/* ------------------  devolvement  ---------------- */\n\t");     
+            parentjdc.constructors().next().body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");     
             
             parentjdc.constructors().next().body().directStatement("this.parent = parent;\n\t");
         }
