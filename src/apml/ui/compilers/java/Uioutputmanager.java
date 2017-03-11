@@ -27,22 +27,47 @@ public class Uioutputmanager
             {   
                 this.setconstructor(jcodemodel);
                 
-                this.setparent(jcodemodel);
-
-                this.setchildren(jcodemodel);                                                
+                this.setfields(jcodemodel);
+                
+                this.setparent(jcodemodel);  
+                                
+                this.setchildren(jcodemodel);                                
                 
                 jcodemodel.build(new File("/home/oem/Desktop/UI"));
             }
         }
-        catch(Exception e)
+        catch(Exception exception)
         {
-            
+            //exception
         }             
     }
     
-    private void setconstructor(JCodeModel jcodemodel)
+    private void setfields(JCodeModel jcodemodel)
     {
-        
+        try
+        {
+            JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
+               
+            jdefinedclass.direct("\n\t");
+
+            jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "keyevent");                
+
+            jdefinedclass.field(JMod.PUBLIC, Class.forName("javax.swing.KeyStroke"), "keystroke");               
+
+            jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.ActionEvent"), "actionevent"); 
+
+            jdefinedclass.field(JMod.PUBLIC, Class.forName("javax.swing.ImageIcon"), "imageicon");
+
+            jdefinedclass.field(JMod.PUBLIC, Class.forName("java.net.URL"), "url");
+        }
+        catch(Exception exception)
+        {
+            //exception;
+        }
+    }
+    
+    private void setconstructor(JCodeModel jcodemodel)
+    {        
         Node self = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);
         
         Element xml = (Element)self;
@@ -51,14 +76,23 @@ public class Uioutputmanager
         
         try
         {                
+            /* ------------------------- BODI lookup --------------------------- */
+                        
             JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);            
             
             Node parent = (Node)Bodi.context("node ^ node").pull(self);                             //return parent node given self node [exists already]
             
             String fullparentclassname = (String)Bodi.context("node ^ jdcname").pull(self);         //return parent node jdc classname (fullname) [exists already]
             
-            constructor.param(Class.forName("java.awt.Component"), "parent");
-                        
+            
+            
+            /* ------------------------- Parent setter ------------------------- */
+            
+            constructor.param(Class.forName("java.awt.Component"), "parent");   
+            
+            
+            
+            /* ------------------------- General setters ----------------------- */
             
             if(xml.getAttribute("setAccelerator")!=null && xml.getAttribute("setAccelerator").length()>0)
             {                                
@@ -123,12 +157,7 @@ public class Uioutputmanager
             if(xml.getAttribute("setForeground")!=null && xml.getAttribute("setForeground").length()>0)
             {
                 try{constructor.body().directStatement("this.setForeground("+xml.getAttribute("setForeground")+");\n\t");                           }catch(Exception e){} 
-            }    
-            
-            if(xml.getAttribute("setHeight")!=null && xml.getAttribute("setHeight").length()>0)
-            {
-                try{constructor.body().directStatement("this.setHeight(\""+xml.getAttribute("setHeight")+"\");\n\t");                               }catch(Exception e){} 
-            }            
+            }              
 
             if(xml.getAttribute("setIcon")!=null && xml.getAttribute("setIcon").length()>0)
             {
@@ -213,73 +242,34 @@ public class Uioutputmanager
             if(xml.getAttribute("setToolTipText")!=null && xml.getAttribute("setToolTipText").length()>0)
             {
                 try{constructor.body().directStatement("this.setToolTipText("+xml.getAttribute("setToolTipText")+");\n\t");                         }catch(Exception e){}
-            }
-                
-            if(xml.getAttribute("setVisible")!=null && xml.getAttribute("setVisible").length()>0)
-            {
-                try{constructor.body().directStatement("this.setVisible("+xml.getAttribute("setVisible")+");\n\t");                                 }catch(Exception e){}
-            } 
-            
-            if(xml.getAttribute("setWidth")!=null && xml.getAttribute("setWidth").length()>0)
-            {
-                try{constructor.body().directStatement("this.setWidth(\""+xml.getAttribute("setWidth")+"\");\n\t");                                 }catch(Exception e){}
             }            
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            //exception
         }       
     }
     
     private void setparent(JCodeModel jcodemodel)
     {
         try
-        {                                            
-            Object o = Bodi.contexts;                                  
-                        
-            Node childnode = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);                                          
-            
-            Node parentnode = (Node)Bodi.context("node ^ node").pull(childnode);
-            
-            String parentclassname = (String)Bodi.context("node ^ jdcname").softpull(parentnode);                                    
-            
+        {            
             JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);  
             
-            if(parentclassname == null || true)
-            {
-                jdefinedclass.direct("\n\t");
+            jdefinedclass.direct("\n\t");
                 
-                jdefinedclass.direct("public Component parent;\n\t");                
-                
-                jdefinedclass.direct("\n\t");
-                
-                jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "keyevent");                
-                
-                jdefinedclass.field(JMod.PUBLIC, Class.forName("javax.swing.KeyStroke"), "keystroke");               
-                
-                jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.ActionEvent"), "actionevent"); 
-                
-                jdefinedclass.field(JMod.PUBLIC, Class.forName("javax.swing.ImageIcon"), "imageicon");
-                
-                jdefinedclass.field(JMod.PUBLIC, Class.forName("java.net.URL"), "url");
-            }            
-            else
-            {                                 
-                jdefinedclass.direct("\n\t");
-
-                jdefinedclass.direct("public "+parentclassname+" parent;\n\t");           
-            }
+            jdefinedclass.direct("public Component parent;\n\t");             
         }
         catch(Exception exception)
         {
-            //System.err.println(exception); 
+            //exception
         }        
     }
      
     private void setchildren(JCodeModel jcodemodel)
     {
         try
-        {                   
+        {          
             Node node = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);                                    
             
             JDefinedClass parentjdc = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
@@ -296,7 +286,7 @@ public class Uioutputmanager
         }
         catch(Exception exception)
         {
-            //System.err.println(exception);
+            //exception
         }        
     }    
     
@@ -328,16 +318,42 @@ public class Uioutputmanager
             
         for(int i=0; i<nodes.getLength(); i++)
         {                
-                JCodeModel childjmodel = (JCodeModel)Bodi.context("node ^ jcm").softpull(nodes.item(i));
+            JCodeModel childjcm = (JCodeModel)Bodi.context("node ^ jcm").softpull(nodes.item(i));
                 
-                JDefinedClass childjclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(childjmodel);
-                
-                JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);                                                                                          
-                
-                jdefinedclass.direct("\n\t");
+            JDefinedClass childjdc = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(childjcm);                
             
-                jdefinedclass.constructors().next().body().directStatement("this.add("+childjclass.name().toLowerCase()+");\n\t");
-            }         
+            JMethod constructor = parentjdc.constructors().next();
+            
+            String childsuperclass = childjdc._extends().name();
+            
+            String childfieldname = childjdc.name().toLowerCase();
+                
+            parentjdc.direct("\n\t");                        
+            
+            //
+            if(childsuperclass.contains("JMenuBar"))            
+            {
+                constructor.body().directStatement("this.setJMenuBar("+childfieldname+");\n\t"); 
+                
+                continue;                
+            }
+            
+            //
+            if(childsuperclass.contains("JTabbedPane"))
+            {
+                constructor.body().directStatement("this.addTab("+childfieldname+");\n\t"); 
+                
+                continue;                
+            }            
+
+            //
+            if(!childsuperclass.contains("JMenuBar") && !childsuperclass.contains("JTabbedPane"))
+            {
+                constructor.body().directStatement("this.add("+childfieldname+");\n\t");
+                
+                continue;
+            }
+        }         
     }
     
     private void dodevolvement(NodeList nodes, JCodeModel jcodemodel, JDefinedClass parentjdc)
@@ -345,5 +361,7 @@ public class Uioutputmanager
         parentjdc.constructors().next().body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");                         
         
         parentjdc.constructors().next().body().directStatement("this.parent = parent;\n\t");                        
+        
+        parentjdc.constructors().next().body().directStatement("this.setVisible(true);\n\t");   
     }
 }

@@ -145,7 +145,9 @@ public class Stduserinterfacecompiler
     }
     
     public void setsourcefiles(Uioutputmanager outputmanager)
-    {               
+    {     
+        //rem rmcp isnot a divorce filing 
+        
         //
         outputmanager.generatejavafiles(this.apmlmanager.jbuttonmodels);
         
