@@ -10,13 +10,17 @@ import javax.xml.xpath.XPathFactory;
  */
 public class Jcmjmenuitembuilder extends Jcmabstractbuilder
 {    
+    public Class _class = JMenuItem.class;
+    
     public static void main(String...args)
     {
-        new Jcmjmenuitembuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jmenuitem", JMenuItem.class);
+        //new Jcmjmenuitembuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jmenuitem", JMenuItem.class);
     }     
     
-    public Jcmjmenuitembuilder(File apml)
+    public Jcmjmenuitembuilder(File apml, String tagname)
     {
+        super(apml, tagname);
+                
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

@@ -14,11 +14,13 @@ public class Jcmjlistbuilder extends Jcmabstractbuilder
 {      
     public static void main(String...args)
     {
-        new Jcmjlistbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jlist", JList.class);
+        //new Jcmjlistbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jlist", JList.class);
     }     
     
-    public Jcmjlistbuilder(File apml)
+    public Jcmjlistbuilder(File apml, String tagname)
     {
+        super(apml, tagname);
+                
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

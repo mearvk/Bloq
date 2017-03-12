@@ -1,29 +1,24 @@
 package apml.ui.compilers.java.builder;
 
 import apml.system.bodi.Bodi;
-import com.sun.codemodel.JClassAlreadyExistsException;
+import apml.ui.compilers.java.Uiparameter;
 import com.sun.codemodel.JCodeModel;
-import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JPackage;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 /**
  *
- * @author max rupplin
+ * @author Max Rupplin
  */
 public abstract class Jcmabstractbuilder
-{      
+{   
+    public ArrayList<JCodeModel> jcodemodels = new ArrayList<>();
+    
     public Jcmabstractbuilder builder = this;
     
     public Document doc;   
@@ -34,91 +29,93 @@ public abstract class Jcmabstractbuilder
     
     public XPath xpath; 
     
-    public ArrayList<JCodeModel> jcodemodels = new ArrayList<>();
+    public String tagname;
     
-    public Jcmabstractbuilder()
-    {
-        /* ---------------- JDC BNDI --------------------*/
+    
+    public Jcmabstractbuilder(File apml, String tagname)
+    {                        
+        Bodi.setcontext("widgets");  
         
-        Bodi.setcontext("jdc ^ node");
-        
-        
-        /* ---------------- JCM BODI --------------------*/
-        
-        Bodi.setcontext("jcm ^ jdc");        
-        
-        Bodi.setcontext("jcm ^ jdcname");
-        
-        Bodi.setcontext("jcm ^ node");             
-        
-        Bodi.setcontext("jcm ^ xpath");
-        
-        
-        /* ---------------- NODE BODI -------------------*/
-        
-        Bodi.setcontext("node ^ jdcname");
-        
-        Bodi.setcontext("node ^ jcm");
-        
-        Bodi.setcontext("node ^ node");
+        this.tagname = tagname;
     }
     
-    public void setsuperclass(JDefinedClass jdefinedclass, Class classname)
+    public void setsuperclass(JCodeModel jcodemodel, Integer i, Class _class)
     {
-        jdefinedclass._extends(classname);
+        jcodemodel.packages().next().classes().next()._extends(_class);
     } 
     
-    public void setbodi(JCodeModel jcodemodel, Node node, JDefinedClass jdefinedclass)
+    public void setbodi(JCodeModel jcodemodel, Integer i, Class _class)
     {
-        /* ---------------- JDC BNDI --------------------*/
+        Uiparameter uip = new Uiparameter();
         
-        Bodi.context("jdc ^ node").put(jdefinedclass, node);  
+        uip.self_node = nodes.item(i);
         
+        uip.jcm = jcodemodel;
         
-        /* ---------------- JCM BODI --------------------*/
+        uip.jdc = jcodemodel.packages().next().classes().next();
         
-        Bodi.context("jcm ^ node").put(jcodemodel, node);                
+        uip.xpath = xpath;
         
-        Bodi.context("jcm ^ xpath").put(jcodemodel, xpath);
-                
-        Bodi.context("jcm ^ jdc").put(jcodemodel, jdefinedclass);
+        uip.parent_node = nodes.item(i).getParentNode();
         
+        uip.classname = uip.jdc.fullName();
         
-        /* ---------------- NODE BODI -------------------*/
+        uip.instancename = uip.jdc.fullName().toLowerCase();
         
-        Bodi.context("node ^ jdcname").put(node, jdefinedclass.fullName());
+        uip.doc = this.doc;
         
-        Bodi.context("node ^ jcm").put(node, jcodemodel);                
-                                                       
-        Bodi.context("node ^ node").put(node, node.getParentNode());                                                                             
+        Bodi.context("widgets").put(uip.jcm, uip);
     }
     
-    public ArrayList<JCodeModel> build(String tagname, Class classname)
-    {                
+    
+    public void setjcmclass(JCodeModel jcodemodel, Integer i, Class _class) throws Exception
+    {
+        jcodemodel.packages().next()._class(_class.getSimpleName()+"_"+String.format("%1$03d",i)); 
+    }
+    
+    public void setjcmpackage(JCodeModel jcodemodel, Integer i, Class _class) throws Exception
+    {                        
+        jcodemodel._package("org.widgets");                         
+    }
+    
+    public void setdocument(File apml) throws Exception
+    {
+        this.doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(apml);
+    }
+    
+    public void setnodes(JCodeModel jcodemodel, Integer i, Class _class) throws Exception
+    {
+        this.nodes = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);
+    }
+    
+    public ArrayList<JCodeModel> build()
+    {                       
         try
-        {                  
-            this.doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(apml);
-        
-            this.nodes = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);           
+        {                              
+            Class _class = null;
             
-            for(int i=0; i<nodes.getLength(); i++)
-            {                                            
-                JCodeModel jcodemodel = new JCodeModel();
+            for(int i=0; i<this.nodes.getLength(); i++)
+            {       
+                JCodeModel jcodemodel = new JCodeModel();                
+                                
+                //
+            
+                this.setdocument(apml);
                 
-                JPackage jpackage = jcodemodel._package("org.widgets");                                              
+                this.setjcmpackage(jcodemodel, i, _class);
                 
-                JDefinedClass jdefinedclass = jpackage._class(classname.getSimpleName()+"_"+String.format("%1$03d",i));                                                              
+                this.setjcmclass(jcodemodel, i, _class);                                
+            
+                this.setnodes(jcodemodel, i, _class);                                                 
                 
-                this.setbodi(jcodemodel, nodes.item(i), jdefinedclass);
+                this.setsuperclass(jcodemodel, i, _class);                 
                 
-                this.setsuperclass(jdefinedclass, classname);
-                 
-                this.setjcodemodel(jcodemodel);
-            }            
+                this.setbodi(jcodemodel, i, _class);
+            }
         }
-        catch(ParserConfigurationException | SAXException | IOException | XPathExpressionException | JClassAlreadyExistsException exception)
+        catch(Exception exception)
         {
-            exception.printStackTrace(System.err);
+            System.err.println(exception);
         }
         
         return jcodemodels;        

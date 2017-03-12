@@ -12,11 +12,13 @@ public class Jcmjradiobuttonbuilder extends Jcmabstractbuilder
 {    
     public static void main(String...args)
     {
-        new Jcmjradiobuttonbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jradiobutton", JRadioButton.class);
+        //new Jcmjradiobuttonbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jradiobutton", JRadioButton.class);
     }     
     
-    public Jcmjradiobuttonbuilder(File apml)
+    public Jcmjradiobuttonbuilder(File apml, String tagname)
     {
+        super(apml, tagname);
+        
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

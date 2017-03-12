@@ -12,11 +12,13 @@ public class Jcmjtreebuilder extends Jcmabstractbuilder
 {   
     public static void main(String...args)
     {
-        new Jcmjtreebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jtree", JTree.class);
+        //new Jcmjtreebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jtree", JTree.class);
     }     
     
-    public Jcmjtreebuilder(File apml)
+    public Jcmjtreebuilder(File apml, String tagname)
     {
+        super(apml, tagname);
+        
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

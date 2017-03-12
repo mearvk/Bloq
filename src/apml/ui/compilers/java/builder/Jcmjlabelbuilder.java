@@ -12,13 +12,17 @@ import javax.xml.xpath.XPathFactory;
  */
 public class Jcmjlabelbuilder extends Jcmabstractbuilder
 {       
+    public Class _class = JLabel.class;
+    
     public static void main(String...args)
     {
-        new Jcmjlabelbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jlabel", JLabel.class);
+        //new Jcmjlabelbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jlabel", JLabel.class);
     }     
     
-    public Jcmjlabelbuilder(File apml)
+    public Jcmjlabelbuilder(File apml, String tagname)
     {
+        super(apml, tagname);
+                
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

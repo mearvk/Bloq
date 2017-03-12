@@ -12,11 +12,13 @@ public class Jcmjscrollpanebuilder extends Jcmabstractbuilder
 {         
     public static void main(String...args)
     {
-        new Jcmjscrollpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jscrollpane", JScrollPane.class);
+        //new Jcmjscrollpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jscrollpane", JScrollPane.class);
     }     
     
-    public Jcmjscrollpanebuilder(File apml)
+    public Jcmjscrollpanebuilder(File apml, String tagname)
     {
+        super(apml, tagname);
+        
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

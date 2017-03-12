@@ -12,11 +12,13 @@ public class Jcmjsplitpanebuilder extends Jcmabstractbuilder
 {    
     public static void main(String...args)
     {
-        new Jcmjsplitpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jsplitpane", JSplitPane.class);
+        //new Jcmjsplitpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jsplitpane", JSplitPane.class);
     }     
     
-    public Jcmjsplitpanebuilder(File apml)
+    public Jcmjsplitpanebuilder(File apml, String tagname)
     {
+        super(apml, tagname);
+        
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

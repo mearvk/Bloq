@@ -1,8 +1,6 @@
 package apml.ui.compilers.java.builder;
 
-import com.sun.codemodel.JCodeModel;
 import java.io.File;
-import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.xml.xpath.XPathFactory;
 
@@ -12,13 +10,17 @@ import javax.xml.xpath.XPathFactory;
  */
 public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
 {       
+    public Class _class = JComboBox.class;
+    
     public static void main(String...args)
     {
-        new Jcmjcomboboxbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jcombobox", JComboBox.class);
+        //new Jcmjcomboboxbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jcombobox", JComboBox.class);
     }     
     
-    public Jcmjcomboboxbuilder(File apml)
+    public Jcmjcomboboxbuilder(File apml, String tagname)
     {
+        super(apml, tagname);
+    
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

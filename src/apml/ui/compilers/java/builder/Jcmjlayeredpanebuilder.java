@@ -14,11 +14,13 @@ public class Jcmjlayeredpanebuilder extends Jcmabstractbuilder
 {            
     public static void main(String...args)
     {
-        new Jcmjlayeredpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jlayeredpane", JLayeredPane.class);
+        //new Jcmjlayeredpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jlayeredpane", JLayeredPane.class);
     }     
     
-    public Jcmjlayeredpanebuilder(File apml)
+    public Jcmjlayeredpanebuilder(File apml, String tagname)
     {
+        super(apml, tagname);
+                
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

@@ -14,11 +14,13 @@ public class Jcmjmenubarbuilder extends Jcmabstractbuilder
 {        
     public static void main(String...args)
     {
-        new Jcmjmenubarbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jmenubar", JMenuBar.class);
+        //new Jcmjmenubarbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jmenubar", JMenuBar.class);
     }     
     
-    public Jcmjmenubarbuilder(File apml)
+    public Jcmjmenubarbuilder(File apml, String tagname)
     {
+        super(apml, tagname);
+                
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

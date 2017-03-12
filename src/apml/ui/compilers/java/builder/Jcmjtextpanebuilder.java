@@ -12,11 +12,13 @@ public class Jcmjtextpanebuilder extends Jcmabstractbuilder
 {    
     public static void main(String...args)
     {
-        new Jcmjtextpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jtextpane", JTextPane.class);
+        //new Jcmjtextpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jtextpane", JTextPane.class);
     }     
     
-    public Jcmjtextpanebuilder(File apml)
+    public Jcmjtextpanebuilder(File apml, String tagname)
     {
+        super(apml, tagname);
+        
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

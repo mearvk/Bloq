@@ -214,67 +214,67 @@ public class Uiapmlmanager
     {            
         switch(tagname)
         {
-            case "//jbutton": return jbuttonmodels = new Jcmjbuttonbuilder(apml).builder.build(tagname, JButton.class);
+            case "//jbutton": return jbuttonmodels = new Jcmjbuttonbuilder(apml, tagname).builder.build();
 
-            case "//jframe": return jframemodels =  new Jcmjframebuilder(apml).builder.build(tagname, JFrame.class); 
+            case "//jframe": return jframemodels =  new Jcmjframebuilder(apml, tagname).builder.build();
 
-            case "//frame": return framemodels =  new Jcmframebuilder(apml).builder.build(tagname, Frame.class); 
+            case "//frame": return framemodels =  new Jcmframebuilder(apml, tagname).builder.build(); 
 
-            case "//jcheckbox": return jcheckboxmodels = new Jcmjcheckboxbuilder(apml).builder.build(tagname, JCheckBox.class); 
+            case "//jcheckbox": return jcheckboxmodels = new Jcmjcheckboxbuilder(apml, tagname).builder.build(); 
 
-            case "//jcombobox": return jcomboboxmodels = new Jcmjcomboboxbuilder(apml).builder.build(tagname, JComboBox.class); 
+            case "//jcombobox": return jcomboboxmodels = new Jcmjcomboboxbuilder(apml, tagname).builder.build(); 
 
-            case "//jlist": return jlistmodels = new Jcmjlistbuilder(apml).builder.build(tagname, JList.class); 
+            case "//jlist": return jlistmodels = new Jcmjlistbuilder(apml, tagname).builder.build();
 
-            case "//jmenu": return jmenumodels = new Jcmjmenubuilder(apml).builder.build(tagname, JMenu.class);
+            case "//jmenu": return jmenumodels = new Jcmjmenubuilder(apml, tagname).builder.build();
             
-            case "//jmenubar": return jmenubarmodels = new Jcmjmenubarbuilder(apml).builder.build(tagname, JMenuBar.class);
+            case "//jmenubar": return jmenubarmodels = new Jcmjmenubarbuilder(apml, tagname).builder.build();
             
-            case "//jmenuitem": return jmenuitemmodels = new Jcmjmenuitembuilder(apml).builder.build(tagname, JMenuItem.class);
+            case "//jmenuitem": return jmenuitemmodels = new Jcmjmenuitembuilder(apml, tagname).builder.build();
 
-            case "//jradiobutton": return jradiobuttonmodels = new Jcmjradiobuttonbuilder(apml).builder.build(tagname, JRadioButton.class); 
+            case "//jradiobutton": return jradiobuttonmodels = new Jcmjradiobuttonbuilder(apml, tagname).builder.build(); 
 
-            case "//jslider": return jslidermodels = new Jcmjsliderbuilder(apml).builder.build(tagname, JSlider.class); 
+            case "//jslider": return jslidermodels = new Jcmjsliderbuilder(apml, tagname).builder.build();
 
-            case "//jspinner": return jspinnermodels = new Jcmjspinnerbuilder(apml).builder.build(tagname, JSpinner.class); 
+            case "//jspinner": return jspinnermodels = new Jcmjspinnerbuilder(apml, tagname).builder.build();
 
-            case "//jtextfield": return jtextfieldmodels = new Jcmjtextfieldbuilder(apml).builder.build(tagname, JTextField.class); 
+            case "//jtextfield": return jtextfieldmodels = new Jcmjtextfieldbuilder(apml, tagname).builder.build(); 
 
-            case "//jpasswordfield": return jpasswordfieldmodels = new Jcmjpasswordfieldbuilder(apml).builder.build(tagname, JPasswordField.class); 
+            case "//jpasswordfield": return jpasswordfieldmodels = new Jcmjpasswordfieldbuilder(apml, tagname).builder.build();
 
-            case "//jcolorchooser": return jcolorchoosermodels = new Jcmjcolorchooserbuilder(apml).builder.build(tagname, JColorChooser.class); 
+            case "//jcolorchooser": return jcolorchoosermodels = new Jcmjcolorchooserbuilder(apml, tagname).builder.build();
 
-            case "//jeditorpane": return jeditorpanemodels = new Jcmjeditorpanebuilder(apml).builder.build(tagname, JEditorPane.class); 
+            case "//jeditorpane": return jeditorpanemodels = new Jcmjeditorpanebuilder(apml, tagname).builder.build();
 
-            case "//jtextpane": return jtextpanemodels = new Jcmjtextpanebuilder(apml).builder.build(tagname, JTextPane.class); 
+            case "//jtextpane": return jtextpanemodels = new Jcmjtextpanebuilder(apml, tagname).builder.build(); 
 
-            case "//jtree": return jtreemodels = new Jcmjtreebuilder(apml).builder.build(tagname, JTree.class); 
+            case "//jtree": return jtreemodels = new Jcmjtreebuilder(apml, tagname).builder.build(); 
 
-            case "//jlabel": return jlabelmodels = new Jcmjlabelbuilder(apml).builder.build(tagname, JLabel.class); 
+            case "//jlabel": return jlabelmodels = new Jcmjlabelbuilder(apml, tagname).builder.build(); 
 
-            case "//jprogressbar": return jprogressbarmodels = new Jcmjprogressbarbuilder(apml).builder.build(tagname, JProgressBar.class); 
+            case "//jprogressbar": return jprogressbarmodels = new Jcmjprogressbarbuilder(apml, tagname).builder.build();
 
-            case "//jseparator": return jseparatormodels = new Jcmjseparatorbuilder(apml).builder.build(tagname, JSeparator.class);
+            case "//jseparator": return jseparatormodels = new Jcmjseparatorbuilder(apml, tagname).builder.build();
 
-            case "//jtooltip": return jtooltipmodels = new Jcmjtooltipbuilder(apml).builder.build(tagname, JToolTip.class);
+            case "//jtooltip": return jtooltipmodels = new Jcmjtooltipbuilder(apml, tagname).builder.build();
 
-            case "//japplet": return jappletmodels = new Jcmjappletbuilder(apml).builder.build(tagname, JApplet.class);
+            case "//japplet": return jappletmodels = new Jcmjappletbuilder(apml, tagname).builder.build();
 
-            case "//jpanel": return jpanelmodels = new Jcmjpanelbuilder(apml).builder.build(tagname, JPanel.class);
+            case "//jpanel": return jpanelmodels = new Jcmjpanelbuilder(apml, tagname).builder.build();
 
-            case "//jscrollpane": return jscrollpanemodels = new Jcmjscrollpanebuilder(apml).builder.build(tagname, JScrollPane.class);
+            case "//jscrollpane": return jscrollpanemodels = new Jcmjscrollpanebuilder(apml, tagname).builder.build();
 
-            case "//jsplitpane": return jsplitpanemodels = new Jcmjsplitpanebuilder(apml).builder.build(tagname, JSplitPane.class);
+            case "//jsplitpane": return jsplitpanemodels = new Jcmjsplitpanebuilder(apml, tagname).builder.build();
 
-            case "//jtabbedpane": return jtabbedpanemodels = new Jcmjtabbedpanebuilder(apml).builder.build(tagname, JTabbedPane.class);
+            case "//jtabbedpane": return jtabbedpanemodels = new Jcmjtabbedpanebuilder(apml, tagname).builder.build();
 
-            case "//jtoolbar": return jtoolbarmodels = new Jcmjtoolbarbuilder(apml).builder.build(tagname, JToolBar.class);
+            case "//jtoolbar": return jtoolbarmodels = new Jcmjtoolbarbuilder(apml, tagname).builder.build();
 
-            case "//jinternalframe": return jinternalframemodels = new Jcmjinternalframebuilder(apml).builder.build(tagname, JInternalFrame.class);
+            case "//jinternalframe": return jinternalframemodels = new Jcmjinternalframebuilder(apml, tagname).builder.build();
 
-            case "//jlayeredpane": return jlayeredpanemodels = new Jcmjlayeredpanebuilder(apml).builder.build(tagname, JLayeredPane.class);
+            case "//jlayeredpane": return jlayeredpanemodels = new Jcmjlayeredpanebuilder(apml, tagname).builder.build();
 
-            case "//jrootpane": return jrootpanemodels = new Jcmjrootpanebuilder(apml).builder.build(tagname, JRootPane.class);            
+            case "//jrootpane": return jrootpanemodels = new Jcmjrootpanebuilder(apml, tagname).builder.build();            
         }        
         
         return new ArrayList<>();

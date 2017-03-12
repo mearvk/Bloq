@@ -12,11 +12,13 @@ public class Jcmjtoolbarbuilder extends Jcmabstractbuilder
 {     
     public static void main(String...args)
     {
-        new Jcmjtoolbarbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jtoolbar", JToolBar.class);
+        //new Jcmjtoolbarbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jtoolbar", JToolBar.class);
     }     
     
-    public Jcmjtoolbarbuilder(File apml)
+    public Jcmjtoolbarbuilder(File apml, String tagname)
     {
+        super(apml, tagname);
+        
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

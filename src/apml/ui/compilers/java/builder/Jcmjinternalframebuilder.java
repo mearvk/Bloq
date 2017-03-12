@@ -1,8 +1,6 @@
 package apml.ui.compilers.java.builder;
 
-import com.sun.codemodel.JCodeModel;
 import java.io.File;
-import java.util.ArrayList;
 import javax.swing.JInternalFrame;
 import javax.xml.xpath.XPathFactory;
 /**
@@ -11,13 +9,17 @@ import javax.xml.xpath.XPathFactory;
  */
 public class Jcmjinternalframebuilder extends Jcmabstractbuilder
 {        
+    public Class _class = JInternalFrame.class;
+    
     public static void main(String...args)
     {
-        new Jcmjinternalframebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jinternalframe", JInternalFrame.class);
+        //new Jcmjinternalframebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jinternalframe", JInternalFrame.class);
     }     
     
-    public Jcmjinternalframebuilder(File apml)
-    {
+    public Jcmjinternalframebuilder(File apml, String tagname)
+    { 
+        super(apml, tagname);
+    
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

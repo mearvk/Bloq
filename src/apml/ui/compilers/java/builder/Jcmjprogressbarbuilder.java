@@ -12,11 +12,13 @@ public class Jcmjprogressbarbuilder extends Jcmabstractbuilder
 {     
     public static void main(String...args)
     {
-        new Jcmjprogressbarbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jprogressbar", JProgressBar.class);
+        //new Jcmjprogressbarbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jprogressbar", JProgressBar.class);
     }     
     
-    public Jcmjprogressbarbuilder(File apml)
+    public Jcmjprogressbarbuilder(File apml, String tagname)
     {
+        super(apml, tagname);
+        
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            

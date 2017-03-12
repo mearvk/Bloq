@@ -1,6 +1,7 @@
 package apml.ui.compilers.java;
 
 import apml.system.bodi.Bodi;
+import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMethod;
@@ -31,7 +32,9 @@ public class Uioutputmanager
                 
                 this.setparent(jcodemodel);  
                                 
-                this.setchildren(jcodemodel);                                
+                this.setchildren(jcodemodel);
+                
+                this.setlisteners(jcodemodel);
                 
                 jcodemodel.build(new File("/home/oem/Desktop/UI"));
             }
@@ -42,15 +45,67 @@ public class Uioutputmanager
         }             
     }
     
+    private void setlisteners(JCodeModel jcodemodel)
+    {
+        try
+        {
+            Node node = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);                                    
+
+            JDefinedClass parentjdc = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
+
+            XPath xpath = (XPath)Bodi.context("jcm ^ xpath").pull(jcodemodel);
+
+            NodeList children = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);
+            
+            JMethod constructor = parentjdc.constructors().next();
+            
+            constructor.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
+            
+            for(int i=0; i<children.getLength(); i++)
+            {
+                String basename = children.item(i).getNodeName().toLowerCase()+"_"+String.format("%1$03d",i);
+                
+                String listener = basename+"_actionlistener"; 
+                
+                JCodeModel childname = (JCodeModel)Bodi.context("node ^ jcm").softpull(children.item(i));                
+                
+                constructor.body().directStatement("this."+basename+".addActionListener("+listener+");\n\t");
+            }
+            
+            for(int i=0; i<children.getLength(); i++)
+            {
+                String basename = children.item(i).getNodeName().toLowerCase()+"_"+String.format("%1$03d",i);                
+                
+                JCodeModel childname = (JCodeModel)Bodi.context("node ^ jcm").softpull(children.item(i));
+                
+                String listener = childname.packages().next().classes().next().name()+"_ActionListener";                                                                
+                
+                JDefinedClass privatex = parentjdc._class(JMod.PRIVATE | JMod.FINAL, listener, ClassType.CLASS);
+                
+                privatex.direct("public void actionPerformed(ActionEvent ae)\n\t");
+                privatex.direct("{\n\t");
+                privatex.direct("/* ------------ stub code goes here ------------ */\n\t");
+                privatex.direct("}\n\t");
+            }            
+        }
+        catch(Exception exception)
+        {
+            
+        }
+    }
+    
     private void setfields(JCodeModel jcodemodel)
     {
         try
         {
+            
+            /* ---------------------- Reference setters ------------------------ */
+            
             JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
                
             jdefinedclass.direct("\n\t");
 
-            jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "keyevent");                
+            jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "keyevent");                          
 
             jdefinedclass.field(JMod.PUBLIC, Class.forName("javax.swing.KeyStroke"), "keystroke");               
 
@@ -59,6 +114,44 @@ public class Uioutputmanager
             jdefinedclass.field(JMod.PUBLIC, Class.forName("javax.swing.ImageIcon"), "imageicon");
 
             jdefinedclass.field(JMod.PUBLIC, Class.forName("java.net.URL"), "url");
+
+            
+            /* ---------------------- BODI child setters ------------------------ */
+            
+            Node node = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);                                    
+            
+            XPath xpath = (XPath)Bodi.context("jcm ^ xpath").pull(jcodemodel);
+            
+            JDefinedClass parentjdc = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
+            
+            
+            /* ---------------------- Child node lookup ------------------------ */
+            
+            NodeList nodes = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);                     
+            
+            //ui fields
+            for(int i=0; i<nodes.getLength(); i++)                           
+            {                                                
+                JCodeModel childjmodel = (JCodeModel)Bodi.context("node ^ jcm").softpull(nodes.item(i));
+                
+                JDefinedClass childjclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(childjmodel);                  
+                
+                jdefinedclass.direct("public "+childjclass.name()+" "+childjclass.name().toLowerCase()+";\n\n\t");                 
+            }
+            
+            //actionlistener fields
+            for(int i=0; i<nodes.getLength(); i++)                           
+            {                                                
+                JCodeModel childjmodel = (JCodeModel)Bodi.context("node ^ jcm").softpull(nodes.item(i));
+                
+                JDefinedClass childjclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(childjmodel);  
+                
+                String basename = childjclass.name();
+                
+                String listenerbasename = childjclass.name()+"_ActionListener";
+                
+                jdefinedclass.direct("public "+listenerbasename+" "+listenerbasename.toLowerCase()+";\n\n\t");                 
+            }                                     
         }
         catch(Exception exception)
         {
@@ -67,16 +160,17 @@ public class Uioutputmanager
     }
     
     private void setconstructor(JCodeModel jcodemodel)
-    {        
-        Node self = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);
-        
-        Element xml = (Element)self;
-        
-        JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
-        
+    {               
         try
-        {                
+        {
+            
             /* ------------------------- BODI lookup --------------------------- */
+            
+            Node self = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);
+        
+            Element xml = (Element)self;
+        
+            JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
                         
             JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);            
             
@@ -253,7 +347,10 @@ public class Uioutputmanager
     private void setparent(JCodeModel jcodemodel)
     {
         try
-        {            
+        {        
+            
+            /* ------------------------ Parent setters ------------------------- */
+            
             JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);  
             
             jdefinedclass.direct("\n\t");
@@ -269,14 +366,21 @@ public class Uioutputmanager
     private void setchildren(JCodeModel jcodemodel)
     {
         try
-        {          
+        {  
+            
+            /* ------------------------- BODI lookup --------------------------- */
+            
             Node node = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);                                    
             
             JDefinedClass parentjdc = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
             
             XPath xpath = (XPath)Bodi.context("jcm ^ xpath").pull(jcodemodel);
             
-            NodeList nodes = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);                                             
+            NodeList nodes = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);    
+            
+            
+            
+            /* ----------------------- Children setters ------------------------ */
             
             this.doinstantiation(nodes, jcodemodel, parentjdc);
            
@@ -295,18 +399,21 @@ public class Uioutputmanager
         parentjdc.constructors().next().body().directStatement("/* ------------------  instantiation  ---------------- */\n\t");
         
         for(int i=0; i<nodes.getLength(); i++)
-        {                
+        {           
+            
+            /* ------------------------- BODI lookup --------------------------- */
+            
             JCodeModel childjmodel = (JCodeModel)Bodi.context("node ^ jcm").softpull(nodes.item(i));
                 
             JDefinedClass childjclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(childjmodel);
                 
             JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
+            
+            
+            
+            /* ----------------------- Instance setters ------------------------ */
                                               
-            jdefinedclass.direct("\n\t");
-                
-            String s = "public "+childjclass.fullName()+" child_"+String.format("%1$03d",i)+";\n\t";
-                
-            jdefinedclass.direct("public "+childjclass.name()+" "+childjclass.name().toLowerCase()+";\n\t");                                   
+            jdefinedclass.direct("\n\t");                                                                              
                 
             jdefinedclass.constructors().next().body().directStatement("this."+childjclass.name().toLowerCase()+" = new "+childjclass.name()+"(this);\n\t");
         }
@@ -317,10 +424,17 @@ public class Uioutputmanager
         parentjdc.constructors().next().body().directStatement("/* ------------------  hierarchy  -------------------- */\n\t");
             
         for(int i=0; i<nodes.getLength(); i++)
-        {                
+        {        
+            
+            /* ------------------------- BODI lookup --------------------------- */
+            
             JCodeModel childjcm = (JCodeModel)Bodi.context("node ^ jcm").softpull(nodes.item(i));
                 
             JDefinedClass childjdc = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(childjcm);                
+            
+            
+            
+            /* ------------------------ Value setters ------------------------- */
             
             JMethod constructor = parentjdc.constructors().next();
             
@@ -330,15 +444,17 @@ public class Uioutputmanager
                 
             parentjdc.direct("\n\t");                        
             
-            //
+            
+            
+            /* ----------------------- Hierarch setters ------------------------ */
+
             if(childsuperclass.contains("JMenuBar"))            
             {
                 constructor.body().directStatement("this.setJMenuBar("+childfieldname+");\n\t"); 
                 
                 continue;                
             }
-            
-            //
+                        
             if(childsuperclass.contains("JTabbedPane"))
             {
                 constructor.body().directStatement("this.addTab("+childfieldname+");\n\t"); 
@@ -346,7 +462,6 @@ public class Uioutputmanager
                 continue;                
             }            
 
-            //
             if(!childsuperclass.contains("JMenuBar") && !childsuperclass.contains("JTabbedPane"))
             {
                 constructor.body().directStatement("this.add("+childfieldname+");\n\t");
@@ -358,6 +473,9 @@ public class Uioutputmanager
     
     private void dodevolvement(NodeList nodes, JCodeModel jcodemodel, JDefinedClass parentjdc)
     {
+        
+        /* ------------------------ Devolvement setters ------------------------ */
+        
         parentjdc.constructors().next().body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");                         
         
         parentjdc.constructors().next().body().directStatement("this.parent = parent;\n\t");                        
