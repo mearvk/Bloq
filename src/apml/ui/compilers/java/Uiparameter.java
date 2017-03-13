@@ -20,6 +20,8 @@ import org.w3c.dom.NodeList;
  */
 public class Uiparameter
 {    
+    protected final Integer hash = 0x888fe8;        
+    
     public Uiparameter uip;   
     
     public Uiparameter(Uiparameter uip)
@@ -38,8 +40,6 @@ public class Uiparameter
         
         this.index = index;
     }
-    
-    protected final Integer hash = 0x888fe8;
     
     public JCodeModel jcm;
     

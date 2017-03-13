@@ -44,7 +44,7 @@ public class Uioutputmanager
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            
         }    
     }
     
@@ -94,7 +94,7 @@ public class Uioutputmanager
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            
         }
     }
     
@@ -258,7 +258,7 @@ public class Uioutputmanager
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            
         }
     }
     
@@ -302,7 +302,7 @@ public class Uioutputmanager
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            
         }
     }
     
@@ -318,7 +318,7 @@ public class Uioutputmanager
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            
         }       
     }
     
@@ -352,7 +352,7 @@ public class Uioutputmanager
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            
         }        
     }    
     
