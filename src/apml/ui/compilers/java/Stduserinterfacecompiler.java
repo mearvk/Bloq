@@ -29,7 +29,7 @@ public class Stduserinterfacecompiler
         {
             inputmanager.generatejcmmodels(this.fileguardian.xmlin, xpathmodel);
         }        
-    }        
+    }
         
     public void setsourcefiles(Uioutputmanager outputmanager)
     {            
@@ -37,5 +37,5 @@ public class Stduserinterfacecompiler
         {
             outputmanager.generatejavafiles(jcmmodel);
         }      
-    } 
+    }
 }
