@@ -135,6 +135,8 @@ import javax.swing.JTree;
  */
 public class Uiapmlmanager
 {    
+    protected final Integer hash = 0x888fe8;
+    
     public ArrayList<JCodeModel> jbuttonmodels;
     
     public ArrayList<JCodeModel> jframemodels;
@@ -214,67 +216,67 @@ public class Uiapmlmanager
     {            
         switch(tagname)
         {
-            case "//jbutton": return jbuttonmodels = new Jcmjbuttonbuilder(apml, tagname).builder.build();
+            case "//jbutton": return this.jbuttonmodels = new Jcmjbuttonbuilder(apml, tagname, JButton.class).builder.build();
 
-            case "//jframe": return jframemodels =  new Jcmjframebuilder(apml, tagname).builder.build();
+            case "//jframe": return this.jframemodels =  new Jcmjframebuilder(apml, tagname, JFrame.class).builder.build();
 
-            case "//frame": return framemodels =  new Jcmframebuilder(apml, tagname).builder.build(); 
+            case "//frame": return this.framemodels =  new Jcmframebuilder(apml, tagname, Frame.class).builder.build(); 
 
-            case "//jcheckbox": return jcheckboxmodels = new Jcmjcheckboxbuilder(apml, tagname).builder.build(); 
+            case "//jcheckbox": return this.jcheckboxmodels = new Jcmjcheckboxbuilder(apml, tagname, JCheckBox.class).builder.build(); 
 
-            case "//jcombobox": return jcomboboxmodels = new Jcmjcomboboxbuilder(apml, tagname).builder.build(); 
+            case "//jcombobox": return this.jcomboboxmodels = new Jcmjcomboboxbuilder(apml, tagname, JComboBox.class).builder.build(); 
 
-            case "//jlist": return jlistmodels = new Jcmjlistbuilder(apml, tagname).builder.build();
+            case "//jlist": return this.jlistmodels = new Jcmjlistbuilder(apml, tagname, JList.class).builder.build();
 
-            case "//jmenu": return jmenumodels = new Jcmjmenubuilder(apml, tagname).builder.build();
+            case "//jmenu": return this.jmenumodels = new Jcmjmenubuilder(apml, tagname, JMenu.class).builder.build();
             
-            case "//jmenubar": return jmenubarmodels = new Jcmjmenubarbuilder(apml, tagname).builder.build();
+            case "//jmenubar": return this.jmenubarmodels = new Jcmjmenubarbuilder(apml, tagname, JMenuBar.class).builder.build();
             
-            case "//jmenuitem": return jmenuitemmodels = new Jcmjmenuitembuilder(apml, tagname).builder.build();
+            case "//jmenuitem": return this.jmenuitemmodels = new Jcmjmenuitembuilder(apml, tagname, JMenuItem.class).builder.build();
 
-            case "//jradiobutton": return jradiobuttonmodels = new Jcmjradiobuttonbuilder(apml, tagname).builder.build(); 
+            case "//jradiobutton": return this.jradiobuttonmodels = new Jcmjradiobuttonbuilder(apml, tagname, JRadioButton.class).builder.build(); 
 
-            case "//jslider": return jslidermodels = new Jcmjsliderbuilder(apml, tagname).builder.build();
+            case "//jslider": return this.jslidermodels = new Jcmjsliderbuilder(apml, tagname, JSlider.class).builder.build();
 
-            case "//jspinner": return jspinnermodels = new Jcmjspinnerbuilder(apml, tagname).builder.build();
+            case "//jspinner": return this.jspinnermodels = new Jcmjspinnerbuilder(apml, tagname, JSpinner.class).builder.build();
 
-            case "//jtextfield": return jtextfieldmodels = new Jcmjtextfieldbuilder(apml, tagname).builder.build(); 
+            case "//jtextfield": return this.jtextfieldmodels = new Jcmjtextfieldbuilder(apml, tagname, JTextField.class).builder.build(); 
 
-            case "//jpasswordfield": return jpasswordfieldmodels = new Jcmjpasswordfieldbuilder(apml, tagname).builder.build();
+            case "//jpasswordfield": return this.jpasswordfieldmodels = new Jcmjpasswordfieldbuilder(apml, tagname, JPasswordField.class).builder.build();
 
-            case "//jcolorchooser": return jcolorchoosermodels = new Jcmjcolorchooserbuilder(apml, tagname).builder.build();
+            case "//jcolorchooser": return this.jcolorchoosermodels = new Jcmjcolorchooserbuilder(apml, tagname, JColorChooser.class).builder.build();
 
-            case "//jeditorpane": return jeditorpanemodels = new Jcmjeditorpanebuilder(apml, tagname).builder.build();
+            case "//jeditorpane": return this.jeditorpanemodels = new Jcmjeditorpanebuilder(apml, tagname, JEditorPane.class).builder.build();
 
-            case "//jtextpane": return jtextpanemodels = new Jcmjtextpanebuilder(apml, tagname).builder.build(); 
+            case "//jtextpane": return this.jtextpanemodels = new Jcmjtextpanebuilder(apml, tagname, JTextPane.class).builder.build(); 
 
-            case "//jtree": return jtreemodels = new Jcmjtreebuilder(apml, tagname).builder.build(); 
+            case "//jtree": return this.jtreemodels = new Jcmjtreebuilder(apml, tagname, JTree.class).builder.build(); 
 
-            case "//jlabel": return jlabelmodels = new Jcmjlabelbuilder(apml, tagname).builder.build(); 
+            case "//jlabel": return this.jlabelmodels = new Jcmjlabelbuilder(apml, tagname, JLabel.class).builder.build(); 
 
-            case "//jprogressbar": return jprogressbarmodels = new Jcmjprogressbarbuilder(apml, tagname).builder.build();
+            case "//jprogressbar": return this.jprogressbarmodels = new Jcmjprogressbarbuilder(apml, tagname, JProgressBar.class).builder.build();
 
-            case "//jseparator": return jseparatormodels = new Jcmjseparatorbuilder(apml, tagname).builder.build();
+            case "//jseparator": return this.jseparatormodels = new Jcmjseparatorbuilder(apml, tagname, JSeparator.class).builder.build();
 
-            case "//jtooltip": return jtooltipmodels = new Jcmjtooltipbuilder(apml, tagname).builder.build();
+            case "//jtooltip": return this.jtooltipmodels = new Jcmjtooltipbuilder(apml, tagname, JToolTip.class).builder.build();
 
-            case "//japplet": return jappletmodels = new Jcmjappletbuilder(apml, tagname).builder.build();
+            case "//japplet": return this.jappletmodels = new Jcmjappletbuilder(apml, tagname, JApplet.class).builder.build();
 
-            case "//jpanel": return jpanelmodels = new Jcmjpanelbuilder(apml, tagname).builder.build();
+            case "//jpanel": return this.jpanelmodels = new Jcmjpanelbuilder(apml, tagname, JPanel.class).builder.build();
 
-            case "//jscrollpane": return jscrollpanemodels = new Jcmjscrollpanebuilder(apml, tagname).builder.build();
+            case "//jscrollpane": return this.jscrollpanemodels = new Jcmjscrollpanebuilder(apml, tagname, JScrollPane.class).builder.build();
 
-            case "//jsplitpane": return jsplitpanemodels = new Jcmjsplitpanebuilder(apml, tagname).builder.build();
+            case "//jsplitpane": return this.jsplitpanemodels = new Jcmjsplitpanebuilder(apml, tagname, JSplitPane.class).builder.build();
 
-            case "//jtabbedpane": return jtabbedpanemodels = new Jcmjtabbedpanebuilder(apml, tagname).builder.build();
+            case "//jtabbedpane": return this.jtabbedpanemodels = new Jcmjtabbedpanebuilder(apml, tagname, JTabbedPane.class).builder.build();
 
-            case "//jtoolbar": return jtoolbarmodels = new Jcmjtoolbarbuilder(apml, tagname).builder.build();
+            case "//jtoolbar": return this.jtoolbarmodels = new Jcmjtoolbarbuilder(apml, tagname, JToolBar.class).builder.build();
 
-            case "//jinternalframe": return jinternalframemodels = new Jcmjinternalframebuilder(apml, tagname).builder.build();
+            case "//jinternalframe": return this.jinternalframemodels = new Jcmjinternalframebuilder(apml, tagname, JInternalFrame.class).builder.build();
 
-            case "//jlayeredpane": return jlayeredpanemodels = new Jcmjlayeredpanebuilder(apml, tagname).builder.build();
+            case "//jlayeredpane": return this.jlayeredpanemodels = new Jcmjlayeredpanebuilder(apml, tagname, JLayeredPane.class).builder.build();
 
-            case "//jrootpane": return jrootpanemodels = new Jcmjrootpanebuilder(apml, tagname).builder.build();            
+            case "//jrootpane": return this.jrootpanemodels = new Jcmjrootpanebuilder(apml, tagname, JRootPane.class).builder.build();            
         }        
         
         return new ArrayList<>();

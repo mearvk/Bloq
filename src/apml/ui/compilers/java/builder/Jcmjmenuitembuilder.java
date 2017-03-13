@@ -17,9 +17,9 @@ public class Jcmjmenuitembuilder extends Jcmabstractbuilder
         //new Jcmjmenuitembuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jmenuitem", JMenuItem.class);
     }     
     
-    public Jcmjmenuitembuilder(File apml, String tagname)
+    public Jcmjmenuitembuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
                 
         this.apml = apml;
         

@@ -1,7 +1,6 @@
 package apml.ui.compilers.java.builder;
 
 import java.io.File;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.xml.xpath.XPathFactory;
 
@@ -18,9 +17,9 @@ public class Jcmjpanelbuilder extends Jcmabstractbuilder
         //new Jcmjpanelbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jpanel", JPanel.class);
     }     
     
-    public Jcmjpanelbuilder(File apml, String tagname)
+    public Jcmjpanelbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
         
         this.apml = apml;
         

@@ -1,7 +1,6 @@
 package apml.ui.compilers.java.builder;
 
 import java.io.File;
-import javax.swing.JProgressBar;
 import javax.xml.xpath.XPathFactory;
 
 /**
@@ -15,9 +14,9 @@ public class Jcmjprogressbarbuilder extends Jcmabstractbuilder
         //new Jcmjprogressbarbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jprogressbar", JProgressBar.class);
     }     
     
-    public Jcmjprogressbarbuilder(File apml, String tagname)
+    public Jcmjprogressbarbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
         
         this.apml = apml;
         

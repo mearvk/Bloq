@@ -1,7 +1,6 @@
 package apml.ui.compilers.java.builder;
 
 import java.io.File;
-import javax.swing.JSlider;
 import javax.xml.xpath.XPathFactory;
 
 /**
@@ -15,9 +14,9 @@ public class Jcmjsliderbuilder extends Jcmabstractbuilder
         //new Jcmjsliderbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jframe", JSlider.class);
     }     
     
-    public Jcmjsliderbuilder(File apml, String tagname)
+    public Jcmjsliderbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
         
         this.apml = apml;
         

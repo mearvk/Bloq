@@ -1,7 +1,6 @@
 package apml.ui.compilers.java.builder;
 
 import java.io.File;
-import javax.swing.JTextField;
 import javax.xml.xpath.XPathFactory;
 
 /**
@@ -15,9 +14,9 @@ public class Jcmjtextfieldbuilder extends Jcmabstractbuilder
         //new Jcmjtextfieldbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jtextfield", JTextField.class);
     }     
     
-    public Jcmjtextfieldbuilder(File apml, String tagname)
+    public Jcmjtextfieldbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
         
         this.apml = apml;
         

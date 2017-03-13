@@ -1,8 +1,6 @@
 package apml.ui.compilers.java.builder;
 
-import com.sun.codemodel.JCodeModel;
 import java.io.File;
-import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.xml.xpath.XPathFactory;
 
@@ -19,9 +17,9 @@ public class Jcmjlabelbuilder extends Jcmabstractbuilder
         //new Jcmjlabelbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jlabel", JLabel.class);
     }     
     
-    public Jcmjlabelbuilder(File apml, String tagname)
+    public Jcmjlabelbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
                 
         this.apml = apml;
         

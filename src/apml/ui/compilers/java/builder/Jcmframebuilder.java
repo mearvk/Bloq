@@ -4,7 +4,6 @@ import com.sun.codemodel.JCodeModel;
 import java.awt.Frame;
 import java.io.File;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.xml.xpath.XPathFactory;
 
 /**
@@ -13,6 +12,8 @@ import javax.xml.xpath.XPathFactory;
  */
 public class Jcmframebuilder extends Jcmabstractbuilder
 {      
+    protected final Integer hash = 0x888fe8;
+    
     public Class _class = Frame.class;
     
     public static void main(String...args)
@@ -20,9 +21,9 @@ public class Jcmframebuilder extends Jcmabstractbuilder
         //new Jcmframebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jframe", JFrame.class);
     }    
     
-    public Jcmframebuilder(File apml, String tagname)
+    public Jcmframebuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);        
+        super(apml, tagname, classname);        
         
         this.apml = apml;
         

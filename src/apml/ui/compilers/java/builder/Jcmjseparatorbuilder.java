@@ -1,7 +1,6 @@
 package apml.ui.compilers.java.builder;
 
 import java.io.File;
-import javax.swing.JSeparator;
 import javax.xml.xpath.XPathFactory;
 
 /**
@@ -15,9 +14,9 @@ public class Jcmjseparatorbuilder extends Jcmabstractbuilder
         //new Jcmjseparatorbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jseparator", JSeparator.class);
     }     
     
-    public Jcmjseparatorbuilder(File apml, String tagname)
+    public Jcmjseparatorbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
         
         this.apml = apml;
         

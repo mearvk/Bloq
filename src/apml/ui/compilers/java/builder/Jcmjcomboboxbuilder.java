@@ -17,9 +17,9 @@ public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
         //new Jcmjcomboboxbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jcombobox", JComboBox.class);
     }     
     
-    public Jcmjcomboboxbuilder(File apml, String tagname)
+    public Jcmjcomboboxbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
     
         this.apml = apml;
         

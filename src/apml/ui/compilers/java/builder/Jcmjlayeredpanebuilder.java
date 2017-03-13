@@ -1,9 +1,6 @@
 package apml.ui.compilers.java.builder;
 
-import com.sun.codemodel.JCodeModel;
 import java.io.File;
-import java.util.ArrayList;
-import javax.swing.JLayeredPane;
 import javax.xml.xpath.XPathFactory;
 
 /**
@@ -17,9 +14,9 @@ public class Jcmjlayeredpanebuilder extends Jcmabstractbuilder
         //new Jcmjlayeredpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jlayeredpane", JLayeredPane.class);
     }     
     
-    public Jcmjlayeredpanebuilder(File apml, String tagname)
+    public Jcmjlayeredpanebuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
                 
         this.apml = apml;
         

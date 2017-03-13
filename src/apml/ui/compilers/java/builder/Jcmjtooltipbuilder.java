@@ -1,7 +1,6 @@
 package apml.ui.compilers.java.builder;
 
 import java.io.File;
-import javax.swing.JToolTip;
 import javax.xml.xpath.XPathFactory;
 
 /**
@@ -15,9 +14,9 @@ public class Jcmjtooltipbuilder extends Jcmabstractbuilder
         //new Jcmjtooltipbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jtooltip", JToolTip.class);
     }     
     
-    public Jcmjtooltipbuilder(File apml, String tagname)
+    public Jcmjtooltipbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
         
         this.apml = apml;
         

@@ -17,9 +17,9 @@ public class Jcmjcolorchooserbuilder extends Jcmabstractbuilder
         //new Jcmjcolorchooserbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jcolorchooser", JColorChooser.class);
     }    
     
-    public Jcmjcolorchooserbuilder(File apml, String tagname)
+    public Jcmjcolorchooserbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
         
         this.apml = apml;
         

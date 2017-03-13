@@ -16,9 +16,9 @@ public class Jcmjinternalframebuilder extends Jcmabstractbuilder
         //new Jcmjinternalframebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jinternalframe", JInternalFrame.class);
     }     
     
-    public Jcmjinternalframebuilder(File apml, String tagname)
+    public Jcmjinternalframebuilder(File apml, String tagname, Class classname)
     { 
-        super(apml, tagname);
+        super(apml, tagname, classname);
     
         this.apml = apml;
         

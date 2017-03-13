@@ -1,10 +1,7 @@
 package apml.ui.compilers.java.builder;
 
-import com.sun.codemodel.JCodeModel;
 import java.io.File;
-import java.util.ArrayList;
 import javax.swing.JApplet;
-import javax.swing.JFrame;
 import javax.xml.xpath.XPathFactory;
 
 /**
@@ -13,6 +10,8 @@ import javax.xml.xpath.XPathFactory;
  */
 public class Jcmjappletbuilder extends Jcmabstractbuilder
 {       
+    protected final Integer hash = 0x888fe8;
+    
     public Class _class = JApplet.class;
     
     public static void main(String...args)
@@ -20,9 +19,9 @@ public class Jcmjappletbuilder extends Jcmabstractbuilder
         //new Jcmjappletbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//japplet", JApplet.class);
     }     
     
-    public Jcmjappletbuilder(File apml, String tagname)
+    public Jcmjappletbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
         
         this.apml = apml;
         

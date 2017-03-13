@@ -1,7 +1,6 @@
 package apml.ui.compilers.java.builder;
 
 import java.io.File;
-import javax.swing.JSplitPane;
 import javax.xml.xpath.XPathFactory;
 
 /**
@@ -15,9 +14,9 @@ public class Jcmjsplitpanebuilder extends Jcmabstractbuilder
         //new Jcmjsplitpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jsplitpane", JSplitPane.class);
     }     
     
-    public Jcmjsplitpanebuilder(File apml, String tagname)
+    public Jcmjsplitpanebuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
         
         this.apml = apml;
         

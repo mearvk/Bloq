@@ -17,9 +17,9 @@ public class Jcmjeditorpanebuilder extends Jcmabstractbuilder
         //new Jcmjeditorpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jeditorpane", JEditorPane.class);
     }    
     
-    public Jcmjeditorpanebuilder(File apml, String tagname)
+    public Jcmjeditorpanebuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
         
         this.apml = apml;
         

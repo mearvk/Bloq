@@ -1,9 +1,6 @@
 package apml.ui.compilers.java.builder;
 
-import com.sun.codemodel.JCodeModel;
 import java.io.File;
-import java.util.ArrayList;
-import javax.swing.JMenuBar;
 import javax.xml.xpath.XPathFactory;
 
 /**
@@ -17,9 +14,9 @@ public class Jcmjmenubarbuilder extends Jcmabstractbuilder
         //new Jcmjmenubarbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jmenubar", JMenuBar.class);
     }     
     
-    public Jcmjmenubarbuilder(File apml, String tagname)
+    public Jcmjmenubarbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
                 
         this.apml = apml;
         

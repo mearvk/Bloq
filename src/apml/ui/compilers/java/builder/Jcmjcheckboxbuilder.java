@@ -9,7 +9,9 @@ import javax.xml.xpath.XPathFactory;
  * @author max rupplin
  */
 public class Jcmjcheckboxbuilder extends Jcmabstractbuilder
-{           
+{       
+    protected final Integer hash = 0x888fe8;
+
     public Class _class = JCheckBox.class;
     
     public static void main(String...args)
@@ -17,9 +19,9 @@ public class Jcmjcheckboxbuilder extends Jcmabstractbuilder
         //new Jcmjcheckboxbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jcheckbox", JCheckBox.class);
     }    
     
-    public Jcmjcheckboxbuilder(File apml, String tagname)
+    public Jcmjcheckboxbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
         
         this.apml = apml;
         

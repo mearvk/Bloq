@@ -1,7 +1,6 @@
 package apml.ui.compilers.java.builder;
 
 import java.io.File;
-import javax.swing.JSpinner;
 import javax.xml.xpath.XPathFactory;
 
 /**
@@ -15,9 +14,9 @@ public class Jcmjspinnerbuilder extends Jcmabstractbuilder
         //new Jcmjspinnerbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jspinner", JSpinner.class);
     }     
     
-    public Jcmjspinnerbuilder(File apml, String tagname)
+    public Jcmjspinnerbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
         
         this.apml = apml;
         

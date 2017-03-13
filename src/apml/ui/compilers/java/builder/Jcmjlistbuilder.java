@@ -1,9 +1,6 @@
 package apml.ui.compilers.java.builder;
 
-import com.sun.codemodel.JCodeModel;
 import java.io.File;
-import java.util.ArrayList;
-import javax.swing.JList;
 import javax.xml.xpath.XPathFactory;
 
 /**
@@ -17,9 +14,9 @@ public class Jcmjlistbuilder extends Jcmabstractbuilder
         //new Jcmjlistbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jlist", JList.class);
     }     
     
-    public Jcmjlistbuilder(File apml, String tagname)
+    public Jcmjlistbuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
                 
         this.apml = apml;
         

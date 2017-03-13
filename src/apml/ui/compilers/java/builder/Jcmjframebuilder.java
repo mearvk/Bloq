@@ -17,9 +17,9 @@ public class Jcmjframebuilder extends Jcmabstractbuilder
         //new Jcmjframebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jframe", JFrame.class);
     }    
     
-    public Jcmjframebuilder(File apml, String tagname)
+    public Jcmjframebuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
                 
         this.apml = apml;
         

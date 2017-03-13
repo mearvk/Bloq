@@ -3,12 +3,14 @@ package apml.ui.compilers.java.builder;
 import apml.system.bodi.Bodi;
 import apml.ui.compilers.java.Uiparameter;
 import com.sun.codemodel.JCodeModel;
+import com.sun.codemodel.JMod;
 import java.io.File;
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
@@ -17,6 +19,8 @@ import org.w3c.dom.NodeList;
  */
 public abstract class Jcmabstractbuilder
 {   
+    protected final Integer hash = 0x888fe8;
+    
     public ArrayList<JCodeModel> jcodemodels = new ArrayList<>();
     
     public Jcmabstractbuilder builder = this;
@@ -31,20 +35,26 @@ public abstract class Jcmabstractbuilder
     
     public String tagname;
     
+    public Class classname;
+     
     
-    public Jcmabstractbuilder(File apml, String tagname)
+    public Jcmabstractbuilder(File apml, String tagname, Class classname)
     {                        
         Bodi.setcontext("widgets");  
         
         this.tagname = tagname;
+        
+        this.apml = apml;
+        
+        this.classname = classname;
     }
     
-    public void setsuperclass(JCodeModel jcodemodel, Integer i, Class _class)
+    public void setsuperclass(JCodeModel jcodemodel, Integer i)
     {
-        jcodemodel.packages().next().classes().next()._extends(_class);
+        jcodemodel.packages().next().classes().next()._extends(this.classname);
     } 
     
-    public void setbodi(JCodeModel jcodemodel, Integer i, Class _class)
+    public void setbodi(JCodeModel jcodemodel, Integer i)
     {
         Uiparameter uip = new Uiparameter();
         
@@ -64,26 +74,32 @@ public abstract class Jcmabstractbuilder
         
         uip.doc = this.doc;
         
+        uip.element = (Element)uip.self_node;
+        
+        uip.constructor = uip.jdc.constructor(JMod.PUBLIC);
+        
         Bodi.context("widgets").put(uip.jcm, uip);
+        
+        Bodi.context("widgets").put(uip.self_node, uip);
     }
     
     
-    public void setjcmclass(JCodeModel jcodemodel, Integer i, Class _class) throws Exception
+    public void setjcmclass(JCodeModel jcodemodel, Integer i) throws Exception
     {
-        jcodemodel.packages().next()._class(_class.getSimpleName()+"_"+String.format("%1$03d",i)); 
+        jcodemodel.packages().next()._class(this.classname.getSimpleName()+"_"+String.format("%1$03d",i)); 
     }
     
-    public void setjcmpackage(JCodeModel jcodemodel, Integer i, Class _class) throws Exception
+    public void setjcmpackage(JCodeModel jcodemodel, Integer i) throws Exception
     {                        
         jcodemodel._package("org.widgets");                         
     }
     
-    public void setdocument(File apml) throws Exception
+    public void setdocument() throws Exception
     {
         this.doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(apml);
     }
     
-    public void setnodes(JCodeModel jcodemodel, Integer i, Class _class) throws Exception
+    public void setnodes(JCodeModel jcodemodel, Integer i) throws Exception
     {
         this.nodes = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);
     }
@@ -91,26 +107,22 @@ public abstract class Jcmabstractbuilder
     public ArrayList<JCodeModel> build()
     {                       
         try
-        {                              
-            Class _class = null;
-            
+        {                     
             for(int i=0; i<this.nodes.getLength(); i++)
-            {       
-                JCodeModel jcodemodel = new JCodeModel();                
-                                
-                //
+            {
+                JCodeModel jcodemodel = new JCodeModel();                                                 
             
-                this.setdocument(apml);
+                this.setdocument();
                 
-                this.setjcmpackage(jcodemodel, i, _class);
+                this.setjcmpackage(jcodemodel, i);
                 
-                this.setjcmclass(jcodemodel, i, _class);                                
+                this.setjcmclass(jcodemodel, i);                                
             
-                this.setnodes(jcodemodel, i, _class);                                                 
+                this.setnodes(jcodemodel, i);                                                 
                 
-                this.setsuperclass(jcodemodel, i, _class);                 
+                this.setsuperclass(jcodemodel, i);                 
                 
-                this.setbodi(jcodemodel, i, _class);
+                this.setbodi(jcodemodel, i);
             }
         }
         catch(Exception exception)

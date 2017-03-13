@@ -8,10 +8,7 @@ import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import java.io.File;
 import java.util.ArrayList;
-import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -20,13 +17,17 @@ import org.w3c.dom.NodeList;
  */
 public class Uioutputmanager
 {
+    protected final Integer hash = 0x888fe8;
+    
     public void generatejavafiles(ArrayList<JCodeModel> jcodemodels)
-    {      
+    {
         try
         {                   
             for(JCodeModel jcodemodel : jcodemodels)
             {   
                 this.setconstructor(jcodemodel);
+                
+                this.setuisetters(jcodemodel);
                 
                 this.setfields(jcodemodel);
                 
@@ -42,429 +43,362 @@ public class Uioutputmanager
         catch(Exception exception)
         {
             //exception
-        }             
+        }    
     }
     
     private void setlisteners(JCodeModel jcodemodel)
     {
+        Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel); 
+        
         try
         {
-            Node node = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);                                    
-
-            JDefinedClass parentjdc = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
-
-            XPath xpath = (XPath)Bodi.context("jcm ^ xpath").pull(jcodemodel);
-
-            NodeList children = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);
+            NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.self_node, XPathConstants.NODESET);            
             
-            JMethod constructor = parentjdc.constructors().next();
+            uip.constructor.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
             
-            constructor.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
-            
+            //Veuillez d'ajouter constructor(s) fields
             for(int i=0; i<children.getLength(); i++)
             {
-                String basename = children.item(i).getNodeName().toLowerCase()+"_"+String.format("%1$03d",i);
+                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").pull(children.item(i));                                
+                        
+                String classname = uipi.classname.toLowerCase()+"_"+String.format("%1$03d",i);
                 
-                String listener = basename+"_actionlistener"; 
+                String listener = classname+"_actionlistener";       
                 
-                JCodeModel childname = (JCodeModel)Bodi.context("node ^ jcm").softpull(children.item(i));                
-                
-                constructor.body().directStatement("this."+basename+".addActionListener("+listener+");\n\t");
+                uip.constructor.body().directStatement("this."+classname+".addActionListener("+listener+");\n\t");
             }
             
+            //Veuillez d'ajouter actionperformed functions
             for(int i=0; i<children.getLength(); i++)
             {
-                String basename = children.item(i).getNodeName().toLowerCase()+"_"+String.format("%1$03d",i);                
+                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").pull(children.item(i)); 
                 
-                JCodeModel childname = (JCodeModel)Bodi.context("node ^ jcm").softpull(children.item(i));
+                String classname = uipi.classname.toLowerCase()+"_"+String.format("%1$03d",i);                                
                 
-                String listener = childname.packages().next().classes().next().name()+"_ActionListener";                                                                
+                String listener = classname+"_ActionListener";                                                               
                 
-                JDefinedClass privatex = parentjdc._class(JMod.PRIVATE | JMod.FINAL, listener, ClassType.CLASS);
+                JDefinedClass nestedclassx = uip.jdc._class(JMod.PRIVATE | JMod.FINAL, listener, ClassType.CLASS);
                 
-                privatex.direct("public void actionPerformed(ActionEvent ae)\n\t");
-                privatex.direct("{\n\t");
-                privatex.direct("/* ------------ stub code goes here ------------ */\n\t");
-                privatex.direct("}\n\t");
+                nestedclassx.direct("public void actionPerformed(ActionEvent ae)\n\t");
+                
+                nestedclassx.direct("{\n\t");
+                
+                nestedclassx.direct("/* ------------ stub code goes here ------------ */\n\t");
+                
+                nestedclassx.direct("}\n\t");
             }            
         }
         catch(Exception exception)
         {
             
+        }
+    }
+    
+    private void setuisetters(JCodeModel jcodemodel)
+    {
+        Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel); 
+        
+        try
+        {
+           /* ------------------------- General setters ----------------------- */
+            
+            if(uip.element.getAttribute("setAccelerator")!=null && uip.element.getAttribute("setAccelerator").length()>0)
+            {                                
+                try{uip.constructor.body().directStatement("this.setAccelerator(KeyStroke.getKeyStroke("+uip.element.getAttribute("setAccelerator")+"));\n\t"); }catch(Exception e){};
+            }               
+            
+            if(uip.element.getAttribute("setAutoscrolls")!=null && uip.element.getAttribute("setAutoscrolls").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setAutoscrolls("+uip.element.getAttribute("setAutoscrolls")+");\n\t");                         }catch(Exception e){}               
+            }
+                
+            if(uip.element.getAttribute("setAlignmentY")!=null && uip.element.getAttribute("setAlignmentY").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setAlignmentY("+uip.element.getAttribute("setAlignmentY")+");\n\t");                           }catch(Exception e){}                
+            }
+                
+            if(uip.element.getAttribute("setAlignmentX")!=null && uip.element.getAttribute("setAlignmentX").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setAlignmentX("+uip.element.getAttribute("setAlignmentX")+");\n\t");                           }catch(Exception e){}                
+            }
+                
+            if(uip.element.getAttribute("setBorderPainted")!=null && uip.element.getAttribute("setBorderPainted").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setBorderPainted("+uip.element.getAttribute("setBorderPainted")+");\n\t");                     }catch(Exception e){}               
+            }
+                                
+            if(uip.element.getAttribute("setBounds")!=null && uip.element.getAttribute("setBounds").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setBounds("+uip.element.getAttribute("setBounds")+");\n\t");                                   }catch(Exception e){}
+            }
+                                
+            if(uip.element.getAttribute("setBorder")!=null && uip.element.getAttribute("setBorder").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setBorder("+uip.element.getAttribute("setBorder")+");\n\t");                                   }catch(Exception e){}                    
+            }
+                
+            if(uip.element.getAttribute("setBackground")!=null && uip.element.getAttribute("setBackground").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setBackground("+uip.element.getAttribute("setBackground")+");\n\t");                           }catch(Exception e){}                                    
+            }
+                
+            if(uip.element.getAttribute("setComponentPopupMenu")!=null && uip.element.getAttribute("setComponentPopupMenu").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setComponentPopupMenu("+uip.element.getAttribute("setComponentPopupMenu")+");\n\t");           }catch(Exception e){}                                   
+            }
+            
+            if(uip.element.getAttribute("setDefaultCloseOperation")!=null && uip.element.getAttribute("setDefaultCloseOperation").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setDefaultCloseOperation("+uip.element.getAttribute("setDefaultCloseOperation")+");\n\t");     }catch(Exception e){}                                   
+            }                    
+                
+            if(uip.element.getAttribute("setDisabledIcon")!=null && uip.element.getAttribute("setDisabledIcon").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setDisabledIcon("+uip.element.getAttribute("setDisabledIcon")+");\n\t");                       }catch(Exception e){}
+            }
+
+            if(uip.element.getAttribute("setEnabled")!=null && uip.element.getAttribute("setEnabled").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setEnabled("+uip.element.getAttribute("setEnabled")+");\n\t");                                 }catch(Exception e){}  
+            }                
+                
+            if(uip.element.getAttribute("setForeground")!=null && uip.element.getAttribute("setForeground").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setForeground("+uip.element.getAttribute("setForeground")+");\n\t");                           }catch(Exception e){} 
+            }              
+
+            if(uip.element.getAttribute("setIcon")!=null && uip.element.getAttribute("setIcon").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setIcon(new ImageIcon(\""+uip.element.getAttribute("setIcon")+"\"));\n\t");                    }catch(Exception e){}
+            }
+            
+            if(uip.element.getAttribute("setIconAt")!=null && uip.element.getAttribute("setIconAt").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setIconAt(new ImageIcon(\""+uip.element.getAttribute("setIconAt")+"\"));\n\t");                }catch(Exception e){}
+            }
+
+            if(uip.element.getAttribute("setLabel")!=null && uip.element.getAttribute("setLabel").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setLabel(\""+uip.element.getAttribute("setLabel")+"\");\n\t");                                 }catch(Exception e){}
+            }
+                
+            if(uip.element.getAttribute("setLayout")!=null && uip.element.getAttribute("setLayout").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setLayout("+uip.element.getAttribute("setLayout")+");\n\t");                                   }catch(Exception e){}
+            }
+                
+            if(uip.element.getAttribute("setLocation")!=null && uip.element.getAttribute("setLocation").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setLocation("+uip.element.getAttribute("setLocation")+");\n\t");                               }catch(Exception e){}
+            }
+                
+            if(uip.element.getAttribute("setMargin")!=null && uip.element.getAttribute("setMargin").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setMargin("+uip.element.getAttribute("setMargin")+");\n\t");                                   }catch(Exception e){}
+            }
+                
+            if(uip.element.getAttribute("setMinimumSize")!=null && uip.element.getAttribute("setMinimumSize").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setMinimumSize("+uip.element.getAttribute("setMinimumSize")+");\n\t");                         }catch(Exception e){}
+            }
+                
+            if(uip.element.getAttribute("setMaximumSize")!=null && uip.element.getAttribute("setMaximumSize").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setMaximumSize("+uip.element.getAttribute("setMaximumSize")+");\n\t");                         }catch(Exception e){}            
+            }
+                
+            if(uip.element.getAttribute("setModel")!=null && uip.element.getAttribute("setModel").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setModel("+uip.element.getAttribute("setModel")+");\n\t");                                     }catch(Exception e){}
+            }
+            
+            if(uip.element.getAttribute("setMnemonic")!=null && uip.element.getAttribute("setMnemonic").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setMnemonic("+uip.element.getAttribute("setMnemonic")+");\n\t");                               }catch(Exception e){}
+            }            
+                                
+            if(uip.element.getAttribute("setName")!=null && uip.element.getAttribute("setName").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setName(\""+uip.element.getAttribute("setName")+"\");\n\t");                                   }catch(Exception e){}
+            }
+                
+            if(uip.element.getAttribute("setPressedIcon")!=null && uip.element.getAttribute("setPressedIcon").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setPressedIcon("+uip.element.getAttribute("setPressedIcon")+");\n\t");                         }catch(Exception e){}
+            }
+                
+            if(uip.element.getAttribute("setRolloverIcon")!=null && uip.element.getAttribute("setRolloverIcon").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setRolloverIcon("+uip.element.getAttribute("setRolloverIcon")+");\n\t");                       }catch(Exception e){}                    
+            }
+
+            if(uip.element.getAttribute("setText")!=null && uip.element.getAttribute("setText").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setText(\""+uip.element.getAttribute("setText")+"\");\n\t");                                   }catch(Exception e){}   
+            }
+            
+            if(uip.element.getAttribute("setTitle")!=null && uip.element.getAttribute("setTitle").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setTitle(\""+uip.element.getAttribute("setTitle")+"\");\n\t");                                 }catch(Exception e){}   
+            }            
+                
+            if(uip.element.getAttribute("setSize")!=null && uip.element.getAttribute("setSize").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setSize("+uip.element.getAttribute("setSize")+");\n\t");                                       }catch(Exception e){}
+            }
+                
+            if(uip.element.getAttribute("setToolTipText")!=null && uip.element.getAttribute("setToolTipText").length()>0)
+            {
+                try{uip.constructor.body().directStatement("this.setToolTipText("+uip.element.getAttribute("setToolTipText")+");\n\t");                         }catch(Exception e){}
+            }        
+        }
+        catch(Exception exception)
+        {
+            //exception
         }
     }
     
     private void setfields(JCodeModel jcodemodel)
     {
         try
-        {
-            
-            /* ---------------------- Reference setters ------------------------ */
-            
-            JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
+        {                        
+            Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);                        
                
-            jdefinedclass.direct("\n\t");
+            uip.jdc.direct("\n\t");
 
-            jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "keyevent");                          
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "keyevent");                          
 
-            jdefinedclass.field(JMod.PUBLIC, Class.forName("javax.swing.KeyStroke"), "keystroke");               
+            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.KeyStroke"), "keystroke");               
 
-            jdefinedclass.field(JMod.PUBLIC, Class.forName("java.awt.event.ActionEvent"), "actionevent"); 
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.event.ActionEvent"), "actionevent"); 
 
-            jdefinedclass.field(JMod.PUBLIC, Class.forName("javax.swing.ImageIcon"), "imageicon");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.ImageIcon"), "imageicon");
 
-            jdefinedclass.field(JMod.PUBLIC, Class.forName("java.net.URL"), "url");
-
-            
-            /* ---------------------- BODI child setters ------------------------ */
-            
-            Node node = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);                                    
-            
-            XPath xpath = (XPath)Bodi.context("jcm ^ xpath").pull(jcodemodel);
-            
-            JDefinedClass parentjdc = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.net.URL"), "url");
+                        
+            //children lookup/finding(s)/etc.
+            NodeList kids = (NodeList)uip.xpath.evaluate("./*", uip.self_node, XPathConstants.NODESET);  
             
             
-            /* ---------------------- Child node lookup ------------------------ */
-            
-            NodeList nodes = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);                     
-            
-            //ui fields
-            for(int i=0; i<nodes.getLength(); i++)                           
-            {                                                
-                JCodeModel childjmodel = (JCodeModel)Bodi.context("node ^ jcm").softpull(nodes.item(i));
+            //user interface fields 
+            for(int i=0; i<kids.getLength(); i++)                           
+            {       
+                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").pull(kids.item(i));
                 
-                JDefinedClass childjclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(childjmodel);                  
-                
-                jdefinedclass.direct("public "+childjclass.name()+" "+childjclass.name().toLowerCase()+";\n\n\t");                 
+                uip.jdc.direct("public "+uipi.classname+" "+uipi.classname.toLowerCase()+";\n\t");
             }
             
             //actionlistener fields
-            for(int i=0; i<nodes.getLength(); i++)                           
-            {                                                
-                JCodeModel childjmodel = (JCodeModel)Bodi.context("node ^ jcm").softpull(nodes.item(i));
+            for(int i=0; i<kids.getLength(); i++)                           
+            {              
+                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").pull(kids.item(i));
                 
-                JDefinedClass childjclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(childjmodel);  
-                
-                String basename = childjclass.name();
-                
-                String listenerbasename = childjclass.name()+"_ActionListener";
-                
-                jdefinedclass.direct("public "+listenerbasename+" "+listenerbasename.toLowerCase()+";\n\n\t");                 
-            }                                     
+                uip.jdc.direct("public "+uipi.classname+"_ActionListener"+" "+uipi.classname+"_ActionListener".toLowerCase()+";\n\t");
+            }            
         }
         catch(Exception exception)
         {
-            //exception;
+            
         }
     }
     
     private void setconstructor(JCodeModel jcodemodel)
     {               
         try
-        {
+        {                        
+            Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);                                                     
             
-            /* ------------------------- BODI lookup --------------------------- */
+            uip.constructor = uip.jdc.constructor(JMod.PUBLIC);           
             
-            Node self = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);
-        
-            Element xml = (Element)self;
-        
-            JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
-                        
-            JMethod constructor = jdefinedclass.constructor(JMod.PUBLIC);            
-            
-            Node parent = (Node)Bodi.context("node ^ node").pull(self);                             //return parent node given self node [exists already]
-            
-            String fullparentclassname = (String)Bodi.context("node ^ jdcname").pull(self);         //return parent node jdc classname (fullname) [exists already]
-            
-            
-            
-            /* ------------------------- Parent setter ------------------------- */
-            
-            constructor.param(Class.forName("java.awt.Component"), "parent");   
-            
-            
-            
-            /* ------------------------- General setters ----------------------- */
-            
-            if(xml.getAttribute("setAccelerator")!=null && xml.getAttribute("setAccelerator").length()>0)
-            {                                
-                try{constructor.body().directStatement("this.setAccelerator(KeyStroke.getKeyStroke("+xml.getAttribute("setAccelerator")+"));\n\t"); }catch(Exception e){};
-            }               
-            
-            if(xml.getAttribute("setAutoscrolls")!=null && xml.getAttribute("setAutoscrolls").length()>0)
-            {
-                try{constructor.body().directStatement("this.setAutoscrolls("+xml.getAttribute("setAutoscrolls")+");\n\t");                         }catch(Exception e){}               
-            }
-                
-            if(xml.getAttribute("setAlignmentY")!=null && xml.getAttribute("setAlignmentY").length()>0)
-            {
-                try{constructor.body().directStatement("this.setAlignmentY("+xml.getAttribute("setAlignmentY")+");\n\t");                           }catch(Exception e){}                
-            }
-                
-            if(xml.getAttribute("setAlignmentX")!=null && xml.getAttribute("setAlignmentX").length()>0)
-            {
-                try{constructor.body().directStatement("this.setAlignmentX("+xml.getAttribute("setAlignmentX")+");\n\t");                           }catch(Exception e){}                
-            }
-                
-            if(xml.getAttribute("setBorderPainted")!=null && xml.getAttribute("setBorderPainted").length()>0)
-            {
-                try{constructor.body().directStatement("this.setBorderPainted("+xml.getAttribute("setBorderPainted")+");\n\t");                     }catch(Exception e){}               
-            }
-                                
-            if(xml.getAttribute("setBounds")!=null && xml.getAttribute("setBounds").length()>0)
-            {
-                try{constructor.body().directStatement("this.setBounds("+xml.getAttribute("setBounds")+");\n\t");                                   }catch(Exception e){}
-            }
-                                
-            if(xml.getAttribute("setBorder")!=null && xml.getAttribute("setBorder").length()>0)
-            {
-                try{constructor.body().directStatement("this.setBorder("+xml.getAttribute("setBorder")+");\n\t");                                   }catch(Exception e){}                    
-            }
-                
-            if(xml.getAttribute("setBackground")!=null && xml.getAttribute("setBackground").length()>0)
-            {
-                try{constructor.body().directStatement("this.setBackground("+xml.getAttribute("setBackground")+");\n\t");                           }catch(Exception e){}                                    
-            }
-                
-            if(xml.getAttribute("setComponentPopupMenu")!=null && xml.getAttribute("setComponentPopupMenu").length()>0)
-            {
-                try{constructor.body().directStatement("this.setComponentPopupMenu("+xml.getAttribute("setComponentPopupMenu")+");\n\t");           }catch(Exception e){}                                   
-            }
-            
-            if(xml.getAttribute("setDefaultCloseOperation")!=null && xml.getAttribute("setDefaultCloseOperation").length()>0)
-            {
-                try{constructor.body().directStatement("this.setDefaultCloseOperation("+xml.getAttribute("setDefaultCloseOperation")+");\n\t");     }catch(Exception e){}                                   
-            }                    
-                
-            if(xml.getAttribute("setDisabledIcon")!=null && xml.getAttribute("setDisabledIcon").length()>0)
-            {
-                try{constructor.body().directStatement("this.setDisabledIcon("+xml.getAttribute("setDisabledIcon")+");\n\t");                       }catch(Exception e){}
-            }
-
-            if(xml.getAttribute("setEnabled")!=null && xml.getAttribute("setEnabled").length()>0)
-            {
-                try{constructor.body().directStatement("this.setEnabled("+xml.getAttribute("setEnabled")+");\n\t");                                 }catch(Exception e){}  
-            }                
-                
-            if(xml.getAttribute("setForeground")!=null && xml.getAttribute("setForeground").length()>0)
-            {
-                try{constructor.body().directStatement("this.setForeground("+xml.getAttribute("setForeground")+");\n\t");                           }catch(Exception e){} 
-            }              
-
-            if(xml.getAttribute("setIcon")!=null && xml.getAttribute("setIcon").length()>0)
-            {
-                try{constructor.body().directStatement("this.setIcon(new ImageIcon(\""+xml.getAttribute("setIcon")+"\"));\n\t");                    }catch(Exception e){}
-            }
-            
-            if(xml.getAttribute("setIconAt")!=null && xml.getAttribute("setIconAt").length()>0)
-            {
-                try{constructor.body().directStatement("this.setIconAt(new ImageIcon(\""+xml.getAttribute("setIconAt")+"\"));\n\t");                }catch(Exception e){}
-            }
-
-            if(xml.getAttribute("setLabel")!=null && xml.getAttribute("setLabel").length()>0)
-            {
-                try{constructor.body().directStatement("this.setLabel(\""+xml.getAttribute("setLabel")+"\");\n\t");                                 }catch(Exception e){}
-            }
-                
-            if(xml.getAttribute("setLayout")!=null && xml.getAttribute("setLayout").length()>0)
-            {
-                try{constructor.body().directStatement("this.setLayout("+xml.getAttribute("setLayout")+");\n\t");                                   }catch(Exception e){}
-            }
-                
-            if(xml.getAttribute("setLocation")!=null && xml.getAttribute("setLocation").length()>0)
-            {
-                try{constructor.body().directStatement("this.setLocation("+xml.getAttribute("setLocation")+");\n\t");                               }catch(Exception e){}
-            }
-                
-            if(xml.getAttribute("setMargin")!=null && xml.getAttribute("setMargin").length()>0)
-            {
-                try{constructor.body().directStatement("this.setMargin("+xml.getAttribute("setMargin")+");\n\t");                                   }catch(Exception e){}
-            }
-                
-            if(xml.getAttribute("setMinimumSize")!=null && xml.getAttribute("setMinimumSize").length()>0)
-            {
-                try{constructor.body().directStatement("this.setMinimumSize("+xml.getAttribute("setMinimumSize")+");\n\t");                         }catch(Exception e){}
-            }
-                
-            if(xml.getAttribute("setMaximumSize")!=null && xml.getAttribute("setMaximumSize").length()>0)
-            {
-                try{constructor.body().directStatement("this.setMaximumSize("+xml.getAttribute("setMaximumSize")+");\n\t");                         }catch(Exception e){}            
-            }
-                
-            if(xml.getAttribute("setModel")!=null && xml.getAttribute("setModel").length()>0)
-            {
-                try{constructor.body().directStatement("this.setModel("+xml.getAttribute("setModel")+");\n\t");                                     }catch(Exception e){}
-            }
-            
-            if(xml.getAttribute("setMnemonic")!=null && xml.getAttribute("setMnemonic").length()>0)
-            {
-                try{constructor.body().directStatement("this.setMnemonic("+xml.getAttribute("setMnemonic")+");\n\t");                               }catch(Exception e){}
-            }            
-                                
-            if(xml.getAttribute("setName")!=null && xml.getAttribute("setName").length()>0)
-            {
-                try{constructor.body().directStatement("this.setName(\""+xml.getAttribute("setName")+"\");\n\t");                                   }catch(Exception e){}
-            }
-                
-            if(xml.getAttribute("setPressedIcon")!=null && xml.getAttribute("setPressedIcon").length()>0)
-            {
-                try{constructor.body().directStatement("this.setPressedIcon("+xml.getAttribute("setPressedIcon")+");\n\t");                         }catch(Exception e){}
-            }
-                
-            if(xml.getAttribute("setRolloverIcon")!=null && xml.getAttribute("setRolloverIcon").length()>0)
-            {
-                try{constructor.body().directStatement("this.setRolloverIcon("+xml.getAttribute("setRolloverIcon")+");\n\t");                       }catch(Exception e){}                    
-            }
-
-            if(xml.getAttribute("setText")!=null && xml.getAttribute("setText").length()>0)
-            {
-                try{constructor.body().directStatement("this.setText(\""+xml.getAttribute("setText")+"\");\n\t");                                   }catch(Exception e){}   
-            }
-            
-            if(xml.getAttribute("setTitle")!=null && xml.getAttribute("setTitle").length()>0)
-            {
-                try{constructor.body().directStatement("this.setTitle(\""+xml.getAttribute("setTitle")+"\");\n\t");                                 }catch(Exception e){}   
-            }            
-                
-            if(xml.getAttribute("setSize")!=null && xml.getAttribute("setSize").length()>0)
-            {
-                try{constructor.body().directStatement("this.setSize("+xml.getAttribute("setSize")+");\n\t");                                       }catch(Exception e){}
-            }
-                
-            if(xml.getAttribute("setToolTipText")!=null && xml.getAttribute("setToolTipText").length()>0)
-            {
-                try{constructor.body().directStatement("this.setToolTipText("+xml.getAttribute("setToolTipText")+");\n\t");                         }catch(Exception e){}
-            }            
+            uip.constructor.param(Class.forName("java.awt.Component"), "parent");                                     
         }
         catch(Exception exception)
         {
-            //exception
+            
         }       
     }
     
     private void setparent(JCodeModel jcodemodel)
     {
         try
-        {        
+        {               
+            Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);            
             
-            /* ------------------------ Parent setters ------------------------- */
-            
-            JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);  
-            
-            jdefinedclass.direct("\n\t");
+            uip.jdc.direct("\n\t");
                 
-            jdefinedclass.direct("public Component parent;\n\t");             
+            uip.jdc.direct("public Component parent;\n\t");             
         }
         catch(Exception exception)
         {
-            //exception
+            
         }        
     }
      
     private void setchildren(JCodeModel jcodemodel)
     {
         try
-        {  
+        {             
+            Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);   
             
-            /* ------------------------- BODI lookup --------------------------- */
+            NodeList nodes = (NodeList)uip.xpath.evaluate("./*", uip.self_node, XPathConstants.NODESET);                        
             
-            Node node = (Node)Bodi.context("jcm ^ node").pull(jcodemodel);                                    
-            
-            JDefinedClass parentjdc = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
-            
-            XPath xpath = (XPath)Bodi.context("jcm ^ xpath").pull(jcodemodel);
-            
-            NodeList nodes = (NodeList)xpath.evaluate("./*", node, XPathConstants.NODESET);    
-            
-            
-            
-            /* ----------------------- Children setters ------------------------ */
-            
-            this.doinstantiation(nodes, jcodemodel, parentjdc);
+            this.doinstantiation(nodes, jcodemodel, uip.jdc);
            
-            this.dohierarchy(nodes, jcodemodel, parentjdc);
+            this.dohierarchy(nodes, jcodemodel, uip.jdc);
                   
-            this.dodevolvement(nodes, jcodemodel, parentjdc);
+            this.dodevolvement(nodes, jcodemodel, uip.jdc);
         }
         catch(Exception exception)
         {
-            //exception
+            
         }        
     }    
     
     private void doinstantiation(NodeList nodes, JCodeModel jcodemodel, JDefinedClass parentjdc)
     {
-        parentjdc.constructors().next().body().directStatement("/* ------------------  instantiation  ---------------- */\n\t");
+        Uiparameter uip = (Uiparameter)Bodi.context("").pull(jcodemodel);        
+        
+        uip.constructor.body().directStatement("/* ------------------  instantiation  ---------------- */\n\t");
         
         for(int i=0; i<nodes.getLength(); i++)
-        {           
-            
-            /* ------------------------- BODI lookup --------------------------- */
-            
-            JCodeModel childjmodel = (JCodeModel)Bodi.context("node ^ jcm").softpull(nodes.item(i));
+        {     
+            Uiparameter uipi = (Uiparameter)Bodi.context("widgets").pull(nodes.item(i));            
                 
-            JDefinedClass childjclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(childjmodel);
-                
-            JDefinedClass jdefinedclass = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(jcodemodel);
-            
-            
-            
-            /* ----------------------- Instance setters ------------------------ */
-                                              
-            jdefinedclass.direct("\n\t");                                                                              
-                
-            jdefinedclass.constructors().next().body().directStatement("this."+childjclass.name().toLowerCase()+" = new "+childjclass.name()+"(this);\n\t");
+            uipi.constructor.body().directStatement("this."+uipi.classname.toLowerCase()+" = new "+uipi.classname+"(this);\n\t");
         }
     }
     
     private void dohierarchy(NodeList nodes, JCodeModel jcodemodel, JDefinedClass parentjdc)
     {
-        parentjdc.constructors().next().body().directStatement("/* ------------------  hierarchy  -------------------- */\n\t");
+        Uiparameter uip = (Uiparameter)Bodi.context("").pull(jcodemodel); 
+        
+        uip.constructor.body().directStatement("/* ------------------  hierarchy  -------------------- */\n\t");
             
         for(int i=0; i<nodes.getLength(); i++)
-        {        
+        {    
+            Uiparameter uipi = (Uiparameter)Bodi.context("").pull(jcodemodel);
             
-            /* ------------------------- BODI lookup --------------------------- */
+            String childsuperclass = uipi.jdc._extends().name();
             
-            JCodeModel childjcm = (JCodeModel)Bodi.context("node ^ jcm").softpull(nodes.item(i));
-                
-            JDefinedClass childjdc = (JDefinedClass)Bodi.context("jcm ^ jdc").pull(childjcm);                
-            
-            
-            
-            /* ------------------------ Value setters ------------------------- */
-            
-            JMethod constructor = parentjdc.constructors().next();
-            
-            String childsuperclass = childjdc._extends().name();
-            
-            String childfieldname = childjdc.name().toLowerCase();
-                
-            parentjdc.direct("\n\t");                        
-            
-            
-            
-            /* ----------------------- Hierarch setters ------------------------ */
+            String childfieldname = uipi.jdc.name().toLowerCase();                            
 
             if(childsuperclass.contains("JMenuBar"))            
             {
-                constructor.body().directStatement("this.setJMenuBar("+childfieldname+");\n\t"); 
+                uip.constructor.body().directStatement("this.setJMenuBar("+childfieldname+");\n\t"); 
                 
                 continue;                
             }
                         
             if(childsuperclass.contains("JTabbedPane"))
             {
-                constructor.body().directStatement("this.addTab("+childfieldname+");\n\t"); 
+                uip.constructor.body().directStatement("this.addTab("+childfieldname+");\n\t"); 
                 
                 continue;                
             }            
 
             if(!childsuperclass.contains("JMenuBar") && !childsuperclass.contains("JTabbedPane"))
             {
-                constructor.body().directStatement("this.add("+childfieldname+");\n\t");
+                uip.constructor.body().directStatement("this.add("+childfieldname+");\n\t");
                 
                 continue;
             }

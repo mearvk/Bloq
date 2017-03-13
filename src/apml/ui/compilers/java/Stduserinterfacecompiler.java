@@ -6,6 +6,8 @@ package apml.ui.compilers.java;
  */
 public class Stduserinterfacecompiler
 {
+    protected final Integer hash = 0x888fe8;
+    
     public Uiapmlmanager apmlmanager = new Uiapmlmanager(); 
     
     public Uioutputmanager outputmanager = new Uioutputmanager();

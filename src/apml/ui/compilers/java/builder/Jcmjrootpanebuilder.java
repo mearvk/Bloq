@@ -1,7 +1,6 @@
 package apml.ui.compilers.java.builder;
 
 import java.io.File;
-import javax.swing.JRootPane;
 import javax.xml.xpath.XPathFactory;
 
 /**
@@ -15,9 +14,9 @@ public class Jcmjrootpanebuilder extends Jcmabstractbuilder
         //new Jcmjrootpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jrootpane", JRootPane.class);
     }     
     
-    public Jcmjrootpanebuilder(File apml, String tagname)
+    public Jcmjrootpanebuilder(File apml, String tagname, Class classname)
     {
-        super(apml, tagname);
+        super(apml, tagname, classname);
         
         this.apml = apml;
         

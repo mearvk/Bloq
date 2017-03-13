@@ -8,6 +8,8 @@ import java.io.File;
  */
 public class Uifileguardian
 {
+    protected final Integer hash = 0x888fe8;
+    
     public File xmlin;
     
     public Uifileguardian()
