@@ -55,7 +55,7 @@ public class Uiparameter
     
     public Node parent_node;    
     
-    public Node self_node;    
+    public Node node;    
         
     public Node child_node;
     

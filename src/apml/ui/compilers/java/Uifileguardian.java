@@ -16,7 +16,7 @@ public class Uifileguardian
     {
         try
         {
-            xmlin = new File("/home/oem/Desktop/UI/UI.xml");    
+            this.xmlin = new File("/home/oem/Desktop/UI/UI.xml");    
         }
         catch(Exception err)
         {

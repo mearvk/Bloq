@@ -7,35 +7,36 @@ public class Stduserinterfacecompiler
 {
     protected final Integer hash = 0x888fe8;
     
-    public Uiinputmanager inputmanager = new Uiinputmanager(); 
+    public Uifileguardian fileguardian = new Uifileguardian();
     
-    public Uioutputmanager outputmanager = new Uioutputmanager();
+    public Uiinputmanager inputmanager = new Uiinputmanager(this); 
     
-    public Uifileguardian fileguardian = new Uifileguardian();   
-    
-    
+    public Uioutputmanager outputmanager = new Uioutputmanager(this);         
+        
     public static void main(String...args)
     {
-        Stduserinterfacecompiler compiler = new Stduserinterfacecompiler();
+        Stduserinterfacecompiler compiler;
+                
+        compiler = new Stduserinterfacecompiler();
         
-        compiler.setapmlfiles(compiler.inputmanager);
+        compiler.dohandleapmlfiles(compiler.inputmanager);
         
-        compiler.setsourcefiles(compiler.outputmanager);        
+        compiler.dohandleoutputfiles(compiler.outputmanager);        
     }    
     
-    public void setapmlfiles(Uiinputmanager inputmanager)
+    public void dohandleapmlfiles(Uiinputmanager inputmanager)
     {
-        for(String xpathmodel : inputmanager.xpathmodels.list)
+        for(String xpathmodel : this.inputmanager.xpathmodels.list)
         {
-            inputmanager.generatejcmmodels(this.fileguardian.xmlin, xpathmodel);
+            inputmanager.generatejcmmodels(xpathmodel);
         }        
     }
         
-    public void setsourcefiles(Uioutputmanager outputmanager)
+    public void dohandleoutputfiles(Uioutputmanager outputmanager)
     {            
         for(ArrayList<JCodeModel> jcmmodel : this.inputmanager.jcmmodels.list)
         {
-            outputmanager.generatejavafiles(jcmmodel);
+            outputmanager.generateoutputfiles(jcmmodel);
         }      
     }
 }

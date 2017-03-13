@@ -75,7 +75,7 @@ public abstract class Jcmabstractbuilder
     
     public void setbodi(Uiparameter uip)
     {        
-        try{uip.self_node = nodes.item(uip.index);} catch(Exception e){}
+        try{uip.node = nodes.item(uip.index);} catch(Exception e){}
         
         try{uip.jdc = uip.jcm.packages().next().classes().next();} catch(Exception e){}
         
@@ -89,13 +89,13 @@ public abstract class Jcmabstractbuilder
         
         try{uip.doc = this.doc;} catch(Exception e){}
         
-        try{uip.element = (Element)uip.self_node;} catch(Exception e){}
+        try{uip.element = (Element)uip.node;} catch(Exception e){}
         
         try{uip.constructor = uip.jdc.constructor(JMod.PUBLIC);} catch(Exception e){}
         
         try{Bodi.context("widgets").put(uip.jcm, uip);} catch(Exception e){}
         
-        try{Bodi.context("widgets").put(uip.self_node, uip);} catch(Exception e){}
+        try{Bodi.context("widgets").put(uip.node, uip);} catch(Exception e){}
     }
     
     

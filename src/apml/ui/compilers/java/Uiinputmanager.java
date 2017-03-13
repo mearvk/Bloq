@@ -137,51 +137,57 @@ public class Uiinputmanager
 {    
     protected final Integer hash = 0x888fe8;
     
+    public Stduserinterfacecompiler compiler;
+    
     public Xpathstrings xpathmodels = new Xpathstrings();
     
-    public Jcmmodels jcmmodels = new Jcmmodels();              
+    public Jcmmodels jcmmodels = new Jcmmodels();                  
     
-    public Object generaterelations(File apml, String tagname)
+    public File apml;
+    
+    public Uiinputmanager(Stduserinterfacecompiler compiler)
     {
-        return null;
+        this.compiler = compiler;
+        
+        this.apml = this.compiler.fileguardian.xmlin;
     }
     
-    public boolean generatejcmmodels(File apml, String tagname)            
+    public boolean generatejcmmodels(String tagname)            
     {            
         switch(tagname)
         {
             case "//jbutton": 
-                this.jcmmodels.jbuttonmodels.addAll(new Jcmjbuttonbuilder(apml, tagname, JButton.class).builder.build()); break;
+                this.jcmmodels.jbuttonmodels.addAll(new Jcmjbuttonbuilder(this.apml, tagname, JButton.class).builder.build()); break;
 
             case "//jframe": 
-                this.jcmmodels.jframemodels.addAll(new Jcmjframebuilder(apml, tagname, JFrame.class).builder.build()); break;
+                this.jcmmodels.jframemodels.addAll(new Jcmjframebuilder(this.apml, tagname, JFrame.class).builder.build()); break;
 
             case "//frame": 
-                this.jcmmodels.framemodels.addAll(new Jcmframebuilder(apml, tagname, Frame.class).builder.build()); break; 
+                this.jcmmodels.framemodels.addAll(new Jcmframebuilder(this.apml, tagname, Frame.class).builder.build()); break; 
 
             case "//jcheckbox": 
-                this.jcmmodels.jcheckboxmodels.addAll(new Jcmjcheckboxbuilder(apml, tagname, JCheckBox.class).builder.build()); break; 
+                this.jcmmodels.jcheckboxmodels.addAll(new Jcmjcheckboxbuilder(this.apml, tagname, JCheckBox.class).builder.build()); break; 
 
             case "//jcombobox": 
-                this.jcmmodels.jcomboboxmodels.addAll(new Jcmjcomboboxbuilder(apml, tagname, JComboBox.class).builder.build()); break; 
+                this.jcmmodels.jcomboboxmodels.addAll(new Jcmjcomboboxbuilder(this.apml, tagname, JComboBox.class).builder.build()); break; 
            
             case "//jlist": 
-                this.jcmmodels.jlistmodels.addAll(new Jcmjlistbuilder(apml, tagname, JList.class).builder.build()); break;
+                this.jcmmodels.jlistmodels.addAll(new Jcmjlistbuilder(this.apml, tagname, JList.class).builder.build()); break;
 
             case "//jmenu": 
-                this.jcmmodels.jmenumodels.addAll(new Jcmjmenubuilder(apml, tagname, JMenu.class).builder.build()); break;
+                this.jcmmodels.jmenumodels.addAll(new Jcmjmenubuilder(this.apml, tagname, JMenu.class).builder.build()); break;
             
             case "//jmenubar": 
-                this.jcmmodels.jmenubarmodels.addAll(new Jcmjmenubarbuilder(apml, tagname, JMenuBar.class).builder.build()); break;
+                this.jcmmodels.jmenubarmodels.addAll(new Jcmjmenubarbuilder(this.apml, tagname, JMenuBar.class).builder.build()); break;
             
             case "//jmenuitem": 
-                this.jcmmodels.jmenuitemmodels.addAll(new Jcmjmenuitembuilder(apml, tagname, JMenuItem.class).builder.build()); break;
+                this.jcmmodels.jmenuitemmodels.addAll(new Jcmjmenuitembuilder(this.apml, tagname, JMenuItem.class).builder.build()); break;
 
             case "//jradiobutton": 
-                this.jcmmodels.jradiobuttonmodels.addAll(new Jcmjradiobuttonbuilder(apml, tagname, JRadioButton.class).builder.build()); break; 
+                this.jcmmodels.jradiobuttonmodels.addAll(new Jcmjradiobuttonbuilder(this.apml, tagname, JRadioButton.class).builder.build()); break; 
 
             case "//jslider": 
-                this.jcmmodels.jslidermodels.addAll(new Jcmjsliderbuilder(apml, tagname, JSlider.class).builder.build()); break;
+                this.jcmmodels.jslidermodels.addAll(new Jcmjsliderbuilder(this.apml, tagname, JSlider.class).builder.build()); break;
 
             case "//jspinner": 
                 this.jcmmodels.jspinnermodels.addAll(new Jcmjspinnerbuilder(apml, tagname, JSpinner.class).builder.build()); break;

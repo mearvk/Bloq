@@ -19,7 +19,14 @@ public class Uioutputmanager
 {
     protected final Integer hash = 0x888fe8;
     
-    public void generatejavafiles(ArrayList<JCodeModel> jcodemodels)
+    public Stduserinterfacecompiler compiler;
+    
+    public Uioutputmanager(Stduserinterfacecompiler compiler)
+    {
+        this.compiler = compiler;
+    }    
+    
+    public void generateoutputfiles(ArrayList<JCodeModel> jcodemodels)
     {
         try
         {                   
@@ -54,7 +61,7 @@ public class Uioutputmanager
         
         try
         {
-            NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.self_node, XPathConstants.NODESET);            
+            NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);            
             
             uip.constructor.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
             
@@ -281,7 +288,7 @@ public class Uioutputmanager
             uip.jdc.field(JMod.PUBLIC, Class.forName("java.net.URL"), "url");
                         
             //children lookup/finding(s)/etc.
-            NodeList kids = (NodeList)uip.xpath.evaluate("./*", uip.self_node, XPathConstants.NODESET);  
+            NodeList kids = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);  
             
             
             //user interface fields 
@@ -342,13 +349,13 @@ public class Uioutputmanager
         {             
             Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);   
             
-            NodeList nodes = (NodeList)uip.xpath.evaluate("./*", uip.self_node, XPathConstants.NODESET);                                    
+            NodeList nodes = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);                                    
             
-            this.doinstantiation(nodes, uip.self_node);
+            this.doinstantiation(nodes, uip.node);
            
-            this.dohierarchy(nodes, uip.self_node);
+            this.dohierarchy(nodes, uip.node);
                   
-            this.dodevolvement(nodes, uip.self_node);
+            this.dodevolvement(nodes, uip.node);
         }
         catch(Exception exception)
         {
