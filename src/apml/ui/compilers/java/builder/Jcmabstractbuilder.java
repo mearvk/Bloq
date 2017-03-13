@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -40,89 +41,106 @@ public abstract class Jcmabstractbuilder
     
     public Jcmabstractbuilder(File apml, String tagname, Class classname)
     {                        
-        Bodi.setcontext("widgets");  
+        Bodi.setcontext("widgets");                  
+                
+        try
+        {      
+            this.tagname = tagname;
         
-        this.tagname = tagname;
+            this.apml = apml;
         
-        this.apml = apml;
+            this.classname = classname;            
+            
+            this.setxpath(null);
+            
+            this.setdocument(null);
         
-        this.classname = classname;
+            this.setnodes(null);
+        }
+        catch(Exception exception)
+        {
+            System.err.println(exception);
+        }
     }
     
-    public void setsuperclass(JCodeModel jcodemodel, Integer i)
+    public void setxpath(Uiparameter uip)
     {
-        jcodemodel.packages().next().classes().next()._extends(this.classname);
+        this.xpath = XPathFactory.newInstance().newXPath();
+    }
+    
+    public void setsuperclass(Uiparameter uip)
+    {
+        uip.jdc._extends(this.classname);
     } 
     
-    public void setbodi(JCodeModel jcodemodel, Integer i)
-    {
-        Uiparameter uip = new Uiparameter();
+    public void setbodi(Uiparameter uip)
+    {        
+        try{uip.self_node = nodes.item(uip.index);} catch(Exception e){}
         
-        uip.self_node = nodes.item(i);
+        try{uip.jdc = uip.jcm.packages().next().classes().next();} catch(Exception e){}
         
-        uip.jcm = jcodemodel;
+        try{uip.xpath = xpath;} catch(Exception e){}
         
-        uip.jdc = jcodemodel.packages().next().classes().next();
+        try{uip.parent_node = nodes.item(uip.index).getParentNode();} catch(Exception e){}
         
-        uip.xpath = xpath;
+        try{uip.classname = uip.jdc.name();} catch(Exception e){}
         
-        uip.parent_node = nodes.item(i).getParentNode();
+        try{uip.instancename = uip.jdc.name().toLowerCase();} catch(Exception e){}
         
-        uip.classname = uip.jdc.fullName();
+        try{uip.doc = this.doc;} catch(Exception e){}
         
-        uip.instancename = uip.jdc.fullName().toLowerCase();
+        try{uip.element = (Element)uip.self_node;} catch(Exception e){}
         
-        uip.doc = this.doc;
+        try{uip.constructor = uip.jdc.constructor(JMod.PUBLIC);} catch(Exception e){}
         
-        uip.element = (Element)uip.self_node;
+        try{Bodi.context("widgets").put(uip.jcm, uip);} catch(Exception e){}
         
-        uip.constructor = uip.jdc.constructor(JMod.PUBLIC);
-        
-        Bodi.context("widgets").put(uip.jcm, uip);
-        
-        Bodi.context("widgets").put(uip.self_node, uip);
+        try{Bodi.context("widgets").put(uip.self_node, uip);} catch(Exception e){}
     }
     
     
-    public void setjcmclass(JCodeModel jcodemodel, Integer i) throws Exception
+    public void setjcmclass(Uiparameter uip) throws Exception
     {
-        jcodemodel.packages().next()._class(this.classname.getSimpleName()+"_"+String.format("%1$03d",i)); 
+        uip.jcm.packages().next()._class(this.classname.getSimpleName()+"_"+String.format("%1$03d",uip.index)); 
     }
     
-    public void setjcmpackage(JCodeModel jcodemodel, Integer i) throws Exception
+    public void setjcmpackage(Uiparameter uip) throws Exception
     {                        
-        jcodemodel._package("org.widgets");                         
+        uip.jcm._package("org.widgets");                         
     }
     
-    public void setdocument() throws Exception
+    public void setdocument(Uiparameter uip) throws Exception
     {
         this.doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(apml);
     }
     
-    public void setnodes(JCodeModel jcodemodel, Integer i) throws Exception
+    public void setnodes(Uiparameter uip) throws Exception
     {
-        this.nodes = (NodeList)xpath.evaluate(tagname, this.doc, XPathConstants.NODESET);
+        try{this.nodes = (NodeList)xpath.evaluate(this.tagname, this.doc, XPathConstants.NODESET); }catch(Exception e){}
     }
     
+
     public ArrayList<JCodeModel> build()
     {                       
         try
-        {                     
-            for(int i=0; i<this.nodes.getLength(); i++)
+        {         
+            for(int index=0; index<this.nodes.getLength(); index++)
             {
-                JCodeModel jcodemodel = new JCodeModel();                                                 
+                Uiparameter uip = new Uiparameter(new JCodeModel(), index);                                           
+                
+                this.setdocument(uip);
+                
+                this.setjcmpackage(uip);
+                
+                this.setjcmclass(uip);                                
             
-                this.setdocument();
+                this.setnodes(uip);                   
                 
-                this.setjcmpackage(jcodemodel, i);
+                this.setbodi(uip); 
                 
-                this.setjcmclass(jcodemodel, i);                                
-            
-                this.setnodes(jcodemodel, i);                                                 
+                this.setsuperclass(uip);  
                 
-                this.setsuperclass(jcodemodel, i);                 
-                
-                this.setbodi(jcodemodel, i);
+                this.setjcodemodel(uip);
             }
         }
         catch(Exception exception)
@@ -133,8 +151,8 @@ public abstract class Jcmabstractbuilder
         return jcodemodels;        
     }   
     
-    protected void setjcodemodel(JCodeModel jcodemodel)
+    protected void setjcodemodel(Uiparameter uip)
     {
-        this.jcodemodels.add(jcodemodel);
+        this.jcodemodels.add(uip.jcm);
     }
 }

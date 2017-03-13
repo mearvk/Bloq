@@ -14,6 +14,13 @@ public class Uifileguardian
     
     public Uifileguardian()
     {
-        xmlin = new File("/home/oem/Desktop/UI/UI.xml");
+        try
+        {
+            xmlin = new File("/home/oem/Desktop/UI/UI.xml");    
+        }
+        catch(Exception err)
+        {
+            System.err.println(err);
+        }        
     }
 }

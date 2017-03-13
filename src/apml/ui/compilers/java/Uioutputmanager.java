@@ -4,11 +4,11 @@ import apml.system.bodi.Bodi;
 import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import java.io.File;
 import java.util.ArrayList;
 import javax.xml.xpath.XPathConstants;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -37,12 +37,14 @@ public class Uioutputmanager
                 
                 this.setlisteners(jcodemodel);
                 
-                jcodemodel.build(new File("/home/oem/Desktop/UI"));
+                Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);
+                
+                uip.jcm.build(new File("/home/oem/Desktop/UI"));
             }
         }
         catch(Exception exception)
         {
-            //exception
+            System.err.println(exception);
         }    
     }
     
@@ -59,9 +61,9 @@ public class Uioutputmanager
             //Veuillez d'ajouter constructor(s) fields
             for(int i=0; i<children.getLength(); i++)
             {
-                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").pull(children.item(i));                                
+                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));                                
                         
-                String classname = uipi.classname.toLowerCase()+"_"+String.format("%1$03d",i);
+                String classname = uipi.classname.toLowerCase();
                 
                 String listener = classname+"_actionlistener";       
                 
@@ -71,26 +73,28 @@ public class Uioutputmanager
             //Veuillez d'ajouter actionperformed functions
             for(int i=0; i<children.getLength(); i++)
             {
-                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").pull(children.item(i)); 
+                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i)); 
                 
-                String classname = uipi.classname.toLowerCase()+"_"+String.format("%1$03d",i);                                
+                String classname = uipi.classname;                                
                 
-                String listener = classname+"_ActionListener";                                                               
+                String nestedlistenerclass = classname+"_ActionListener";                                                               
                 
-                JDefinedClass nestedclassx = uip.jdc._class(JMod.PRIVATE | JMod.FINAL, listener, ClassType.CLASS);
+                JDefinedClass nestedclass = uip.jdc._class(JMod.PRIVATE | JMod.FINAL, nestedlistenerclass, ClassType.CLASS);
                 
-                nestedclassx.direct("public void actionPerformed(ActionEvent ae)\n\t");
+                nestedclass._implements(Class.forName("java.awt.event.ActionListener"));
                 
-                nestedclassx.direct("{\n\t");
+                nestedclass.direct("public void actionPerformed(ActionEvent ae)\n\t");
                 
-                nestedclassx.direct("/* ------------ stub code goes here ------------ */\n\t");
+                nestedclass.direct("{\n\t");
                 
-                nestedclassx.direct("}\n\t");
+                nestedclass.direct("/* ------------ stub code goes here ------------ */\n\t");
+                
+                nestedclass.direct("}\n\t");
             }            
         }
         catch(Exception exception)
         {
-            
+            System.err.println(exception);
         }
     }
     
@@ -99,7 +103,7 @@ public class Uioutputmanager
         Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel); 
         
         try
-        {
+        {                        
            /* ------------------------- General setters ----------------------- */
             
             if(uip.element.getAttribute("setAccelerator")!=null && uip.element.getAttribute("setAccelerator").length()>0)
@@ -254,7 +258,7 @@ public class Uioutputmanager
         }
         catch(Exception exception)
         {
-            //exception
+            System.err.println(exception);
         }
     }
     
@@ -283,22 +287,22 @@ public class Uioutputmanager
             //user interface fields 
             for(int i=0; i<kids.getLength(); i++)                           
             {       
-                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").pull(kids.item(i));
+                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(kids.item(i));
                 
-                uip.jdc.direct("public "+uipi.classname+" "+uipi.classname.toLowerCase()+";\n\t");
+                uip.jdc.direct("public "+uipi.classname+" "+uipi.classname.toLowerCase()+";\n\n\t");
             }
             
             //actionlistener fields
             for(int i=0; i<kids.getLength(); i++)                           
             {              
-                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").pull(kids.item(i));
+                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(kids.item(i));
                 
-                uip.jdc.direct("public "+uipi.classname+"_ActionListener"+" "+uipi.classname+"_ActionListener".toLowerCase()+";\n\t");
+                uip.jdc.direct("public "+uipi.classname+"_ActionListener"+" "+(uipi.classname+"_ActionListener").toLowerCase()+";\n\n\t");
             }            
         }
         catch(Exception exception)
         {
-            
+            System.err.println(exception);
         }
     }
     
@@ -314,7 +318,7 @@ public class Uioutputmanager
         }
         catch(Exception exception)
         {
-            
+            System.err.println(exception);
         }       
     }
     
@@ -323,14 +327,12 @@ public class Uioutputmanager
         try
         {               
             Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);            
-            
-            uip.jdc.direct("\n\t");
                 
             uip.jdc.direct("public Component parent;\n\t");             
         }
         catch(Exception exception)
         {
-            
+            System.err.println(exception);
         }        
     }
      
@@ -340,43 +342,43 @@ public class Uioutputmanager
         {             
             Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);   
             
-            NodeList nodes = (NodeList)uip.xpath.evaluate("./*", uip.self_node, XPathConstants.NODESET);                        
+            NodeList nodes = (NodeList)uip.xpath.evaluate("./*", uip.self_node, XPathConstants.NODESET);                                    
             
-            this.doinstantiation(nodes, jcodemodel, uip.jdc);
+            this.doinstantiation(nodes, uip.self_node);
            
-            this.dohierarchy(nodes, jcodemodel, uip.jdc);
+            this.dohierarchy(nodes, uip.self_node);
                   
-            this.dodevolvement(nodes, jcodemodel, uip.jdc);
+            this.dodevolvement(nodes, uip.self_node);
         }
         catch(Exception exception)
         {
-            
+            System.err.println(exception);
         }        
     }    
     
-    private void doinstantiation(NodeList nodes, JCodeModel jcodemodel, JDefinedClass parentjdc)
-    {
-        Uiparameter uip = (Uiparameter)Bodi.context("").pull(jcodemodel);        
+    private void doinstantiation(NodeList children, Node self)
+    {          
+        Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(self); 
         
         uip.constructor.body().directStatement("/* ------------------  instantiation  ---------------- */\n\t");
         
-        for(int i=0; i<nodes.getLength(); i++)
+        for(int i=0; i<children.getLength(); i++)
         {     
-            Uiparameter uipi = (Uiparameter)Bodi.context("widgets").pull(nodes.item(i));            
+            Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));            
                 
-            uipi.constructor.body().directStatement("this."+uipi.classname.toLowerCase()+" = new "+uipi.classname+"(this);\n\t");
+            uip.constructor.body().directStatement("this."+uipi.classname.toLowerCase()+" = new "+uipi.classname+"(this);\n\t");
         }
     }
     
-    private void dohierarchy(NodeList nodes, JCodeModel jcodemodel, JDefinedClass parentjdc)
-    {
-        Uiparameter uip = (Uiparameter)Bodi.context("").pull(jcodemodel); 
+    private void dohierarchy(NodeList children, Node self)
+    {         
+        Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(self); 
         
         uip.constructor.body().directStatement("/* ------------------  hierarchy  -------------------- */\n\t");
             
-        for(int i=0; i<nodes.getLength(); i++)
+        for(int i=0; i<children.getLength(); i++)
         {    
-            Uiparameter uipi = (Uiparameter)Bodi.context("").pull(jcodemodel);
+            Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
             
             String childsuperclass = uipi.jdc._extends().name();
             
@@ -405,15 +407,16 @@ public class Uioutputmanager
         }         
     }
     
-    private void dodevolvement(NodeList nodes, JCodeModel jcodemodel, JDefinedClass parentjdc)
+    private void dodevolvement(NodeList children, Node self)
     {
+        Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(self);         
         
         /* ------------------------ Devolvement setters ------------------------ */
         
-        parentjdc.constructors().next().body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");                         
+        uip.constructor.body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");                         
         
-        parentjdc.constructors().next().body().directStatement("this.parent = parent;\n\t");                        
+        uip.constructor.body().directStatement("this.parent = parent;\n\t");                        
         
-        parentjdc.constructors().next().body().directStatement("this.setVisible(true);\n\t");   
+        uip.constructor.body().directStatement("this.setVisible(true);\n\t");   
     }
 }

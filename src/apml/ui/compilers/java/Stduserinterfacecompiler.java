@@ -14,6 +14,15 @@ public class Stduserinterfacecompiler
     
     public Uifileguardian fileguardian = new Uifileguardian(); 
     
+    public String[] xpath_targets = new String[]
+    {
+        "//jbutton", "//jframe", "//frame", "//jcheckbox", "//jcombobox", "//jlist", "//jmenu", "//jmenubar",
+        "//jmenuitem", "//jradiobutton", "//jslider", "//jspinner", "//jtextfield", "//jpasswordfield", "//jcolorchooser",
+        "//jeditorpane", "//jtextpane", "//jfilechooser", "//jtable", "//jtextarea", "//jtree", "//jlabels", "//jprogressbar",
+        "//jseparator", "//jtooltip", "//japplet", "//jdialog", "//jpanel", "//jscrollpane", "//jsplitpane", "//jtabbedpane",
+        "//jtoolbar", "//jinternalframe", "//jlayeredpane", "//jrootpane"
+    };
+    
     public static void main(String...args)
     {
         Stduserinterfacecompiler compiler = new Stduserinterfacecompiler();
@@ -35,6 +44,12 @@ public class Stduserinterfacecompiler
      */
     public void setapmlfiles(Uiapmlmanager apmlmanager)
     {
+    
+        for(String xpath_target: xpath_targets)
+        {
+            apmlmanager.generatejcmmodels(this.fileguardian.xmlin, xpath_target);
+        }
+        
         //
         apmlmanager.generatejcmmodels(this.fileguardian.xmlin, "//jbutton");
         

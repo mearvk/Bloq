@@ -20,6 +20,25 @@ import org.w3c.dom.NodeList;
  */
 public class Uiparameter
 {    
+    public Uiparameter uip;   
+    
+    public Uiparameter(Uiparameter uip)
+    {
+        this.uip = uip;
+    }
+    
+    public Uiparameter(JCodeModel jcm)
+    {
+        this.jcm = jcm;        
+    }
+    
+    public Uiparameter(JCodeModel jcm, Integer index)
+    {
+        this.jcm = jcm;
+        
+        this.index = index;
+    }
+    
     protected final Integer hash = 0x888fe8;
     
     public JCodeModel jcm;
@@ -46,5 +65,7 @@ public class Uiparameter
     
     public Document doc;
     
-    public Element element;    
+    public Element element;   
+    
+    public Integer index;
 }
