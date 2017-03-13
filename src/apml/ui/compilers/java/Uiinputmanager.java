@@ -1,66 +1,36 @@
 package apml.ui.compilers.java;
 
-import apml.ui.compilers.java.builder.Jcmjtabbedpanebuilder;
-
-import apml.ui.compilers.java.builder.Jcmjlabelbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjmenubuilder;
-
-import apml.ui.compilers.java.builder.Jcmjappletbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjpasswordfieldbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjprogressbarbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjscrollpanebuilder;
-
-import apml.ui.compilers.java.builder.Jcmjsplitpanebuilder;
-
-import apml.ui.compilers.java.builder.Jcmjtooltipbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjinternalframebuilder;
-
-import apml.ui.compilers.java.builder.Jcmjtoolbarbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjradiobuttonbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjpanelbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjeditorpanebuilder;
-
-import apml.ui.compilers.java.builder.Jcmjlayeredpanebuilder;
-
-import apml.ui.compilers.java.builder.Jcmjtextfieldbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjsliderbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjseparatorbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjrootpanebuilder;
-
-import apml.ui.compilers.java.builder.Jcmjtreebuilder;
-
-import apml.ui.compilers.java.builder.Jcmjspinnerbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjtextpanebuilder;
-
-import apml.ui.compilers.java.builder.Jcmjcolorchooserbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjlistbuilder;
-
-import apml.ui.compilers.java.builder.Jcmframebuilder;
-
-import apml.ui.compilers.java.builder.Jcmjbuttonbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjcheckboxbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjcomboboxbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjframebuilder;
-
-import apml.ui.compilers.java.builder.Jcmjmenubarbuilder;
-
-import apml.ui.compilers.java.builder.Jcmjmenuitembuilder;
+import apml.ui.compilers.java.builders.Jcmjtabbedpanebuilder;
+import apml.ui.compilers.java.builders.Jcmjlabelbuilder;
+import apml.ui.compilers.java.builders.Jcmjmenubuilder;
+import apml.ui.compilers.java.builders.Jcmjappletbuilder;
+import apml.ui.compilers.java.builders.Jcmjpasswordfieldbuilder;
+import apml.ui.compilers.java.builders.Jcmjprogressbarbuilder;
+import apml.ui.compilers.java.builders.Jcmjscrollpanebuilder;
+import apml.ui.compilers.java.builders.Jcmjsplitpanebuilder;
+import apml.ui.compilers.java.builders.Jcmjtooltipbuilder;
+import apml.ui.compilers.java.builders.Jcmjinternalframebuilder;
+import apml.ui.compilers.java.builders.Jcmjtoolbarbuilder;
+import apml.ui.compilers.java.builders.Jcmjradiobuttonbuilder;
+import apml.ui.compilers.java.builders.Jcmjpanelbuilder;
+import apml.ui.compilers.java.builders.Jcmjeditorpanebuilder;
+import apml.ui.compilers.java.builders.Jcmjlayeredpanebuilder;
+import apml.ui.compilers.java.builders.Jcmjtextfieldbuilder;
+import apml.ui.compilers.java.builders.Jcmjsliderbuilder;
+import apml.ui.compilers.java.builders.Jcmjseparatorbuilder;
+import apml.ui.compilers.java.builders.Jcmjrootpanebuilder;
+import apml.ui.compilers.java.builders.Jcmjtreebuilder;
+import apml.ui.compilers.java.builders.Jcmjspinnerbuilder;
+import apml.ui.compilers.java.builders.Jcmjtextpanebuilder;
+import apml.ui.compilers.java.builders.Jcmjcolorchooserbuilder;
+import apml.ui.compilers.java.builders.Jcmjlistbuilder;
+import apml.ui.compilers.java.builders.Jcmframebuilder;
+import apml.ui.compilers.java.builders.Jcmjbuttonbuilder;
+import apml.ui.compilers.java.builders.Jcmjcheckboxbuilder;
+import apml.ui.compilers.java.builders.Jcmjcomboboxbuilder;
+import apml.ui.compilers.java.builders.Jcmjframebuilder;
+import apml.ui.compilers.java.builders.Jcmjmenubarbuilder;
+import apml.ui.compilers.java.builders.Jcmjmenuitembuilder;
 
 import com.sun.codemodel.JCodeModel;
 
