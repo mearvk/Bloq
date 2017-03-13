@@ -19,9 +19,9 @@ public class Uioutputmanager
 {
     protected final Integer hash = 0x888fe8;
     
-    public Stduserinterfacecompiler compiler;
+    public Uicompiler compiler;
     
-    public Uioutputmanager(Stduserinterfacecompiler compiler)
+    public Uioutputmanager(Uicompiler compiler)
     {
         this.compiler = compiler;
     }    

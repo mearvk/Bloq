@@ -9,7 +9,7 @@ package apml.ui.compilers.java;
  *
  * @author oem
  */
-public class Xpathstrings
+public class Uixpathstrings
 {
     protected final Integer hash = 0x888fe8;
     

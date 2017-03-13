@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Max Rupplin
  */
-public class Jcmmodels
+public class Uijcmmodels
 {
     public ArrayList<JCodeModel> jbuttonmodels = new ArrayList<JCodeModel>();
 
@@ -86,7 +86,7 @@ public class Jcmmodels
     
     public ArrayList<ArrayList<JCodeModel>> list = new ArrayList<ArrayList<JCodeModel>>(0);      
     
-    public Jcmmodels()
+    public Uijcmmodels()
     {
         list.add(jbuttonmodels);
 

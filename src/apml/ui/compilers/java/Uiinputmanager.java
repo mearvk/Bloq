@@ -137,15 +137,15 @@ public class Uiinputmanager
 {    
     protected final Integer hash = 0x888fe8;
     
-    public Stduserinterfacecompiler compiler;
+    public Uicompiler compiler;
     
-    public Xpathstrings xpathmodels = new Xpathstrings();
+    public Uixpathstrings xpathmodels = new Uixpathstrings();
     
-    public Jcmmodels jcmmodels = new Jcmmodels();                  
+    public Uijcmmodels jcmmodels = new Uijcmmodels();                  
     
     public File apml;
     
-    public Uiinputmanager(Stduserinterfacecompiler compiler)
+    public Uiinputmanager(Uicompiler compiler)
     {
         this.compiler = compiler;
         

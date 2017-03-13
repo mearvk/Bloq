@@ -3,7 +3,7 @@ package apml.ui.compilers.java;
 import com.sun.codemodel.JCodeModel;
 import java.util.ArrayList;
 
-public class Stduserinterfacecompiler
+public class Uicompiler
 {
     protected final Integer hash = 0x888fe8;
     
@@ -15,9 +15,9 @@ public class Stduserinterfacecompiler
         
     public static void main(String...args)
     {
-        Stduserinterfacecompiler compiler;
+        Uicompiler compiler;
                 
-        compiler = new Stduserinterfacecompiler();
+        compiler = new Uicompiler();
         
         compiler.dohandleapmlfiles(compiler.inputmanager);
         
