@@ -95,7 +95,7 @@ public class Uioutputmanager
                 
                 nestedclass.direct("{\n\t");
                 
-                nestedclass.direct("/* ------------ stub code goes here ------------ */\n\t");
+                nestedclass.direct("\tSystem.out.println(\"ActionCommand: \"+ae.getActionCommand());\n\t");
                 
                 nestedclass.direct("}\n\t");
             }            
@@ -129,7 +129,7 @@ public class Uioutputmanager
                 
                 if(attribute.getNodeName().startsWith("setIconAt"))
                 {
-                    String string = "this.setIconAt(\""+attribute.getNodeValue()+"\");";
+                    String string = "this.setIconAt(\""+attribute.getNodeValue()+"\");\n\t";
                     
                     uip.constructor.body().directStatement(string);
                     
@@ -138,7 +138,7 @@ public class Uioutputmanager
                 
                 if(attribute.getNodeName().startsWith("setIcon"))
                 {
-                    String string = "this.setIcon(\""+attribute.getNodeValue()+"\");";
+                    String string = "this.setIcon(\""+attribute.getNodeValue()+"\");\n\t";
                     
                     uip.constructor.body().directStatement(string);
                     
@@ -147,7 +147,7 @@ public class Uioutputmanager
                 
                 if(attribute.getNodeName().startsWith("setLabel"))
                 {
-                    String string = "this.setLabel(\""+attribute.getNodeValue()+"\");";
+                    String string = "this.setLabel(\""+attribute.getNodeValue()+"\");\n\t";
                     
                     uip.constructor.body().directStatement(string);
                     
@@ -156,7 +156,7 @@ public class Uioutputmanager
                 
                 if(attribute.getNodeName().startsWith("setName"))
                 {
-                    String string = "this.setName(\""+attribute.getNodeValue()+"\");";
+                    String string = "this.setName(\""+attribute.getNodeValue()+"\");\n\t";
                     
                     uip.constructor.body().directStatement(string);
                     
@@ -165,7 +165,7 @@ public class Uioutputmanager
                 
                if(attribute.getNodeName().startsWith("setText"))
                 {
-                    String string = "this.setText(\""+attribute.getNodeValue()+"\");";
+                    String string = "this.setText(\""+attribute.getNodeValue()+"\");\n\t";
                     
                     uip.constructor.body().directStatement(string);
                     
@@ -174,7 +174,7 @@ public class Uioutputmanager
                 
                 if(attribute.getNodeName().startsWith("setTitle"))
                 {
-                    String string = "this.setTitle(\""+attribute.getNodeValue()+"\");";
+                    String string = "this.setTitle(\""+attribute.getNodeValue()+"\");\n\t";
                     
                     uip.constructor.body().directStatement(string);
                     
@@ -183,7 +183,7 @@ public class Uioutputmanager
                 
                 if(attribute.getNodeName().startsWith("setToolTipText"))
                 {
-                    String string = "this.setToolTipText(\""+attribute.getNodeValue()+"\");";
+                    String string = "this.setToolTipText(\""+attribute.getNodeValue()+"\");\n\t";
                     
                     uip.constructor.body().directStatement(string);
                     
@@ -192,7 +192,7 @@ public class Uioutputmanager
                 
                 if(attribute.getNodeName().startsWith("set"))
                 {
-                    String string = "this."+attribute.getNodeName()+"("+attribute.getNodeValue()+")\n\t";
+                    String string = "this."+attribute.getNodeName()+"("+attribute.getNodeValue()+");\n\t";
                     
                     uip.constructor.body().directStatement(string);
                     
@@ -306,12 +306,21 @@ public class Uioutputmanager
         
         uip.constructor.body().directStatement("/* ------------------  instantiation  ---------------- */\n\t");
         
+        //ui instantiation
         for(int i=0; i<children.getLength(); i++)
         {     
             Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));            
                 
             uip.constructor.body().directStatement("this."+uipi.classname.toLowerCase()+" = new "+uipi.classname+"(this);\n\t");
         }
+        
+        //action listener instantiation
+        for(int i=0; i<children.getLength(); i++)
+        {     
+            Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));            
+                
+            uip.constructor.body().directStatement("this."+uipi.classname.toLowerCase()+"_actionlistener = new "+uipi.classname+"_ActionListener();\n\t");
+        }        
     }
     
     private void dohierarchy(NodeList children, Node self)
@@ -324,6 +333,8 @@ public class Uioutputmanager
         {    
             Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
             
+            String classname = uip.classname;
+            
             String childsuperclass = uipi.jdc._extends().name();
             
             String childfieldname = uipi.jdc.name().toLowerCase();                            
@@ -333,16 +344,9 @@ public class Uioutputmanager
                 uip.constructor.body().directStatement("this.setJMenuBar("+childfieldname+");\n\t"); 
                 
                 continue;                
-            }
-                        
-            if(childsuperclass.contains("JTabbedPane"))
-            {
-                uip.constructor.body().directStatement("this.addTab("+childfieldname+");\n\t"); 
-                
-                continue;                
-            }            
+            }                        
 
-            if(!childsuperclass.contains("JMenuBar") && !childsuperclass.contains("JTabbedPane"))
+            if(!childsuperclass.contains("JMenuBar"))
             {
                 uip.constructor.body().directStatement("this.add("+childfieldname+");\n\t");
                 
