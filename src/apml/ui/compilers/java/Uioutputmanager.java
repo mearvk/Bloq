@@ -8,6 +8,7 @@ import com.sun.codemodel.JMod;
 import java.io.File;
 import java.util.ArrayList;
 import javax.xml.xpath.XPathConstants;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -110,158 +111,27 @@ public class Uioutputmanager
         Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel); 
         
         try
-        {                        
-           /* ------------------------- General setters ----------------------- */
+        {              
+            NamedNodeMap attribs = uip.element.getAttributes();
             
-            if(uip.element.getAttribute("setAccelerator")!=null && uip.element.getAttribute("setAccelerator").length()>0)
-            {                                
-                try{uip.constructor.body().directStatement("this.setAccelerator(KeyStroke.getKeyStroke("+uip.element.getAttribute("setAccelerator")+"));\n\t"); }catch(Exception e){};
-            }               
-            
-            if(uip.element.getAttribute("setAutoscrolls")!=null && uip.element.getAttribute("setAutoscrolls").length()>0)
+            for(int i=0; i<attribs.getLength(); i++)
             {
-                try{uip.constructor.body().directStatement("this.setAutoscrolls("+uip.element.getAttribute("setAutoscrolls")+");\n\t");                         }catch(Exception e){}               
-            }
+                Node attribute = attribs.item(i);
                 
-            if(uip.element.getAttribute("setAlignmentY")!=null && uip.element.getAttribute("setAlignmentY").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setAlignmentY("+uip.element.getAttribute("setAlignmentY")+");\n\t");                           }catch(Exception e){}                
-            }
+                if(attribute.getNodeName().startsWith("setAccelerator"))
+                {
+                    String string = "this.setAccelerator(KeyStroke.getKeyStroke("+attribute.getNodeName()+"));";
+                    
+                    uip.constructor.body().directStatement("this.setAccelerator(KeyStroke.getKeyStroke("+string+"));\n\t");
+                }
                 
-            if(uip.element.getAttribute("setAlignmentX")!=null && uip.element.getAttribute("setAlignmentX").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setAlignmentX("+uip.element.getAttribute("setAlignmentX")+");\n\t");                           }catch(Exception e){}                
-            }
-                
-            if(uip.element.getAttribute("setBorderPainted")!=null && uip.element.getAttribute("setBorderPainted").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setBorderPainted("+uip.element.getAttribute("setBorderPainted")+");\n\t");                     }catch(Exception e){}               
-            }
-                                
-            if(uip.element.getAttribute("setBounds")!=null && uip.element.getAttribute("setBounds").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setBounds("+uip.element.getAttribute("setBounds")+");\n\t");                                   }catch(Exception e){}
-            }
-                                
-            if(uip.element.getAttribute("setBorder")!=null && uip.element.getAttribute("setBorder").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setBorder("+uip.element.getAttribute("setBorder")+");\n\t");                                   }catch(Exception e){}                    
-            }
-                
-            if(uip.element.getAttribute("setBackground")!=null && uip.element.getAttribute("setBackground").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setBackground("+uip.element.getAttribute("setBackground")+");\n\t");                           }catch(Exception e){}                                    
-            }
-                
-            if(uip.element.getAttribute("setComponentPopupMenu")!=null && uip.element.getAttribute("setComponentPopupMenu").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setComponentPopupMenu("+uip.element.getAttribute("setComponentPopupMenu")+");\n\t");           }catch(Exception e){}                                   
-            }
-            
-            if(uip.element.getAttribute("setDefaultCloseOperation")!=null && uip.element.getAttribute("setDefaultCloseOperation").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setDefaultCloseOperation("+uip.element.getAttribute("setDefaultCloseOperation")+");\n\t");     }catch(Exception e){}                                   
-            }                    
-                
-            if(uip.element.getAttribute("setDisabledIcon")!=null && uip.element.getAttribute("setDisabledIcon").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setDisabledIcon("+uip.element.getAttribute("setDisabledIcon")+");\n\t");                       }catch(Exception e){}
-            }
-
-            if(uip.element.getAttribute("setEnabled")!=null && uip.element.getAttribute("setEnabled").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setEnabled("+uip.element.getAttribute("setEnabled")+");\n\t");                                 }catch(Exception e){}  
-            }                
-                
-            if(uip.element.getAttribute("setForeground")!=null && uip.element.getAttribute("setForeground").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setForeground("+uip.element.getAttribute("setForeground")+");\n\t");                           }catch(Exception e){} 
-            }              
-
-            if(uip.element.getAttribute("setIcon")!=null && uip.element.getAttribute("setIcon").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setIcon(new ImageIcon(\""+uip.element.getAttribute("setIcon")+"\"));\n\t");                    }catch(Exception e){}
-            }
-            
-            if(uip.element.getAttribute("setIconAt")!=null && uip.element.getAttribute("setIconAt").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setIconAt(new ImageIcon(\""+uip.element.getAttribute("setIconAt")+"\"));\n\t");                }catch(Exception e){}
-            }
-
-            if(uip.element.getAttribute("setLabel")!=null && uip.element.getAttribute("setLabel").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setLabel(\""+uip.element.getAttribute("setLabel")+"\");\n\t");                                 }catch(Exception e){}
-            }
-                
-            if(uip.element.getAttribute("setLayout")!=null && uip.element.getAttribute("setLayout").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setLayout("+uip.element.getAttribute("setLayout")+");\n\t");                                   }catch(Exception e){}
-            }
-                
-            if(uip.element.getAttribute("setLocation")!=null && uip.element.getAttribute("setLocation").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setLocation("+uip.element.getAttribute("setLocation")+");\n\t");                               }catch(Exception e){}
-            }
-                
-            if(uip.element.getAttribute("setMargin")!=null && uip.element.getAttribute("setMargin").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setMargin("+uip.element.getAttribute("setMargin")+");\n\t");                                   }catch(Exception e){}
-            }
-                
-            if(uip.element.getAttribute("setMinimumSize")!=null && uip.element.getAttribute("setMinimumSize").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setMinimumSize("+uip.element.getAttribute("setMinimumSize")+");\n\t");                         }catch(Exception e){}
-            }
-                
-            if(uip.element.getAttribute("setMaximumSize")!=null && uip.element.getAttribute("setMaximumSize").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setMaximumSize("+uip.element.getAttribute("setMaximumSize")+");\n\t");                         }catch(Exception e){}            
-            }
-                
-            if(uip.element.getAttribute("setModel")!=null && uip.element.getAttribute("setModel").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setModel("+uip.element.getAttribute("setModel")+");\n\t");                                     }catch(Exception e){}
-            }
-            
-            if(uip.element.getAttribute("setMnemonic")!=null && uip.element.getAttribute("setMnemonic").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setMnemonic("+uip.element.getAttribute("setMnemonic")+");\n\t");                               }catch(Exception e){}
-            }            
-                                
-            if(uip.element.getAttribute("setName")!=null && uip.element.getAttribute("setName").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setName(\""+uip.element.getAttribute("setName")+"\");\n\t");                                   }catch(Exception e){}
-            }
-                
-            if(uip.element.getAttribute("setPressedIcon")!=null && uip.element.getAttribute("setPressedIcon").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setPressedIcon("+uip.element.getAttribute("setPressedIcon")+");\n\t");                         }catch(Exception e){}
-            }
-                
-            if(uip.element.getAttribute("setRolloverIcon")!=null && uip.element.getAttribute("setRolloverIcon").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setRolloverIcon("+uip.element.getAttribute("setRolloverIcon")+");\n\t");                       }catch(Exception e){}                    
-            }
-
-            if(uip.element.getAttribute("setText")!=null && uip.element.getAttribute("setText").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setText(\""+uip.element.getAttribute("setText")+"\");\n\t");                                   }catch(Exception e){}   
-            }
-            
-            if(uip.element.getAttribute("setTitle")!=null && uip.element.getAttribute("setTitle").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setTitle(\""+uip.element.getAttribute("setTitle")+"\");\n\t");                                 }catch(Exception e){}   
-            }            
-                
-            if(uip.element.getAttribute("setSize")!=null && uip.element.getAttribute("setSize").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setSize("+uip.element.getAttribute("setSize")+");\n\t");                                       }catch(Exception e){}
-            }
-                
-            if(uip.element.getAttribute("setToolTipText")!=null && uip.element.getAttribute("setToolTipText").length()>0)
-            {
-                try{uip.constructor.body().directStatement("this.setToolTipText("+uip.element.getAttribute("setToolTipText")+");\n\t");                         }catch(Exception e){}
-            }        
+                if(attribute.getNodeName().startsWith("set"))
+                {
+                    String string = "this."+attribute.getNodeName()+"("+attribute.getNodeValue()+")\n\t";
+                    
+                    uip.constructor.body().directStatement(string);
+                }
+            }                   
         }
         catch(Exception exception)
         {
