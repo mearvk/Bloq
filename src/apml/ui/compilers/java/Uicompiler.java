@@ -22,7 +22,7 @@ public class Uicompiler
         compiler.dohandleapmlfiles(compiler.inputmanager);
         
         compiler.dohandleoutputfiles(compiler.outputmanager);        
-    }    
+    }
     
     public void dohandleapmlfiles(Uiinputmanager inputmanager)
     {

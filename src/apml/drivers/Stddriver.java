@@ -5,6 +5,8 @@
  */
 package apml.drivers;
 
+import java.io.File;
+
 /**
  *
  * @author Max Rupplin
@@ -12,7 +14,19 @@ package apml.drivers;
 public abstract class Stddriver 
 {
     protected final Integer hash = 0x888fe8;
+    
+    protected File workingdir;
         
+    public Stddriver()
+    {
+        
+    }
+    
+    public Stddriver(File workingdir)
+    {
+        this.workingdir = workingdir;
+    }
+    
     public abstract void drive();
     
     public abstract void init();
