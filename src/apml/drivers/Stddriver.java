@@ -15,14 +15,16 @@ public abstract class Stddriver
 {
     protected final Integer hash = 0x888fe8;
     
-    protected File workingdir;
+    protected String workingdir;
+    
+    protected File basedir;
         
     public Stddriver()
     {
         
     }
     
-    public Stddriver(File workingdir)
+    public Stddriver(String workingdir)
     {
         this.workingdir = workingdir;
     }

@@ -26,9 +26,13 @@ public class Apmlsystem implements Runnable
     public Stddriver driver;    
     
     public static String[] classes = {"/r/null"}; //todo fix me plz
+    
     public static Boolean loadbndi = true;
+    
     public static Boolean loadsubsystems = true;
+    
     public static Boolean displayloading = true;
+    
     public static Map map = null;
     
     public void run()
