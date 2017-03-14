@@ -32,13 +32,9 @@ import apml.ui.compilers.java.builders.Jcmjframebuilder;
 import apml.ui.compilers.java.builders.Jcmjmenubarbuilder;
 import apml.ui.compilers.java.builders.Jcmjmenuitembuilder;
 
-import com.sun.codemodel.JCodeModel;
-
 import java.awt.Frame;
 
 import java.io.File;
-
-import java.util.ArrayList;
 
 import javax.swing.JApplet;
 

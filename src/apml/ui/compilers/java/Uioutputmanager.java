@@ -14,7 +14,7 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * @author max rupplin
+ * @author Max Rupplin
  */
 public class Uioutputmanager
 {
@@ -45,7 +45,7 @@ public class Uioutputmanager
                 
                 this.setlisteners(jcodemodel);
                 
-                Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);
+                Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);                
                 
                 uip.jcm.build(new File("/home/oem/Desktop/UI"));
             }
@@ -123,13 +123,80 @@ public class Uioutputmanager
                     String string = "this.setAccelerator(KeyStroke.getKeyStroke("+attribute.getNodeName()+"));";
                     
                     uip.constructor.body().directStatement("this.setAccelerator(KeyStroke.getKeyStroke("+string+"));\n\t");
+                    
+                    continue;
                 }
+                
+                if(attribute.getNodeName().startsWith("setIconAt"))
+                {
+                    String string = "this.setIconAt(\""+attribute.getNodeValue()+"\");";
+                    
+                    uip.constructor.body().directStatement(string);
+                    
+                    continue;
+                }                 
+                
+                if(attribute.getNodeName().startsWith("setIcon"))
+                {
+                    String string = "this.setIcon(\""+attribute.getNodeValue()+"\");";
+                    
+                    uip.constructor.body().directStatement(string);
+                    
+                    continue;
+                }                
+                
+                if(attribute.getNodeName().startsWith("setLabel"))
+                {
+                    String string = "this.setLabel(\""+attribute.getNodeValue()+"\");";
+                    
+                    uip.constructor.body().directStatement(string);
+                    
+                    continue;
+                } 
+                
+                if(attribute.getNodeName().startsWith("setName"))
+                {
+                    String string = "this.setName(\""+attribute.getNodeValue()+"\");";
+                    
+                    uip.constructor.body().directStatement(string);
+                    
+                    continue;
+                }     
+                
+               if(attribute.getNodeName().startsWith("setText"))
+                {
+                    String string = "this.setText(\""+attribute.getNodeValue()+"\");";
+                    
+                    uip.constructor.body().directStatement(string);
+                    
+                    continue;
+                }                
+                
+                if(attribute.getNodeName().startsWith("setTitle"))
+                {
+                    String string = "this.setTitle(\""+attribute.getNodeValue()+"\");";
+                    
+                    uip.constructor.body().directStatement(string);
+                    
+                    continue;
+                }    
+                
+                if(attribute.getNodeName().startsWith("setToolTipText"))
+                {
+                    String string = "this.setToolTipText(\""+attribute.getNodeValue()+"\");";
+                    
+                    uip.constructor.body().directStatement(string);
+                    
+                    continue;
+                }                                                         
                 
                 if(attribute.getNodeName().startsWith("set"))
                 {
                     String string = "this."+attribute.getNodeName()+"("+attribute.getNodeValue()+")\n\t";
                     
                     uip.constructor.body().directStatement(string);
+                    
+                    continue;
                 }
             }                   
         }
@@ -137,7 +204,7 @@ public class Uioutputmanager
         {
             
         }
-    }
+    } 
     
     private void setfields(JCodeModel jcodemodel)
     {
@@ -158,21 +225,21 @@ public class Uioutputmanager
             uip.jdc.field(JMod.PUBLIC, Class.forName("java.net.URL"), "url");
                         
             //children lookup/finding(s)/etc.
-            NodeList kids = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);  
+            NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);  
             
             
             //user interface fields 
-            for(int i=0; i<kids.getLength(); i++)                           
+            for(int i=0; i<children.getLength(); i++)                           
             {       
-                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(kids.item(i));
+                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
                 
                 uip.jdc.direct("public "+uipi.classname+" "+uipi.classname.toLowerCase()+";\n\n\t");
             }
             
             //actionlistener fields
-            for(int i=0; i<kids.getLength(); i++)                           
+            for(int i=0; i<children.getLength(); i++)                           
             {              
-                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(kids.item(i));
+                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
                 
                 uip.jdc.direct("public "+uipi.classname+"_ActionListener"+" "+(uipi.classname+"_ActionListener").toLowerCase()+";\n\n\t");
             }            
