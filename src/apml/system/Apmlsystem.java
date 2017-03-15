@@ -1,6 +1,7 @@
 package apml.system;
 
 import apml.compilers.java.codemodel.Codemodelcompiler;
+import apml.drivers.Stdbloqdriver;
 import apml.drivers.Stddriver;
 import apml.subscribers.Apmlsubscriber;
 import java.awt.event.ActionEvent;
@@ -22,10 +23,11 @@ public class Apmlsystem implements Runnable
         
     public Map properties = new HashMap();
     
-    public ArrayList<Stdsystem> systems;
+    public ArrayList<Stdsystem> systems = new ArrayList();
+    
     public Stddriver driver;    
     
-    public static String[] classes = {"/r/null"}; //todo fix me plz
+    public static String[] classes = {"/r/null"};
     
     public static Boolean loadbndi = true;
     
@@ -35,72 +37,83 @@ public class Apmlsystem implements Runnable
     
     public static Map map = null;
     
+    public String basedir;
+    
+    public String apmlfile;
+    
+    
+    public static void main(String...args)
+    {
+        Apmlsystem system = new Apmlsystem("/home/oem/Desktop/apml.xml", "/home/oem/Desktop/apml", new Stdbloqdriver());                
+        
+        system.start();                
+        
+        system.initialize();                
+        
+        system.run();
+    }
+    
+    public Apmlsystem(String apmlfile, String basedir, Stddriver driver)
+    {
+        this.setapmlfile(apmlfile);
+        
+        this.setbasedir(basedir);
+        
+        this.setdriver(driver);         
+    }
+    
+    public void setapmlfile(String apmlfile)
+    {
+        this.apmlfile = apmlfile;
+    }
+    
+    public void setbasedir(String basedir)
+    {
+        this.basedir = basedir;
+    }
+    
+    public void setdriver(Stddriver driver)
+    {
+        this.driver = driver;
+    }    
+    
+    public void start()
+    {       
+        for(Stdsystem system: this.systems)
+        {
+            system.start();
+        }                                 
+    }
+    
+    public void initialize()
+    {
+        for(Stdsystem system: this.systems)
+        {
+            system.initialize();
+        }                             
+    }
+    
     public void run()
     {
         for(Stdsystem system: this.systems)
         {
             system.run();
         }   
-    }  
+    }     
     
-    public void start()
+    public void put(Object key, Object value)
     {
-        this.init();        
-        
-        for(Stdsystem system: this.systems)
-        {
-            system.init();
-        }
-                
-        
-        this.start();        
-        
-        for(Stdsystem system: this.systems)
-        {
-            system.start();
-        }       
-    }
-    
-    public void put(Object object)
-    {
-        
-    }
-    
-    public void init()
-    {
-        
-        //read properties file
-        
-        //read classes in from classpath
-        
-        //wire classes into system
-        
-        //wire classes into each other [where appropriate]
-        
-        //call driver.init
-        
-        //driver calls to init on subsystem(s)
-        
-        //driver calls to start on subsystems(s)
-        
-        //driver calls run on Apmlsystem
-    }
+        this.properties.put(key, value);
+    }    
     
     public void loadclasses(String classes)
     {
-        
+        //
     }
     
     public void loadclasses()
     {       
-        try
-        {
-            ClassLoader.getSystemClassLoader().loadClass("org.test.fixmeplz.Classname");
-        }        
-        catch(Exception exception)
-        {
-            
-        }         
+        //
     }
     
     public void setproperty(Object object, Object state) throws Exception

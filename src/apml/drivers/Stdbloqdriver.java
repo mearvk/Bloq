@@ -22,9 +22,7 @@ public class Stdbloqdriver extends Stddriver
     public String objectdirext = "/object";
     
     public String definitiondirext = "/defintion";
-    
-    
-
+        
     public Stdbloqdriver(String workingdir)
     {
         super(workingdir); 
@@ -37,15 +35,19 @@ public class Stdbloqdriver extends Stddriver
         
         this.read("//object", objectdirext);
         
-        this.read("//definition", definitiondirext);
-                    
+        this.read("//definition", definitiondirext);                    
     }
+
+    public Stdbloqdriver()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    } 
     
     public void read(String systemline, String extension)
     {
         Bodi.setcontext(systemline);
         
-        Bodi.context(systemline).put(extension, new File(workingdir+extension));
+        Bodi.context(systemline).put(extension, this);
     }
     
     @Override

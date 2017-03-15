@@ -11,7 +11,7 @@ package apml.system;
  */
 public abstract class Stdsystem 
 {
-    public abstract void init();
+    public abstract void initialize();
     
     public abstract void start();
     
