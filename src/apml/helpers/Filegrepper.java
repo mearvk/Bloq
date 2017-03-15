@@ -12,6 +12,8 @@ public class Filegrepper
     
     public String getpackagename(String fullURL) throws Exception
     {
+        if(fullURL==null) return null;
+        
         if(fullURL.replace(".java","").contains(".")) //e.g. abc.def.ghi.Classname.java returns abc.def.ghi
         {
             String stmp = "";
@@ -33,9 +35,29 @@ public class Filegrepper
         throw new Exception("Could not parse for package name.");
     }
     
+    public String getclassnameforclassloader(File basedir, File file) throws Exception
+    {
+        if(file==null) return null;
+        
+        String tempURL = file.getAbsolutePath();
+        
+        String baseURL = basedir.getAbsolutePath();
+        
+        tempURL = tempURL.replace(baseURL, "");
+                
+        if(tempURL.replace(".class","").contains("/")) //e.g. abc/def/ghi/Classname.class returns abc.def.ghi.Classname
+        {            
+            return tempURL.replace(File.separator, ".").substring(1,tempURL.lastIndexOf(".class"));            
+        }
+        
+        throw new Exception("Could not parse for package name.");
+    }
+    
     public String getpackagenameaspathname(String fullURL) throws Exception
     {
-        if(fullURL.replace(".java","").contains(".")) //e.g. abc.def.ghi.Classname.java returns abc.def.ghi
+        if(fullURL==null) return null;
+        
+        if(fullURL.replace(".java","").contains(".")) //e.g. abc.def.ghi.Classname.java returns abc/def/ghi
         {
             String stmp = "";
             
@@ -44,7 +66,7 @@ public class Filegrepper
             return stmp;
         }
         
-        if(fullURL.replace(".java","").contains("/")) //e.g. abc/def/ghi/Classname.java returns abc.def.ghi
+        if(fullURL.replace(".java","").contains("/")) //e.g. abc/def/ghi/Classname.java returns abc/def/ghi
         {            
             String stmp = "";
             
@@ -56,6 +78,8 @@ public class Filegrepper
     
     public String getclassname(String fullURL) throws Exception
     {
+        if(fullURL==null) return null;
+        
         fullURL = fullURL.replace(".", "/");
         
         if(fullURL.replace(".java","").contains(".")) //e.g. abc.def.ghi.Classname.java returns Classname

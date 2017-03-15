@@ -3,8 +3,11 @@ package apml.system;
 import apml.compilers.java.codemodel.Codemodelcompiler;
 import apml.drivers.Stdbloqdriver;
 import apml.drivers.Stddriver;
+import apml.helpers.Filegrepper;
+import apml.helpers.Fileloader;
 import apml.subscribers.Apmlsubscriber;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,14 +23,14 @@ import java.util.logging.Logger;
 public class Apmlsystem implements Runnable
 {
     protected final Integer hash = 0x888fe8;
-        
-    public Map properties = new HashMap();
     
     public ArrayList<Stdsystem> systems = new ArrayList();
+                   
+    public Map properties = new HashMap();                
     
-    public Stddriver driver;    
+    public static ArrayList<String> classnames = new ArrayList();
     
-    public static String[] classes = {"/r/null"};
+    public static ArrayList<Class> classes = new ArrayList();
     
     public static Boolean loadbndi = true;
     
@@ -36,6 +39,8 @@ public class Apmlsystem implements Runnable
     public static Boolean displayloading = true;
     
     public static Map map = null;
+    
+    public Stddriver driver;    
     
     public String basedir;
     
@@ -51,6 +56,8 @@ public class Apmlsystem implements Runnable
         system.initialize();                
         
         system.run();
+        
+        system.loadclasses("/home/oem/Desktop/UI/org/widgets");
     }
     
     public Apmlsystem(String apmlfile, String basedir, Stddriver driver)
@@ -106,14 +113,26 @@ public class Apmlsystem implements Runnable
         this.properties.put(key, value);
     }    
     
-    public void loadclasses(String classes)
+    public void loadclasses(String basedir)
     {
-        //
+        try
+        {                    
+            this.classnames = new Fileloader().loadclasses(new File(basedir), null, ".class", new ArrayList<String>());             
+            
+            for(String eachclass : this.classnames)
+            {
+                Apmlsystem.classes.add(Class.forName(eachclass));
+            }
+        }
+        catch(Exception exception)
+        {
+            System.out.println(exception);
+        }
     }
     
-    public void loadclasses()
+    public void loadclasses(String[] basedirs)
     {       
-        //
+        
     }
     
     public void setproperty(Object object, Object state) throws Exception

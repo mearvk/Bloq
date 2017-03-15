@@ -40,7 +40,7 @@ public class Stdbloqdriver extends Stddriver
 
     public Stdbloqdriver()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     } 
     
     public void read(String systemline, String extension)
