@@ -66,7 +66,7 @@ public class Uioutputmanager
             
             uip.constructor.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
             
-            //Veuillez d'ajouter constructor(s) fields
+            //
             for(int i=0; i<children.getLength(); i++)
             {
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));                                
@@ -78,7 +78,7 @@ public class Uioutputmanager
                 uip.constructor.body().directStatement("this."+classname+".addActionListener("+listener+");\n\t");
             }
             
-            //Veuillez d'ajouter actionperformed functions
+            //
             for(int i=0; i<children.getLength(); i++)
             {
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i)); 
@@ -224,11 +224,11 @@ public class Uioutputmanager
 
             uip.jdc.field(JMod.PUBLIC, Class.forName("java.net.URL"), "url");
                         
-            //children lookup/finding(s)/etc.
+            //
             NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);  
             
             
-            //user interface fields 
+            // 
             for(int i=0; i<children.getLength(); i++)                           
             {       
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
@@ -236,7 +236,7 @@ public class Uioutputmanager
                 uip.jdc.direct("public "+uipi.classname+" "+uipi.classname.toLowerCase()+";\n\n\t");
             }
             
-            //actionlistener fields
+            //
             for(int i=0; i<children.getLength(); i++)                           
             {              
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
@@ -287,6 +287,11 @@ public class Uioutputmanager
             Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);   
             
             NodeList nodes = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);                                    
+            
+            if(uip.classname.contains("JPanel"))
+            {
+                System.out.println("Dorkmess");
+            }                
             
             this.doinstantiation(nodes, uip.node);
            

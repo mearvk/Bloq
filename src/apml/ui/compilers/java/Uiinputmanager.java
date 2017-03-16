@@ -55,6 +55,7 @@ import apml.ui.compilers.java.builders.Jcmjbuttonbuilder;
 import apml.ui.compilers.java.builders.Jcmjcheckboxbuilder;
 
 import apml.ui.compilers.java.builders.Jcmjcomboboxbuilder;
+import apml.ui.compilers.java.builders.Jcmjfilechooserbuilder;
 
 import apml.ui.compilers.java.builders.Jcmjframebuilder;
 
@@ -77,6 +78,8 @@ import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 
 import javax.swing.JEditorPane;
+
+import javax.swing.JFileChooser;
 
 import javax.swing.JFrame;
 
@@ -152,6 +155,9 @@ public class Uiinputmanager
     {            
         switch(tagname)
         {
+            case "//jfilechooser":
+                this.jcmmodels.jfilechoosermodels.addAll(new Jcmjfilechooserbuilder(this.apml, tagname, JFileChooser.class).builder.build()); break;
+            
             case "//jbutton": 
                 this.jcmmodels.jbuttonmodels.addAll(new Jcmjbuttonbuilder(this.apml, tagname, JButton.class).builder.build()); break;
 
