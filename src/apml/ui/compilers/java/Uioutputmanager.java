@@ -27,7 +27,7 @@ public class Uioutputmanager
         this.compiler = compiler;
     }    
     
-    public void generateoutputfiles(ArrayList<JCodeModel> jcodemodels)
+    public void generatefiles(ArrayList<JCodeModel> jcodemodels)
     {
         try
         {                   

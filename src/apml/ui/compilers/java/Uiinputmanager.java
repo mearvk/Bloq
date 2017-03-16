@@ -1,35 +1,65 @@
 package apml.ui.compilers.java;
 
 import apml.ui.compilers.java.builders.Jcmjtabbedpanebuilder;
+
 import apml.ui.compilers.java.builders.Jcmjlabelbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjmenubuilder;
+
 import apml.ui.compilers.java.builders.Jcmjappletbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjpasswordfieldbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjprogressbarbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjscrollpanebuilder;
+
 import apml.ui.compilers.java.builders.Jcmjsplitpanebuilder;
+
 import apml.ui.compilers.java.builders.Jcmjtooltipbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjinternalframebuilder;
+
 import apml.ui.compilers.java.builders.Jcmjtoolbarbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjradiobuttonbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjpanelbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjeditorpanebuilder;
+
 import apml.ui.compilers.java.builders.Jcmjlayeredpanebuilder;
+
 import apml.ui.compilers.java.builders.Jcmjtextfieldbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjsliderbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjseparatorbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjrootpanebuilder;
+
 import apml.ui.compilers.java.builders.Jcmjtreebuilder;
+
 import apml.ui.compilers.java.builders.Jcmjspinnerbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjtextpanebuilder;
+
 import apml.ui.compilers.java.builders.Jcmjcolorchooserbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjlistbuilder;
+
 import apml.ui.compilers.java.builders.Jcmframebuilder;
+
 import apml.ui.compilers.java.builders.Jcmjbuttonbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjcheckboxbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjcomboboxbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjframebuilder;
+
 import apml.ui.compilers.java.builders.Jcmjmenubarbuilder;
+
 import apml.ui.compilers.java.builders.Jcmjmenuitembuilder;
 
 import java.awt.Frame;
@@ -118,7 +148,7 @@ public class Uiinputmanager
         this.apml = this.compiler.fileguardian.xmlin;
     }
     
-    public boolean generatejcmmodels(String tagname)            
+    public boolean generatemodels(String tagname)            
     {            
         switch(tagname)
         {

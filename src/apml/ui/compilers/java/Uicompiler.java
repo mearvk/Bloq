@@ -19,16 +19,16 @@ public class Uicompiler
                 
         compiler = new Uicompiler();
         
-        compiler.dohandleapmlfiles(compiler.inputmanager);
+        compiler.dohandleinputfiles(compiler.inputmanager);
         
         compiler.dohandleoutputfiles(compiler.outputmanager);        
     }
     
-    public void dohandleapmlfiles(Uiinputmanager inputmanager)
+    public void dohandleinputfiles(Uiinputmanager inputmanager)
     {
         for(String xpathmodel : this.inputmanager.xpathmodels.list)
         {
-            inputmanager.generatejcmmodels(xpathmodel);
+            inputmanager.generatemodels(xpathmodel);
         }        
     }
         
@@ -36,7 +36,7 @@ public class Uicompiler
     {            
         for(ArrayList<JCodeModel> jcmmodel : this.inputmanager.jcmmodels.list)
         {
-            outputmanager.generateoutputfiles(jcmmodel);
+            outputmanager.generatefiles(jcmmodel);
         }      
     }
 }
