@@ -8,6 +8,7 @@ package apml.ui.compilers.java;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMethod;
+import com.sun.codemodel.JPackage;
 import javax.xml.xpath.XPath;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -68,4 +69,8 @@ public class Uiparameter
     public Element element;   
     
     public Integer index;
+    
+    public JPackage jpackage;
+    
+    public Integer hashcode;
 }

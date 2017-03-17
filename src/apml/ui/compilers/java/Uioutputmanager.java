@@ -1,15 +1,25 @@
 package apml.ui.compilers.java;
 
 import apml.system.bodi.Bodi;
+
 import com.sun.codemodel.ClassType;
+
 import com.sun.codemodel.JCodeModel;
+
 import com.sun.codemodel.JDefinedClass;
+
 import com.sun.codemodel.JMod;
+
 import java.io.File;
+
 import java.util.ArrayList;
+
 import javax.xml.xpath.XPathConstants;
+
 import org.w3c.dom.NamedNodeMap;
+
 import org.w3c.dom.Node;
+
 import org.w3c.dom.NodeList;
 
 /**
@@ -62,23 +72,28 @@ public class Uioutputmanager
         
         try
         {
-            NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);            
+            NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET); 
+            
+            for(int i=0; i<children.getLength(); i++)
+            {
+                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i)); 
+                
+                System.err.println("CLASSNAME: "+uipi.classname);
+            }
             
             uip.constructor.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
             
-            //
             for(int i=0; i<children.getLength(); i++)
             {
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));                                
                         
-                String classname = uipi.classname.toLowerCase();
+                String instancename = uipi.instancename;
                 
-                String listener = classname+"_actionlistener";       
+                String listener = instancename+"_actionlistener";       
                 
-                uip.constructor.body().directStatement("this."+classname+".addActionListener("+listener+");\n\t");
-            }
+                uip.constructor.body().directStatement("this."+instancename+".addActionListener("+listener+");\n\t");
+            }            
             
-            //
             for(int i=0; i<children.getLength(); i++)
             {
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i)); 
@@ -224,11 +239,8 @@ public class Uioutputmanager
 
             uip.jdc.field(JMod.PUBLIC, Class.forName("java.net.URL"), "url");
                         
-            //
             NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);  
-            
-            
-            // 
+                        
             for(int i=0; i<children.getLength(); i++)                           
             {       
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
@@ -236,7 +248,6 @@ public class Uioutputmanager
                 uip.jdc.direct("public "+uipi.classname+" "+uipi.classname.toLowerCase()+";\n\n\t");
             }
             
-            //
             for(int i=0; i<children.getLength(); i++)                           
             {              
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
@@ -286,12 +297,7 @@ public class Uioutputmanager
         {             
             Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);   
             
-            NodeList nodes = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);                                    
-            
-            if(uip.classname.contains("JPanel"))
-            {
-                System.out.println("Dorkmess");
-            }                
+            NodeList nodes = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);                                                    
             
             this.doinstantiation(nodes, uip.node);
            

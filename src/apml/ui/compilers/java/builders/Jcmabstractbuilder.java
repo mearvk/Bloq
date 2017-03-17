@@ -1,17 +1,29 @@
 package apml.ui.compilers.java.builders;
 
 import apml.system.bodi.Bodi;
+
 import apml.ui.compilers.java.Uiparameter;
+
 import com.sun.codemodel.JCodeModel;
+
 import com.sun.codemodel.JMod;
+
 import java.io.File;
+
 import java.util.ArrayList;
+
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import javax.xml.xpath.XPath;
+
 import javax.xml.xpath.XPathConstants;
+
 import javax.xml.xpath.XPathFactory;
+
 import org.w3c.dom.Document;
+
 import org.w3c.dom.Element;
+
 import org.w3c.dom.NodeList;
 
 /**
@@ -79,6 +91,8 @@ public abstract class Jcmabstractbuilder
         
         try{uip.jdc = uip.jcm.packages().next().classes().next();} catch(Exception e){}
         
+        try{uip.jpackage = uip.jcm.rootPackage();}catch(Exception e){}
+                        
         try{uip.xpath = xpath;} catch(Exception e){}
         
         try{uip.parent_node = nodes.item(uip.index).getParentNode();} catch(Exception e){}
