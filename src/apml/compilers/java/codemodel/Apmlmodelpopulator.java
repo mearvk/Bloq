@@ -1,19 +1,33 @@
 package apml.compilers.java.codemodel;
 
 import apml.helpers.Filegrepper;
+
 import apml.modeling.Apmlimplement;
+
 import apml.modeling.Apmllistener;
+
 import apml.modeling.Apmlmodelfile;
+
 import apml.modeling.Apmlobject;
+
 import apml.xpath.helpers.Xpathparameter;
+
 import java.io.File;
+
 import java.io.IOException;
+
 import java.util.ArrayList;
+
 import java.util.logging.FileHandler;
+
 import java.util.logging.Level;
+
 import java.util.logging.Logger;
+
 import javax.xml.xpath.XPathConstants;
+
 import org.w3c.dom.Element;
+
 import org.w3c.dom.NodeList;
 
 /**
@@ -131,7 +145,7 @@ public final class Apmlmodelpopulator
         }
         catch(Exception exception)
         {
-            logger.log(Level.WARNING, exception.getMessage(), exception);
+            exception.printStackTrace();
         }      
         
         return null;

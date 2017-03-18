@@ -51,13 +51,13 @@ public class Apmlsystem implements Runnable
     {
         Apmlsystem system = new Apmlsystem("/home/oem/Desktop/apml.xml", "/home/oem/Desktop/apml", new Stdbloqdriver());                
         
+        system.loadclasses("/home/oem/Desktop/UI/org/widgets");
+        
         system.start();                
         
         system.initialize();                
         
-        system.run();
-        
-        system.loadclasses("/home/oem/Desktop/UI/org/widgets");
+        system.run();                
     }
     
     public Apmlsystem(String apmlfile, String basedir, Stddriver driver)
@@ -132,7 +132,10 @@ public class Apmlsystem implements Runnable
     
     public void loadclasses(String[] basedirs)
     {       
-        
+        for(String basedir : basedirs)
+        {
+            this.loadclasses(basedir);
+        }
     }
     
     public void setproperty(Object object, Object state) throws Exception

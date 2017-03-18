@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package apml.compilers.java.codemodel;
 
 import apml.compilers.Bloqabstractfileguardian;
@@ -14,15 +9,15 @@ import java.io.File;
  */
 public class Bloqfileguardian extends Bloqabstractfileguardian
 {
-    public File manifestfile;
+    public File manifestfile = null;
     
-    public File manifestfiledir;    
+    public File manifestfiledir = null;    
     
-    public File sourceoutdir;   
+    public File sourceoutdir = null;   
     
-    public File buildoutdir;
+    public File buildoutdir = null;
     
-    public File apmlxmlinputfile;
+    public File apmlxmlinputfile = null;
     
     public final String apmlinjarurl = "/home/oem/NetBeansProjects/APML/dist/APML.jar";
     

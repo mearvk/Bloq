@@ -63,6 +63,7 @@ import apml.ui.compilers.java.builders.Jcmjframebuilder;
 import apml.ui.compilers.java.builders.Jcmjmenubarbuilder;
 
 import apml.ui.compilers.java.builders.Jcmjmenuitembuilder;
+import apml.ui.compilers.java.builders.Jcmjtablebuilder;
 
 import java.awt.Frame;
 
@@ -119,6 +120,8 @@ import javax.swing.JSpinner;
 import javax.swing.JSplitPane;
 
 import javax.swing.JTabbedPane;
+
+import javax.swing.JTable;
 
 import javax.swing.JTextField;
 
@@ -234,6 +237,9 @@ public class Uiinputmanager
             case "//jsplitpane": 
                 this.jcmmodels.jsplitpanemodels.addAll(new Jcmjsplitpanebuilder(apml, tagname, JSplitPane.class).builder.build()); break;                
 
+            case "//jtable": 
+                this.jcmmodels.jsplitpanemodels.addAll(new Jcmjtablebuilder(apml, tagname, JTable.class).builder.build()); break;                                
+                
             case "//jtabbedpane": 
                 this.jcmmodels.jtabbedpanemodels.addAll(new Jcmjtabbedpanebuilder(apml, tagname, JTabbedPane.class).builder.build()); break;
                 
