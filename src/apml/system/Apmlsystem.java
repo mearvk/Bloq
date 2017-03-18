@@ -46,18 +46,25 @@ public class Apmlsystem implements Runnable
     
     public String apmlfile;
     
+    public static final short MOVE_TO_STARTUP_STATE = 0;
+    
+    public static final short MOVE_TO_INITIALIZED_STATE = 1;
+    
+    public static final short MOVE_TO_RUN_STATE = 2;
+    
+    public static final short MOVE_TO_LOAD_CLASSES = 3;
     
     public static void main(String...args)
     {
         Apmlsystem system = new Apmlsystem("/home/oem/Desktop/apml.xml", "/home/oem/Desktop/apml", new Stdbloqdriver());                
         
-        system.loadclasses("/home/oem/Desktop/UI/org/widgets");
+        system.execute(MOVE_TO_LOAD_CLASSES);              
         
-        system.start();                
+        system.execute(MOVE_TO_STARTUP_STATE);
         
-        system.initialize();                
+        system.execute(MOVE_TO_INITIALIZED_STATE);
         
-        system.run();                
+        system.execute(MOVE_TO_RUN_STATE);               
     }
     
     public Apmlsystem(String apmlfile, String basedir, Stddriver driver)
@@ -83,6 +90,26 @@ public class Apmlsystem implements Runnable
     {
         this.driver = driver;
     }    
+    
+    public void execute(final short command)
+    {
+        switch(command)
+        {
+            case 0: this.start();
+                break;
+                    
+            case 1: this.initialize();
+                break;
+            
+            case 2: this.run();
+                break;
+            
+            case MOVE_TO_RUN: this.loadclasses(basedir);
+                break;
+            
+            default: return;
+        }
+    }
     
     public void start()
     {       
