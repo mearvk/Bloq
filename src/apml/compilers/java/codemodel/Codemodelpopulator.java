@@ -42,7 +42,9 @@ public class Codemodelpopulator
     
     public Logger logger = Logger.getLogger(Codemodelpopulator.class.getName());       
     
-    public String apmlinurl = "/home/oem/Desktop/apml/apml/echoserver.xml";   
+    //public String apmlinurl = "/home/oem/Desktop/apml/apml/echoserver.xml";   
+    
+    public String apmlinurl = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";
     
     public String sourceoutdirurl = "/home/oem/Desktop/apml/output";    
     

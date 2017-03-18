@@ -70,7 +70,7 @@ public class Codemodelcompiler extends Stdabstractcompiler
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            exception.printStackTrace();
         }
     }
     
@@ -100,7 +100,7 @@ public class Codemodelcompiler extends Stdabstractcompiler
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            exception.printStackTrace();
         }
     }          
     
@@ -123,7 +123,7 @@ public class Codemodelcompiler extends Stdabstractcompiler
         }
         catch(Exception exception)
         {
-            logger.log(Level.WARNING, exception.getMessage(), exception);
+            exception.printStackTrace();
         }
     }    
     
@@ -146,7 +146,7 @@ public class Codemodelcompiler extends Stdabstractcompiler
         }
         catch(Exception exception)
         {
-            logger.log(Level.WARNING, exception.getMessage(), exception);
+            exception.printStackTrace();
         }
     }
         
@@ -169,7 +169,7 @@ public class Codemodelcompiler extends Stdabstractcompiler
         }
         catch(Exception exception)
         {
-            logger.log(Level.WARNING, exception.getMessage(), exception);
+            exception.printStackTrace();
         }
     }
     
@@ -227,7 +227,7 @@ public class Codemodelcompiler extends Stdabstractcompiler
             }
             catch(Exception exception)
             {
-                logger.log(Level.WARNING, exception.getMessage(), exception);
+                exception.printStackTrace();
             }
             finally
             {
@@ -263,7 +263,7 @@ public class Codemodelcompiler extends Stdabstractcompiler
         }
         catch(Exception exception)
         {
-            logger.log(Level.WARNING, exception.getMessage(), exception);
+            exception.printStackTrace();
         }
         
         return apmlmodelfiles;
@@ -296,7 +296,7 @@ public class Codemodelcompiler extends Stdabstractcompiler
         }
         catch(Exception exception)
         {
-            logger.log(Level.WARNING, exception.getMessage(), exception);
+            exception.printStackTrace();
         }
         
         return jcmmodels_genericfiles;
@@ -333,12 +333,12 @@ public class Codemodelcompiler extends Stdabstractcompiler
             }
             catch(Exception exception)
             {
-                logger.log(Level.WARNING, exception.getMessage(), exception);
+                exception.printStackTrace();
             }            
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            exception.printStackTrace();
         }
     }       
         
@@ -368,7 +368,7 @@ public class Codemodelcompiler extends Stdabstractcompiler
             }
             catch(Exception exception)
             {
-                logger.log(Level.WARNING, exception.getMessage(), exception);
+                exception.printStackTrace();
             }                       
         }                
     }  
