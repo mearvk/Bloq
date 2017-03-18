@@ -5,7 +5,9 @@ import apml.drivers.Stdbloqdriver;
 import apml.drivers.Stddriver;
 import apml.helpers.Filegrepper;
 import apml.helpers.Fileloader;
+import apml.listeners.Apmllistener;
 import apml.subscribers.Apmlsubscriber;
+import apml.system.bodi.Bodi;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.ArrayList;
@@ -28,9 +30,13 @@ public class Apmlsystem implements Runnable
                    
     public Map properties = new HashMap();                
     
-    public static ArrayList<String> classnames = new ArrayList();
+    public static  ArrayList<Apmllistener> listeners = new ArrayList();
     
-    public static ArrayList<Class> classes = new ArrayList();
+    public static ArrayList<Apmlsubscriber> subscribers = new ArrayList();
+    
+    public ArrayList<String> classnames = new ArrayList();
+    
+    public ArrayList<Class> classes = new ArrayList();
     
     public static Boolean loadbndi = true;
     
@@ -48,21 +54,27 @@ public class Apmlsystem implements Runnable
     
     public static final short MOVE_TO_STARTUP_STATE = 0;
     
-    public static final short MOVE_TO_INITIALIZED_STATE = 1;
+    public static final short MOVE_TO_INIT_STATE = 1;
     
     public static final short MOVE_TO_RUN_STATE = 2;
     
-    public static final short MOVE_TO_LOAD_CLASSES = 3;
+    public static final short MOVE_TO_CLASSLOADING = 3;
+    
+    public static final short MOVE_TO_BODI_LOADING = 4;
+    
+    public static short STATE;
     
     public static void main(String...args)
     {
         Apmlsystem system = new Apmlsystem("/home/oem/Desktop/apml.xml", "/home/oem/Desktop/apml", new Stdbloqdriver());                
         
-        system.execute(MOVE_TO_LOAD_CLASSES);              
+        system.execute(MOVE_TO_BODI_LOADING);
+        
+        system.execute(MOVE_TO_CLASSLOADING);              
         
         system.execute(MOVE_TO_STARTUP_STATE);
         
-        system.execute(MOVE_TO_INITIALIZED_STATE);
+        system.execute(MOVE_TO_INIT_STATE);
         
         system.execute(MOVE_TO_RUN_STATE);               
     }
@@ -76,17 +88,17 @@ public class Apmlsystem implements Runnable
         this.setdriver(driver);         
     }
     
-    public void setapmlfile(String apmlfile)
+    public final void setapmlfile(String apmlfile)
     {
         this.apmlfile = apmlfile;
     }
     
-    public void setbasedir(String basedir)
+    public final void setbasedir(String basedir)
     {
         this.basedir = basedir;
     }
     
-    public void setdriver(Stddriver driver)
+    public final void setdriver(Stddriver driver)
     {
         this.driver = driver;
     }    
@@ -95,24 +107,85 @@ public class Apmlsystem implements Runnable
     {
         switch(command)
         {
-            case 0: this.start();
+            case MOVE_TO_BODI_LOADING: 
+            
+                Apmlsystem.STATE = MOVE_TO_BODI_LOADING; 
+                
+                this.loadbodi();                                
+                
+                break;
+            
+            case MOVE_TO_CLASSLOADING:
+                
+                Apmlsystem.STATE = MOVE_TO_CLASSLOADING;  
+                
+                this.loadclasses(basedir);                                 
+                
+                break;
+            
+            case MOVE_TO_STARTUP_STATE: 
+                
+                Apmlsystem.STATE = MOVE_TO_STARTUP_STATE; 
+                
+                this.start();                                 
+                
                 break;
                     
-            case 1: this.initialize();
+            case MOVE_TO_INIT_STATE: 
+                
+                Apmlsystem.STATE = MOVE_TO_INIT_STATE;  
+                
+                this.initialize();                                 
+                
                 break;
             
-            case 2: this.run();
-                break;
+            case MOVE_TO_RUN_STATE: 
+                
+                Apmlsystem.STATE = MOVE_TO_RUN_STATE;  
+                
+                this.run(); 
+                                                
+                break;                        
             
-            case MOVE_TO_RUN: this.loadclasses(basedir);
-                break;
-            
-            default: return;
+            default: 
+                
+                return;
         }
     }
     
+    public void loadbodi()
+    {
+        /* ------------------------ set contexts -------------------------------*/
+        
+        Bodi.setcontext("//Apmlsystem");
+        
+        Bodi.setcontext("//Apmlsystem/systems");
+        
+        Bodi.setcontext("//Apmlsystem/classes");
+        
+        Bodi.setcontext("//Apmlsystem/state");
+        
+        Bodi.setcontext("//Apmlsystem/listeners");
+        
+        Bodi.setcontext("//Apmlsystem/subscribers");
+        
+        /* ------------------------ set instances -------------------------------*/
+        
+        Bodi.context("//Apmlsystem").put("Apmlsystem", this);
+        
+        Bodi.context("//Apmlsystem/systems").put("Apmlsystem.systems", this.systems);
+        
+        Bodi.context("//Apmlsystem/classes").put("Apmlsystem.classes", this.classes);
+        
+        Bodi.context("//Apmlsystem/state").put("Apmlsystem.state", Apmlsystem.STATE);
+        
+        Bodi.context("//Apmlsystem/listeners").put("Apmlsystem.listeners", Apmlsystem.listeners);
+        
+        Bodi.context("//Apmlsystem.subscribers").put("Apmlsystem.subscribers", Apmlsystem.subscribers);
+    }
+    
     public void start()
-    {       
+    {                      
         for(Stdsystem system: this.systems)
         {
             system.start();
@@ -144,11 +217,11 @@ public class Apmlsystem implements Runnable
     {
         try
         {                    
-            this.classnames = new Fileloader().loadclasses(new File(basedir), null, ".class", new ArrayList<String>());             
+            classnames = new Fileloader().loadclasses(new File(basedir), null, ".class", new ArrayList());             
             
-            for(String eachclass : this.classnames)
+            for(String eachclass : classnames)
             {
-                Apmlsystem.classes.add(Class.forName(eachclass));
+                this.classes.add(Class.forName(eachclass));
             }
         }
         catch(Exception exception)
@@ -181,82 +254,126 @@ public class Apmlsystem implements Runnable
     
     public static Object notify(Apmlsubscriber subscriber, ActionEvent ae)
     {
-        return null;
+        subscriber.update(null, ae);
+        
+        return "success";
     }
     
-    public static Object notifyall(ArrayList<Apmlsubscriber> subscriber, ActionEvent ae)
+    public static Object notifyall(ArrayList<Apmlsubscriber> subscribers, ActionEvent ae)
     {
-        return null;
+        for(Apmlsubscriber subscriber : subscribers)
+        {
+            subscriber.update(null, ae);
+        }
+        
+        return "success";
     }     
     
     public static Object notify(Apmlsubscriber subscriber, String string)
     {
-        return null;
+        subscriber.update(null, null);
+        
+        return "success";
     }
     
-    public static Object notifyall(ArrayList<Apmlsubscriber> subscriber, String string)
+    public static Object notifyall(ArrayList<Apmlsubscriber> subscribers, String string)
     {
-        return null; //sridhar narayan; clayton ferner phd(s) *grep hug uncw&*
+        for(Apmlsubscriber subscriber : subscribers)
+        {
+            subscriber.update(null, null);
+        }
+        
+        return "success";        
     }    
     
-    public static Object mountlistener()
+    public Object mountlistener(Apmllistener listener)
     {
-        return null;
+        this.listeners.add(listener);
+        
+        return "success";
     }
     
-    public static Object mountlisteners()
+    public Object mountlisteners(ArrayList<Apmllistener> listeners)
     {
-        return null;
+        for(Apmllistener listener : listeners)
+        {
+            this.listeners.add(listener);
+        }
+        
+        return "success";
     }    
     
-    public static Object unmountlistener()
+    public Object unmountlistener(Apmllistener listener)
     {
-        return null;
+        this.listeners.remove(listener);
+        
+        return "success";
     }    
    
-    public static Object unmountlisteners()
+    public Object unmountlisteners(ArrayList<Apmllistener> listeners)
     {
-        return null;
+        this.listeners.removeAll(listeners);
+        
+        return "success";
     }  
     
-    public static Object mountsubscriber()
+    public Object mountsubscriber(Apmlsubscriber subscriber)
     {
-        return null;
+        this.subscribers.add(subscriber);
+        
+        return "success";
     }
     
-    public static Object mountsubscribers()
+    public Object mountsubscribers(ArrayList<Apmlsubscriber> subscribers)
     {
-        return null;
+        for(Apmlsubscriber subscriber : subscribers)
+        {
+            this.subscribers.addAll(subscribers);
+        }
+        
+        return "success";
     }    
     
-    public static Object unmountsubscriber()
+    public Object unmountsubscriber(Apmlsubscriber subscriber)
     {
-        return null;
+        this.subscribers.remove(subscriber);
+        
+        return "success";
     }    
    
-    public static Object unmountsubscribers()
+    public Object unmountsubscribers(ArrayList<Apmlsubscriber> subscribers)
     {
-        return null;
+        this.subscribers.removeAll(subscribers);
+        
+        return "success";
     }    
     
-    public static Object getlistener()
+    public Object getlistener(Integer hashcode)
     {
-        return null;
+        Apmllistener listener = (Apmllistener)Bodi.context("//Apmlsystem/listeners").pull(hashcode);
+        
+        return listener;        
     }
     
-    public static Object getlisteners()
+    public Object getlisteners(String bodistring)
     {
-        return null;
+        Apmllistener listeners = (Apmllistener)Bodi.context("//Apmlsystem/listeners").pull(bodistring);
+        
+        return listeners; 
     }    
     
-    public static Object getsubscriber()
+    public Object getsubscriber(String bodistring)
     {
-        return null;
+        Apmllistener subscriber = (Apmllistener)Bodi.context("//Apmlsystem/subscribers").pull(bodistring);
+        
+        return subscriber;        
     }    
    
-    public static ArrayList<Apmlsubscriber> getsubscribers(String unique)
+    public ArrayList<Apmlsubscriber> getsubscribers(String unique)
     {
-        return null;
+        ArrayList<Apmlsubscriber> subscribers = (ArrayList<Apmlsubscriber>)Bodi.context("//Apmlsystem/subscribers").pull("Apmlsystem.subscribers");
+        
+        return subscribers; 
     }    
     
     public static Object doinstantiation(Class c)
