@@ -52,15 +52,15 @@ public class Apmlsystem implements Runnable
     
     public String apmlfile;
     
-    public static final short MOVE_TO_STARTUP_STATE = 0;
+    public static final short DO_SYS_BOOTUP = 0;
     
-    public static final short MOVE_TO_INIT_STATE = 1;
+    public static final short DO_SYS_INITIALIZE = 1;
     
-    public static final short MOVE_TO_RUN_STATE = 2;
+    public static final short DO_SYS_RUN = 2;
     
-    public static final short MOVE_TO_CLASSLOADING = 3;
+    public static final short DO_CLASSFILES_LOAD = 3;
     
-    public static final short MOVE_TO_BODI_LOADING = 4;
+    public static final short DO_BODI_SETUP = 4;
     
     public static short STATE;
     
@@ -68,15 +68,15 @@ public class Apmlsystem implements Runnable
     {
         Apmlsystem system = new Apmlsystem("/home/oem/Desktop/apml.xml", "/home/oem/Desktop/apml", new Stdbloqdriver());                
         
-        system.execute(MOVE_TO_BODI_LOADING);
+        system.moveorexecute(DO_BODI_SETUP);
         
-        system.execute(MOVE_TO_CLASSLOADING);              
+        system.moveorexecute(DO_CLASSFILES_LOAD);              
         
-        system.execute(MOVE_TO_STARTUP_STATE);
+        system.moveorexecute(DO_SYS_BOOTUP);
         
-        system.execute(MOVE_TO_INIT_STATE);
+        system.moveorexecute(DO_SYS_INITIALIZE);
         
-        system.execute(MOVE_TO_RUN_STATE);               
+        system.moveorexecute(DO_SYS_RUN);               
     }
     
     public Apmlsystem(String apmlfile, String basedir, Stddriver driver)
@@ -103,45 +103,45 @@ public class Apmlsystem implements Runnable
         this.driver = driver;
     }    
     
-    public void execute(final short command)
+    public void moveorexecute(final short command)
     {
         switch(command)
         {
-            case MOVE_TO_BODI_LOADING: 
+            case DO_BODI_SETUP: 
             
-                Apmlsystem.STATE = MOVE_TO_BODI_LOADING; 
+                Apmlsystem.STATE = DO_BODI_SETUP; 
                 
                 this.loadbodi();                                
                 
                 break;
             
-            case MOVE_TO_CLASSLOADING:
+            case DO_CLASSFILES_LOAD:
                 
-                Apmlsystem.STATE = MOVE_TO_CLASSLOADING;  
+                Apmlsystem.STATE = DO_CLASSFILES_LOAD;  
                 
                 this.loadclasses(basedir);                                 
                 
                 break;
             
-            case MOVE_TO_STARTUP_STATE: 
+            case DO_SYS_BOOTUP: 
                 
-                Apmlsystem.STATE = MOVE_TO_STARTUP_STATE; 
+                Apmlsystem.STATE = DO_SYS_BOOTUP; 
                 
                 this.start();                                 
                 
                 break;
                     
-            case MOVE_TO_INIT_STATE: 
+            case DO_SYS_INITIALIZE: 
                 
-                Apmlsystem.STATE = MOVE_TO_INIT_STATE;  
+                Apmlsystem.STATE = DO_SYS_INITIALIZE;  
                 
                 this.initialize();                                 
                 
                 break;
             
-            case MOVE_TO_RUN_STATE: 
+            case DO_SYS_RUN: 
                 
-                Apmlsystem.STATE = MOVE_TO_RUN_STATE;  
+                Apmlsystem.STATE = DO_SYS_RUN;  
                 
                 this.run(); 
                                                 

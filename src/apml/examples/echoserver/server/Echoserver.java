@@ -175,12 +175,14 @@ class EchoServerOnConnectListener implements ActionListener
    @Override
     public void actionPerformed(ActionEvent ae) 
     {
+/*
         ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/onconnect");
         
         for(Apmlsubscriber s : subscribers)
         {
             apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onconnect/notify"));
         }
+*/
     }   
 }
 
@@ -194,13 +196,14 @@ class EchoServerOnExitListener implements Actionlistener, ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) 
     {
+/*        
         ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/onexit");
         
         for(Apmlsubscriber s : subscribers)
         {
             apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onconnect/notify"));
         }        
-        
+*/        
     }      
 }
 
@@ -209,12 +212,14 @@ class EchoServerOnReadListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) 
     {
+/*        
         ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/onread");
         
         for(Apmlsubscriber s : subscribers)
         {
             apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onread/notify"));
-        }        
+        }  
+*/
     }      
 }
 
@@ -223,12 +228,14 @@ class EchoServerOnReceiptListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) 
     {
+/*       
         ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/onreceipt");
         
         for(Apmlsubscriber s : subscribers)
         {
             apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onreceipt/notify"));
-        }        
+        }   
+*/
     }      
 }
 
@@ -237,12 +244,14 @@ class EchoServerOnDispatchListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent ae) 
     {
+/*        
         ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/ondispatch");
         
         for(Apmlsubscriber s : subscribers)
         {
             apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/ondispatch/notify"));
-        }        
+        }  
+*/
     }      
 }     
         

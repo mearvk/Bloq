@@ -38,7 +38,7 @@ import java.util.logging.Logger;
  * 
  * @author max rupplin
  */
-public class Codemodelcompiler extends Stdabstractcompiler
+public class Codemodelcompiler
 {        
     protected final Integer hash = 0x888fe8;              
     
@@ -103,12 +103,12 @@ public class Codemodelcompiler extends Stdabstractcompiler
             exception.printStackTrace();
         }
     }          
-    
-    @Override
-    public void setapmlfiles(Bloqabstractfileguardian fileguardian)
+        
+    //@Override
+    public void setapmlfiles(Bloqfileguardian fileguardian)
     {
         try
-        {
+        {            
             this.generateapmlmodelfiles(fileguardian.apmlxmlinputfile, "//apml");
             
             this.generateapmlmodelfiles(fileguardian.apmlxmlinputfile, "//dynamiclistener");
@@ -127,8 +127,8 @@ public class Codemodelcompiler extends Stdabstractcompiler
         }
     }    
     
-    @Override
-    public void settempfiles(Bloqabstractapmlmanager bloqapmlmanager)
+    //@Override
+    public void settempfiles(Bloqapmlmanager bloqapmlmanager)
     {
         try
         {
@@ -150,8 +150,8 @@ public class Codemodelcompiler extends Stdabstractcompiler
         }
     }
         
-    @Override
-    public void setoutputfiles(Bloqabstractapmlmanager bloqapmlmanager)
+    //@Override
+    public void setoutputfiles(Bloqapmlmanager bloqapmlmanager)
     {        
         try
         {                        
@@ -173,8 +173,8 @@ public class Codemodelcompiler extends Stdabstractcompiler
         }
     }
     
-    @Override
-    public void setsourcefiles(Bloqabstractoutputmanager bloqjcmmanager)
+    //@Override
+    public void setsourcefiles(Bloqjcmmanager bloqjcmmanager)
     {
         dosetfinalsource(bloqjcmmanager.apmlmodels);
         

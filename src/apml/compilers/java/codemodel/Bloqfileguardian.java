@@ -23,7 +23,7 @@ public class Bloqfileguardian extends Bloqabstractfileguardian
     
     public final String apmloutjarurl = "/home/oem/Desktop/apml/output/libs/APML.jar";
     
-    public final String apmlinurl = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";
+    public final String apmlinurl = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";   
     
     public final String basedirurl = "/home/oem/Desktop/apml/output/echo/";
     

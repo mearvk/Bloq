@@ -8,31 +8,31 @@ import java.io.File;
  */
 public abstract class Bloqabstractfileguardian 
 {
-    public File manifestfile;
+    public File manifestfile = null;
     
-    public File manifestfiledir;    
+    public File manifestfiledir = null;    
     
-    public File sourceoutdir;   
+    public File sourceoutdir = null;   
     
-    public File buildoutdir;
+    public File buildoutdir = null;
     
-    public File apmlxmlinputfile;
+    public File apmlxmlinputfile = null;
     
-    public final String apmlinjarurl = "";
+    public final String apmlinjarurl = "/home/oem/NetBeansProjects/APML/dist/APML.jar";
     
-    public final String apmloutjarurl = "";
+    public final String apmloutjarurl = "/home/oem/Desktop/apml/output/libs/APML.jar";
     
-    public final String apmlinurl = "";
+    public final String apmlinurl = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";   
     
-    public final String basedirurl = "";
+    public final String basedirurl = "/home/oem/Desktop/apml/output/echo/";
     
-    public final String builddirurl = "";
+    public final String builddirurl = "build/";
     
-    public final String srcdirurl = "";    
+    public final String srcdirurl = "source/";    
     
-    public final String tempsrcdirurl = "";
+    public final String tempsrcdirurl = "temp/";
     
-    public final String manifestdirurl = "";
+    public final String manifestdirurl = "manifest/";
     
-    public final String manifestfileurl = "";    
+    public final String manifestfileurl = "/home/oem/Desktop/apml/output/manifest/manifest.txt";     
 }
