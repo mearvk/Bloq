@@ -68,7 +68,7 @@ public class Apmlsystem implements Runnable
     {
         Apmlsystem system = new Apmlsystem("/home/oem/Desktop/apml.xml", "/home/oem/Desktop/apml", new Stdbloqdriver());                
         
-        system.moveorexecute(DO_BODI_SETUP);
+        system.moveorexecute(DO_BODI_SETUP); //@healo @^christina applegate $^ //mr //ss //ok
         
         system.moveorexecute(DO_CLASSFILES_LOAD);              
         
