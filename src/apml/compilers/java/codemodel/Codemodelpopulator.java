@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author max rupplin
+ * @author Max Rupplin
  */
 public class Codemodelpopulator 
 {

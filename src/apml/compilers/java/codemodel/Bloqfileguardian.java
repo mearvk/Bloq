@@ -1,39 +1,48 @@
 package apml.compilers.java.codemodel;
 
 import apml.compilers.Bloqabstractfileguardian;
+
 import java.io.File;
 
 /**
  *
- * @author max rupplin
+ * @author Max Rupplin
  */
 public class Bloqfileguardian extends Bloqabstractfileguardian
 {
-    public File manifestfile = null;
+    /* ---------------------------- File Instances ----------------------------- */
     
-    public File manifestfiledir = null;    
+    public File apmlxmlinputfile = null; //file for ampl (xml) system specification
     
-    public File sourceoutdir = null;   
+    public File buildoutdir = null; //file dir for bytecode
     
-    public File buildoutdir = null;
+    public File manifestfile = null; //file for manifest 
     
-    public File apmlxmlinputfile = null;
+    public File manifestfiledir = null; //file dir for manifest
     
-    public final String apmlinjarurl = "/home/oem/NetBeansProjects/APML/dist/APML.jar";
+    public File sourceoutdir = null; //file dir for source code
+            
+    /* ---------------------------- Strings & URLs ----------------------------- */
     
-    public final String apmloutjarurl = "/home/oem/Desktop/apml/output/libs/APML.jar";
+    public final String apmlfilename = "APML.jar"; //
     
-    public final String apmlinurl = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";   
+    public final String apmlinjarurl = "/home/oem/NetBeansProjects/APML/dist/"; //where project jar file is supposed to exist
     
-    public final String basedirurl = "/home/oem/Desktop/apml/output/echo/";
+    public final String apmloutjarurl = "/home/oem/Desktop/Apml/output/libs/"; //where project jar file is supposed to be written
     
-    public final String builddirurl = "build/";
+    public final String apmlinurl = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml"; //APML source file 
     
-    public final String srcdirurl = "source/";    
+    public final String basedirurl = "/home/oem/Desktop/Apml/output/"; //where .xml or .apml file would be
     
-    public final String tempsrcdirurl = "temp/";
+    public final String projectdirurl = "echo/"; //project extension directory
     
-    public final String manifestdirurl = "manifest/";
+    public final String builddirurl = "build/"; //output directory for .class files
     
-    public final String manifestfileurl = "/home/oem/Desktop/apml/output/manifest/manifest.txt";    
+    public final String srcdirurl = "source/"; //output directory for final .java files
+    
+    public final String tempsrcdirurl = "temp/"; //output directory for temporary files (partial builds, etc.)
+    
+    public final String manifestdirurl = "manifest/"; //manifest extension for manifest documents
+    
+    public final String manifestfileurl = "/home/oem/Desktop/apml/output/manifest/manifest.txt"; //manifest URL for files
 }

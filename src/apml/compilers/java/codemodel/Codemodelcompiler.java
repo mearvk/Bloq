@@ -38,7 +38,7 @@ import java.util.logging.Logger;
  * 
  * @author max rupplin
  */
-public class Codemodelcompiler
+public class Codemodelcompiler extends Stdabstractcompiler
 {        
     protected final Integer hash = 0x888fe8;              
     

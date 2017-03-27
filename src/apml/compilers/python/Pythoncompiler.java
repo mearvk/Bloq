@@ -1,9 +1,12 @@
 package apml.compilers.python;
 
-import apml.compilers.Bloqabstractapmlmanager;
-import apml.compilers.Bloqabstractfileguardian;
-import apml.compilers.Bloqabstractoutputmanager;
 import apml.compilers.Stdabstractcompiler;
+
+import apml.compilers.java.codemodel.Bloqapmlmanager;
+
+import apml.compilers.java.codemodel.Bloqfileguardian;
+
+import apml.compilers.java.codemodel.Bloqjcmmanager;
 
 /**
  *
@@ -11,27 +14,26 @@ import apml.compilers.Stdabstractcompiler;
  */
 public class Pythoncompiler extends Stdabstractcompiler 
 {
-
     @Override
-    public void setapmlfiles(Bloqabstractfileguardian fileguardian)
+    public void setapmlfiles(Bloqfileguardian fileguardian)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void settempfiles(Bloqabstractapmlmanager apmlmanager)
+    public void settempfiles(Bloqapmlmanager apmlmanager)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setoutputfiles(Bloqabstractapmlmanager apmlmanager)
+    public void setoutputfiles(Bloqapmlmanager apmlmanager)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setsourcefiles(Bloqabstractoutputmanager astmanager)
+    public void setsourcefiles(Bloqjcmmanager astmanager)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
