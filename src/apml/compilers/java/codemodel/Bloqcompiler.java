@@ -206,7 +206,7 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
                     {                                              
                         String cname = classes.next().name();
                         
-                        jcmmodels.get(i).build(new File(fileguardian.basedirurl+fileguardian.projectdirurl+fileguardian.srcdirurl), System.err);           
+                        jcmmodels.get(i).build(new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.srcextensionurl), System.err);           
                     }
                 }
             }
@@ -233,21 +233,21 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
                 
                 String pathname             = new Filegrepper().getpackagenameaspathname(model.packagename)+"/";
                 
-                String javac                = "javac "+fileguardian.basedirurl+fileguardian.tempsrcdirurl+pathname+model.classname+".java -d "+fileguardian.basedirurl+fileguardian.builddirurl;
+                String javac                = "javac "+fileguardian.basedirurl+fileguardian.tempextensionurl+pathname+model.classname+".java -d "+fileguardian.basedirurl+fileguardian.buildextensionurl;
                 
-                new File(fileguardian.basedirurl+fileguardian.tempsrcdirurl).mkdirs();
+                new File(fileguardian.basedirurl+fileguardian.tempextensionurl).mkdirs();
                 
-                new File(fileguardian.basedirurl+fileguardian.tempsrcdirurl+sourcepackagedir).mkdirs();               
+                new File(fileguardian.basedirurl+fileguardian.tempextensionurl+sourcepackagedir).mkdirs();               
                 
-                new File(fileguardian.basedirurl+fileguardian.builddirurl).mkdirs();
+                new File(fileguardian.basedirurl+fileguardian.buildextensionurl).mkdirs();
                 
-                new File(fileguardian.basedirurl+fileguardian.builddirurl).mkdirs();
+                new File(fileguardian.basedirurl+fileguardian.buildextensionurl).mkdirs();
                    
                 jmodel = new JCodeModel();
                 
                 jmodel._package(model.packagename)._class(model.classname);
                 
-                jmodel.build(new File(fileguardian.basedirurl+fileguardian.tempsrcdirurl));
+                jmodel.build(new File(fileguardian.basedirurl+fileguardian.tempextensionurl));
                 
                 runtime = Runtime.getRuntime();                                                
                 

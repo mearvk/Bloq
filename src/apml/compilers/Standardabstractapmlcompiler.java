@@ -38,23 +38,33 @@ public abstract class Standardabstractapmlcompiler
             
             LOGGER.setUseParentHandlers(false);
             
-            this.fileguardian.sourceoutdir                      = new File(fileguardian.basedirurl+fileguardian.projectdirurl+fileguardian.srcdirurl);     
+            this.fileguardian.buildoutdir       = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.buildextensionurl);
             
-            this.fileguardian.buildoutdir                       = new File(fileguardian.basedirurl+fileguardian.projectdirurl+fileguardian.builddirurl);
+            this.fileguardian.sourceoutdir      = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.srcextensionurl);                             
             
-            this.fileguardian.manifestdir                   = new File(fileguardian.basedirurl+fileguardian.projectdirurl+fileguardian.manifestdirurl);
+            this.fileguardian.manifestdir       = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.manifestextensionurl);
             
-            this.fileguardian.loggingdir                   = new File(fileguardian.basedirurl+fileguardian.projectdirurl+fileguardian.loggingdirurl);
+            this.fileguardian.libsdir           = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.libsdir);
             
-            this.fileguardian.apmlinputfile                  = new File(fileguardian.apmlinurl);
+            this.fileguardian.loggingdir        = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.loggingextensionurl);
             
-            if(!this.fileguardian.sourceoutdir.exists())        this.fileguardian.sourceoutdir.mkdirs();                  
+            this.fileguardian.tempdir           = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.tempdir);
             
-            if(!this.fileguardian.buildoutdir.exists())         this.fileguardian.buildoutdir.mkdirs();                                             
+            this.fileguardian.apmlinputfile     = new File(fileguardian.apmlinurl);                        
+            
+            if(!this.fileguardian.buildoutdir.exists())     this.fileguardian.buildoutdir.mkdirs();                                       
+            
+            if(!this.fileguardian.libsdir.exists())         this.fileguardian.libsdir.mkdirs();                                       
+            
+            if(!this.fileguardian.loggingdir.exists())      this.fileguardian.loggingdir.mkdirs();                                       
             
             if(!this.fileguardian.manifestdir.exists())     this.fileguardian.manifestdir.mkdirs();
             
-            if(!this.fileguardian.apmlinputfile.exists())    throw new Exception("ApmlTagHandler::constructor:Could not find the system's APML file");
+            if(!this.fileguardian.sourceoutdir.exists())    this.fileguardian.sourceoutdir.mkdirs();                                               
+            
+            if(!this.fileguardian.tempdir.exists())         this.fileguardian.tempdir.mkdirs();
+            
+            if(!this.fileguardian.apmlinputfile.exists())   throw new Exception("ApmlTagHandler::constructor:Could not find the system's APML file");
         }
         catch(Exception exception)
         {
