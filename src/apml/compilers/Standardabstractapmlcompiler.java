@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public abstract class Standardabstractapmlcompiler 
 {        
-    protected final Integer hash = 0x0888fe8;     
+    protected final Integer hash = 0x00888fe8;     
     
     public Bloqapmlmanager apmlmanager      = new Bloqapmlmanager(); 
     

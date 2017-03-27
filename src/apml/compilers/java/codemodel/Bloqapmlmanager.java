@@ -14,7 +14,9 @@ import java.util.ArrayList;
  * @author max rupplin
  */
 public class Bloqapmlmanager
-{    
+{   
+    private final Integer hash = 0x00888fe8;  
+    
     public ArrayList<Apmlmodelfile> apmlmodels;  
     
     public ArrayList<Apmlmodelfile> definitionmodels;

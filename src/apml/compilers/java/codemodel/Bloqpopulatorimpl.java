@@ -48,7 +48,7 @@ import java.util.logging.Logger;
  */
 public class Bloqpopulatorimpl 
 {
-    private final Integer hash = 0x888fe8;   
+    private final Integer hash = 0x00888fe8;   
     
     public File apmlfile;    
     

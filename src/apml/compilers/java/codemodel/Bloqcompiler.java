@@ -28,7 +28,7 @@ import java.io.File;
  */
 public class Bloqcompiler extends Standardabstractapmlcompiler
 {        
-    protected final Integer hash = 0x888fe8;                  
+    private final Integer hash = 0x00888fe8;                    
                
     public Bloqcompiler()
     {                        

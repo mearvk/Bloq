@@ -10,6 +10,8 @@ import java.io.File;
  */
 public class Bloqfileguardian 
 {
+    private final Integer hash = 0x00888fe8;  
+    
     /* ---------------------------- File Instances ----------------------------- */
     
     public File apmlxmlinputfile = null; //file for ampl (xml) system specification

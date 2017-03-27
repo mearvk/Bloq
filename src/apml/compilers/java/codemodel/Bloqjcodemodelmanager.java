@@ -17,6 +17,8 @@ import java.util.ArrayList;
  */
 public class Bloqjcodemodelmanager
 {
+    private final Integer hash = 0x00888fe8;  
+    
     public ArrayList<JCodeModel> apmlmodels;  
     
     public ArrayList<JCodeModel> definitionmodels;
