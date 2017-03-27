@@ -46,7 +46,7 @@ import java.util.logging.Logger;
  *
  * @author Max Rupplin
  */
-public class Bloqpopulator 
+public class Bloqpopulatorimpl 
 {
     private final Integer hash = 0x888fe8;   
     
@@ -58,7 +58,7 @@ public class Bloqpopulator
     
     public File outputdir;       
     
-    public static final Logger LOGGER = Logger.getLogger(Bloqpopulator.class.getName());       
+    public static final Logger LOGGER = Logger.getLogger(Bloqpopulatorimpl.class.getName());       
     
     //public String apmlinurl = "/home/oem/Desktop/apml/apml/echoserver.xml";   
     
@@ -70,7 +70,7 @@ public class Bloqpopulator
     
     public String manifestfileurl = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
     
-    public Bloqpopulator()
+    public Bloqpopulatorimpl()
     {
         try
         {

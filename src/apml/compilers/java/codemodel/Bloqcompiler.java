@@ -132,7 +132,7 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     }
     
     @Override
-    public void setsourcefiles(Bloqjcmmanager bloqjcmmanager)
+    public void setsourcefiles(Bloqjcodemodelmanager bloqjcmmanager)
     {
         dosetsourcefiles(bloqjcmmanager.apmlmodels);
         
@@ -182,7 +182,7 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     
     private ArrayList<JCodeModel> dosetoutputfiles(ArrayList<Apmlmodelfile> apmlmodelfiles, String apmltag)
     {
-        Bloqpopulator jcmmodelpopulator = new Bloqpopulator();
+        Bloqpopulatorimpl jcmmodelpopulator = new Bloqpopulatorimpl();
         
         ArrayList<JCodeModel> jcmmodels_genericfiles = null;
                 

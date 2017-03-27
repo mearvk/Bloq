@@ -6,7 +6,7 @@ import apml.compilers.java.codemodel.Bloqapmlmanager;
 
 import apml.compilers.java.codemodel.Bloqfileguardian;
 
-import apml.compilers.java.codemodel.Bloqjcmmanager;
+import apml.compilers.java.codemodel.Bloqjcodemodelmanager;
 
 /**
  *
@@ -34,7 +34,7 @@ public class Objectiveccompiler extends Standardabstractapmlcompiler
     }
 
     @Override
-    public void setsourcefiles(Bloqjcmmanager astmanager)
+    public void setsourcefiles(Bloqjcodemodelmanager astmanager)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

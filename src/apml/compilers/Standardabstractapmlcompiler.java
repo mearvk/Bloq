@@ -4,7 +4,7 @@ import apml.compilers.java.codemodel.Bloqapmlmanager;
 
 import apml.compilers.java.codemodel.Bloqfileguardian;
 
-import apml.compilers.java.codemodel.Bloqjcmmanager;
+import apml.compilers.java.codemodel.Bloqjcodemodelmanager;
 
 import apml.compilers.java.codemodel.Bloqcompiler;
 
@@ -24,7 +24,7 @@ public abstract class Standardabstractapmlcompiler
     
     public Bloqapmlmanager apmlmanager = new Bloqapmlmanager(); 
     
-    public Bloqjcmmanager jcmmanager = new Bloqjcmmanager();
+    public Bloqjcodemodelmanager jcmmanager = new Bloqjcodemodelmanager();
     
     public Bloqfileguardian fileguardian = new Bloqfileguardian();
 
@@ -86,5 +86,5 @@ public abstract class Standardabstractapmlcompiler
      * 
      * @param astmanager 
      */
-    public abstract void setsourcefiles(Bloqjcmmanager astmanager);  
+    public abstract void setsourcefiles(Bloqjcodemodelmanager astmanager);  
 }

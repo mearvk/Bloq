@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author max rupplin
  */
-public class Bloqjcmmanager
+public class Bloqjcodemodelmanager
 {
     public ArrayList<JCodeModel> apmlmodels;  
     
