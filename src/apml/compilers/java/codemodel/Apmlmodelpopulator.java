@@ -36,9 +36,9 @@ import org.w3c.dom.NodeList;
  */
 public final class Apmlmodelpopulator 
 {
-    public final String loggingfileurl = "/home/oem/Desktop/Apml/output/logging/Apmlmodelpopulator.txt";
-    
     protected final Integer hash = 0x888fe8;
+    
+    public final String loggingfileurl = "/home/oem/Desktop/Apml/output/logging/Apmlmodelpopulator.txt";        
         
     protected static final Logger LOGGER = Logger.getLogger(Apmlmodelpopulator.class.getName());    
     
