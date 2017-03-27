@@ -34,9 +34,16 @@ public abstract class Standardabstractapmlcompiler
     {            
         try
         {
+            /* -------------------------- Logger Setup -------------------------*/
+            
             LOGGER.addHandler(new FileHandler(this.fileguardian.loggingfileurl));
             
             LOGGER.setUseParentHandlers(false);
+            
+            
+            /* --------------------------- New Files ---------------------------*/
+            
+            this.fileguardian.apmlinputfile     = new File(fileguardian.apmlinurl);  
             
             this.fileguardian.buildoutdir       = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.buildextensionurl);
             
@@ -44,13 +51,14 @@ public abstract class Standardabstractapmlcompiler
             
             this.fileguardian.manifestdir       = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.manifestextensionurl);
             
-            this.fileguardian.libsdir           = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.libsdir);
+            this.fileguardian.libsdir           = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.libsextensionurl);
             
             this.fileguardian.loggingdir        = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.loggingextensionurl);
             
-            this.fileguardian.tempdir           = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.tempdir);
+            this.fileguardian.tempdir           = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.tempextensionurl);
             
-            this.fileguardian.apmlinputfile     = new File(fileguardian.apmlinurl);                        
+            
+            /* -------------------------- Mkdir calls --------------------------*/                      
             
             if(!this.fileguardian.buildoutdir.exists())     this.fileguardian.buildoutdir.mkdirs();                                       
             

@@ -38,7 +38,7 @@ public final class Apmlmodelpopulator
 {
     private final Integer hash = 0x00888fe8;  
     
-    public final String loggingfileurl = "/home/oem/Desktop/Apml/output/logging/Apmlmodelpopulator.txt";        
+    public final String loggingfileurl = "/home/oem/Desktop/Apml/output/echo/logging/Apmlmodelpopulator.txt";        
         
     protected static final Logger LOGGER = Logger.getLogger(Apmlmodelpopulator.class.getName());    
     
@@ -80,6 +80,7 @@ public final class Apmlmodelpopulator
     {
         try
         {
+            
             LOGGER.addHandler(new FileHandler(this.loggingfileurl));
             
             LOGGER.setUseParentHandlers(false);

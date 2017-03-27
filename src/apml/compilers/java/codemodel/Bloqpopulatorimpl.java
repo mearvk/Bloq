@@ -60,7 +60,7 @@ public class Bloqpopulatorimpl
     
     public static final Logger LOGGER = Logger.getLogger(Bloqpopulatorimpl.class.getName());    
     
-    public String loggingfile = "/home/oem/Desktop/Apml/output/logging/Jcmmodelpopulator.txt";
+    public String loggingfile = "/home/oem/Desktop/Apml/output/echo/logging/Jcmmodelpopulator.txt";
     
     public String apmlinurl = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";
     

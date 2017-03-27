@@ -10,6 +10,14 @@ import java.io.File;
  */
 public class Bloqfileguardian 
 {
+    public Bloqfileguardian()
+    {
+        if(!new File("/home/oem/Desktop/Apml/output/echo/logging/").exists()) 
+        {
+            new File("/home/oem/Desktop/Apml/output/echo/logging/").mkdirs();                        
+        }
+    }
+    
     private final Integer hash = 0x00888fe8;  
     
     /* ---------------------------- File Instances ----------------------------- */
@@ -46,7 +54,7 @@ public class Bloqfileguardian
                 
     public final String libsextensionurl = "libs/"; //output directory for libs files
     
-    public final String loggingfileurl = "/home/oem/Desktop/Apml/output/logging/logging.txt"; //base logging URL for files
+    public final String loggingfileurl = "/home/oem/Desktop/Apml/output/echo/logging/logging.txt"; //base logging URL for files
     
     public final String loggingextensionurl = "logging/"; //output directory for logging files                
     
