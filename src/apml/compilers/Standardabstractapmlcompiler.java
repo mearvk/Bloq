@@ -22,19 +22,19 @@ public abstract class Standardabstractapmlcompiler
 {        
     protected final Integer hash = 0x0888fe8;     
     
-    public Bloqapmlmanager apmlmanager = new Bloqapmlmanager(); 
+    public Bloqapmlmanager apmlmanager      = new Bloqapmlmanager(); 
     
     public Bloqjcodemodelmanager jcmmanager = new Bloqjcodemodelmanager();
     
-    public Bloqfileguardian fileguardian = new Bloqfileguardian();
+    public Bloqfileguardian fileguardian    = new Bloqfileguardian();
 
-    protected static final Logger LOGGER = Logger.getLogger(Bloqcompiler.class.getName());     
+    protected static final Logger LOGGER    = Logger.getLogger(Bloqcompiler.class.getName());     
     
     public Standardabstractapmlcompiler()
     {            
         try
         {
-            LOGGER.addHandler(new FileHandler("/home/oem/Desktop/apml/output/logging/Jcmcompiler.txt"));
+            LOGGER.addHandler(new FileHandler(this.fileguardian.loggingfileurl));
             
             LOGGER.setUseParentHandlers(false);
             

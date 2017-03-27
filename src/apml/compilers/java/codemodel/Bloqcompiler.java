@@ -22,8 +22,6 @@ import java.util.Iterator;
 
 import java.io.File;
 
-import java.util.logging.FileHandler;
-
 /**
  * 
  * @author Max Rupplin
@@ -34,32 +32,7 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
                
     public Bloqcompiler()
     {                        
-        try
-        {
-            LOGGER.addHandler(new FileHandler("/home/oem/Desktop/apml/output/logging/Jcmcompiler.txt"));
-            
-            LOGGER.setUseParentHandlers(false);
-            
-            this.fileguardian.sourceoutdir                      = new File(fileguardian.basedirurl+fileguardian.srcdirurl);     
-            
-            this.fileguardian.buildoutdir                       = new File(fileguardian.basedirurl+fileguardian.builddirurl);
-            
-            this.fileguardian.manifestfiledir                   = new File(fileguardian.basedirurl+fileguardian.manifestdirurl);
-            
-            this.fileguardian.apmlxmlinputfile                  = new File(fileguardian.apmlinurl);
-            
-            if(!this.fileguardian.sourceoutdir.exists())        this.fileguardian.sourceoutdir.mkdirs();                  
-            
-            if(!this.fileguardian.buildoutdir.exists())         this.fileguardian.buildoutdir.mkdirs();                                             
-            
-            if(!this.fileguardian.manifestfiledir.exists())     this.fileguardian.manifestfiledir.mkdirs();
-            
-            if(!this.fileguardian.apmlxmlinputfile.exists())    throw new Exception("ApmlTagHandler::constructor:Could not find the system's APML file");
-        }
-        catch(Exception exception)
-        {
-            exception.printStackTrace(System.err);
-        }
+        //moved to common abstract compiler
     }          
         
     @Override
@@ -134,17 +107,17 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     @Override
     public void setsourcefiles(Bloqjcodemodelmanager bloqjcmmanager)
     {
-        dosetsourcefiles(bloqjcmmanager.apmlmodels);
+        this.dosetsourcefiles(bloqjcmmanager.apmlmodels);
         
-        dosetsourcefiles(bloqjcmmanager.dynamiclistenermodels);                             
+        this.dosetsourcefiles(bloqjcmmanager.dynamiclistenermodels);                             
         
-        dosetsourcefiles(bloqjcmmanager.listenermodels);                    
+        this.dosetsourcefiles(bloqjcmmanager.listenermodels);                    
         
-        dosetsourcefiles(bloqjcmmanager.objectmodels);
+        this.dosetsourcefiles(bloqjcmmanager.objectmodels);
         
-        dosetsourcefiles(bloqjcmmanager.subscribermodels);                    
+        this.dosetsourcefiles(bloqjcmmanager.subscribermodels);                    
         
-        dosetsourcefiles(bloqjcmmanager.systemmodels);           
+        this.dosetsourcefiles(bloqjcmmanager.systemmodels);           
     }    
     
     private ArrayList<Apmlmodelfile> dosetapmlfiles(File apmlxmlfile, String apmltag)
@@ -174,7 +147,7 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
         }
         catch(Exception exception)
         {
-            //exception.printStackTrace();
+            exception.printStackTrace(System.err);
         }
         
         return apmlmodelfiles;
@@ -207,7 +180,7 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
         }
         catch(Exception exception)
         {
-            //exception.printStackTrace();
+            exception.printStackTrace(System.err);
         }
         
         return jcmmodels_genericfiles;
@@ -239,7 +212,7 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
             }
             catch(Exception exception)
             {
-                //exception.printStackTrace();
+                exception.printStackTrace(System.err);
             }                       
         }                
     }    
@@ -282,7 +255,7 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
             }
             catch(Exception exception)
             {
-                //exception.printStackTrace();
+                exception.printStackTrace(System.err);
             }
             finally
             {
@@ -322,12 +295,12 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
             }
             catch(Exception exception)
             {
-                //exception.printStackTrace();
+                exception.printStackTrace(System.err);
             }            
         }
         catch(Exception exception)
         {
-            //exception.printStackTrace();
+            exception.printStackTrace(System.err);
         }
     }       
           
@@ -366,7 +339,7 @@ class Localdriver
         }
         catch(Exception exception)
         {
-            exception.printStackTrace();
+            exception.printStackTrace(System.err);
         }
     }
 }

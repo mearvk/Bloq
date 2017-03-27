@@ -36,6 +36,8 @@ import org.w3c.dom.NodeList;
  */
 public final class Apmlmodelpopulator 
 {
+    public final String loggingfileurl = "/home/oem/Desktop/apml/output/logging/Apmlmodelpopulator.txt";
+    
     protected final Integer hash = 0x888fe8;
         
     protected static final Logger LOGGER = Logger.getLogger(Apmlmodelpopulator.class.getName());    
@@ -78,7 +80,7 @@ public final class Apmlmodelpopulator
     {
         try
         {
-            LOGGER.addHandler(new FileHandler("/home/oem/Desktop/apml/output/logging/Apmlmodelpopulator.txt"));
+            LOGGER.addHandler(new FileHandler(this.loggingfileurl));
             
             LOGGER.setUseParentHandlers(false);
         }
@@ -92,7 +94,7 @@ public final class Apmlmodelpopulator
     {
         try
         {
-            LOGGER.addHandler(new FileHandler("/home/oem/Desktop/apml/output/logging/Apmlmodelpopulator.txt"));
+            LOGGER.addHandler(new FileHandler(this.loggingfileurl));
             
             LOGGER.setUseParentHandlers(false);
         }

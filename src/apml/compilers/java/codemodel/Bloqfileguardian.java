@@ -44,5 +44,7 @@ public class Bloqfileguardian
     
     public final String manifestdirurl = "manifest/"; //manifest extension for manifest documents
     
-    public final String manifestfileurl = "/home/oem/Desktop/apml/output/manifest/manifest.txt"; //manifest URL for files
+    public final String manifestfileurl = "/home/oem/Desktop/Apml/output/manifest/manifest.txt"; //manifest URL for files
+    
+    public final String loggingfileurl = "/home/oem/Desktop/Apml/output/logging/logging.txt";
 }
