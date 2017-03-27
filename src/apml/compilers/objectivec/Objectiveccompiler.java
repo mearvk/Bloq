@@ -10,7 +10,7 @@ import apml.compilers.java.codemodel.Bloqjcmmanager;
 
 /**
  *
- * @author max rupplin
+ * @author Max Rupplin
  */
 public class Objectiveccompiler extends Stdabstractcompiler 
 {
