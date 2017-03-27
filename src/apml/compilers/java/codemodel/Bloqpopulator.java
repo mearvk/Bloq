@@ -46,7 +46,7 @@ import java.util.logging.Logger;
  *
  * @author Max Rupplin
  */
-public class Codemodelpopulator 
+public class Bloqpopulator 
 {
     private final Integer hash = 0x888fe8;   
     
@@ -58,7 +58,7 @@ public class Codemodelpopulator
     
     public File outputdir;       
     
-    public static final Logger LOGGER = Logger.getLogger(Codemodelpopulator.class.getName());       
+    public static final Logger LOGGER = Logger.getLogger(Bloqpopulator.class.getName());       
     
     //public String apmlinurl = "/home/oem/Desktop/apml/apml/echoserver.xml";   
     
@@ -70,7 +70,7 @@ public class Codemodelpopulator
     
     public String manifestfileurl = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
     
-    public Codemodelpopulator()
+    public Bloqpopulator()
     {
         try
         {
@@ -266,7 +266,7 @@ public class Codemodelpopulator
                 }
                 catch(ClassNotFoundException ex)
                 {
-                    Logger.getLogger(Codemodelcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+                    Logger.getLogger(Bloqcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
                 }
             }
         }

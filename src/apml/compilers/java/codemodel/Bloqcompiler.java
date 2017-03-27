@@ -28,11 +28,11 @@ import java.util.logging.FileHandler;
  * 
  * @author Max Rupplin
  */
-public class Codemodelcompiler extends Standardabstractapmlcompiler
+public class Bloqcompiler extends Standardabstractapmlcompiler
 {        
     protected final Integer hash = 0x888fe8;                  
                
-    public Codemodelcompiler()
+    public Bloqcompiler()
     {                        
         try
         {
@@ -182,7 +182,7 @@ public class Codemodelcompiler extends Standardabstractapmlcompiler
     
     private ArrayList<JCodeModel> dosetoutputfiles(ArrayList<Apmlmodelfile> apmlmodelfiles, String apmltag)
     {
-        Codemodelpopulator jcmmodelpopulator = new Codemodelpopulator();
+        Bloqpopulator jcmmodelpopulator = new Bloqpopulator();
         
         ArrayList<JCodeModel> jcmmodels_genericfiles = null;
                 
@@ -350,7 +350,7 @@ class Localdriver
     {                          
         try
         {
-            Codemodelcompiler bloqcompiler = new Codemodelcompiler();
+            Bloqcompiler bloqcompiler = new Bloqcompiler();
             
             bloqcompiler.setapmlfiles(bloqcompiler.fileguardian);
             

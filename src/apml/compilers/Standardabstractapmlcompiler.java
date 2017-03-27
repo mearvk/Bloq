@@ -6,7 +6,7 @@ import apml.compilers.java.codemodel.Bloqfileguardian;
 
 import apml.compilers.java.codemodel.Bloqjcmmanager;
 
-import apml.compilers.java.codemodel.Codemodelcompiler;
+import apml.compilers.java.codemodel.Bloqcompiler;
 
 import java.io.File;
 
@@ -28,7 +28,7 @@ public abstract class Standardabstractapmlcompiler
     
     public Bloqfileguardian fileguardian = new Bloqfileguardian();
 
-    protected static final Logger LOGGER = Logger.getLogger(Codemodelcompiler.class.getName());     
+    protected static final Logger LOGGER = Logger.getLogger(Bloqcompiler.class.getName());     
     
     public Standardabstractapmlcompiler()
     {            

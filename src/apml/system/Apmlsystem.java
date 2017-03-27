@@ -1,6 +1,6 @@
 package apml.system;
 
-import apml.compilers.java.codemodel.Codemodelcompiler;
+import apml.compilers.java.codemodel.Bloqcompiler;
 import apml.drivers.Stdbloqdriver;
 import apml.drivers.Stddriver;
 import apml.helpers.Filegrepper;
@@ -384,7 +384,7 @@ public class Apmlsystem implements Runnable
         }
         catch(InstantiationException | IllegalAccessException ex)
         {
-            Logger.getLogger(Codemodelcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            Logger.getLogger(Bloqcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
         
         return null;
