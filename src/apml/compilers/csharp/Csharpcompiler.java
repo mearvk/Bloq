@@ -1,6 +1,6 @@
 package apml.compilers.csharp;
 
-import apml.compilers.Stdabstractcompiler;
+import apml.compilers.Standardabstractapmlcompiler;
 
 import apml.compilers.java.codemodel.Bloqjcmmanager;
 
@@ -8,7 +8,7 @@ import apml.compilers.java.codemodel.Bloqjcmmanager;
  *
  * @author max rupplin
  */
-public class Csharpcompiler extends Stdabstractcompiler 
+public class Csharpcompiler extends Standardabstractapmlcompiler 
 {
 
     @Override

@@ -1,6 +1,6 @@
 package apml.compilers.objectivec;
 
-import apml.compilers.Stdabstractcompiler;
+import apml.compilers.Standardabstractapmlcompiler;
 
 import apml.compilers.java.codemodel.Bloqapmlmanager;
 
@@ -12,7 +12,7 @@ import apml.compilers.java.codemodel.Bloqjcmmanager;
  *
  * @author Max Rupplin
  */
-public class Objectiveccompiler extends Stdabstractcompiler 
+public class Objectiveccompiler extends Standardabstractapmlcompiler 
 {
 
     @Override

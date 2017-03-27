@@ -1,6 +1,6 @@
 package apml.compilers.cpp;
 
-import apml.compilers.Stdabstractcompiler;
+import apml.compilers.Standardabstractapmlcompiler;
 
 import apml.compilers.java.codemodel.Bloqjcmmanager;
 
@@ -8,7 +8,7 @@ import apml.compilers.java.codemodel.Bloqjcmmanager;
  *
  * @author max rupplin
  */
-public class Cpluspluscompiler extends Stdabstractcompiler
+public class Cpluspluscompiler extends Standardabstractapmlcompiler
 {
     @Override
     public void setapmlfiles(apml.compilers.java.codemodel.Bloqfileguardian fileguardian)

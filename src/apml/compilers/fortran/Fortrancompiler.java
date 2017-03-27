@@ -1,7 +1,7 @@
 
 package apml.compilers.fortran;
 
-import apml.compilers.Stdabstractcompiler;
+import apml.compilers.Standardabstractapmlcompiler;
 
 import apml.compilers.java.codemodel.Bloqjcmmanager;
 
@@ -9,7 +9,7 @@ import apml.compilers.java.codemodel.Bloqjcmmanager;
  *
  * @author max rupplin
  */
-public class Fortrancompiler extends Stdabstractcompiler 
+public class Fortrancompiler extends Standardabstractapmlcompiler 
 {
 
     @Override

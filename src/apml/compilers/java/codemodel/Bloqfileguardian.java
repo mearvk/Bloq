@@ -1,6 +1,6 @@
 package apml.compilers.java.codemodel;
 
-import apml.compilers.Bloqabstractfileguardian;
+//import apml.compilers.Bloqabstractfileguardian;
 
 import java.io.File;
 
@@ -8,7 +8,7 @@ import java.io.File;
  *
  * @author Max Rupplin
  */
-public class Bloqfileguardian extends Bloqabstractfileguardian
+public class Bloqfileguardian 
 {
     /* ---------------------------- File Instances ----------------------------- */
     
@@ -24,7 +24,7 @@ public class Bloqfileguardian extends Bloqabstractfileguardian
             
     /* ---------------------------- Strings & URLs ----------------------------- */
     
-    public final String apmlfilename = "APML.jar"; //
+    public final String apmlfilename = "APML.jar"; //name of the APML jar file to be written
     
     public final String apmlinjarurl = "/home/oem/NetBeansProjects/APML/dist/"; //where project jar file is supposed to exist
     

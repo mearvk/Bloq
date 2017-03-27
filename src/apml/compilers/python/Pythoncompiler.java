@@ -1,6 +1,6 @@
 package apml.compilers.python;
 
-import apml.compilers.Stdabstractcompiler;
+import apml.compilers.Standardabstractapmlcompiler;
 
 import apml.compilers.java.codemodel.Bloqapmlmanager;
 
@@ -12,7 +12,7 @@ import apml.compilers.java.codemodel.Bloqjcmmanager;
  *
  * @author max rupplin
  */
-public class Pythoncompiler extends Stdabstractcompiler 
+public class Pythoncompiler extends Standardabstractapmlcompiler 
 {
     @Override
     public void setapmlfiles(Bloqfileguardian fileguardian)
