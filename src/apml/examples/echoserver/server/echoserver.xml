@@ -8,7 +8,7 @@
             <echoserver extends="ServerSocketImpl" class="Echoserver"></echoserver>   
         </definitions>                                   
 
-        <package name="servers" default="examples.echoserver.serversz" sourcedir="/source" builddir="/build">
+        <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
             <system id="echoserver" start="true" bndi="//echoserver/systems/{this.id}" class="Echoserversystem">
 
                 <object id="echoserver" start="true" bndi="//echoserver/objects/1" class="Echoserver">                       
