@@ -40,21 +40,21 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     {
         try
         {            
-            this.dosetapmlfiles(fileguardian.apmlxmlinputfile, "//apml");
+            this.dosetapmlfiles(fileguardian.apmlinputfile, "//apml");
             
-            this.dosetapmlfiles(fileguardian.apmlxmlinputfile, "//dynamiclistener");
+            this.dosetapmlfiles(fileguardian.apmlinputfile, "//dynamiclistener");
             
-            this.dosetapmlfiles(fileguardian.apmlxmlinputfile, "//listener");    
+            this.dosetapmlfiles(fileguardian.apmlinputfile, "//listener");    
             
-            this.dosetapmlfiles(fileguardian.apmlxmlinputfile, "//object");   
+            this.dosetapmlfiles(fileguardian.apmlinputfile, "//object");   
             
-            this.dosetapmlfiles(fileguardian.apmlxmlinputfile, "//subscriber");
+            this.dosetapmlfiles(fileguardian.apmlinputfile, "//subscriber");
             
-            this.dosetapmlfiles(fileguardian.apmlxmlinputfile, "//system");        
+            this.dosetapmlfiles(fileguardian.apmlinputfile, "//system");        
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            exception.printStackTrace(System.err);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }
     }    
     
@@ -75,9 +75,9 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
             
             this.dosettempfiles(bloqapmlmanager.systemmodels);
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            exception.printStackTrace(System.err);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }
     }
         
@@ -98,9 +98,9 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
             
             this.dosetoutputfiles(bloqapmlmanager.systemmodels, "//system");         
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            exception.printStackTrace(System.err);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }
     }
     
@@ -145,9 +145,9 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
                 case "//system": this.apmlmanager.systemmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
             }            
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            exception.printStackTrace(System.err);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }
         
         return apmlmodelfiles;
@@ -178,9 +178,9 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
                 case "//system": this.jcmmanager.systemmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
             }                     
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            exception.printStackTrace(System.err);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }
         
         return jcmmodels_genericfiles;
@@ -206,13 +206,13 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
                     {                                              
                         String cname = classes.next().name();
                         
-                        jcmmodels.get(i).build(new File(fileguardian.basedirurl+fileguardian.srcdirurl), System.err);           
+                        jcmmodels.get(i).build(new File(fileguardian.basedirurl+fileguardian.projectdirurl+fileguardian.srcdirurl), System.err);           
                     }
                 }
             }
-            catch(Exception exception)
+            catch(Exception e)
             {
-                exception.printStackTrace(System.err);
+                /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
             }                       
         }                
     }    
@@ -241,7 +241,7 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
                 
                 new File(fileguardian.basedirurl+fileguardian.builddirurl).mkdirs();
                 
-                new File(fileguardian.basedirurl+fileguardian.builddirurl+buildpackagedir).mkdirs();
+                new File(fileguardian.basedirurl+fileguardian.builddirurl).mkdirs();
                    
                 jmodel = new JCodeModel();
                 
@@ -253,9 +253,9 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
                 
                 runtime.exec(javac);
             }
-            catch(Exception exception)
+            catch(Exception e)
             {
-                exception.printStackTrace(System.err);
+                /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
             }
             finally
             {
@@ -293,14 +293,14 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
                     Files.copy(new File(fileguardian.apmlinjarurl+fileguardian.apmlfilename).toPath(), new File(fileguardian.apmloutjarurl+fileguardian.apmlfilename).toPath(), REPLACE_EXISTING );                
                 }
             }
-            catch(Exception exception)
+            catch(Exception e)
             {
-                exception.printStackTrace(System.err);
+                /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
             }            
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            exception.printStackTrace(System.err);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }
     }       
           
@@ -337,9 +337,9 @@ class Localdriver
             
             System.gc();
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            exception.printStackTrace(System.err);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }
     }
 }

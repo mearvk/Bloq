@@ -58,9 +58,9 @@ public class Bloqpopulatorimpl
     
     public File outputdir;       
     
-    public static final Logger LOGGER = Logger.getLogger(Bloqpopulatorimpl.class.getName());       
+    public static final Logger LOGGER = Logger.getLogger(Bloqpopulatorimpl.class.getName());    
     
-    //public String apmlinurl = "/home/oem/Desktop/apml/apml/echoserver.xml";   
+    public String loggingfile = "/home/oem/Desktop/Apml/output/logging/Jcmmodelpopulator.txt";
     
     public String apmlinurl = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";
     
@@ -74,13 +74,13 @@ public class Bloqpopulatorimpl
     {
         try
         {
-            LOGGER.addHandler(new FileHandler("/home/oem/Desktop/apml/output/logging/Jcmmodelpopulator.txt"));
+            LOGGER.addHandler(new FileHandler(this.loggingfile));
             
             LOGGER.setUseParentHandlers(false);
         }
-        catch(IOException | SecurityException exception)
+        catch(IOException | SecurityException e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }
     }            
     
@@ -96,39 +96,39 @@ public class Bloqpopulatorimpl
             
             Apmltaghandlerparameter param = new Apmltaghandlerparameter(jcodemodel,jpackage,classfile,apmlmodelfile);
             
-            try{this.jcmpackagename(param);}        catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmpackagename(param);}        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmclassname(param);}          catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}            
+            try{this.jcmclassname(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
             
-            try{this.jcmextends(param);}            catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmextends(param);}            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmimplements(param);}         catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmimplements(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmbndi(param);}               catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmbndi(param);}               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmautostarttag(param);}       catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmautostarttag(param);}       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcminittag(param);}            catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);} 
+            try{this.jcminittag(param);}            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/} 
             
-            try{this.jcmruntag(param);}             catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmruntag(param);}             catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmstarttag(param);}           catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}                         
+            try{this.jcmstarttag(param);}           catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                         
             
-            try{this.jcmlisteners(param);}          catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmlisteners(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmobjects(param);}            catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.jcmobjects(param);}            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.addinterfacemethods(param);}   catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.addinterfacemethods(param);}   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.addsuperclassmethods(param);}  catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}
+            try{this.addsuperclassmethods(param);}  catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.addtagmethods(param);}         catch(Exception exception){LOGGER.log(Level.WARNING, exception.getMessage(), exception);}                                     
+            try{this.addtagmethods(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                     
             
             return jcodemodel;
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }        
         
         throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel.");
@@ -143,9 +143,9 @@ public class Bloqpopulatorimpl
 
             param.classfile.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bndi=\""+param.apmlmodelfile.bndi+"\"");                          
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }        
     }      
     
@@ -167,9 +167,9 @@ public class Bloqpopulatorimpl
                 param.classfile.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d", i));                               
             }
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }        
     }    
     
@@ -191,9 +191,9 @@ public class Bloqpopulatorimpl
                 param.classfile.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d",i));
             }
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }        
     }
     
@@ -206,9 +206,9 @@ public class Bloqpopulatorimpl
             
             param.jpackage = param.jcodemodel._package(param.apmlmodelfile.packagename);
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }        
     }
     
@@ -224,9 +224,9 @@ public class Bloqpopulatorimpl
             
             param.classfile = param.jpackage._class(param.apmlmodelfile.classname);  
         }
-        catch(NullPointerException | InvalidParameterException | JClassAlreadyExistsException exception)
+        catch(NullPointerException | InvalidParameterException | JClassAlreadyExistsException e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }        
     }
 
@@ -242,9 +242,9 @@ public class Bloqpopulatorimpl
                
             param.classfile = param.classfile._extends(Class.forName(param.apmlmodelfile.superclass));      
         }
-        catch(NullPointerException | InvalidParameterException | ClassNotFoundException exception)
+        catch(NullPointerException | InvalidParameterException | ClassNotFoundException e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }        
     }
     
@@ -270,9 +270,9 @@ public class Bloqpopulatorimpl
                 }
             }
         }
-        catch(NullPointerException | InvalidParameterException exception)
+        catch(NullPointerException | InvalidParameterException e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }        
     }
     
@@ -289,9 +289,9 @@ public class Bloqpopulatorimpl
             if(param.apmlmodelfile.run.equalsIgnoreCase("true"))                    
                 param.classfile = param.classfile._implements(Runnable.class);
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }          
     }
     
@@ -308,9 +308,9 @@ public class Bloqpopulatorimpl
             if(param.apmlmodelfile.start.equalsIgnoreCase("true"))
                 param.classfile = param.classfile._implements(Startable.class);
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }           
     }
     
@@ -362,15 +362,15 @@ public class Bloqpopulatorimpl
                         }                
                     }
                 }
-                catch(ClassNotFoundException exception)
+                catch(ClassNotFoundException e)
                 {
-                    LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+                    /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
                 }
             }                 
         }
-        catch(InvalidParameterException | NullPointerException | SecurityException exception)
+        catch(InvalidParameterException | NullPointerException | SecurityException e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }        
     }
     
@@ -386,9 +386,9 @@ public class Bloqpopulatorimpl
             
             param.classfile = param.classfile._implements(Autostartable.class);
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }         
     }
     
@@ -404,9 +404,9 @@ public class Bloqpopulatorimpl
             
             param.classfile = param.classfile._implements(Initializable.class);
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }         
     }
 
@@ -449,9 +449,9 @@ public class Bloqpopulatorimpl
                     }
             }                 
         }
-        catch(InvalidParameterException | NullPointerException | ClassNotFoundException | SecurityException exception)
+        catch(InvalidParameterException | NullPointerException | ClassNotFoundException | SecurityException e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }        
     }
     
@@ -503,9 +503,9 @@ public class Bloqpopulatorimpl
                     }                   
                 }                 
         }
-        catch(InvalidParameterException | NullPointerException | ClassNotFoundException | SecurityException exception)
+        catch(InvalidParameterException | NullPointerException | ClassNotFoundException | SecurityException e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }         
     }            
     
@@ -519,9 +519,9 @@ public class Bloqpopulatorimpl
             {
                 jcmmodels.add(this.makeindividualjcodemodelinstance(apmlmodels.get(i)));
             }
-            catch(Exception exception)
+            catch(Exception e)
             {
-                LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+                /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
             }
         }              
         
