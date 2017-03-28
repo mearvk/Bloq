@@ -133,9 +133,11 @@ public class Bloqapmlmanager
                 
                 String pathname             = new Filegrepper().getpackagenameaspathname(model.packagename)+"/";
                 
+                /*--------------------------------------------------------------*/
                 
-                String javac                = "javac "+fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.tempextensionurl+pathname+model.classname+".java -d "+fileguardian.basedirurl+fileguardian.buildextensionurl;
+                String javac                = "javac "+fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.tempextensionurl+pathname+model.classname+".java -d "+fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.buildextensionurl;
                 
+                /*--------------------------------------------------------------*/
                 
                 new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.tempextensionurl).mkdirs();
                 
@@ -143,6 +145,7 @@ public class Bloqapmlmanager
                 
                 new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.buildextensionurl).mkdirs();
                 
+                /*--------------------------------------------------------------*/
                 
                 jmodel = new JCodeModel();
                 
