@@ -48,31 +48,31 @@ public class Bloqfileguardian
             
     /* ---------------------------- File Instances ----------------------------- */
     
-    public File apmlinputfile = null;       //file for apml (an xml) system specification
+    public File apmlinputfile = null;                                                                           //file for apml (an xml) system specification
     
-    public File buildoutdirfile = null;     //file dir for bytecode
+    public File buildoutdirfile = null;                                                                         //file dir for bytecode
     
-    public File libsdirfile = null;         //libs dir for byte code
+    public File libsdirfile = null;                                                                             //libs dir for byte code
     
-    public File loggingdirfile = null;      //logging dir for byte code    
+    public File loggingdirfile = null;                                                                          //logging dir for byte code    
     
-    public File manifestfile = null;        //file for manifest 
+    public File manifestfile = null;                                                                            //file for manifest 
     
-    public File manifestdirfile = null;     //file dir for manifest
+    public File manifestdirfile = null;                                                                         //file dir for manifest
     
-    public File sourceoutdirfile = null;    //file dir for source code
+    public File sourceoutdirfile = null;                                                                        //file dir for source code
     
-    public File tempdirfile = null;         //temporary dir for byte code   
+    public File tempdirfile = null;                                                                             //temporary dir for byte code   
             
     /* ------------------------------ File Names ------------------------------- */
     
-    public final String apmljarfilename = "APML.jar";       //name of the APML jar file to be written
+    public final String apmljarfilename = "APML.jar";                                                           //name of the APML jar file to be written
     
-    public final String apmlfilename = "echoserver.xml";    //APML source file
+    public final String apmlfilename = "echoserver.xml";                                                        //APML source file
     
-    public final String loggingfilename = "logging.txt";
+    public final String loggingfilename = "logging.txt";                                                        //logging output file
     
-    public final String manifestfilename = "manifest.txt";        
+    public final String manifestfilename = "manifest.txt";                                                      //manifest output file 
     
     /* -------------------------- Strings & URLs ------------------------------- */
     
@@ -90,17 +90,17 @@ public class Bloqfileguardian
     
     /* ------------------------------------------------------------------------- */
     
-    public final String buildextensionurl = "build/";       //output directory for .class files
+    public final String buildextensionurl = "build/";                                                           //output directory for .class files
                 
-    public final String libsextensionurl = "libs/";         //output directory for libs files        
+    public final String libsextensionurl = "libs/";                                                             //output directory for libs files        
     
-    public final String loggingextensionurl = "logging/";   //output directory for logging files                
+    public final String loggingextensionurl = "logging/";                                                       //output directory for logging files                
     
-    public final String manifestextensionurl = "manifest/"; //manifest extension for manifest documents          
+    public final String manifestextensionurl = "manifest/";                                                     //manifest extension for manifest documents          
     
-    public final String projectextensionurl = "echo/";      //project extension directory   
+    public final String projectextensionurl = "echo/";                                                          //project extension directory   
     
-    public final String srcextensionurl = "source/";        //output directory for final .java files
+    public final String srcextensionurl = "source/";                                                            //output directory for final .java files
     
-    public final String tempextensionurl = "temp/";         //output directory for temporary files (partial builds, etc.)
+    public final String tempextensionurl = "temp/";                                                             //output directory for temporary files (partial builds, etc.)
 }
