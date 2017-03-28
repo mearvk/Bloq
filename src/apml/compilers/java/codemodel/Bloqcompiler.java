@@ -9,6 +9,7 @@ import apml.system.bodi.Bodi;
 import java.nio.file.Files;
 
 import java.io.File;
+
 import java.util.logging.Level;
 
 /**
@@ -109,47 +110,7 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
         this.jcmmanager.dosetsourcefiles(bloqjcmmanager.subscribermodels);                    
         
         this.jcmmanager.dosetsourcefiles(bloqjcmmanager.systemmodels);           
-    }                           
-    
-    public void dowritesourcetoharddrive()
-    {
-        try
-        {
-            this.jcmmanager.dosetsourcefiles(this.jcmmanager.apmlmodels);
-            
-            this.jcmmanager.dosetsourcefiles(this.jcmmanager.definitionmodels);
-            
-            this.jcmmanager.dosetsourcefiles(this.jcmmanager.dynamiclistenermodels);            
-            
-            this.jcmmanager.dosetsourcefiles(this.jcmmanager.listenermodels);
-            
-            this.jcmmanager.dosetsourcefiles(this.jcmmanager.objectmodels);
-            
-            this.jcmmanager.dosetsourcefiles(this.jcmmanager.subscribermodels);
-            
-            this.jcmmanager.dosetsourcefiles(this.jcmmanager.systemmodels);
-            
-            try
-            {
-                if(new File(fileguardian.apmloutjarurl).exists())
-                {
-                    Files.copy(new File(fileguardian.apmlinjarurl+fileguardian.apmlfilename).toPath(), new File(fileguardian.apmloutjarurl+fileguardian.apmlfilename).toPath(), REPLACE_EXISTING );
-                }
-                else new File(fileguardian.apmloutjarurl).mkdirs();
-                {
-                    Files.copy(new File(fileguardian.apmlinjarurl+fileguardian.apmlfilename).toPath(), new File(fileguardian.apmloutjarurl+fileguardian.apmlfilename).toPath(), REPLACE_EXISTING );                
-                }
-            }
-            catch(Exception e)
-            {
-                LOGGER.log(Level.WARNING, e.getMessage(), e);
-            }            
-        }
-        catch(Exception e)
-        {
-            LOGGER.log(Level.WARNING, e.getMessage(), e);
-        }
-    }       
+    }                               
           
     public void setjarfile() throws Exception
     {
