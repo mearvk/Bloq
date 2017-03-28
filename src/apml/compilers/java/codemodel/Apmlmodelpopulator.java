@@ -10,6 +10,8 @@ import apml.modeling.Apmlmodelfile;
 
 import apml.modeling.Apmlobject;
 
+import apml.system.bodi.Bodi;
+
 import apml.xpath.helpers.Xpathparameter;
 
 import java.io.File;
@@ -37,14 +39,10 @@ import org.w3c.dom.NodeList;
 public final class Apmlmodelpopulator 
 {
     private final Integer hash = 0x00888fe8;  
-    
-    public final String loggingfileurl = "/home/oem/Desktop/Apml/output/echo/logging/Apmlmodelpopulator.txt";        
-        
+            
     protected static final Logger LOGGER = Logger.getLogger(Apmlmodelpopulator.class.getName());    
     
-    public ArrayList<Apmlmodelfile> apmlfiles;   
-    
-    public String defaultpackage;
+    public ArrayList<Apmlmodelfile> apmlfiles;      
     
     public static void main(String...args) 
     {                          
@@ -74,36 +72,29 @@ public final class Apmlmodelpopulator
         {
             LOGGER.log(Level.WARNING, exception.getMessage(), exception);
         }
-    }       
+    }      
     
     public Apmlmodelpopulator()
     {
+        Bodi.setcontext("system");
+        
+        Bodi.context("system").put("apmlmodelpopulator", this); 
+        
+        /*----------------------------------------------------------------------*/
+        
+        Bloqfileguardian fileguardian = (Bloqfileguardian)Bodi.context("system").pull("bloqfileguardian");
+        
         try
         {
+            LOGGER.addHandler(new FileHandler(fileguardian.loggingfileurl+fileguardian.loggingfilename));
             
-            LOGGER.addHandler(new FileHandler(this.loggingfileurl));
-            
-            LOGGER.setUseParentHandlers(false);
+            LOGGER.setUseParentHandlers(false);            
         }
-        catch(IOException | SecurityException exception)
+        catch(IOException e)
         {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
-    }
-    
-    public Apmlmodelpopulator(String sysobj)
-    {
-        try
-        {
-            LOGGER.addHandler(new FileHandler(this.loggingfileurl));
-            
-            LOGGER.setUseParentHandlers(false);
-        }
-        catch(IOException | SecurityException exception)
-        {
-            LOGGER.log(Level.WARNING, exception.getMessage(), exception);
-        }
-    }  
+    } 
     
     public Apmlmodelpopulator(File apmlfile, String sysobj) throws Exception
     {
@@ -115,32 +106,24 @@ public final class Apmlmodelpopulator
         try
         {
             Xpathparameter xparam = new Xpathparameter(apmltag, apmlfile);          
-               
+                                       
             for(int i=0;i<xparam.getnodecount();i++)
-            {
-            
+            {                            
                 switch(apmltag)
                 {
-                    case "//apml": 
-                        return doapmltags(xparam, apmltag);
+                    case "//apml":              return doapmltags(xparam, apmltag);
                     
-                    case "//definitions": 
-                        return dodefinitiontags(xparam, apmltag);
+                    case "//definitions":       return dodefinitiontags(xparam, apmltag);
                         
-                    case "//dynamiclistener": 
-                        return dodynamiclistenertags(xparam, apmltag);                        
+                    case "//dynamiclistener":   return dodynamiclistenertags(xparam, apmltag);                        
                         
-                    case "//listener": 
-                        return dolistenertags(xparam, apmltag); 
+                    case "//listener":          return dolistenertags(xparam, apmltag); 
                         
-                    case "//object": 
-                        return doobjecttags(xparam, apmltag);                        
+                    case "//object":            return doobjecttags(xparam, apmltag);                        
                         
-                    case "//subscriber": 
-                        return dosubscribertags(xparam, apmltag);                         
+                    case "//subscriber":        return dosubscribertags(xparam, apmltag);                         
                     
-                    case "//system": 
-                        return dosystemtags(xparam, apmltag);   
+                    case "//system":            return dosystemtags(xparam, apmltag);   
                         
                     default: return null;
                 }
@@ -148,7 +131,7 @@ public final class Apmlmodelpopulator
         }
         catch(Exception exception)
         {
-            exception.printStackTrace(System.err);
+            //
         }      
         
         return null;
@@ -356,7 +339,9 @@ public final class Apmlmodelpopulator
     private String getbndi(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0014_bndi==null || xparam.n0014_bndi.item(0)==null) 
+        {
             return "//unbound";                    
+        }
         
         return xparam.n0014_bndi.item(index).getNodeValue();        
     }  
@@ -415,18 +400,12 @@ public final class Apmlmodelpopulator
         return dir;
     }    
 
-    private String getsuperclass(Xpathparameter xparam, Integer index)
-    {
-        if(xparam.n0012_superclass==null || xparam.n0012_superclass.item(0)==null) 
-            throw new NullPointerException("No tag name found");                    
-        
-        return xparam.n0012_superclass.item(index).getNodeName();
-    }
-
     private String gettagname(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0001_tagname==null || xparam.n0001_tagname.item(0)==null) 
+        {
             throw new NullPointerException("No tag name found");                    
+        }
         
         return xparam.n0001_tagname.item(index).getNodeName();
     }
@@ -434,7 +413,9 @@ public final class Apmlmodelpopulator
     private String getautostarttag(Xpathparameter xparam, Integer index)
     {        
         if(xparam.n0002_autostart==null || xparam.n0002_autostart.item(0)==null) 
+        {
             throw new NullPointerException("No autostart tag found");
+        }
                 
         return xparam.n0002_autostart.item(0).getNodeName();
     }
@@ -442,7 +423,9 @@ public final class Apmlmodelpopulator
     private String getclassname(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0003_classname==null || xparam.n0003_classname.item(0)==null) 
+        {
             throw new NullPointerException("No class tag found");
+        }
               
         String retval=null;
         
@@ -461,7 +444,9 @@ public final class Apmlmodelpopulator
     private String getidtag(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0004_id==null || xparam.n0004_id.item(0)==null)
+        {
             throw new NullPointerException("No id tag found");
+        }
                 
         return xparam.n0004_id.item(0).getNodeValue();
     }
@@ -469,7 +454,9 @@ public final class Apmlmodelpopulator
     private String getinittag(Xpathparameter xparam, Integer index) 
     {
         if(xparam.n0005_init==null || xparam.n0005_init.item(0)==null)
+        {
             throw new NullPointerException("No init tag found");
+        }
             
         return xparam.n0005_init.item(0).getNodeName();
     }
@@ -493,7 +480,9 @@ public final class Apmlmodelpopulator
     private String getruntag(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0007_run==null || xparam.n0007_run.item(0)==null)
+        {
             throw new NullPointerException("No run tag found"); 
+        }
         
         return xparam.n0007_run.item(0).getNodeName();
     }    
@@ -501,7 +490,9 @@ public final class Apmlmodelpopulator
     private String getstarttag(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0008_start==null || xparam.n0008_start.item(0)==null)
+        {
             throw new NullPointerException("No start tag found"); 
+        }
                 
         return xparam.n0008_start.item(0).getNodeName();
     }    
@@ -540,6 +531,16 @@ public final class Apmlmodelpopulator
         
         return implementz;
     }     
+    
+    private String getsuperclass(Xpathparameter xparam, Integer index)
+    {
+        if(xparam.n0012_superclass==null || xparam.n0012_superclass.item(0)==null) 
+        {
+            throw new NullPointerException("No tag name found");                    
+        }
+        
+        return xparam.n0012_superclass.item(index).getNodeName();
+    }    
 
     private ArrayList<Apmllistener> getlisteners(Xpathparameter xparam, Integer index)
     {

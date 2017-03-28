@@ -1,10 +1,16 @@
 package apml.compilers.java.codemodel;
 
-//import apml.compilers.Bloqabstractfileguardian;
+import static apml.compilers.java.codemodel.Bloqpopulatorimpl.LOGGER;
 
 import apml.system.bodi.Bodi;
 
 import java.io.File;
+
+import java.io.IOException;
+
+import java.util.logging.FileHandler;
+
+import java.util.logging.Level;
 
 /**
  *
@@ -15,17 +21,25 @@ public class Bloqfileguardian
     private final Integer hash = 0x00888fe8;  
     
     public Bloqfileguardian()
-    {
-        /*
-        if(!new File("/home/oem/Desktop/Apml/output/echo/logging/").exists()) //hack please consider fixing
-        {
-            new File("/home/oem/Desktop/Apml/output/echo/logging/").mkdirs();                        
-        }
-        */
-        
+    {      
         Bodi.setcontext("system");
         
-        Bodi.context("system").put("bloqfileguardian", this);         
+        Bodi.context("system").put("bloqfileguardian", this);
+        
+        /*----------------------------------------------------------------------*/
+        
+        Bloqfileguardian fileguardian = (Bloqfileguardian)Bodi.context("system").pull("bloqfileguardian");
+        
+        try
+        {
+            LOGGER.addHandler(new FileHandler(fileguardian.loggingfileurl+fileguardian.loggingfilename));
+            
+            LOGGER.setUseParentHandlers(false);            
+        }
+        catch(IOException e)
+        {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }        
     }
             
     /* ---------------------------- File Instances ----------------------------- */

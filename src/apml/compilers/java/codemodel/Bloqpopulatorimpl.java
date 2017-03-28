@@ -9,6 +9,7 @@ import apml.interfaces.Initializable;
 import apml.helpers.Filegrepper;
 
 import apml.modeling.Apmlmodelfile;
+
 import apml.system.bodi.Bodi;
 
 import com.sun.codemodel.JClassAlreadyExistsException;
@@ -22,8 +23,6 @@ import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 
 import com.sun.codemodel.JClass;
-
-import java.io.File;
 
 import java.io.IOException;
 
@@ -50,36 +49,22 @@ import java.util.logging.Logger;
 public class Bloqpopulatorimpl 
 {
     private final Integer hash = 0x00888fe8;   
-    
-    public File apmlfile;    
-    
-    public File manifestfile;
-    
-    public File manifestdir;    
-    
-    public File outputdir;       
-    
-    public static final Logger LOGGER = Logger.getLogger(Bloqpopulatorimpl.class.getName());    
-    
-    public String loggingfile = "/home/oem/Desktop/Apml/output/echo/logging/Jcmmodelpopulator.txt";
-    
-    public String apmlinurl = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";
-    
-    public String sourceoutdirurl = "/home/oem/Desktop/apml/output";    
-    
-    public String manfiestdirurl = "/home/oem/Desktop/apml/output/manifest";
-    
-    public String manifestfileurl = "/home/oem/Desktop/apml/output/manifest/manifest.txt";
+          
+    public static final Logger LOGGER = Logger.getLogger(Bloqpopulatorimpl.class.getName()); 
     
     public Bloqpopulatorimpl()
     {
         Bodi.setcontext("system");
         
-        Bodi.context("system").put("bloqpopulatorimpl", this);        
+        Bodi.context("system").put("bloqpopulatorimpl", this);   
+        
+        /*----------------------------------------------------------------------*/
+        
+        Bloqfileguardian fileguardian = (Bloqfileguardian)Bodi.context("system").pull("bloqfileguardian");
         
         try
         {
-            LOGGER.addHandler(new FileHandler(this.loggingfile));
+            LOGGER.addHandler(new FileHandler(fileguardian.loggingfileurl+fileguardian.loggingfilename));
             
             LOGGER.setUseParentHandlers(false);            
         }

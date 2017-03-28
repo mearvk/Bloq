@@ -10,6 +10,10 @@ import java.nio.file.Files;
 
 import java.io.File;
 
+import java.io.IOException;
+
+import java.util.logging.FileHandler;
+
 import java.util.logging.Level;
 
 /**
@@ -25,6 +29,21 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
         Bodi.setcontext("system");
         
         Bodi.context("system").put("bloqcompiler", this);
+        
+        /*----------------------------------------------------------------------*/
+        
+        Bloqfileguardian fileguardian = (Bloqfileguardian)Bodi.context("system").pull("bloqfileguardian");
+        
+        try
+        {
+            LOGGER.addHandler(new FileHandler(fileguardian.loggingfileurl+fileguardian.loggingfilename));
+            
+            LOGGER.setUseParentHandlers(false);            
+        }
+        catch(IOException e)
+        {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }        
     }          
         
     @Override

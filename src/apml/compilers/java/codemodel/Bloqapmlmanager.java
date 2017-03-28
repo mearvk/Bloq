@@ -1,20 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package apml.compilers.java.codemodel;
 
+import static apml.compilers.java.codemodel.Bloqpopulatorimpl.LOGGER;
+
 import apml.helpers.Filegrepper;
+
 import apml.modeling.Apmlmodelfile;
+
 import apml.system.bodi.Bodi;
+
 import com.sun.codemodel.JCodeModel;
-import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JPackage;
+
 import java.io.File;
 
+import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.Iterator;
+
+import java.util.logging.FileHandler;
+
+import java.util.logging.Level;
 
 /**
  *
@@ -44,6 +48,21 @@ public class Bloqapmlmanager
         Bodi.setcontext("system");
         
         Bodi.context("system").put("bloqapmlmanager", this);
+        
+        /*----------------------------------------------------------------------*/
+        
+        Bloqfileguardian fileguardian = (Bloqfileguardian)Bodi.context("system").pull("bloqfileguardian");
+        
+        try
+        {
+            LOGGER.addHandler(new FileHandler(fileguardian.loggingfileurl+fileguardian.loggingfilename));
+            
+            LOGGER.setUseParentHandlers(false);            
+        }
+        catch(IOException e)
+        {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }        
     }
     
     

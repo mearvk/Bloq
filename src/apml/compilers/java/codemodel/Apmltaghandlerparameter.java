@@ -1,13 +1,16 @@
 package apml.compilers.java.codemodel;
 
 import apml.modeling.Apmlmodelfile;
+
 import com.sun.codemodel.JCodeModel;
+
 import com.sun.codemodel.JDefinedClass;
+
 import com.sun.codemodel.JPackage;
 
 /**
  *
- * @author max rupplin
+ * @author Max Rupplin
  */
 public class Apmltaghandlerparameter
 {
