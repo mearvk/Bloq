@@ -34,7 +34,8 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * @author max rupplin
+ * @author Max Rupplin
+ * @since 03.28.2017 
  */
 public final class Apmlmodelpopulator 
 {

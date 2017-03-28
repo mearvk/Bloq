@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author Max Rupplin
+ * @since 03.28.2017
  */
 public class Bloqapmlmanager
 {   
@@ -68,7 +69,13 @@ public class Bloqapmlmanager
         }        
     }
     
-    
+    /**
+     * Takes APML input file(s) and creates the APML models (interim models) for use in creating final JCodeModel files
+     * 
+     * @param apmlxmlfile
+     * @param apmltag
+     * @return 
+     */
     public ArrayList<Apmlmodelfile> dosetapmlfiles(File apmlxmlfile, String apmltag)
     {        
         Apmlmodelpopulator apmlmodelpopulator = new Apmlmodelpopulator();
