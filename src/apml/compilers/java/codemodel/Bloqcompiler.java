@@ -99,17 +99,24 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     @Override
     public void setsourcefiles(Bloqjcodemodelmanager bloqjcmmanager)
     {
-        this.jcmmanager.dosetsourcefiles(bloqjcmmanager.apmlmodels);
-        
-        this.jcmmanager.dosetsourcefiles(bloqjcmmanager.dynamiclistenermodels);                             
-        
-        this.jcmmanager.dosetsourcefiles(bloqjcmmanager.listenermodels);                    
-        
-        this.jcmmanager.dosetsourcefiles(bloqjcmmanager.objectmodels);
-        
-        this.jcmmanager.dosetsourcefiles(bloqjcmmanager.subscribermodels);                    
-        
-        this.jcmmanager.dosetsourcefiles(bloqjcmmanager.systemmodels);           
+        try
+        {
+            this.jcmmanager.dosetsourcefiles(bloqjcmmanager.apmlmodels);
+
+            this.jcmmanager.dosetsourcefiles(bloqjcmmanager.dynamiclistenermodels);                             
+
+            this.jcmmanager.dosetsourcefiles(bloqjcmmanager.listenermodels);                    
+
+            this.jcmmanager.dosetsourcefiles(bloqjcmmanager.objectmodels);
+
+            this.jcmmanager.dosetsourcefiles(bloqjcmmanager.subscribermodels);                    
+
+            this.jcmmanager.dosetsourcefiles(bloqjcmmanager.systemmodels);           
+        }
+        catch(Exception e)
+        {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }
     }                               
           
     public void setjarfile() throws Exception
