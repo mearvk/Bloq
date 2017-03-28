@@ -6,13 +6,7 @@ import apml.compilers.java.codemodel.Bloqfileguardian;
 
 import apml.compilers.java.codemodel.Bloqjcodemodelmanager;
 
-import apml.compilers.java.codemodel.Bloqcompiler;
-
 import java.io.File;
-
-import java.util.logging.FileHandler;
-
-import java.util.logging.Logger;
 
 /**
  *
@@ -27,23 +21,13 @@ public abstract class Standardabstractapmlcompiler
     
     public Bloqjcodemodelmanager jcmmanager = new Bloqjcodemodelmanager();
     
-    public Bloqfileguardian fileguardian    = new Bloqfileguardian();
-
-    
-    public static final Logger LOGGER    = Logger.getLogger(Bloqcompiler.class.getName());     
+    public Bloqfileguardian fileguardian    = new Bloqfileguardian();        
     
     
     public Standardabstractapmlcompiler()
     {            
         try
-        {
-            /* -------------------------- Logger Setup -------------------------*/
-            
-            LOGGER.addHandler(new FileHandler(this.fileguardian.loggingfileurl+this.fileguardian.loggingfilename));
-            
-            LOGGER.setUseParentHandlers(false);
-            
-            
+        {                       
             /* --------------------------- New Files ---------------------------*/
             
             this.fileguardian.apmlinputfile         = new File(fileguardian.apmlinurl+fileguardian.apmlfilename);  

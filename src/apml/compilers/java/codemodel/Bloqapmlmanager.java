@@ -1,7 +1,5 @@
 package apml.compilers.java.codemodel;
 
-import static apml.compilers.java.codemodel.Bloqpopulatorimpl.LOGGER;
-
 import apml.helpers.Filegrepper;
 
 import apml.modeling.Apmlmodelfile;
@@ -19,6 +17,7 @@ import java.util.ArrayList;
 import java.util.logging.FileHandler;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,7 +25,8 @@ import java.util.logging.Level;
  */
 public class Bloqapmlmanager
 {   
-    private final Integer hash = 0x00888fe8;  
+    private final Integer hash = 0x00888fe8;
+    
     
     public ArrayList<Apmlmodelfile> apmlmodels;  
     
@@ -41,6 +41,9 @@ public class Bloqapmlmanager
     public ArrayList<Apmlmodelfile> subscribermodels;
     
     public ArrayList<Apmlmodelfile> systemmodels;
+    
+    
+    public static final Logger LOGGER    = Logger.getLogger(Bloqapmlmanager.class.getName());  
     
     
     public Bloqapmlmanager()

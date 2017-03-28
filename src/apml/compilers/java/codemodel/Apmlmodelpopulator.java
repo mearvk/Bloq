@@ -39,10 +39,13 @@ import org.w3c.dom.NodeList;
 public final class Apmlmodelpopulator 
 {
     private final Integer hash = 0x00888fe8;  
-            
-    protected static final Logger LOGGER = Logger.getLogger(Apmlmodelpopulator.class.getName());    
+    
     
     public ArrayList<Apmlmodelfile> apmlfiles;      
+        
+    
+    protected static final Logger LOGGER = Logger.getLogger(Apmlmodelpopulator.class.getName());
+    
     
     public static void main(String...args) 
     {                          
@@ -103,36 +106,27 @@ public final class Apmlmodelpopulator
       
     public ArrayList<Apmlmodelfile> getapmlmodelfiles(File apmlfile, String apmltag) throws Exception
     {                          
-        try
-        {
-            Xpathparameter xparam = new Xpathparameter(apmltag, apmlfile);          
+        Xpathparameter xparam = new Xpathparameter(apmltag, apmlfile);          
                                        
-            for(int i=0;i<xparam.getnodecount();i++)
-            {                            
-                switch(apmltag)
-                {
-                    case "//apml":              return doapmltags(xparam, apmltag);
+        for(int i=0; i<xparam.getnodecount(); i++)
+        {                            
+            switch(apmltag)
+            {
+                case "//apml":              return doapmltags(xparam, apmltag);
                     
-                    case "//definitions":       return dodefinitiontags(xparam, apmltag);
+                case "//definitions":       return dodefinitiontags(xparam, apmltag);
                         
-                    case "//dynamiclistener":   return dodynamiclistenertags(xparam, apmltag);                        
+                case "//dynamiclistener":   return dodynamiclistenertags(xparam, apmltag);                        
                         
-                    case "//listener":          return dolistenertags(xparam, apmltag); 
+                case "//listener":          return dolistenertags(xparam, apmltag); 
                         
-                    case "//object":            return doobjecttags(xparam, apmltag);                        
+                case "//object":            return doobjecttags(xparam, apmltag);                        
                         
-                    case "//subscriber":        return dosubscribertags(xparam, apmltag);                         
+                case "//subscriber":        return dosubscribertags(xparam, apmltag);                         
                     
-                    case "//system":            return dosystemtags(xparam, apmltag);   
-                        
-                    default: return null;
-                }
-            }                
+                case "//system":            return dosystemtags(xparam, apmltag);                           
+            }
         }
-        catch(Exception exception)
-        {
-            //
-        }      
         
         return null;
     }          
@@ -140,25 +134,41 @@ public final class Apmlmodelpopulator
     private ArrayList<Apmlmodelfile> doapmltags(Xpathparameter xparam, String apmltag) throws Exception
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();
+        
         for(int index=0; index<xparam.getnodecount(); index++)
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();
 
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.sourcedir=this.getsourcedir(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.builddir=this.getbuilddir(xparam, index);}                            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            
             try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                                                                    
+            
             try{modelfile.packagename=this.getpackagename(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.run=this.getruntag(xparam, index);}                                   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.start=this.getstarttag(xparam, index);}                               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.apmlimplementš=this.getimplements(xparam, index);}                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.apmllisteners=this.getlisteners(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.apmlobjects=this.getobjects(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             modelfiles.add(modelfile);
@@ -175,20 +185,35 @@ public final class Apmlmodelpopulator
             Apmlmodelfile modelfile=new Apmlmodelfile();
 
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}    
+            
             try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.sourcedir=this.getsourcedir(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.builddir=this.getbuilddir(xparam, index);}                            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            
             try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            
             try{modelfile.packagename=this.getpackagename(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.run=this.getruntag(xparam, index);}                                   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            
             try{modelfile.start=this.getstarttag(xparam, index);}                               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                                
+            
             try{modelfile.apmlimplementš=this.getimplements(xparam, index);}                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.apmllisteners=this.getlisteners(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.apmlobjects=this.getobjects(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/} 
             
             modelfiles.add(modelfile);
@@ -199,25 +224,38 @@ public final class Apmlmodelpopulator
 
     private ArrayList<Apmlmodelfile> dodynamiclistenertags(Xpathparameter xparam, String apmltag)
     {
-        ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
+        ArrayList<Apmlmodelfile> modelfiles = new ArrayList(); 
+        
         for(int index=0; index<xparam.getnodecount(); index++)
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();
 
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
-            try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
-            try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
-            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
-            try{modelfile.sourcedir=this.getsourcedir(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
-            try{modelfile.builddir=this.getbuilddir(xparam, index);}                            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                               
-            try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
-            try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
-            try{modelfile.packagename=this.getpackagename(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
-            try{modelfile.run=this.getruntag(xparam, index);}                                   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
-            try{modelfile.start=this.getstarttag(xparam, index);}                               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
-            try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
-            try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                   
             
+            try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.sourcedir=this.getsourcedir(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.builddir=this.getbuilddir(xparam, index);}                            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                               
+            
+            try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            
+            try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.packagename=this.getpackagename(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.run=this.getruntag(xparam, index);}                                   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.start=this.getstarttag(xparam, index);}                               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                   
+                        
             modelfiles.add(modelfile);
         }       
         
@@ -226,23 +264,36 @@ public final class Apmlmodelpopulator
      
     private ArrayList<Apmlmodelfile> dolistenertags(Xpathparameter xparam, String apmltag)
     {
-        ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
+        ArrayList<Apmlmodelfile> modelfiles = new ArrayList();    
+        
         for(int index=0; index<xparam.getnodecount(); index++)
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();
                             
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.sourcedir=this.getsourcedir(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.builddir=this.getbuilddir(xparam, index);}                            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                    
+            
             try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}        
+            
             try{modelfile.packagename=this.getpackagename(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.run=this.getruntag(xparam, index);}                                   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.start=this.getstarttag(xparam, index);}                               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                       
+            
             try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}           
             
             modelfiles.add(modelfile);
@@ -253,24 +304,38 @@ public final class Apmlmodelpopulator
    
     private ArrayList<Apmlmodelfile> doobjecttags(Xpathparameter xparam, String apmltag)
     {
-        ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
+        ArrayList<Apmlmodelfile> modelfiles = new ArrayList(); 
+        
         for(int index=0; index<xparam.getnodecount(); index++)
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();
                             
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}         
+            
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.sourcedir=this.getsourcedir(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.builddir=this.getbuilddir(xparam, index);}                            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                       
+            
             try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            
             try{modelfile.packagename=this.getpackagename(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.run=this.getruntag(xparam, index);}                                   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.start=this.getstarttag(xparam, index);}                               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                      
+            
             try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                       
+            
             try{modelfile.apmllisteners=this.getlisteners(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             modelfiles.add(modelfile);
@@ -281,23 +346,36 @@ public final class Apmlmodelpopulator
   
     private ArrayList<Apmlmodelfile> dosubscribertags(Xpathparameter xparam, String apmltag)
     {
-        ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
+        ArrayList<Apmlmodelfile> modelfiles = new ArrayList();   
+        
         for(int index=0; index<xparam.getnodecount(); index++)
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();
                               
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.sourcedir=this.getsourcedir(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.builddir=this.getbuilddir(xparam, index);}                            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                        
+            
             try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}          
+            
             try{modelfile.packagename=this.getpackagename(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.run=this.getruntag(xparam, index);}                                   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.start=this.getstarttag(xparam, index);}                               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            
             try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}         
+            
             try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                               
             
             modelfiles.add(modelfile);
@@ -308,26 +386,42 @@ public final class Apmlmodelpopulator
 
     private ArrayList<Apmlmodelfile> dosystemtags(Xpathparameter xparam, String apmltag)
     {
-        ArrayList<Apmlmodelfile> modelfiles = new ArrayList();        
+        ArrayList<Apmlmodelfile> modelfiles = new ArrayList();  
+        
         for(int index=0; index<xparam.getnodecount(); index++)  //show two system tags 
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();        //show two apml files for each system
 
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                       
+            
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.sourcedir=this.getsourcedir(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.builddir=this.getbuilddir(xparam, index);}                            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}           
+            
             try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}          
+            
             try{modelfile.packagename=this.getpackagename(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.run=this.getruntag(xparam, index);}                                   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.start=this.getstarttag(xparam, index);}                               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.apmlimplementš=this.getimplements(xparam, index);}                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.apmllisteners=this.getlisteners(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{modelfile.apmlobjects=this.getobjects(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             modelfiles.add(modelfile);

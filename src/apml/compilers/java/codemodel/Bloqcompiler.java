@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.logging.FileHandler;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
@@ -22,7 +23,11 @@ import java.util.logging.Level;
  */
 public class Bloqcompiler extends Standardabstractapmlcompiler
 {        
-    private final Integer hash = 0x00888fe8;                    
+    private final Integer hash = 0x00888fe8;  
+    
+    
+    public static final Logger LOGGER = Logger.getLogger(Bloqcompiler.class.getName());
+    
                
     public Bloqcompiler()
     {                        

@@ -1,7 +1,5 @@
 package apml.compilers.java.codemodel;
 
-import static apml.compilers.java.codemodel.Bloqpopulatorimpl.LOGGER;
-
 import apml.system.bodi.Bodi;
 
 import java.io.File;
@@ -11,6 +9,7 @@ import java.io.IOException;
 import java.util.logging.FileHandler;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,7 +17,11 @@ import java.util.logging.Level;
  */
 public class Bloqfileguardian 
 {
-    private final Integer hash = 0x00888fe8;  
+    private final Integer hash = 0x00888fe8;
+    
+    
+    public static final Logger LOGGER = Logger.getLogger(Bloqfileguardian.class.getName());
+    
     
     public Bloqfileguardian()
     {      
