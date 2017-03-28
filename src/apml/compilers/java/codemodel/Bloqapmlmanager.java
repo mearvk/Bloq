@@ -103,7 +103,11 @@ public class Bloqapmlmanager
     }  
     
     
-    
+    /**
+     * Takes partial JCodeModel models, compiles them to .class files for purposes of completing final JCodeModel references
+     * 
+     * @param apmlmodelfiles 
+     */
     public void dosettempfiles(ArrayList<Apmlmodelfile> apmlmodelfiles) 
     {
         Bloqfileguardian fileguardian = (Bloqfileguardian)Bodi.context("system").pull("bloqfileguardian");
