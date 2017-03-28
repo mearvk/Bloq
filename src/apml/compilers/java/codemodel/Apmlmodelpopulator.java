@@ -599,21 +599,29 @@ public final class Apmlmodelpopulator
         {
             NodeList nodes = (NodeList)xparam.xpath.evaluate("./implements", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
                         
-            for(int i=0; i<nodes.getLength(); i++)  
+            for(int indexi=0; indexi<nodes.getLength(); indexi++)  
             {
-                Element element = (Element)nodes.item(i);            
-
                 Apmlimplement object = new Apmlimplement();            
+                
+                String xpathstring = "(./implements["+(indexi+1)+"]/ancestor::package/@default)[last()]";
+                
+                Element element = (Element)nodes.item(indexi);            
+
+                /*--------------------------------------------------------------*/
 
                 object.alias            = element.getAttribute("alias");
-                object.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
-                object.classname        = element.getAttribute("class");
-                object.extension        = element.getAttribute("extends");
                 
-                String xpathstring = "(./implements["+(i+1)+"]/ancestor::package/@default)[last()]";
+                object.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
+                
+                object.classname        = element.getAttribute("class");
+                
+                object.extension        = element.getAttribute("extends");                                
                 
                 object.packagename      = (String)xparam.xpath.evaluate(xpathstring, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                
                 object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
+                
+                /*--------------------------------------------------------------*/
 
                 implementz.add(object);
             }            
