@@ -17,11 +17,11 @@ public abstract class Standardabstractapmlcompiler
     protected final Integer hash = 0x00888fe8;     
         
     
+    public Bloqfileguardian fileguardian    = new Bloqfileguardian(); //todo can we fix temporal dependency
+    
     public Bloqapmlmanager apmlmanager      = new Bloqapmlmanager(); 
     
-    public Bloqjcodemodelmanager jcmmanager = new Bloqjcodemodelmanager();
-    
-    public Bloqfileguardian fileguardian    = new Bloqfileguardian();        
+    public Bloqjcodemodelmanager jcmmanager = new Bloqjcodemodelmanager();               
     
     
     public Standardabstractapmlcompiler()
