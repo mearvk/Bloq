@@ -80,73 +80,7 @@ public class Bloqapmlmanager
         return apmlmodelfiles;
     }  
     
-    public ArrayList<JCodeModel> dosetoutputfiles(ArrayList<Apmlmodelfile> apmlmodelfiles, String apmltag)
-    {
-        Bloqpopulatorimpl jcmmodelpopulator = new Bloqpopulatorimpl();
-        
-        ArrayList<JCodeModel> jcmmodels_genericfiles = null;
-                
-        Bloqjcodemodelmanager jcmmanager = (Bloqjcodemodelmanager)Bodi.context("system").pull("bloqjcodemodelmanager");
-        
-        try
-        {                        
-            switch(apmltag)
-            {
-                case "//apml": jcmmanager.apmlmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
-                    
-                case "//definitions": jcmmanager.definitionmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
-                    
-                case "//dynamiclistener": jcmmanager.dynamiclistenermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
-                    
-                case "//listener": jcmmanager.listenermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;   
-                    
-                case "//object": jcmmanager.objectmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                     
-                    
-                case "//subscriber": jcmmanager.subscribermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
-                    
-                case "//system": jcmmanager.systemmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
-            }                     
-        }
-        catch(Exception e)
-        {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
-        }
-        
-        return jcmmodels_genericfiles;
-    }    
     
-    public void dosetsourcefiles(ArrayList<JCodeModel> jcmmodels)
-    {        
-        Bloqfileguardian fileguardian = (Bloqfileguardian)Bodi.context("system").pull("bloqfileguardian");
-        
-        for(int i=0; i<jcmmodels.size(); i++)
-        {
-            try
-            {                                
-                Iterator<JPackage> packages = jcmmodels.get(i).packages();
-                                
-                while(packages.hasNext())
-                {                    
-                    JPackage jpackage = packages.next();                            
-                                    
-                    Iterator<JDefinedClass> classes = jpackage.classes();
-                    
-                    String pname = jpackage.name();
-                    
-                    while(classes.hasNext())
-                    {                                              
-                        String cname = classes.next().name();
-                        
-                        jcmmodels.get(i).build(new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.srcextensionurl), System.err);           
-                    }
-                }
-            }
-            catch(Exception e)
-            {
-                /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
-            }                       
-        }                
-    }    
     
     public void dosettempfiles(ArrayList<Apmlmodelfile> apmlmodelfiles) 
     {

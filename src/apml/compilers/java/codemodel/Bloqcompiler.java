@@ -77,17 +77,17 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     {        
         try
         {                        
-            this.apmlmanager.dosetoutputfiles(bloqapmlmanager.apmlmodels, "//apml");
+            this.jcmmanager.dosetoutputfiles(bloqapmlmanager.apmlmodels, "//apml");
             
-            this.apmlmanager.dosetoutputfiles(bloqapmlmanager.dynamiclistenermodels, "//dynamiclistener");
+            this.jcmmanager.dosetoutputfiles(bloqapmlmanager.dynamiclistenermodels, "//dynamiclistener");
             
-            this.apmlmanager.dosetoutputfiles(bloqapmlmanager.listenermodels, "//listener");
+            this.jcmmanager.dosetoutputfiles(bloqapmlmanager.listenermodels, "//listener");
             
-            this.apmlmanager.dosetoutputfiles(bloqapmlmanager.objectmodels, "//object");
+            this.jcmmanager.dosetoutputfiles(bloqapmlmanager.objectmodels, "//object");
             
-            this.apmlmanager.dosetoutputfiles(bloqapmlmanager.subscribermodels, "//subscriber");
+            this.jcmmanager.dosetoutputfiles(bloqapmlmanager.subscribermodels, "//subscriber");
             
-            this.apmlmanager.dosetoutputfiles(bloqapmlmanager.systemmodels, "//system");         
+            this.jcmmanager.dosetoutputfiles(bloqapmlmanager.systemmodels, "//system");         
         }
         catch(Exception e)
         {
@@ -98,38 +98,36 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     @Override
     public void setsourcefiles(Bloqjcodemodelmanager bloqjcmmanager)
     {
-        this.apmlmanager.dosetsourcefiles(bloqjcmmanager.apmlmodels);
+        this.jcmmanager.dosetsourcefiles(bloqjcmmanager.apmlmodels);
         
-        this.apmlmanager.dosetsourcefiles(bloqjcmmanager.dynamiclistenermodels);                             
+        this.jcmmanager.dosetsourcefiles(bloqjcmmanager.dynamiclistenermodels);                             
         
-        this.apmlmanager.dosetsourcefiles(bloqjcmmanager.listenermodels);                    
+        this.jcmmanager.dosetsourcefiles(bloqjcmmanager.listenermodels);                    
         
-        this.apmlmanager.dosetsourcefiles(bloqjcmmanager.objectmodels);
+        this.jcmmanager.dosetsourcefiles(bloqjcmmanager.objectmodels);
         
-        this.apmlmanager.dosetsourcefiles(bloqjcmmanager.subscribermodels);                    
+        this.jcmmanager.dosetsourcefiles(bloqjcmmanager.subscribermodels);                    
         
-        this.apmlmanager.dosetsourcefiles(bloqjcmmanager.systemmodels);           
-    }    
-    
-                   
+        this.jcmmanager.dosetsourcefiles(bloqjcmmanager.systemmodels);           
+    }                           
     
     public void dowritesourcetoharddrive()
     {
         try
         {
-            this.apmlmanager.dosetsourcefiles(this.jcmmanager.apmlmodels);
+            this.jcmmanager.dosetsourcefiles(this.jcmmanager.apmlmodels);
             
-            this.apmlmanager.dosetsourcefiles(this.jcmmanager.definitionmodels);
+            this.jcmmanager.dosetsourcefiles(this.jcmmanager.definitionmodels);
             
-            this.apmlmanager.dosetsourcefiles(this.jcmmanager.dynamiclistenermodels);            
+            this.jcmmanager.dosetsourcefiles(this.jcmmanager.dynamiclistenermodels);            
             
-            this.apmlmanager.dosetsourcefiles(this.jcmmanager.listenermodels);
+            this.jcmmanager.dosetsourcefiles(this.jcmmanager.listenermodels);
             
-            this.apmlmanager.dosetsourcefiles(this.jcmmanager.objectmodels);
+            this.jcmmanager.dosetsourcefiles(this.jcmmanager.objectmodels);
             
-            this.apmlmanager.dosetsourcefiles(this.jcmmanager.subscribermodels);
+            this.jcmmanager.dosetsourcefiles(this.jcmmanager.subscribermodels);
             
-            this.apmlmanager.dosetsourcefiles(this.jcmmanager.systemmodels);
+            this.jcmmanager.dosetsourcefiles(this.jcmmanager.systemmodels);
             
             try
             {
