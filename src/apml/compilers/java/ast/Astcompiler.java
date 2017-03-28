@@ -1,6 +1,6 @@
 package apml.compilers.java.ast;
 
-import apml.compilers.java.codemodel.Bloqapmlmanager;
+import apml.compilers.java.codemodel.Bloqinputmanager;
 import apml.compilers.java.codemodel.Bloqfileguardian;
 
 /**
@@ -9,7 +9,7 @@ import apml.compilers.java.codemodel.Bloqfileguardian;
  */
 public class Astcompiler 
 {
-    public Bloqapmlmanager apmlmanager = new Bloqapmlmanager(); 
+    public Bloqinputmanager apmlmanager = new Bloqinputmanager(); 
     
     public Bloqastmanager astmanager = new Bloqastmanager();
     
@@ -44,12 +44,12 @@ public class Astcompiler
         
     }
     
-    public void settempfiles(Bloqapmlmanager apmlmanager)
+    public void settempfiles(Bloqinputmanager apmlmanager)
     {
         
     }
     
-    public void setastfiles(Bloqapmlmanager apmlmanager)
+    public void setastfiles(Bloqinputmanager apmlmanager)
     {
         
     }

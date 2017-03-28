@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * @author Max Rupplin
  * @since 03.28.2017
  */
-public class Bloqapmlmanager
+public class Bloqinputmanager
 {   
     private final Integer hash = 0x00888fe8;
     
@@ -45,10 +45,10 @@ public class Bloqapmlmanager
     public ArrayList<Apmlmodelfile> systemmodels;
     
     
-    public static final Logger LOGGER    = Logger.getLogger(Bloqapmlmanager.class.getName());  
+    public static final Logger LOGGER    = Logger.getLogger(Bloqinputmanager.class.getName());  
     
     
-    public Bloqapmlmanager()
+    public Bloqinputmanager()
     {
         Bodi.setcontext("system");
         

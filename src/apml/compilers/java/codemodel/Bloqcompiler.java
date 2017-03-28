@@ -58,17 +58,17 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     {
         try
         {            
-            this.apmlmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//apml");
+            this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//apml");
             
-            this.apmlmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//dynamiclistener");
+            this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//dynamiclistener");
             
-            this.apmlmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//listener");    
+            this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//listener");    
             
-            this.apmlmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//object");   
+            this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//object");   
             
-            this.apmlmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//subscriber");
+            this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//subscriber");
             
-            this.apmlmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//system");        
+            this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//system");        
         }
         catch(Exception e)
         {
@@ -77,21 +77,21 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     }    
     
     @Override
-    public void settempfiles(Bloqapmlmanager bloqapmlmanager)
+    public void settempfiles(Bloqinputmanager bloqapmlmanager)
     {
         try
         {
-            this.apmlmanager.dosettempfiles(bloqapmlmanager.apmlmodels);
+            this.inputmanager.dosettempfiles(bloqapmlmanager.apmlmodels);
             
-            this.apmlmanager.dosettempfiles(bloqapmlmanager.dynamiclistenermodels);
+            this.inputmanager.dosettempfiles(bloqapmlmanager.dynamiclistenermodels);
             
-            this.apmlmanager.dosettempfiles(bloqapmlmanager.listenermodels);
+            this.inputmanager.dosettempfiles(bloqapmlmanager.listenermodels);
             
-            this.apmlmanager.dosettempfiles(bloqapmlmanager.objectmodels);
+            this.inputmanager.dosettempfiles(bloqapmlmanager.objectmodels);
             
-            this.apmlmanager.dosettempfiles(bloqapmlmanager.subscribermodels);
+            this.inputmanager.dosettempfiles(bloqapmlmanager.subscribermodels);
             
-            this.apmlmanager.dosettempfiles(bloqapmlmanager.systemmodels);
+            this.inputmanager.dosettempfiles(bloqapmlmanager.systemmodels);
         }
         catch(Exception e)
         {
@@ -100,21 +100,21 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     }
         
     @Override
-    public void setoutputfiles(Bloqapmlmanager bloqapmlmanager)
+    public void setoutputfiles(Bloqinputmanager bloqapmlmanager)
     {        
         try
         {                        
-            this.jcmmanager.dosetoutputfiles(bloqapmlmanager.apmlmodels, "//apml");
+            this.outputmanager.dosetoutputfiles(bloqapmlmanager.apmlmodels, "//apml");
             
-            this.jcmmanager.dosetoutputfiles(bloqapmlmanager.dynamiclistenermodels, "//dynamiclistener");
+            this.outputmanager.dosetoutputfiles(bloqapmlmanager.dynamiclistenermodels, "//dynamiclistener");
             
-            this.jcmmanager.dosetoutputfiles(bloqapmlmanager.listenermodels, "//listener");
+            this.outputmanager.dosetoutputfiles(bloqapmlmanager.listenermodels, "//listener");
             
-            this.jcmmanager.dosetoutputfiles(bloqapmlmanager.objectmodels, "//object");
+            this.outputmanager.dosetoutputfiles(bloqapmlmanager.objectmodels, "//object");
             
-            this.jcmmanager.dosetoutputfiles(bloqapmlmanager.subscribermodels, "//subscriber");
+            this.outputmanager.dosetoutputfiles(bloqapmlmanager.subscribermodels, "//subscriber");
             
-            this.jcmmanager.dosetoutputfiles(bloqapmlmanager.systemmodels, "//system");         
+            this.outputmanager.dosetoutputfiles(bloqapmlmanager.systemmodels, "//system");         
         }
         catch(Exception e)
         {
@@ -123,21 +123,21 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     }
     
     @Override
-    public void setsourcefiles(Bloqjcodemodelmanager bloqjcmmanager)
+    public void setsourcefiles(Bloqoutputmanager bloqjcmmanager)
     {
         try
         {
-            this.jcmmanager.dosetsourcefiles(bloqjcmmanager.apmlmodels);
+            this.outputmanager.dosetsourcefiles(bloqjcmmanager.apmlmodels);
 
-            this.jcmmanager.dosetsourcefiles(bloqjcmmanager.dynamiclistenermodels);                             
+            this.outputmanager.dosetsourcefiles(bloqjcmmanager.dynamiclistenermodels);                             
 
-            this.jcmmanager.dosetsourcefiles(bloqjcmmanager.listenermodels);                    
+            this.outputmanager.dosetsourcefiles(bloqjcmmanager.listenermodels);                    
 
-            this.jcmmanager.dosetsourcefiles(bloqjcmmanager.objectmodels);
+            this.outputmanager.dosetsourcefiles(bloqjcmmanager.objectmodels);
 
-            this.jcmmanager.dosetsourcefiles(bloqjcmmanager.subscribermodels);                    
+            this.outputmanager.dosetsourcefiles(bloqjcmmanager.subscribermodels);                    
 
-            this.jcmmanager.dosetsourcefiles(bloqjcmmanager.systemmodels);           
+            this.outputmanager.dosetsourcefiles(bloqjcmmanager.systemmodels);           
         }
         catch(Exception e)
         {
@@ -168,11 +168,11 @@ class Localdriver
             
             bloqcompiler.setapmlfiles(bloqcompiler.fileguardian);
             
-            bloqcompiler.settempfiles(bloqcompiler.apmlmanager);
+            bloqcompiler.settempfiles(bloqcompiler.inputmanager);
             
-            bloqcompiler.setoutputfiles(bloqcompiler.apmlmanager);         
+            bloqcompiler.setoutputfiles(bloqcompiler.inputmanager);         
             
-            bloqcompiler.setsourcefiles(bloqcompiler.jcmmanager);
+            bloqcompiler.setsourcefiles(bloqcompiler.outputmanager);
             
             bloqcompiler.setjarfile();
             

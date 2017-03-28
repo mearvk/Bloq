@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  * @author Max Rupplin
  * @since 03.28.2017
  */
-public class Bloqjcodemodelmanager
+public class Bloqoutputmanager
 {
     private final Integer hash = 0x00888fe8;  
     
@@ -49,10 +49,10 @@ public class Bloqjcodemodelmanager
     public ArrayList<JCodeModel> systemmodels;
     
     
-    public static final Logger LOGGER = Logger.getLogger(Bloqjcodemodelmanager.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(Bloqoutputmanager.class.getName());
     
     
-    public Bloqjcodemodelmanager()
+    public Bloqoutputmanager()
     {
         Bodi.setcontext("system");
         
@@ -78,7 +78,7 @@ public class Bloqjcodemodelmanager
         
         ArrayList<JCodeModel> jcmmodels_genericfiles = null;
                 
-        Bloqjcodemodelmanager jcmmanager = (Bloqjcodemodelmanager)Bodi.context("system").pull("bloqjcodemodelmanager");
+        Bloqoutputmanager jcmmanager = (Bloqoutputmanager)Bodi.context("system").pull("bloqjcodemodelmanager");
         
         try
         {                        

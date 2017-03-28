@@ -1,10 +1,10 @@
 package apml.compilers;
 
-import apml.compilers.java.codemodel.Bloqapmlmanager;
+import apml.compilers.java.codemodel.Bloqinputmanager;
 
 import apml.compilers.java.codemodel.Bloqfileguardian;
 
-import apml.compilers.java.codemodel.Bloqjcodemodelmanager;
+import apml.compilers.java.codemodel.Bloqoutputmanager;
 
 import java.io.File;
 
@@ -19,9 +19,9 @@ public abstract class Standardabstractapmlcompiler
     
     public Bloqfileguardian fileguardian    = new Bloqfileguardian(); //todo can we fix temporal dependency
     
-    public Bloqapmlmanager apmlmanager      = new Bloqapmlmanager(); 
+    public Bloqinputmanager inputmanager      = new Bloqinputmanager(); 
     
-    public Bloqjcodemodelmanager jcmmanager = new Bloqjcodemodelmanager();               
+    public Bloqoutputmanager outputmanager = new Bloqoutputmanager();               
     
     
     public Standardabstractapmlcompiler()
@@ -68,7 +68,7 @@ public abstract class Standardabstractapmlcompiler
     }
     
     /**
-     * Read in the APML system specification file and store in Bloqapmlmanager reference
+     * Read in the APML system specification file and store in Bloqinputmanager reference
      * 
      * @param fileguardian 
      */
@@ -79,19 +79,19 @@ public abstract class Standardabstractapmlcompiler
      * 
      * @param apmlmanager 
      */
-    public abstract void settempfiles(Bloqapmlmanager apmlmanager);
+    public abstract void settempfiles(Bloqinputmanager apmlmanager);
     
     /**
      * Having read APML file and created all required temporary files we create the files/models for final output files
      * 
      * @param apmlmanager 
      */
-    public abstract void setoutputfiles(Bloqapmlmanager apmlmanager);
+    public abstract void setoutputfiles(Bloqinputmanager apmlmanager);
     
     /**
      * Handle outputting of files/models to disk, write out source models to computer hard drive
      * 
      * @param astmanager 
      */
-    public abstract void setsourcefiles(Bloqjcodemodelmanager astmanager);  
+    public abstract void setsourcefiles(Bloqoutputmanager astmanager);  
 }

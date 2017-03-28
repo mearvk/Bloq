@@ -2,11 +2,11 @@ package apml.compilers.objectivec;
 
 import apml.compilers.Standardabstractapmlcompiler;
 
-import apml.compilers.java.codemodel.Bloqapmlmanager;
+import apml.compilers.java.codemodel.Bloqinputmanager;
 
 import apml.compilers.java.codemodel.Bloqfileguardian;
 
-import apml.compilers.java.codemodel.Bloqjcodemodelmanager;
+import apml.compilers.java.codemodel.Bloqoutputmanager;
 
 /**
  *
@@ -22,19 +22,19 @@ public class Objectiveccompiler extends Standardabstractapmlcompiler
     }
 
     @Override
-    public void settempfiles(Bloqapmlmanager apmlmanager)
+    public void settempfiles(Bloqinputmanager apmlmanager)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setoutputfiles(Bloqapmlmanager apmlmanager)
+    public void setoutputfiles(Bloqinputmanager apmlmanager)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setsourcefiles(Bloqjcodemodelmanager astmanager)
+    public void setsourcefiles(Bloqoutputmanager astmanager)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

@@ -2,7 +2,7 @@ package apml.compilers.csharp;
 
 import apml.compilers.Standardabstractapmlcompiler;
 
-import apml.compilers.java.codemodel.Bloqjcodemodelmanager;
+import apml.compilers.java.codemodel.Bloqoutputmanager;
 
 /**
  *
@@ -18,19 +18,19 @@ public class Csharpcompiler extends Standardabstractapmlcompiler
     }
 
     @Override
-    public void settempfiles(apml.compilers.java.codemodel.Bloqapmlmanager apmlmanager)
+    public void settempfiles(apml.compilers.java.codemodel.Bloqinputmanager apmlmanager)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setoutputfiles(apml.compilers.java.codemodel.Bloqapmlmanager apmlmanager)
+    public void setoutputfiles(apml.compilers.java.codemodel.Bloqinputmanager apmlmanager)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void setsourcefiles(Bloqjcodemodelmanager astmanager)
+    public void setsourcefiles(Bloqoutputmanager astmanager)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
