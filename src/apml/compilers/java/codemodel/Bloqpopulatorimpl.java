@@ -9,6 +9,7 @@ import apml.interfaces.Initializable;
 import apml.helpers.Filegrepper;
 
 import apml.modeling.Apmlmodelfile;
+import apml.system.bodi.Bodi;
 
 import com.sun.codemodel.JClassAlreadyExistsException;
 
@@ -72,15 +73,19 @@ public class Bloqpopulatorimpl
     
     public Bloqpopulatorimpl()
     {
+        Bodi.setcontext("system");
+        
+        Bodi.context("system").put("bloqpopulatorimpl", this);        
+        
         try
         {
             LOGGER.addHandler(new FileHandler(this.loggingfile));
             
-            LOGGER.setUseParentHandlers(false);
+            LOGGER.setUseParentHandlers(false);            
         }
         catch(IOException | SecurityException e)
         {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
     }            
     

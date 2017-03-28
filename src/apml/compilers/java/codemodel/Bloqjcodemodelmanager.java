@@ -7,6 +7,7 @@ package apml.compilers.java.codemodel;
 
 //import apml.compilers.Bloqabstractoutputmanager;
 
+import apml.system.bodi.Bodi;
 import com.sun.codemodel.JCodeModel;
 
 import java.util.ArrayList;
@@ -32,4 +33,12 @@ public class Bloqjcodemodelmanager
     public ArrayList<JCodeModel> subscribermodels;
     
     public ArrayList<JCodeModel> systemmodels;
+    
+    
+    public Bloqjcodemodelmanager()
+    {
+        Bodi.setcontext("system");
+        
+        Bodi.context("system").put("Bloqjcodemodelmanager", this);
+    }
 }

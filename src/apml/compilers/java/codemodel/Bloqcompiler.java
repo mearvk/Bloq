@@ -4,23 +4,12 @@ import static java.nio.file.StandardCopyOption.*;
 
 import apml.compilers.Standardabstractapmlcompiler;
 
-import apml.helpers.Filegrepper;
-
-import apml.modeling.Apmlmodelfile;
-
-import com.sun.codemodel.JCodeModel;
-
-import com.sun.codemodel.JDefinedClass;
-
-import com.sun.codemodel.JPackage;
+import apml.system.bodi.Bodi;
 
 import java.nio.file.Files;
 
-import java.util.ArrayList;
-
-import java.util.Iterator;
-
 import java.io.File;
+import java.util.logging.Level;
 
 /**
  * 
@@ -32,7 +21,9 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
                
     public Bloqcompiler()
     {                        
-        //moved to common abstract compiler
+        Bodi.setcontext("system");
+        
+        Bodi.context("system").put("bloqcompiler", this);
     }          
         
     @Override
@@ -40,21 +31,21 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     {
         try
         {            
-            this.dosetapmlfiles(fileguardian.apmlinputfile, "//apml");
+            this.apmlmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//apml");
             
-            this.dosetapmlfiles(fileguardian.apmlinputfile, "//dynamiclistener");
+            this.apmlmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//dynamiclistener");
             
-            this.dosetapmlfiles(fileguardian.apmlinputfile, "//listener");    
+            this.apmlmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//listener");    
             
-            this.dosetapmlfiles(fileguardian.apmlinputfile, "//object");   
+            this.apmlmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//object");   
             
-            this.dosetapmlfiles(fileguardian.apmlinputfile, "//subscriber");
+            this.apmlmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//subscriber");
             
-            this.dosetapmlfiles(fileguardian.apmlinputfile, "//system");        
+            this.apmlmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//system");        
         }
         catch(Exception e)
         {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
     }    
     
@@ -63,21 +54,21 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     {
         try
         {
-            this.dosettempfiles(bloqapmlmanager.apmlmodels);
+            this.apmlmanager.dosettempfiles(bloqapmlmanager.apmlmodels);
             
-            this.dosettempfiles(bloqapmlmanager.dynamiclistenermodels);
+            this.apmlmanager.dosettempfiles(bloqapmlmanager.dynamiclistenermodels);
             
-            this.dosettempfiles(bloqapmlmanager.listenermodels);
+            this.apmlmanager.dosettempfiles(bloqapmlmanager.listenermodels);
             
-            this.dosettempfiles(bloqapmlmanager.objectmodels);
+            this.apmlmanager.dosettempfiles(bloqapmlmanager.objectmodels);
             
-            this.dosettempfiles(bloqapmlmanager.subscribermodels);
+            this.apmlmanager.dosettempfiles(bloqapmlmanager.subscribermodels);
             
-            this.dosettempfiles(bloqapmlmanager.systemmodels);
+            this.apmlmanager.dosettempfiles(bloqapmlmanager.systemmodels);
         }
         catch(Exception e)
         {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
     }
         
@@ -86,201 +77,59 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     {        
         try
         {                        
-            this.dosetoutputfiles(bloqapmlmanager.apmlmodels, "//apml");
+            this.apmlmanager.dosetoutputfiles(bloqapmlmanager.apmlmodels, "//apml");
             
-            this.dosetoutputfiles(bloqapmlmanager.dynamiclistenermodels, "//dynamiclistener");
+            this.apmlmanager.dosetoutputfiles(bloqapmlmanager.dynamiclistenermodels, "//dynamiclistener");
             
-            this.dosetoutputfiles(bloqapmlmanager.listenermodels, "//listener");
+            this.apmlmanager.dosetoutputfiles(bloqapmlmanager.listenermodels, "//listener");
             
-            this.dosetoutputfiles(bloqapmlmanager.objectmodels, "//object");
+            this.apmlmanager.dosetoutputfiles(bloqapmlmanager.objectmodels, "//object");
             
-            this.dosetoutputfiles(bloqapmlmanager.subscribermodels, "//subscriber");
+            this.apmlmanager.dosetoutputfiles(bloqapmlmanager.subscribermodels, "//subscriber");
             
-            this.dosetoutputfiles(bloqapmlmanager.systemmodels, "//system");         
+            this.apmlmanager.dosetoutputfiles(bloqapmlmanager.systemmodels, "//system");         
         }
         catch(Exception e)
         {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
     }
     
     @Override
     public void setsourcefiles(Bloqjcodemodelmanager bloqjcmmanager)
     {
-        this.dosetsourcefiles(bloqjcmmanager.apmlmodels);
+        this.apmlmanager.dosetsourcefiles(bloqjcmmanager.apmlmodels);
         
-        this.dosetsourcefiles(bloqjcmmanager.dynamiclistenermodels);                             
+        this.apmlmanager.dosetsourcefiles(bloqjcmmanager.dynamiclistenermodels);                             
         
-        this.dosetsourcefiles(bloqjcmmanager.listenermodels);                    
+        this.apmlmanager.dosetsourcefiles(bloqjcmmanager.listenermodels);                    
         
-        this.dosetsourcefiles(bloqjcmmanager.objectmodels);
+        this.apmlmanager.dosetsourcefiles(bloqjcmmanager.objectmodels);
         
-        this.dosetsourcefiles(bloqjcmmanager.subscribermodels);                    
+        this.apmlmanager.dosetsourcefiles(bloqjcmmanager.subscribermodels);                    
         
-        this.dosetsourcefiles(bloqjcmmanager.systemmodels);           
+        this.apmlmanager.dosetsourcefiles(bloqjcmmanager.systemmodels);           
     }    
     
-    private ArrayList<Apmlmodelfile> dosetapmlfiles(File apmlxmlfile, String apmltag)
-    {        
-        Apmlmodelpopulator apmlmodelpopulator = new Apmlmodelpopulator();
-        
-        ArrayList<Apmlmodelfile> apmlmodelfiles = null;
-        
-        try
-        {
-            switch(apmltag)
-            {                    
-                case "//apml": this.apmlmanager.apmlmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
-                
-                case "//definitions": this.apmlmanager.definitionmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
-                
-                case "//dynamiclistener": this.apmlmanager.dynamiclistenermodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
-                
-                case "//listener": this.apmlmanager.listenermodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
-                
-                case "//object": this.apmlmanager.objectmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
-                
-                case "//subscriber": this.apmlmanager.subscribermodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
-                
-                case "//system": this.apmlmanager.systemmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
-            }            
-        }
-        catch(Exception e)
-        {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
-        }
-        
-        return apmlmodelfiles;
-    }  
-    
-    private ArrayList<JCodeModel> dosetoutputfiles(ArrayList<Apmlmodelfile> apmlmodelfiles, String apmltag)
-    {
-        Bloqpopulatorimpl jcmmodelpopulator = new Bloqpopulatorimpl();
-        
-        ArrayList<JCodeModel> jcmmodels_genericfiles = null;
-                
-        try
-        {
-            switch(apmltag)
-            {
-                case "//apml": this.jcmmanager.apmlmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
-                    
-                case "//definitions": this.jcmmanager.definitionmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
-                    
-                case "//dynamiclistener": this.jcmmanager.dynamiclistenermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
-                    
-                case "//listener": this.jcmmanager.listenermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;   
-                    
-                case "//object": this.jcmmanager.objectmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                     
-                    
-                case "//subscriber": this.jcmmanager.subscribermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
-                    
-                case "//system": this.jcmmanager.systemmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;                    
-            }                     
-        }
-        catch(Exception e)
-        {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
-        }
-        
-        return jcmmodels_genericfiles;
-    }    
-    
-    private void dosetsourcefiles(ArrayList<JCodeModel> jcmmodels)
-    {        
-        for(int i=0; i<jcmmodels.size(); i++)
-        {
-            try
-            {                                
-                Iterator<JPackage> packages = jcmmodels.get(i).packages();
-                                
-                while(packages.hasNext())
-                {                    
-                    JPackage jpackage = packages.next();                            
-                                    
-                    Iterator<JDefinedClass> classes = jpackage.classes();
-                    
-                    String pname = jpackage.name();
-                    
-                    while(classes.hasNext())
-                    {                                              
-                        String cname = classes.next().name();
-                        
-                        jcmmodels.get(i).build(new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.srcextensionurl), System.err);           
-                    }
-                }
-            }
-            catch(Exception e)
-            {
-                /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
-            }                       
-        }                
-    }    
-    
-    private void dosettempfiles(ArrayList<Apmlmodelfile> apmlmodelfiles) 
-    {
-        for(Apmlmodelfile model: apmlmodelfiles) 
-        {
-            try
-            {   
-                JCodeModel jmodel;                
-                
-                Runtime runtime;
-                
-                String sourcepackagedir     = new Filegrepper().getpackagenameaspathname(model.packagename);
-                
-                String buildpackagedir      = new Filegrepper().getpackagenameaspathname(model.packagename);
-                
-                String pathname             = new Filegrepper().getpackagenameaspathname(model.packagename)+"/";
-                
-                String javac                = "javac "+fileguardian.basedirurl+fileguardian.tempextensionurl+pathname+model.classname+".java -d "+fileguardian.basedirurl+fileguardian.buildextensionurl;
-                
-                new File(fileguardian.basedirurl+fileguardian.tempextensionurl).mkdirs();
-                
-                new File(fileguardian.basedirurl+fileguardian.tempextensionurl+sourcepackagedir).mkdirs();               
-                
-                new File(fileguardian.basedirurl+fileguardian.buildextensionurl).mkdirs();
-                
-                new File(fileguardian.basedirurl+fileguardian.buildextensionurl).mkdirs();
                    
-                jmodel = new JCodeModel();
-                
-                jmodel._package(model.packagename)._class(model.classname);
-                
-                jmodel.build(new File(fileguardian.basedirurl+fileguardian.tempextensionurl));
-                
-                runtime = Runtime.getRuntime();                                                
-                
-                runtime.exec(javac);
-            }
-            catch(Exception e)
-            {
-                /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
-            }
-            finally
-            {
-                System.gc();
-            }
-        }
-    }                    
     
     public void dowritesourcetoharddrive()
     {
         try
         {
-            this.dosetsourcefiles(this.jcmmanager.apmlmodels);
+            this.apmlmanager.dosetsourcefiles(this.jcmmanager.apmlmodels);
             
-            this.dosetsourcefiles(this.jcmmanager.definitionmodels);
+            this.apmlmanager.dosetsourcefiles(this.jcmmanager.definitionmodels);
             
-            this.dosetsourcefiles(this.jcmmanager.dynamiclistenermodels);            
+            this.apmlmanager.dosetsourcefiles(this.jcmmanager.dynamiclistenermodels);            
             
-            this.dosetsourcefiles(this.jcmmanager.listenermodels);
+            this.apmlmanager.dosetsourcefiles(this.jcmmanager.listenermodels);
             
-            this.dosetsourcefiles(this.jcmmanager.objectmodels);
+            this.apmlmanager.dosetsourcefiles(this.jcmmanager.objectmodels);
             
-            this.dosetsourcefiles(this.jcmmanager.subscribermodels);
+            this.apmlmanager.dosetsourcefiles(this.jcmmanager.subscribermodels);
             
-            this.dosetsourcefiles(this.jcmmanager.systemmodels);
+            this.apmlmanager.dosetsourcefiles(this.jcmmanager.systemmodels);
             
             try
             {
@@ -295,12 +144,12 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
             }
             catch(Exception e)
             {
-                /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+                LOGGER.log(Level.WARNING, e.getMessage(), e);
             }            
         }
         catch(Exception e)
         {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
     }       
           
@@ -339,7 +188,7 @@ class Localdriver
         }
         catch(Exception e)
         {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+            Bloqcompiler.LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
     }
 }

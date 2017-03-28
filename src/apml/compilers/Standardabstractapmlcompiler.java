@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 public abstract class Standardabstractapmlcompiler 
 {        
     protected final Integer hash = 0x00888fe8;     
+        
     
     public Bloqapmlmanager apmlmanager      = new Bloqapmlmanager(); 
     
@@ -28,7 +29,9 @@ public abstract class Standardabstractapmlcompiler
     
     public Bloqfileguardian fileguardian    = new Bloqfileguardian();
 
-    protected static final Logger LOGGER    = Logger.getLogger(Bloqcompiler.class.getName());     
+    
+    public static final Logger LOGGER    = Logger.getLogger(Bloqcompiler.class.getName());     
+    
     
     public Standardabstractapmlcompiler()
     {            
@@ -36,43 +39,43 @@ public abstract class Standardabstractapmlcompiler
         {
             /* -------------------------- Logger Setup -------------------------*/
             
-            LOGGER.addHandler(new FileHandler(this.fileguardian.loggingfileurl));
+            LOGGER.addHandler(new FileHandler(this.fileguardian.loggingfileurl+this.fileguardian.loggingfilename));
             
             LOGGER.setUseParentHandlers(false);
             
             
             /* --------------------------- New Files ---------------------------*/
             
-            this.fileguardian.apmlinputfile     = new File(fileguardian.apmlinurl);  
+            this.fileguardian.apmlinputfile         = new File(fileguardian.apmlinurl+fileguardian.apmlfilename);  
             
-            this.fileguardian.buildoutdir       = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.buildextensionurl);
+            this.fileguardian.buildoutdirfile       = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.buildextensionurl);
             
-            this.fileguardian.sourceoutdir      = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.srcextensionurl);                             
+            this.fileguardian.sourceoutdirfile      = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.srcextensionurl);                             
             
-            this.fileguardian.manifestdir       = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.manifestextensionurl);
+            this.fileguardian.manifestdirfile       = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.manifestextensionurl);
             
-            this.fileguardian.libsdir           = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.libsextensionurl);
+            this.fileguardian.libsdirfile           = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.libsextensionurl);
             
-            this.fileguardian.loggingdir        = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.loggingextensionurl);
+            this.fileguardian.loggingdirfile        = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.loggingextensionurl);
             
-            this.fileguardian.tempdir           = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.tempextensionurl);
+            this.fileguardian.tempdirfile           = new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.tempextensionurl);
             
             
             /* -------------------------- Mkdir calls --------------------------*/                      
             
-            if(!this.fileguardian.buildoutdir.exists())     this.fileguardian.buildoutdir.mkdirs();                                       
+            if(!this.fileguardian.buildoutdirfile.exists())     this.fileguardian.buildoutdirfile.mkdirs();                                       
             
-            if(!this.fileguardian.libsdir.exists())         this.fileguardian.libsdir.mkdirs();                                       
+            if(!this.fileguardian.libsdirfile.exists())         this.fileguardian.libsdirfile.mkdirs();                                       
             
-            if(!this.fileguardian.loggingdir.exists())      this.fileguardian.loggingdir.mkdirs();                                       
+            if(!this.fileguardian.loggingdirfile.exists())      this.fileguardian.loggingdirfile.mkdirs();                                       
             
-            if(!this.fileguardian.manifestdir.exists())     this.fileguardian.manifestdir.mkdirs();
+            if(!this.fileguardian.manifestdirfile.exists())     this.fileguardian.manifestdirfile.mkdirs();
             
-            if(!this.fileguardian.sourceoutdir.exists())    this.fileguardian.sourceoutdir.mkdirs();                                               
+            if(!this.fileguardian.sourceoutdirfile.exists())    this.fileguardian.sourceoutdirfile.mkdirs();                                               
             
-            if(!this.fileguardian.tempdir.exists())         this.fileguardian.tempdir.mkdirs();
+            if(!this.fileguardian.tempdirfile.exists())         this.fileguardian.tempdirfile.mkdirs();
             
-            if(!this.fileguardian.apmlinputfile.exists())   throw new Exception("ApmlTagHandler::constructor:Could not find the system's APML file");
+            if(!this.fileguardian.apmlinputfile.exists())       throw new Exception("ApmlTagHandler::constructor:Could not find the system's APML file");
         }
         catch(Exception exception)
         {

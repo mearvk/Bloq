@@ -78,7 +78,7 @@ public class Uioutputmanager
             {
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i)); 
                 
-                System.err.println("CLASSNAME: "+uipi.classname);
+                //System.err.println("CLASSNAME: "+uipi.classname);
             }
             
             uip.constructor.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
