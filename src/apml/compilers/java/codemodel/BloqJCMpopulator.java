@@ -47,13 +47,13 @@ import java.util.logging.Logger;
  * @author Max Rupplin
  * @since 03.28.2017
  */
-public class Bloqpopulatorimpl 
+public class BloqJCMpopulator 
 {
     private final Integer hash = 0x00888fe8;   
           
-    public static final Logger LOGGER = Logger.getLogger(Bloqpopulatorimpl.class.getName()); 
+    public static final Logger LOGGER = Logger.getLogger(BloqJCMpopulator.class.getName()); 
     
-    public Bloqpopulatorimpl()
+    public BloqJCMpopulator()
     {
         Bodi.setcontext("system");
         
@@ -85,7 +85,7 @@ public class Bloqpopulatorimpl
             
             JPackage jpackage=null;            
             
-            Apmltaghandlerparameter param = new Apmltaghandlerparameter(jcodemodel,jpackage,classfile,apmlmodelfile);
+            Bloqparameter param = new Bloqparameter(jcodemodel,jpackage,classfile,apmlmodelfile);
             
             try{this.jcmpackagename(param);}        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -125,7 +125,7 @@ public class Bloqpopulatorimpl
         throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel.");
     }  
     
-    private void jcmbndi(Apmltaghandlerparameter param)
+    private void jcmbndi(Bloqparameter param)
     {
         try
         {
@@ -140,7 +140,7 @@ public class Bloqpopulatorimpl
         }        
     }      
     
-    private void jcmobjects(Apmltaghandlerparameter param)
+    private void jcmobjects(Bloqparameter param)
     {
         try
         {
@@ -166,7 +166,7 @@ public class Bloqpopulatorimpl
         }        
     }    
     
-    private void jcmlisteners(Apmltaghandlerparameter param)
+    private void jcmlisteners(Bloqparameter param)
     {
         try
         {
@@ -192,7 +192,7 @@ public class Bloqpopulatorimpl
         }        
     }
     
-    private void jcmpackagename(Apmltaghandlerparameter param)
+    private void jcmpackagename(Bloqparameter param)
     {
         try
         {
@@ -209,7 +209,7 @@ public class Bloqpopulatorimpl
         }        
     }
     
-    private void jcmclassname(Apmltaghandlerparameter param)
+    private void jcmclassname(Bloqparameter param)
     {
         try
         {     
@@ -231,7 +231,7 @@ public class Bloqpopulatorimpl
         }        
     }
 
-    private void jcmextends(Apmltaghandlerparameter param)
+    private void jcmextends(Bloqparameter param)
     {
         try
         {
@@ -253,7 +253,7 @@ public class Bloqpopulatorimpl
         }        
     }
     
-    private void jcmimplements(Apmltaghandlerparameter param)
+    private void jcmimplements(Bloqparameter param)
     {      
         try
         {
@@ -285,7 +285,7 @@ public class Bloqpopulatorimpl
         }        
     }
     
-    private void jcmruntag(Apmltaghandlerparameter param)
+    private void jcmruntag(Bloqparameter param)
     {
         try
         {
@@ -310,7 +310,7 @@ public class Bloqpopulatorimpl
         }          
     }
     
-    private void jcmstarttag(Apmltaghandlerparameter param)
+    private void jcmstarttag(Bloqparameter param)
     {          
         try
         {
@@ -335,7 +335,7 @@ public class Bloqpopulatorimpl
         }           
     }
     
-    private void addinterfacemethods(Apmltaghandlerparameter param)
+    private void addinterfacemethods(Bloqparameter param)
     {
         try
         {               
@@ -399,7 +399,7 @@ public class Bloqpopulatorimpl
         }        
     }
     
-    private void jcmautostarttag(Apmltaghandlerparameter param)
+    private void jcmautostarttag(Bloqparameter param)
     {
         try
         {
@@ -421,7 +421,7 @@ public class Bloqpopulatorimpl
         }         
     }
     
-    private void jcminittag(Apmltaghandlerparameter param)
+    private void jcminittag(Bloqparameter param)
     {        
         try
         {
@@ -443,7 +443,7 @@ public class Bloqpopulatorimpl
         }         
     }
 
-    private void addsuperclassmethods(Apmltaghandlerparameter param)
+    private void addsuperclassmethods(Bloqparameter param)
     {        
         try
         {
@@ -492,7 +492,7 @@ public class Bloqpopulatorimpl
         }        
     }
     
-    private void addtagmethods(Apmltaghandlerparameter param)
+    private void addtagmethods(Bloqparameter param)
     {
         try
         {

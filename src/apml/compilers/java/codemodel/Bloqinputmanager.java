@@ -79,7 +79,7 @@ public class Bloqinputmanager
      */
     public ArrayList<Apmlmodelfile> dosetapmlfiles(File apmlxmlfile, String apmltag)
     {        
-        Apmlmodelpopulator apmlmodelpopulator = new Apmlmodelpopulator();
+        BloqAPMLmodelpopulator apmlmodelpopulator = new BloqAPMLmodelpopulator();
         
         ArrayList<Apmlmodelfile> apmlmodelfiles = null;
         

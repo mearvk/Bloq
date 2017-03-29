@@ -74,7 +74,7 @@ public class Bloqoutputmanager
     
     public ArrayList<JCodeModel> dosetoutputfiles(ArrayList<Apmlmodelfile> apmlmodelfiles, String apmltag)
     {
-        Bloqpopulatorimpl jcmmodelpopulator = new Bloqpopulatorimpl();
+        BloqJCMpopulator jcmmodelpopulator = new BloqJCMpopulator();
         
         ArrayList<JCodeModel> jcmmodels_genericfiles = null;
                 

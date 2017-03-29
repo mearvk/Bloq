@@ -37,7 +37,7 @@ import org.w3c.dom.NodeList;
  * @author Max Rupplin
  * @since 03.28.2017 
  */
-public final class Apmlmodelpopulator 
+public final class BloqAPMLmodelpopulator 
 {
     private final Integer hash = 0x00888fe8;  
     
@@ -45,14 +45,14 @@ public final class Apmlmodelpopulator
     public ArrayList<Apmlmodelfile> apmlfiles;      
         
     
-    protected static final Logger LOGGER = Logger.getLogger(Apmlmodelpopulator.class.getName());
+    protected static final Logger LOGGER = Logger.getLogger(BloqAPMLmodelpopulator.class.getName());
     
     
     public static void main(String...args) 
     {                          
         try
         {     
-            Apmlmodelpopulator populator = new Apmlmodelpopulator();
+            BloqAPMLmodelpopulator populator = new BloqAPMLmodelpopulator();
             
             File apmlfile = new File("");
                         
@@ -78,7 +78,7 @@ public final class Apmlmodelpopulator
         }
     }      
     
-    public Apmlmodelpopulator()
+    public BloqAPMLmodelpopulator()
     {
         Bodi.setcontext("system");
         
@@ -100,7 +100,7 @@ public final class Apmlmodelpopulator
         }
     } 
     
-    public Apmlmodelpopulator(File apmlfile, String sysobj) throws Exception
+    public BloqAPMLmodelpopulator(File apmlfile, String sysobj) throws Exception
     {
         this.apmlfiles = this.getapmlmodelfiles(apmlfile, sysobj);
     }     
