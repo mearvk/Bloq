@@ -31,6 +31,8 @@ public class Apmlmodelfile
     
     public ArrayList<Apmlstdinterface> apmlstdinterfaces = new ArrayList();
     
+    public ArrayList<Apmlsubscriber> apmlsubscribers = new ArrayList();
+    
     public ArrayList<String> apmltaginterfaces = new ArrayList();     
     
     /* ------------------------------------------------------------------------*/

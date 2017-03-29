@@ -188,7 +188,19 @@ public class BloqJCMpopulator
                 
                 String full = packagename+"."+classname;
             
-                param.classref.field(JMod.PROTECTED, Class.forName(full), "alisteners_"+String.format("%03d",i));
+                param.classref.field(JMod.PROTECTED, Class.forName(full), "listeners_"+String.format("%03d",i));
+                
+                //
+                for(int j=0; j<param.apmlmodelfile.apmlsubscribers.size(); j++)
+                {
+                    param.classref.direct("\tprivate final class Apmllistener\n");
+                    
+                    param.classref.direct("\t{\n");
+                    
+                    param.classref.direct("\t//to be implemented\n");
+                    
+                    param.classref.direct("\t}\n");
+                }
                 
                 //param.classref.direct("\n\tprotected "+classname+" listener_"+String.format("%03d",i)+";\n");
             }
