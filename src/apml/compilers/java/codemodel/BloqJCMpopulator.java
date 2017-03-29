@@ -130,11 +130,11 @@ public class BloqJCMpopulator
         try
         {
             if(param.jcodemodel==null) 
-                throw new InvalidParameterException("JCodeModel not set; unable to set BODI value.");
-
-            param.classref.direct("\tprotected String bodi=\""+param.apmlmodelfile.bndi+"\";\n");
+                throw new InvalidParameterException("JCodeModel not set; unable to set BODI value.");           
             
-            //param.classref.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bndi+"\"");                          
+            param.classref.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bndi+"\"");                          
+            
+            //param.classref.direct("\tprotected String bodi=\""+param.apmlmodelfile.bndi+"\";\n");
         }
         catch(Exception e)
         {
@@ -159,9 +159,9 @@ public class BloqJCMpopulator
                 
                 String full = packagename+"."+classname;
                                                 
-                //param.classref.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d", i));                               
+                param.classref.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d", i));                               
                 
-                param.classref.direct("\n\tprotected "+classname+" object_"+String.format("%03d", i)+";\n");
+                //param.classref.direct("\n\tprotected "+classname+" object_"+String.format("%03d", i)+";\n");
             }
         }
         catch(Exception e)
@@ -179,6 +179,7 @@ public class BloqJCMpopulator
                 throw new InvalidParameterException("JCodeModel not set; unable to set listener(s).");                
             }
             
+            //
             for(int i=0; i<param.apmlmodelfile.apmllisteners.size(); i++)
             {   
                 String classname = new Filegrepper().getclassname(param.apmlmodelfile.apmllisteners.get(i).classname); 
@@ -187,14 +188,14 @@ public class BloqJCMpopulator
                 
                 String full = packagename+"."+classname;
             
-                //param.classref.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d",i));
+                param.classref.field(JMod.PROTECTED, Class.forName(full), "alisteners_"+String.format("%03d",i));
                 
-                param.classref.direct("\n\tprotected "+classname+" listener_"+String.format("%03d",i)+";\n");
+                //param.classref.direct("\n\tprotected "+classname+" listener_"+String.format("%03d",i)+";\n");
             }
         }
         catch(Exception e)
         {
-            e.printStackTrace(); LOGGER.log(Level.WARNING, e.getMessage(), e);            
+            //e.printStackTrace(); LOGGER.log(Level.WARNING, e.getMessage(), e);            
         }        
     }
     

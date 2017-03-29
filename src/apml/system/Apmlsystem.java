@@ -6,7 +6,7 @@ import apml.drivers.Stddriver;
 import apml.helpers.Filegrepper;
 import apml.helpers.Fileloader;
 import apml.listeners.Apmllistener;
-import apml.subscribers.Apmlsubscriber;
+import apml.modeling.Apmlsubscriber;
 import apml.system.bodi.Bodi;
 import java.awt.event.ActionEvent;
 import java.io.File;

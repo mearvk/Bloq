@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package apml.modeling;
 
 import java.util.ArrayList;
@@ -10,44 +5,77 @@ import java.util.ArrayList;
 /**
  *
  * @author Max Rupplin
+ * @since 03.29.2017
  */
 public class Apmlmodelfile 
 {   
     protected final Integer hash = 0x888fe8;
         
-    public ArrayList<String> children;
-    public ArrayList<String> subscribers;
-    public ArrayList<String> localinterfaces;
-    public ArrayList<String> localclasses;
-    public ArrayList<String> nestedclasses;
+    public ArrayList<String> children = new ArrayList();
     
-    public ArrayList<Apmlimplement> apmlimplementš;
-    public ArrayList<Apmllistener> apmllisteners;
-    public ArrayList<Apmlobject> apmlobjects;
-    public ArrayList<Apmlstdinterface> apmlstdinterfaces;
-    public ArrayList<String> apmltaginterfaces;     
+    public ArrayList<String> subscribers = new ArrayList();
+    
+    public ArrayList<String> localinterfaces = new ArrayList();
+    
+    public ArrayList<String> localclasses = new ArrayList();
+    
+    public ArrayList<String> nestedclasses = new ArrayList();
+    
+    /* ------------------------------------------------------------------------*/
+    
+    public ArrayList<Apmlimplement> apmlimplements = new ArrayList();
+    
+    public ArrayList<Apmllistener> apmllisteners = new ArrayList();
+    
+    public ArrayList<Apmlobject> apmlobjects = new ArrayList();
+    
+    public ArrayList<Apmlstdinterface> apmlstdinterfaces = new ArrayList();
+    
+    public ArrayList<String> apmltaginterfaces = new ArrayList();     
+    
+    /* ------------------------------------------------------------------------*/
     
     public String bndi;   
+    
     public String classname;    
+    
     public String id;    
+    
     public String packagename;
+    
     public String parent;
+    
     public String superclass;    
     
+    /* ------------------------------------------------------------------------*/
+    
     public String builddir;
+    
     public String defaultdir;
+    
     public String sourcedir;
     
+    /* ------------------------------------------------------------------------*/
+    
     public String autostart;    
+    
     public String init;            
     
     public String run;
+    
     public String start;
+    
     public String tagname;        
     
-    public String[] implementors;
-    public String[] listeners;
-    public String[] objects;
-    public String[] stdinterfaces;
-    public String[] taginterfaces;                  
+    /* ------------------------------------------------------------------------*/
+    
+    public String[] implementors = new String[1000];
+    
+    public String[] listeners = new String[1000];
+    
+    public String[] objects = new String[1000];
+    
+    public String[] stdinterfaces = new String[1000];
+    
+    public String[] taginterfaces = new String[1000];                  
 }
