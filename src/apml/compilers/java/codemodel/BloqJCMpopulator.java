@@ -81,11 +81,11 @@ public class BloqJCMpopulator
         
         try            
         {
-            JDefinedClass classfile=null;
+            JDefinedClass classfile = null;
             
-            JPackage jpackage=null;            
+            JPackage jpackage = null;            
             
-            Bloqparameter param = new Bloqparameter(jcodemodel,jpackage,classfile,apmlmodelfile);
+            Bloqparameter param = new Bloqparameter(jcodemodel, jpackage, classfile, apmlmodelfile);
             
             try{this.jcmpackagename(param);}        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -95,7 +95,7 @@ public class BloqJCMpopulator
             
             try{this.jcmimplements(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmbndi(param);}               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.jcmbodi(param);}               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{this.jcmautostarttag(param);}       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -125,14 +125,16 @@ public class BloqJCMpopulator
         throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel.");
     }  
     
-    private void jcmbndi(Bloqparameter param)
+    private void jcmbodi(Bloqparameter param)
     {
         try
         {
             if(param.jcodemodel==null) 
-                throw new InvalidParameterException("JCodeModel not set; unable to set BNDI value.");
+                throw new InvalidParameterException("JCodeModel not set; unable to set BODI value.");
 
-            param.classref.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bndi=\""+param.apmlmodelfile.bndi+"\"");                          
+            param.classref.direct("\tprotected String bodi=\""+param.apmlmodelfile.bndi+"\";\n");
+            
+            //param.classref.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bndi+"\"");                          
         }
         catch(Exception e)
         {
@@ -156,8 +158,10 @@ public class BloqJCMpopulator
                 String packagename = param.apmlmodelfile.apmlobjects.get(i).packagename;
                 
                 String full = packagename+"."+classname;
+                                                
+                //param.classref.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d", i));                               
                 
-                param.classref.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d", i));                               
+                param.classref.direct("\n\tprotected "+classname+" object_"+String.format("%03d", i)+";\n");
             }
         }
         catch(Exception e)
@@ -183,12 +187,14 @@ public class BloqJCMpopulator
                 
                 String full = packagename+"."+classname;
             
-                param.classref.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d",i));
+                //param.classref.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d",i));
+                
+                param.classref.direct("\n\tprotected "+classname+" listener_"+String.format("%03d",i)+";\n");
             }
         }
         catch(Exception e)
         {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+            e.printStackTrace(); LOGGER.log(Level.WARNING, e.getMessage(), e);            
         }        
     }
     

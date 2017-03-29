@@ -13,24 +13,24 @@
                 
                 <object id="echoserver" start="true" bndi="//echoserver/objects/1" class="Echoserver">                       
                     <listener id="esocl" bndi="//echoserver/listeners/onconnect/{this.id}" class="Onconnectlistener" with="*">
-                        <subscriber class="Onconnect_001"></subscriber>
-                        <subscriber class="Onconnect_002"></subscriber>
-                        <subscriber class="Onconnect_003"></subscriber>
+                        <subscriber class="Onconnectsubscriber_001"></subscriber>
+                        <subscriber class="Onconnectsubscriber_002"></subscriber>
+                        <subscriber class="Onconnectsubscriber_003"></subscriber>
                     </listener>
                     <listener id="esoel" bndi="//echoserver/listeners/onexit/{this.id}" class="Onexitlistener" with="*">
-                        <subscriber class="Onexit_001"></subscriber>
-                        <subscriber class="Onexit_002"></subscriber>
-                        <subscriber class="Onexit_003"></subscriber>
+                        <subscriber class="Onexitsubscriber_001"></subscriber>
+                        <subscriber class="Onexitsubscriber_002"></subscriber>
+                        <subscriber class="Onexitsubscriber_003"></subscriber>
                     </listener>
                     <listener id="esorl" bndi="//echoserver/listeners/onread/{this.id}" class="Onreadlistener" with="*">
-                        <subscriber class="Onreceipt_001"></subscriber>
-                        <subscriber class="Onreceipt_002"></subscriber>
-                        <subscriber class="Onreceipt_003"></subscriber>
+                        <subscriber class="Onreceiptsubscriber_001"></subscriber>
+                        <subscriber class="Onreceiptsubscriber_002"></subscriber>
+                        <subscriber class="Onreceiptsubscriber_003"></subscriber>
                     </listener>
                     <listener id="esodl" bndi="//echoserver/listeners/ondispatch/{this.id}" class="Ondispatchlistener" with="*">
-                        <subscriber class="Ondispatch_001"></subscriber>
-                        <subscriber class="Ondispatch_002"></subscriber>
-                        <subscriber class="Ondispatch_003"></subscriber>
+                        <subscriber class="Ondispatchsubscriber_001"></subscriber>
+                        <subscriber class="Ondispatchsubscriber_002"></subscriber>
+                        <subscriber class="Ondispatcsubscriberh_003"></subscriber>
                     </listener>  
                 </object>   
 
