@@ -17,11 +17,11 @@ public abstract class Standardabstractapmlcompiler
     protected final Integer hash = 0x00888fe8;     
         
     
-    public Bloqfileguardian fileguardian    = new Bloqfileguardian(); //todo can we fix temporal dependency
+    public Bloqfileguardian fileguardian    = new Bloqfileguardian(); 
     
-    public Bloqinputmanager inputmanager      = new Bloqinputmanager(); 
+    public Bloqinputmanager inputmanager    = new Bloqinputmanager(); 
     
-    public Bloqoutputmanager outputmanager = new Bloqoutputmanager();               
+    public Bloqoutputmanager outputmanager  = new Bloqoutputmanager();               
     
     
     public Standardabstractapmlcompiler()
