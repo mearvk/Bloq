@@ -17,19 +17,19 @@ public class Apmltaghandlerparameter
 {
     private final Integer hash = 0x00888fe8;  
     
-    JCodeModel jcodemodel;
+    public JCodeModel jcodemodel;
     
-    JDefinedClass classfile;
+    public JDefinedClass classref;
     
-    JPackage jpackage; 
+    public JPackage jpackage; 
     
-    Apmlmodelfile apmlmodelfile;
+    public Apmlmodelfile apmlmodelfile;
             
-    public Apmltaghandlerparameter(JCodeModel jcodemodel, JPackage jpackage, JDefinedClass classfile, Apmlmodelfile apmlmodelfile)
+    public Apmltaghandlerparameter(JCodeModel jcodemodel, JPackage jpackage, JDefinedClass classref, Apmlmodelfile apmlmodelfile)
     {
         this.jcodemodel = jcodemodel;
         
-        this.classfile = classfile;
+        this.classref = classref;
         
         this.jpackage = jpackage;
         

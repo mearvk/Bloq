@@ -132,7 +132,7 @@ public class Bloqpopulatorimpl
             if(param.jcodemodel==null) 
                 throw new InvalidParameterException("JCodeModel not set; unable to set BNDI value.");
 
-            param.classfile.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bndi=\""+param.apmlmodelfile.bndi+"\"");                          
+            param.classref.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bndi=\""+param.apmlmodelfile.bndi+"\"");                          
         }
         catch(Exception e)
         {
@@ -157,7 +157,7 @@ public class Bloqpopulatorimpl
                 
                 String full = packagename+"."+classname;
                 
-                param.classfile.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d", i));                               
+                param.classref.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d", i));                               
             }
         }
         catch(Exception e)
@@ -183,7 +183,7 @@ public class Bloqpopulatorimpl
                 
                 String full = packagename+"."+classname;
             
-                param.classfile.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d",i));
+                param.classref.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d",i));
             }
         }
         catch(Exception e)
@@ -223,7 +223,7 @@ public class Bloqpopulatorimpl
                 throw new InvalidParameterException("No classname found.");
             }
             
-            param.classfile = param.jpackage._class(param.apmlmodelfile.classname);  
+            param.classref = param.jpackage._class(param.apmlmodelfile.classname);  
         }
         catch(NullPointerException | InvalidParameterException | JClassAlreadyExistsException e)
         {
@@ -235,7 +235,7 @@ public class Bloqpopulatorimpl
     {
         try
         {
-            if(param.classfile==null) 
+            if(param.classref==null) 
             {
                 throw new InvalidParameterException("Classfile not set; unable to determine if Class extends another.");
             }
@@ -245,7 +245,7 @@ public class Bloqpopulatorimpl
                 throw new InvalidParameterException("No superclass reference found in param.apmlmodelfile.apml_extends.");            
             }
                
-            param.classfile = param.classfile._extends(Class.forName(param.apmlmodelfile.superclass));      
+            param.classref = param.classref._extends(Class.forName(param.apmlmodelfile.superclass));      
         }
         catch(NullPointerException | InvalidParameterException | ClassNotFoundException e)
         {
@@ -257,7 +257,7 @@ public class Bloqpopulatorimpl
     {      
         try
         {
-            if(param.classfile==null) 
+            if(param.classref==null) 
             {
                 throw new InvalidParameterException("Classfile not set; unable to set interfaces for Class.");
             }
@@ -271,7 +271,7 @@ public class Bloqpopulatorimpl
             {
                 try
                 {
-                    param.classfile = param.classfile._implements(Class.forName(implments));
+                    param.classref = param.classref._implements(Class.forName(implments));
                 }
                 catch(ClassNotFoundException ex)
                 {
@@ -289,7 +289,7 @@ public class Bloqpopulatorimpl
     {
         try
         {
-            if(param.classfile==null) 
+            if(param.classref==null) 
             {
                 throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");
             }
@@ -301,7 +301,7 @@ public class Bloqpopulatorimpl
                 
             if(param.apmlmodelfile.run.equalsIgnoreCase("true"))                    
             {
-                param.classfile = param.classfile._implements(Runnable.class);
+                param.classref = param.classref._implements(Runnable.class);
             }
         }
         catch(Exception e)
@@ -314,7 +314,7 @@ public class Bloqpopulatorimpl
     {          
         try
         {
-            if(param.classfile==null) 
+            if(param.classref==null) 
             {
                 throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");
             }
@@ -326,7 +326,7 @@ public class Bloqpopulatorimpl
             
             if(param.apmlmodelfile.start.equalsIgnoreCase("true"))
             {
-                param.classfile = param.classfile._implements(Startable.class);
+                param.classref = param.classref._implements(Startable.class);
             }
         }
         catch(Exception e)
@@ -339,7 +339,7 @@ public class Bloqpopulatorimpl
     {
         try
         {               
-            if(param.classfile==null) 
+            if(param.classref==null) 
             {
                 throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");            
             }
@@ -362,19 +362,19 @@ public class Bloqpopulatorimpl
                         switch(m.getModifiers())
                         {
                             case Modifier.ABSTRACT | Modifier.PUBLIC:
-                                param.classfile.method(JMod.PUBLIC, m.getReturnType(), m.getName());
+                                param.classref.method(JMod.PUBLIC, m.getReturnType(), m.getName());
                                 break;
 
                             case Modifier.ABSTRACT | Modifier.PROTECTED:                                            
-                                param.classfile.method(JMod.PROTECTED, m.getReturnType(), m.getName());
+                                param.classref.method(JMod.PROTECTED, m.getReturnType(), m.getName());
                                 break;                    
 
                             case Modifier.ABSTRACT | Modifier.NATIVE:
-                                param.classfile.method(JMod.NATIVE, m.getReturnType(), m.getName());
+                                param.classref.method(JMod.NATIVE, m.getReturnType(), m.getName());
                                 break;   
 
                             case Modifier.ABSTRACT | Modifier.PRIVATE:
-                                param.classfile.method(JMod.PRIVATE, m.getReturnType(), m.getName());
+                                param.classref.method(JMod.PRIVATE, m.getReturnType(), m.getName());
                                 break;  
 
                             case Modifier.ABSTRACT | Modifier.INTERFACE:
@@ -382,7 +382,7 @@ public class Bloqpopulatorimpl
                                 break;
 
                             default: 
-                                param.classfile.method(JMod.NONE, m.getReturnType(), m.getName()); 
+                                param.classref.method(JMod.NONE, m.getReturnType(), m.getName()); 
                                 break;
                         }                
                     }
@@ -403,7 +403,7 @@ public class Bloqpopulatorimpl
     {
         try
         {
-            if(param.classfile==null) 
+            if(param.classref==null) 
             {
                 throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");
             }
@@ -413,7 +413,7 @@ public class Bloqpopulatorimpl
                 throw new InvalidParameterException("No autostart tag found");
             }
             
-            param.classfile = param.classfile._implements(Autostartable.class);
+            param.classref = param.classref._implements(Autostartable.class);
         }
         catch(Exception e)
         {
@@ -425,7 +425,7 @@ public class Bloqpopulatorimpl
     {        
         try
         {
-            if(param.classfile==null) 
+            if(param.classref==null) 
             {
                 throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");
             }
@@ -435,7 +435,7 @@ public class Bloqpopulatorimpl
                 throw new InvalidParameterException("No init tag found.");
             }
             
-            param.classfile = param.classfile._implements(Initializable.class);
+            param.classref = param.classref._implements(Initializable.class);
         }
         catch(Exception e)
         {
@@ -447,7 +447,7 @@ public class Bloqpopulatorimpl
     {        
         try
         {
-            if(param.classfile==null) 
+            if(param.classref==null) 
             {
                 throw new InvalidParameterException("Classfile not set; unable to load superclass methods for JCodeModel builder.");
             }
@@ -465,23 +465,23 @@ public class Bloqpopulatorimpl
                 switch (method.getModifiers()) 
                 {
                     case Modifier.PUBLIC:
-                        param.classfile.method(JMod.PUBLIC, method.getReturnType(), method.getName());
+                        param.classref.method(JMod.PUBLIC, method.getReturnType(), method.getName());
                         break;
             
                     case Modifier.PROTECTED:
-                        param.classfile.method(JMod.PROTECTED, method.getReturnType(), method.getName());    
+                        param.classref.method(JMod.PROTECTED, method.getReturnType(), method.getName());    
                         break;
                                                 
                     case Modifier.NATIVE:                    
-                        param.classfile.method(JMod.NATIVE, method.getReturnType(), method.getName());                        
+                        param.classref.method(JMod.NATIVE, method.getReturnType(), method.getName());                        
                         break;                        
                        
                     case Modifier.PRIVATE:                            
-                        param.classfile.method(JMod.PRIVATE, method.getReturnType(), method.getName());                            
+                        param.classref.method(JMod.PRIVATE, method.getReturnType(), method.getName());                            
                         break;
                         
                     default:
-                        param.classfile.method(JMod.NONE, method.getReturnType(), method.getName());
+                        param.classref.method(JMod.NONE, method.getReturnType(), method.getName());
                         break;
                     }
             }                 
@@ -498,7 +498,7 @@ public class Bloqpopulatorimpl
         {
             Iterator<JClass> intrfaces;
                 
-            if(param.classfile==null) 
+            if(param.classref==null) 
             {
                 throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");
             }
@@ -508,7 +508,7 @@ public class Bloqpopulatorimpl
                 throw new InvalidParameterException("No tag interfaces found.");
             }
                 
-            intrfaces = param.classfile._implements();
+            intrfaces = param.classref._implements();
                 
             for(;intrfaces.hasNext();)
             {
@@ -522,23 +522,23 @@ public class Bloqpopulatorimpl
                         switch(m.getModifiers())
                         {
                             case Modifier.ABSTRACT |  Modifier.PUBLIC:
-                                param.classfile.method(JMod.PUBLIC, m.getReturnType(), m.getName());
+                                param.classref.method(JMod.PUBLIC, m.getReturnType(), m.getName());
                                 break;
                                 
                             case Modifier.ABSTRACT |  Modifier.PROTECTED:                                            
-                                param.classfile.method(JMod.PROTECTED, m.getReturnType(), m.getName());
+                                param.classref.method(JMod.PROTECTED, m.getReturnType(), m.getName());
                                 break;                    
                                 
                             case Modifier.ABSTRACT |  Modifier.NATIVE:
-                                param.classfile.method(JMod.NATIVE, m.getReturnType(), m.getName());
+                                param.classref.method(JMod.NATIVE, m.getReturnType(), m.getName());
                                 break;                        
                                 
                             case Modifier.ABSTRACT |  Modifier.PRIVATE:
-                                param.classfile.method(JMod.PRIVATE, m.getReturnType(), m.getName());
+                                param.classref.method(JMod.PRIVATE, m.getReturnType(), m.getName());
                                 break;                                    
                                 
                             default: 
-                                param.classfile.method(JMod.NONE, m.getReturnType(), m.getName()); 
+                                param.classref.method(JMod.NONE, m.getReturnType(), m.getName()); 
                                 break;                                
                         }                
                     }                   
