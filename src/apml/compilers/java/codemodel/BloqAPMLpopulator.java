@@ -103,12 +103,7 @@ public final class BloqAPMLpopulator
         {
             LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
-    } 
-    
-    public BloqAPMLpopulator(File apmlfile, String sysobj) throws Exception
-    {
-        this.apmlfiles = this.getapmlmodelfiles(apmlfile, sysobj);
-    }     
+    }       
       
     public ArrayList<Apmlmodelfile> getapmlmodelfiles(File apmlfile, String apmltag) throws Exception
     {                          
@@ -452,9 +447,8 @@ public final class BloqAPMLpopulator
                 Element element = (Element)nodes.item(i);                        
                         
                 Apmlsubscriber subscriber = new Apmlsubscriber();
-                
-                //add data for each subscriber under a given listener (by index)
-                element.getAttribute("id");
+                                
+                subscriber.id               = element.getAttribute("id");
                 
                 subscriber.alias            = element.getAttribute("alias");
                 
@@ -464,13 +458,12 @@ public final class BloqAPMLpopulator
                 
                 subscriber.extension        = element.getAttribute("extends");
                 
-                String xpathstring = "(./listener["+(i+1)+"]/ancestor::package/@default)[last()]";
+                String xpathstring          = "(./subscriber["+(i+1)+"]/ancestor::package/@default)[last()]";
                 
-                subscriber.packagename      = (String)xparam.xpath.evaluate(xpathstring, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                subscriber.packagename      = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
                 
                 subscriber.startable        = element.getAttribute("start").equalsIgnoreCase("true");                
-               
-                
+                               
                 subscribers.add(subscriber);
             }        
         }
@@ -481,6 +474,127 @@ public final class BloqAPMLpopulator
         
         return subscribers;
     }
+    
+    private ArrayList<Apmllistener> getlisteners(Xpathparameter xparam, Integer index)
+    {
+        ArrayList<Apmllistener> listeners = new ArrayList<>();
+        
+        try
+        {
+            NodeList nodes = (NodeList)xparam.xpath.evaluate("./listener", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
+                        
+            for(int i=0; i<nodes.getLength(); i++)  
+            {
+                Element element = (Element)nodes.item(i);            
+
+                Apmllistener listener = new Apmllistener();            
+
+                listener.alias            = element.getAttribute("alias");
+                
+                listener.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
+                
+                listener.classname        = element.getAttribute("class");
+                
+                listener.extension        = element.getAttribute("extends");
+                
+                String xpathstring = "(./listener["+(i+1)+"]/ancestor::package/@default)[last()]";
+                
+                listener.packagename      = (String)xparam.xpath.evaluate(xpathstring, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                
+                listener.startable        = element.getAttribute("start").equalsIgnoreCase("true");
+
+                listeners.add(listener);
+            }            
+        }
+        catch(Exception e)
+        {
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+        }                       
+        
+        return listeners;
+    }        
+
+    private ArrayList<Apmlobject> getobjects(Xpathparameter xparam, Integer index)
+    {      
+        ArrayList<Apmlobject> objects = new ArrayList<>();
+        
+        try
+        {
+            NodeList nodes = (NodeList)xparam.xpath.evaluate("./object", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
+                        
+            for(int i=0; i<nodes.getLength(); i++)  
+            {
+                Element element = (Element)nodes.item(i);            
+
+                Apmlobject object = new Apmlobject();            
+
+                object.alias            = element.getAttribute("alias");
+                
+                object.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
+                
+                object.classname        = element.getAttribute("class");
+                
+                object.extension        = element.getAttribute("extends");
+                
+                String nearestpackagedefaultvalue = "(./object["+(i+1)+"]/ancestor::package/@default)[last()]";
+                
+                object.packagename      = (String)xparam.xpath.evaluate(nearestpackagedefaultvalue, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                
+                object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
+
+                objects.add(object);
+            }            
+        }
+        catch(Exception e)
+        {
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+        }                       
+        
+        return objects;
+    }
+    
+    private ArrayList<Apmlimplement> getimplements(Xpathparameter xparam, Integer index)
+    {
+        ArrayList<Apmlimplement> implementz = new ArrayList<>();
+        
+        try
+        {
+            NodeList nodes = (NodeList)xparam.xpath.evaluate("./implements", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
+                        
+            for(int indexi=0; indexi<nodes.getLength(); indexi++)  
+            {
+                Apmlimplement implement = new Apmlimplement();            
+                
+                String xpathstring = "(./implements["+(indexi+1)+"]/ancestor::package/@default)[last()]";
+                
+                Element element = (Element)nodes.item(indexi);            
+
+                /*--------------------------------------------------------------*/
+
+                implement.alias            = element.getAttribute("alias");
+                
+                implement.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
+                
+                implement.classname        = element.getAttribute("class");
+                
+                implement.extension        = element.getAttribute("extends");                                
+                
+                implement.packagename      = (String)xparam.xpath.evaluate(xpathstring, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                
+                implement.startable        = element.getAttribute("start").equalsIgnoreCase("true");
+                
+                /*--------------------------------------------------------------*/
+
+                implementz.add(implement);
+            }            
+        }
+        catch(Exception e)
+        {
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+        }                       
+        
+        return implementz;
+    }    
 
     private String getbndi(Xpathparameter xparam, Integer index)
     {
@@ -642,50 +756,7 @@ public final class BloqAPMLpopulator
                 
         return xparam.n0008_start.item(0).getNodeName();
     }    
-
-    private ArrayList<Apmlimplement> getimplements(Xpathparameter xparam, Integer index)
-    {
-        ArrayList<Apmlimplement> implementz = new ArrayList<>();
-        
-        try
-        {
-            NodeList nodes = (NodeList)xparam.xpath.evaluate("./implements", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
-                        
-            for(int indexi=0; indexi<nodes.getLength(); indexi++)  
-            {
-                Apmlimplement object = new Apmlimplement();            
-                
-                String xpathstring = "(./implements["+(indexi+1)+"]/ancestor::package/@default)[last()]";
-                
-                Element element = (Element)nodes.item(indexi);            
-
-                /*--------------------------------------------------------------*/
-
-                object.alias            = element.getAttribute("alias");
-                
-                object.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
-                
-                object.classname        = element.getAttribute("class");
-                
-                object.extension        = element.getAttribute("extends");                                
-                
-                object.packagename      = (String)xparam.xpath.evaluate(xpathstring, xparam.n0001_tagname.item(index), XPathConstants.STRING);
-                
-                object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
-                
-                /*--------------------------------------------------------------*/
-
-                implementz.add(object);
-            }            
-        }
-        catch(Exception e)
-        {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
-        }                       
-        
-        return implementz;
-    }     
-    
+         
     private String getsuperclass(Xpathparameter xparam, Integer index)
     {
         if(xparam.n0012_superclass==null || xparam.n0012_superclass.item(0)==null) 
@@ -694,83 +765,5 @@ public final class BloqAPMLpopulator
         }
         
         return xparam.n0012_superclass.item(index).getNodeName();
-    }    
-
-    private ArrayList<Apmllistener> getlisteners(Xpathparameter xparam, Integer index)
-    {
-        ArrayList<Apmllistener> listeners = new ArrayList<>();
-        
-        try
-        {
-            NodeList nodes = (NodeList)xparam.xpath.evaluate("./listener", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
-                        
-            for(int i=0; i<nodes.getLength(); i++)  
-            {
-                Element element = (Element)nodes.item(i);            
-
-                Apmllistener object = new Apmllistener();            
-
-                object.alias            = element.getAttribute("alias");
-                
-                object.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
-                
-                object.classname        = element.getAttribute("class");
-                
-                object.extension        = element.getAttribute("extends");
-                
-                String xpathstring = "(./listener["+(i+1)+"]/ancestor::package/@default)[last()]";
-                
-                object.packagename      = (String)xparam.xpath.evaluate(xpathstring, xparam.n0001_tagname.item(index), XPathConstants.STRING);
-                
-                object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
-
-                listeners.add(object);
-            }            
-        }
-        catch(Exception e)
-        {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
-        }                       
-        
-        return listeners;
-    }        
-
-    private ArrayList<Apmlobject> getobjects(Xpathparameter xparam, Integer index)
-    {      
-        ArrayList<Apmlobject> objects = new ArrayList<>();
-        
-        try
-        {
-            NodeList nodes = (NodeList)xparam.xpath.evaluate("./object", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
-                        
-            for(int i=0; i<nodes.getLength(); i++)  
-            {
-                Element element = (Element)nodes.item(i);            
-
-                Apmlobject object = new Apmlobject();            
-
-                object.alias            = element.getAttribute("alias");
-                
-                object.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
-                
-                object.classname        = element.getAttribute("class");
-                
-                object.extension        = element.getAttribute("extends");
-                
-                String nearestpackagedefaultvalue = "(./object["+(i+1)+"]/ancestor::package/@default)[last()]";
-                
-                object.packagename      = (String)xparam.xpath.evaluate(nearestpackagedefaultvalue, xparam.n0001_tagname.item(index), XPathConstants.STRING);
-                
-                object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
-
-                objects.add(object);
-            }            
-        }
-        catch(Exception e)
-        {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
-        }                       
-        
-        return objects;
-    }          
+    }             
 }
