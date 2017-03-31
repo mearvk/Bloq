@@ -145,6 +145,8 @@ public class BloqJCMpopulator
             
             /*--------------------------------------- Add methods -----------------------------------------------------*/
             
+            //try{this.addsimplemethods(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{this.addinterfacemethods(param);}   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{this.addsuperclassmethods(param);}  catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}

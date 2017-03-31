@@ -271,6 +271,8 @@ public final class BloqAPMLpopulator
         for(int index=0; index<xparam.getnodecount(); index++)
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();
+
+            /*------------------------------------------------------------------*/
             
             try{modelfile.apmlsubscribers=this.getsubscribers(xparam, index);}                  catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -299,6 +301,8 @@ public final class BloqAPMLpopulator
             try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                         
             
             try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}           
+            
+            /*------------------------------------------------------------------*/
             
             modelfiles.add(modelfile);
         }       
