@@ -122,15 +122,15 @@ public final class BloqAPMLpopulator
                     
                 case "//definitions":       return dodefinitiontags(xparam, apmltag);
                         
-                case "//dynamiclistener":   return dodynamiclistenertags(xparam, apmltag);                        
+                case "//dynamiclistener":   return dodynamiclistenertags(xparam, apmltag);
                         
-                case "//listener":          return dolistenertags(xparam, apmltag); 
+                case "//listener":          return dolistenertags(xparam, apmltag);
                         
-                case "//object":            return doobjecttags(xparam, apmltag);                        
+                case "//object":            return doobjecttags(xparam, apmltag);
                         
-                case "//subscriber":        return dosubscribertags(xparam, apmltag);                         
+                case "//subscriber":        return dosubscribertags(xparam, apmltag);
                     
-                case "//system":            return dosystemtags(xparam, apmltag);                           
+                case "//system":            return dosystemtags(xparam, apmltag);
             }
         }
         
@@ -441,11 +441,37 @@ public final class BloqAPMLpopulator
     
     private ArrayList<Apmlsubscriber> getsubscribers(Xpathparameter xparam, Integer index)
     {              
+        ArrayList<Apmlsubscriber> subscribers = new ArrayList<>();
+        
         try
         {
-            for(int i=0; i<xparam.n0010_listeners.getLength(); i++)
+            NodeList nodes = (NodeList)xparam.xpath.evaluate("./subscriber", xparam.n0010_listeners.item(index), XPathConstants.NODESET);
+            
+            for(int i=0; i<nodes.getLength(); i++) //for each subscriber under listener.item(index)
             {
-                NodeList nodes = (NodeList)xparam.xpath.evaluate("./subscriber", xparam.n0010_listeners.item(i), XPathConstants.NODESET); 
+                Element element = (Element)nodes.item(i);                        
+                        
+                Apmlsubscriber subscriber = new Apmlsubscriber();
+                
+                //add data for each subscriber under a given listener (by index)
+                element.getAttribute("id");
+                
+                subscriber.alias            = element.getAttribute("alias");
+                
+                subscriber.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
+                
+                subscriber.classname        = element.getAttribute("class");
+                
+                subscriber.extension        = element.getAttribute("extends");
+                
+                String xpathstring = "(./listener["+(i+1)+"]/ancestor::package/@default)[last()]";
+                
+                subscriber.packagename      = (String)xparam.xpath.evaluate(xpathstring, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                
+                subscriber.startable        = element.getAttribute("start").equalsIgnoreCase("true");                
+               
+                
+                subscribers.add(subscriber);
             }        
         }
         catch(Exception e)
@@ -453,7 +479,7 @@ public final class BloqAPMLpopulator
             //
         }
         
-        return null;
+        return subscribers;
     }
 
     private String getbndi(Xpathparameter xparam, Integer index)
