@@ -37,7 +37,7 @@ public class Apmlmodelfile
     
     /* ------------------------------------------------------------------------*/
     
-    public String bndi;   
+    public String bodi;   
     
     public String classname;    
     

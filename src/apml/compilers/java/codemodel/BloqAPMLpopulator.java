@@ -111,7 +111,7 @@ public final class BloqAPMLpopulator
                                        
         for(int i=0; i<xparam.getnodecount(); i++)
         {                            
-            switch(apmltag)
+            switch(apmltag) //would probably need a 'parent' reference is all these cases given how it's been implemented
             {
                 case "//apml":              return doapmltags(xparam, apmltag);
                     
@@ -148,7 +148,7 @@ public final class BloqAPMLpopulator
             
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{modelfile.bodi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{modelfile.builddir=this.getbuilddir(xparam, index);}                            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -188,7 +188,7 @@ public final class BloqAPMLpopulator
 
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            try{modelfile.bodi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
             
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}    
             
@@ -234,7 +234,7 @@ public final class BloqAPMLpopulator
 
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{modelfile.bodi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -276,7 +276,7 @@ public final class BloqAPMLpopulator
             
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            try{modelfile.bodi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
             
             try{modelfile.builddir=this.getbuilddir(xparam, index);}                            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -318,7 +318,7 @@ public final class BloqAPMLpopulator
             
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}         
+            try{modelfile.bodi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}         
             
             try{modelfile.builddir=this.getbuilddir(xparam, index);}                            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -358,7 +358,7 @@ public final class BloqAPMLpopulator
                               
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{modelfile.bodi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -398,7 +398,7 @@ public final class BloqAPMLpopulator
 
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{modelfile.bndi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                       
+            try{modelfile.bodi=this.getbndi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                       
             
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -460,7 +460,7 @@ public final class BloqAPMLpopulator
                 
                 subscriber.extension        = element.getAttribute("extends");
                 
-                String xpathstring          = "(./subscriber["+(i+1)+"]/ancestor::package/@default)[last()]";
+                String xpathstring          = "(./ancestor::package/@default)[last()]";
                 
                 subscriber.packagename      = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
                 
@@ -505,7 +505,7 @@ public final class BloqAPMLpopulator
                 
                 listener.extension          = element.getAttribute("extends");
                 
-                String xpathstring          = "(./listener["+(i+1)+"]/ancestor::package/@default)[last()]";
+                String xpathstring          = "(./ancestor::package/@default)[last()]";
                 
                 listener.packagename        = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
                 
@@ -550,7 +550,7 @@ public final class BloqAPMLpopulator
                 
                 object.extension        = element.getAttribute("extends");
                 
-                String xpathstring      = "(./object["+(i+1)+"]/ancestor::package/@default)[last()]";
+                String xpathstring      = "(./ancestor::package/@default)[last()]";
                 
                 object.packagename      = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
                 
@@ -595,7 +595,7 @@ public final class BloqAPMLpopulator
                 
                 implement.extension         = element.getAttribute("extends");                                
                 
-                String xpathstring          = "(./implements["+(i+1)+"]/ancestor::package/@default)[last()]";
+                String xpathstring          = "(./ancestor::package/@default)[last()]";
                 
                 implement.packagename       = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
                 

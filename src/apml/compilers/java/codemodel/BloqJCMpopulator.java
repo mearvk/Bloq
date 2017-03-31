@@ -83,13 +83,41 @@ public class BloqJCMpopulator
     {       
         JCodeModel jcodemodel = new JCodeModel();                
         
+        /**
+         * 0. Here we have expectation that Apmlmodelfile will represent a single JCM file; that each JCM will have references to classes (fields, etc but these will not be nested within it at this hour)
+         * 
+         * 1. if object then check for objects, listeners
+         * 
+         * 2. if system then check for objects, systems
+         * 
+         * 3. if listener then check for subscribers
+         * 
+         * 4. if subscribers then check for nothing
+         * 
+         * pro-tip: try never adding more deeply than 1st gen children (not object, listeners, subscribers but object adds listeners then listeners add subscribers)
+         * 
+         * questions:
+         * 
+         * a) does apmlmodelfile say this is object, listener, subscriber class etc.
+         * 
+         * b) do we need BODI here - for what?
+         * 
+         * c) do we need to backwardly walk at any point? i.e. given a subscriber would we need to find its parent, that parent's parent, etc?
+         * 
+         * d)
+         * 
+         */
+        
+        
         try            
         {
             JDefinedClass classfile = null;
             
             JPackage jpackage = null;            
             
-            Bloqparameter param = new Bloqparameter(jcodemodel, jpackage, classfile, apmlmodelfile);
+            Bloqconvenienceparameter param = new Bloqconvenienceparameter(jcodemodel, jpackage, classfile, apmlmodelfile);
+            
+            /*------------------------------------ Add class fields ---------------------------------------------------*/
             
             try{this.jcmpackagename(param);}        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -111,13 +139,19 @@ public class BloqJCMpopulator
             
             try{this.jcmlisteners(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
+            try{this.jcmsubscribers(param);}        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
             try{this.jcmobjects(param);}            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            /*--------------------------------------- Add methods -----------------------------------------------------*/
             
             try{this.addinterfacemethods(param);}   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{this.addsuperclassmethods(param);}  catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{this.addtagmethods(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                     
+            
+            /*--------------------------------------- Return JCM ------------------------------------------------------*/
             
             return jcodemodel;
         }
@@ -129,16 +163,23 @@ public class BloqJCMpopulator
         throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel.");
     }  
     
-    private void jcmbodi(Bloqparameter param)
+    private void jcmbodi(Bloqconvenienceparameter param)
     {
         try
         {
             if(param.jcodemodel==null) 
+            {
                 throw new InvalidParameterException("JCodeModel not set; unable to set BODI value.");           
+            }
             
-            param.classref.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bndi+"\"");                          
+            if(param.apmlmodelfile.bodi==null) 
+            {
+                throw new InvalidParameterException("BODI value not properly set; unable to set BODI value.");           
+            }
+                            
+            param.classref.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bodi+"\"");                          
             
-            //param.classref.direct("\tprotected String bodi=\""+param.apmlmodelfile.bndi+"\";\n");
+            //param.classref.direct("\tprotected String bodi=\""+param.apmlmodelfile.bodi+"\";\n");
         }
         catch(Exception e)
         {
@@ -146,24 +187,29 @@ public class BloqJCMpopulator
         }        
     }      
     
-    private void jcmobjects(Bloqparameter param)
+    private void jcmobjects(Bloqconvenienceparameter param)
     {
         try
         {
             if(param.jcodemodel==null)
             {    
-                throw new InvalidParameterException("JCodeModel not set; unable to get child object(s).");
+                throw new InvalidParameterException("JCodeModel not set; unable to set child object(s).");
             }
+            
+            if(param.apmlmodelfile.apmlobjects==null)
+            {    
+                throw new InvalidParameterException("No child objects set; unable to set child object(s).");
+            }            
                        
-            for(int i=0; i<param.apmlmodelfile.apmlobjects.size(); i++)
+            for(int i=0; i<param.apmlmodelfile.apmlobjects.size(); i++) //for each child object
             {   
                 String classname = new Filegrepper().getclassname(param.apmlmodelfile.apmlobjects.get(i).classname);                                                             
                 
                 String packagename = param.apmlmodelfile.apmlobjects.get(i).packagename;
                 
-                String full = packagename+"."+classname;
+                String fullname = packagename+"."+classname;
                                                 
-                param.classref.field(JMod.PROTECTED, Class.forName(full), "object_"+String.format("%03d", i));                               
+                param.classref.field(JMod.PROTECTED, Class.forName(fullname), "object_"+String.format("%03d", i));                               
                 
                 //param.classref.direct("\n\tprotected "+classname+" object_"+String.format("%03d", i)+";\n");
             }
@@ -174,13 +220,18 @@ public class BloqJCMpopulator
         }        
     }    
     
-    private void jcmlisteners(Bloqparameter param)
+    private void jcmlisteners(Bloqconvenienceparameter param)
     {
         try
         {
             if(param.jcodemodel==null) 
             {
-                throw new InvalidParameterException("JCodeModel not set; unable to set listener(s).");                
+                throw new InvalidParameterException("JCodeModel not set; unable to set listener(s).");
+            }
+            
+            if(param.apmlmodelfile.apmllisteners==null)
+            {
+                throw new InvalidParameterException("Apmllisteners not set; unable to set listener(s).");
             }
             
             //
@@ -190,12 +241,12 @@ public class BloqJCMpopulator
                 
                 String packagename = param.apmlmodelfile.apmllisteners.get(i).packagename;
                 
-                String full = packagename+"."+classname;
+                String fullname = packagename+"."+classname;
             
-                param.classref.field(JMod.PROTECTED, Class.forName(full), "listeners_"+String.format("%03d",i));
+                param.classref.field(JMod.PROTECTED, Class.forName(fullname), "listeners_"+String.format("%03d",i));
                 
                 //
-                for(int j=0; j<param.apmlmodelfile.apmlsubscribers.size(); j++)
+                /*for(int j=0; j<param.apmlmodelfile.apmlsubscribers.size(); j++)
                 {
                     param.classref.direct("\tprivate final class Apmllistener\n");
                     
@@ -204,18 +255,52 @@ public class BloqJCMpopulator
                     param.classref.direct("\t//to be implemented\n");
                     
                     param.classref.direct("\t}\n");
-                }
+                }*/
                 
                 //param.classref.direct("\n\tprotected "+classname+" listener_"+String.format("%03d",i)+";\n");
             }
         }
         catch(Exception e)
         {
-            //e.printStackTrace(); LOGGER.log(Level.WARNING, e.getMessage(), e);            
+            e.printStackTrace(); //LOGGER.log(Level.WARNING, e.getMessage(), e);            
         }        
     }
     
-    private void jcmpackagename(Bloqparameter param)
+    private void jcmsubscribers(Bloqconvenienceparameter param)
+    {
+        try
+        {
+            if(param.jcodemodel==null)
+            {
+                throw new InvalidParameterException("JCodeModel not set; unable to set subscribers(s).");
+            }
+            
+            if(param.apmlmodelfile.subscribers==null)
+            {
+                throw new InvalidParameterException("Apmlsubscribers not set; unable to set subscriber(s).");
+            }                
+            
+            //
+            for(int i=0; i<param.apmlmodelfile.apmlsubscribers.size(); i++)
+            {   
+                String classname = new Filegrepper().getclassname(param.apmlmodelfile.apmlsubscribers.get(i).classname); 
+                
+                String packagename = param.apmlmodelfile.apmlsubscribers.get(i).packagename;
+                
+                String fullname = packagename+"."+classname;
+            
+                param.classref.field(JMod.PROTECTED, Class.forName(fullname), "subscribers_"+String.format("%03d",i));
+                
+                //param.classref.direct("\n\tprotected "+classname+" listener_"+String.format("%03d",i)+";\n");
+            }            
+        }
+        catch(Exception e)
+        {
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+        }
+    }
+    
+    private void jcmpackagename(Bloqconvenienceparameter param)
     {
         try
         {
@@ -223,6 +308,11 @@ public class BloqJCMpopulator
             {
                 throw new InvalidParameterException("JCodeModel not set; unable to set package name.");            
             }
+            
+            if(param.apmlmodelfile.packagename==null) 
+            {
+                throw new InvalidParameterException("No package name found; unable to set package name.");            
+            }            
             
             param.jpackage = param.jcodemodel._package(param.apmlmodelfile.packagename);
         }
@@ -232,7 +322,7 @@ public class BloqJCMpopulator
         }        
     }
     
-    private void jcmclassname(Bloqparameter param)
+    private void jcmclassname(Bloqconvenienceparameter param)
     {
         try
         {     
@@ -254,7 +344,7 @@ public class BloqJCMpopulator
         }        
     }
 
-    private void jcmextends(Bloqparameter param)
+    private void jcmextends(Bloqconvenienceparameter param)
     {
         try
         {
@@ -276,7 +366,7 @@ public class BloqJCMpopulator
         }        
     }
     
-    private void jcmimplements(Bloqparameter param)
+    private void jcmimplements(Bloqconvenienceparameter param)
     {      
         try
         {
@@ -308,7 +398,7 @@ public class BloqJCMpopulator
         }        
     }
     
-    private void jcmruntag(Bloqparameter param)
+    private void jcmruntag(Bloqconvenienceparameter param)
     {
         try
         {
@@ -333,7 +423,7 @@ public class BloqJCMpopulator
         }          
     }
     
-    private void jcmstarttag(Bloqparameter param)
+    private void jcmstarttag(Bloqconvenienceparameter param)
     {          
         try
         {
@@ -358,7 +448,7 @@ public class BloqJCMpopulator
         }           
     }
     
-    private void addinterfacemethods(Bloqparameter param)
+    private void addinterfacemethods(Bloqconvenienceparameter param)
     {
         try
         {               
@@ -422,7 +512,7 @@ public class BloqJCMpopulator
         }        
     }
     
-    private void jcmautostarttag(Bloqparameter param)
+    private void jcmautostarttag(Bloqconvenienceparameter param)
     {
         try
         {
@@ -444,7 +534,7 @@ public class BloqJCMpopulator
         }         
     }
     
-    private void jcminittag(Bloqparameter param)
+    private void jcminittag(Bloqconvenienceparameter param)
     {        
         try
         {
@@ -466,7 +556,7 @@ public class BloqJCMpopulator
         }         
     }
 
-    private void addsuperclassmethods(Bloqparameter param)
+    private void addsuperclassmethods(Bloqconvenienceparameter param)
     {        
         try
         {
@@ -515,7 +605,7 @@ public class BloqJCMpopulator
         }        
     }
     
-    private void addtagmethods(Bloqparameter param)
+    private void addtagmethods(Bloqconvenienceparameter param)
     {
         try
         {
