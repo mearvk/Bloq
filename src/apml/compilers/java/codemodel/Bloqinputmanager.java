@@ -27,8 +27,10 @@ import java.util.logging.Logger;
  */
 public class Bloqinputmanager
 {   
+    
     private final Integer hash = 0x00888fe8;
     
+    /*--------------------------------------------------------------------------*/
     
     public ArrayList<Apmlmodelfile> apmlmodels;  
     
@@ -44,9 +46,11 @@ public class Bloqinputmanager
     
     public ArrayList<Apmlmodelfile> systemmodels;
     
+    /*--------------------------------------------------------------------------*/
     
     public static final Logger LOGGER    = Logger.getLogger(Bloqinputmanager.class.getName());  
     
+    /*--------------------------------------------------------------------------*/
     
     public Bloqinputmanager()
     {
@@ -79,7 +83,7 @@ public class Bloqinputmanager
      */
     public ArrayList<Apmlmodelfile> dosetapmlfiles(File apmlxmlfile, String apmltag)
     {        
-        BloqAPMLmodelpopulator apmlmodelpopulator = new BloqAPMLmodelpopulator();
+        BloqAPMLpopulator apmlmodelpopulator = new BloqAPMLpopulator();
         
         ArrayList<Apmlmodelfile> apmlmodelfiles = null;
         

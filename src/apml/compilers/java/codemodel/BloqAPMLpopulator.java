@@ -9,6 +9,7 @@ import apml.modeling.Apmllistener;
 import apml.modeling.Apmlmodelfile;
 
 import apml.modeling.Apmlobject;
+
 import apml.modeling.Apmlsubscriber;
 
 import apml.system.bodi.Bodi;
@@ -38,22 +39,25 @@ import org.w3c.dom.NodeList;
  * @author Max Rupplin
  * @since 03.28.2017 
  */
-public final class BloqAPMLmodelpopulator 
+public final class BloqAPMLpopulator 
 {
     private final Integer hash = 0x00888fe8;  
     
+    /*--------------------------------------------------------------------------*/
     
     public ArrayList<Apmlmodelfile> apmlfiles;      
         
+    /*--------------------------------------------------------------------------*/
     
-    protected static final Logger LOGGER = Logger.getLogger(BloqAPMLmodelpopulator.class.getName());
+    protected static final Logger LOGGER = Logger.getLogger(BloqAPMLpopulator.class.getName());
     
+    /*--------------------------------------------------------------------------*/
     
     public static void main(String...args) 
     {                          
         try
         {     
-            BloqAPMLmodelpopulator populator = new BloqAPMLmodelpopulator();
+            BloqAPMLpopulator populator = new BloqAPMLpopulator();
             
             File apmlfile = new File("");
                         
@@ -79,7 +83,7 @@ public final class BloqAPMLmodelpopulator
         }
     }      
     
-    public BloqAPMLmodelpopulator()
+    public BloqAPMLpopulator()
     {
         Bodi.setcontext("system");
         
@@ -101,7 +105,7 @@ public final class BloqAPMLmodelpopulator
         }
     } 
     
-    public BloqAPMLmodelpopulator(File apmlfile, String sysobj) throws Exception
+    public BloqAPMLpopulator(File apmlfile, String sysobj) throws Exception
     {
         this.apmlfiles = this.getapmlmodelfiles(apmlfile, sysobj);
     }     
@@ -295,9 +299,9 @@ public final class BloqAPMLmodelpopulator
             
             try{modelfile.start=this.getstarttag(xparam, index);}                               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                               
+            try{modelfile.sourcedir=this.getsourcedir(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                                            
             
-            try{modelfile.sourcedir=this.getsourcedir(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                        
+            try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                         
             
             try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}           
             
@@ -436,10 +440,17 @@ public final class BloqAPMLmodelpopulator
     } 
     
     private ArrayList<Apmlsubscriber> getsubscribers(Xpathparameter xparam, Integer index)
-    {
-        if(xparam.n0015_subscribers==null || xparam.n0015_subscribers.item(0)==null) 
+    {              
+        try
         {
-            return null;                  
+            for(int i=0; i<xparam.n0010_listeners.getLength(); i++)
+            {
+                NodeList nodes = (NodeList)xparam.xpath.evaluate("./subscriber", xparam.n0010_listeners.item(i), XPathConstants.NODESET); 
+            }        
+        }
+        catch(Exception e)
+        {
+            //
         }
         
         return null;

@@ -33,6 +33,7 @@ public class Bloqoutputmanager
 {
     private final Integer hash = 0x00888fe8;  
     
+    /*--------------------------------------------------------------------------*/
     
     public ArrayList<JCodeModel> apmlmodels;  
     
@@ -48,9 +49,11 @@ public class Bloqoutputmanager
     
     public ArrayList<JCodeModel> systemmodels;
     
+    /*--------------------------------------------------------------------------*/
     
     public static final Logger LOGGER = Logger.getLogger(Bloqoutputmanager.class.getName());
     
+    /*--------------------------------------------------------------------------*/
     
     public Bloqoutputmanager()
     {

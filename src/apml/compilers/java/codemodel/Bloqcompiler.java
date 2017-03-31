@@ -27,10 +27,12 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
 {        
     private final Integer hash = 0x00888fe8;  
     
+    /*--------------------------------------------------------------------------*/
     
     public static final Logger LOGGER = Logger.getLogger(Bloqcompiler.class.getName());
     
-               
+    /*--------------------------------------------------------------------------*/           
+    
     public Bloqcompiler()
     {                        
         Bodi.setcontext("system");

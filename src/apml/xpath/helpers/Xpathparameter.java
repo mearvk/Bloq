@@ -289,16 +289,40 @@ public final class Xpathparameter
     public Xpathparameter evaluate(Xpathparameter param) throws Exception
     {          
         if(param.e0000_count!=null)
-            try{param.n0000_count = Math.round((double)param.e0000_count.evaluate(param.document, XPathConstants.NUMBER));}
-            catch(Exception e){e.printStackTrace(System.err);}
+        {
+            try
+            {
+                param.n0000_count = Math.round((double)param.e0000_count.evaluate(param.document, XPathConstants.NUMBER));
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace(System.err);
+            }       
+        }
         
         if(param.e0001_tagname!=null)
-            try{param.n0001_tagname = (NodeList)param.e0001_tagname.evaluate(param.document, XPathConstants.NODESET);}
-            catch(Exception e){e.printStackTrace(System.err);}
+        {
+            try
+            {
+                param.n0001_tagname = (NodeList)param.e0001_tagname.evaluate(param.document, XPathConstants.NODESET);
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace(System.err);
+            }       
+        }
         
         if(param.e0002_autostart!=null)
-            try{param.n0002_autostart = (NodeList)param.e0002_autostart.evaluate(param.document, XPathConstants.NODESET);}
-            catch(Exception e){e.printStackTrace(System.err);}
+        {
+            try
+            {
+                param.n0002_autostart = (NodeList)param.e0002_autostart.evaluate(param.document, XPathConstants.NODESET);
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace(System.err);
+            }       
+        }
         
         if(param.e0003_classname!=null)
             try{param.n0003_classname = (NodeList)param.e0003_classname.evaluate(param.document, XPathConstants.NODESET);}

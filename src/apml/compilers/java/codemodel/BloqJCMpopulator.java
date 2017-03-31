@@ -50,8 +50,12 @@ import java.util.logging.Logger;
 public class BloqJCMpopulator 
 {
     private final Integer hash = 0x00888fe8;   
+    
+    /*--------------------------------------------------------------------------*/
           
     public static final Logger LOGGER = Logger.getLogger(BloqJCMpopulator.class.getName()); 
+    
+    /*--------------------------------------------------------------------------*/
     
     public BloqJCMpopulator()
     {

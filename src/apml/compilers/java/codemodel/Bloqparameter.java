@@ -17,6 +17,8 @@ public class Bloqparameter
 {
     private final Integer hash = 0x00888fe8;  
     
+    /*--------------------------------------------------------------------------*/
+    
     public JCodeModel jcodemodel;
     
     public JDefinedClass classref;
