@@ -495,6 +495,8 @@ public final class BloqAPMLpopulator
                 
                 /*--------------------------------------------------------------*/
 
+                listener.id                 = element.getAttribute("id");
+                
                 listener.alias              = element.getAttribute("alias");
                 
                 listener.autostartable      = element.getAttribute("autostart").equalsIgnoreCase("true");
@@ -537,6 +539,8 @@ public final class BloqAPMLpopulator
                 Apmlobject object = new Apmlobject();            
 
                 /*--------------------------------------------------------------*/
+                
+                object.id               = element.getAttribute("id");
                 
                 object.alias            = element.getAttribute("alias");
                 
@@ -581,6 +585,8 @@ public final class BloqAPMLpopulator
 
                 /*--------------------------------------------------------------*/
 
+                implement.id                = element.getAttribute("id");
+                
                 implement.alias             = element.getAttribute("alias");
                 
                 implement.autostartable     = element.getAttribute("autostart").equalsIgnoreCase("true");
