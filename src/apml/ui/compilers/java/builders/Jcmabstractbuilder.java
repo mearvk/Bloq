@@ -107,6 +107,8 @@ public abstract class Jcmabstractbuilder
         
         try{uip.constructor = uip.jdc.constructor(JMod.PUBLIC);} catch(Exception e){}
         
+        /*----------------------------------------------------------------------*/
+        
         try{Bodi.context("widgets").put(uip.jcm, uip);} catch(Exception e){}
         
         try{Bodi.context("widgets").put(uip.node, uip);} catch(Exception e){}

@@ -12,6 +12,7 @@ import org.w3c.dom.NodeList;
 /**
  * 
  * @author Max Rupplin
+ * @since 03.31.2017
  */
 public class Bloqxpathquick
 {  

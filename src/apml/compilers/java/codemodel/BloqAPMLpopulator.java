@@ -116,7 +116,7 @@ public final class BloqAPMLpopulator
                                        
         for(int i=0; i<xparam.getnodecount(); i++)
         {                            
-            switch(apmltag)
+            switch(apmltag) //only use root nodes
             {
                 case "//apml":              return doapmltags(xparam, apmltag);
                     
@@ -685,13 +685,17 @@ public final class BloqAPMLpopulator
                 Apmllistener object = new Apmllistener();            
 
                 object.alias            = element.getAttribute("alias");
+                
                 object.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
+                
                 object.classname        = element.getAttribute("class");
+                
                 object.extension        = element.getAttribute("extends");
                 
                 String xpathstring = "(./listener["+(i+1)+"]/ancestor::package/@default)[last()]";
                 
                 object.packagename      = (String)xparam.xpath.evaluate(xpathstring, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                
                 object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
 
                 listeners.add(object);
@@ -720,13 +724,17 @@ public final class BloqAPMLpopulator
                 Apmlobject object = new Apmlobject();            
 
                 object.alias            = element.getAttribute("alias");
+                
                 object.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
+                
                 object.classname        = element.getAttribute("class");
+                
                 object.extension        = element.getAttribute("extends");
                 
                 String nearestpackagedefaultvalue = "(./object["+(i+1)+"]/ancestor::package/@default)[last()]";
                 
                 object.packagename      = (String)xparam.xpath.evaluate(nearestpackagedefaultvalue, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                
                 object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
 
                 objects.add(object);

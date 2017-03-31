@@ -24,7 +24,8 @@ import org.xml.sax.SAXException;
 
 /**
  * 
- * @author max rupplin
+ * @author Max Rupplin
+ * @since 03.30.2017
  */
 public final class Xpathparameter
 {   
