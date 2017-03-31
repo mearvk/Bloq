@@ -111,7 +111,7 @@ public final class BloqAPMLpopulator
                                        
         for(int i=0; i<xparam.getnodecount(); i++)
         {                            
-            switch(apmltag) //only use root nodes
+            switch(apmltag)
             {
                 case "//apml":              return doapmltags(xparam, apmltag);
                     
@@ -440,13 +440,15 @@ public final class BloqAPMLpopulator
         
         try
         {
-            NodeList nodes = (NodeList)xparam.xpath.evaluate("./subscriber", xparam.n0010_listeners.item(index), XPathConstants.NODESET);
+            NodeList nodes = (NodeList)xparam.xpath.evaluate("./subscriber", xparam.n0001_tagname.item(index), XPathConstants.NODESET);
             
             for(int i=0; i<nodes.getLength(); i++) //for each subscriber under listener.item(index)
             {
                 Element element = (Element)nodes.item(i);                        
                         
                 Apmlsubscriber subscriber = new Apmlsubscriber();
+                
+                /*--------------------------------------------------------------*/
                                 
                 subscriber.id               = element.getAttribute("id");
                 
@@ -463,6 +465,8 @@ public final class BloqAPMLpopulator
                 subscriber.packagename      = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
                 
                 subscriber.startable        = element.getAttribute("start").equalsIgnoreCase("true");                
+                
+                /*--------------------------------------------------------------*/
                                
                 subscribers.add(subscriber);
             }        
@@ -487,21 +491,25 @@ public final class BloqAPMLpopulator
             {
                 Element element = (Element)nodes.item(i);            
 
-                Apmllistener listener = new Apmllistener();            
+                Apmllistener listener = new Apmllistener();   
+                
+                /*--------------------------------------------------------------*/
 
-                listener.alias            = element.getAttribute("alias");
+                listener.alias              = element.getAttribute("alias");
                 
-                listener.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
+                listener.autostartable      = element.getAttribute("autostart").equalsIgnoreCase("true");
                 
-                listener.classname        = element.getAttribute("class");
+                listener.classname          = element.getAttribute("class");
                 
-                listener.extension        = element.getAttribute("extends");
+                listener.extension          = element.getAttribute("extends");
                 
-                String xpathstring = "(./listener["+(i+1)+"]/ancestor::package/@default)[last()]";
+                String xpathstring          = "(./listener["+(i+1)+"]/ancestor::package/@default)[last()]";
                 
-                listener.packagename      = (String)xparam.xpath.evaluate(xpathstring, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                listener.packagename        = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
                 
-                listener.startable        = element.getAttribute("start").equalsIgnoreCase("true");
+                listener.startable          = element.getAttribute("start").equalsIgnoreCase("true");
+                
+                /*--------------------------------------------------------------*/
 
                 listeners.add(listener);
             }            
@@ -528,6 +536,8 @@ public final class BloqAPMLpopulator
 
                 Apmlobject object = new Apmlobject();            
 
+                /*--------------------------------------------------------------*/
+                
                 object.alias            = element.getAttribute("alias");
                 
                 object.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
@@ -536,11 +546,13 @@ public final class BloqAPMLpopulator
                 
                 object.extension        = element.getAttribute("extends");
                 
-                String nearestpackagedefaultvalue = "(./object["+(i+1)+"]/ancestor::package/@default)[last()]";
+                String xpathstring      = "(./object["+(i+1)+"]/ancestor::package/@default)[last()]";
                 
-                object.packagename      = (String)xparam.xpath.evaluate(nearestpackagedefaultvalue, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                object.packagename      = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
                 
                 object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
+                
+                /*--------------------------------------------------------------*/
 
                 objects.add(object);
             }            
@@ -561,27 +573,27 @@ public final class BloqAPMLpopulator
         {
             NodeList nodes = (NodeList)xparam.xpath.evaluate("./implements", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
                         
-            for(int indexi=0; indexi<nodes.getLength(); indexi++)  
+            for(int i=0; i<nodes.getLength(); i++)  
             {
-                Apmlimplement implement = new Apmlimplement();            
+                Apmlimplement implement = new Apmlimplement();                                            
                 
-                String xpathstring = "(./implements["+(indexi+1)+"]/ancestor::package/@default)[last()]";
-                
-                Element element = (Element)nodes.item(indexi);            
+                Element element = (Element)nodes.item(i);            
 
                 /*--------------------------------------------------------------*/
 
-                implement.alias            = element.getAttribute("alias");
+                implement.alias             = element.getAttribute("alias");
                 
-                implement.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
+                implement.autostartable     = element.getAttribute("autostart").equalsIgnoreCase("true");
                 
-                implement.classname        = element.getAttribute("class");
+                implement.classname         = element.getAttribute("class");
                 
-                implement.extension        = element.getAttribute("extends");                                
+                implement.extension         = element.getAttribute("extends");                                
                 
-                implement.packagename      = (String)xparam.xpath.evaluate(xpathstring, xparam.n0001_tagname.item(index), XPathConstants.STRING);
+                String xpathstring          = "(./implements["+(i+1)+"]/ancestor::package/@default)[last()]";
                 
-                implement.startable        = element.getAttribute("start").equalsIgnoreCase("true");
+                implement.packagename       = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
+                
+                implement.startable         = element.getAttribute("start").equalsIgnoreCase("true");
                 
                 /*--------------------------------------------------------------*/
 
