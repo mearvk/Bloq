@@ -30,7 +30,7 @@
                     <listener id="esodl" bodi="//echoserver/listeners/ondispatch/{this.id}" class="Ondispatchlistener" with="*">
                         <subscriber class="Ondispatchsubscriber_001"></subscriber>
                         <subscriber class="Ondispatchsubscriber_002"></subscriber>
-                        <subscriber class="Ondispatcsubscriberh_003"></subscriber>
+                        <subscriber class="Ondispatchsubscriber_003"></subscriber>
                     </listener>  
                 </object>   
 
