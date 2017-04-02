@@ -82,41 +82,15 @@ public class BloqJCMpopulator
     private JCodeModel makeindividualjcodemodelinstance(Apmlmodelfile apmlmodelfile) throws Exception
     {       
         JCodeModel jcodemodel = new JCodeModel();                
-        
-        /**
-         * 0. Here we have expectation that Apmlmodelfile will represent a single JCM file; that each JCM will have references to classes (fields, etc but these will not be nested within it at this hour)
-         * 
-         * 1. if object then check for objects, listeners
-         * 
-         * 2. if system then check for objects, systems
-         * 
-         * 3. if listener then check for subscribers
-         * 
-         * 4. if subscribers then check for nothing
-         * 
-         * pro-tip: try never adding more deeply than 1st gen children (not object, listeners, subscribers but object adds listeners then listeners add subscribers)
-         * 
-         * questions:
-         * 
-         * a) does apmlmodelfile say this is object, listener, subscriber class etc.
-         * 
-         * b) do we need BODI here - for what?
-         * 
-         * c) do we need to backwardly walk at any point? i.e. given a subscriber would we need to find its parent, that parent's parent, etc?
-         * 
-         * d)
-         * 
-         */
-        
+
+        JDefinedClass classfile = null;
+            
+        JPackage jpackage = null;            
+            
+        Bloqconvenienceparameter param = new Bloqconvenienceparameter(jcodemodel, jpackage, classfile, apmlmodelfile);                
         
         try            
-        {
-            JDefinedClass classfile = null;
-            
-            JPackage jpackage = null;            
-            
-            Bloqconvenienceparameter param = new Bloqconvenienceparameter(jcodemodel, jpackage, classfile, apmlmodelfile);
-            
+        {            
             /*------------------------------------ Add class fields ---------------------------------------------------*/
             
             try{this.jcmpackagename(param);}        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
@@ -154,16 +128,105 @@ public class BloqJCMpopulator
             try{this.addtagmethods(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                     
             
             /*--------------------------------------- Return JCM ------------------------------------------------------*/
-            
-            return jcodemodel;
+                        
         }
         catch(Exception e)
         {
             /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }        
         
-        throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel.");
+        try
+        {                 
+            switch(apmlmodelfile.tagname.toLowerCase())
+            {
+                case "apml":            
+                    doapmlfinishing(param);
+                    break;
+                
+                case "dynamiclistener": 
+                    dodynamiclistenerfinishing(param);
+                    break;
+                
+                case "listener":        
+                    dolistenerfinishing(param);
+                    break;
+                    
+                case "object":        
+                    doobjectfinishing(param);
+                    break;                    
+                
+                case "subscriber":      
+                    dosubscriberfinishing(param);
+                    break;
+                
+                case "system":          
+                    dosystemfinishing(param);
+                    break;                
+            }
+        }
+        catch(Exception e)
+        {
+            //
+        }        
+        
+        return jcodemodel;
+        
+        //throw new Exception("ApmlTagHandler::createJCodeModel: Unable to return a JCodeModel.");        
     }  
+    
+    private void doapmlfinishing(Bloqconvenienceparameter param)
+    {
+        param.classref.constructor(JMod.PUBLIC);                
+        
+        param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dosetter");
+        
+        param.classref.direct("//todo finish adding support");
+    }
+    
+    private void dodynamiclistenerfinishing(Bloqconvenienceparameter param)
+    {
+        param.classref.constructor(JMod.PUBLIC);                
+        
+        param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dosetter");
+        
+        param.classref.direct("//todo finish adding support");
+    }
+    
+    private void dolistenerfinishing(Bloqconvenienceparameter param)
+    {
+        param.classref.constructor(JMod.PUBLIC);                
+        
+        param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dosetter");
+        
+        param.classref.direct("//todo finish adding support");
+    }
+    
+    private void doobjectfinishing(Bloqconvenienceparameter param)
+    {
+        param.classref.constructor(JMod.PUBLIC);                
+        
+        param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dosetter");
+        
+        param.classref.direct("//todo finish adding support");
+    }    
+    
+    private void dosubscriberfinishing(Bloqconvenienceparameter param)
+    {
+        param.classref.constructor(JMod.PUBLIC);                
+        
+        param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dosetter");
+        
+        param.classref.direct("//todo finish adding support");
+    }
+    
+    private void dosystemfinishing(Bloqconvenienceparameter param)
+    {
+        param.classref.constructor(JMod.PUBLIC);                
+        
+        param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dosetter");
+        
+        param.classref.direct("//todo finish adding support");
+    }
     
     private void jcmbodi(Bloqconvenienceparameter param)
     {
