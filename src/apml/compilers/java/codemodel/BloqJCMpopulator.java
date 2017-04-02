@@ -23,6 +23,7 @@ import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 
 import com.sun.codemodel.JClass;
+import com.sun.codemodel.JMethod;
 
 import java.io.IOException;
 
@@ -166,7 +167,7 @@ public class BloqJCMpopulator
         }
         catch(Exception e)
         {
-            //
+            e.printStackTrace();
         }        
         
         return jcodemodel;
@@ -176,56 +177,216 @@ public class BloqJCMpopulator
     
     private void doapmlfinishing(Bloqconvenienceparameter param)
     {
-        param.classref.constructor(JMod.PUBLIC);                
+        JMethod constructor;
         
-        param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dosetter");
+        constructor = param.classref.constructor(JMod.PUBLIC);                
         
-        param.classref.direct("//todo finish adding support");
+        constructor.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        
+        constructor.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/
+        
+        JMethod constructor2;
+        
+        constructor2 = param.classref.constructor(JMod.PUBLIC);
+        
+        constructor2.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/        
+        
+        JMethod initialization;
+        
+        initialization = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "initialization");
+        
+        initialization.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/
+        
+        param.classref.direct("\t\n\n//TODO: finish adding support...");
     }
     
     private void dodynamiclistenerfinishing(Bloqconvenienceparameter param)
     {
-        param.classref.constructor(JMod.PUBLIC);                
+        JMethod constructor;
         
-        param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dosetter");
+        constructor = param.classref.constructor(JMod.PUBLIC);                
         
-        param.classref.direct("//todo finish adding support");
+        constructor.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        
+        constructor.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/
+        
+        JMethod constructor2;
+        
+        constructor2 = param.classref.constructor(JMod.PUBLIC);
+        
+        constructor2.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/
+        
+        JMethod initialization;
+        
+        initialization = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "initialization");
+        
+        initialization.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/
+        
+        JMethod callback;
+        
+        callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dynamiclistenercallback");
+        
+        callback.param(JMod.FINAL, java.lang.Object.class, "event");
+        
+        callback.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/         
+        
+        param.classref.direct("\t\n\n//TODO: finish adding support...");
     }
     
     private void dolistenerfinishing(Bloqconvenienceparameter param)
-    {
-        param.classref.constructor(JMod.PUBLIC);                
+    {                
+        JMethod constructor;
         
-        param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dosetter");
+        constructor = param.classref.constructor(JMod.PUBLIC);                
         
-        param.classref.direct("//todo finish adding support");
+        constructor.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        
+        constructor.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/
+        
+        JMethod constructor2;
+        
+        constructor2 = param.classref.constructor(JMod.PUBLIC);
+        
+        constructor2.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/        
+        
+        JMethod initialization;
+        
+        initialization = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "initialization");
+        
+        initialization.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/
+        
+        JMethod callback;
+        
+        callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "listenercallback");
+        
+        callback.param(JMod.FINAL, java.lang.Object.class, "event");
+        
+        callback.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/        
+        
+        param.classref.direct("\t\n\n//TODO: finish adding support...");
     }
     
     private void doobjectfinishing(Bloqconvenienceparameter param)
     {
-        param.classref.constructor(JMod.PUBLIC);                
+        JMethod constructor;
         
-        param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dosetter");
+        constructor = param.classref.constructor(JMod.PUBLIC);                
         
-        param.classref.direct("//todo finish adding support");
+        constructor.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        
+        constructor.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/
+        
+        JMethod constructor2;
+        
+        constructor2 = param.classref.constructor(JMod.PUBLIC);
+        
+        constructor2.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/        
+        
+        JMethod initialization;
+        
+        initialization = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "initialization");
+        
+        initialization.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/
+        
+        param.classref.direct("\t\n\n//TODO: finish adding support...");
     }    
     
     private void dosubscriberfinishing(Bloqconvenienceparameter param)
     {
-        param.classref.constructor(JMod.PUBLIC);                
+        JMethod constructor;
         
-        param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dosetter");
+        constructor = param.classref.constructor(JMod.PUBLIC);                
         
-        param.classref.direct("//todo finish adding support");
+        constructor.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        
+        constructor.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/
+        
+        JMethod constructor2;
+        
+        constructor2 = param.classref.constructor(JMod.PUBLIC);
+        
+        constructor2.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/        
+        
+        JMethod initialization;
+        
+        initialization = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "initialization");
+        
+        initialization.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/
+        
+        JMethod callback;
+        
+        callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "subscribercallback");
+        
+        callback.param(JMod.FINAL, java.lang.Object.class, "event");
+        
+        callback.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/         
+        
+        param.classref.direct("\t\n\n//TODO: finish adding support...");
     }
     
     private void dosystemfinishing(Bloqconvenienceparameter param)
     {
-        param.classref.constructor(JMod.PUBLIC);                
+        JMethod constructor;
         
-        param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dosetter");
+        constructor = param.classref.constructor(JMod.PUBLIC);                
         
-        param.classref.direct("//todo finish adding support");
+        constructor.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        
+        /*---------------------------------------------------------------------*/
+        
+        JMethod constructor2;
+        
+        constructor2 = param.classref.constructor(JMod.PUBLIC);
+        
+        constructor2.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/        
+        
+        JMethod initialization;
+        
+        initialization = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "initialization");
+        
+        initialization.body().directStatement("\n//todo finish implementation here...");
+        
+        /*---------------------------------------------------------------------*/
+        
+        param.classref.direct("\n\n//TODO: finish adding support...");
     }
     
     private void jcmbodi(Bloqconvenienceparameter param)

@@ -9,28 +9,28 @@
         </definitions>                                   
 
         <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
-            <system id="echoserver" start="true" bodi="//echoserver/systems/{this.id}" class="Echoserversystem">                  
+            <system id="echoserver" start="true" bodi="//systems/echoserver/{this.id}" class="Echoserversystem">                  
                 
                 <object id="echoserver" start="true" bodi="//echoserver/objects/1" class="Echoserver">                       
-                    <listener id="esocl" bodi="//echoserver/listeners/onconnect/{this.id}" class="Echoserveronconnectlistener" with="*">
-                        <subscriber class="EchoOnconnectsubscriber_001"></subscriber>
-                        <subscriber class="EchoOnconnectsubscriber_002"></subscriber>
-                        <subscriber class="EchoOnconnectsubscriber_003"></subscriber>
+                    <listener id="esocl" bodi="//echoserver/listeners/onconnect/{this.id}" class="EchoserverOnconnectlistener" with="*">
+                        <subscriber class="ESOnconnectSubscriber_001"></subscriber>
+                        <subscriber class="ESOnconnectSubscriber_002"></subscriber>
+                        <subscriber class="ESOnconnectSubscriber_003"></subscriber>
                     </listener>
-                    <listener id="esoel" bodi="//echoserver/listeners/onexit/{this.id}" class="Echoserveronexitlistener" with="*">
-                        <subscriber class="EchoOnexitsubscriber_001"></subscriber>
-                        <subscriber class="EchoOnexitsubscriber_002"></subscriber>
-                        <subscriber class="EchoOnexitsubscriber_003"></subscriber>
+                    <listener id="esoel" bodi="//echoserver/listeners/onexit/{this.id}" class="EchoserverOnexitlistener" with="*">
+                        <subscriber class="ESOnexitSubscriber_001"></subscriber>
+                        <subscriber class="ESOnexitSubscriber_002"></subscriber>
+                        <subscriber class="ESOnexitSubscriber_003"></subscriber>
                     </listener>
-                    <listener id="esorl" bodi="//echoserver/listeners/onread/{this.id}" class="Echoserveronreadlistener" with="*">
-                        <subscriber class="EchoOnreceiptsubscriber_001"></subscriber>
-                        <subscriber class="EchoOnreceiptsubscriber_002"></subscriber>
-                        <subscriber class="EchoOnreceiptsubscriber_003"></subscriber>
+                    <listener id="esorl" bodi="//echoserver/listeners/onread/{this.id}" class="EchoserverOnreadlistener" with="*">
+                        <subscriber class="ESOnreceiptSubscriber_001"></subscriber>
+                        <subscriber class="ESOnreceiptSubscriber_002"></subscriber>
+                        <subscriber class="ESOnreceiptSubscriber_003"></subscriber>
                     </listener>
-                    <listener id="esodl" bodi="//echoserver/listeners/ondispatch/{this.id}" class="Echoserverondispatchlistener" with="*">
-                        <subscriber class="EchoOndispatchsubscriber_001"></subscriber>
-                        <subscriber class="EchoOndispatchsubscriber_002"></subscriber>
-                        <subscriber class="EchoOndispatchsubscriber_003"></subscriber>
+                    <listener id="esodl" bodi="//echoserver/listeners/ondispatch/{this.id}" class="EchoserverOndispatchlistener" with="*">
+                        <subscriber class="ESOndispatchSubscriber_001"></subscriber>
+                        <subscriber class="ESOndispatchSubscriber_002"></subscriber>
+                        <subscriber class="ESOndispatchSubscriber_003"></subscriber>
                     </listener>  
                 </object>   
 
@@ -38,28 +38,28 @@
         </package>
         
         <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
-            <system id="ftpserver" start="true" bodi="//ftpserver/systems/{this.id}" class="Ftpserversystem">                  
+            <system id="fileserver" start="true" bodi="//systems/fileserver/{this.id}" class="Fileserversystem">                  
                 
                 <object id="ftpserver" start="true" bodi="//echoserver/objects/1" class="Ftpserver">                       
                     <listener id="ftpocl" bodi="//ftpserver/listeners/onconnect/{this.id}" class="Ftponconnectlistener" with="*">
-                        <subscriber class="FTPOnconnectsubscriber_001"></subscriber>
-                        <subscriber class="FTPOnconnectsubscriber_002"></subscriber>
-                        <subscriber class="FTPOnconnectsubscriber_003"></subscriber>
+                        <subscriber class="FTPOnconnectSubscriber_001"></subscriber>
+                        <subscriber class="FTPOnconnectSubscriber_002"></subscriber>
+                        <subscriber class="FTPOnconnectSubscriber_003"></subscriber>
                     </listener>
                     <listener id="ftpoel" bodi="//ftpserver/listeners/onexit/{this.id}" class="Ftponexitlistener" with="*">
-                        <subscriber class="FTPOnexitsubscriber_001"></subscriber>
-                        <subscriber class="FTPOnexitsubscriber_002"></subscriber>
-                        <subscriber class="FTPOnexitsubscriber_003"></subscriber>
+                        <subscriber class="FTPOnexitSubscriber_001"></subscriber>
+                        <subscriber class="FTPOnexitSubscriber_002"></subscriber>
+                        <subscriber class="FTPOnexitSubscriber_003"></subscriber>
                     </listener>
                     <listener id="ftporl" bodi="//ftpserver/listeners/onread/{this.id}" class="Ftponreadlistener" with="*">
-                        <subscriber class="FTPOnreceiptsubscriber_001"></subscriber>
-                        <subscriber class="FTPOnreceiptsubscriber_002"></subscriber>
-                        <subscriber class="FTPOnreceiptsubscriber_003"></subscriber>
+                        <subscriber class="FTPOnreceiptSubscriber_001"></subscriber>
+                        <subscriber class="FTPOnreceiptSubscriber_002"></subscriber>
+                        <subscriber class="FTPOnreceiptSubscriber_003"></subscriber>
                     </listener>
                     <listener id="ftpodl" bodi="//ftpserver/listeners/ondispatch/{this.id}" class="Ftpondispatchlistener" with="*">
-                        <subscriber class="FTPOndispatchsubscriber_001"></subscriber>
-                        <subscriber class="FTPOndispatchsubscriber_002"></subscriber>
-                        <subscriber class="FTPOndispatchsubscriber_003"></subscriber>
+                        <subscriber class="FTPOndispatchSubscriber_001"></subscriber>
+                        <subscriber class="FTPOndispatchSubscriber_002"></subscriber>
+                        <subscriber class="FTPOndispatchSubscriber_003"></subscriber>
                     </listener>  
                 </object>   
 
@@ -104,7 +104,7 @@
             <template type=""></template>
         </compiler>    
 
-        <dynamiclistener class="StdDynamicListener">
+        <dynamiclistener class="StdDynamicListener" bodi="//dynamiclisteners/1">
             <object start="true"></object>
         </dynamiclistener>
 
