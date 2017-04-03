@@ -14,8 +14,6 @@ import apml.modeling.Apmlsubscriber;
 
 import apml.system.bodi.Bodi;
 
-import apml.xpath.helpers.Xpathparameter;
-
 import java.io.File;
 
 import java.io.IOException;
@@ -107,7 +105,7 @@ public final class BloqAPMLpopulator
       
     public ArrayList<Apmlmodelfile> getapmlmodelfiles(File apmlfile, String apmltag) throws Exception
     {                          
-        Xpathparameter xparam = new Xpathparameter(apmltag, apmlfile);          
+        Bloqxpathparameter xparam = new Bloqxpathparameter(apmltag, apmlfile);          
                                        
         for(int i=0; i<xparam.getnodecount(); i++)
         {                            
@@ -132,7 +130,7 @@ public final class BloqAPMLpopulator
         return null;
     }          
     
-    private ArrayList<Apmlmodelfile> doapmltags(Xpathparameter xparam, String apmltag) throws Exception
+    private ArrayList<Apmlmodelfile> doapmltags(Bloqxpathparameter xparam, String apmltag) throws Exception
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();
         
@@ -178,7 +176,7 @@ public final class BloqAPMLpopulator
         return modelfiles;
     }        
     
-    private ArrayList<Apmlmodelfile> dodefinitiontags(Xpathparameter xparam, String apmltag) throws Exception
+    private ArrayList<Apmlmodelfile> dodefinitiontags(Bloqxpathparameter xparam, String apmltag) throws Exception
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();       
         
@@ -224,7 +222,7 @@ public final class BloqAPMLpopulator
         return modelfiles;
     }
 
-    private ArrayList<Apmlmodelfile> dodynamiclistenertags(Xpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dodynamiclistenertags(Bloqxpathparameter xparam, String apmltag)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList(); 
         
@@ -264,7 +262,7 @@ public final class BloqAPMLpopulator
         return modelfiles;
     }     
      
-    private ArrayList<Apmlmodelfile> dolistenertags(Xpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dolistenertags(Bloqxpathparameter xparam, String apmltag)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();    
         
@@ -310,7 +308,7 @@ public final class BloqAPMLpopulator
         return modelfiles;
     }    
    
-    private ArrayList<Apmlmodelfile> doobjecttags(Xpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> doobjecttags(Bloqxpathparameter xparam, String apmltag)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList(); 
         
@@ -352,7 +350,7 @@ public final class BloqAPMLpopulator
         return modelfiles;
     }    
   
-    private ArrayList<Apmlmodelfile> dosubscribertags(Xpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dosubscribertags(Bloqxpathparameter xparam, String apmltag)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();   
         
@@ -392,7 +390,7 @@ public final class BloqAPMLpopulator
         return modelfiles;
     }    
 
-    private ArrayList<Apmlmodelfile> dosystemtags(Xpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dosystemtags(Bloqxpathparameter xparam, String apmltag)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();  
         
@@ -438,7 +436,7 @@ public final class BloqAPMLpopulator
         return modelfiles;
     } 
     
-    private ArrayList<Apmlsubscriber> getsubscribers(Xpathparameter xparam, Integer index)
+    private ArrayList<Apmlsubscriber> getsubscribers(Bloqxpathparameter xparam, Integer index)
     {              
         ArrayList<Apmlsubscriber> subscribers = new ArrayList<>();
         
@@ -483,7 +481,7 @@ public final class BloqAPMLpopulator
         return subscribers;
     }
     
-    private ArrayList<Apmllistener> getlisteners(Xpathparameter xparam, Integer index)
+    private ArrayList<Apmllistener> getlisteners(Bloqxpathparameter xparam, Integer index)
     {
         ArrayList<Apmllistener> listeners = new ArrayList<>();
         
@@ -528,7 +526,7 @@ public final class BloqAPMLpopulator
         return listeners;
     }        
 
-    private ArrayList<Apmlobject> getobjects(Xpathparameter xparam, Integer index)
+    private ArrayList<Apmlobject> getobjects(Bloqxpathparameter xparam, Integer index)
     {      
         ArrayList<Apmlobject> objects = new ArrayList<>();
         
@@ -573,7 +571,7 @@ public final class BloqAPMLpopulator
         return objects;
     }
     
-    private ArrayList<Apmlimplement> getimplements(Xpathparameter xparam, Integer index)
+    private ArrayList<Apmlimplement> getimplements(Bloqxpathparameter xparam, Integer index)
     {
         ArrayList<Apmlimplement> implementz = new ArrayList<>();
         
@@ -618,7 +616,7 @@ public final class BloqAPMLpopulator
         return implementz;
     }    
 
-    private String getbndi(Xpathparameter xparam, Integer index)
+    private String getbndi(Bloqxpathparameter xparam, Integer index)
     {
         if(xparam.n0014_bndi==null || xparam.n0014_bndi.item(0)==null) 
         {
@@ -628,7 +626,7 @@ public final class BloqAPMLpopulator
         return xparam.n0014_bndi.item(index).getNodeValue();        
     }  
     
-    private String getdefaultdir(Xpathparameter xparam, Integer index)
+    private String getdefaultdir(Bloqxpathparameter xparam, Integer index)
     {        
         String dir = "apml.default.unbound";
         
@@ -646,7 +644,7 @@ public final class BloqAPMLpopulator
         return dir;
     }      
 
-    private String getsourcedir(Xpathparameter xparam, Integer index)
+    private String getsourcedir(Bloqxpathparameter xparam, Integer index)
     {        
         String dir = "apml.src.unbound";
         
@@ -664,7 +662,7 @@ public final class BloqAPMLpopulator
         return dir;
     }    
 
-    private String getbuilddir(Xpathparameter xparam, Integer index)
+    private String getbuilddir(Bloqxpathparameter xparam, Integer index)
     {        
         String dir = "apml.build.unbound";
         
@@ -682,7 +680,7 @@ public final class BloqAPMLpopulator
         return dir;
     }    
 
-    private String gettagname(Xpathparameter xparam, Integer index)
+    private String gettagname(Bloqxpathparameter xparam, Integer index)
     {
         if(xparam.n0001_tagname==null || xparam.n0001_tagname.item(0)==null) 
         {
@@ -692,7 +690,7 @@ public final class BloqAPMLpopulator
         return xparam.n0001_tagname.item(index).getNodeName();
     }
 
-    private String getautostarttag(Xpathparameter xparam, Integer index)
+    private String getautostarttag(Bloqxpathparameter xparam, Integer index)
     {        
         if(xparam.n0002_autostart==null || xparam.n0002_autostart.item(0)==null) 
         {
@@ -702,7 +700,7 @@ public final class BloqAPMLpopulator
         return xparam.n0002_autostart.item(0).getNodeName();
     }
 
-    private String getclassname(Xpathparameter xparam, Integer index)
+    private String getclassname(Bloqxpathparameter xparam, Integer index)
     {
         if(xparam.n0003_classname==null || xparam.n0003_classname.item(0)==null) 
         {
@@ -723,7 +721,7 @@ public final class BloqAPMLpopulator
         return retval;
     }
 
-    private String getidtag(Xpathparameter xparam, Integer index)
+    private String getidtag(Bloqxpathparameter xparam, Integer index)
     {
         if(xparam.n0004_id==null || xparam.n0004_id.item(0)==null)
         {
@@ -733,7 +731,7 @@ public final class BloqAPMLpopulator
         return xparam.n0004_id.item(0).getNodeValue();
     }
 
-    private String getinittag(Xpathparameter xparam, Integer index) 
+    private String getinittag(Bloqxpathparameter xparam, Integer index) 
     {
         if(xparam.n0005_init==null || xparam.n0005_init.item(0)==null)
         {
@@ -743,7 +741,7 @@ public final class BloqAPMLpopulator
         return xparam.n0005_init.item(0).getNodeName();
     }
 
-    private String getpackagename(Xpathparameter xparam, Integer index)
+    private String getpackagename(Bloqxpathparameter xparam, Integer index)
     {        
         String packagename="apml.unbound.pkg";
         
@@ -759,7 +757,7 @@ public final class BloqAPMLpopulator
         return packagename;
     }
 
-    private String getruntag(Xpathparameter xparam, Integer index)
+    private String getruntag(Bloqxpathparameter xparam, Integer index)
     {
         if(xparam.n0007_run==null || xparam.n0007_run.item(0)==null)
         {
@@ -769,7 +767,7 @@ public final class BloqAPMLpopulator
         return xparam.n0007_run.item(0).getNodeName();
     }    
 
-    private String getstarttag(Xpathparameter xparam, Integer index)
+    private String getstarttag(Bloqxpathparameter xparam, Integer index)
     {
         if(xparam.n0008_start==null || xparam.n0008_start.item(0)==null)
         {
@@ -779,7 +777,7 @@ public final class BloqAPMLpopulator
         return xparam.n0008_start.item(0).getNodeName();
     }    
          
-    private String getsuperclass(Xpathparameter xparam, Integer index)
+    private String getsuperclass(Bloqxpathparameter xparam, Integer index)
     {
         if(xparam.n0012_superclass==null || xparam.n0012_superclass.item(0)==null) 
         {

@@ -9,6 +9,7 @@ import apml.interfaces.Initializable;
 import apml.helpers.Filegrepper;
 
 import apml.modeling.Apmlmodelfile;
+import apml.system.Apmlsystem;
 
 import apml.system.bodi.Bodi;
 
@@ -178,6 +179,14 @@ public class BloqJCMpopulator
     
     private void doapmlfinishing(Bloqconvenienceparameter param)
     {
+        JDefinedClass theclass;
+        
+        theclass = param.classref;
+        
+        theclass._extends(java.lang.Object.class);
+        
+        /*---------------------------------------------------------------------*/
+        
         JMethod constructor;
         
         constructor = param.classref.constructor(JMod.PUBLIC);                
@@ -209,6 +218,14 @@ public class BloqJCMpopulator
     
     private void dodynamiclistenerfinishing(Bloqconvenienceparameter param)
     {
+        JDefinedClass theclass;
+        
+        theclass = param.classref;
+        
+        theclass._extends(java.lang.Object.class);
+
+        /*---------------------------------------------------------------------*/        
+        
         JMethod constructor;
         
         constructor = param.classref.constructor(JMod.PUBLIC);                
@@ -282,6 +299,13 @@ public class BloqJCMpopulator
     
     private void dolistenerfinishing(Bloqconvenienceparameter param)
     {                
+        JDefinedClass theclass;
+        
+        theclass = param.classref;
+        
+        theclass._extends(java.lang.Object.class);
+
+        /*---------------------------------------------------------------------*/           
         JMethod constructor;
         
         constructor = param.classref.constructor(JMod.PUBLIC);                
