@@ -166,38 +166,66 @@ public final class Bloqxpathparameter
         /*----------------------------------------------------------------------*/
         
         this.s0000_count            = "count("+apmltag+")";
+        
         this.s0001_tagname          = apmltag; 
+        
         this.s0002_autostart        = apmltag+"/@autostart";
+        
         this.s0003_classname        = apmltag+"/@class"; 
+        
         this.s0004_id               = apmltag+"/@id";
+        
         this.s0005_init             = apmltag+"/@init";
+        
         this.s0006_package          = apmltag+"/@package";
+        
         this.s0007_run              = apmltag+"/@run";
+        
         this.s0008_start            = apmltag+"/@start";   
+        
         this.s0009_implements       = apmltag+"/implements";
+        
         this.s0010_listeners        = apmltag+"/listener"; 
+        
         this.s0011_objects          = apmltag+"/object";     
+        
         this.s0012_superclass       = apmltag+"/@extends";
+        
         this.s0013_defaultpackage   = "//system/package/@default";
+        
         this.s0014_bndi             = apmltag+"/@bndi";
         
         /*----------------------------------------------------------------------*/
         
-        try{this.e0000_count            = xpath.compile(s0000_count);}catch(Exception e){e.printStackTrace(System.err);}
-        try{this.e0001_tagname          = xpath.compile(s0001_tagname);}catch(Exception e){e.printStackTrace(System.err);} 
-        try{this.e0002_autostart        = xpath.compile(s0002_autostart);}catch(Exception e){e.printStackTrace(System.err);}
-        try{this.e0003_classname        = xpath.compile(s0003_classname);}catch(Exception e){e.printStackTrace(System.err);}
-        try{this.e0004_id               = xpath.compile(s0004_id);}catch(Exception e){e.printStackTrace(System.err);}
-        try{this.e0005_init             = xpath.compile(s0005_init);}catch(Exception e){e.printStackTrace(System.err);}            
-        try{this.e0006_package          = xpath.compile(s0006_package);}catch(Exception e){e.printStackTrace(System.err);}
-        try{this.e0007_run              = xpath.compile(s0007_run);}catch(Exception e){e.printStackTrace(System.err);}
-        try{this.e0008_start            = xpath.compile(s0008_start);}catch(Exception e){e.printStackTrace(System.err);}            
-        try{this.e0009_implements       = xpath.compile(s0009_implements);}catch(Exception e){e.printStackTrace(System.err);}
-        try{this.e0010_listeners        = xpath.compile(s0010_listeners);}catch(Exception e){e.printStackTrace(System.err);} 
-        try{this.e0011_objects          = xpath.compile(s0011_objects);}catch(Exception e){e.printStackTrace(System.err);}   
-        try{this.e0012_superclass       = xpath.compile(s0012_superclass);}catch(Exception e){e.printStackTrace(System.err);}
-        try{this.e0013_defaultpackage   = xpath.compile(s0013_defaultpackage);}catch(Exception e){e.printStackTrace(System.err);}
-        try{this.e0014_bndi             = xpath.compile(s0014_bndi);}catch(Exception e){e.printStackTrace(System.err);}
+        try{this.e0000_count            = xpath.compile(s0000_count);}          catch(Exception e){e.printStackTrace(System.err);}
+        
+        try{this.e0001_tagname          = xpath.compile(s0001_tagname);}        catch(Exception e){e.printStackTrace(System.err);} 
+                
+        try{this.e0002_autostart        = xpath.compile(s0002_autostart);}      catch(Exception e){e.printStackTrace(System.err);}
+        
+        try{this.e0003_classname        = xpath.compile(s0003_classname);}      catch(Exception e){e.printStackTrace(System.err);}
+        
+        try{this.e0004_id               = xpath.compile(s0004_id);}             catch(Exception e){e.printStackTrace(System.err);}
+        
+        try{this.e0005_init             = xpath.compile(s0005_init);}           catch(Exception e){e.printStackTrace(System.err);}            
+        
+        try{this.e0006_package          = xpath.compile(s0006_package);}        catch(Exception e){e.printStackTrace(System.err);}
+        
+        try{this.e0007_run              = xpath.compile(s0007_run);}            catch(Exception e){e.printStackTrace(System.err);}
+        
+        try{this.e0008_start            = xpath.compile(s0008_start);}          catch(Exception e){e.printStackTrace(System.err);}            
+        
+        try{this.e0009_implements       = xpath.compile(s0009_implements);}     catch(Exception e){e.printStackTrace(System.err);}
+        
+        try{this.e0010_listeners        = xpath.compile(s0010_listeners);}      catch(Exception e){e.printStackTrace(System.err);} 
+        
+        try{this.e0011_objects          = xpath.compile(s0011_objects);}        catch(Exception e){e.printStackTrace(System.err);}   
+        
+        try{this.e0012_superclass       = xpath.compile(s0012_superclass);}     catch(Exception e){e.printStackTrace(System.err);}
+        
+        try{this.e0013_defaultpackage   = xpath.compile(s0013_defaultpackage);} catch(Exception e){e.printStackTrace(System.err);}
+        
+        try{this.e0014_bndi             = xpath.compile(s0014_bndi);}           catch(Exception e){e.printStackTrace(System.err);}
         
         /*----------------------------------------------------------------------*/
         

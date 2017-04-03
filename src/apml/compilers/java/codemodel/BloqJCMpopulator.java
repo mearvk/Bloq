@@ -23,6 +23,7 @@ import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 
 import com.sun.codemodel.JClass;
+
 import com.sun.codemodel.JMethod;
 
 import java.io.IOException;
@@ -234,6 +235,38 @@ public class BloqJCMpopulator
         
         /*---------------------------------------------------------------------*/
         
+        JMethod startup;
+        
+        startup = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "startup");
+        
+        startup.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod run;
+        
+        run = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "run");
+        
+        run.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod pause;
+        
+        pause = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "pause");
+        
+        pause.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod exit;
+        
+        exit = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "exit");
+        
+        exit.body().directStatement("\n");        
+        
+        /*---------------------------------------------------------------------*/                                               
+        
         JMethod callback;
         
         callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "dynamiclistenercallback");
@@ -274,6 +307,38 @@ public class BloqJCMpopulator
         initialization.body().directStatement("\n");
         
         /*---------------------------------------------------------------------*/
+        
+        JMethod startup;
+        
+        startup = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "startup");
+        
+        startup.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod run;
+        
+        run = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "run");
+        
+        run.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod pause;
+        
+        pause = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "pause");
+        
+        pause.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod exit;
+        
+        exit = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "exit");
+        
+        exit.body().directStatement("\n");        
+        
+        /*---------------------------------------------------------------------*/                                            
         
         JMethod callback;
         
@@ -316,6 +381,38 @@ public class BloqJCMpopulator
         
         /*---------------------------------------------------------------------*/
         
+        JMethod startup;
+        
+        startup = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "startup");
+        
+        startup.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod run;
+        
+        run = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "run");
+        
+        run.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod pause;
+        
+        pause = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "pause");
+        
+        pause.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod exit;
+        
+        exit = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "exit");
+        
+        exit.body().directStatement("\n");        
+        
+        /*---------------------------------------------------------------------*/                                             
+        
         param.classref.direct("\t\n\n//TODO: finish adding support...");
     }    
     
@@ -346,6 +443,38 @@ public class BloqJCMpopulator
         initialization.body().directStatement("\n");
         
         /*---------------------------------------------------------------------*/
+        
+        JMethod startup;
+        
+        startup = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "startup");
+        
+        startup.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod run;
+        
+        run = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "run");
+        
+        run.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod pause;
+        
+        pause = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "pause");
+        
+        pause.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod exit;
+        
+        exit = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "exit");
+        
+        exit.body().directStatement("\n");        
+        
+        /*---------------------------------------------------------------------*/                                        
         
         JMethod callback;
         
@@ -385,6 +514,38 @@ public class BloqJCMpopulator
         initialization.body().directStatement("\n//todo finish implementation here...");
         
         /*---------------------------------------------------------------------*/
+                
+        JMethod startup;
+        
+        startup = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "startup");
+        
+        startup.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod run;
+        
+        run = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "run");
+        
+        run.body().directStatement("\n");
+
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod pause;
+        
+        pause = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "pause");
+        
+        pause.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/      
+        
+        JMethod exit;
+        
+        exit = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "exit");
+        
+        exit.body().directStatement("\n");        
+        
+        /*---------------------------------------------------------------------*/                                
         
         param.classref.direct("\n\n//TODO: finish adding support...");
     }
