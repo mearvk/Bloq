@@ -11,7 +11,18 @@
         <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
             <system id="echoserver" start="true" bodi="//systems/echoserver/{this.id}" class="Echoserversystem">                  
                 
-                <object id="echoserver" start="true" bodi="//echoserver/objects/1" class="Echoserver">                       
+                <object id="echoserver" start="true" bodi="//echoserver/objects/echoserver" class="Echoserver">                                                              
+                    
+                    <implements>
+                        <interface class="apml.interfaces.Autostartable"></interface>
+                        <interface class="apml.interfaces.Initializable"></interface>
+                        <interface class="apml.interfaces.Pausable"></interface>
+                        <interface class="apml.interfaces.Restartable"></interface>
+                        <interface class="apml.interfaces.Runnable"></interface>
+                        <interface class="apml.interfaces.Startable"></interface>
+                        <interface class="apml.interfaces.Stoppable"></interface>
+                    </implements>                    
+                    
                     <listener id="esocl" bodi="//systems/echoserver/listeners/onconnect/{this.id}" class="EchoserverOnconnectlistener" with="*">
                         <subscriber class="ESOnconnectSubscriber_001"></subscriber>
                         <subscriber class="ESOnconnectSubscriber_002"></subscriber>
@@ -32,6 +43,7 @@
                         <subscriber class="ESOndispatchSubscriber_002"></subscriber>
                         <subscriber class="ESOndispatchSubscriber_003"></subscriber>
                     </listener>  
+                    
                 </object>   
 
             </system>   

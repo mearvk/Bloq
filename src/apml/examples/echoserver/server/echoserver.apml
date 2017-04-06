@@ -77,7 +77,7 @@ bndi://blind                                                                /* n
     input//socket.inputstream
     {
         bytes :: java.net.Socket.getInputstream.bytes                       /* that bytes maps to Socket byte buffer */
-        write :: java.net.Socket.getInputstream.write                       /* that write maps to standard socket outputstream write function */
+        read  :: java.net.Socket.getInputstream.read                       /* that write maps to standard socket outputstream read function */
         poll  :: java.net.Socket.getInputstream.poll                        /* that poll maps to standard socket buffer poll function */
     }
 }

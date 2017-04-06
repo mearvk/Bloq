@@ -142,7 +142,7 @@ public final class BloqAPMLpopulator
             
             try{modelfile.apmllisteners=this.getlisteners(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{modelfile.apmlobjects=this.getobjects(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            //try{modelfile.apmlobjects=this.getobjects(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
             
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -330,7 +330,9 @@ public final class BloqAPMLpopulator
             
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                       
             
-            try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}  
+            
+            try{modelfile.apmlobjects=this.getobjects(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{modelfile.packagename=this.getpackagename(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -577,35 +579,40 @@ public final class BloqAPMLpopulator
         
         try
         {
-            NodeList nodes = (NodeList)xparam.xpath.evaluate("./implements", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
+            NodeList implementors = (NodeList)xparam.xpath.evaluate("./implements", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
                         
-            for(int i=0; i<nodes.getLength(); i++)  
+            for(int i=0; i<implementors.getLength(); i++)  
             {
-                Apmlimplement implement = new Apmlimplement();                                            
+                NodeList interfaces = (NodeList)xparam.xpath.evaluate("./interface", implementors.item(i), XPathConstants.NODESET);  
                 
-                Element element = (Element)nodes.item(i);            
+                for(int j=0; j<interfaces.getLength(); j++)  
+                {                
+                    Apmlimplement implement = new Apmlimplement();                                            
 
-                /*--------------------------------------------------------------*/
+                    Element element = (Element)interfaces.item(j);            
 
-                implement.id                = element.getAttribute("id");
-                
-                implement.alias             = element.getAttribute("alias");
-                
-                implement.autostartable     = element.getAttribute("autostart").equalsIgnoreCase("true");
-                
-                implement.classname         = element.getAttribute("class");
-                
-                implement.extension         = element.getAttribute("extends");                                
-                
-                String xpathstring          = "(./ancestor::package/@default)[last()]";
-                
-                implement.packagename       = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
-                
-                implement.startable         = element.getAttribute("start").equalsIgnoreCase("true");
-                
-                /*--------------------------------------------------------------*/
+                    /*--------------------------------------------------------------*/
 
-                implementz.add(implement);
+                    implement.id                = element.getAttribute("id");
+
+                    implement.alias             = element.getAttribute("alias");
+
+                    implement.autostartable     = element.getAttribute("autostart").equalsIgnoreCase("true");
+
+                    implement.classname         = element.getAttribute("class");
+
+                    implement.extension         = element.getAttribute("extends");                                
+
+                    String xpathstring          = "(./ancestor::package/@default)[last()]";
+
+                    implement.packagename       = (String)xparam.xpath.evaluate(xpathstring, interfaces.item(i), XPathConstants.STRING);
+
+                    implement.startable         = element.getAttribute("start").equalsIgnoreCase("true");
+
+                    /*--------------------------------------------------------------*/
+
+                    implementz.add(implement);
+                }
             }            
         }
         catch(Exception e)
