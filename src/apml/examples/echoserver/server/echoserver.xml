@@ -10,7 +10,17 @@
 
         <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
             <system id="echoserver" start="true" bodi="//systems/echoserver/{this.id}" class="Echoserversystem">                  
-                
+
+                <implements>
+                    <interface class="apml.interfaces.Autostartable"></interface>
+                    <interface class="apml.interfaces.Initializable"></interface>
+                    <interface class="apml.interfaces.Pausable"></interface>
+                    <interface class="apml.interfaces.Restartable"></interface>
+                    <interface class="apml.interfaces.Runnable"></interface>
+                    <interface class="apml.interfaces.Startable"></interface>
+                    <interface class="apml.interfaces.Stoppable"></interface>
+                </implements>                
+                                
                 <object id="echoserver" start="true" bodi="//echoserver/objects/echoserver" class="Echoserver">                                                              
                     
                     <implements>

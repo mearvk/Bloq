@@ -210,7 +210,7 @@ public final class BloqAPMLpopulator
             
             try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                                
             
-            try{modelfile.apmlimplements=this.getimplements(xparam, index);}                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            //try{modelfile.apmlimplements=this.getimplements(xparam, index);}                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{modelfile.apmllisteners=this.getlisteners(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -315,6 +315,8 @@ public final class BloqAPMLpopulator
         for(int index=0; index<xparam.getnodecount(); index++)
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();
+            
+            try{modelfile.apmlimplements=this.getimplements(xparam, index);}                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{modelfile.apmllisteners=this.getlisteners(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -575,21 +577,21 @@ public final class BloqAPMLpopulator
     
     private ArrayList<Apmlimplement> getimplements(Bloqxpathparameter xparam, Integer index)
     {
-        ArrayList<Apmlimplement> implementz = new ArrayList<>();
+        ArrayList<Apmlimplement> retval = new ArrayList<>();
         
         try
         {
-            NodeList implementors = (NodeList)xparam.xpath.evaluate("./implements", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
+            NodeList implementstags = (NodeList)xparam.xpath.evaluate("./implements", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
                         
-            for(int i=0; i<implementors.getLength(); i++)  
+            for(int i=0; i<implementstags.getLength(); i++)  
             {
-                NodeList interfaces = (NodeList)xparam.xpath.evaluate("./interface", implementors.item(i), XPathConstants.NODESET);  
+                NodeList interfacetags = (NodeList)xparam.xpath.evaluate("./interface", implementstags.item(i), XPathConstants.NODESET);  
                 
-                for(int j=0; j<interfaces.getLength(); j++)  
+                for(int j=0; j<interfacetags.getLength(); j++)  
                 {                
                     Apmlimplement implement = new Apmlimplement();                                            
 
-                    Element element = (Element)interfaces.item(j);            
+                    Element element = (Element)interfacetags.item(j);            
 
                     /*--------------------------------------------------------------*/
 
@@ -605,22 +607,22 @@ public final class BloqAPMLpopulator
 
                     String xpathstring          = "(./ancestor::package/@default)[last()]";
 
-                    implement.packagename       = (String)xparam.xpath.evaluate(xpathstring, interfaces.item(i), XPathConstants.STRING);
+                    implement.packagename       = (String)xparam.xpath.evaluate(xpathstring, interfacetags.item(i), XPathConstants.STRING);
 
                     implement.startable         = element.getAttribute("start").equalsIgnoreCase("true");
 
                     /*--------------------------------------------------------------*/
 
-                    implementz.add(implement);
+                    retval.add(implement);
                 }
             }            
         }
         catch(Exception e)
         {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+            e.printStackTrace();
         }                       
         
-        return implementz;
+        return retval;
     }    
 
     private String getbndi(Bloqxpathparameter xparam, Integer index)

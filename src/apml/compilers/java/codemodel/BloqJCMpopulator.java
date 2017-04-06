@@ -7,6 +7,7 @@ import apml.interfaces.Autostartable;
 import apml.interfaces.Initializable;
 
 import apml.helpers.Filegrepper;
+import apml.modeling.Apmlimplement;
 
 import apml.modeling.Apmlmodelfile;
 
@@ -95,41 +96,41 @@ public class BloqJCMpopulator
         {            
             /*------------------------------------ Add class fields ---------------------------------------------------*/
             
-            try{this.jcmpackagename(param);}        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmpackagename(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmclassname(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            try{this.addjcmclassname(param);}           catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
             
-            try{this.jcmextends(param);}            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmextends(param);}             catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmimplements(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmimplements(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmbodi(param);}               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmbodi(param);}                catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmautostarttag(param);}       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmautostarttag(param);}        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcminittag(param);}            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/} 
+            try{this.addjcminittag(param);}             catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/} 
             
-            try{this.jcmruntag(param);}             catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmruntag(param);}              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmstarttag(param);}           catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                         
+            try{this.addjcmstarttag(param);}            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                         
             
-            try{this.jcmlisteners(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmlisteners(param);}           catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmsubscribers(param);}        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmsubscribers(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.jcmobjects(param);}            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmobjects(param);}             catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             /*--------------------------------------- Add methods -----------------------------------------------------*/
             
-            try{this.doquicktouchforbloqs(param);}        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            //try{this.doquicktouchforbloqs(param);}      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             //try{this.addsimplemethods(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.addinterfacemethods(param);}   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcminterfacemethods(param);}    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.addsuperclassmethods(param);}  catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmsuperclassmethods(param);}   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.addtagmethods(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                     
+            try{this.addjcmtagmethods(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                     
             
             /*--------------------------------------- Return JCM ------------------------------------------------------*/
                         
@@ -189,7 +190,7 @@ public class BloqJCMpopulator
     {
         JDefinedClass theclass;
         
-        theclass = param.classref;
+        /*theclass = param.classref;
         
         theclass._implements(apml.interfaces.Autostartable.class);
         
@@ -204,16 +205,17 @@ public class BloqJCMpopulator
         theclass._implements(apml.interfaces.Startable.class);
         
         theclass._implements(apml.interfaces.Stoppable.class);
+        */
         
         /*---------------------------------------------------------------------*/
         
-        JMethod constructor;
+        JMethod constructor1;
         
-        constructor = param.classref.constructor(JMod.PUBLIC);                
+        constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
         
-        constructor.body().directStatement("\n");
+        constructor1.body().directStatement("\n");
         
         /*---------------------------------------------------------------------*/
         
@@ -300,13 +302,13 @@ public class BloqJCMpopulator
 
         /*---------------------------------------------------------------------*/        
         
-        JMethod constructor;
+        JMethod constructor1;
         
-        constructor = param.classref.constructor(JMod.PUBLIC);                
+        constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
         
-        constructor.body().directStatement("\n");
+        constructor1.body().directStatement("\n");
         
         /*---------------------------------------------------------------------*/
         
@@ -393,13 +395,13 @@ public class BloqJCMpopulator
 
         /*---------------------------------------------------------------------*/
         
-        JMethod constructor;
+        JMethod constructor1;
         
-        constructor = param.classref.constructor(JMod.PUBLIC);                
+        constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
         
-        constructor.body().directStatement("\n");
+        constructor1.body().directStatement("\n");
         
         /*---------------------------------------------------------------------*/
         
@@ -719,7 +721,7 @@ public class BloqJCMpopulator
         param.classref.direct("\n\n//TODO: finish adding support...");
     }
     
-    private void jcmbodi(Bloqconvenienceparameter param)
+    private void addjcmbodi(Bloqconvenienceparameter param)
     {
         try
         {
@@ -743,7 +745,7 @@ public class BloqJCMpopulator
         }        
     }      
     
-    private void jcmobjects(Bloqconvenienceparameter param)
+    private void addjcmobjects(Bloqconvenienceparameter param)
     {
         try
         {
@@ -776,7 +778,7 @@ public class BloqJCMpopulator
         }        
     }    
     
-    private void jcmlisteners(Bloqconvenienceparameter param)
+    private void addjcmlisteners(Bloqconvenienceparameter param)
     {
         try
         {
@@ -822,7 +824,7 @@ public class BloqJCMpopulator
         }        
     }
     
-    private void jcmsubscribers(Bloqconvenienceparameter param)
+    private void addjcmsubscribers(Bloqconvenienceparameter param)
     {
         try
         {
@@ -856,7 +858,7 @@ public class BloqJCMpopulator
         }
     }
     
-    private void jcmpackagename(Bloqconvenienceparameter param)
+    private void addjcmpackagename(Bloqconvenienceparameter param)
     {
         try
         {
@@ -878,7 +880,7 @@ public class BloqJCMpopulator
         }        
     }
     
-    private void jcmclassname(Bloqconvenienceparameter param)
+    private void addjcmclassname(Bloqconvenienceparameter param)
     {
         try
         {     
@@ -900,7 +902,7 @@ public class BloqJCMpopulator
         }        
     }
 
-    private void jcmextends(Bloqconvenienceparameter param)
+    private void addjcmextends(Bloqconvenienceparameter param)
     {
         try
         {
@@ -922,7 +924,7 @@ public class BloqJCMpopulator
         }        
     }
     
-    private void jcmimplements(Bloqconvenienceparameter param)
+    private void addjcmimplements(Bloqconvenienceparameter param)
     {      
         try
         {
@@ -954,7 +956,7 @@ public class BloqJCMpopulator
         }        
     }
     
-    private void jcmruntag(Bloqconvenienceparameter param)
+    private void addjcmruntag(Bloqconvenienceparameter param)
     {
         try
         {
@@ -979,7 +981,7 @@ public class BloqJCMpopulator
         }          
     }
     
-    private void jcmstarttag(Bloqconvenienceparameter param)
+    private void addjcmstarttag(Bloqconvenienceparameter param)
     {          
         try
         {
@@ -1004,7 +1006,7 @@ public class BloqJCMpopulator
         }           
     }
     
-    private void addinterfacemethods(Bloqconvenienceparameter param)
+    private void addjcminterfacemethods(Bloqconvenienceparameter param)
     {
         try
         {               
@@ -1012,16 +1014,23 @@ public class BloqJCMpopulator
             {
                 throw new InvalidParameterException("Classfile not set; unable to load interface methods for JCodeModel builder.");            
             }                
-                   
-            for(String intrfacename : param.apmlmodelfile.stdinterfaces)
+            
+            if(param.apmlmodelfile.apmlimplements==null) 
             {
+                throw new InvalidParameterException("No interfaces found; unable to load interface methods for JCodeModel builder.");            
+            }            
+                   
+            for(Apmlimplement _interface : param.apmlmodelfile.apmlimplements)
+            {                                
                 try
                 {
-                    Class intrface = Class.forName(intrfacename);
-
-                    Method[] methods = intrface.getMethods();
-
-                    for(Method m: methods)
+                    Class interfacename = Class.forName(_interface.classname);
+                    
+                    //add the implementation class file to JCM class file
+                    param.classref._implements(interfacename);
+                                        
+                    //add the implementation methods to the JCM class file
+                    for(Method m: interfacename.getMethods())
                     {                                      
                         switch(m.getModifiers())
                         {
@@ -1059,11 +1068,11 @@ public class BloqJCMpopulator
         }
         catch(InvalidParameterException | NullPointerException | SecurityException e)
         {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+            e.printStackTrace();
         }        
     }
     
-    private void jcmautostarttag(Bloqconvenienceparameter param)
+    private void addjcmautostarttag(Bloqconvenienceparameter param)
     {
         try
         {
@@ -1085,7 +1094,7 @@ public class BloqJCMpopulator
         }         
     }
     
-    private void jcminittag(Bloqconvenienceparameter param)
+    private void addjcminittag(Bloqconvenienceparameter param)
     {        
         try
         {
@@ -1107,7 +1116,7 @@ public class BloqJCMpopulator
         }         
     }
 
-    private void addsuperclassmethods(Bloqconvenienceparameter param)
+    private void addjcmsuperclassmethods(Bloqconvenienceparameter param)
     {        
         try
         {
@@ -1156,7 +1165,7 @@ public class BloqJCMpopulator
         }        
     }
     
-    private void addtagmethods(Bloqconvenienceparameter param)
+    private void addjcmtagmethods(Bloqconvenienceparameter param)
     {
         try
         {
