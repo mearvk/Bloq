@@ -5,6 +5,8 @@
  */
 package apml.interfaces;
 
+import java.net.ServerSocket;
+
 /**
  *
  * @author oem
@@ -15,5 +17,5 @@ public interface Server
     
     public void write();
     
-    public void connect();
+    public void connect(ServerSocket ss);
 }
