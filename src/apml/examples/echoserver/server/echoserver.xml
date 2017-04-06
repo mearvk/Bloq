@@ -5,13 +5,7 @@
     <apml language="Java 9" version="1.0" class="Apmlsystem" infer="true">  
 
         <implements>
-            <interface class="apml.interfaces.Autostartable"></interface>
-            <interface class="apml.interfaces.Initializable"></interface>
-            <interface class="apml.interfaces.Pausable"></interface>
-            <interface class="apml.interfaces.Restartable"></interface>
-            <interface class="apml.interfaces.Runnable"></interface>
-            <interface class="apml.interfaces.Startable"></interface>
-            <interface class="apml.interfaces.Stoppable"></interface>
+            <interface class="apml.interfaces.Apmlsystemelement"></interface>
         </implements>  
         
         <definitions>
@@ -22,25 +16,13 @@
             <system id="echoserver" start="true" bodi="//systems/echoserver/{this.id}" class="Echoserversystem">                  
 
                 <implements>
-                    <interface class="apml.interfaces.Autostartable"></interface>
-                    <interface class="apml.interfaces.Initializable"></interface>
-                    <interface class="apml.interfaces.Pausable"></interface>
-                    <interface class="apml.interfaces.Restartable"></interface>
-                    <interface class="apml.interfaces.Runnable"></interface>
-                    <interface class="apml.interfaces.Startable"></interface>
-                    <interface class="apml.interfaces.Stoppable"></interface>
+                    <interface class="apml.interfaces.Apmlsystemelement"></interface>
                 </implements>                
                                 
                 <object id="echoserver" start="true" bodi="//echoserver/objects/echoserver" class="Echoserver">                                                              
                     
                     <implements>
-                        <interface class="apml.interfaces.Autostartable"></interface>
-                        <interface class="apml.interfaces.Initializable"></interface>
-                        <interface class="apml.interfaces.Pausable"></interface>
-                        <interface class="apml.interfaces.Restartable"></interface>
-                        <interface class="apml.interfaces.Runnable"></interface>
-                        <interface class="apml.interfaces.Startable"></interface>
-                        <interface class="apml.interfaces.Stoppable"></interface>
+                        <interface class="apml.interfaces.Apmlsystemelement"></interface>
                     </implements>                    
                     
                     <listener id="esocl" bodi="//systems/echoserver/listeners/onconnect/{this.id}" class="EchoserverOnconnectlistener" with="*">
@@ -48,74 +30,30 @@
                         <subscriber class="ESOnconnectSubscriber_002"></subscriber>
                         <subscriber class="ESOnconnectSubscriber_003"></subscriber>
                     </listener>
+                    
                     <listener id="esoel" bodi="//systems/echoserver/listeners/onexit/{this.id}" class="EchoserverOnexitlistener" with="*">
                         <subscriber class="ESOnexitSubscriber_001"></subscriber>
                         <subscriber class="ESOnexitSubscriber_002"></subscriber>
                         <subscriber class="ESOnexitSubscriber_003"></subscriber>
                     </listener>
+                    
                     <listener id="esorl" bodi="//systems/echoserver/listeners/onread/{this.id}" class="EchoserverOnreadlistener" with="*">
                         <subscriber class="ESOnreceiptSubscriber_001"></subscriber>
                         <subscriber class="ESOnreceiptSubscriber_002"></subscriber>
                         <subscriber class="ESOnreceiptSubscriber_003"></subscriber>
                     </listener>
+                    
                     <listener id="esodl" bodi="//systems/echoserver/listeners/ondispatch/{this.id}" class="EchoserverOndispatchlistener" with="*">
                         <subscriber class="ESOndispatchSubscriber_001"></subscriber>
                         <subscriber class="ESOndispatchSubscriber_002"></subscriber>
                         <subscriber class="ESOndispatchSubscriber_003"></subscriber>
                     </listener>  
                     
-                </object>  
-                
-                <object id="echohelper" start="true" bodi="//echoserver/objects/echohelper" class="Echohelper">                                                              
-                    
-                    <implements>
-                        <interface class="apml.interfaces.Autostartable"></interface>
-                        <interface class="apml.interfaces.Initializable"></interface>
-                        <interface class="apml.interfaces.Pausable"></interface>
-                        <interface class="apml.interfaces.Runnable"></interface>
-                        <interface class="apml.interfaces.Startable"></interface>
-                        <interface class="apml.interfaces.Stoppable"></interface>
-                    </implements>                                        
-                    
-                </object>                   
+                </object>                  
 
             </system>   
         </package>
-        
-        <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
-            <system id="fileserver" start="true" bodi="//systems/fileserver/{this.id}" class="Fileserversystem2">                  
                 
-                <object id="ftpserver" start="true" bodi="//echoserver/objects/1" class="Ftpserver">                       
-                    <listener id="ftpocl" bodi="//systems/ftpserver/listeners/onconnect/{1}" class="FtpOnconnectlistener" with="*">
-                        <subscriber class="FTPOnconnectSubscriber_001"></subscriber>
-                        <subscriber class="FTPOnconnectSubscriber_002"></subscriber>
-                        <subscriber class="FTPOnconnectSubscriber_003"></subscriber>
-                    </listener>
-                    <listener id="ftpoel" bodi="//systems/ftpserver/listeners/onfiletransfercomplete/{1}" class="FtpOnfiletransfercomplete" with="*">
-                        <subscriber class="FTPOnexitSubscriber_001"></subscriber>
-                        <subscriber class="FTPOnexitSubscriber_002"></subscriber>
-                        <subscriber class="FTPOnexitSubscriber_003"></subscriber>
-                    </listener>
-                    <listener id="ftpoel" bodi="//systems/ftpserver/listeners/onfiletransferrequest/{1}" class="FtpOnfiletransferrequestlistener" with="*">
-                        <subscriber class="FTPOnexitSubscriber_001"></subscriber>
-                        <subscriber class="FTPOnexitSubscriber_002"></subscriber>
-                        <subscriber class="FTPOnexitSubscriber_003"></subscriber>
-                    </listener>                    
-                    <listener id="ftporl" bodi="//systems/ftpserver/listeners/oncompletion/{1}" class="FtpOncompletionlistener" with="*">
-                        <subscriber class="FTPOnreceiptSubscriber_001"></subscriber>
-                        <subscriber class="FTPOnreceiptSubscriber_002"></subscriber>
-                        <subscriber class="FTPOnreceiptSubscriber_003"></subscriber>
-                    </listener>
-                    <listener id="ftpodl" bodi="//systems/ftpserver/listeners/ondispatch/{1}" class="FtpOndispatchlistener" with="*">
-                        <subscriber class="FTPOndispatchSubscriber_001"></subscriber>
-                        <subscriber class="FTPOndispatchSubscriber_002"></subscriber>
-                        <subscriber class="FTPOndispatchSubscriber_003"></subscriber>
-                    </listener>  
-                </object>   
-
-            </system>   
-        </package>        
-
         <package name="clients" default="examples.echoserver.clients" sourcedir="/source" builddir="/build">
             <system id="echoclient" start="true" bodi="//echoclient/systems/{this.id}" class="Echoclientsystem">        
                 <object start="true" bodi="//echoclient/objects/{this.id}" class="Echoclient">
