@@ -7,6 +7,7 @@ import apml.interfaces.Autostartable;
 import apml.interfaces.Initializable;
 
 import apml.helpers.Filegrepper;
+
 import apml.modeling.Apmlimplement;
 
 import apml.modeling.Apmlmodelfile;
@@ -44,7 +45,9 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 
 import java.util.logging.Logger;
+
 import apml.annotations.system_api;
+
 
 /**
  *
@@ -189,7 +192,7 @@ public class BloqJCMpopulator
     
     private void doquicktouchforapmlbloqs(Bloqconvenienceparameter param)
     {
-        JDefinedClass theclass;
+        JDefinedClass theclass = param.classref;
                 
         /*---------------------------------------------------------------------*/
         
@@ -220,13 +223,19 @@ public class BloqJCMpopulator
         callback.body().directStatement("return null;\n");
         
         /*---------------------------------------------------------------------*/                         
+        
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
+                
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        
+        /*---------------------------------------------------------------------*/
         
         param.classref.direct("\t\n\n//TODO: finish adding support...");
     }
     
     private void doquicktouchfordynamiclistenerbloqs(Bloqconvenienceparameter param)
     {
-        JDefinedClass theclass;
+        JDefinedClass theclass = param.classref;
                 
         /*---------------------------------------------------------------------*/
         
@@ -257,13 +266,19 @@ public class BloqJCMpopulator
         callback.body().directStatement("return null;\n");
         
         /*---------------------------------------------------------------------*/                         
+        
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
+                
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        
+        /*---------------------------------------------------------------------*/        
         
         param.classref.direct("\t\n\n//TODO: finish adding support...");
     }
     
     private void doquicktouchforlistenerbloqs(Bloqconvenienceparameter param)
     {                
-        JDefinedClass theclass;
+        JDefinedClass theclass = param.classref;
                 
         /*---------------------------------------------------------------------*/
         
@@ -293,14 +308,20 @@ public class BloqJCMpopulator
         
         callback.body().directStatement("return null;\n");
         
-        /*---------------------------------------------------------------------*/                         
+        /*---------------------------------------------------------------------*/  
+        
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
+                
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        
+        /*---------------------------------------------------------------------*/        
         
         param.classref.direct("\t\n\n//TODO: finish adding support...");
     }
     
     private void doquicktouchforobjectbloqs(Bloqconvenienceparameter param)
     {
-        JDefinedClass theclass;
+        JDefinedClass theclass = param.classref;
                 
         /*---------------------------------------------------------------------*/
         
@@ -330,14 +351,20 @@ public class BloqJCMpopulator
         
         callback.body().directStatement("return null;\n");
         
-        /*---------------------------------------------------------------------*/                         
+        /*---------------------------------------------------------------------*/ 
+        
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
+                
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        
+        /*---------------------------------------------------------------------*/                       
         
         param.classref.direct("\t\n\n//TODO: finish adding support...");
     }    
     
     private void doquicktouchforsubscriberbloqs(Bloqconvenienceparameter param)
     {
-        JDefinedClass theclass;
+        JDefinedClass theclass = param.classref;
                 
         /*---------------------------------------------------------------------*/
         
@@ -367,14 +394,20 @@ public class BloqJCMpopulator
         
         callback.body().directStatement("return null;\n");
         
-        /*---------------------------------------------------------------------*/                         
+        /*---------------------------------------------------------------------*/  
+        
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
+                
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        
+        /*---------------------------------------------------------------------*/                        
         
         param.classref.direct("\t\n\n//TODO: finish adding support...");
     }
     
     private void doquicktouchforsystembloqs(Bloqconvenienceparameter param)
     {
-        JDefinedClass theclass;
+        JDefinedClass theclass = param.classref;
                 
         /*---------------------------------------------------------------------*/
         
@@ -404,7 +437,13 @@ public class BloqJCMpopulator
         
         callback.body().directStatement("return null;\n");
         
-        /*---------------------------------------------------------------------*/                         
+        /*---------------------------------------------------------------------*/        
+        
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
+                
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        
+        /*---------------------------------------------------------------------*/                
         
         param.classref.direct("\t\n\n//TODO: finish adding support...");
     }
