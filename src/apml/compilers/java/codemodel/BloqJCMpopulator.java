@@ -44,6 +44,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 
 import java.util.logging.Logger;
+import apml.annotations.system_api;
 
 /**
  *
@@ -122,15 +123,15 @@ public class BloqJCMpopulator
             
             /*--------------------------------------- Add methods -----------------------------------------------------*/
             
-            //try{this.doquicktouchforbloqs(param);}      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.doquicktouchforbloqs(param);}      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             //try{this.addsimplemethods(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{this.addjcminterfacemethods(param);}    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.addjcmsuperclassmethods(param);}   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            //try{this.addjcmsuperclassmethods(param);}   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.addjcmtagmethods(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                     
+            //try{this.addjcmtagmethods(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                     
             
             /*--------------------------------------- Return JCM ------------------------------------------------------*/
                         
@@ -189,24 +190,7 @@ public class BloqJCMpopulator
     private void doquicktouchforapmlbloqs(Bloqconvenienceparameter param)
     {
         JDefinedClass theclass;
-        
-        /*theclass = param.classref;
-        
-        theclass._implements(apml.interfaces.Autostartable.class);
-        
-        theclass._implements(apml.interfaces.Initializable.class);
-        
-        theclass._implements(apml.interfaces.Pausable.class);
-        
-        theclass._implements(apml.interfaces.Restartable.class);                
-        
-        theclass._implements(apml.interfaces.Runnable.class);
-        
-        theclass._implements(apml.interfaces.Startable.class);
-        
-        theclass._implements(apml.interfaces.Stoppable.class);
-        */
-        
+                
         /*---------------------------------------------------------------------*/
         
         JMethod constructor1;
@@ -223,47 +207,7 @@ public class BloqJCMpopulator
         
         constructor2 = param.classref.constructor(JMod.PUBLIC);
         
-        constructor2.body().directStatement("\n");
-        
-        /*---------------------------------------------------------------------*/        
-        
-        JMethod initialization;
-        
-        initialization = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "initialization");
-        
-        initialization.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/                
-        
-        JMethod startup;
-        
-        startup = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "startup");
-        
-        startup.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod run;
-        
-        run = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "run");
-        
-        run.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod pause;
-        
-        pause = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "pause");
-        
-        pause.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod exit;
-        
-        exit = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "exit");
-        
-        exit.body().directStatement("return null;\n");        
+        constructor2.body().directStatement("\n");        
         
         /*---------------------------------------------------------------------*/                                               
         
@@ -283,24 +227,8 @@ public class BloqJCMpopulator
     private void doquicktouchfordynamiclistenerbloqs(Bloqconvenienceparameter param)
     {
         JDefinedClass theclass;
-        
-        theclass = param.classref;
-        
-        theclass._implements(apml.interfaces.Autostartable.class);
-        
-        theclass._implements(apml.interfaces.Initializable.class);
-        
-        theclass._implements(apml.interfaces.Pausable.class);
-        
-        theclass._implements(apml.interfaces.Restartable.class);                
-        
-        theclass._implements(apml.interfaces.Runnable.class);
-        
-        theclass._implements(apml.interfaces.Startable.class);
-        
-        theclass._implements(apml.interfaces.Stoppable.class);
-
-        /*---------------------------------------------------------------------*/        
+                
+        /*---------------------------------------------------------------------*/
         
         JMethod constructor1;
         
@@ -316,47 +244,7 @@ public class BloqJCMpopulator
         
         constructor2 = param.classref.constructor(JMod.PUBLIC);
         
-        constructor2.body().directStatement("\n");
-        
-        /*---------------------------------------------------------------------*/
-        
-        JMethod initialization;
-        
-        initialization = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "initialization");
-        
-        initialization.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/
-        
-        JMethod startup;
-        
-        startup = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "startup");
-        
-        startup.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod run;
-        
-        run = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "run");
-        
-        run.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod pause;
-        
-        pause = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "pause");
-        
-        pause.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod exit;
-        
-        exit = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "exit");
-        
-        exit.body().directStatement("return null;\n");        
+        constructor2.body().directStatement("\n");        
         
         /*---------------------------------------------------------------------*/                                               
         
@@ -368,7 +256,7 @@ public class BloqJCMpopulator
         
         callback.body().directStatement("return null;\n");
         
-        /*---------------------------------------------------------------------*/         
+        /*---------------------------------------------------------------------*/                         
         
         param.classref.direct("\t\n\n//TODO: finish adding support...");
     }
@@ -376,23 +264,7 @@ public class BloqJCMpopulator
     private void doquicktouchforlistenerbloqs(Bloqconvenienceparameter param)
     {                
         JDefinedClass theclass;
-        
-        theclass = param.classref;
-        
-        theclass._implements(apml.interfaces.Autostartable.class);
-        
-        theclass._implements(apml.interfaces.Initializable.class);
-        
-        theclass._implements(apml.interfaces.Pausable.class);
-        
-        theclass._implements(apml.interfaces.Restartable.class);                
-        
-        theclass._implements(apml.interfaces.Runnable.class);
-        
-        theclass._implements(apml.interfaces.Startable.class);
-        
-        theclass._implements(apml.interfaces.Stoppable.class);
-
+                
         /*---------------------------------------------------------------------*/
         
         JMethod constructor1;
@@ -409,59 +281,19 @@ public class BloqJCMpopulator
         
         constructor2 = param.classref.constructor(JMod.PUBLIC);
         
-        constructor2.body().directStatement("\n");
+        constructor2.body().directStatement("\n");        
         
-        /*---------------------------------------------------------------------*/        
-        
-        JMethod initialization;
-        
-        initialization = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "initialization");
-        
-        initialization.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/
-        
-        JMethod startup;
-        
-        startup = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "startup");
-        
-        startup.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod run;
-        
-        run = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "run");
-        
-        run.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod pause;
-        
-        pause = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "pause");
-        
-        pause.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod exit;
-        
-        exit = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "exit");
-        
-        exit.body().directStatement("return null;\n");        
-        
-        /*---------------------------------------------------------------------*/                                            
+        /*---------------------------------------------------------------------*/                                               
         
         JMethod callback;
         
-        callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "listenercallback");
+        callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
         
         callback.param(JMod.FINAL, java.lang.Object.class, "event");
         
         callback.body().directStatement("return null;\n");
         
-        /*---------------------------------------------------------------------*/        
+        /*---------------------------------------------------------------------*/                         
         
         param.classref.direct("\t\n\n//TODO: finish adding support...");
     }
@@ -469,197 +301,7 @@ public class BloqJCMpopulator
     private void doquicktouchforobjectbloqs(Bloqconvenienceparameter param)
     {
         JDefinedClass theclass;
-        
-        theclass = param.classref;
-        
-        theclass._implements(apml.interfaces.Autostartable.class);
-        
-        theclass._implements(apml.interfaces.Initializable.class);
-        
-        theclass._implements(apml.interfaces.Pausable.class);
-        
-        theclass._implements(apml.interfaces.Restartable.class);                
-        
-        theclass._implements(apml.interfaces.Runnable.class);
-        
-        theclass._implements(apml.interfaces.Startable.class);
-        
-        theclass._implements(apml.interfaces.Stoppable.class);
-
-        /*---------------------------------------------------------------------*/
-        
-        JMethod constructor;
-        
-        constructor = param.classref.constructor(JMod.PUBLIC);                
-        
-        constructor.param(JMod.FINAL, java.lang.Object.class, "monitor");
-        
-        constructor.body().directStatement("\n");
-        
-        /*---------------------------------------------------------------------*/
-        
-        JMethod constructor2;
-        
-        constructor2 = param.classref.constructor(JMod.PUBLIC);
-        
-        constructor2.body().directStatement("\n");
-        
-        /*---------------------------------------------------------------------*/        
-        
-        JMethod initialization;
-        
-        initialization = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "initialization");
-        
-        initialization.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/
-        
-        JMethod startup;
-        
-        startup = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "startup");
-        
-        startup.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod run;
-        
-        run = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "run");
-        
-        run.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod pause;
-        
-        pause = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "pause");
-        
-        pause.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod exit;
-        
-        exit = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "exit");
-        
-        exit.body().directStatement("return null;\n");        
-        
-        /*---------------------------------------------------------------------*/                                             
-        
-        param.classref.direct("\t\n\n//TODO: finish adding support...");
-    }    
-    
-    private void doquicktouchforsubscriberbloqs(Bloqconvenienceparameter param)
-    {
-        JDefinedClass theclass;
-        
-        theclass = param.classref;
-        
-        theclass._implements(apml.interfaces.Autostartable.class);
-        
-        theclass._implements(apml.interfaces.Initializable.class);
-        
-        theclass._implements(apml.interfaces.Pausable.class);
-        
-        theclass._implements(apml.interfaces.Restartable.class);                
-        
-        theclass._implements(apml.interfaces.Runnable.class);
-        
-        theclass._implements(apml.interfaces.Startable.class);
-        
-        theclass._implements(apml.interfaces.Stoppable.class);
-
-        /*---------------------------------------------------------------------*/
-        
-        JMethod constructor;
-        
-        constructor = param.classref.constructor(JMod.PUBLIC);                
-        
-        constructor.param(JMod.FINAL, java.lang.Object.class, "monitor");
-        
-        constructor.body().directStatement("\n");
-        
-        /*---------------------------------------------------------------------*/
-        
-        JMethod constructor2;
-        
-        constructor2 = param.classref.constructor(JMod.PUBLIC);
-        
-        constructor2.body().directStatement("\n");
-        
-        /*---------------------------------------------------------------------*/        
-        
-        JMethod initialization;
-        
-        initialization = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "initialization");
-        
-        initialization.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/
-        
-        JMethod startup;
-        
-        startup = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "startup");
-        
-        startup.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod run;
-        
-        run = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "run");
-        
-        run.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod pause;
-        
-        pause = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "pause");
-        
-        pause.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/      
-        
-        JMethod exit;
-        
-        exit = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "exit");
-        
-        exit.body().directStatement("return null;\n");        
-        
-        /*---------------------------------------------------------------------*/                                        
-        
-        JMethod callback;
-        
-        callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "subscribercallback");
-        
-        callback.param(JMod.FINAL, java.lang.Object.class, "event");
-        
-        callback.body().directStatement("return null;\n");
-        
-        /*---------------------------------------------------------------------*/         
-        
-        param.classref.direct("\t\n\n//TODO: finish adding support...");
-    }
-    
-    private void doquicktouchforsystembloqs(Bloqconvenienceparameter param)
-    {
-        JDefinedClass theclass;
-        
-        theclass = param.classref;
-        
-        theclass._implements(apml.interfaces.Autostartable.class);
-        
-        theclass._implements(apml.interfaces.Pausable.class);
-        
-        theclass._implements(apml.interfaces.Restartable.class);                
-        
-        theclass._implements(apml.interfaces.Runnable.class);
-        
-        theclass._implements(apml.interfaces.Startable.class);
-        
-        theclass._implements(apml.interfaces.Stoppable.class);
-
+                
         /*---------------------------------------------------------------------*/
         
         JMethod constructor1;
@@ -668,57 +310,103 @@ public class BloqJCMpopulator
         
         constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
         
+        constructor1.body().directStatement("\n");
+        
         /*---------------------------------------------------------------------*/
         
         JMethod constructor2;
         
         constructor2 = param.classref.constructor(JMod.PUBLIC);
         
-        constructor2.body().directStatement("\n");
+        constructor2.body().directStatement("\n");        
         
-        /*---------------------------------------------------------------------*/        
+        /*---------------------------------------------------------------------*/                                               
         
-        JMethod initialization;
+        JMethod callback;
         
-        initialization = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "initialization");
+        callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
         
-        initialization.body().directStatement("return null;\n");
+        callback.param(JMod.FINAL, java.lang.Object.class, "event");
+        
+        callback.body().directStatement("return null;\n");
+        
+        /*---------------------------------------------------------------------*/                         
+        
+        param.classref.direct("\t\n\n//TODO: finish adding support...");
+    }    
+    
+    private void doquicktouchforsubscriberbloqs(Bloqconvenienceparameter param)
+    {
+        JDefinedClass theclass;
+                
+        /*---------------------------------------------------------------------*/
+        
+        JMethod constructor1;
+        
+        constructor1 = param.classref.constructor(JMod.PUBLIC);                
+        
+        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        
+        constructor1.body().directStatement("\n");
         
         /*---------------------------------------------------------------------*/
+        
+        JMethod constructor2;
+        
+        constructor2 = param.classref.constructor(JMod.PUBLIC);
+        
+        constructor2.body().directStatement("\n");        
+        
+        /*---------------------------------------------------------------------*/                                               
+        
+        JMethod callback;
+        
+        callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
+        
+        callback.param(JMod.FINAL, java.lang.Object.class, "event");
+        
+        callback.body().directStatement("return null;\n");
+        
+        /*---------------------------------------------------------------------*/                         
+        
+        param.classref.direct("\t\n\n//TODO: finish adding support...");
+    }
+    
+    private void doquicktouchforsystembloqs(Bloqconvenienceparameter param)
+    {
+        JDefinedClass theclass;
                 
-        JMethod startup;
+        /*---------------------------------------------------------------------*/
         
-        startup = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "startup");
+        JMethod constructor1;
         
-        startup.body().directStatement("return null;\n");
+        constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        /*---------------------------------------------------------------------*/      
+        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
         
-        JMethod run;
+        constructor1.body().directStatement("\n");
         
-        run = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "run");
+        /*---------------------------------------------------------------------*/
         
-        run.body().directStatement("return null;\n");
-
-        /*---------------------------------------------------------------------*/      
+        JMethod constructor2;
         
-        JMethod pause;
+        constructor2 = param.classref.constructor(JMod.PUBLIC);
         
-        pause = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "pause");
+        constructor2.body().directStatement("\n");        
         
-        pause.body().directStatement("return null;\n");
+        /*---------------------------------------------------------------------*/                                               
         
-        /*---------------------------------------------------------------------*/      
+        JMethod callback;
         
-        JMethod exit;
+        callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
         
-        exit = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "exit");
+        callback.param(JMod.FINAL, java.lang.Object.class, "event");
         
-        exit.body().directStatement("return null;\n");        
+        callback.body().directStatement("return null;\n");
         
-        /*---------------------------------------------------------------------*/                                
+        /*---------------------------------------------------------------------*/                         
         
-        param.classref.direct("\n\n//TODO: finish adding support...");
+        param.classref.direct("\t\n\n//TODO: finish adding support...");
     }
     
     private void addjcmbodi(Bloqconvenienceparameter param)
@@ -1026,37 +714,56 @@ public class BloqJCMpopulator
                 {
                     Class interfacename = Class.forName(_interface.classname);
                     
-                    //add the implementation class file to JCM class file
                     param.classref._implements(interfacename);
                                         
-                    //add the implementation methods to the JCM class file
                     for(Method m: interfacename.getMethods())
-                    {                                      
+                    {                
+                        JMethod method;
+                        
                         switch(m.getModifiers())
                         {
+                            
                             case Modifier.ABSTRACT | Modifier.PUBLIC:
-                                param.classref.method(JMod.PUBLIC, m.getReturnType(), m.getName());
+                                
+                                method = param.classref.method(JMod.PUBLIC, m.getReturnType(), m.getName());
+                                method.body().directStatement("\n");                                      
+                                method.annotate(system_api.class);
                                 break;
 
                             case Modifier.ABSTRACT | Modifier.PROTECTED:                                            
-                                param.classref.method(JMod.PROTECTED, m.getReturnType(), m.getName());
+                                
+                                method = param.classref.method(JMod.PROTECTED, m.getReturnType(), m.getName());
+                                method.body().directStatement("\n");
+                                method.annotate(system_api.class);
                                 break;                    
 
                             case Modifier.ABSTRACT | Modifier.NATIVE:
-                                param.classref.method(JMod.NATIVE, m.getReturnType(), m.getName());
+                                
+                                method = param.classref.method(JMod.NATIVE, m.getReturnType(), m.getName());
+                                method.body().directStatement("\n");
+                                method.annotate(system_api.class);
                                 break;   
 
                             case Modifier.ABSTRACT | Modifier.PRIVATE:
-                                param.classref.method(JMod.PRIVATE, m.getReturnType(), m.getName());
-                                break;  
+                                
+                                method = param.classref.method(JMod.PRIVATE, m.getReturnType(), m.getName());
+                                method.body().directStatement("\n");
+                                method.annotate(system_api.class);
+                                break;      
 
                             case Modifier.ABSTRACT | Modifier.INTERFACE:
-                                System.err.println("Unknown origin detected; symmetry unbounded by this algorithm detected.");
-                                break;
+                                
+                                method = param.classref.method(JMod.PROTECTED, m.getReturnType(), m.getName());
+                                method.body().directStatement("\n");
+                                method.annotate(system_api.class);
+                                break;      
 
                             default: 
-                                param.classref.method(JMod.NONE, m.getReturnType(), m.getName()); 
-                                break;
+                                
+                                method = param.classref.method(JMod.NONE, m.getReturnType(), m.getName());
+                                method.body().directStatement("\n");
+                                method.annotate(system_api.class);
+                                break;      
                         }                
                     }
                 }
@@ -1131,6 +838,7 @@ public class BloqJCMpopulator
             }
             
             Class superclass = Class.forName(param.apmlmodelfile.superclass);
+            
             for (Method method : superclass.getMethods()) 
             {
                 if(method==null) break;

@@ -4,6 +4,16 @@
 <package name="globals" default="examples.echoserver" sourcedir="/source" builddir="/build">
     <apml language="Java 9" version="1.0" class="Apmlsystem" infer="true">  
 
+        <implements>
+            <interface class="apml.interfaces.Autostartable"></interface>
+            <interface class="apml.interfaces.Initializable"></interface>
+            <interface class="apml.interfaces.Pausable"></interface>
+            <interface class="apml.interfaces.Restartable"></interface>
+            <interface class="apml.interfaces.Runnable"></interface>
+            <interface class="apml.interfaces.Startable"></interface>
+            <interface class="apml.interfaces.Stoppable"></interface>
+        </implements>  
+        
         <definitions>
             <echoserver extends="ServerSocketImpl" class="Echoserver"></echoserver>   
         </definitions>                                   
@@ -54,7 +64,20 @@
                         <subscriber class="ESOndispatchSubscriber_003"></subscriber>
                     </listener>  
                     
-                </object>   
+                </object>  
+                
+                <object id="echohelper" start="true" bodi="//echoserver/objects/echohelper" class="Echohelper">                                                              
+                    
+                    <implements>
+                        <interface class="apml.interfaces.Autostartable"></interface>
+                        <interface class="apml.interfaces.Initializable"></interface>
+                        <interface class="apml.interfaces.Pausable"></interface>
+                        <interface class="apml.interfaces.Runnable"></interface>
+                        <interface class="apml.interfaces.Startable"></interface>
+                        <interface class="apml.interfaces.Stoppable"></interface>
+                    </implements>                                        
+                    
+                </object>                   
 
             </system>   
         </package>
