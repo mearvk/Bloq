@@ -5,13 +5,11 @@
  */
 package apml.interfaces;
 
-import java.awt.event.ActionEvent;
-
 /**
  *
- * @author Max Rupplin
+ * @author oem
  */
-public interface Actionlistener 
+public interface Writer
 {
-    public void actionEvent(ActionEvent event);
+    public void write();
 }
