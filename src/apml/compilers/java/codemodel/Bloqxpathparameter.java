@@ -193,7 +193,7 @@ public final class Bloqxpathparameter
         
         this.s0013_defaultpackage   = "//system/package/@default";
         
-        this.s0014_bndi             = apmltag+"/@bndi";
+        this.s0014_bndi             = apmltag+"/@bodi";
         
         /*----------------------------------------------------------------------*/
         
