@@ -138,11 +138,7 @@ public final class BloqAPMLpopulator
         {
             Apmlmodelfile modelfile=new Apmlmodelfile();
 
-            try{modelfile.apmlimplements=this.getimplements(xparam, index);}                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
-            
-            try{modelfile.apmllisteners=this.getlisteners(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
-            
-            //try{modelfile.apmlobjects=this.getobjects(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            try{modelfile.apmlimplements=this.getimplements(xparam, index);}                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                        
             
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -627,12 +623,18 @@ public final class BloqAPMLpopulator
 
     private String getbodi(Bloqxpathparameter xparam, Integer index)
     {
-        if(xparam.n0014_bndi==null || xparam.n0014_bndi.item(0)==null) 
+        if(xparam.n0014_bndi==null || xparam.n0014_bndi.item(0)==null || xparam.n0004_id==null || xparam.n0004_id.item(0)==null)
         {
-            return "//unbound";                    
+            return "//systems/"+xparam.n0001_tagname.item(0).getNodeValue()+"/undefined/"+index;                    
         }
         
-        return xparam.n0014_bndi.item(index).getNodeValue();        
+        String retval = xparam.n0014_bndi.item(index).getNodeValue();        
+        
+        if(retval.endsWith("{this.id}"))
+        {                        
+            return retval.replace("{this.id}", xparam.n0004_id.item(0).getNodeValue().trim());            
+        }
+        else return retval;        
     }  
     
     private String getdefaultdir(Bloqxpathparameter xparam, Integer index)

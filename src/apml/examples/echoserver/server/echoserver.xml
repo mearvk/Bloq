@@ -2,26 +2,17 @@
 <?apml version="1.0" encoding="UTF-8"?>
 
 <package name="globals" default="examples.echoserver" sourcedir="/source" builddir="/build">
+    
     <apml language="Java 9" version="1.0" class="Apmlsystem" infer="true">  
 
-        <implements>
-            <interface class="apml.interfaces.Apmlsystemelement"></interface>
-        </implements>  
-        
-        <definitions>
-            <echoserver extends="ServerSocketImpl" class="Echoserver"></echoserver>   
-        </definitions>                                   
+        <implements class="apml.interfaces.Apmlsystemelement"/>        
 
         <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
+            
             <system id="echoserver" start="true" bodi="//systems/echoserver/{this.id}" class="Echoserversystem">                  
-
-                <interface class="apml.interfaces.Apmlsystemelement"></interface>
-                                
-                <object id="echoserver" start="true" bodi="//echoserver/objects/echoserver" class="Echoserver">                                                              
-                    
-                    <implements>
-                        <interface class="apml.interfaces.Apmlsystemelement"></interface>
-                    </implements>                    
+                <implements class="apml.interfaces.Apmlsystemelement"/>
+                <object id="echoserver" start="true" bodi="//echoserver/objects/echoserver" class="Echoserver">                                                                                  
+                    <implements class="apml.interfaces.Apmlsystemelement"/>
                     
                     <listener id="esocl" bodi="//systems/echoserver/listeners/onconnect/{this.id}" class="EchoserverOnconnectListener" with="*">
                         <subscriber class="ESOnconnectSubscriber_001"></subscriber>
@@ -45,11 +36,10 @@
                         <subscriber class="ESOndispatchSubscriber_001"></subscriber>
                         <subscriber class="ESOndispatchSubscriber_002"></subscriber>
                         <subscriber class="ESOndispatchSubscriber_003"></subscriber>
-                    </listener>  
-                    
+                    </listener>                      
                 </object>                  
-
             </system>   
+            
         </package>
                 
         <package name="clients" default="examples.echoserver.clients" sourcedir="/source" builddir="/build">

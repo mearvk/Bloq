@@ -186,7 +186,7 @@ public class BloqJCMpopulator
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
         }        
     }
     
@@ -486,13 +486,11 @@ public class BloqJCMpopulator
                 throw new InvalidParameterException("BODI value not properly set; unable to set BODI value.");           
             }
                             
-            param.classref.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bodi+"\"");                          
-            
-            //param.classref.direct("\tprotected String bodi=\""+param.apmlmodelfile.bodi+"\";\n");
+            param.classref.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bodi+"\"");
         }
         catch(Exception e)
         {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+            //e.printStackTrace(System.err);
         }        
     }      
     
@@ -518,14 +516,12 @@ public class BloqJCMpopulator
                 
                 String fullname = packagename+"."+classname;
                                                 
-                param.classref.field(JMod.PROTECTED, Class.forName(fullname), "object_"+String.format("%03d", i));                               
-                
-                //param.classref.direct("\n\tprotected "+classname+" object_"+String.format("%03d", i)+";\n");
+                param.classref.field(JMod.PROTECTED, Class.forName(fullname), "object_"+String.format("%03d", i));
             }
         }
         catch(Exception e)
         {
-            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+            //e.printStackTrace(System.err);
         }        
     }    
     
