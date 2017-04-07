@@ -4,8 +4,6 @@ import apml.annotations.ApmlListener;
 
 import apml.objects.networking.ServerSocketImpl;
 
-import apml.modeling.Apmlsubscriber;
-
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
