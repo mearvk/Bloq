@@ -46,7 +46,8 @@ import java.util.logging.Level;
 
 import java.util.logging.Logger;
 
-import apml.annotations.system_api;
+import apml.annotations.BloqSys;
+import java.lang.reflect.Parameter;
 
 
 /**
@@ -108,7 +109,7 @@ public class BloqJCMpopulator
             
             try{this.addjcmimplements(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.addjcmbodi(param);}                catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            //try{this.addjcmbodi(param);}                catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{this.addjcmautostarttag(param);}        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -128,7 +129,7 @@ public class BloqJCMpopulator
             
             try{this.doquicktouchforbloqs(param);}      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            //try{this.addsimplemethods(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmimplements(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{this.addjcminterfacemethods(param);}    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -224,6 +225,10 @@ public class BloqJCMpopulator
         
         /*---------------------------------------------------------------------*/                         
         
+        //theclass.direct("public final String bodi=\""+param.apmlmodelfile.bodi+";\n");
+        
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bodi+"\"");
+        
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
@@ -265,7 +270,9 @@ public class BloqJCMpopulator
         
         callback.body().directStatement("return null;\n");
         
-        /*---------------------------------------------------------------------*/                         
+        /*---------------------------------------------------------------------*/           
+        
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bodi+"\"");
         
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
@@ -279,6 +286,8 @@ public class BloqJCMpopulator
     private void doquicktouchforlistenerbloqs(Bloqconvenienceparameter param)
     {                
         JDefinedClass theclass = param.classref;
+        
+        theclass._implements(java.awt.event.ActionListener.class);
                 
         /*---------------------------------------------------------------------*/
         
@@ -288,15 +297,25 @@ public class BloqJCMpopulator
         
         constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
         
-        constructor1.body().directStatement("\n");
+        constructor1.body().directStatement("\n\t/*--------------- instantiation ----------------*/");
+        
+        for(int i=0; i<param.apmlmodelfile.apmlsubscribers.size(); i++)
+        {
+            constructor1.body().directStatement("\n\tthis.subscribers_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlsubscribers.get(i).classname+"();");
+        }
         
         /*---------------------------------------------------------------------*/
         
         JMethod constructor2;
         
-        constructor2 = param.classref.constructor(JMod.PUBLIC);
+        constructor2 = param.classref.constructor(JMod.PUBLIC);    
         
-        constructor2.body().directStatement("\n");        
+        constructor2.body().directStatement("\n\t/*--------------- instantiation ----------------*/");
+        
+        for(int i=0; i<param.apmlmodelfile.apmlsubscribers.size(); i++)
+        {
+            constructor2.body().directStatement("\n\tthis.subscribers_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlsubscribers.get(i).classname+"();");
+        }        
         
         /*---------------------------------------------------------------------*/                                               
         
@@ -309,6 +328,8 @@ public class BloqJCMpopulator
         callback.body().directStatement("return null;\n");
         
         /*---------------------------------------------------------------------*/  
+        
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bodi+"\"");
         
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
@@ -353,6 +374,8 @@ public class BloqJCMpopulator
         
         /*---------------------------------------------------------------------*/ 
         
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bodi+"\"");
+        
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
@@ -396,6 +419,8 @@ public class BloqJCMpopulator
         
         /*---------------------------------------------------------------------*/  
         
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bodi+"\"");
+        
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
@@ -438,6 +463,8 @@ public class BloqJCMpopulator
         callback.body().directStatement("return null;\n");
         
         /*---------------------------------------------------------------------*/        
+        
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bodi+"\"");
         
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
@@ -658,26 +685,35 @@ public class BloqJCMpopulator
             if(param.classref==null) 
             {
                 throw new InvalidParameterException("Classfile not set; unable to set interfaces for Class.");
-            }
+            }                
+                            
+            Iterator itr = param.classref._implements();
+                                    
+            for(;itr.hasNext();)
+            {               
+                Class quickload = Class.forName(((JClass)itr.next()).fullName());
                 
-            if(param.apmlmodelfile.implementors==null || param.apmlmodelfile.implementors.length==0)
-            {
-                throw new InvalidParameterException("No interfaces found with param.apmlmodelfile.apml_implements.");
-            }
-                
-            for(String implments : param.apmlmodelfile.implementors)        
-            {
-                try
-                {
-                    param.classref = param.classref._implements(Class.forName(implments));
-                }
-                catch(ClassNotFoundException ex)
-                {
-                    Logger.getLogger(Bloqcompiler.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+                for(Method method :quickload.getMethods())
+                {                    
+                    if(Modifier.isPublic(method.getModifiers()))
+                    {                        
+                        JMethod jcmmethod;
+                        
+                        jcmmethod = param.classref.method(JMod.PUBLIC, method.getReturnType(), method.getName());
+                        
+                        for(int k=0; k<method.getParameterCount(); k++)
+                        {                    
+                            Parameter parameter = method.getParameters()[k];
+                            
+                            jcmmethod.param(parameter.getType(), parameter.getName());
+                            
+                            jcmmethod.body().directStatement("\n");
+                        }
+                    }                                        
                 }
             }
         }
-        catch(NullPointerException | InvalidParameterException e)
+        catch(NullPointerException | InvalidParameterException | ClassNotFoundException e)
         {
             /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }        
@@ -766,42 +802,42 @@ public class BloqJCMpopulator
                                 
                                 method = param.classref.method(JMod.PUBLIC, m.getReturnType(), m.getName());
                                 method.body().directStatement("\n");                                      
-                                method.annotate(system_api.class);
+                                method.annotate(BloqSys.class);
                                 break;
 
                             case Modifier.ABSTRACT | Modifier.PROTECTED:                                            
                                 
                                 method = param.classref.method(JMod.PROTECTED, m.getReturnType(), m.getName());
                                 method.body().directStatement("\n");
-                                method.annotate(system_api.class);
+                                method.annotate(BloqSys.class);
                                 break;                    
 
                             case Modifier.ABSTRACT | Modifier.NATIVE:
                                 
                                 method = param.classref.method(JMod.NATIVE, m.getReturnType(), m.getName());
                                 method.body().directStatement("\n");
-                                method.annotate(system_api.class);
+                                method.annotate(BloqSys.class);
                                 break;   
 
                             case Modifier.ABSTRACT | Modifier.PRIVATE:
                                 
                                 method = param.classref.method(JMod.PRIVATE, m.getReturnType(), m.getName());
                                 method.body().directStatement("\n");
-                                method.annotate(system_api.class);
+                                method.annotate(BloqSys.class);
                                 break;      
 
                             case Modifier.ABSTRACT | Modifier.INTERFACE:
                                 
                                 method = param.classref.method(JMod.PROTECTED, m.getReturnType(), m.getName());
                                 method.body().directStatement("\n");
-                                method.annotate(system_api.class);
+                                method.annotate(BloqSys.class);
                                 break;      
 
                             default: 
                                 
                                 method = param.classref.method(JMod.NONE, m.getReturnType(), m.getName());
                                 method.body().directStatement("\n");
-                                method.annotate(system_api.class);
+                                method.annotate(BloqSys.class);
                                 break;      
                         }                
                     }

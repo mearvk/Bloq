@@ -9,7 +9,7 @@ package apml.annotations;
  *
  * @author oem
  */
-public @interface system_api
+public @interface BloqSys
 {
     
 }

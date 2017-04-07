@@ -25,25 +25,25 @@
                         <interface class="apml.interfaces.Apmlsystemelement"></interface>
                     </implements>                    
                     
-                    <listener id="esocl" bodi="//systems/echoserver/listeners/onconnect/{this.id}" class="EchoserverOnconnectlistener" with="*">
+                    <listener id="esocl" bodi="//systems/echoserver/listeners/onconnect/{this.id}" class="EchoserverOnconnectListener" with="*">
                         <subscriber class="ESOnconnectSubscriber_001"></subscriber>
                         <subscriber class="ESOnconnectSubscriber_002"></subscriber>
                         <subscriber class="ESOnconnectSubscriber_003"></subscriber>
                     </listener>
                     
-                    <listener id="esoel" bodi="//systems/echoserver/listeners/onexit/{this.id}" class="EchoserverOnexitlistener" with="*">
+                    <listener id="esoel" bodi="//systems/echoserver/listeners/onexit/{this.id}" class="EchoserverOnexitListener" with="*">
                         <subscriber class="ESOnexitSubscriber_001"></subscriber>
                         <subscriber class="ESOnexitSubscriber_002"></subscriber>
                         <subscriber class="ESOnexitSubscriber_003"></subscriber>
                     </listener>
                     
-                    <listener id="esorl" bodi="//systems/echoserver/listeners/onread/{this.id}" class="EchoserverOnreadlistener" with="*">
+                    <listener id="esorl" bodi="//systems/echoserver/listeners/onread/{this.id}" class="EchoserverOnreadListener" with="*">
                         <subscriber class="ESOnreceiptSubscriber_001"></subscriber>
                         <subscriber class="ESOnreceiptSubscriber_002"></subscriber>
                         <subscriber class="ESOnreceiptSubscriber_003"></subscriber>
                     </listener>
                     
-                    <listener id="esodl" bodi="//systems/echoserver/listeners/ondispatch/{this.id}" class="EchoserverOndispatchlistener" with="*">
+                    <listener id="esodl" bodi="//systems/echoserver/listeners/ondispatch/{this.id}" class="EchoserverOndispatchListener" with="*">
                         <subscriber class="ESOndispatchSubscriber_001"></subscriber>
                         <subscriber class="ESOndispatchSubscriber_002"></subscriber>
                         <subscriber class="ESOndispatchSubscriber_003"></subscriber>

@@ -3,7 +3,6 @@ package apml.system;
 import apml.compilers.java.codemodel.Bloqcompiler;
 import apml.drivers.Stdbloqdriver;
 import apml.drivers.Stddriver;
-import apml.helpers.Filegrepper;
 import apml.helpers.Fileloader;
 import apml.listeners.Apmllistener;
 import apml.modeling.Apmlsubscriber;
@@ -23,7 +22,7 @@ import java.util.logging.Logger;
  * @see http://github.com/mearvk/Bloq
  */
 public class Apmlsystem implements Runnable
-{
+{   
     protected final Integer hash = 0x888fe8;
     
     public ArrayList<Stdsystem> systems = new ArrayList();
@@ -51,7 +50,7 @@ public class Apmlsystem implements Runnable
     public String basedir;
     
     public String apmlfile;
-    
+      
     public static final short DO_SYS_BOOTUP = 0;
     
     public static final short DO_SYS_INITIALIZE = 1;
