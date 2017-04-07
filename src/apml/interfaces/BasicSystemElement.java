@@ -4,7 +4,7 @@ package apml.interfaces;
  *
  * @author Max Rupplin 
  */
-public interface Apmlsystemelement
+public interface BasicSystemElement
 {
     public void autostart();
     

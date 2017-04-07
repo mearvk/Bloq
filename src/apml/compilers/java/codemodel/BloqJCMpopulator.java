@@ -58,7 +58,7 @@ import java.lang.reflect.Parameter;
  */
 public class BloqJCMpopulator 
 {
-    private final Integer hash = 0x00888fe8;   
+    private final Integer hash = 0x00888FE8;   
     
     /*--------------------------------------------------------------------------*/
           

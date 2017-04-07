@@ -581,36 +581,31 @@ public final class BloqAPMLpopulator
                         
             for(int i=0; i<implementstags.getLength(); i++)  
             {
-                NodeList interfacetags = (NodeList)xparam.xpath.evaluate("./interface", implementstags.item(i), XPathConstants.NODESET);  
-                
-                for(int j=0; j<interfacetags.getLength(); j++)  
-                {                
-                    Apmlimplement implement = new Apmlimplement();                                            
+                Apmlimplement implement = new Apmlimplement();                                            
 
-                    Element element = (Element)interfacetags.item(j);            
+                Element element = (Element)implementstags.item(i);            
 
-                    /*--------------------------------------------------------------*/
+                /*--------------------------------------------------------------*/
 
-                    implement.id                = element.getAttribute("id");
+                implement.id                = element.getAttribute("id");
 
-                    implement.alias             = element.getAttribute("alias");
+                implement.alias             = element.getAttribute("alias");
 
-                    implement.autostartable     = element.getAttribute("autostart").equalsIgnoreCase("true");
+                implement.autostartable     = element.getAttribute("autostart").equalsIgnoreCase("true");
 
-                    implement.classname         = element.getAttribute("class");
+                implement.classname         = element.getAttribute("class");
 
-                    implement.extension         = element.getAttribute("extends");                                
+                implement.extension         = element.getAttribute("extends");                                
 
-                    String xpathstring          = "(./ancestor::package/@default)[last()]";
+                String xpathstring          = "(./ancestor::package/@default)[last()]";
 
-                    implement.packagename       = (String)xparam.xpath.evaluate(xpathstring, interfacetags.item(i), XPathConstants.STRING);
+                implement.packagename       = (String)xparam.xpath.evaluate(xpathstring, implementstags.item(i), XPathConstants.STRING);
 
-                    implement.startable         = element.getAttribute("start").equalsIgnoreCase("true");
+                implement.startable         = element.getAttribute("start").equalsIgnoreCase("true");
 
-                    /*--------------------------------------------------------------*/
+                /*--------------------------------------------------------------*/
 
-                    retval.add(implement);
-                }
+                retval.add(implement);
             }            
         }
         catch(Exception e)
@@ -623,16 +618,16 @@ public final class BloqAPMLpopulator
 
     private String getbodi(Bloqxpathparameter xparam, Integer index)
     {
-        if(xparam.n0014_bndi==null || xparam.n0014_bndi.item(0)==null || xparam.n0004_id==null || xparam.n0004_id.item(0)==null)
+        if(xparam.n0014_bndi==null || xparam.n0014_bndi.item(index)==null || xparam.n0004_id==null || xparam.n0004_id.item(index)==null)
         {
-            return "//systems/"+xparam.n0001_tagname.item(0).getNodeValue()+"/undefined/"+index;                    
+            return "//systems/"+xparam.n0001_tagname.item(index).getNodeValue()+"/undefined/"+index;                    
         }
         
         String retval = xparam.n0014_bndi.item(index).getNodeValue();        
         
         if(retval.endsWith("{this.id}"))
         {                        
-            return retval.replace("{this.id}", xparam.n0004_id.item(0).getNodeValue().trim());            
+            return retval.replace("{this.id}", xparam.n0004_id.item(index).getNodeValue().trim());            
         }
         else return retval;        
     }  

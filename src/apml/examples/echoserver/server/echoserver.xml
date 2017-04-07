@@ -5,41 +5,30 @@
     
     <apml language="Java 9" version="1.0" class="Apmlsystem" infer="true">  
 
-        <implements class="apml.interfaces.Apmlsystemelement"/>        
+        <implements class="apml.interfaces.BasicSystemElement"/>        
 
-        <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
-            
-            <system id="echoserver" start="true" bodi="//systems/echoserver/{this.id}" class="Echoserversystem">                  
-                <implements class="apml.interfaces.Apmlsystemelement"/>
-                <object id="echoserver" start="true" bodi="//echoserver/objects/echoserver" class="Echoserver">                                                                                  
-                    <implements class="apml.interfaces.Apmlsystemelement"/>
-                    
-                    <listener id="esocl" bodi="//systems/echoserver/listeners/onconnect/{this.id}" class="EchoserverOnconnectListener" with="*">
-                        <subscriber class="ESOnconnectSubscriber_001"></subscriber>
-                        <subscriber class="ESOnconnectSubscriber_002"></subscriber>
-                        <subscriber class="ESOnconnectSubscriber_003"></subscriber>
-                    </listener>
-                    
-                    <listener id="esoel" bodi="//systems/echoserver/listeners/onexit/{this.id}" class="EchoserverOnexitListener" with="*">
-                        <subscriber class="ESOnexitSubscriber_001"></subscriber>
-                        <subscriber class="ESOnexitSubscriber_002"></subscriber>
-                        <subscriber class="ESOnexitSubscriber_003"></subscriber>
-                    </listener>
-                    
-                    <listener id="esorl" bodi="//systems/echoserver/listeners/onread/{this.id}" class="EchoserverOnreadListener" with="*">
-                        <subscriber class="ESOnreceiptSubscriber_001"></subscriber>
-                        <subscriber class="ESOnreceiptSubscriber_002"></subscriber>
-                        <subscriber class="ESOnreceiptSubscriber_003"></subscriber>
-                    </listener>
-                    
-                    <listener id="esodl" bodi="//systems/echoserver/listeners/ondispatch/{this.id}" class="EchoserverOndispatchListener" with="*">
-                        <subscriber class="ESOndispatchSubscriber_001"></subscriber>
-                        <subscriber class="ESOndispatchSubscriber_002"></subscriber>
-                        <subscriber class="ESOndispatchSubscriber_003"></subscriber>
-                    </listener>                      
-                </object>                  
-            </system>   
-            
+        <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">            
+            <system id="echoserver" start="true" bodi="//echoserver/systems/{this.id}" class="Echoserversystem">                                  
+                <implements class="apml.interfaces.BasicSystemElement"/>                
+                <object id="echoserver" start="true" bodi="//echoserver/objects/echoserver" class="Echoserver">                                                                                                      
+                    <implements class="apml.interfaces.BasicSystemElement"/>                    
+                    <listener id="ESOCL" bodi="//echoserver/listeners/onconnect/{this.id}" class="EchoserverOnconnectListener" with="*">
+                        <subscriber notion="unordered" class="CallNewConnectionService"></subscriber>
+                    </listener>                                        
+                    <listener id="ESOEL" bodi="//echoserver/listeners/onexit/{this.id}" class="EchoserverOnexitListener" with="*">
+                        <subscriber notion="unordered" class="CallClosingService"></subscriber>
+                    </listener>                                        
+                    <listener id="ESORL" bodi="//echoserver/listeners/onread/{this.id}" class="EchoserverOnreadListener" with="*">
+                        <subscriber notion="ordered" order="1" class="CallInputService"></subscriber>
+                        <subscriber notion="ordered" order="2" class="CallBufferingService"></subscriber>
+                        <subscriber notion="ordered" order="3" class="CallOutputService"></subscriber>
+                    </listener>                                        
+                    <listener id="ESODL" bodi="//echoserver/listeners/ondispatch/{this.id}" class="EchoserverOndispatchListener" with="*">
+                        <subscriber class="UpdateNewDataOutgoingService"></subscriber>
+                        <subscriber class="UpdateDoSend"></subscriber>
+                    </listener>                                          
+                </object>                                  
+            </system>               
         </package>
                 
         <package name="clients" default="examples.echoserver.clients" sourcedir="/source" builddir="/build">
