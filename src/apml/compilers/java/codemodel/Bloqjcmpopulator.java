@@ -56,17 +56,17 @@ import java.lang.reflect.Parameter;
  * @author Max Rupplin
  * @since 03.28.2017
  */
-public class BloqJCMpopulator 
+public class Bloqjcmpopulator 
 {
     private final Integer hash = 0x00888FE8;   
     
     /*--------------------------------------------------------------------------*/
           
-    public static final Logger LOGGER = Logger.getLogger(BloqJCMpopulator.class.getName()); 
+    public static final Logger LOGGER = Logger.getLogger(Bloqjcmpopulator.class.getName()); 
     
     /*--------------------------------------------------------------------------*/
     
-    public BloqJCMpopulator()
+    public Bloqjcmpopulator()
     {
         Bodi.setcontext("system");
         

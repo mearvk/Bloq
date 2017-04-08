@@ -37,7 +37,7 @@ import org.w3c.dom.NodeList;
  * @author Max Rupplin
  * @since 03.28.2017 
  */
-public final class BloqAPMLpopulator 
+public final class Bloqapmlpopulator 
 {
     private final Integer hash = 0x00888fe8;  
     
@@ -47,7 +47,7 @@ public final class BloqAPMLpopulator
         
     /*--------------------------------------------------------------------------*/
     
-    protected static final Logger LOGGER = Logger.getLogger(BloqAPMLpopulator.class.getName());
+    protected static final Logger LOGGER = Logger.getLogger(Bloqapmlpopulator.class.getName());
     
     /*--------------------------------------------------------------------------*/
     
@@ -55,7 +55,7 @@ public final class BloqAPMLpopulator
     {                          
         try
         {     
-            BloqAPMLpopulator populator = new BloqAPMLpopulator();
+            Bloqapmlpopulator populator = new Bloqapmlpopulator();
             
             File apmlfile = new File("");
                         
@@ -83,7 +83,7 @@ public final class BloqAPMLpopulator
         }
     }      
     
-    public BloqAPMLpopulator()
+    public Bloqapmlpopulator()
     {
         Bodi.setcontext("system");
         
