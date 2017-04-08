@@ -16,22 +16,19 @@
                     <implements class="apml.interfaces.BasicSystemElement"/>                    
                     
                     <listener id="ESOCL" bodi="//echoserver/listeners/onconnect/{this.id}" class="EchoserverOnconnectListener" with="*">
-                        <callback notion="unordered" class="CallNewConnectionService"></callback>
+                        <subscriber notion="unordered" class="NewConnectionService"></subscriber>
                     </listener>                                        
                     
                     <listener id="ESOEL" bodi="//echoserver/listeners/onexit/{this.id}" class="EchoserverOnexitListener" with="*">
-                        <subscriber notion="unordered" class="CallClosingService"></subscriber>
+                        <subscriber notion="unordered" class="ClosingService"></subscriber>
                     </listener>                                        
                     
                     <listener id="ESORL" bodi="//echoserver/listeners/onread/{this.id}" class="EchoserverOnreadListener" with="*">
-                        <subscriber notion="ordered" order="1" class="CallInputService"></subscriber>
-                        <subscriber notion="ordered" order="2" class="CallBufferingService"></subscriber>
-                        <subscriber notion="ordered" order="3" class="CallOutputService"></subscriber>
+                        <subscriber notion="ordered" order="1" class="InputService"></subscriber>                        
                     </listener>                                        
                     
                     <listener id="ESODL" bodi="//echoserver/listeners/ondispatch/{this.id}" class="EchoserverOndispatchListener" with="*">
-                        <subscriber class="UpdateNewDataOutgoingService"></subscriber>
-                        <subscriber class="UpdateDoSend"></subscriber>
+                        <subscriber notion="ordered" order="2" class="OutputService"></subscriber>
                     </listener>                                          
                     
                 </object>                                  
