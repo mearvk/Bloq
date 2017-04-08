@@ -115,7 +115,9 @@ public class Bloqoutputmanager
     }    
     
     public void dosetsourcefiles(ArrayList<JCodeModel> jcmmodels)
-    {        
+    {       
+        if(jcmmodels==null) return;
+        
         Bloqfileguardian fileguardian = (Bloqfileguardian)Bodi.context("system").pull("bloqfileguardian");
         
         for(int i=0; i<jcmmodels.size(); i++)

@@ -125,6 +125,8 @@ public class Bloqinputmanager
      */
     public void dosettempfiles(ArrayList<Apmlmodelfile> apmlmodelfiles) 
     {
+        if(apmlmodelfiles==null) return;
+        
         Bloqfileguardian fileguardian = (Bloqfileguardian)Bodi.context("system").pull("bloqfileguardian");
         
         for(Apmlmodelfile model: apmlmodelfiles) 
