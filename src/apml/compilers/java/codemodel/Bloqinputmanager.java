@@ -159,7 +159,7 @@ public class Bloqinputmanager
                 
                 jmodel._package(model.packagename)._class(model.classname);
                 
-                jmodel.build(new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.tempextensionurl));
+                jmodel.build(new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.tempextensionurl), System.err);
                 
                 runtime = Runtime.getRuntime();                                                
                 

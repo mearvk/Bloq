@@ -190,7 +190,7 @@ public class Bloqjcmpopulator
         }
         catch(Exception e)
         {
-            e.printStackTrace(System.err);
+            //e.printStackTrace(System.err);
         }        
     }
     
@@ -892,7 +892,7 @@ public class Bloqjcmpopulator
         }
         catch(InvalidParameterException | NullPointerException | SecurityException e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
         }        
     }
     

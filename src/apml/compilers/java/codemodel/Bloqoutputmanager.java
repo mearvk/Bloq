@@ -136,7 +136,7 @@ public class Bloqoutputmanager
                     {                                              
                         String cname = classes.next().name();
                         
-                        jcmmodels.get(i).build(new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.srcextensionurl), System.err);           
+                        jcmmodels.get(i).build(new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.srcextensionurl), System.out);           
                     }
                 }
             }
