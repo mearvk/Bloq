@@ -8,25 +8,16 @@
         <implements class="apml.interfaces.BasicSystemElement"/>        
 
         <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">            
-            <system id="echoserver" start="true" bodi="//echoserver/systems/{this.id}" class="Echoserversystem">     
-                                             
+            <system id="echoserver" start="true" bodi="//echoserver/systems/{this.id}" class="Echoserversystem">                                                  
                 <implements class="apml.interfaces.BasicSystemElement"/>                
                 
-                <object id="echoserver" start="true" bodi="//echoserver/objects/echoserver" class="Echoserver">                                                                                                      
+                <object id="echoserver" start="true" bodi="//echoserver/objects/echoserver" class="Echoserver" implements="">                                                                                                      
                     <implements class="apml.interfaces.BasicSystemElement"/>                    
-                    
-                    <listener id="ESOCL" bodi="//echoserver/listeners/onconnect/{this.id}" class="EchoserverOnconnectListener" with="*">
-                        <subscriber notion="unordered" class="NewConnectionService"></subscriber>
-                    </listener>                                        
-                    
-                    <listener id="ESOEL" bodi="//echoserver/listeners/onexit/{this.id}" class="EchoserverOnexitListener" with="*">
-                        <subscriber notion="unordered" class="ClosingService"></subscriber>
-                    </listener>                                        
-                    
+                                                                          
                     <listener id="ESORL" bodi="//echoserver/listeners/onread/{this.id}" class="EchoserverOnreadListener" with="*">
                         <subscriber notion="ordered" order="1" class="InputService"></subscriber>                        
-                    </listener>                                        
-                    
+                    </listener>    
+                                                                            
                     <listener id="ESODL" bodi="//echoserver/listeners/ondispatch/{this.id}" class="EchoserverOndispatchListener" with="*">
                         <subscriber notion="ordered" order="2" class="OutputService"></subscriber>
                     </listener>                                          
@@ -39,16 +30,19 @@
         <package name="clients" default="examples.echoserver.clients" sourcedir="/source" builddir="/build">
             <system id="echoclient" start="true" bodi="//echoclient/systems/{this.id}" class="Echoclientsystem">        
                 <object start="true" bodi="//echoclient/objects/{this.id}" class="Echoclient">
+                    
                     <listener class="Clientsocketondispatchlistener">
                         <subscriber class="Onclientdispatch_1"></subscriber>
                         <subscriber class="Onclientdispatch_2"></subscriber>
                         <subscriber class="Onclientdispatch_3"></subscriber>
                     </listener>
+                    
                     <listener class="Clientsocketonreceiptlistener">
                         <subscriber class="Onclientdispatch_1"></subscriber>
                         <subscriber class="Onclientdispatch_2"></subscriber>
                         <subscriber class="Onclientdispatch_3"></subscriber>
                     </listener>                
+                    
                 </object>        
             </system>                      
         </package>

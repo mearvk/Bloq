@@ -19,6 +19,8 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import java.util.logging.FileHandler;
 
@@ -619,7 +621,20 @@ public final class Bloqapmlpopulator
     
     private ArrayList<Apmlimplement> getimplements(Bloqxpathparameter xparam, Integer index)
     {
-        ArrayList<Apmlimplement> retval = new ArrayList<>();
+        ArrayList<Apmlimplement> retval = new ArrayList<>();   
+        
+        Set<Apmlimplement> clearer = new HashSet<>();  
+                        
+        Element inline = ((Element)xparam.n0001_tagname.item(index));
+        
+        if(inline.getAttribute("implements")!=null)
+        {
+            Apmlimplement apmlimpl = new Apmlimplement(); 
+            
+            apmlimpl.classname = inline.getAttribute("implements");
+
+            retval.add(apmlimpl);            
+        }                    
         
         try
         {
@@ -657,7 +672,15 @@ public final class Bloqapmlpopulator
         catch(Exception e)
         {
             e.printStackTrace();
-        }                       
+        }        
+        
+        //clearing tech - stands at acknowledged 
+        
+        clearer.addAll(retval);
+        
+        retval.clear();
+        
+        retval.addAll(clearer);
         
         return retval;
     }    
