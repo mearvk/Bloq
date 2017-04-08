@@ -162,6 +162,10 @@ public class BloqJCMpopulator
                 case "apml":            
                     doapmlbloqs(param);
                     break;
+                    
+                case "callback":            
+                    docallbackbloqs(param);
+                    break;                    
                 
                 case "dynamiclistener": 
                     dodynamiclistenerbloqs(param);
@@ -233,6 +237,51 @@ public class BloqJCMpopulator
         /*---------------------------------------------------------------------*/
         
         param.classref.direct("\t\n\n//TODO: finish adding support...");
+    }
+    
+    private void docallbackbloqs(Bloqconvenienceparameter param)
+    {
+        JDefinedClass theclass = param.classref;
+                
+        /*---------------------------------------------------------------------*/
+        
+        JMethod constructor1;
+        
+        constructor1 = param.classref.constructor(JMod.PUBLIC);                
+        
+        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        
+        constructor1.body().directStatement("\n");
+        
+        /*---------------------------------------------------------------------*/
+        
+        JMethod constructor2;
+        
+        constructor2 = param.classref.constructor(JMod.PUBLIC);
+        
+        constructor2.body().directStatement("\n");        
+        
+        /*---------------------------------------------------------------------*/                                               
+        
+        JMethod callback;
+        
+        callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
+        
+        callback.param(JMod.FINAL, java.lang.Object.class, "event");
+        
+        callback.body().directStatement("return null;\n");
+        
+        /*---------------------------------------------------------------------*/                                 
+        
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bodi+"\"");
+        
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
+                
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        
+        /*---------------------------------------------------------------------*/
+        
+        param.classref.direct("\t\n\n//TODO: finish adding support...");        
     }
     
     private void dodynamiclistenerbloqs(Bloqconvenienceparameter param)

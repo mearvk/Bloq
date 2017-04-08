@@ -37,6 +37,8 @@ public class Bloqoutputmanager
     
     public ArrayList<JCodeModel> apmlmodels;  
     
+    public ArrayList<JCodeModel> callbackmodels;  
+    
     public ArrayList<JCodeModel> definitionmodels;
     
     public ArrayList<JCodeModel> dynamiclistenermodels;
@@ -88,6 +90,8 @@ public class Bloqoutputmanager
             switch(apmltag)
             {
                 case "//apml": jcmmanager.apmlmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
+                
+                case "//callback": jcmmanager.callbackmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
                     
                 case "//definitions": jcmmanager.definitionmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
                     

@@ -61,6 +61,10 @@ public final class BloqAPMLpopulator
                         
             populator.getapmlmodelfiles(apmlfile,"//apml");   
             
+            populator.getapmlmodelfiles(apmlfile,"//callback");  
+            
+            populator.getapmlmodelfiles(apmlfile,"//compiler");  
+            
             populator.getapmlmodelfiles(apmlfile,"//definitions");            
             
             populator.getapmlmodelfiles(apmlfile,"//dynamiclistener");             
@@ -71,9 +75,7 @@ public final class BloqAPMLpopulator
             
             populator.getapmlmodelfiles(apmlfile,"//system");               
             
-            populator.getapmlmodelfiles(apmlfile,"//driver");               
-            
-            populator.getapmlmodelfiles(apmlfile,"//compiler");  
+            populator.getapmlmodelfiles(apmlfile,"//driver");                                       
         }
         catch(Exception exception)
         {
@@ -111,26 +113,28 @@ public final class BloqAPMLpopulator
         {                            
             switch(apmltag) //would probably need a 'parent' reference is all these cases given how it's been implemented
             {
-                case "//apml":              return doapmltags(xparam, apmltag);
+                case "//apml":              return doapmltags(xparam);
                     
-                case "//definitions":       return dodefinitiontags(xparam, apmltag);
+                case "//callback":          return docallbacktags(xparam);
+                
+                case "//definitions":       return dodefinitiontags(xparam);
                         
-                case "//dynamiclistener":   return dodynamiclistenertags(xparam, apmltag);
+                case "//dynamiclistener":   return dodynamiclistenertags(xparam);
                         
-                case "//listener":          return dolistenertags(xparam, apmltag);
+                case "//listener":          return dolistenertags(xparam);
                         
-                case "//object":            return doobjecttags(xparam, apmltag);
+                case "//object":            return doobjecttags(xparam);
                         
-                case "//subscriber":        return dosubscribertags(xparam, apmltag);
+                case "//subscriber":        return dosubscribertags(xparam);
                     
-                case "//system":            return dosystemtags(xparam, apmltag);
+                case "//system":            return dosystemtags(xparam);
             }
         }
         
         return null;
     }          
     
-    private ArrayList<Apmlmodelfile> doapmltags(Bloqxpathparameter xparam, String apmltag) throws Exception
+    private ArrayList<Apmlmodelfile> doapmltags(Bloqxpathparameter xparam) throws Exception
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();
         
@@ -172,7 +176,49 @@ public final class BloqAPMLpopulator
         return modelfiles;
     }        
     
-    private ArrayList<Apmlmodelfile> dodefinitiontags(Bloqxpathparameter xparam, String apmltag) throws Exception
+    private ArrayList<Apmlmodelfile> docallbacktags(Bloqxpathparameter xparam) throws Exception
+    {
+        ArrayList<Apmlmodelfile> modelfiles = new ArrayList();
+        
+        for(int index=0; index<xparam.getnodecount(); index++)
+        {
+            Apmlmodelfile modelfile=new Apmlmodelfile();
+
+            try{modelfile.apmlimplements=this.getimplements(xparam, index);}                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                        
+            
+            try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.bodi=this.getbodi(xparam, index);}                                    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.builddir=this.getbuilddir(xparam, index);}                            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            
+            try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                                                                    
+            
+            try{modelfile.packagename=this.getpackagename(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.run=this.getruntag(xparam, index);}                                   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.start=this.getstarttag(xparam, index);}                               catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.sourcedir=this.getsourcedir(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            
+            try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+                        
+            try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
+            
+            modelfiles.add(modelfile);
+        }       
+        
+        return modelfiles;        
+    }
+    
+    private ArrayList<Apmlmodelfile> dodefinitiontags(Bloqxpathparameter xparam) throws Exception
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();       
         
@@ -218,7 +264,7 @@ public final class BloqAPMLpopulator
         return modelfiles;
     }
 
-    private ArrayList<Apmlmodelfile> dodynamiclistenertags(Bloqxpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dodynamiclistenertags(Bloqxpathparameter xparam)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList(); 
         
@@ -258,7 +304,7 @@ public final class BloqAPMLpopulator
         return modelfiles;
     }     
      
-    private ArrayList<Apmlmodelfile> dolistenertags(Bloqxpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dolistenertags(Bloqxpathparameter xparam)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();    
         
@@ -268,7 +314,7 @@ public final class BloqAPMLpopulator
 
             /*------------------------------------------------------------------*/
             
-            try{modelfile.apmlsubscribers=this.getsubscribers(xparam, index);}                  catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{modelfile.apmlsubscribers=this.getsubscribers(xparam);}                  catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -304,7 +350,7 @@ public final class BloqAPMLpopulator
         return modelfiles;
     }    
    
-    private ArrayList<Apmlmodelfile> doobjecttags(Bloqxpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> doobjecttags(Bloqxpathparameter xparam)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList(); 
         
@@ -350,7 +396,7 @@ public final class BloqAPMLpopulator
         return modelfiles;
     }    
   
-    private ArrayList<Apmlmodelfile> dosubscribertags(Bloqxpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dosubscribertags(Bloqxpathparameter xparam)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();   
         
@@ -390,7 +436,7 @@ public final class BloqAPMLpopulator
         return modelfiles;
     }    
 
-    private ArrayList<Apmlmodelfile> dosystemtags(Bloqxpathparameter xparam, String apmltag)
+    private ArrayList<Apmlmodelfile> dosystemtags(Bloqxpathparameter xparam)
     {
         ArrayList<Apmlmodelfile> modelfiles = new ArrayList();  
         
@@ -436,13 +482,13 @@ public final class BloqAPMLpopulator
         return modelfiles;
     } 
     
-    private ArrayList<Apmlsubscriber> getsubscribers(Bloqxpathparameter xparam, Integer index)
+    private ArrayList<Apmlsubscriber> getsubscribers(Bloqxpathparameter xparam)
     {              
         ArrayList<Apmlsubscriber> subscribers = new ArrayList<>();
         
         try
         {
-            NodeList nodes = (NodeList)xparam.xpath.evaluate("./subscriber", xparam.n0001_tagname.item(index), XPathConstants.NODESET);
+            NodeList nodes = (NodeList)xparam.xpath.evaluate("./subscriber", xparam.n0001_tagname.item(0), XPathConstants.NODESET);
             
             for(int i=0; i<nodes.getLength(); i++) //for each subscriber under listener.item(index)
             {

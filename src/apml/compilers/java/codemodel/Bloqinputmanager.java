@@ -34,6 +34,8 @@ public class Bloqinputmanager
     
     public ArrayList<Apmlmodelfile> apmlmodels;  
     
+    public ArrayList<Apmlmodelfile> callbackmodels;  
+    
     public ArrayList<Apmlmodelfile> definitionmodels;
     
     public ArrayList<Apmlmodelfile> dynamiclistenermodels;
@@ -92,6 +94,8 @@ public class Bloqinputmanager
             switch(apmltag)
             {                    
                 case "//apml": this.apmlmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
+                
+                case "//callback": this.callbackmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
                 
                 case "//definitions": this.definitionmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;                    
                 

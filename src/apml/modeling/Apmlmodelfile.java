@@ -71,13 +71,13 @@ public class Apmlmodelfile
     
     /* ------------------------------------------------------------------------*/
     
-    public String[] implementors = new String[1000];
+    public String[] implementors = new String[1];
     
-    public String[] listeners = new String[1000];
+    public String[] listeners = new String[1];
     
-    public String[] objects = new String[1000];
+    public String[] objects = new String[1];
     
-    public String[] stdinterfaces = new String[1000];
+    public String[] stdinterfaces = new String[1];
     
-    public String[] taginterfaces = new String[1000];                  
+    public String[] taginterfaces = new String[1];                  
 }

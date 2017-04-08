@@ -62,6 +62,8 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
         {            
             this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//apml");
             
+            this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//callback");
+            
             this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//dynamiclistener");
             
             this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//listener");    
@@ -81,9 +83,11 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     @Override
     public void settempfiles(Bloqinputmanager bloqapmlmanager)
     {
-        try
+        try                
         {
             this.inputmanager.dosettempfiles(bloqapmlmanager.apmlmodels);
+            
+            this.inputmanager.dosettempfiles(bloqapmlmanager.callbackmodels);
             
             this.inputmanager.dosettempfiles(bloqapmlmanager.dynamiclistenermodels);
             
@@ -108,6 +112,8 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
         {                        
             this.outputmanager.dosetoutputfiles(bloqapmlmanager.apmlmodels, "//apml");
             
+            this.outputmanager.dosetoutputfiles(bloqapmlmanager.callbackmodels, "//callback");
+            
             this.outputmanager.dosetoutputfiles(bloqapmlmanager.dynamiclistenermodels, "//dynamiclistener");
             
             this.outputmanager.dosetoutputfiles(bloqapmlmanager.listenermodels, "//listener");
@@ -130,6 +136,8 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
         try
         {
             this.outputmanager.dosetsourcefiles(bloqjcmmanager.apmlmodels);
+            
+            this.outputmanager.dosetsourcefiles(bloqjcmmanager.callbackmodels);
 
             this.outputmanager.dosetsourcefiles(bloqjcmmanager.dynamiclistenermodels);                             
 

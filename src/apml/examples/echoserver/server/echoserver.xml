@@ -8,26 +8,34 @@
         <implements class="apml.interfaces.BasicSystemElement"/>        
 
         <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">            
-            <system id="echoserver" start="true" bodi="//echoserver/systems/{this.id}" class="Echoserversystem">                                  
+            <system id="echoserver" start="true" bodi="//echoserver/systems/{this.id}" class="Echoserversystem">     
+                                             
                 <implements class="apml.interfaces.BasicSystemElement"/>                
+                
                 <object id="echoserver" start="true" bodi="//echoserver/objects/echoserver" class="Echoserver">                                                                                                      
                     <implements class="apml.interfaces.BasicSystemElement"/>                    
+                    
                     <listener id="ESOCL" bodi="//echoserver/listeners/onconnect/{this.id}" class="EchoserverOnconnectListener" with="*">
-                        <subscriber notion="unordered" class="CallNewConnectionService"></subscriber>
+                        <callback notion="unordered" class="CallNewConnectionService"></callback>
                     </listener>                                        
+                    
                     <listener id="ESOEL" bodi="//echoserver/listeners/onexit/{this.id}" class="EchoserverOnexitListener" with="*">
                         <subscriber notion="unordered" class="CallClosingService"></subscriber>
                     </listener>                                        
+                    
                     <listener id="ESORL" bodi="//echoserver/listeners/onread/{this.id}" class="EchoserverOnreadListener" with="*">
                         <subscriber notion="ordered" order="1" class="CallInputService"></subscriber>
                         <subscriber notion="ordered" order="2" class="CallBufferingService"></subscriber>
                         <subscriber notion="ordered" order="3" class="CallOutputService"></subscriber>
                     </listener>                                        
+                    
                     <listener id="ESODL" bodi="//echoserver/listeners/ondispatch/{this.id}" class="EchoserverOndispatchListener" with="*">
                         <subscriber class="UpdateNewDataOutgoingService"></subscriber>
                         <subscriber class="UpdateDoSend"></subscriber>
                     </listener>                                          
+                    
                 </object>                                  
+                
             </system>               
         </package>
                 
