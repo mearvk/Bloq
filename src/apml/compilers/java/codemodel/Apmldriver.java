@@ -8,7 +8,7 @@ import java.util.logging.Level;
  */
 public class Apmldriver
 {
-    public static void main2(String...args)
+    public static void main(String...args)
     {
         try
         {

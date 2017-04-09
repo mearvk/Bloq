@@ -343,7 +343,7 @@ public class Bloqjcmpopulator
         
         constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
         
-        constructor1.body().directStatement("\n\t/*--------------- instantiation ----------------*/");
+        constructor1.body().directStatement("\n\t/*--------------- instantiation ----------------*/\n");
         
         for(int i=0; i<param.apmlmodelfile.apmlsubscribers.size(); i++)
         {
@@ -356,11 +356,11 @@ public class Bloqjcmpopulator
         
         constructor2 = param.classref.constructor(JMod.PUBLIC);    
         
-        constructor2.body().directStatement("\n\t/*--------------- instantiation ----------------*/");
+        constructor2.body().directStatement("\n\t/*--------------- instantiation ----------------*/\n");
         
         for(int i=0; i<param.apmlmodelfile.apmlsubscribers.size(); i++)
         {
-            constructor2.body().directStatement("\n\tthis.subscribers_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlsubscribers.get(i).classname+"();");
+            constructor2.body().directStatement("\tthis.subscribers_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlsubscribers.get(i).classname+"();\n");
         }        
         
         /*---------------------------------------------------------------------*/                                               
@@ -398,7 +398,12 @@ public class Bloqjcmpopulator
         
         constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
         
-        constructor1.body().directStatement("\n");
+        constructor1.body().directStatement("\n\t/*--------------- instantiation ----------------*/\n"); 
+        
+        for(int i=0; i<param.apmlmodelfile.apmllisteners.size(); i++)
+        {
+            constructor1.body().directStatement("\tthis.listener_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmllisteners.get(i).classname+"();\n");
+        }                
         
         /*---------------------------------------------------------------------*/
         
@@ -406,11 +411,11 @@ public class Bloqjcmpopulator
         
         constructor2 = param.classref.constructor(JMod.PUBLIC);
         
-        constructor2.body().directStatement("\n"); 
+        constructor2.body().directStatement("\n\t/*--------------- instantiation ----------------*/\n"); 
         
         for(int i=0; i<param.apmlmodelfile.apmllisteners.size(); i++)
         {
-            constructor2.body().directStatement("\n\tthis.listener_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmllisteners.get(i).classname+"();");
+            constructor2.body().directStatement("\tthis.listener_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmllisteners.get(i).classname+"();\n");
         }           
         
         /*---------------------------------------------------------------------*/                                               
@@ -491,9 +496,14 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");        
         
-        constructor1.body().directStatement("\n");
+        constructor1.body().directStatement("\n\t/*--------------- instantiation ----------------*/\n"); 
+        
+        for(int i=0; i<param.apmlmodelfile.apmlobjects.size(); i++)
+        {
+            constructor1.body().directStatement("\tthis.object_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlobjects.get(i).classname+"();\n");
+        }        
         
         /*---------------------------------------------------------------------*/
         
@@ -501,7 +511,12 @@ public class Bloqjcmpopulator
         
         constructor2 = param.classref.constructor(JMod.PUBLIC);
         
-        constructor2.body().directStatement("\n");        
+        constructor2.body().directStatement("\n\t/*--------------- instantiation ----------------*/\n"); 
+        
+        for(int i=0; i<param.apmlmodelfile.apmlobjects.size(); i++)
+        {
+            constructor2.body().directStatement("\tthis.object_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlobjects.get(i).classname+"();\n");
+        }        
         
         /*---------------------------------------------------------------------*/                                               
         
