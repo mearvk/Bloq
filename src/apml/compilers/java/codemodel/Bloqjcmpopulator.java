@@ -406,7 +406,12 @@ public class Bloqjcmpopulator
         
         constructor2 = param.classref.constructor(JMod.PUBLIC);
         
-        constructor2.body().directStatement("\n");        
+        constructor2.body().directStatement("\n"); 
+        
+        for(int i=0; i<param.apmlmodelfile.apmllisteners.size(); i++)
+        {
+            constructor2.body().directStatement("\n\tthis.listener_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmllisteners.get(i).classname+"();");
+        }           
         
         /*---------------------------------------------------------------------*/                                               
         
