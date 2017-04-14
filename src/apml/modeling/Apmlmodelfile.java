@@ -33,6 +33,8 @@ public class Apmlmodelfile
     
     public ArrayList<Apmlsubscriber> apmlsubscribers = new ArrayList();
     
+    public ArrayList<Apmlsystem> apmlsystems = new ArrayList();
+    
     public ArrayList<String> apmltaginterfaces = new ArrayList();     
     
     /* ------------------------------------------------------------------------*/

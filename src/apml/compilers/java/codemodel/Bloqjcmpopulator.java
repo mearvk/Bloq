@@ -100,29 +100,34 @@ public class Bloqjcmpopulator
         
         try            
         {            
-            /*------------------------------------ Add class fields ---------------------------------------------------*/            
+            /*------------------------------------ Add base fields ---------------------------------------------------*/            
             
             try{this.addjcmpackagename(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.addjcmclassname(param);}           catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                    
+            try{this.addjcmclassname(param);}           catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                                
             
             try{this.addjcmextends(param);}             catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.addjcmimplements(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                          
+            try{this.addjcmimplements(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+                        
             
-            try{this.addjcmautostarttag(param);}        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            /*------------------------------------ Add bloq fields ---------------------------------------------------*/
+            
+            try{this.addjcmautostarttag(param);}        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                                  
             
             try{this.addjcminittag(param);}             catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/} 
             
+            try{this.addjcmlisteners(param);}           catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{this.addjcmobjects(param);}             catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                        
+            
             try{this.addjcmruntag(param);}              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.addjcmstarttag(param);}            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                         
-            
-            try{this.addjcmlisteners(param);}           catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmstarttag(param);}            catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                                 
             
             try{this.addjcmsubscribers(param);}         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{this.addjcmobjects(param);}             catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmsystems(param);}             catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                        
             
             /*--------------------------------------- Add methods -----------------------------------------------------*/
             
@@ -204,9 +209,16 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");
         
         constructor1.body().directStatement("\n");
+        
+        constructor1.body().directStatement("this.monitor = monitor;\n");
+        
+        for(int i=0; i<param.apmlmodelfile.apmlsystems.size(); i++)
+        {
+            constructor1.body().directStatement("this.system_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlsystems.get(i).classname+"();\n");
+        }
         
         /*---------------------------------------------------------------------*/
         
@@ -214,7 +226,12 @@ public class Bloqjcmpopulator
         
         constructor2 = param.classref.constructor(JMod.PUBLIC);
         
-        constructor2.body().directStatement("\n");        
+        constructor2.body().directStatement("\n");                
+        
+        for(int i=0; i<param.apmlmodelfile.apmlsystems.size(); i++)
+        {
+            constructor2.body().directStatement("this.system_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlsystems.get(i).classname+"();\n");
+        }        
         
         /*---------------------------------------------------------------------*/                                               
         
@@ -249,9 +266,11 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");
         
         constructor1.body().directStatement("\n");
+        
+        constructor1.body().directStatement("this.monitor = monitor;\n");
         
         /*---------------------------------------------------------------------*/
         
@@ -294,9 +313,11 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");
         
         constructor1.body().directStatement("\n");
+        
+        constructor1.body().directStatement("this.monitor = monitor;\n");
         
         /*---------------------------------------------------------------------*/
         
@@ -341,13 +362,15 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");
         
         constructor1.body().directStatement("\n\t/*--------------- instantiation ----------------*/\n");
         
+        constructor1.body().directStatement("this.monitor = monitor;\n");
+        
         for(int i=0; i<param.apmlmodelfile.apmlsubscribers.size(); i++)
         {
-            constructor1.body().directStatement("\n\tthis.subscribers_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlsubscribers.get(i).classname+"();");
+            constructor1.body().directStatement("this.subscriber_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlsubscribers.get(i).classname+"();\n");
         }
         
         /*---------------------------------------------------------------------*/
@@ -360,7 +383,7 @@ public class Bloqjcmpopulator
         
         for(int i=0; i<param.apmlmodelfile.apmlsubscribers.size(); i++)
         {
-            constructor2.body().directStatement("\tthis.subscribers_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlsubscribers.get(i).classname+"();\n");
+            constructor2.body().directStatement("this.subscriber_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlsubscribers.get(i).classname+"();\n");
         }        
         
         /*---------------------------------------------------------------------*/                                               
@@ -396,13 +419,15 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");
         
         constructor1.body().directStatement("\n\t/*--------------- instantiation ----------------*/\n"); 
         
+        constructor1.body().directStatement("this.monitor = monitor;\n");
+        
         for(int i=0; i<param.apmlmodelfile.apmllisteners.size(); i++)
         {
-            constructor1.body().directStatement("\tthis.listener_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmllisteners.get(i).classname+"();\n");
+            constructor1.body().directStatement("this.listener_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmllisteners.get(i).classname+"();\n");
         }                
         
         /*---------------------------------------------------------------------*/
@@ -415,7 +440,7 @@ public class Bloqjcmpopulator
         
         for(int i=0; i<param.apmlmodelfile.apmllisteners.size(); i++)
         {
-            constructor2.body().directStatement("\tthis.listener_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmllisteners.get(i).classname+"();\n");
+            constructor2.body().directStatement("this.listener_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmllisteners.get(i).classname+"();\n");
         }           
         
         /*---------------------------------------------------------------------*/                                               
@@ -451,9 +476,11 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");
+        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");
         
         constructor1.body().directStatement("\n");
+        
+        constructor1.body().directStatement("this.monitor = monitor;\n");
         
         /*---------------------------------------------------------------------*/
         
@@ -496,9 +523,11 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, java.lang.Object.class, "monitor");        
+        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");        
         
         constructor1.body().directStatement("\n\t/*--------------- instantiation ----------------*/\n"); 
+        
+        constructor1.body().directStatement("this.monitor = monitor;\n");
         
         for(int i=0; i<param.apmlmodelfile.apmlobjects.size(); i++)
         {
@@ -617,7 +646,7 @@ public class Bloqjcmpopulator
                 
                 String fullname = packagename+"."+classname;
             
-                param.classref.field(JMod.PROTECTED, Class.forName(fullname), "listeners_"+String.format("%03d",i));
+                param.classref.field(JMod.PROTECTED, Class.forName(fullname), "listener_"+String.format("%03d",i));
                 
                 //
                 /*for(int j=0; j<param.apmlmodelfile.apmlsubscribers.size(); j++)
@@ -663,7 +692,7 @@ public class Bloqjcmpopulator
                 
                 String fullname = packagename+"."+classname;
             
-                param.classref.field(JMod.PROTECTED, Class.forName(fullname), "subscribers_"+String.format("%03d",i));
+                param.classref.field(JMod.PROTECTED, Class.forName(fullname), "subscriber_"+String.format("%03d",i));
                 
                 //param.classref.direct("\n\tprotected "+classname+" listener_"+String.format("%03d",i)+";\n");
             }            
@@ -672,6 +701,42 @@ public class Bloqjcmpopulator
         {
             /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
         }
+    }
+    
+    private void addjcmsystems(Bloqconvenienceparameter param)
+    {
+        try
+        {
+            if(param.jcodemodel==null)
+            {
+                throw new InvalidParameterException("JCodeModel not set; unable to set system(s).");
+            }
+            
+            param.classref.field(JMod.PROTECTED, apml.system.Apmlsystem.class, "monitor");
+            
+            if(param.apmlmodelfile.apmlsystems==null)
+            {
+                throw new InvalidParameterException("Apmlsystems not set; unable to set system(s).");
+            }                
+            
+            //
+            for(int i=0; i<param.apmlmodelfile.apmlsystems.size(); i++)
+            {   
+                String classname = new Filegrepper().getclassname(param.apmlmodelfile.apmlsystems.get(i).classname); 
+                
+                String packagename = param.apmlmodelfile.apmlsystems.get(i).packagename;
+                
+                String fullname = packagename+"."+classname;
+            
+                param.classref.field(JMod.PROTECTED, Class.forName(fullname), "system_"+String.format("%03d",i));
+                
+                //param.classref.direct("\n\tprotected "+classname+" listener_"+String.format("%03d",i)+";\n");
+            }            
+        }
+        catch(Exception e)
+        {
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+        }        
     }
     
     private void addjcmpackagename(Bloqconvenienceparameter param)

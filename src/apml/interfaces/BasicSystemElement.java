@@ -10,7 +10,7 @@ public interface BasicSystemElement
     
     public void init();
     
-    public void pausable();
+    public void pause();
     
     public void restart();
     
@@ -18,5 +18,5 @@ public interface BasicSystemElement
     
     public void start();
     
-    public void stop();
+    public void stop();    
 }

@@ -3,46 +3,30 @@
 
 <package name="globals" default="examples.echoserver" sourcedir="/source" builddir="/build">
     
-    <apml language="Java 9" version="1.0" class="Apmlsystem" infer="true">  
+    <apml language="Java 9" version="1.0" class="Apmlsystem" infer="true" implements="apml.interfaces.BasicSystemElement">  
 
-        <implements class="apml.interfaces.BasicSystemElement"/>        
-
-        <package name="servers" default="examples.echoserver.servers" sourcedir="/source" builddir="/build">            
-            <system id="echoserver" start="true" bodi="//echoserver/systems/{this.id}" class="Echoserversystem">                                                  
-                <implements class="apml.interfaces.BasicSystemElement"/>                
-                
-                <object id="echoserver" start="true" bodi="//echoserver/objects/echoserver" class="Echoserver" implements="">                                                                                                      
-                    <implements class="apml.interfaces.BasicSystemElement"/>                    
-                                                                          
-                    <listener id="ESORL" bodi="//echoserver/listeners/onread/{this.id}" class="EchoserverOnreadListener" with="*">
-                        <subscriber notion="ordered" order="1" class="InputService"></subscriber>                        
-                    </listener>    
-                                                                            
-                    <listener id="ESODL" bodi="//echoserver/listeners/ondispatch/{this.id}" class="EchoserverOndispatchListener" with="*">
-                        <subscriber notion="ordered" order="2" class="OutputService"></subscriber>
-                    </listener>                                          
-                    
-                </object>                                  
-                
+        <package default="examples.echoserver.servers" sourcedir="/source" builddir="/build">            
+            <system id="Echoserversystem" class="Echoserversystem" implements="apml.interfaces.BasicSystemElement">                
+                <object id="Echoserver" class="Echoserver" implements="apml.interfaces.BasicSystemElement">                                                                                                                                                                               
+                    <listener id="Inputservice" class="Inputservicelistener">
+                        <subscriber class="InputService"></subscriber>                        
+                    </listener>                                                                                
+                    <listener id="Outputservice" class="Outputservicelistener">
+                        <subscriber class="OutputService"></subscriber>
+                    </listener>                                                              
+                </object>
             </system>               
         </package>
                 
-        <package name="clients" default="examples.echoserver.clients" sourcedir="/source" builddir="/build">
-            <system id="echoclient" start="true" bodi="//echoclient/systems/{this.id}" class="Echoclientsystem">        
-                <object start="true" bodi="//echoclient/objects/{this.id}" class="Echoclient">
-                    
-                    <listener class="Clientsocketondispatchlistener">
-                        <subscriber class="Onclientdispatch_1"></subscriber>
-                        <subscriber class="Onclientdispatch_2"></subscriber>
-                        <subscriber class="Onclientdispatch_3"></subscriber>
-                    </listener>
-                    
-                    <listener class="Clientsocketonreceiptlistener">
-                        <subscriber class="Onclientdispatch_1"></subscriber>
-                        <subscriber class="Onclientdispatch_2"></subscriber>
-                        <subscriber class="Onclientdispatch_3"></subscriber>
-                    </listener>                
-                    
+        <package default="examples.echoserver.clients" sourcedir="/source" builddir="/build">
+            <system id="Echoclientsystem" class="Echoclientsystem" implements="apml.interfaces.BasicSystemElement">        
+                <object id="Echoclient" class="Echoclient" implements="apml.interfaces.BasicSystemElement">                    
+                    <listener id="Outservice" class="Outputservicelistener">
+                        <subscriber class="Outputservice"></subscriber>
+                    </listener>                    
+                    <listener id="Inservice" class="Inputservicelistener">
+                        <subscriber class="Inputservice"></subscriber>
+                    </listener>                                    
                 </object>        
             </system>                      
         </package>

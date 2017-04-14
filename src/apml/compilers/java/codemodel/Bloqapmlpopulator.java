@@ -12,6 +12,8 @@ import apml.modeling.Apmlobject;
 
 import apml.modeling.Apmlsubscriber;
 
+import apml.modeling.Apmlsystem;
+
 import apml.system.bodi.Bodi;
 
 import java.io.File;
@@ -160,8 +162,8 @@ public final class Bloqapmlpopulator
             
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
             
-            try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                                                                    
-            
+            try{modelfile.init=this.getinittag(xparam, index);}                                 catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}    
+                                    
             try{modelfile.packagename=this.getpackagename(xparam, index);}                      catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{modelfile.run=this.getruntag(xparam, index);}                                   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
@@ -171,6 +173,8 @@ public final class Bloqapmlpopulator
             try{modelfile.sourcedir=this.getsourcedir(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
             
             try{modelfile.superclass=this.getsuperclass(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            
+            try{modelfile.apmlsystems=this.getsystems(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
                         
             try{modelfile.tagname=this.gettagname(xparam, index);}                              catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
             
@@ -620,6 +624,51 @@ public final class Bloqapmlpopulator
         
         return objects;
     }
+    
+    private ArrayList<Apmlsystem> getsystems(Bloqxpathparameter xparam, Integer index)
+    {      
+        ArrayList<Apmlsystem> systems = new ArrayList<>();
+        
+        try
+        {
+            NodeList nodes = (NodeList)xparam.xpath.evaluate("./package/system", xparam.n0001_tagname.item(index), XPathConstants.NODESET);                                       
+                        
+            for(int i=0; i<nodes.getLength(); i++)  
+            {
+                Element element = (Element)nodes.item(i);            
+
+                Apmlsystem system = new Apmlsystem();            
+
+                /*--------------------------------------------------------------*/
+                
+                system.id               = element.getAttribute("id");
+                
+                system.alias            = element.getAttribute("alias");
+                
+                system.autostartable    = element.getAttribute("autostart").equalsIgnoreCase("true");
+                
+                system.classname        = element.getAttribute("class");
+                
+                system.extension        = element.getAttribute("extends");
+                
+                String xpathstring      = "(./ancestor::package/@default)[last()]";
+                
+                system.packagename      = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
+                
+                system.startable        = element.getAttribute("start").equalsIgnoreCase("true");
+                
+                /*--------------------------------------------------------------*/
+
+                systems.add(system);
+            }            
+        }
+        catch(Exception e)
+        {
+            /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+        }                       
+        
+        return systems;
+    }    
     
     private ArrayList<Apmlimplement> getimplements(Bloqxpathparameter xparam, Integer index)
     {
