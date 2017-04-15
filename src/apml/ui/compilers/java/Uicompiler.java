@@ -5,24 +5,13 @@ import java.util.ArrayList;
 
 public class Uicompiler
 {
-    protected final Integer hash = 0x888fe8;
+    protected final Integer hash = 0x00888fe8;
     
     public Uifileguardian fileguardian = new Uifileguardian();
     
     public Uiinputmanager inputmanager = new Uiinputmanager(this); 
     
-    public Uioutputmanager outputmanager = new Uioutputmanager(this);         
-        
-    public static void main(String...args)
-    {
-        Uicompiler compiler;
-                
-        compiler = new Uicompiler();
-        
-        compiler.dohandleinputfiles(compiler.inputmanager);
-        
-        compiler.dohandleoutputfiles(compiler.outputmanager);        
-    }
+    public Uioutputmanager outputmanager = new Uioutputmanager(this);                
     
     public void dohandleinputfiles(Uiinputmanager inputmanager)
     {
