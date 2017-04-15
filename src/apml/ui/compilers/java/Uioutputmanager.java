@@ -28,7 +28,7 @@ import org.w3c.dom.NodeList;
  */
 public class Uioutputmanager
 {
-    protected final Integer hash = 0x888fe8;
+    protected final Integer hash = 0x00888fe8;
     
     public Uicompiler compiler;
     

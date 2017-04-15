@@ -249,7 +249,7 @@ public class Bloqjcmpopulator
         
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
-        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tag=\""+param.apmlmodelfile.tagname+"\"");
         
         /*---------------------------------------------------------------------*/
         
@@ -296,7 +296,7 @@ public class Bloqjcmpopulator
         
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
-        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tag=\""+param.apmlmodelfile.tagname+"\"");
         
         /*---------------------------------------------------------------------*/
         
@@ -343,7 +343,7 @@ public class Bloqjcmpopulator
         
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
-        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tag=\""+param.apmlmodelfile.tagname+"\"");
         
         /*---------------------------------------------------------------------*/        
         
@@ -402,7 +402,7 @@ public class Bloqjcmpopulator
         
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
-        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tag=\""+param.apmlmodelfile.tagname+"\"");
         
         /*---------------------------------------------------------------------*/        
         
@@ -459,7 +459,7 @@ public class Bloqjcmpopulator
         
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
-        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tag=\""+param.apmlmodelfile.tagname+"\"");
         
         /*---------------------------------------------------------------------*/                       
         
@@ -506,7 +506,7 @@ public class Bloqjcmpopulator
         
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
-        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tag=\""+param.apmlmodelfile.tagname+"\"");
         
         /*---------------------------------------------------------------------*/                        
         
@@ -531,7 +531,7 @@ public class Bloqjcmpopulator
         
         for(int i=0; i<param.apmlmodelfile.apmlobjects.size(); i++)
         {
-            constructor1.body().directStatement("\tthis.object_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlobjects.get(i).classname+"();\n");
+            constructor1.body().directStatement("this.object_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlobjects.get(i).classname+"();\n");
         }        
         
         /*---------------------------------------------------------------------*/
@@ -544,7 +544,7 @@ public class Bloqjcmpopulator
         
         for(int i=0; i<param.apmlmodelfile.apmlobjects.size(); i++)
         {
-            constructor2.body().directStatement("\tthis.object_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlobjects.get(i).classname+"();\n");
+            constructor2.body().directStatement("this.object_"+String.format("%03d", i)+" = new "+param.apmlmodelfile.apmlobjects.get(i).classname+"();\n");
         }        
         
         /*---------------------------------------------------------------------*/                                               
@@ -563,7 +563,7 @@ public class Bloqjcmpopulator
         
         theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
-        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tagname=\""+param.apmlmodelfile.tagname+"\"");
+        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tag=\""+param.apmlmodelfile.tagname+"\"");
         
         /*---------------------------------------------------------------------*/                
         

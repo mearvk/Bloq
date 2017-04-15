@@ -63,6 +63,7 @@ import apml.ui.compilers.java.builders.Jcmjframebuilder;
 import apml.ui.compilers.java.builders.Jcmjmenubarbuilder;
 
 import apml.ui.compilers.java.builders.Jcmjmenuitembuilder;
+
 import apml.ui.compilers.java.builders.Jcmjtablebuilder;
 
 import java.awt.Frame;
@@ -138,7 +139,7 @@ import javax.swing.JTree;
  */
 public class Uiinputmanager
 {    
-    protected final Integer hash = 0x888fe8;
+    protected final Integer hash = 0x00888fe8;
     
     public Uicompiler compiler;
     
