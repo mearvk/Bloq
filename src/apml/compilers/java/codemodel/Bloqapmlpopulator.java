@@ -322,7 +322,7 @@ public final class Bloqapmlpopulator
 
             /*------------------------------------------------------------------*/
             
-            try{modelfile.apmlsubscribers=this.getsubscribers(xparam);}                  catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{modelfile.apmlsubscribers=this.getsubscribers(xparam, index);}                         catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -490,13 +490,13 @@ public final class Bloqapmlpopulator
         return modelfiles;
     } 
     
-    private ArrayList<Apmlsubscriber> getsubscribers(Bloqxpathparameter xparam)
+    private ArrayList<Apmlsubscriber> getsubscribers(Bloqxpathparameter xparam, Integer index)
     {              
         ArrayList<Apmlsubscriber> subscribers = new ArrayList<>();
         
         try
         {
-            NodeList nodes = (NodeList)xparam.xpath.evaluate("./subscriber", xparam.n0001_tagname.item(0), XPathConstants.NODESET);
+            NodeList nodes = (NodeList)xparam.xpath.evaluate("./subscriber", xparam.n0001_tagname.item(index), XPathConstants.NODESET);
             
             for(int i=0; i<nodes.getLength(); i++) //for each subscriber under listener.item(index)
             {

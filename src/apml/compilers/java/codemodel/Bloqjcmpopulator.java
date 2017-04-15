@@ -678,7 +678,7 @@ public class Bloqjcmpopulator
                 throw new InvalidParameterException("JCodeModel not set; unable to set subscribers(s).");
             }
             
-            if(param.apmlmodelfile.subscribers==null)
+            if(param.apmlmodelfile.apmlsubscribers==null || param.apmlmodelfile.apmlsubscribers.size()==0)
             {
                 throw new InvalidParameterException("Apmlsubscribers not set; unable to set subscriber(s).");
             }                

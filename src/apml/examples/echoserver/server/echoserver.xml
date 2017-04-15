@@ -8,11 +8,11 @@
         <package default="examples.echoserver.servers" sourcedir="/source" builddir="/build">            
             <system id="Echoserversystem" class="Echoserversystem" implements="apml.interfaces.BasicSystemElement">                
                 <object id="Echoserver" class="Echoserver" implements="apml.interfaces.BasicSystemElement">                                                                                                                                                                               
-                    <listener id="Inputservice" class="Inputservicelistener">
-                        <subscriber class="InputService"></subscriber>                        
+                    <listener id="Inservice" class="Inputservicelistener">
+                        <subscriber class="InputService"/>
                     </listener>                                                                                
-                    <listener id="Outputservice" class="Outputservicelistener">
-                        <subscriber class="OutputService"></subscriber>
+                    <listener id="Outservice" class="Outputservicelistener">
+                        <subscriber class="OutputService"/>
                     </listener>                                                              
                 </object>
             </system>               
@@ -20,13 +20,13 @@
                 
         <package default="examples.echoserver.clients" sourcedir="/source" builddir="/build">
             <system id="Echoclientsystem" class="Echoclientsystem" implements="apml.interfaces.BasicSystemElement">        
-                <object id="Echoclient" class="Echoclient" implements="apml.interfaces.BasicSystemElement">                    
-                    <listener id="Outservice" class="Outputservicelistener">
-                        <subscriber class="Outputservice"></subscriber>
-                    </listener>                    
+                <object id="Echoclient" class="Echoclient" implements="apml.interfaces.BasicSystemElement">                                   
                     <listener id="Inservice" class="Inputservicelistener">
-                        <subscriber class="Inputservice"></subscriber>
+                        <subscriber class="Inputservice"/>
                     </listener>                                    
+                    <listener id="Outservice" class="Outputservicelistener">
+                        <subscriber class="Outputservice"/>
+                    </listener>                         
                 </object>        
             </system>                      
         </package>
