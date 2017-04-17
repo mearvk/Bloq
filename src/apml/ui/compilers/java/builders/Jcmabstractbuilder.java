@@ -49,8 +49,79 @@ public abstract class Jcmabstractbuilder
     public String tagname;
     
     public Class classname;
-     
     
+    public ArrayList<Uiparameter> storage = new ArrayList<Uiparameter>();
+     
+    public ArrayList<JCodeModel> build()
+    {                       
+        try
+        {         
+            for(int index=0; index<this.nodes.getLength(); index++)
+            {
+                Uiparameter uip = new Uiparameter(new JCodeModel(), index);                                           
+                
+                this.setdocument(uip);
+                
+                this.setjcmpackage(uip);
+                
+                this.setjcmclass(uip);                                
+            
+                this.setnodes(uip);                   
+                
+                this.setbodi(uip); 
+                
+                this.setsuperclass(uip);  
+                
+                this.setjcodemodel(uip);
+                
+                this.setconstructors(uip);
+                
+                this.storage.add(uip);                                
+            }
+        }
+        catch(Exception exception)
+        {
+            System.err.println(exception);
+        }                                
+        
+        return jcodemodels;        
+    } 
+    
+    public ArrayList<JCodeModel> basebuild()
+    {                       
+        try
+        {         
+            for(int index=0; index<this.nodes.getLength(); index++)
+            {
+                Uiparameter uip = new Uiparameter(new JCodeModel(), index);                                           
+                
+                this.setdocument(uip);
+                
+                this.setjcmpackage(uip);
+                
+                this.setjcmclass(uip);                                
+            
+                this.setnodes(uip);                   
+                
+                this.setbodi(uip); 
+                
+                this.setsuperclass(uip);  
+                
+                this.setjcodemodel(uip);
+                
+                this.setconstructors(uip);
+                
+                this.storage.add(uip);                                
+            }
+        }
+        catch(Exception exception)
+        {
+            System.err.println(exception);
+        }                                
+        
+        return jcodemodels;        
+    }          
+        
     public Jcmabstractbuilder(File apml, String tagname, Class classname)
     {                        
         Bodi.setcontext("widgets");                  
@@ -67,12 +138,25 @@ public abstract class Jcmabstractbuilder
             
             this.setdocument(null);
         
-            this.setnodes(null);
+            this.setnodes(null);            
         }
         catch(Exception exception)
         {
             System.err.println(exception);
         }
+    }
+    
+    public void setconstructors(Uiparameter uip)
+    {
+        try
+        {
+            uip.constructor1 = uip.jdc.constructor(JMod.PUBLIC);
+            
+            uip.constructor2 = uip.jdc.constructor(JMod.PUBLIC);
+            
+            uip.constructor2.param(java.awt.Component.class, "monitor");
+        } 
+        catch(Exception e){}
     }
     
     public void setxpath(Uiparameter uip)
@@ -105,7 +189,7 @@ public abstract class Jcmabstractbuilder
         
         try{uip.element = (Element)uip.node;} catch(Exception e){}
         
-        try{uip.constructor = uip.jdc.constructor(JMod.PUBLIC);} catch(Exception e){}
+        
         
         /*----------------------------------------------------------------------*/
         
@@ -134,39 +218,7 @@ public abstract class Jcmabstractbuilder
     {
         try{this.nodes = (NodeList)xpath.evaluate(this.tagname, this.doc, XPathConstants.NODESET); }catch(Exception e){}
     }
-    
-
-    public ArrayList<JCodeModel> build()
-    {                       
-        try
-        {         
-            for(int index=0; index<this.nodes.getLength(); index++)
-            {
-                Uiparameter uip = new Uiparameter(new JCodeModel(), index);                                           
-                
-                this.setdocument(uip);
-                
-                this.setjcmpackage(uip);
-                
-                this.setjcmclass(uip);                                
-            
-                this.setnodes(uip);                   
-                
-                this.setbodi(uip); 
-                
-                this.setsuperclass(uip);  
-                
-                this.setjcodemodel(uip);
-            }
-        }
-        catch(Exception exception)
-        {
-            System.err.println(exception);
-        }
         
-        return jcodemodels;        
-    }   
-    
     protected void setjcodemodel(Uiparameter uip)
     {
         this.jcodemodels.add(uip.jcm);

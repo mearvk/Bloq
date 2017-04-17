@@ -44,8 +44,10 @@ public class Uiparameter
     
     public JCodeModel jcm;
     
-    public JMethod constructor;
+    public JMethod constructor1;
     
+    public JMethod constructor2;
+        
     public JDefinedClass jdc;
     
     public String classname;
