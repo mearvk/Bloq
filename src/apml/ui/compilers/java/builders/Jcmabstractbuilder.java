@@ -154,7 +154,7 @@ public abstract class Jcmabstractbuilder
             
             uip.constructor2 = uip.jdc.constructor(JMod.PUBLIC);
             
-            uip.constructor2.param(java.awt.Component.class, "monitor");
+            uip.constructor2.param(java.awt.Component.class, "parent");
         } 
         catch(Exception e){}
     }
@@ -187,9 +187,7 @@ public abstract class Jcmabstractbuilder
         
         try{uip.doc = this.doc;} catch(Exception e){}
         
-        try{uip.element = (Element)uip.node;} catch(Exception e){}
-        
-        
+        try{uip.element = (Element)uip.node;} catch(Exception e){}                
         
         /*----------------------------------------------------------------------*/
         

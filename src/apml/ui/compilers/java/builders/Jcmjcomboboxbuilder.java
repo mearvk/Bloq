@@ -3,6 +3,7 @@ package apml.ui.compilers.java.builders;
 import apml.ui.compilers.java.Uiparameter;
 
 import com.sun.codemodel.JCodeModel;
+
 import com.sun.codemodel.JMethod;
 
 import java.io.File;
@@ -71,21 +72,27 @@ public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
     {
         try
         {
+            uip.constructor1.body().directStatement("\n");
+            uip.constructor2.body().directStatement("\n");
+            
+            uip.constructor1.body().directStatement("/*---------------------- combobox items ---------------------*/\n");
+            uip.constructor2.body().directStatement("/*---------------------- combobox items ---------------------*/\n");
+            
             NodeList nodes =  (NodeList)xpath.evaluate("./item", this.nodes.item(uip.index), XPathConstants.NODESET); 
             
             for(int i=0; i<nodes.getLength(); i++)
             {
                 Element element = (Element)nodes.item(i);
                 
-                if(element.getAttribute("name")==null) continue;
-                
-                //String tmp = element.getAttribute("name");
+                if(element.getAttribute("name")==null) continue;                
                 
                 Iterator iterator = uip.jdc.constructors();
                 
                 while(iterator.hasNext())
                 {
-                    JMethod constructor = (JMethod)iterator.next();
+                    JMethod constructor;
+                    
+                    constructor = (JMethod)iterator.next();                    
                     
                     constructor.body().directStatement("this.addItem(\""+element.getAttribute("name")+"\");\n");
                 }                
