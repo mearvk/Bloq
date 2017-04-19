@@ -6,6 +6,8 @@ import apml.ui.compilers.java.Uiparameter;
 
 import com.sun.codemodel.JCodeModel;
 
+import com.sun.codemodel.JDefinedClass;
+
 import com.sun.codemodel.JMod;
 
 import java.io.File;
@@ -30,7 +32,7 @@ import org.w3c.dom.NodeList;
  *
  * @author Max Rupplin
  */
-public abstract class Jcmabstractbuilder
+public abstract class Jcmabstractbuilder //todo check why dodevolvement must be called from concrete class and is not called on output side (uioutputmanager) where it is natively set; ok /mr /ok /ss
 {   
     protected final Integer hash = 0x888fe8;
     
@@ -74,7 +76,7 @@ public abstract class Jcmabstractbuilder
                 
                 this.setjcodemodel(uip);
                 
-                this.setconstructors(uip);
+                this.setconstructors(uip);                                
                 
                 this.storage.add(uip);                                
             }
@@ -111,7 +113,7 @@ public abstract class Jcmabstractbuilder
                 
                 this.setconstructors(uip);
                 
-                this.storage.add(uip);                                
+                this.storage.add(uip);                     
             }
         }
         catch(Exception exception)
@@ -150,11 +152,19 @@ public abstract class Jcmabstractbuilder
     {
         try
         {
+            /*--------------------- first constructor --------------------------*/
+            
             uip.constructor1 = uip.jdc.constructor(JMod.PUBLIC);
+            
+            uip.constructor1.param(java.awt.Component.class, "parent");
+            
+            /*--------------------- second constructor -------------------------*/
             
             uip.constructor2 = uip.jdc.constructor(JMod.PUBLIC);
             
             uip.constructor2.param(java.awt.Component.class, "parent");
+            
+            uip.constructor2.param(apml.system.Apmlsystem.class, "system");
         } 
         catch(Exception e){}
     }
@@ -199,7 +209,30 @@ public abstract class Jcmabstractbuilder
     
     public void setjcmclass(Uiparameter uip) throws Exception
     {
-        uip.jcm.packages().next()._class(this.classname.getSimpleName()+"_"+String.format("%1$03d",uip.index)); 
+        
+        
+        JDefinedClass theclass;
+        
+        theclass = uip.jcm.packages().next()._class(this.classname.getSimpleName()+"_"+String.format("%1$03d",uip.index));      
+        
+        /*---------------------------------------------------------------------*/
+        
+        String bodiversion = (String)Bodi.context("//bodi/version").pull("version");       
+        
+        /*---------------------------------------------------------------------*/                
+        
+        theclass.javadoc().add("Software programmatically produced by Bloq implementation version "+bodiversion+"\n");
+        
+        theclass.javadoc().add("\n");                
+                
+        theclass.javadoc().addParam("Apmlsystem system : tie in to Apmlsystem; a standard system object for local immediate reference.");
+        
+        theclass.javadoc().addParam("Component parent : parent Swing/AWT object; a standard GUI object for local immediate reference.");
+        
+        theclass.javadoc().add("\n");        
+        
+        theclass.javadoc().add("Bloq and APML software design by Max Rupplin //scientologist\n");
+        
     }
     
     public void setjcmpackage(Uiparameter uip) throws Exception

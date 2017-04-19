@@ -1,5 +1,6 @@
 package apml.ui.compilers.java.builders;
 
+import apml.system.bodi.Bodi;
 import apml.ui.compilers.java.Uiparameter;
 
 import com.sun.codemodel.JCodeModel;
@@ -54,10 +55,18 @@ public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
         try
         {         
             for(int index=0; index<this.nodes.getLength(); index++)
-            {                                
-                Uiparameter uip = this.storage.get(index);                                                                                       
+            {   
+                
+                
+                Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(this.jcodemodels.get(index)); 
+                
+                //Uiparameter uip = this.storage.get(index);                      
                 
                 this.additems(uip);
+                
+                //this.setconstructors(uip); //todo find where constructors are already set
+                                
+                this.dodevolvement(uip);
             }
         }
         catch(Exception exception)
@@ -67,7 +76,7 @@ public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
         
         return this.jcodemodels;
     }
-    
+
     public void additems(Uiparameter uip)
     {
         try
@@ -100,4 +109,18 @@ public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
         }
         catch(Exception e){e.printStackTrace();}
     }
+    
+    public void dodevolvement(Uiparameter uip)
+    {
+        /* ------------------------ Devolvement setters ------------------------ */
+        
+        uip.constructor1.body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");                         
+        uip.constructor2.body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");   
+        
+        uip.constructor1.body().directStatement("this.parent = parent;\n\t");                        
+        uip.constructor2.body().directStatement("this.parent = parent;\n\t");                        
+        
+        uip.constructor1.body().directStatement("this.setVisible(true);\n\t");   
+        uip.constructor2.body().directStatement("this.setVisible(true);\n\t");   
+    }                
 }

@@ -1,5 +1,6 @@
 package apml.ui.compilers.java;
 
+import apml.system.bodi.Bodi;
 import com.sun.codemodel.JCodeModel;
 import java.util.ArrayList;
 
@@ -12,6 +13,15 @@ public class Uicompiler
     public Uiinputmanager inputmanager = new Uiinputmanager(this); 
     
     public Uioutputmanager outputmanager = new Uioutputmanager(this);                
+    
+    public Uicompiler()
+    {
+        Bodi.setcontext("//bodi/version");
+        
+        Bodi.context("//bodi/version").put("version", "1.0");
+        
+        Bodi.context("//bodi/version").put("since", "04.18.2017");
+    }
     
     public void dohandleinputfiles(Uiinputmanager inputmanager)
     {
