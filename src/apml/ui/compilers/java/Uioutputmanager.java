@@ -84,10 +84,15 @@ public class Uioutputmanager
             uip.constructor1.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
             uip.constructor2.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
             
+            //add action listener connects
             for(int i=0; i<children.getLength(); i++)
             {
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));                                
                         
+                if(uipi.classname.contains("JPanel")) continue; //todo fix me more standardly
+                
+                if(uipi.classname.contains("JMenuBar")) continue; //todo fix me more standardly
+                
                 String instancename = uipi.instancename;
                 
                 String listener = instancename+"_actionlistener";       
@@ -96,9 +101,14 @@ public class Uioutputmanager
                 uip.constructor2.body().directStatement("this."+instancename+".addActionListener("+listener+");\n\t");
             }            
             
+            //add private final nested classes for action listeners
             for(int i=0; i<children.getLength(); i++)
             {
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i)); 
+                
+                if(uipi.classname.contains("JPanel")) continue; //todo fix me more standardly
+                
+                if(uipi.classname.contains("JMenuBar")) continue; //todo fix me more standardly
                 
                 String classname = uipi.classname;                                
                 
@@ -240,15 +250,28 @@ public class Uioutputmanager
                
             uip.jdc.direct("\n\t");
 
-            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "keyevent");                          
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "ref_001");                          
 
-            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.KeyStroke"), "keystroke");               
+            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.KeyStroke"), "ref_002");               
 
-            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.event.ActionEvent"), "actionevent"); 
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.event.ActionEvent"), "ref_003"); 
 
-            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.ImageIcon"), "imageicon");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.ImageIcon"), "ref_004");
 
-            uip.jdc.field(JMod.PUBLIC, Class.forName("java.net.URL"), "url");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.net.URL"), "ref_005");
+            
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.Color"), "ref_006");
+            
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.BorderLayout"), "ref_007");
+
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.FlowLayout"), "ref_008");
+            
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.GridLayout"), "ref_009");
+            
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.Color"), "ref_010");
+            
+            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.border.EmptyBorder"), "ref_011");
+            
                         
             NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);  
                         
@@ -256,12 +279,20 @@ public class Uioutputmanager
             {       
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
                 
+                //if(uipi.classname.contains("JPanel")) continue; //todo fix me more standardly
+                
+                //if(uipi.classname.contains("JMenuBar")) continue; //todo fix me more standardly
+                
                 uip.jdc.direct("public "+uipi.classname+" "+uipi.classname.toLowerCase()+";\n\n\t");
             }
             
             for(int i=0; i<children.getLength(); i++)                           
             {              
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
+                
+                if(uipi.classname.contains("JPanel")) continue; //todo fix me more standardly
+                
+                if(uipi.classname.contains("JMenuBar")) continue; //todo fix me more standardly                
                 
                 uip.jdc.direct("public "+uipi.classname+"_ActionListener"+" "+(uipi.classname+"_ActionListener").toLowerCase()+";\n\n\t");
             }            
@@ -318,6 +349,10 @@ public class Uioutputmanager
         {     
             Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));            
                 
+            //if(uipi.classname.contains("JPanel")) continue; //todo fix me more standardly
+                
+            //if(uipi.classname.contains("JMenuBar")) continue; //todo fix me more standardly            
+            
             uip.constructor1.body().directStatement("this."+uipi.classname.toLowerCase()+" = new "+uipi.classname+"(this);\n\t");
             uip.constructor2.body().directStatement("this."+uipi.classname.toLowerCase()+" = new "+uipi.classname+"(this);\n\t");
         }
@@ -326,6 +361,10 @@ public class Uioutputmanager
         for(int i=0; i<children.getLength(); i++)
         {     
             Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));            
+            
+            if(uipi.classname.contains("JPanel")) continue; //todo fix me more standardly
+                
+            if(uipi.classname.contains("JMenuBar")) continue; //todo fix me more standardly            
                 
             uip.constructor1.body().directStatement("this."+uipi.classname.toLowerCase()+"_actionlistener = new "+uipi.classname+"_ActionListener();\n\t");
             uip.constructor2.body().directStatement("this."+uipi.classname.toLowerCase()+"_actionlistener = new "+uipi.classname+"_ActionListener();\n\t");
