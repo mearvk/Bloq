@@ -1,6 +1,7 @@
 package apml.ui.compilers.java.builders;
 
 import apml.system.bodi.Bodi;
+
 import apml.ui.compilers.java.Uiparameter;
 
 import com.sun.codemodel.JCodeModel;
@@ -8,6 +9,8 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JMethod;
 
 import java.io.File;
+
+import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 
@@ -25,7 +28,7 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * @author max rupplin
+ * @author Max Rupplin
  */
 public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
 {       
@@ -48,16 +51,17 @@ public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
     @Override
     public ArrayList<JCodeModel> build()
     {
-        this.basebuild();                
-        
+
+        //call base class build first
+        super.build();
+       
+        //check storage for completed base objects
         if(this.storage.size()==0) return null;
         
         try
         {         
             for(int index=0; index<this.nodes.getLength(); index++)
-            {   
-                
-                
+            {                                  
                 Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(this.jcodemodels.get(index)); 
                 
                 //Uiparameter uip = this.storage.get(index);                      

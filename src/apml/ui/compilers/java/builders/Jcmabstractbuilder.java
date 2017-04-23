@@ -32,7 +32,7 @@ import org.w3c.dom.NodeList;
  *
  * @author Max Rupplin
  */
-public abstract class Jcmabstractbuilder //todo check why dodevolvement must be called from concrete class and is not called on output side (uioutputmanager) where it is natively set; ok /mr /ok /ss
+public class Jcmabstractbuilder //todo check why dodevolvement must be called from concrete class and is not called on output side (uioutputmanager) where it is natively set; ok /mr /ok /ss
 {   
     protected final Integer hash = 0x888fe8;
     
@@ -88,41 +88,6 @@ public abstract class Jcmabstractbuilder //todo check why dodevolvement must be 
         
         return jcodemodels;        
     } 
-    
-    public ArrayList<JCodeModel> basebuild()
-    {                       
-        try
-        {         
-            for(int index=0; index<this.nodes.getLength(); index++)
-            {
-                Uiparameter uip = new Uiparameter(new JCodeModel(), index);                                           
-                
-                this.setdocument(uip);
-                
-                this.setjcmpackage(uip);
-                
-                this.setjcmclass(uip);                                
-            
-                this.setnodes(uip);                   
-                
-                this.setbodi(uip); 
-                
-                this.setsuperclass(uip);  
-                
-                this.setjcodemodel(uip);
-                
-                this.setconstructors(uip);
-                
-                this.storage.add(uip);                     
-            }
-        }
-        catch(Exception exception)
-        {
-            System.err.println(exception);
-        }                                
-        
-        return jcodemodels;        
-    }          
         
     public Jcmabstractbuilder(File apml, String tagname, Class classname)
     {                        
