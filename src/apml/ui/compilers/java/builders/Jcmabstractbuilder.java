@@ -34,7 +34,7 @@ import org.w3c.dom.NodeList;
  */
 public class Jcmabstractbuilder //todo check why dodevolvement must be called from concrete class and is not called on output side (uioutputmanager) where it is natively set; ok /mr /ok /ss
 {   
-    protected final Integer hash = 0x888fe8;
+    protected final Integer hash = 0x00888fe8;
     
     public ArrayList<JCodeModel> jcodemodels = new ArrayList<>();
     
@@ -53,22 +53,47 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
     public Class classname;
     
     public ArrayList<Uiparameter> storage = new ArrayList<Uiparameter>();
-     
+    
+        
+    public Jcmabstractbuilder(File apml, String tagname, Class classname)
+    {                        
+        Bodi.setcontext("widgets");                  
+                
+        try
+        {      
+            this.tagname = tagname;
+        
+            this.apml = apml;
+        
+            this.classname = classname;            
+            
+            this.setxpath();
+            
+            this.setdocument();
+        
+            this.setnodes();            
+        }
+        catch(Exception exception)
+        {
+            System.err.println(exception);
+        }
+    }
+    
     public ArrayList<JCodeModel> build()
     {                       
         try
         {         
-            for(int index=0; index<this.nodes.getLength(); index++)
+            for(int index=0; index<this.nodes.getLength(); index++) //ordering somewhat important
             {
                 Uiparameter uip = new Uiparameter(new JCodeModel(), index);                                           
                 
-                this.setdocument(uip);
+                //this.setdocument(uip);
                 
                 this.setjcmpackage(uip);
                 
                 this.setjcmclass(uip);                                
             
-                this.setnodes(uip);                   
+                //this.setnodes(uip);                   
                 
                 this.setbodi(uip); 
                 
@@ -87,31 +112,7 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
         }                                
         
         return jcodemodels;        
-    } 
-        
-    public Jcmabstractbuilder(File apml, String tagname, Class classname)
-    {                        
-        Bodi.setcontext("widgets");                  
-                
-        try
-        {      
-            this.tagname = tagname;
-        
-            this.apml = apml;
-        
-            this.classname = classname;            
-            
-            this.setxpath(null);
-            
-            this.setdocument(null);
-        
-            this.setnodes(null);            
-        }
-        catch(Exception exception)
-        {
-            System.err.println(exception);
-        }
-    }
+    }    
     
     public void setconstructors(Uiparameter uip)
     {
@@ -134,7 +135,7 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
         catch(Exception e){}
     }
     
-    public void setxpath(Uiparameter uip)
+    public void setxpath()
     {
         this.xpath = XPathFactory.newInstance().newXPath();
     }
@@ -145,7 +146,9 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
     } 
     
     public void setbodi(Uiparameter uip)
-    {        
+    {     
+        try{uip.children = (NodeList)xpath.evaluate("./*", nodes.item(uip.index), XPathConstants.NODESET); }catch(Exception e){}
+        
         try{uip.node = nodes.item(uip.index);} catch(Exception e){}
         
         try{uip.jdc = uip.jcm.packages().next().classes().next();} catch(Exception e){}
@@ -166,16 +169,14 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
         
         /*----------------------------------------------------------------------*/
         
-        try{Bodi.context("widgets").put(uip.jcm, uip);} catch(Exception e){}
+        try{Bodi.context("widgets").put(uip.jcm, uip);}     catch(Exception e){e.printStackTrace(System.err);}
         
-        try{Bodi.context("widgets").put(uip.node, uip);} catch(Exception e){}
+        try{Bodi.context("widgets").put(uip.node, uip);}    catch(Exception e){e.printStackTrace(System.err);}
     }
     
     
     public void setjcmclass(Uiparameter uip) throws Exception
     {
-        
-        
         JDefinedClass theclass;
         
         theclass = uip.jcm.packages().next()._class(this.classname.getSimpleName()+"_"+String.format("%1$03d",uip.index));      
@@ -205,14 +206,16 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
         uip.jcm._package("org.widgets");                         
     }
     
-    public void setdocument(Uiparameter uip) throws Exception
+    public void setdocument() throws Exception
     {
         this.doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(apml);
     }
     
-    public void setnodes(Uiparameter uip) throws Exception
+    public void setnodes() throws Exception
     {
         try{this.nodes = (NodeList)xpath.evaluate(this.tagname, this.doc, XPathConstants.NODESET); }catch(Exception e){}
+        
+        //try{this.}catch(Exception e){}
     }
         
     protected void setjcodemodel(Uiparameter uip)

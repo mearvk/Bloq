@@ -68,7 +68,7 @@ public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
                 
                 //this.setconstructors(uip); //todo find where constructors are already set
                                 
-                this.dodevolvement(uip);
+                //this.dodevolvement(uip);
             }
         }
         catch(Exception exception)
@@ -110,19 +110,5 @@ public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
             }
         }
         catch(Exception e){e.printStackTrace();}
-    }
-    
-    public void dodevolvement(Uiparameter uip)
-    {
-        /* ------------------------ Devolvement setters ------------------------ */
-        
-        uip.constructor1.body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");                         
-        uip.constructor2.body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");   
-        
-        uip.constructor1.body().directStatement("this.parent = parent;\n\t");                        
-        uip.constructor2.body().directStatement("this.parent = parent;\n\t");                        
-        
-        uip.constructor1.body().directStatement("this.setVisible(true);\n\t");   
-        uip.constructor2.body().directStatement("this.setVisible(true);\n\t");   
-    }                
+    }               
 }

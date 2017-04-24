@@ -15,6 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.xml.xpath.XPathConstants;
+import org.w3c.dom.Element;
 
 import org.w3c.dom.NamedNodeMap;
 
@@ -41,21 +42,23 @@ public class Uioutputmanager
     {
         try
         {                   
-            for(JCodeModel jcodemodel : jcodemodels)
+            for(JCodeModel jcodemodel : jcodemodels) //for each type of widget and in turn each instance let us finalize some general fields
             {   
                 //this.setconstructor(jcodemodel);
                 
-                this.setuisetters(jcodemodel);
+                Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel); 
                 
-                this.setfields(jcodemodel);
+                this.setuisetters(uip);
                 
-                this.setparent(jcodemodel);  
+                this.setfields(uip);
+                
+                this.setparent(uip);  
                                 
-                this.setchildren(jcodemodel);
+                this.setchildren(uip);
                 
-                this.setlisteners(jcodemodel);
+                this.setlisteners(uip);
                 
-                Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);                
+                //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);                
                 
                 uip.jcm.build(new File("/home/oem/Desktop/UI"));
             }
@@ -66,9 +69,9 @@ public class Uioutputmanager
         }    
     }
     
-    private void setlisteners(JCodeModel jcodemodel)
+    private void setlisteners(Uiparameter uip)
     {
-        Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel); 
+        //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel); 
         
         try
         {
@@ -78,7 +81,7 @@ public class Uioutputmanager
             {
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i)); 
                 
-                //System.err.println("CLASSNAME: "+uipi.classname);
+                //System.err.println("CLASSNAME: "+child.classname);
             }
             
             uip.constructor1.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
@@ -133,9 +136,9 @@ public class Uioutputmanager
         }
     }
     
-    private void setuisetters(JCodeModel jcodemodel)
+    private void setuisetters(Uiparameter uip)
     {
-        Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel); 
+        //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel); 
         
         try
         {              
@@ -242,11 +245,11 @@ public class Uioutputmanager
         }
     } 
     
-    private void setfields(JCodeModel jcodemodel)
+    private void setfields(Uiparameter uip)
     {
         try
         {                        
-            Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);                        
+            //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);                        
                
             uip.jdc.direct("\n\t");
 
@@ -279,9 +282,8 @@ public class Uioutputmanager
             {       
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
                 
-                //if(uipi.classname.contains("JPanel")) continue; //todo fix me more standardly
-                
-                //if(uipi.classname.contains("JMenuBar")) continue; //todo fix me more standardly
+                //if(child.classname.contains("JPanel")) continue; //todo fix me more standardly                
+                //if(child.classname.contains("JMenuBar")) continue; //todo fix me more standardly
                 
                 uip.jdc.direct("public "+uipi.classname+" "+uipi.classname.toLowerCase()+";\n\n\t");
             }
@@ -303,13 +305,15 @@ public class Uioutputmanager
         }
     }
     
-    private void setparent(JCodeModel jcodemodel)
+    private void setparent(Uiparameter uip)
     {
         try
         {               
-            Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);            
+            //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);            
                 
-            uip.jdc.direct("public Component parent;\n\t");             
+            uip.jdc.direct("public Component parent;\n\n");
+            
+            uip.jdc.direct("\tpublic Apmlsystem system;\n");
         }
         catch(Exception exception)
         {
@@ -317,76 +321,82 @@ public class Uioutputmanager
         }        
     }
      
-    private void setchildren(JCodeModel jcodemodel)
+    private void setchildren(Uiparameter uip)
     {
         try
         {             
-            Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);   
+            //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);   
             
-            NodeList nodes = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);                                                    
+            //NodeList nodes = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);                                                    
             
-            this.doinstantiation(nodes, uip.node);
+            this.doinstantiation(uip);
            
-            this.dohierarchy(nodes, uip.node);
+            this.dohierarchy(uip);
                   
-            this.dodevolvement(nodes, uip.node);
+            this.dodevolvement(uip);
         }
         catch(Exception exception)
         {
-            
+            exception.printStackTrace();
         }        
     }    
     
-    private void doinstantiation(NodeList children, Node self)
-    {          
-        Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(self); 
-        
+    private void doinstantiation(Uiparameter uip)
+    {                  
         uip.constructor1.body().directStatement("/* ------------------  instantiation  ---------------- */\n\t");
         uip.constructor2.body().directStatement("/* ------------------  instantiation  ---------------- */\n\t");
         
-        //ui instantiation
-        for(int i=0; i<children.getLength(); i++)
-        {     
-            Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));            
-                
-            //if(uipi.classname.contains("JPanel")) continue; //todo fix me more standardly
-                
-            //if(uipi.classname.contains("JMenuBar")) continue; //todo fix me more standardly            
+        //quick sanity check
+        if(uip.children==null) return;
+        
+        //ui component instantiation
+        for(int i=0; i<uip.children.getLength(); i++)
+        {               
+            Uiparameter child = (Uiparameter)Bodi.context("widgets").softpull(uip.children.item(i)); 
             
-            uip.constructor1.body().directStatement("this."+uipi.classname.toLowerCase()+" = new "+uipi.classname+"(this);\n\t");
-            uip.constructor2.body().directStatement("this."+uipi.classname.toLowerCase()+" = new "+uipi.classname+"(this);\n\t");
+            //quick sanity check
+            if(child==null) return;
+            
+            uip.constructor1.body().directStatement("this."+child.classname.toLowerCase()+" = new "+child.classname+"(this);\n\t");
+            uip.constructor2.body().directStatement("this."+child.classname.toLowerCase()+" = new "+child.classname+"(this);\n\t");
         }
         
-        //action listener instantiation
-        for(int i=0; i<children.getLength(); i++)
-        {     
-            Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));            
+        //ui listener instantiation
+        for(int i=0; i<uip.children.getLength(); i++)
+        {                
+            Uiparameter child = (Uiparameter)Bodi.context("widgets").softpull(uip.children.item(i));            
             
-            if(uipi.classname.contains("JPanel")) continue; //todo fix me more standardly
-                
-            if(uipi.classname.contains("JMenuBar")) continue; //todo fix me more standardly            
-                
-            uip.constructor1.body().directStatement("this."+uipi.classname.toLowerCase()+"_actionlistener = new "+uipi.classname+"_ActionListener();\n\t");
-            uip.constructor2.body().directStatement("this."+uipi.classname.toLowerCase()+"_actionlistener = new "+uipi.classname+"_ActionListener();\n\t");
-        }        
+            //quick sanity check
+            if(child==null) return;
+            
+            if(child.classname.contains("JPanel")) continue; //todo fix me more standardly                
+            if(child.classname.contains("JMenuBar")) continue; //todo fix me more standardly       
+                            
+            uip.constructor1.body().directStatement("this."+child.classname.toLowerCase()+"_actionlistener = new "+child.classname+"_ActionListener();\n\t");
+            uip.constructor2.body().directStatement("this."+child.classname.toLowerCase()+"_actionlistener = new "+child.classname+"_ActionListener();\n\t");
+        }      
+        
     }
     
-    private void dohierarchy(NodeList children, Node self)
+    //private void dohierarchy(NodeList children, Node self)
+    private void dohierarchy(Uiparameter uip)
     {         
-        Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(self); 
+        //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(self); 
         
         uip.constructor1.body().directStatement("/* ------------------  hierarchy  -------------------- */\n\t");
         uip.constructor2.body().directStatement("/* ------------------  hierarchy  -------------------- */\n\t");
             
-        for(int i=0; i<children.getLength(); i++)
+        if(uip.children==null) return;
+        
+        /*for(int i=0; i<children.getLength(); i++)
         {    
-            Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
+            Uiparameter child = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
             
             String classname = uip.classname;
             
-            String childsuperclass = uipi.jdc._extends().name();
+            String childsuperclass = child.jdc._extends().name();
             
-            String childfieldname = uipi.jdc.name().toLowerCase();                            
+            String childfieldname = child.jdc.name().toLowerCase();                            
 
             if(childsuperclass.contains("JMenuBar"))            
             {
@@ -403,12 +413,13 @@ public class Uioutputmanager
                 
                 continue;
             }
-        }         
+        } 
+        */
     }
     
-    private void dodevolvement(NodeList children, Node self)
+    private void dodevolvement(Uiparameter uip)
     {
-        Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(self);         
+        //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(self);         
         
         /* ------------------------ Devolvement setters ------------------------ */
         
