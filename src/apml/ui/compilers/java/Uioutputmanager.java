@@ -388,9 +388,9 @@ public class Uioutputmanager
             
         if(uip.children==null) return;
         
-        /*for(int i=0; i<children.getLength(); i++)
+        for(int i=0; i<uip.children.getLength(); i++)
         {    
-            Uiparameter child = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
+            Uiparameter child = (Uiparameter)Bodi.context("widgets").softpull(uip.children.item(i));
             
             String classname = uip.classname;
             
@@ -414,7 +414,6 @@ public class Uioutputmanager
                 continue;
             }
         } 
-        */
     }
     
     private void dodevolvement(Uiparameter uip)
