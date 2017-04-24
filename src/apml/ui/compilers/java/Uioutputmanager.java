@@ -392,12 +392,16 @@ public class Uioutputmanager
         {    
             Uiparameter child = (Uiparameter)Bodi.context("widgets").softpull(uip.children.item(i));
             
+            //sanity check
+            if(child==null) return;
+                        
             String classname = uip.classname;
             
             String childsuperclass = child.jdc._extends().name();
             
             String childfieldname = child.jdc.name().toLowerCase();                            
 
+            //jframe as parent etc
             if(childsuperclass.contains("JMenuBar"))            
             {
                 uip.constructor1.body().directStatement("this.setJMenuBar("+childfieldname+");\n\t"); 
@@ -406,6 +410,7 @@ public class Uioutputmanager
                 continue;                
             }                        
 
+            //else a more standard case
             if(!childsuperclass.contains("JMenuBar"))
             {
                 uip.constructor1.body().directStatement("this.add("+childfieldname+");\n\t");
@@ -430,5 +435,7 @@ public class Uioutputmanager
         
         uip.constructor1.body().directStatement("this.setVisible(true);\n\t");   
         uip.constructor2.body().directStatement("this.setVisible(true);\n\t");   
+        
+        uip.constructor2.body().directStatement("this.system = system;\n\t");   
     }
 }
