@@ -71,7 +71,7 @@ public class Bloqfileguardian
     
     public final String apmljarfilename = "APML.jar";                                                           //name of the APML jar file to be written
     
-    public final String apmlfilename = "tonyscloset.xml";                                                        //APML source file
+    public final String apmlfilename = "echoserver.xml";                                                        //APML source file
     
     public final String loggingfilename = "logging.txt";                                                        //logging output file
     

@@ -54,7 +54,7 @@ public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
         super.build();
        
         //check storage for completed base objects
-        if(this.storage.size()==0) return null;
+        if(this.storage.size()==0) return new ArrayList<JCodeModel>();
         
         try
         {         
