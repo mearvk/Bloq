@@ -17,7 +17,7 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public class Uiparameter
 {    

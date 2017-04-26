@@ -7,7 +7,7 @@ package apml.ui.compilers.java;
 
 /**
  *
- * @author oem
+ * @author Max Rupplin
  */
 public class LocalDriver
 {

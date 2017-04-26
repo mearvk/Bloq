@@ -4,11 +4,11 @@ import java.io.File;
 
 /**
  *
- * @author max rupplin
+ * @author Max Rupplin
  */
 public class Uifileguardian
 {
-    protected final Integer hash = 0x888fe8;
+    protected final Integer hash = 0x00888fe8;
     
     public File xmlin;
     

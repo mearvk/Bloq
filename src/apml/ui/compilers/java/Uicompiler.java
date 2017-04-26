@@ -4,6 +4,10 @@ import apml.system.bodi.Bodi;
 import com.sun.codemodel.JCodeModel;
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Max Rupplin
+ */
 public class Uicompiler
 {
     protected final Integer hash = 0x00888fe8;
