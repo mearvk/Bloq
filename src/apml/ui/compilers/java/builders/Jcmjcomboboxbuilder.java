@@ -2,6 +2,8 @@ package apml.ui.compilers.java.builders;
 
 import apml.system.bodi.Bodi;
 
+import apml.system.bodi.Bodicontext;
+
 import apml.ui.compilers.java.Uiparameter;
 
 import com.sun.codemodel.JCodeModel;
@@ -49,26 +51,17 @@ public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
     @Override
     public ArrayList<JCodeModel> build()
     {
-
-        //call base class build first
         super.build();
-       
-        //check storage for completed base objects
-        if(this.storage.size()==0) return new ArrayList<JCodeModel>();
-        
+               
         try
-        {         
-            for(int index=0; index<this.nodes.getLength(); index++)
+        {  
+            Bodicontext widgets = Bodi.context("widgets");
+            
+            for(int index=0; index<nodes.getLength(); index++)
             {                                  
-                Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(this.jcodemodels.get(index)); 
-                
-                //Uiparameter uip = this.storage.get(index);                      
-                
-                this.additems(uip);
-                
-                //this.setconstructors(uip); //todo find where constructors are already set
+                Uiparameter uip = (Uiparameter)widgets.pull(this.jcodemodels.get(index)); 
                                 
-                //this.dodevolvement(uip);
+                this.additems(uip);
             }
         }
         catch(Exception exception)

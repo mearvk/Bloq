@@ -7,6 +7,7 @@ import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JCodeModel;
 
 import com.sun.codemodel.JDefinedClass;
+
 import com.sun.codemodel.JMethod;
 
 import com.sun.codemodel.JMod;
