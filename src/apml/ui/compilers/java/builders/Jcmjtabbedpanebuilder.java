@@ -13,7 +13,7 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * @author max rupplin
+ * @author Max Rupplin
  */
 public class Jcmjtabbedpanebuilder extends Jcmabstractbuilder
 {   
@@ -59,7 +59,7 @@ public class Jcmjtabbedpanebuilder extends Jcmabstractbuilder
     
     private void setSelected(Uiparameter uip)
     {
-        
+        //may not need at yet
     }
     
     private void addtabs(Uiparameter uip)
