@@ -185,20 +185,23 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
         
         String bodiversion = (String)Bodi.context("//bodi/version").pull("version");       
         
-        /*---------------------------------------------------------------------*/                
+        /*---------------------------------------------------------------------*/            
+        
+        theclass.javadoc().add("Bloq and APML software & design courtesy of Max Rupplin.\n");
         
         theclass.javadoc().add("Software programmatically produced by Bloq implementation version "+bodiversion+"\n");
         
-        theclass.javadoc().add("\n");                
-                
-        theclass.javadoc().addParam("Apmlsystem system : tie in to Apmlsystem; a standard system object for local immediate reference.");
+        theclass.javadoc().add("Hello and thanks to and from the Church of Scientology. /mr /ok /ss\n");
         
-        theclass.javadoc().addParam("Component parent : parent Swing/AWT object; a standard GUI object for local immediate reference.");
+        theclass.javadoc().add("Hello and thanks to and from the HUC, Holy Unified Church; Church of Hello and welcome now in her lesser manner. /mr /ok /ss\n");
         
-        theclass.javadoc().add("\n");        
+        theclass.javadoc().add("\n");                 
         
-        theclass.javadoc().add("Bloq and APML software design by Max Rupplin //scientologist\n");
+        theclass.javadoc().add("\n");      
         
+        theclass.javadoc().add("\n");                 
+        
+        theclass.javadoc().add("\n");                                                        
     }
     
     public void setjcmpackage(Uiparameter uip) throws Exception

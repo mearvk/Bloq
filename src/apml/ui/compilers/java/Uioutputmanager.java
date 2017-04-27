@@ -60,10 +60,8 @@ public class Uioutputmanager
     {
         try
         {                   
-            for(JCodeModel jcodemodel : jcodemodels) //for each type of widget and in turn each instance let us finalize some general fields
-            {   
-                //this.setconstructor(jcodemodel);
-                
+            for(JCodeModel jcodemodel : jcodemodels)
+            {                  
                 Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel); 
                 
                 this.setuisetters(uip);
@@ -76,8 +74,8 @@ public class Uioutputmanager
                 
                 this.setlisteners(uip);
                 
-                //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);                
-                
+                this.setconstructorcomments(uip);
+                                
                 uip.jcm.build(new File("/home/oem/Desktop/UI"));
             }
         }
@@ -87,19 +85,26 @@ public class Uioutputmanager
         }    
     }
     
-    private void setlisteners(Uiparameter uip)
+    private void setconstructorcomments(Uiparameter uip)
     {
-        //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel); 
+        //uip.constructor1.javadoc().addParam("Apmlsystem system : The APML system object.");
         
+        uip.constructor1.javadoc().addParam("parent : The parent AWT object.");
+        
+        uip.constructor2.javadoc().addParam("system : The APML system object.");
+        
+        uip.constructor2.javadoc().addParam("parent : The parent AWT object.");            
+    }
+    
+    private void setlisteners(Uiparameter uip)
+    {       
         try
         {
             NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET); 
             
             for(int i=0; i<children.getLength(); i++)
             {
-                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i)); 
-                
-                //System.err.println("CLASSNAME: "+child.classname);
+                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));                 
             }
             
             uip.constructor1.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
@@ -136,7 +141,7 @@ public class Uioutputmanager
                 uip.constructor2.body().directStatement("this."+instancename+".addActionListener("+listener+");\n\t");
             }            
             
-            //add private final nested classes for action listeners
+            //
             for(int i=0; i<children.getLength(); i++)
             {
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i)); 
@@ -189,7 +194,6 @@ public class Uioutputmanager
     
     private void setuisetters(Uiparameter uip)
     {
-        //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel); 
         uip.constructor1.body().directStatement("/* ------------------  setters  ---------------- */\n\t");
         uip.constructor2.body().directStatement("/* ------------------  setters  ---------------- */\n\t");        
         
@@ -295,18 +299,16 @@ public class Uioutputmanager
                     }
                     
                     if( (sizes[0]!=null && !sizes[0].isEmpty()) && (sizes[1]!=null && !sizes[1].isEmpty()) )
-                    {
-                        //String directstatement = "return new Dimension";
-                        
+                    {                       
                         if(sizes[0].endsWith("%") && sizes[1].endsWith("%")) //uniform; both width and heigh are percentage based
                         {
                             try
                             {
-                                Integer width = Integer.parseInt(sizes[0].trim().replace("%", ""));
+                                Double width = Double.parseDouble(sizes[0].trim().replace("%", ""));
                                 
-                                Integer height = Integer.parseInt(sizes[1].trim().replace("%", ""));
+                                Double height = Double.parseDouble(sizes[1].trim().replace("%", ""));
                                 
-                                method.body().directStatement("return new Dimension(parent.getWidth()*"+(width/100)+", parent.getHeight()*"+(height/100)+");");                                
+                                method.body().directStatement("return new Dimension( (int)(parent.getWidth()*"+(width/100d)+"), (int)(parent.getHeight()*"+(height/100d)+"));");                                
                             }
                             catch(Exception e)
                             {
@@ -322,11 +324,11 @@ public class Uioutputmanager
                         {
                             try
                             {
-                                Integer width = Integer.parseInt(sizes[0].trim().replace("%", ""));
+                                Double width = Double.parseDouble(sizes[0].trim().replace("%", ""));
                                 
-                                Integer height = Integer.parseInt(sizes[1].trim().replace("px", ""));
+                                Double height = Double.parseDouble(sizes[1].trim().replace("px", ""));
                                 
-                                method.body().directStatement("return new Dimension(parent.getWidth()*"+(width/100)+", "+(height)+");");                                
+                                method.body().directStatement("return new Dimension( (int)(parent.getWidth()*"+(width/100d)+"), "+(height.intValue())+");");                                
                             }
                             catch(Exception e)
                             {
@@ -342,11 +344,11 @@ public class Uioutputmanager
                         {
                             try
                             {
-                                Integer width = Integer.parseInt(sizes[0].trim().replace("px", ""));
+                                Double width = Double.parseDouble(sizes[0].trim().replace("px", ""));
                                 
-                                Integer height = Integer.parseInt(sizes[1].trim().replace("%", ""));
+                                Double height = Double.parseDouble(sizes[1].trim().replace("%", ""));
                                 
-                                method.body().directStatement("return new Dimension("+(width)+", parent.getHeight()*"+(height/100)+");");                                
+                                method.body().directStatement("return new Dimension("+width.intValue()+", (int)(parent.getHeight()*"+(height/100d)+"));");                                
                             }
                             catch(Exception e)
                             {
@@ -362,11 +364,11 @@ public class Uioutputmanager
                         {
                             try
                             {
-                                Integer width = Integer.parseInt(sizes[0].trim().replace("px", ""));
+                                Double width = Double.parseDouble(sizes[0].trim().replace("px", ""));
                                 
-                                Integer height = Integer.parseInt(sizes[1].trim().replace("px", ""));
+                                Double height = Double.parseDouble(sizes[1].trim().replace("px", ""));
                                 
-                                method.body().directStatement("return new Dimension("+(width)+", "+(height)+");");                                
+                                method.body().directStatement("return new Dimension("+(width.intValue())+", "+(height.intValue())+");");                                
                             }
                             catch(Exception e)
                             {
@@ -406,38 +408,36 @@ public class Uioutputmanager
     private void setfields(Uiparameter uip)
     {
         try
-        {                        
-            //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);                        
-               
+        {                                       
             uip.jdc.direct("\n\t");
 
-            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "ref_001");                          
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.event.KeyEvent"), "importref_001");                          
 
-            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.KeyStroke"), "ref_002");               
+            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.KeyStroke"), "importref_002");               
 
-            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.event.ActionEvent"), "ref_003"); 
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.event.ActionEvent"), "importref_003"); 
 
-            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.ImageIcon"), "ref_004");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.ImageIcon"), "importref_004");
 
-            uip.jdc.field(JMod.PUBLIC, Class.forName("java.net.URL"), "ref_005");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.net.URL"), "importref_005");
             
-            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.Color"), "ref_006");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.Color"), "importref_006");
             
-            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.BorderLayout"), "ref_007");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.BorderLayout"), "importref_007");
 
-            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.FlowLayout"), "ref_008");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.FlowLayout"), "importref_008");
             
-            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.GridLayout"), "ref_009");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.GridLayout"), "importref_009");
             
-            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.Color"), "ref_010");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.Color"), "importref_010");
             
-            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.border.EmptyBorder"), "ref_011");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.border.EmptyBorder"), "importref_011");
             
-            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.event.ChangeEvent"), "ref_012");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.swing.event.ChangeEvent"), "importref_012");
             
-            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.Dimension"), "ref_013");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.Dimension"), "importref_013");
             
-            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.Rectangle"), "ref_014");
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.Rectangle"), "importref_014");
             
                         
             NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);  
