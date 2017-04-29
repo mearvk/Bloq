@@ -1,6 +1,9 @@
 package apml.ui.compilers.java;
 
 import apml.system.bodi.Bodi;
+import apml.ui.compilers.java.builders.Jcmjmenubarbuilder;
+import apml.ui.compilers.java.builders.Jcmjpanelbuilder;
+import apml.ui.compilers.java.builders.Jcmjtabbedpanebuilder;
 
 import com.sun.codemodel.ClassType;
 
@@ -17,8 +20,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.xml.xpath.XPathConstants;
-
-import org.w3c.dom.Element;
 
 import org.w3c.dom.NamedNodeMap;
 
@@ -100,38 +101,33 @@ public class Uioutputmanager
     {       
         try
         {
-            NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET); 
-            
-            for(int i=0; i<children.getLength(); i++)
-            {
-                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));                 
-            }
+            NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);             
             
             uip.constructor1.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
-            uip.constructor2.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
+            uip.constructor2.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");            
+                        
+            /*------------------------ Listener Additions --------------------------*/
             
-            //add action listener connects
             for(int i=0; i<children.getLength(); i++)
             {
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));                                
                         
-                if(uipi.classname.contains("JPanel")) //todo fix me more standardly 
-                    continue;
+                if(uipi.classname.contains("JPanel"))
+                {
+                    new Jcmjpanelbuilder().addListeners(uip);
+                }
                 
-                if(uipi.classname.contains("JMenuBar")) //todo fix me more standardly 
-                    continue;
+                if(uipi.classname.contains("JMenuBar")) 
+                {
+                    new Jcmjmenubarbuilder().addListeners(uip);
+                }                    
                 
                 if(uipi.classname.contains("JTabbedPane"))
                 {
-                    String instancename = uipi.instancename;
-                
-                    String listener = instancename+"_changelistener";       
-                
-                    uip.constructor1.body().directStatement("this."+instancename+".addChangeListener("+listener+");\n\t");
-                    uip.constructor2.body().directStatement("this."+instancename+".addChangeListener("+listener+");\n\t");                    
-                    
-                    continue;
+                    new Jcmjtabbedpanebuilder().addListeners(uip);
                 }
+                
+                /*------------------------- General Case ---------------------------*/
                 
                 String instancename = uipi.instancename;
                 
@@ -141,49 +137,45 @@ public class Uioutputmanager
                 uip.constructor2.body().directStatement("this."+instancename+".addActionListener("+listener+");\n\t");
             }            
             
-            //
+            
+            /*------------------------- Overridden Methods--------------------------*/
+            
             for(int i=0; i<children.getLength(); i++)
             {
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i)); 
                 
-                if(uipi.classname.contains("JPanel")) continue; //todo fix me more standardly
+                if(uipi.classname.contains("JPanel"))
+                {
+                    new Jcmjpanelbuilder().addListenerMethods(uip);
+                }
                 
-                if(uipi.classname.contains("JMenuBar")) continue; //todo fix me more standardly
+                if(uipi.classname.contains("JMenuBar")) 
+                {
+                    new Jcmjmenubarbuilder().addListenerMethods(uip);
+                }
                 
                 String classname = uipi.classname;                                
                 
                 if(classname.contains("JTabbedPane"))
                 {
-                    String nestedlistenerclass = classname+"_ChangeListener";                                                               
-
-                    JDefinedClass nestedclass = uip.jdc._class(JMod.PRIVATE | JMod.FINAL, nestedlistenerclass, ClassType.CLASS);
-
-                    nestedclass._implements(Class.forName("javax.swing.event.ChangeListener"));
-
-                    nestedclass.direct("public void stateChanged(ChangeEvent ce)\n\t");
-
-                    nestedclass.direct("{\n\t");
-
-                    nestedclass.direct("\tSystem.out.println(\"Event Source: \"+ce.getSource());\n\t");
-
-                    nestedclass.direct("}\n\t");
+                    new Jcmjtabbedpanebuilder().addListenerMethods(uip);
                 }
-                else
-                {                
-                    String nestedlistenerclass = classname+"_ActionListener";                                                               
+                
+                /*------------------------- General Case ---------------------------*/
+                
+                String nestedlistenerclass = classname+"_ActionListener";                                                               
 
-                    JDefinedClass nestedclass = uip.jdc._class(JMod.PRIVATE | JMod.FINAL, nestedlistenerclass, ClassType.CLASS);
+                JDefinedClass nestedclass = uip.jdc._class(JMod.PRIVATE | JMod.FINAL, nestedlistenerclass, ClassType.CLASS);
 
-                    nestedclass._implements(Class.forName("java.awt.event.ActionListener"));
+                nestedclass._implements(Class.forName("java.awt.event.ActionListener"));
 
-                    nestedclass.direct("public void actionPerformed(ActionEvent ae)\n\t");
+                nestedclass.direct("public void actionPerformed(ActionEvent ae)\n\t");
 
-                    nestedclass.direct("{\n\t");
+                nestedclass.direct("{\n\t");
 
-                    nestedclass.direct("\tSystem.out.println(\"Action Command: \"+ae.getActionCommand());\n\t");
+                nestedclass.direct("\tSystem.out.println(\"Action Command: \"+ae.getActionCommand());\n\t");
 
-                    nestedclass.direct("}\n\t");
-                }
+                nestedclass.direct("}\n\t");
             }            
         }
         catch(Exception exception)
@@ -388,8 +380,20 @@ public class Uioutputmanager
                     continue;
                 }                  
                 
+                if(attribute.getNodeName().startsWith("setBackgroundImage"))
+                {
+                    String string = "this.backgroundimagename = \""+uip.backgroundimagename+"\";\n\t";
+                    
+                    uip.constructor1.body().directStatement(string);
+                    uip.constructor2.body().directStatement(string);
+                    
+                    continue;                    
+                }
+                
                 if(attribute.getNodeName().startsWith("set"))
                 {
+                    //
+                    
                     String string = "this."+attribute.getNodeName()+"("+attribute.getNodeValue()+");\n\t";
                     
                     uip.constructor1.body().directStatement(string);
@@ -403,7 +407,7 @@ public class Uioutputmanager
         {
             
         }
-    } 
+    }     
     
     private void setfields(Uiparameter uip)
     {
@@ -438,6 +442,10 @@ public class Uioutputmanager
             uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.Dimension"), "importref_013");
             
             uip.jdc.field(JMod.PUBLIC, Class.forName("java.awt.Rectangle"), "importref_014");
+            
+            uip.jdc.field(JMod.PUBLIC, Class.forName("javax.imageio.ImageIO"), "importref_015");
+            
+            uip.jdc.field(JMod.PUBLIC, Class.forName("java.io.File"), "importref_016");
             
                         
             NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);  
@@ -612,11 +620,11 @@ public class Uioutputmanager
         uip.constructor2.body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");   
         
         uip.constructor1.body().directStatement("this.parent = parent;\n\t");                        
-        uip.constructor2.body().directStatement("this.parent = parent;\n\t");                        
+        uip.constructor2.body().directStatement("this.parent = parent;\n\t");  
+        
+        uip.constructor2.body().directStatement("this.system = system;\n\t"); 
         
         uip.constructor1.body().directStatement("this.setVisible(true);\n\t");   
-        uip.constructor2.body().directStatement("this.setVisible(true);\n\t");   
-        
-        uip.constructor2.body().directStatement("this.system = system;\n\t");   
+        uip.constructor2.body().directStatement("this.setVisible(true);\n\t");            
     }
 }

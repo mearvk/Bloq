@@ -7,10 +7,12 @@ import apml.ui.compilers.java.Uiparameter;
 import com.sun.codemodel.JCodeModel;
 
 import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JMethod;
 
 import com.sun.codemodel.JMod;
 
 import java.io.File;
+import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 
@@ -54,6 +56,10 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
     
     public ArrayList<Uiparameter> storage = new ArrayList<Uiparameter>();
     
+    public Jcmabstractbuilder()
+    {
+        
+    }
         
     public Jcmabstractbuilder(File apml, String tagname, Class classname)
     {                        
@@ -85,15 +91,13 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
         {         
             for(int index=0; index<this.nodes.getLength(); index++) //ordering somewhat important
             {
-                Uiparameter uip = new Uiparameter(new JCodeModel(), index);                                           
-                
-                //this.setdocument(uip);
+                Uiparameter uip = new Uiparameter(new JCodeModel(), index);                                                           
                 
                 this.setjcmpackage(uip);
                 
-                this.setjcmclass(uip);                                
-            
-                //this.setnodes(uip);                   
+                this.setjcmclass(uip);                                            
+                
+                this.setuipvalues(uip); 
                 
                 this.setbodi(uip); 
                 
@@ -101,14 +105,16 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
                 
                 this.setjcodemodel(uip);
                 
-                this.setconstructors(uip);                                
+                this.setconstructors(uip);                                     
+                
+                this.setbackgroundimage(uip); 
                 
                 this.storage.add(uip);                                
             }
         }
         catch(Exception exception)
         {
-            System.err.println(exception);
+            //exception.printStackTrace();
         }                                
         
         return jcodemodels;        
@@ -145,11 +151,15 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
         uip.jdc._extends(this.classname);
     } 
     
-    public void setbodi(Uiparameter uip)
-    {     
+    public void setuipvalues(Uiparameter uip)
+    {
+        /*----------------------------------------------------------------------*/
+        
         try{uip.children = (NodeList)xpath.evaluate("./*", nodes.item(uip.index), XPathConstants.NODESET); }catch(Exception e){}
         
         try{uip.node = nodes.item(uip.index);} catch(Exception e){}
+        
+        try{uip.backgroundimagename = ((Element)uip.node).getAttribute("setBackgroundImage");} catch(Exception e){}
         
         try{uip.jdc = uip.jcm.packages().next().classes().next();} catch(Exception e){}
         
@@ -165,8 +175,11 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
         
         try{uip.doc = this.doc;} catch(Exception e){}
         
-        try{uip.element = (Element)uip.node;} catch(Exception e){}                
-        
+        try{uip.element = (Element)uip.node;} catch(Exception e){}          
+    }
+    
+    public void setbodi(Uiparameter uip)
+    {                           
         /*----------------------------------------------------------------------*/
         
         try{Bodi.context("widgets").put(uip.jcm, uip);}     catch(Exception e){e.printStackTrace(System.err);}
@@ -187,21 +200,33 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
         
         /*---------------------------------------------------------------------*/            
         
-        theclass.javadoc().add("Bloq and APML software & design courtesy of Max Rupplin.\n");
+        theclass.javadoc().add("Bloq software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.\n");
+        
+        theclass.javadoc().add("APML software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.\n");
+        
+        theclass.javadoc().add("Sprung software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.\n");
+        
+        theclass.javadoc().add("\n");
         
         theclass.javadoc().add("Software programmatically produced by Bloq implementation version "+bodiversion+"\n");
         
-        theclass.javadoc().add("Hello and thanks to and from the Church of Scientology. /mr /ok /ss\n");
+        theclass.javadoc().add("\n");
         
-        theclass.javadoc().add("Hello and thanks to and from the HUC, Holy Unified Church; Church of Hello and welcome now in her lesser manner. /mr /ok /ss\n");
+        theclass.javadoc().add("Hello and thanks to and from the Church of Scientology now in her final Holy Form. /mr /ok /ss\n");
+        
+        theclass.javadoc().add("Hello and thanks to and from the HUC, Holy Unified Church, (the Church of \"Hi, Hello\") and welcome now in her lesser manner. /mr /ok /ss\n");
         
         theclass.javadoc().add("\n");                 
         
         theclass.javadoc().add("\n");      
         
-        theclass.javadoc().add("\n");                 
+        theclass.javadoc().add("\n");  
         
-        theclass.javadoc().add("\n");                                                        
+        theclass.javadoc().add("\n");
+        
+        theclass.javadoc().add("//hi hello");
+        
+        // /mr /ok /ss
     }
     
     public void setjcmpackage(Uiparameter uip) throws Exception
@@ -224,5 +249,81 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
     protected void setjcodemodel(Uiparameter uip)
     {
         this.jcodemodels.add(uip.jcm);
+    }
+    
+    private void setbackgroundimage(Uiparameter uip)
+    {   
+        if(uip.backgroundimagename==null || uip.backgroundimagename.isEmpty()) return;
+        
+        /*--------------------------------  setup  -----------------------------------*/
+        
+        JDefinedClass jdefinedclass;
+        
+        jdefinedclass = uip.jdc;
+        
+        
+        /*------------------------- set field for bg image ---------------------------*/
+        
+        jdefinedclass.field(JMod.PUBLIC, java.awt.Image.class, "backgroundimage");
+        
+        jdefinedclass.field(JMod.PUBLIC, java.lang.String.class, "backgroundimagename");
+        
+        
+        /*----------------------- add paintComponent method --------------------------*/
+        
+        JMethod method;
+        
+        method = jdefinedclass.method(JMod.PUBLIC, uip.jcm.VOID, "paintComponent");
+        
+        method.param(java.awt.Graphics.class, "g");
+        
+        method.body().directStatement("super.paintComponent(g);\n");
+        
+        method.body().directStatement("try{this.backgroundimage = ImageIO.read(new File(backgroundimagename));}catch(Exception e){e.printStackTrace();}\n");
+        
+        method.body().directStatement("g.drawImage(backgroundimage, 0, 0, this);");
+    } 
+    
+    public void addListeners(Uiparameter uip)
+    {
+
+        Class theclass;
+
+        Method[] methods;
+        
+        
+        /*--------------------------------------------------------------------*/
+        
+        theclass = uip.jdc.getClass();
+                
+        methods = theclass.getMethods();
+        
+        
+        /*--------------------------------------------------------------------*/
+        
+        for(Method method : methods)
+        {
+            String name = method.getName(); 
+            
+            if(name.endsWith("Listener"))
+            {
+                String suffix = name.replace("add", "").trim().toLowerCase();
+                
+                try
+                {
+                    String instancename = uip.instancename;
+
+                    String listener = instancename+"_"+suffix;       
+
+                    uip.constructor1.body().directStatement("this."+instancename+"."+name+"("+listener+");\n\t");
+                    
+                    uip.constructor2.body().directStatement("this."+instancename+"."+name+"("+listener+");\n\t");
+                }
+                catch(Exception e)
+                {
+
+                }                
+            }
+        }
     }
 }

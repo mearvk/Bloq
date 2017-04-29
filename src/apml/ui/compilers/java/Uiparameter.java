@@ -9,6 +9,7 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JPackage;
+import java.awt.Image;
 import javax.xml.xpath.XPath;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -41,6 +42,10 @@ public class Uiparameter
         
         this.index = index;
     }
+    
+    public Image backgroundimage;
+    
+    public String backgroundimagename;
     
     public JCodeModel jcm;
     

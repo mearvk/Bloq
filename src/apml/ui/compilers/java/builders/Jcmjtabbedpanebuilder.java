@@ -3,7 +3,10 @@ package apml.ui.compilers.java.builders;
 import apml.system.bodi.Bodi;
 import apml.system.bodi.Bodicontext;
 import apml.ui.compilers.java.Uiparameter;
+import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JCodeModel;
+import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JMod;
 import java.io.File;
 import java.util.ArrayList;
 import javax.xml.xpath.XPathConstants;
@@ -21,6 +24,11 @@ public class Jcmjtabbedpanebuilder extends Jcmabstractbuilder
     {
         //new Jcmjtabbedpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jtabbedpane", JTabbedPane.class);
     }     
+    
+    public Jcmjtabbedpanebuilder()
+    {
+        
+    }
     
     public Jcmjtabbedpanebuilder(File apml, String tagname, Class classname)
     {
@@ -95,6 +103,47 @@ public class Jcmjtabbedpanebuilder extends Jcmabstractbuilder
         catch(Exception exception)
         {
             exception.printStackTrace();
+        }        
+    }
+    
+    public void addListeners(Uiparameter uip)
+    {
+        try
+        {
+            String instancename = uip.instancename;
+                
+            String listener = instancename+"_changelistener";       
+                
+            uip.constructor1.body().directStatement("this."+instancename+".addChangeListener("+listener+");\n\t");
+            uip.constructor2.body().directStatement("this."+instancename+".addChangeListener("+listener+");\n\t");                                           
+        }
+        catch(Exception e)
+        {
+            
+        }
+    }
+    
+    public void addListenerMethods(Uiparameter uip)
+    {
+        try
+        {
+            String nestedlistenerclass = classname+"_ChangeListener";                                                               
+
+            JDefinedClass nestedclass = uip.jdc._class(JMod.PRIVATE | JMod.FINAL, nestedlistenerclass, ClassType.CLASS);
+
+            nestedclass._implements(Class.forName("javax.swing.event.ChangeListener"));
+
+            nestedclass.direct("public void stateChanged(ChangeEvent ce)\n\t");
+
+            nestedclass.direct("{\n\t");
+
+            nestedclass.direct("\tSystem.out.println(\"Event Source: \"+ce.getSource());\n\t");
+
+            nestedclass.direct("}\n\t");                    
+        }
+        catch(Exception e)
+        {
+            
         }        
     }
 }
