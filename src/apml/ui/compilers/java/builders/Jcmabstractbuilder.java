@@ -408,17 +408,17 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
                                 {                           
                                     if(parameter.getType().getSimpleName().contains("Event"))
                                     {
-                                        String function = "public void "+nestedmethod.getName()+"("+parameter.getType()+" "+parameter.getName()+")";
+                                        String function = "public void "+nestedmethod.getName()+"("+parameter.getType()+" "+parameter.getName()+")\n";
                                         
                                         function = function.replace("class", "");
                                         
                                         nestedclass.direct(function);                                                                        
 
-                                        nestedclass.direct("{\n\t");
+                                        nestedclass.direct("\t{\n\t");
 
-                                        nestedclass.direct("/*system.out etc.*/");
+                                        nestedclass.direct("\t//to be implemented\n");
 
-                                        nestedclass.direct("}\n\t");                                    
+                                        nestedclass.direct("\t}\n\t");                                    
                                     }                            
                                 }
                             }
@@ -442,17 +442,17 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
                                 {                           
                                     if(parameter.getType().getSimpleName().contains("Event"))
                                     {                                        
-                                        String function = "public void "+nestedmethod.getName()+"("+parameter.getType()+" "+parameter.getName()+")";
+                                        String function = "public void "+nestedmethod.getName()+"("+parameter.getType()+" "+parameter.getName()+")\n";
                                         
                                         function = function.replace("class", "");
                                         
                                         nestedclass.direct(function);                                                                                                                
 
-                                        nestedclass.direct("{\n\t");
+                                        nestedclass.direct("\t{\n\t");
 
-                                        nestedclass.direct("/*system.out etc.*/");
+                                        nestedclass.direct("\t//to be implemented\n");
 
-                                        nestedclass.direct("}\n\t");                                    
+                                        nestedclass.direct("\t}\n\t");                                    
                                     }                            
                                 }
                             }
@@ -476,17 +476,17 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
                                 {                           
                                     if(parameter.getType().getSimpleName().contains("Event"))
                                     {
-                                        String function = "public void "+nestedmethod.getName()+"("+parameter.getType()+" "+parameter.getName()+")";
+                                        String function = "public void "+nestedmethod.getName()+"("+parameter.getType()+" "+parameter.getName()+")\n";
                                         
                                         function = function.replace("class", "");
                                         
                                         nestedclass.direct(function);                                                                                                                                              
 
-                                        nestedclass.direct("{\n\t");
+                                        nestedclass.direct("\t{\n\t");
 
-                                        nestedclass.direct("/*system.out etc.*/");
+                                        nestedclass.direct("\t//to be implemented\n");
 
-                                        nestedclass.direct("}\n\t");                                    
+                                        nestedclass.direct("\t}\n\t");                                    
                                     }                            
                                 }
                             }
@@ -545,22 +545,80 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 
                     try
                     {
-                        uip.jdc.direct("\t"+nestedlistenerclass+" "+listener+";\n");
+                        uip.jdc.direct("\t"+nestedlistenerclass+" "+listener+";\n\n");
                     }
                     catch(Exception e)
                     {
                         //e.printStackTrace();
                     }
-                }
-                
-                uip.jdc.direct("\n");
+                }                                
             }
         
+            uip.jdc.direct("\n");
         }
         catch(Exception e)
         {
             //e.printStackTrace();
         }        
+    }
+    
+    public void addListenerInstantiation(Uiparameter uip, Node child)
+    {
+        try
+        {
+            Uiparameter childuip = (Uiparameter)Bodi.context("widgets").softpull(child);    
+            
+            if(child.getNodeName().trim().equalsIgnoreCase("tab")) return;
+            
+            if(child.getNodeName().trim().equalsIgnoreCase("jtextarea")) return; //errant fix me please
+
+            Class theclass = Class.forName("javax.swing."+childuip.jdc.name().substring(0, childuip.jdc.name().indexOf("_")));                                    
+
+            List<Method> list = Arrays.asList(theclass.getMethods());            
+
+            Collections.sort(list, new AlphabeticalComparator());   
+            
+            //Arrays.stream(list.toArray()).distinct().
+                    
+            List<Method> unique = new ArrayList<Method>(new HashSet<Method>(list));
+
+            for(Method method : unique)
+            {
+                String name = method.getName(); 
+
+                if(name.endsWith("Listener") && name.startsWith("add"))
+                {
+                    String suffix_lowercase = name.replace("add", "").trim().toLowerCase();
+
+                    String suffix_standard = name.replace("add", "").trim();
+
+                    String instancename = childuip.instancename;                   
+                    
+                    String listener = instancename+"_"+suffix_lowercase;
+
+                    String nestedlistenerclass = childuip.classname+"_"+suffix_standard;      
+
+                    /*------------------------------------------------------*/
+
+                    try
+                    {
+                        uip.constructor1.body().directStatement("this."+listener+" = new "+nestedlistenerclass+"();\n");
+                        
+                        uip.constructor2.body().directStatement("this."+listener+" = new "+nestedlistenerclass+"();\n");
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }                                
+            }
+        
+            uip.jdc.direct("\n");
+        }
+        catch(Exception e)
+        {
+            //e.printStackTrace();
+        }              
     }
 }
 
