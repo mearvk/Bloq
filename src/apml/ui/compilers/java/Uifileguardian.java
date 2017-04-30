@@ -3,8 +3,11 @@ package apml.ui.compilers.java;
 import java.io.File;
 
 /**
- *
+ * Handles the Bloq UI system files (input files, etc) for Bloq UI driving and output
+ * 
  * @author Max Rupplin
+ * @since 04.30.2017
+ * @version Bloq 1.0
  */
 public class Uifileguardian
 {

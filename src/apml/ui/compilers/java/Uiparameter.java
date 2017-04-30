@@ -17,8 +17,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- *
+ * The one utility parameter we use in system; all things come into a Uiparameter and are passed as method parameters or into Bodi
+ * 
+ * @since 04.30.2017
  * @author Max Rupplin
+ * @version Bloq 1.0
  */
 public class Uiparameter
 {    

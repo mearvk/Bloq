@@ -5,8 +5,11 @@ import com.sun.codemodel.JCodeModel;
 import java.util.ArrayList;
 
 /**
+ * Primary class for actually running Bloq UI compilation; Localdriver class may call this class.
  * 
  * @author Max Rupplin
+ * @since 04.30.2017
+ * @version Bloq 1.0
  */
 public class Uicompiler
 {
@@ -27,6 +30,11 @@ public class Uicompiler
         Bodi.context("//bodi/version").put("since", "04.18.2017");
     }
     
+    /**
+     * Handles the input files (APML/XML to JCM source) and moving from interpretive to actual JCM files for output finalization
+     * 
+     * @param inputmanager Storage pointer for input objects
+     */
     public void dohandleinputfiles(Uiinputmanager inputmanager)
     {
         for(String xpathmodel : this.inputmanager.xpathmodels.list)
@@ -35,6 +43,11 @@ public class Uicompiler
         }        
     }
         
+    /**
+     * Handles the output of the Bloq UI system; JCM files to actual output (persistent files on disk usually).
+     * 
+     * @param outputmanager Storage pointer for output objects 
+     */
     public void dohandleoutputfiles(Uioutputmanager outputmanager)
     {            
         for(ArrayList<JCodeModel> jcmmodel : this.inputmanager.jcmmodels.list)

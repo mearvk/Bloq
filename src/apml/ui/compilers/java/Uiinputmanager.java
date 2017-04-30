@@ -135,6 +135,8 @@ import javax.swing.JToolTip;
 import javax.swing.JTree;
 
 /**
+ * Handler for the Bloq UI input (conversion from raw APML/XML input) to modelling in the system as JCM models ready for output
+ * 
  * @author Max Rupplin
  */
 public class Uiinputmanager

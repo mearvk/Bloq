@@ -1,8 +1,11 @@
 package apml.ui.compilers.java;
 
 /**
- *
+ * Quick reference for Xpath matching of the various Java Swing widget classes; lightweight utility class
+ * 
+ * @since 04.30.2017
  * @author Max Rupplin
+ * @version Bloq 1.0
  */
 public class Uixpathstrings
 {

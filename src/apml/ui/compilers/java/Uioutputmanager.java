@@ -22,24 +22,13 @@ import org.w3c.dom.Node;
 
 import org.w3c.dom.NodeList;
 
-/**
- * Altering the value of a listener type based on Class (tabbedpane vs jbutton)
- * 
- * 1. visit instantiation and change actionlistener_xxx to xxxlistener_yyy
- * 
- * 2. visit listeners and change xxx.addActionListener to xxx.addYYYListener
- * 
- * 3. private final class should be altered to specific listener class type (actionlistener -> tab changelistener etc)
- * 
- * 4. Change field (setfields method) from XXX_ActionListener to YYY_ChangeListener
- * 
- * 04.25.2017 /mr /ok /ss
- */
-
 
 /**
- *
+ * Class for handling output and finalization of JCM files (Jcodemodel) for Bloq implementation version 1.0x
+ * 
  * @author Max Rupplin
+ * @since 04.30.2017
+ * @version Bloq 1.0
  */
 public class Uioutputmanager
 {
@@ -52,6 +41,11 @@ public class Uioutputmanager
         this.compiler = compiler;
     }    
     
+    /**
+     * Primary method presumed called by Localdriver and then Uicompiler
+     * 
+     * @param jcodemodels 
+     */
     public void generatefiles(ArrayList<JCodeModel> jcodemodels)
     {
         try

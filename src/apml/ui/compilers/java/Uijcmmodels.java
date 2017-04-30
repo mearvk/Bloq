@@ -5,8 +5,11 @@ import com.sun.codemodel.JCodeModel;
 import java.util.ArrayList;
 
 /**
- *
+ * The list of various JCM models that are filled by Uiinputmanager and readied for Uioutputmanager
+ * 
+ * @since 04.30.2017
  * @author Max Rupplin
+ * @version Bloq 1.0
  */
 public class Uijcmmodels
 {
