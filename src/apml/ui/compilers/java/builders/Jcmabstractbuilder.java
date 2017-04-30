@@ -3,6 +3,7 @@ package apml.ui.compilers.java.builders;
 import apml.system.bodi.Bodi;
 
 import apml.ui.compilers.java.Uiparameter;
+import com.sun.codemodel.ClassType;
 
 import com.sun.codemodel.JCodeModel;
 
@@ -13,8 +14,16 @@ import com.sun.codemodel.JMod;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -27,6 +36,7 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import org.w3c.dom.NodeList;
 
@@ -284,46 +294,288 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
         method.body().directStatement("g.drawImage(backgroundimage, 0, 0, this);");
     } 
     
-    public void addListeners(Uiparameter uip)
-    {
-
-        Class theclass;
-
-        Method[] methods;
+    public void addListeners(Uiparameter uip, Node child)
+    {                       
+        /*--------------------------------------------------------------------*/        
         
-        
-        /*--------------------------------------------------------------------*/
-        
-        theclass = uip.jdc.getClass();
-                
-        methods = theclass.getMethods();
-        
-        
-        /*--------------------------------------------------------------------*/
-        
-        for(Method method : methods)
-        {
-            String name = method.getName(); 
+        try
+        {            
+            Uiparameter childuip = (Uiparameter)Bodi.context("widgets").softpull(child);
             
-            if(name.endsWith("Listener"))
+            if(child.getNodeName().trim().equalsIgnoreCase("tab")) return;
+            
+            if(child.getNodeName().trim().equalsIgnoreCase("jtextarea")) return;
+            
+            
+            Class theclass=null;
+            
+            String trimmed;
+            
+            try
             {
-                String suffix = name.replace("add", "").trim().toLowerCase();
+                trimmed = "javax.swing."+childuip.jdc.name().substring(0, childuip.jdc.name().indexOf("_"));
                 
-                try
-                {
-                    String instancename = uip.instancename;
-
-                    String listener = instancename+"_"+suffix;       
-
-                    uip.constructor1.body().directStatement("this."+instancename+"."+name+"("+listener+");\n\t");
-                    
-                    uip.constructor2.body().directStatement("this."+instancename+"."+name+"("+listener+");\n\t");
-                }
-                catch(Exception e)
-                {
-
-                }                
+                theclass = Class.forName("javax.swing."+childuip.jdc.name().substring(0, childuip.jdc.name().indexOf("_")));                                    
             }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+            
+            List<Method> list = Arrays.asList(theclass.getMethods());            
+            
+            Collections.sort(list, new AlphabeticalComparator());
+
+            /*--------------------------------------------------------------------*/
+
+            for(Method method : list)
+            {
+                String name = method.getName();
+
+                if(name.endsWith("Listener") && name.startsWith("add"))
+                {
+                    String suffix = name.replace("add", "").trim().toLowerCase();
+
+                    try
+                    {
+                        String instancename = childuip.instancename;
+
+                        String listener = instancename+"_"+suffix;       
+
+                        uip.constructor1.body().directStatement("this."+instancename+"."+name+"("+listener+");\n\t");
+
+                        uip.constructor2.body().directStatement("this."+instancename+"."+name+"("+listener+");\n\t");
+                    }
+                    catch(Exception e)
+                    {
+
+                    }                
+                }
+            }            
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }        
+    }
+    
+    public void addListenerMethods(Uiparameter uip, Node child)
+    {
+        try
+        {            
+            Uiparameter childuip = (Uiparameter)Bodi.context("widgets").softpull(child);
+            
+            Class theclass = Class.forName("javax.swing."+childuip.jdc.name().substring(0, childuip.jdc.name().indexOf("_")));                                    
+            
+            List<Method> list = Arrays.asList(theclass.getMethods());            
+            
+            Collections.sort(list, new AlphabeticalComparator());
+
+
+            /*------------------------------------------------------------------*/
+        
+            for(Method method : list)
+            {
+                String name = method.getName(); 
+
+                if(name.endsWith("Listener") && name.startsWith("add"))
+                {
+                    String suffix_lowercase = name.replace("add", "").trim().toLowerCase();
+                    
+                    String suffix_standard = name.replace("add", "").trim();
+
+                    try
+                    {
+                        String instancename = childuip.instancename;                        
+
+                        String listener = instancename+"_"+suffix_lowercase;
+
+                        String nestedlistenerclass = childuip.classname+"_"+suffix_standard;      
+                        
+                        /*------------------------------------------------------*/
+
+                        try
+                        {
+                            if( Class.forName("java.awt.event."+suffix_standard)==null) continue;
+                            
+                            JDefinedClass nestedclass = uip.jdc._class(JMod.PRIVATE | JMod.FINAL, nestedlistenerclass, ClassType.CLASS);                    
+
+                            nestedclass._implements(Class.forName("java.awt.event."+suffix_standard));
+
+                            for(Method nestedmethod : Class.forName("java.awt.event."+suffix_standard).getMethods())
+                            {
+                                for(Parameter parameter : nestedmethod.getParameters())
+                                {                           
+                                    if(parameter.getType().getSimpleName().contains("Event"))
+                                    {
+                                        String function = "public void "+nestedmethod.getName()+"("+parameter.getType()+" "+parameter.getName()+")";
+                                        
+                                        function = function.replace("class", "");
+                                        
+                                        nestedclass.direct(function);                                                                        
+
+                                        nestedclass.direct("{\n\t");
+
+                                        nestedclass.direct("/*system.out etc.*/");
+
+                                        nestedclass.direct("}\n\t");                                    
+                                    }                            
+                                }
+                            }
+                        }
+                        catch(Exception e)
+                        {
+                            //e.printStackTrace();
+                        }
+                        
+                        try
+                        {
+                            if( Class.forName("javax.swing.event."+suffix_standard)==null) continue;
+                            
+                            JDefinedClass nestedclass = uip.jdc._class(JMod.PRIVATE | JMod.FINAL, nestedlistenerclass, ClassType.CLASS);                    
+
+                            nestedclass._implements(Class.forName("javax.swing.event."+suffix_standard));
+
+                            for(Method nestedmethod : Class.forName("javax.swing.event."+suffix_standard).getMethods())
+                            {
+                                for(Parameter parameter : nestedmethod.getParameters())
+                                {                           
+                                    if(parameter.getType().getSimpleName().contains("Event"))
+                                    {                                        
+                                        String function = "public void "+nestedmethod.getName()+"("+parameter.getType()+" "+parameter.getName()+")";
+                                        
+                                        function = function.replace("class", "");
+                                        
+                                        nestedclass.direct(function);                                                                                                                
+
+                                        nestedclass.direct("{\n\t");
+
+                                        nestedclass.direct("/*system.out etc.*/");
+
+                                        nestedclass.direct("}\n\t");                                    
+                                    }                            
+                                }
+                            }
+                        }
+                        catch(Exception e)
+                        {
+                            //e.printStackTrace();
+                        }     
+                        
+                        try
+                        {
+                            if( Class.forName("java.beans."+suffix_standard)==null) continue;
+                            
+                            JDefinedClass nestedclass = uip.jdc._class(JMod.PRIVATE | JMod.FINAL, nestedlistenerclass, ClassType.CLASS);                    
+
+                            nestedclass._implements(Class.forName("java.beans."+suffix_standard));
+
+                            for(Method nestedmethod : Class.forName("java.beans."+suffix_standard).getMethods())
+                            {
+                                for(Parameter parameter : nestedmethod.getParameters())
+                                {                           
+                                    if(parameter.getType().getSimpleName().contains("Event"))
+                                    {
+                                        String function = "public void "+nestedmethod.getName()+"("+parameter.getType()+" "+parameter.getName()+")";
+                                        
+                                        function = function.replace("class", "");
+                                        
+                                        nestedclass.direct(function);                                                                                                                                              
+
+                                        nestedclass.direct("{\n\t");
+
+                                        nestedclass.direct("/*system.out etc.*/");
+
+                                        nestedclass.direct("}\n\t");                                    
+                                    }                            
+                                }
+                            }
+                        }
+                        catch(Exception e)
+                        {
+                            //e.printStackTrace();
+                        }                        
+                    }
+                    catch(Exception e)
+                    {
+                        //e.printStackTrace();
+                    }                
+                }
+            }                              
+        }
+        catch(Exception e)
+        {
+            //e.printStackTrace();
         }
     }
+    
+    public void addListenerFields(Uiparameter uip, Node child)
+    {
+        try
+        {
+            Uiparameter childuip = (Uiparameter)Bodi.context("widgets").softpull(child);    
+            
+            if(child.getNodeName().trim().equalsIgnoreCase("tab")) return;
+            
+            if(child.getNodeName().trim().equalsIgnoreCase("jtextarea")) return;
+
+            Class theclass = Class.forName("javax.swing."+childuip.jdc.name().substring(0, childuip.jdc.name().indexOf("_")));                                    
+
+            List<Method> list = Arrays.asList(theclass.getMethods());            
+
+            Collections.sort(list, new AlphabeticalComparator());        
+
+            for(Method method : list)
+            {
+                String name = method.getName(); 
+
+                if(name.endsWith("Listener") && name.startsWith("add"))
+                {
+                    String suffix_lowercase = name.replace("add", "").trim().toLowerCase();
+
+                    String suffix_standard = name.replace("add", "").trim();
+
+                    String instancename = childuip.instancename;                   
+                    
+                    String listener = instancename+"_"+suffix_lowercase;
+
+                    String nestedlistenerclass = childuip.classname+"_"+suffix_standard;      
+
+                    /*------------------------------------------------------*/
+
+                    try
+                    {
+                        uip.jdc.direct("\t"+nestedlistenerclass+" "+listener+";\n");
+                    }
+                    catch(Exception e)
+                    {
+                        //e.printStackTrace();
+                    }
+                }
+                
+                uip.jdc.direct("\n");
+            }
+        
+        }
+        catch(Exception e)
+        {
+            //e.printStackTrace();
+        }        
+    }
+}
+
+class AlphabeticalComparator implements Comparator
+{    
+    @Override
+    public int compare(Object o1, Object o2)
+    {
+        if(o1==null || o2==null) return -1;
+        
+        Method m1 = (Method)o1;
+        
+        Method m2 = (Method)o2;               
+        
+        return m1.getName().compareToIgnoreCase(m2.getName());
+    }
+    
 }

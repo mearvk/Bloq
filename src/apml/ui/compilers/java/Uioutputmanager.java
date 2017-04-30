@@ -1,15 +1,10 @@
 package apml.ui.compilers.java;
 
 import apml.system.bodi.Bodi;
-import apml.ui.compilers.java.builders.Jcmjmenubarbuilder;
-import apml.ui.compilers.java.builders.Jcmjpanelbuilder;
-import apml.ui.compilers.java.builders.Jcmjtabbedpanebuilder;
 
-import com.sun.codemodel.ClassType;
+import apml.ui.compilers.java.builders.Jcmabstractbuilder;
 
 import com.sun.codemodel.JCodeModel;
-
-import com.sun.codemodel.JDefinedClass;
 
 import com.sun.codemodel.JMethod;
 
@@ -105,78 +100,20 @@ public class Uioutputmanager
             
             uip.constructor1.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
             uip.constructor2.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");            
-                        
-            /*------------------------ Listener Additions --------------------------*/
             
+            
+            /*------------------------ Listener Additions --------------------------*/            
             for(int i=0; i<children.getLength(); i++)
             {
-                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));                                
-                        
-                if(uipi.classname.contains("JPanel"))
-                {
-                    new Jcmjpanelbuilder().addListeners(uip);
-                }
-                
-                if(uipi.classname.contains("JMenuBar")) 
-                {
-                    new Jcmjmenubarbuilder().addListeners(uip);
-                }                    
-                
-                if(uipi.classname.contains("JTabbedPane"))
-                {
-                    new Jcmjtabbedpanebuilder().addListeners(uip);
-                }
-                
-                /*------------------------- General Case ---------------------------*/
-                
-                String instancename = uipi.instancename;
-                
-                String listener = instancename+"_actionlistener";       
-                
-                uip.constructor1.body().directStatement("this."+instancename+".addActionListener("+listener+");\n\t");
-                uip.constructor2.body().directStatement("this."+instancename+".addActionListener("+listener+");\n\t");
-            }            
+                new Jcmabstractbuilder().addListeners(uip, children.item(i));            
+            }
             
             
-            /*------------------------- Overridden Methods--------------------------*/
-            
+            /*------------------------- Overridden Methods--------------------------*/             
             for(int i=0; i<children.getLength(); i++)
             {
-                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i)); 
-                
-                if(uipi.classname.contains("JPanel"))
-                {
-                    new Jcmjpanelbuilder().addListenerMethods(uip);
-                }
-                
-                if(uipi.classname.contains("JMenuBar")) 
-                {
-                    new Jcmjmenubarbuilder().addListenerMethods(uip);
-                }
-                
-                String classname = uipi.classname;                                
-                
-                if(classname.contains("JTabbedPane"))
-                {
-                    new Jcmjtabbedpanebuilder().addListenerMethods(uip);
-                }
-                
-                /*------------------------- General Case ---------------------------*/
-                
-                String nestedlistenerclass = classname+"_ActionListener";                                                               
-
-                JDefinedClass nestedclass = uip.jdc._class(JMod.PRIVATE | JMod.FINAL, nestedlistenerclass, ClassType.CLASS);
-
-                nestedclass._implements(Class.forName("java.awt.event.ActionListener"));
-
-                nestedclass.direct("public void actionPerformed(ActionEvent ae)\n\t");
-
-                nestedclass.direct("{\n\t");
-
-                nestedclass.direct("\tSystem.out.println(\"Action Command: \"+ae.getActionCommand());\n\t");
-
-                nestedclass.direct("}\n\t");
-            }            
+                new Jcmabstractbuilder().addListenerMethods(uip, children.item(i));
+            }
         }
         catch(Exception exception)
         {
@@ -454,29 +391,10 @@ public class Uioutputmanager
             {       
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
                 
-                //if(child.classname.contains("JPanel")) continue; //todo fix me more standardly                
-                //if(child.classname.contains("JMenuBar")) continue; //todo fix me more standardly
-                
-                uip.jdc.direct("public "+uipi.classname+" "+uipi.classname.toLowerCase()+";\n\n\t");
+                new Jcmabstractbuilder().addListenerFields(uip, children.item(i));
             }
             
-            for(int i=0; i<children.getLength(); i++)                           
-            {              
-                Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
-                
-                if(uipi.classname.contains("JPanel")) continue; //todo fix me more standardly
-                
-                if(uipi.classname.contains("JMenuBar")) continue; //todo fix me more standardly    
-                
-                if(uipi.classname.contains("JTabbedPane"))
-                {
-                    uip.jdc.direct("public "+uipi.classname+"_ChangeListener"+" "+(uipi.classname+"_ChangeListener").toLowerCase()+";\n\n\t");
-                    
-                    continue;
-                }
-                
-                uip.jdc.direct("public "+uipi.classname+"_ActionListener"+" "+(uipi.classname+"_ActionListener").toLowerCase()+";\n\n\t");
-            }            
+            
         }
         catch(Exception exception)
         {
