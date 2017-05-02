@@ -15,15 +15,26 @@ public class Uifileguardian
     
     public File xmlin;
     
+    public File outputdir;
+    
     public Uifileguardian()
     {
         try
         {
-            this.xmlin = new File("/home/oem/Desktop/UI/UI 3.xml");    
+            this.xmlin = new File("/home/oem/Desktop/UI/UI 2.xml");    
         }
-        catch(Exception err)
+        catch(Exception e)
         {
-            System.err.println(err);
+            //e.printStackTrace();
         }        
+        
+        try
+        {
+            this.outputdir = new File("/home/oem/Desktop/UI");
+        }
+        catch(Exception e)
+        {
+            //e.printStackTrace();
+        }
     }
 }

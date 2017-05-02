@@ -58,7 +58,7 @@ public class Uioutputmanager
                 
                 this.setfields(uip);
                 
-                this.setparent(uip);  
+                this.setdevolvement(uip);  
                                 
                 this.setchildren(uip);
                 
@@ -66,20 +66,20 @@ public class Uioutputmanager
                 
                 this.setconstructorcomments(uip);
                                 
-                uip.jcm.build(new File("/home/oem/Desktop/UI"));
+                uip.jcm.build(this.compiler.fileguardian.outputdir);
             }
         }
-        catch(Exception exception)
+        catch(Exception e)
         {
-            
+            //e.printStackTrace();
         }    
     }
     
     private void setconstructorcomments(Uiparameter uip)
-    {
-        //uip.constructor1.javadoc().addParam("Apmlsystem system : The APML system object.");
-        
+    {        
         uip.constructor1.javadoc().addParam("parent : The parent AWT object.");
+        
+        /*---------------------------------------------------------------------*/
         
         uip.constructor2.javadoc().addParam("system : The APML system object.");
         
@@ -93,17 +93,20 @@ public class Uioutputmanager
             NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);             
             
             uip.constructor1.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");
+            
             uip.constructor2.body().directStatement("/* ------------------  listeners  -------------------- */\n\t");            
             
             
-            /*------------------------ Listener Additions --------------------------*/            
+            /*------------------------ Listener Additions [handled by Jcmabstractbuilder now] --------------------------*/            
+            
             for(int i=0; i<children.getLength(); i++)
             {
                 new Jcmabstractbuilder().addListeners(uip, children.item(i));            
             }
             
             
-            /*------------------------- Overridden Methods--------------------------*/             
+            /*------------------------- Overridden Methods [handled by Jcmabstractbuilder now] --------------------------*/      
+            
             for(int i=0; i<children.getLength(); i++)
             {
                 new Jcmabstractbuilder().addListenerMethods(uip, children.item(i));
@@ -118,6 +121,7 @@ public class Uioutputmanager
     private void setuisetters(Uiparameter uip)
     {
         uip.constructor1.body().directStatement("/* ------------------  setters  ---------------- */\n\t");
+        
         uip.constructor2.body().directStatement("/* ------------------  setters  ---------------- */\n\t");        
         
         try
@@ -380,6 +384,9 @@ public class Uioutputmanager
             
                         
             NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);  
+            
+            
+            /*-----------------------------------------------------------------*/
                         
             for(int i=0; i<children.getLength(); i++)                           
             {       
@@ -387,6 +394,9 @@ public class Uioutputmanager
                 
                 new Jcmabstractbuilder().addListenerFields(uip, children.item(i));
             }
+
+            
+            /*-----------------------------------------------------------------*/            
             
             for(int i=0; i<children.getLength(); i++)
             {
@@ -401,12 +411,14 @@ public class Uioutputmanager
         }
     }
     
-    private void setparent(Uiparameter uip)
-    {
+    /**
+     * 
+     * @param uip The user interface paraameter 
+     */
+    private void setdevolvement(Uiparameter uip)
+    {        
         try
-        {               
-            //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel);            
-                
+        {                                       
             uip.jdc.direct("\tpublic Component parent;\n\n");
             
             uip.jdc.direct("\tpublic Apmlsystem system;\n");
@@ -417,6 +429,10 @@ public class Uioutputmanager
         }        
     }
      
+    /**
+     * 
+     * @param uip The user interface parameter
+     */
     private void setchildren(Uiparameter uip)
     {
         try
@@ -437,21 +453,27 @@ public class Uioutputmanager
         }        
     }    
     
+    /**
+     * 
+     * @param uip The user interface parameter
+     */
     private void doinstantiation(Uiparameter uip)
     {                  
         uip.constructor1.body().directStatement("/* ------------------  instantiation  ---------------- */\n\t");
         
         uip.constructor2.body().directStatement("/* ------------------  instantiation  ---------------- */\n\t");
         
-        //quick sanity check
+        
         if(uip.children==null) return;
         
-        //ui component instantiation        
+        
+        /*---------------------------------------------------------------------*/
+                
         for(int i=0; i<uip.children.getLength(); i++)
         {               
             Uiparameter child = (Uiparameter)Bodi.context("widgets").softpull(uip.children.item(i)); 
             
-            //quick sanity check
+            //safety check
             if(child==null) return;
             
             uip.constructor1.body().directStatement("this."+child.classname.toLowerCase()+" = new "+child.classname+"(this);\n\t");
@@ -460,19 +482,18 @@ public class Uioutputmanager
             
         }
         
-        //ui listener instantiation
+        
+        /*---------------------------------------------------------------------*/        
+        
+        //listener instantiation
         for(int i=0; i<uip.children.getLength(); i++)
         {                
             new Jcmabstractbuilder().addListenerInstantiation(uip, uip.children.item(i));
-        }      
-        
+        }              
     }
-    
-    //private void dohierarchy(NodeList children, Node self)
+       
     private void dohierarchy(Uiparameter uip)
-    {         
-        //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(self); 
-        
+    {                 
         uip.constructor1.body().directStatement("/* ------------------  hierarchy  -------------------- */\n\t");
         
         uip.constructor2.body().directStatement("/* ------------------  hierarchy  -------------------- */\n\t");
@@ -483,10 +504,10 @@ public class Uioutputmanager
         {    
             Uiparameter child = (Uiparameter)Bodi.context("widgets").softpull(uip.children.item(i));
             
-            //sanity check
+            //safety check
             if(child==null) return;
                         
-            String classname = uip.classname;
+            String parentclassname = uip.classname;
             
             String childsuperclass = child.jdc._extends().name();
             
@@ -513,20 +534,30 @@ public class Uioutputmanager
     }
     
     private void dodevolvement(Uiparameter uip)
-    {
-        //Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(self);         
+    {       
+        /* ------------------------ devolvement setters ------------------------ */
         
-        /* ------------------------ Devolvement setters ------------------------ */
+        uip.constructor1.body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");   
         
-        uip.constructor1.body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");                         
         uip.constructor2.body().directStatement("/* ------------------  devolvement  -------------------- */\n\t");   
         
+        
+        /*---------------------------------------------------------------------*/
+        
         uip.constructor1.body().directStatement("this.parent = parent;\n\t");                        
+        
+        
+        /*---------------------------------------------------------------------*/
+        
         uip.constructor2.body().directStatement("this.parent = parent;\n\t");  
         
         uip.constructor2.body().directStatement("this.system = system;\n\t"); 
         
+        
+        /*---------------------------------------------------------------------*/
+        
         uip.constructor1.body().directStatement("this.setVisible(true);\n\t");   
+        
         uip.constructor2.body().directStatement("this.setVisible(true);\n\t");            
     }
 }
