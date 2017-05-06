@@ -47,3 +47,6 @@ javascript
             
             system.out.prinln("dau").fixme("bsg");
 <!-->
+
+
+enum classes should be inheritable...

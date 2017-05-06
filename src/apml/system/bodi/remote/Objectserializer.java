@@ -9,8 +9,6 @@ public class Objectserializer
 {
     public Objectserializer(Object object)
     {
-        
-    }
-    
-    
+        //as required for sending actual objects
+    }        
 }

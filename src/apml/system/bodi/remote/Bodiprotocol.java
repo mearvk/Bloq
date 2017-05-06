@@ -4,24 +4,24 @@ package apml.system.bodi.remote;
  *
  * @author Max Rupplin
  */
-public enum Bodiprotocol
+public class Bodiprotocol extends Protocol
 {        
-    CLOSE("//close"),
+    public static final String CLOSE = "//close";
     
-    HANDSHAKE("//handshake"),
+    public static final String HANDSHAKE = "//handshake";
             
-    OPEN("//open"),
+    public static final String OPEN = "//open";
             
-    PULL("//pull"),            
+    public static final String PUT = "//put";
             
-    PUT("//put"),
+    public static final String PULL = "//pull";
     
-    TRADE("//trade");
+    public static final String TRADE = "//trade";
     
-    public String value;
+    public static final String value = "";
     
-    Bodiprotocol(String args)
+    public Bodiprotocol()
     {
-        this.value = args;
+        super();
     }
 }

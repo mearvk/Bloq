@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Bodiconnection
 {
-    public ArrayList<String> sessionids = new ArrayList<String>();
+    public ArrayList<String> sessionids = new ArrayList();
     
     public Bodi bodi;
     

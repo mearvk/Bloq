@@ -13,7 +13,7 @@ import java.net.Socket;
  *
  * @author Max Rupplin
  */
-public class Protocolserver extends Basicserver
+public abstract class Protocolserver extends Basicserver implements Runnable
 {
     public Socket socket;
     
@@ -31,6 +31,12 @@ public class Protocolserver extends Basicserver
     public Protocolserver(Integer port)
     {
         super(port);
+    }
+    
+    @Override
+    public void run()
+    {
+        super.run();
     }
     
     @Override
@@ -68,6 +74,8 @@ public class Protocolserver extends Basicserver
             
         return this.inqueue.toString().getBytes();
     }
+    
+    protected abstract Object parseprotocol(String protocol , StringBuffer buffer) throws Exception;
 }
 
 class ProtocolListenerThread extends Thread
