@@ -14,6 +14,8 @@ public interface BasicSystemElement
     
     public void restart();
     
+    public void resume();
+    
     public void run();
     
     public void start();

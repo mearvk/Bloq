@@ -1,15 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package apml.system.bodi;
 
 import java.io.File;
+
 import java.util.HashMap;
+
 import java.util.Map;
+
 import java.util.Map.Entry;
+
 import org.w3c.dom.Element;
+
 import org.w3c.dom.Node;
 
 /**
@@ -21,10 +22,13 @@ public class Bodicontext
     protected final Integer hash = 0x888fe8;
     
     private final Map<String, Object> namemap = new HashMap();
+    
     private final Map<Integer, Object> hashmap = new HashMap();
+    
     private final Map<Object, Object> objectmap = new HashMap();    
     
     public String contextname;
+    
     public File file;
     
     public Bodicontext(String contextname)
@@ -86,11 +90,13 @@ public class Bodicontext
         for(Entry entry : map.entrySet())
         {                     
             Object key = entry.getKey();
+            
             Object value = entry.getValue();
             
             if(object instanceof Node && key instanceof Node)
             {
                 Element n1 = (Element)object;
+                
                 Element n2 = (Element)key;                
                 
                 if(n1.isEqualNode(n2)) 
