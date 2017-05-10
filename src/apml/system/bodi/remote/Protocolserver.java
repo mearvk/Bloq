@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package apml.system.bodi.remote;
 
 import java.net.ServerSocket;
@@ -36,73 +31,8 @@ public abstract class Protocolserver extends Basicserver implements Runnable
     @Override
     public void run()
     {
-        super.run();
-    }
+        super.run(); 
+    }    
     
-    @Override
-    public void write(byte[] bytes)
-    {
-        try
-        {
-            synchronized(this.outqueue)
-            {                
-                /*-------------------------------------------------------------*/
-                
-                this.writer.write(this.outqueue.toString(), 0, this.outqueue.toString().length());
-                                            
-                this.writer.flush();
-                                
-                /*-------------------------------------------------------------*/
-                
-                this.outqueue.delete(0, this.outqueue.length());                                
-            }
-        }
-        catch(Exception e)
-        {
-            //
-        }
-        finally
-        {
-            //
-        }
-    }
-
-    @Override
-    public byte[] read()
-    {
-        if(!this.doread) return null;
-            
-        return this.inqueue.toString().getBytes();
-    }
-    
-    protected abstract Object parseprotocol(String protocol , StringBuffer buffer) throws Exception;
-}
-
-class ProtocolListenerThread extends Thread
-{
-    Protocolserver server;
-    
-    public ProtocolListenerThread(Protocolserver server)
-    {
-        this.server = server;
-    }
-    
-    @Override
-    public void run()
-    {
-        while(true)
-        {
-            try
-            {
-                if(this.server.doread)
-                {
-                    
-                }                                
-            }
-            catch(Exception e)
-            {
-                
-            }
-        }
-    }
+    protected abstract Object parseprotocol(String protocol , StringBuffer buffer, Bodiprotocolhandler server) throws Exception;
 }

@@ -10,11 +10,15 @@ import java.util.ArrayList;
  *
  * @author Max Rupplin
  */
-public class Bodiremoteserver extends Protocolserver implements Runnable, BasicSystemElement
-{                
-    public Bodi bodi;
+public class Bodiremoteserver extends Basicserver implements Runnable, BasicSystemElement
+{   
+    public ArrayList<Bodiconnection> bodiconnections;    
     
-    public ArrayList<Bodiconnection> bodiconnections;
+    public Bodiprotocolhandler protocolhandler;
+    
+    public Boolean running;
+    
+    public Bodi bodi;        
     
     
     public static void main(String...args)
@@ -24,8 +28,7 @@ public class Bodiremoteserver extends Protocolserver implements Runnable, BasicS
         server = new Bodiremoteserver("localhost", 8888);
         
         server.run();        
-    }   
-    
+    }       
     
     public Bodiremoteserver(String host, Integer port)
     {
@@ -63,32 +66,32 @@ public class Bodiremoteserver extends Protocolserver implements Runnable, BasicS
                 {                                        
                     if(this.inqueue.toString().startsWith("//handshake"))
                     {
-                        this.parseprotocol(Bodiprotocol.HANDSHAKE, buffer);
+                        protocolhandler.parseprotocol(Bodiprotocol.HANDSHAKE, buffer, this);
                     }
                     
                     if(this.inqueue.toString().startsWith("//close"))
                     {
-                        this.parseprotocol(Bodiprotocol.CLOSE, buffer);
+                        protocolhandler.parseprotocol(Bodiprotocol.CLOSE, buffer, this);
                     }
 
                     if(this.inqueue.toString().startsWith("//open"))
                     {
-                        this.parseprotocol(Bodiprotocol.OPEN, buffer);
+                        protocolhandler.parseprotocol(Bodiprotocol.OPEN, buffer, this);
                     }
 
                     if(this.inqueue.toString().startsWith("//pull"))
                     {
-                        this.parseprotocol(Bodiprotocol.PULL, buffer);
+                        protocolhandler.parseprotocol(Bodiprotocol.PULL, buffer, this);
                     }
                                         
                     if(this.inqueue.toString().startsWith("//put"))
                     {
-                        this.parseprotocol(Bodiprotocol.PUT, buffer);
+                        protocolhandler.parseprotocol(Bodiprotocol.PUT, buffer, this);
                     }
                     
                     if(this.inqueue.toString().startsWith("//trade"))
                     {
-                        this.parseprotocol(Bodiprotocol.TRADE, buffer);
+                        protocolhandler.parseprotocol(Bodiprotocol.TRADE, buffer, this);
                     }                    
                 }
                 else
@@ -105,7 +108,7 @@ public class Bodiremoteserver extends Protocolserver implements Runnable, BasicS
     
     private final Boolean inputqueueisready()
     {
-        return this.inqueue.toString().length()>0 && this.isdonereading;
+        return this.inqueue!= null && this.inqueue.toString().length()>0 && this.isdonereading;
     }
     
     protected void sleepmillis(Long millis)
@@ -126,45 +129,7 @@ public class Bodiremoteserver extends Protocolserver implements Runnable, BasicS
         {
             //System.out.println("System in sleepmillis mode...");
         }        
-    }
-    
-    @Override
-    protected Object parseprotocol(String protocol, StringBuffer buffer) throws Exception
-    {
-        Bodiconnection acceptedconnection; 
-        
-        switch(protocol)
-        {
-            case Bodiprotocol.HANDSHAKE: 
-                acceptedconnection = this.checksessionid(bodiconnections, buffer, bodi);
-                acceptedconnection.handshake(buffer, bodi);                     //request new connection id for persistent connection
-                break;
-            
-            case Bodiprotocol.CLOSE: 
-                acceptedconnection = this.checksessionid(bodiconnections, buffer, bodi);
-                acceptedconnection.close(buffer, bodi);                         //close a new request on existing connection
-                break;
-            
-            case Bodiprotocol.OPEN: 
-                acceptedconnection = this.checksessionid(bodiconnections, buffer, bodi);
-                acceptedconnection.open(buffer, bodi);                          //open a new request on existing connection
-                break;
-            
-            case Bodiprotocol.PULL: 
-                acceptedconnection = this.checksessionid(bodiconnections, buffer, bodi);
-                return acceptedconnection.pull(buffer, bodi);                   //return actual request as object                 
-            
-            case Bodiprotocol.PUT: 
-                acceptedconnection = this.checksessionid(bodiconnections, buffer, bodi);
-                return acceptedconnection.put(buffer, bodi);                    //return boolean indicating if put was a success
-            
-            case Bodiprotocol.TRADE: 
-                acceptedconnection = this.checksessionid(bodiconnections, buffer, bodi);
-                return acceptedconnection.trade(buffer, bodi);                  //trade bit coin for services etc. //hotswap one object for another //etc
-        } 
-        
-        throw new NoValidConnectionFoundException("No valid connectino found.");
-    }
+    }    
     
     public Bodiconnection checksessionid(ArrayList<Bodiconnection> bodiconnections, StringBuffer buffer, Bodi bodi) throws Exception
     {
@@ -227,6 +192,18 @@ public class Bodiremoteserver extends Protocolserver implements Runnable, BasicS
 
     @Override
     public void resume()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void write(byte[] bytes)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public byte[] read()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

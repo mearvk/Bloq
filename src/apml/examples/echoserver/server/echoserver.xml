@@ -6,7 +6,7 @@
     <apml language="Java 9" version="1.0" class="Apmlsystem" infer="true" implements="apml.interfaces.BasicSystemElement">  
 
         <package default="examples.echoserver.servers" sourcedir="/source" builddir="/build">            
-            <system id="Echoserversystem" class="Echoserversystem" implements="apml.interfaces.BasicSystemElement">                
+            <system id="Echoserversystem" class="Echoserversystem" implements="apml.interfaces.BasicSystemElement">        
                 <object id="Echoserver" class="Echoserver" implements="apml.interfaces.BasicSystemElement">                                                                                                                                                                               
                     <listener id="Inservice" class="Inputservicelistener">
                         <subscriber class="InputService"/>

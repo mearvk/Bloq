@@ -1,6 +1,7 @@
 package apml.system.bodi.remote;
 
 import apml.system.bodi.Bodi;
+
 import java.util.ArrayList;
 
 /**
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 public class Bodiconnection
 {
     public ArrayList<String> sessionids = new ArrayList();
+    
+    public String sessionid;
     
     public Bodi bodi;
     
@@ -28,33 +31,33 @@ public class Bodiconnection
         this.host = host;
     }
     
-    public void handshake(StringBuffer buffer, Bodi bodi)
+    public Bodiconnection handshake(StringBuffer buffer, Bodiremoteserver server)
     {
-        //to be implemented
+        return null;
     }
     
-    public void close(StringBuffer buffer, Bodi bodi)
-    {
-        //to be implemented
+    public Bodiconnection close(StringBuffer buffer, Bodiremoteserver server)
+    {               
+        return null;
     }
     
-    public Boolean put(StringBuffer buffer, Bodi bodi)
+    public Bodiconnection put(StringBuffer buffer, Bodiremoteserver server)
     {
-        return new Boolean("true");
+        return null;
     }
     
-    public Object pull(StringBuffer buffer, Bodi bodi)
+    public Bodiconnection pull(StringBuffer buffer, Bodiremoteserver server)
     {
-        return new Object();
+        return null;
     }
     
-    public void open(StringBuffer buffer, Bodi bodi)
+    public Bodiconnection open(StringBuffer buffer, Bodiremoteserver server)
     {
-        //to be implemented
+        return null;
     }
     
-    public Object trade(StringBuffer buffer, Bodi bodi)
+    public Bodiconnection trade(StringBuffer buffer, Bodiremoteserver server)
     {
-        return new Object();
+        return null;
     } 
 }
