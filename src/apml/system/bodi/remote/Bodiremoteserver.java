@@ -6,6 +6,8 @@ import apml.system.bodi.Bodi;
 
 import java.util.ArrayList;
 
+import java.util.Queue;
+
 /**
  *
  * @author Max Rupplin
@@ -16,10 +18,9 @@ public class Bodiremoteserver extends Basicserver implements Runnable, BasicSyst
     
     public Bodiprotocolhandler protocolhandler;
     
-    public Boolean running;
+    public Boolean running = true; //start at false?
     
-    public Bodi bodi;        
-    
+    public Bodi bodi;                
     
     public static void main(String...args)
     {
@@ -54,44 +55,82 @@ public class Bodiremoteserver extends Basicserver implements Runnable, BasicSyst
     @Override
     public void run()
     {
-        super.run();
+        super.run();                
         
         while(running)
         {
-            StringBuffer buffer = this.inqueue;
+            Connection inconnection = this.getnextqueuedconnection();
+            
+            Bodiconnection bodiconnection = null;
                     
             try
             {
-                if( inputqueueisready() )
+                if( inconnection!=null && inconnection.inputqueueisready() )
                 {                                        
-                    if(this.inqueue.toString().startsWith("//handshake"))
+                    if(inconnection.inqueue.toString().startsWith("//handshake"))
                     {
-                        protocolhandler.parseprotocol(Bodiprotocol.HANDSHAKE, buffer, this);
+                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.HANDSHAKE, inconnection.inqueue, this);
+                        
+                        inconnection.outqueue.append("//handshake //sessionid="+bodiconnection.sessionid);
+                        
+                        inconnection.haswriteready = true;
+                        
+                        inconnection.thread.outputlistenerthrread.haswriteready = true;
                     }
                     
-                    if(this.inqueue.toString().startsWith("//close"))
+                    if(inconnection.inqueue.toString().startsWith("//close"))
                     {
-                        protocolhandler.parseprotocol(Bodiprotocol.CLOSE, buffer, this);
+                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.CLOSE, inconnection.inqueue, this);
+                        
+                        inconnection.outqueue.append("//close");
+                        
+                        inconnection.haswriteready = true;
+                        
+                        inconnection.thread.outputlistenerthrread.haswriteready = true;
                     }
 
-                    if(this.inqueue.toString().startsWith("//open"))
+                    if(inconnection.inqueue.toString().startsWith("//open"))
                     {
-                        protocolhandler.parseprotocol(Bodiprotocol.OPEN, buffer, this);
+                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.OPEN, inconnection.inqueue, this);
+                        
+                        inconnection.outqueue.append("//open");
+                        
+                        inconnection.haswriteready = true;
+                        
+                        inconnection.thread.outputlistenerthrread.haswriteready = true;
                     }
 
-                    if(this.inqueue.toString().startsWith("//pull"))
+                    if(inconnection.inqueue.toString().startsWith("//pull"))
                     {
-                        protocolhandler.parseprotocol(Bodiprotocol.PULL, buffer, this);
+                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.PULL, inconnection.inqueue, this);
+                        
+                        inconnection.outqueue.append("//pull");
+                        
+                        inconnection.haswriteready = true;
+                        
+                        inconnection.thread.outputlistenerthrread.haswriteready = true;
                     }
                                         
-                    if(this.inqueue.toString().startsWith("//put"))
+                    if(inconnection.inqueue.toString().startsWith("//put"))
                     {
-                        protocolhandler.parseprotocol(Bodiprotocol.PUT, buffer, this);
+                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.PUT, inconnection.inqueue, this);
+                        
+                        inconnection.outqueue.append("//put");
+                        
+                        inconnection.haswriteready = true;
+                        
+                        inconnection.thread.outputlistenerthrread.haswriteready = true;                  
                     }
                     
-                    if(this.inqueue.toString().startsWith("//trade"))
+                    if(inconnection.inqueue.toString().startsWith("//trade"))
                     {
-                        protocolhandler.parseprotocol(Bodiprotocol.TRADE, buffer, this);
+                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.TRADE, inconnection.inqueue, this);
+                        
+                        inconnection.outqueue.append("//trade");
+                        
+                        inconnection.haswriteready = true;
+                        
+                        inconnection.thread.outputlistenerthrread.haswriteready = true;
                     }                    
                 }
                 else
@@ -101,15 +140,23 @@ public class Bodiremoteserver extends Basicserver implements Runnable, BasicSyst
             }
             catch(Exception e)
             {
-                //e.printStackTrace();
+                e.printStackTrace();
             }
         }
-    }
+    }    
     
-    private final Boolean inputqueueisready()
+    public Connection getnextqueuedconnection()
     {
-        return this.inqueue!= null && this.inqueue.toString().length()>0 && this.isdonereading;
-    }
+        Connection connection;
+        
+        connection = this.inputqueue.peek();
+        
+        if(connection==null) return null;
+        
+        this.inputqueue.remove(connection);
+        
+        return connection;
+    }    
     
     protected void sleepmillis(Long millis)
     {
@@ -131,7 +178,7 @@ public class Bodiremoteserver extends Basicserver implements Runnable, BasicSyst
         }        
     }    
     
-    public Bodiconnection checksessionid(ArrayList<Bodiconnection> bodiconnections, StringBuffer buffer, Bodi bodi) throws Exception
+    protected Bodiconnection checksessionid(ArrayList<Bodiconnection> bodiconnections, StringBuffer buffer, Bodi bodi) throws Exception
     {
        String[] tokens = buffer.toString().split(":");
         
@@ -206,5 +253,25 @@ public class Bodiremoteserver extends Basicserver implements Runnable, BasicSyst
     public byte[] read()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+}
+
+class Inputqueue 
+{
+    public Queue<Connection> queue;
+    
+    public void add(Connection connection)
+    {
+        this.queue.add(connection);
+    }
+    
+    public void remove(Connection connection)
+    {
+        this.queue.remove(connection);
+    }
+    
+    public Connection peek()
+    {
+        return this.queue.peek();
     }
 }

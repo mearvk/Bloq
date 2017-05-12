@@ -77,9 +77,11 @@ public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
         try
         {
             uip.constructor1.body().directStatement("\n");
+            
             uip.constructor2.body().directStatement("\n");
             
             uip.constructor1.body().directStatement("/*---------------------- combobox items ---------------------*/\n");
+            
             uip.constructor2.body().directStatement("/*---------------------- combobox items ---------------------*/\n");
             
             NodeList nodes =  (NodeList)xpath.evaluate("./item", this.nodes.item(uip.index), XPathConstants.NODESET); 

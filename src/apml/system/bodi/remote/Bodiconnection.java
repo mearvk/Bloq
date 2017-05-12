@@ -12,11 +12,13 @@ public class Bodiconnection
 {
     public ArrayList<String> sessionids = new ArrayList();
     
-    public String sessionid;
+    public String sessionid = "0x123456789abcdef";
+    
+    public String host;
     
     public Bodi bodi;
     
-    public String host;
+    public Boolean islive = false;
     
     
     public Bodiconnection(Bodi bodi)
