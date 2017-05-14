@@ -52,7 +52,7 @@ public class Bodiconnection
         
         bodiconnection.ttl = this.gettimetolive();
         
-        bodiconnection.object = this.getrequestedobject();
+        bodiconnection.object = this.getrequestedobject("context", "key");
         
         bodiconnection.result = this.getresult();
         
@@ -67,7 +67,7 @@ public class Bodiconnection
         
         bodiconnection.ttl = this.gettimetolive();
         
-        bodiconnection.object = this.getrequestedobject();
+        bodiconnection.object = this.getrequestedobject("context", "key");
         
         bodiconnection.result = this.getresult();    
     
@@ -82,7 +82,7 @@ public class Bodiconnection
         
         bodiconnection.ttl = this.gettimetolive();
         
-        bodiconnection.object = this.getrequestedobject();
+        bodiconnection.object = this.getrequestedobject("context", "key");
         
         bodiconnection.result = this.getresult();    
     
@@ -97,7 +97,7 @@ public class Bodiconnection
         
         bodiconnection.ttl = this.gettimetolive();
         
-        bodiconnection.object = this.getrequestedobject();
+        bodiconnection.object = this.getrequestedobject("context", "key");
         
         bodiconnection.result = this.getresult();    
     
@@ -112,7 +112,7 @@ public class Bodiconnection
         
         bodiconnection.ttl = this.gettimetolive();
         
-        bodiconnection.object = this.getrequestedobject();
+        bodiconnection.object = this.getrequestedobject("context", "key");
         
         bodiconnection.result = this.getresult();
         
@@ -127,7 +127,7 @@ public class Bodiconnection
         
         bodiconnection.ttl = this.gettimetolive();
         
-        bodiconnection.object = this.getrequestedobject();
+        bodiconnection.object = this.getrequestedobject("context", "key");
         
         bodiconnection.result = this.getresult(); 
         
@@ -136,21 +136,50 @@ public class Bodiconnection
     
     protected Integer getsessionid() 
     {
-        return -1;
+        return this.hashCode(); //ok for now
     }
     
     protected Long gettimetolive()
     {
-        return -1l;
+        return 60*1000*8l; //8 minutes of default connect
     }
     
-    protected Integer getrequestedobject()
+    protected Serializable getrequestedobject(String context, String key)
     {
-        return -1;
+        SerializedCarrier bodicarrier = new SerializedCarrier();
+        
+        Object object = Bodi.context(context).pull(key);
+        
+        Class _class = object.getClass();
+        
+        bodicarrier.object = object;
+        
+        bodicarrier._class = _class;
+        
+        return bodicarrier;
     }
     
     protected String getresult()
     {
         return "ok";
+    }
+}
+
+class SerializedCarrier implements Serializable
+{
+    public Object object = null;
+    
+    public Class _class = null;
+    
+    public SerializedCarrier()
+    {
+        
+    }
+    
+    public SerializedCarrier(Class _class, Object object)
+    {
+        this._class = _class;
+        
+        this.object = object;
     }
 }
