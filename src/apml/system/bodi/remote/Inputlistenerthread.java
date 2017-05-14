@@ -35,21 +35,19 @@ class Inputlistenerthread extends Thread
         {                 
             try
             {                
-                if(this.parent.connection.reader.ready())
+                if(this.parent.connection.reader.ready() && this.parent.connection.server.doread)
                 {                                           
-                    //readLine does not find \r or \n while using Telnet (at this time) so only use the single read please                    
-                    String line;
+                    //please use single line reads only for now
+                    String line = this.parent.connection.reader.readLine();
                     
-                    line = this.parent.connection.reader.readLine();
+                    Connection connection = this.parent.connection;                    
                     
-                    this.parent.connection.appendline(line);     
+                    connection.appendline(line);
                     
-                    this.parent.connection.server.inputqueue.add(this.parent.connection);
+                    connection.server.inputqueue.add(connection);
                     
-                    this.parent.connection.hasreadready = true;
-                    
-                    this.parent.connection.server.doread = true;
-                }             
+                    connection.hasreadready = true;
+                }            
             }
             catch(Error e)
             {
@@ -84,6 +82,8 @@ class Inputlistenerthread extends Thread
                     if(this.parent.connection.reader.ready())
                     {                        
                         this.hasreadready = true;
+                        
+                        this.parent.connection.server.doread = true;
                     }
                 }
                 catch(Exception e)

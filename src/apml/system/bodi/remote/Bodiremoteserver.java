@@ -45,7 +45,7 @@ public class Bodiremoteserver extends Basicserver
         this.port = port;        
     }
 
-    public void go()
+    public void go() //find a way to synch the input queue so delete doesn't actually delete fresh data
     {                                  
         while(running)
         {
@@ -57,7 +57,9 @@ public class Bodiremoteserver extends Basicserver
             {
                 if( inconnection!=null && inconnection.inputqueueisready() )
                 {                                        
-                    if(inconnection.inqueue.toString().startsWith("//handshake"))
+                    String input = inconnection.inqueue.toString();
+                    
+                    if(input.startsWith("//handshake"))
                     {
                         bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.HANDSHAKE, inconnection.inqueue, this, inconnection);
                                                 
@@ -65,12 +67,12 @@ public class Bodiremoteserver extends Basicserver
                                                                         
                         inconnection.haswriteready = true;
                         
-                        inconnection.thread.outputlistenerthread.haswriteready = true;                        
-                        
-                        inconnection.inqueue.delete(0, inconnection.inqueue.length());
+                        inconnection.thread.outputlistenerthread.haswriteready = true;                                                
+                            
+                        inconnection.inqueue.delete(0, input.length()); 
                     }
                     
-                    if(inconnection.inqueue.toString().startsWith("//close"))
+                    if(input.startsWith("//close"))
                     {
                         bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.CLOSE, inconnection.inqueue, this, inconnection);
                         
@@ -80,10 +82,10 @@ public class Bodiremoteserver extends Basicserver
                         
                         inconnection.thread.outputlistenerthread.haswriteready = true;
                         
-                        inconnection.inqueue.delete(0, inconnection.inqueue.length());
+                        inconnection.inqueue.delete(0, input.length());                  
                     }
 
-                    if(inconnection.inqueue.toString().startsWith("//open"))
+                    if(input.startsWith("//open"))
                     {
                         bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.OPEN, inconnection.inqueue, this, inconnection);
                         
@@ -93,10 +95,10 @@ public class Bodiremoteserver extends Basicserver
                         
                         inconnection.thread.outputlistenerthread.haswriteready = true;
                         
-                        inconnection.inqueue.delete(0, inconnection.inqueue.length());
+                        inconnection.inqueue.delete(0, input.length());                   
                     }
 
-                    if(inconnection.inqueue.toString().startsWith("//pull"))
+                    if(input.startsWith("//pull"))
                     {
                         bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.PULL, inconnection.inqueue, this, inconnection);
                         
@@ -106,10 +108,10 @@ public class Bodiremoteserver extends Basicserver
                         
                         inconnection.thread.outputlistenerthread.haswriteready = true;
                         
-                        inconnection.inqueue.delete(0, inconnection.inqueue.length());
+                        inconnection.inqueue.delete(0, input.length());                   
                     }
                                         
-                    if(inconnection.inqueue.toString().startsWith("//put"))
+                    if(input.startsWith("//put"))
                     {
                         bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.PUT, inconnection.inqueue, this, inconnection);
                         
@@ -119,10 +121,10 @@ public class Bodiremoteserver extends Basicserver
                         
                         inconnection.thread.outputlistenerthread.haswriteready = true;                  
                         
-                        inconnection.inqueue.delete(0, inconnection.inqueue.length());
+                        inconnection.inqueue.delete(0, input.length()); 
                     }
                     
-                    if(inconnection.inqueue.toString().startsWith("//trade"))
+                    if(input.startsWith("//trade"))
                     {
                         bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.TRADE, inconnection.inqueue, this, inconnection);
                         
@@ -132,7 +134,7 @@ public class Bodiremoteserver extends Basicserver
                         
                         inconnection.thread.outputlistenerthread.haswriteready = true;
                         
-                        inconnection.inqueue.delete(0, inconnection.inqueue.length());
+                        inconnection.inqueue.delete(0, input.length());                   
                     }                    
                 }
                 else
