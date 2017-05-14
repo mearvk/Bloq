@@ -89,7 +89,8 @@ class Outputlistenerthread extends Thread
                 }
                 finally
                 {
-                    //Thread.currentThread().sleep(400l);
+                    //sleep 400ms
+                    this.sleepmillis(400l);
                 }
             }
         }
@@ -98,4 +99,24 @@ class Outputlistenerthread extends Thread
             e.printStackTrace();
         }        
     }
+    
+    protected void sleepmillis(Long millis)
+    {
+        try
+        {
+            Thread.currentThread().sleep(150);
+        }
+        catch(InterruptedException ie)
+        {
+            return;
+        }
+        catch(Exception e)
+        {
+            //e.printStackTrace();
+        }
+        finally
+        {
+            //System.out.println("System in sleepmillis mode...");
+        }        
+    }    
 }

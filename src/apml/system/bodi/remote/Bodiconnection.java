@@ -148,13 +148,25 @@ public class Bodiconnection
     {
         SerializedCarrier bodicarrier = new SerializedCarrier();
         
-        Object object = Bodi.context(context).pull(key);
         
-        Class _class = object.getClass();
+        try
+        {   
+            Object object = Bodi.context(context).pull(key);
         
-        bodicarrier.object = object;
+            Class _class = Bodi.context(context).getclass(key);
+            
+            bodicarrier.object = object;
         
-        bodicarrier._class = _class;
+            bodicarrier._class = _class;
+        }
+        catch(Exception e)
+        {
+            //
+        }
+        
+        
+
+        
         
         return bodicarrier;
     }

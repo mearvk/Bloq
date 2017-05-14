@@ -93,6 +93,7 @@ class Inputlistenerthread extends Thread
                 finally
                 {
                     //sleep 400ms
+                    this.sleep(400l);
                 }
             }
         }
@@ -101,4 +102,24 @@ class Inputlistenerthread extends Thread
             e.printStackTrace();
         }
     }
+    
+    protected void sleepmillis(Long millis)
+    {
+        try
+        {
+            Thread.currentThread().sleep(150);
+        }
+        catch(InterruptedException ie)
+        {
+            return;
+        }
+        catch(Exception e)
+        {
+            //e.printStackTrace();
+        }
+        finally
+        {
+            //System.out.println("System in sleepmillis mode...");
+        }        
+    }    
 }

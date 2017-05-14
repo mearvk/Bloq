@@ -19,7 +19,7 @@ import org.w3c.dom.Node;
  */
 public class Bodicontext 
 {
-    protected final Integer hash = 0x888fe8;
+    protected final Integer hash = 0x00888fe8;
     
     private final Map<String, Object> namemap = new HashMap();
     
@@ -39,6 +39,11 @@ public class Bodicontext
     public Bodicontext(File file)
     {
         this.file = file;
+    }
+    
+    public Class getclass(String name)
+    {
+        return this.pull(name).getClass();
     }
     
     public void put(Integer hashcode, Object object)

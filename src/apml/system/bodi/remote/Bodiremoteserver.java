@@ -74,7 +74,7 @@ public class Bodiremoteserver extends Basicserver
                     {
                         bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.CLOSE, inconnection.inqueue, this, inconnection);
                         
-                        inconnection.outqueue.append("//close");
+                        inconnection.outqueue.append("//close //sessionid="+bodiconnection.sessionid);
                         
                         inconnection.haswriteready = true;
                         
@@ -87,7 +87,7 @@ public class Bodiremoteserver extends Basicserver
                     {
                         bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.OPEN, inconnection.inqueue, this, inconnection);
                         
-                        inconnection.outqueue.append("//open");
+                        inconnection.outqueue.append("//open //sessionid="+bodiconnection.sessionid);
                         
                         inconnection.haswriteready = true;
                         
@@ -100,7 +100,7 @@ public class Bodiremoteserver extends Basicserver
                     {
                         bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.PULL, inconnection.inqueue, this, inconnection);
                         
-                        inconnection.outqueue.append("//pull");
+                        inconnection.outqueue.append("//pull //sessionid="+bodiconnection.sessionid);
                         
                         inconnection.haswriteready = true;
                         
@@ -113,7 +113,7 @@ public class Bodiremoteserver extends Basicserver
                     {
                         bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.PUT, inconnection.inqueue, this, inconnection);
                         
-                        inconnection.outqueue.append("//put");
+                        inconnection.outqueue.append("//put //sessionid="+bodiconnection.sessionid);
                         
                         inconnection.haswriteready = true;
                         
@@ -126,7 +126,7 @@ public class Bodiremoteserver extends Basicserver
                     {
                         bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.TRADE, inconnection.inqueue, this, inconnection);
                         
-                        inconnection.outqueue.append("//trade");
+                        inconnection.outqueue.append("//trade  //sessionid="+bodiconnection.sessionid);
                         
                         inconnection.haswriteready = true;
                         
@@ -137,7 +137,7 @@ public class Bodiremoteserver extends Basicserver
                 }
                 else
                 {
-                    //this.sleepmillis(500l);
+                    this.sleepmillis(500l);
                 }
             }
             catch(Exception e)

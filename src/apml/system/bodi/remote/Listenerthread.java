@@ -80,9 +80,30 @@ class Listenerthread extends Thread
             finally
             {
                 //sleep 400ms
+                this.sleepmillis(400l);
             }
         }
         
         System.out.println("Basicserver listener thread exiting...");
-    }       
+    } 
+    
+    protected void sleepmillis(Long millis)
+    {
+        try
+        {
+            Thread.currentThread().sleep(150);
+        }
+        catch(InterruptedException ie)
+        {
+            return;
+        }
+        catch(Exception e)
+        {
+            //e.printStackTrace();
+        }
+        finally
+        {
+            //System.out.println("System in sleepmillis mode...");
+        }        
+    }    
 }
