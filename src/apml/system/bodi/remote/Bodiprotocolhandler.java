@@ -6,37 +6,35 @@ package apml.system.bodi.remote;
  */
 public class Bodiprotocolhandler
 { 
-    protected Bodiconnection parseprotocol( String protocol, StringBuffer buffer, Bodiremoteserver server ) throws Exception
-    {
-        Bodiconnection connection = server.checksessionid(server.bodiconnections, buffer, server.bodi);        
-        
-        if(connection.islive)
+    protected Bodiconnection parseprotocol( String protocol, StringBuffer buffer, Bodiremoteserver server, Connection connection ) throws Exception
+    {               
+        if(connection!=null)
         {
             switch(protocol)
             {                
                 //
                 case Bodiprotocol.CLOSE:        
-                    return connection.close(buffer, server);                                                 
+                    return new Bodiconnection(server, connection).close(buffer);                                                 
 
                 //
                 case Bodiprotocol.HANDSHAKE:    
-                    return connection.handshake(buffer, server);                                                                
+                    return new Bodiconnection(server, connection).handshake(buffer);                                                                
 
                 //
                 case Bodiprotocol.OPEN:         
-                    return connection.open(buffer, server);                                        
+                    return new Bodiconnection(server, connection).open(buffer);                                        
 
                 //
                 case Bodiprotocol.PULL:         
-                    return connection.pull(buffer, server);                                    
+                    return new Bodiconnection(server, connection).pull(buffer);                                    
 
                 //
                 case Bodiprotocol.PUT:          
-                    return connection.put(buffer, server);                    
+                    return new Bodiconnection(server, connection).put(buffer);                    
 
                 //
                 case Bodiprotocol.TRADE:        
-                    return connection.trade(buffer, server);                  
+                    return new Bodiconnection(server, connection).trade(buffer);                  
             }                        
         }  
         

@@ -2,6 +2,8 @@ package apml.system.bodi.remote;
 
 import apml.system.bodi.Bodi;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 
 /**
@@ -10,56 +12,145 @@ import java.util.ArrayList;
  */
 public class Bodiconnection
 {
+    public Bodiremoteserver server;
+            
+    public Connection connection;
+            
     public ArrayList<String> sessionids = new ArrayList();
     
-    public String sessionid = "0x123456789abcdef";
+    public Integer sessionid;
+    
+    public Long ttl;
+    
+    public String result;
+    
+    public Serializable object;
     
     public String host;
     
     public Bodi bodi;
     
-    public Boolean islive = false;
+    public Boolean islive = true;
     
-    
-    public Bodiconnection(Bodi bodi)
+    public Bodiconnection()
     {
-        this.bodi = bodi;
-    }
-    
-    public Bodiconnection(Bodi bodi, String host)
-    {
-        this.bodi = bodi;
         
-        this.host = host;
     }
     
-    public Bodiconnection handshake(StringBuffer buffer, Bodiremoteserver server)
+    public Bodiconnection(Bodiremoteserver server, Connection connection)
     {
-        return null;
+        this.server = server;
+        
+        this.connection = connection;
     }
     
-    public Bodiconnection close(StringBuffer buffer, Bodiremoteserver server)
+    public Bodiconnection handshake(StringBuffer buffer)
+    {
+        Bodiconnection bodiconnection = new Bodiconnection();
+        
+        bodiconnection.sessionid = this.getsessionid();
+        
+        bodiconnection.ttl = this.gettimetolive();
+        
+        bodiconnection.object = this.getrequestedobject();
+        
+        bodiconnection.result = this.getresult();
+        
+        return bodiconnection;
+    }
+    
+    public Bodiconnection close(StringBuffer buffer)
     {               
-        return null;
+        Bodiconnection bodiconnection = new Bodiconnection();
+        
+        bodiconnection.sessionid = this.getsessionid();
+        
+        bodiconnection.ttl = this.gettimetolive();
+        
+        bodiconnection.object = this.getrequestedobject();
+        
+        bodiconnection.result = this.getresult();    
+    
+        return bodiconnection;
     }
     
-    public Bodiconnection put(StringBuffer buffer, Bodiremoteserver server)
+    public Bodiconnection put(StringBuffer buffer)
     {
-        return null;
+        Bodiconnection bodiconnection = new Bodiconnection();
+        
+        bodiconnection.sessionid = this.getsessionid();
+        
+        bodiconnection.ttl = this.gettimetolive();
+        
+        bodiconnection.object = this.getrequestedobject();
+        
+        bodiconnection.result = this.getresult();    
+    
+        return bodiconnection;
     }
     
-    public Bodiconnection pull(StringBuffer buffer, Bodiremoteserver server)
+    public Bodiconnection pull(StringBuffer buffer)
     {
-        return null;
+        Bodiconnection bodiconnection = new Bodiconnection();
+        
+        bodiconnection.sessionid = this.getsessionid();
+        
+        bodiconnection.ttl = this.gettimetolive();
+        
+        bodiconnection.object = this.getrequestedobject();
+        
+        bodiconnection.result = this.getresult();    
+    
+        return bodiconnection;
     }
     
-    public Bodiconnection open(StringBuffer buffer, Bodiremoteserver server)
+    public Bodiconnection open(StringBuffer buffer)
     {
-        return null;
+        Bodiconnection bodiconnection = new Bodiconnection();
+        
+        bodiconnection.sessionid = this.getsessionid();
+        
+        bodiconnection.ttl = this.gettimetolive();
+        
+        bodiconnection.object = this.getrequestedobject();
+        
+        bodiconnection.result = this.getresult();
+        
+        return bodiconnection;
     }
     
-    public Bodiconnection trade(StringBuffer buffer, Bodiremoteserver server)
+    public Bodiconnection trade(StringBuffer buffer)
     {
-        return null;
-    } 
+        Bodiconnection bodiconnection = new Bodiconnection();
+        
+        bodiconnection.sessionid = this.getsessionid();
+        
+        bodiconnection.ttl = this.gettimetolive();
+        
+        bodiconnection.object = this.getrequestedobject();
+        
+        bodiconnection.result = this.getresult(); 
+        
+        return bodiconnection;
+    }
+    
+    protected Integer getsessionid() 
+    {
+        return -1;
+    }
+    
+    protected Long gettimetolive()
+    {
+        return -1l;
+    }
+    
+    protected Integer getrequestedobject()
+    {
+        return -1;
+    }
+    
+    protected String getresult()
+    {
+        return "ok";
+    }
 }

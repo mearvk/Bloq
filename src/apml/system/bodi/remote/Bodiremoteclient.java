@@ -1,6 +1,7 @@
 package apml.system.bodi.remote;
 
 import apml.system.bodi.Bodi;
+
 import java.util.ArrayList;
 
 /**
@@ -18,7 +19,7 @@ public class Bodiremoteclient extends Bodibaseclient implements Runnable
     
     public Bodi bodi;
     
-    public Bodiconnection connection = new Bodiconnection(bodi);
+    //public Bodiconnection connection = new Bodiconnection(bodi);
     
     
     public Bodiremoteclient(String host, Integer port)
@@ -33,9 +34,9 @@ public class Bodiremoteclient extends Bodibaseclient implements Runnable
         {
             try
             {
-                this.read(inputbuffer); //read input from a keyboard or else something entire diff ./diffclt
+                this.read(inputbuffer); 
                 
-                this.write(outputbuffer); //write out Bodi protocol in correct form
+                this.write(outputbuffer);
             }
             catch(Exception e)
             {

@@ -13,8 +13,8 @@ import java.util.Map;
  */
 public class Bodi 
 {
-    protected final Integer hash = 0x888fe8;
-        
+    protected final Integer hash = 0x00888FE8;
+            
     public static Map<String, Bodicontext> contexts = new HashMap();
     
     public static void main(String[] args)
