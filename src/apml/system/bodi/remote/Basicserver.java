@@ -4,11 +4,9 @@ import java.io.BufferedReader;
 
 import java.io.BufferedWriter;
 
-import java.io.InputStream;
+import java.io.IOException;
 
 import java.io.InputStreamReader;
-
-import java.io.OutputStream;
 
 import java.io.OutputStreamWriter;
 
@@ -16,13 +14,13 @@ import java.net.InetAddress;
 
 import java.net.ServerSocket;
 
-import java.net.Socket;
+import java.net.SocketException;
 
 import java.util.ArrayList;
 
 /**
  *
- * [^/@jrbodo] New trade era of Service, Protocol, Method [first touch /mr /ok /ss]
+ * New trade era of Service, Protocol, Method [first touch /mr /ok /ss]
  * 
  * @author Max Rupplin
  */
@@ -36,15 +34,17 @@ public abstract class Basicserver extends Thread
     
     public ServerSocket serversocket;    
     
-    public boolean doread;
+    public Boolean doread;
     
-    public boolean dowrite;
+    public Boolean dowrite;
     
-    public boolean isdonereading;
+    public Boolean isdonereading;
     
-    public boolean isdonewriting;        
+    public Boolean isdonewriting;       
     
-    public ArrayList<Connection> connections = new ArrayList<Connection>();
+    public Boolean running = true;
+    
+    public ArrayList<Connection> connections = new ArrayList();
     
     public Inputqueue inputqueue = new Inputqueue();
     
@@ -62,7 +62,7 @@ public abstract class Basicserver extends Thread
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
             
             return;
         }        
@@ -73,7 +73,7 @@ public abstract class Basicserver extends Thread
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
 
             return;
         }
@@ -95,7 +95,7 @@ public abstract class Basicserver extends Thread
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
             
             return;
         }        
@@ -106,7 +106,7 @@ public abstract class Basicserver extends Thread
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
 
             return;
         }
@@ -119,81 +119,79 @@ public abstract class Basicserver extends Thread
     @Override
     public void run()
     {
-        while(true)
-        {                    
-            Connection connection;
-            
-            connection = new Connection(this);
-            
-            connection.start();
-            
-            try
-            {
-                connection.socket = this.serversocket.accept();                                
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
+        try
+        {
+            while(running)
+            {                                                    
+                Connection connection;
+                
+                connection = new Connection(this);
 
-                return;
-            }
-            finally
-            {
-                System.out.println("> Remote connection established...");
-            }
+                connection.socket = this.serversocket.accept(); 
+                
+                System.out.println("> New remote connection established...");
+                
+                try
+                {
+                    connection.inputstream = connection.socket.getInputStream();
 
-            try
-            {
-                connection.inputstream = connection.socket.getInputStream();
+                    connection.reader = new BufferedReader(new InputStreamReader(connection.inputstream));            
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace(System.err);
 
-                connection.reader = new BufferedReader(new InputStreamReader(connection.inputstream));            
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
+                    return;
+                }
+                finally
+                {
+                    System.out.println(">   Server reader established...");
+                }
 
-                return;
-            }
-            finally
-            {
-                System.out.println(">   Server reader established...");
-            }
+                try
+                {
+                    connection.outputstream = connection.socket.getOutputStream();
 
-            try
-            {
-                connection.outputstream = connection.socket.getOutputStream();
+                    connection.writer = new BufferedWriter(new OutputStreamWriter(connection.outputstream));            
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace(System.err);
 
-                connection.writer = new BufferedWriter(new OutputStreamWriter(connection.outputstream));            
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
+                    return;
+                }   
+                finally
+                {
+                    System.out.println(">   Server writer established...");
+                }
 
-                return;
-            }   
-            finally
-            {
-                System.out.println(">   Server writer established...");
-            }
+                try
+                {                        
+                    connection.thread = new Listenerthread(connection);
 
-            try
-            {                        
-                connection.thread = new Listenerthread(connection);
+                    connection.thread.start();                
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace(System.err);
 
-                connection.thread.start();                
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
+                    return;
+                }
+                finally
+                {
+                    System.out.println(">   Socket I/O thread established...");
+                }
 
-                return;
+                this.connections.add(connection);                                
             }
-            finally
-            {
-                System.out.println(">   Socket I/O thread established...");
-            }
-            
-            connections.add(connection);
+        }
+        catch(SocketException se)
+        {
+            se.printStackTrace(System.err);
+        }        
+        catch(IOException ioe)
+        {
+            ioe.printStackTrace(System.err);
         }
     }
     

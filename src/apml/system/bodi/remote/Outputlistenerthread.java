@@ -23,48 +23,39 @@ class Outputlistenerthread extends Thread
     
     public Boolean checkoutputqueue()
     {
-        StringBuffer outputbuffer = this.parent.connection.outqueue;
+        String output = this.parent.connection.outqueue.toString();
         
-        synchronized(this.parent.outputlock)
-        {
-            try
-            {          
-                if(this.haswriteready == false)
-                {
-                    this.parent.outputlock.notifyAll();
-                    
-                    return true;
-                }
-                            
-                /*-------------------------------------------------------------*/
+         try
+         {                                    
+            //
 
-                this.parent.connection.isdonewriting = false;
+            this.parent.connection.isdonewriting = false;
+            
+            //
 
-                this.parent.connection.writer.write(outputbuffer.toString(), 0, outputbuffer.length());         
+            this.parent.connection.writer.write(output.toString(), 0, output.length());         
 
-                this.parent.connection.writer.flush();
+            this.parent.connection.writer.flush();
+            
+            //
 
-                this.parent.connection.outqueue.delete(0, this.parent.connection.outqueue.length());
+            this.parent.connection.outqueue.delete(0, output.length());
+            
+            //
 
-                this.parent.connection.isdonewriting = true;
+            this.parent.connection.isdonewriting = true;
 
-                this.parent.connection.haswriteready = false;
+            this.parent.connection.haswriteready = false;
 
-                /*-------------------------------------------------------------*/
-
-                this.parent.outputlock.notifyAll();               
-            }
-            catch(Exception e)
-            {
-                //e.printStackTrace();
-            }      
-            finally
-            {
-                //sleep 400ms
-            }
-
-            return true;
+            //
         }
+        catch(Exception e)
+        {
+            //e.printStackTrace();
+        }      
+
+
+        return true;        
     }    
     
     @Override

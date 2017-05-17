@@ -18,26 +18,12 @@ import java.util.stream.Stream;
  *
  * @author Max Rupplin
  */
-class Connection extends Thread
+class Connection
 {
     public Connection(Basicserver server)
     {
         this.server = server;
-    }
-    
-    public Stream<String> lines1;
-    
-    public Stream<String> lines2;
-    
-    public Stream<String> lines3;
-    
-    public Stream<String> lines4;
-    
-    public Stream<String> markslines1to8;
-    
-    public Stream<String> sharonslifeguardline;
-    
-    public Stream<String> append;
+    }    
     
     public Basicserver server;
     
@@ -67,7 +53,7 @@ class Connection extends Thread
     
     public Connection()
     {
-        this.append = new ArrayList<String>().stream();
+        
     }
     
     public void appendline(String line) 
@@ -78,46 +64,5 @@ class Connection extends Thread
     public Boolean inputqueueisready()
     {
         return this.inqueue!=null && this.inqueue.length()>0;
-    }
-    
-    @Override
-    public void run()
-    {
-        while(true)
-        {           
-            try
-            {
-                //synchronized(this)
-                //{                              
-                    if(this.append!=null && this.append.count()>0)
-                    {
-                        this.append.forEach(inqueue::append);    
-
-                        this.server.inputqueue.add(this);                                    
-
-                        this.hasreadready = true;
-
-                        this.isdonereading = true;                      
-                    }
-                //}
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            finally
-            {
-                try
-                {
-                    Thread.sleep(400l);
-                }
-                catch(Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            
-            //this.notify();
-        }
-    }
+    }   
 }

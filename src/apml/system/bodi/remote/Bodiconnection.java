@@ -4,8 +4,6 @@ import apml.system.bodi.Bodi;
 
 import java.io.Serializable;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Max Rupplin
@@ -14,9 +12,7 @@ public class Bodiconnection
 {
     public Bodiremoteserver server;
             
-    public Connection connection;
-            
-    public ArrayList<String> sessionids = new ArrayList();
+    public Connection connection;            
     
     public Integer sessionid;
     
@@ -32,9 +28,10 @@ public class Bodiconnection
     
     public Boolean islive = true;
     
+    
     public Bodiconnection()
     {
-        
+        this.sessionid = this.hashCode();
     }
     
     public Bodiconnection(Bodiremoteserver server, Connection connection)
@@ -44,99 +41,121 @@ public class Bodiconnection
         this.connection = connection;
     }
     
-    public Bodiconnection handshake(StringBuffer buffer)
+    private Boolean checkconnection(Bodiconnection bodiconnection)            
     {
-        Bodiconnection bodiconnection = new Bodiconnection();
+        if(bodiconnection==null)    return false;
         
-        bodiconnection.sessionid = this.getsessionid();
+        if(bodiconnection.ttl <= 0) return false;
         
-        bodiconnection.ttl = this.gettimetolive();
+        return true;
+    }
+    
+    /**
+     * New handshakes should return new Bodiconnection instances with unique sessionid values
+     * 
+     * Existing Bodiconnections should return updated TTLs possibly more.
+     * 
+     * @param buffer
+     * @return 
+     */
+    public Bodiconnection handshake(StringBuffer buffer) throws Exception
+    {
+        Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
         
-        bodiconnection.object = this.getrequestedobject("context", "key");
+        bodiconnection.getsessionid();
         
-        bodiconnection.result = this.getresult();
+        bodiconnection.gettimetolive();                
+        
+        bodiconnection.getrequestedobject("context", "key");
+        
+        bodiconnection.getresult();
         
         return bodiconnection;
     }
     
-    public Bodiconnection close(StringBuffer buffer)
+    public Bodiconnection close(StringBuffer buffer) throws Exception
     {               
-        Bodiconnection bodiconnection = new Bodiconnection();
+        Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
         
-        bodiconnection.sessionid = this.getsessionid();
+        bodiconnection.getsessionid();
         
-        bodiconnection.ttl = this.gettimetolive();
+        bodiconnection.gettimetolive();                
         
-        bodiconnection.object = this.getrequestedobject("context", "key");
+        bodiconnection.getrequestedobject("context", "key");
         
-        bodiconnection.result = this.getresult();    
-    
-        return bodiconnection;
-    }
-    
-    public Bodiconnection put(StringBuffer buffer)
-    {
-        Bodiconnection bodiconnection = new Bodiconnection();
-        
-        bodiconnection.sessionid = this.getsessionid();
-        
-        bodiconnection.ttl = this.gettimetolive();
-        
-        bodiconnection.object = this.getrequestedobject("context", "key");
-        
-        bodiconnection.result = this.getresult();    
-    
-        return bodiconnection;
-    }
-    
-    public Bodiconnection pull(StringBuffer buffer)
-    {
-        Bodiconnection bodiconnection = new Bodiconnection();
-        
-        bodiconnection.sessionid = this.getsessionid();
-        
-        bodiconnection.ttl = this.gettimetolive();
-        
-        bodiconnection.object = this.getrequestedobject("context", "key");
-        
-        bodiconnection.result = this.getresult();    
-    
-        return bodiconnection;
-    }
-    
-    public Bodiconnection open(StringBuffer buffer)
-    {
-        Bodiconnection bodiconnection = new Bodiconnection();
-        
-        bodiconnection.sessionid = this.getsessionid();
-        
-        bodiconnection.ttl = this.gettimetolive();
-        
-        bodiconnection.object = this.getrequestedobject("context", "key");
-        
-        bodiconnection.result = this.getresult();
+        bodiconnection.getresult();
         
         return bodiconnection;
     }
     
-    public Bodiconnection trade(StringBuffer buffer)
+    public Bodiconnection put(StringBuffer buffer) throws Exception
     {
-        Bodiconnection bodiconnection = new Bodiconnection();
+        Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
         
-        bodiconnection.sessionid = this.getsessionid();
+        bodiconnection.getsessionid();
         
-        bodiconnection.ttl = this.gettimetolive();
+        bodiconnection.gettimetolive();                
         
-        bodiconnection.object = this.getrequestedobject("context", "key");
+        bodiconnection.getrequestedobject("context", "key");
         
-        bodiconnection.result = this.getresult(); 
+        bodiconnection.getresult();
+        
+        return bodiconnection;
+    }
+    
+    public Bodiconnection pull(StringBuffer buffer) throws Exception
+    {
+        Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
+        
+        bodiconnection.getsessionid();
+        
+        bodiconnection.gettimetolive();                
+        
+        bodiconnection.getrequestedobject("context", "key");
+        
+        bodiconnection.getresult();
+        
+        return bodiconnection;
+    }
+    
+    public Bodiconnection open(StringBuffer buffer) throws Exception
+    {        
+        Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
+        
+        bodiconnection.getsessionid();
+        
+        bodiconnection.gettimetolive();                
+        
+        bodiconnection.getrequestedobject("context", "key");
+        
+        bodiconnection.getresult();
+        
+        return bodiconnection;
+    }
+    
+    public Bodiconnection trade(StringBuffer buffer) throws Exception
+    {
+        Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
+        
+        bodiconnection.getsessionid();
+        
+        bodiconnection.gettimetolive();                
+        
+        bodiconnection.getrequestedobject("context", "key");
+        
+        bodiconnection.getresult();
         
         return bodiconnection;
     }
     
     protected Integer getsessionid() 
     {
-        return this.hashCode(); //ok for now
+        if(this.sessionid==null || this.sessionid==0)
+        {
+            return this.hashCode();
+        }
+        
+        return this.sessionid;
     }
     
     protected Long gettimetolive()
@@ -162,11 +181,7 @@ public class Bodiconnection
         catch(Exception e)
         {
             //
-        }
-        
-        
-
-        
+        }                        
         
         return bodicarrier;
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package apml.system.bodi.remote;
 
 /**
@@ -11,36 +6,31 @@ package apml.system.bodi.remote;
  */
 class Listenerthread extends Thread
 {
+    
     public Connection connection;
     
     public Boolean running = true;
-    
-    public Object inputlock = new Object();
-    
-    public Object outputlock = new Object();
-    
-    
-    //public Basicserver server;
     
     public Inputlistenerthread inputlistenerthrread;
     
     public Outputlistenerthread outputlistenerthread;
     
+    
     public Listenerthread(Connection connection)
     {
         this.connection = connection;
                 
-        /*---------------------------------------------------------------------*/
+        //
         
         this.setName("Listenerthread");
         
-        /*---------------------------------------------------------------------*/
+        //
         
         this.inputlistenerthrread = new Inputlistenerthread(this);
         
         this.inputlistenerthrread.start();        
                 
-        /*---------------------------------------------------------------------*/
+        //
         
         this.outputlistenerthread = new Outputlistenerthread(this);                
         
@@ -50,60 +40,45 @@ class Listenerthread extends Thread
     @Override
     public void run()
     {
-        System.out.println(">   Server main thread started...");
+        //System.out.println(">   Server main thread started...");
         
-        while(running)            
-        {
-            System.err.println("Listener thread now looping...");
-            
-            try
-            {               
-                this.inputlistenerthrread.checkinputqueue();                                   
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            finally
-            {
-                //sleep 400 ms
-            }
-            
-            try
-            {
-                this.outputlistenerthread.checkoutputqueue();
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            finally
-            {
-                //sleep 400ms
-                this.sleepmillis(400l);
-            }
-        }
-        
-        System.out.println("Basicserver listener thread exiting...");
-    } 
-    
-    protected void sleepmillis(Long millis)
-    {
         try
         {
-            Thread.currentThread().sleep(150);
-        }
-        catch(InterruptedException ie)
-        {
-            return;
+            while(running)            
+            {
+                //System.err.println("Listener thread now looping...");
+
+                try
+                {               
+                    this.inputlistenerthrread.checkinputqueue();                                   
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace(System.err);
+                }
+
+                try
+                {
+                    this.outputlistenerthread.checkoutputqueue();
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace(System.err);
+                }     
+            }            
+            
+            this.sleepmillis(1000l);
         }
         catch(Exception e)
         {
             //e.printStackTrace();
         }
-        finally
-        {
-            //System.out.println("System in sleepmillis mode...");
-        }        
+        
+        //System.out.println("Basicserver listener thread exiting...");
+    } 
+    
+    protected void sleepmillis(Long millis) throws Exception
+    {        
+        Thread.currentThread().sleep(millis);     
     }    
 }

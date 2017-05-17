@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Bodiremoteserver extends Basicserver
 {       
     public ArrayList<Bodiconnection> bodiconnections = new ArrayList();    
-    
+//    
     public Bodiprotocolhandler protocolhandler = new Bodiprotocolhandler();
     
     public Boolean running = true; 
@@ -45,106 +45,106 @@ public class Bodiremoteserver extends Basicserver
         
         this.port = port;        
     }
-
+    
     public void go() //find a way to synch the input queue so delete doesn't actually delete fresh data
     {                                  
         while(running)
         {
-            Connection inconnection = this.getnextqueuedconnection();
+            Connection socketconnection = this.getnextqueuedconnection();
             
             Bodiconnection bodiconnection = null;
                     
             try
             {
-                if( inconnection!=null && inconnection.inputqueueisready() )
+                if( socketconnection!=null && socketconnection.inputqueueisready() )
                 {                                        
-                    String input = inconnection.inqueue.toString();
+                    String input = socketconnection.inqueue.toString();
                     
                     if(input.startsWith("//handshake"))
                     {
-                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.HANDSHAKE, inconnection.inqueue, this, inconnection);
+                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.HANDSHAKE, socketconnection.inqueue, this, socketconnection);
                                                 
-                        inconnection.outqueue.append("//handshake //sessionid="+bodiconnection.sessionid+" //result="+bodiconnection.result);
+                        socketconnection.outqueue.append("//handshake //sessionid="+bodiconnection.sessionid+" //result="+bodiconnection.result);
                                                                         
-                        inconnection.haswriteready = true;
+                        socketconnection.haswriteready = true;
                         
-                        inconnection.thread.outputlistenerthread.haswriteready = true;                                                
+                        socketconnection.thread.outputlistenerthread.haswriteready = true;                                                
                             
-                        inconnection.inqueue.delete(0, input.length()); 
+                        socketconnection.inqueue.delete(0, input.length()); 
                     }
                     
                     if(input.startsWith("//close"))
                     {
-                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.CLOSE, inconnection.inqueue, this, inconnection);
+                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.CLOSE, socketconnection.inqueue, this, socketconnection);
                         
-                        inconnection.outqueue.append("//close //sessionid="+bodiconnection.sessionid+" //result="+bodiconnection.result);
+                        socketconnection.outqueue.append("//close //sessionid="+bodiconnection.sessionid+" //result="+bodiconnection.result);
                         
-                        inconnection.haswriteready = true;
+                        socketconnection.haswriteready = true;
                         
-                        inconnection.thread.outputlistenerthread.haswriteready = true;
+                        socketconnection.thread.outputlistenerthread.haswriteready = true;
                         
-                        inconnection.inqueue.delete(0, input.length());                
+                        socketconnection.inqueue.delete(0, input.length());                
                         
-                        //inconnection.server.closeconnection(inconnection);
+                        //inconnection.server.closeconnection(socketconnection);
                     }
 
                     if(input.startsWith("//open"))
                     {
-                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.OPEN, inconnection.inqueue, this, inconnection);
+                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.OPEN, socketconnection.inqueue, this, socketconnection);
                         
-                        inconnection.outqueue.append("//open //sessionid="+bodiconnection.sessionid+" //result="+bodiconnection.result);
+                        socketconnection.outqueue.append("//open //sessionid="+bodiconnection.sessionid+" //result="+bodiconnection.result);
                         
-                        inconnection.haswriteready = true;
+                        socketconnection.haswriteready = true;
                         
-                        inconnection.thread.outputlistenerthread.haswriteready = true;
+                        socketconnection.thread.outputlistenerthread.haswriteready = true;
                         
-                        inconnection.inqueue.delete(0, input.length());      
+                        socketconnection.inqueue.delete(0, input.length());      
                         
-                        //inconnection.server.openconnection(inconnection);
+                        //inconnection.server.openconnection(socketconnection);
                     }
 
                     if(input.startsWith("//pull"))
                     {
-                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.PULL, inconnection.inqueue, this, inconnection);
+                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.PULL, socketconnection.inqueue, this, socketconnection);
                         
-                        inconnection.outqueue.append("//pull //sessionid="+bodiconnection.sessionid+" //result="+bodiconnection.result);
+                        socketconnection.outqueue.append("//pull //sessionid="+bodiconnection.sessionid+" //result="+bodiconnection.result);
                         
-                        inconnection.haswriteready = true;
+                        socketconnection.haswriteready = true;
                         
-                        inconnection.thread.outputlistenerthread.haswriteready = true;
+                        socketconnection.thread.outputlistenerthread.haswriteready = true;
                         
-                        inconnection.inqueue.delete(0, input.length());                   
+                        socketconnection.inqueue.delete(0, input.length());                   
                     }
                                         
                     if(input.startsWith("//put"))
                     {
-                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.PUT, inconnection.inqueue, this, inconnection);
+                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.PUT, socketconnection.inqueue, this, socketconnection);
                         
-                        inconnection.outqueue.append("//put //sessionid="+bodiconnection.sessionid+" //result="+bodiconnection.result);
+                        socketconnection.outqueue.append("//put //sessionid="+bodiconnection.sessionid+" //result="+bodiconnection.result);
                         
-                        inconnection.haswriteready = true;
+                        socketconnection.haswriteready = true;
                         
-                        inconnection.thread.outputlistenerthread.haswriteready = true;                  
+                        socketconnection.thread.outputlistenerthread.haswriteready = true;                  
                         
-                        inconnection.inqueue.delete(0, input.length()); 
+                        socketconnection.inqueue.delete(0, input.length()); 
                     }
                     
                     if(input.startsWith("//trade"))
                     {
-                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.TRADE, inconnection.inqueue, this, inconnection);
+                        bodiconnection = protocolhandler.parseprotocol(Bodiprotocol.TRADE, socketconnection.inqueue, this, socketconnection);
                         
-                        inconnection.outqueue.append("//trade  //sessionid="+bodiconnection.sessionid+" //result"+bodiconnection.result);
+                        socketconnection.outqueue.append("//trade  //sessionid="+bodiconnection.sessionid+" //result"+bodiconnection.result);
                         
-                        inconnection.haswriteready = true;
+                        socketconnection.haswriteready = true;
                         
-                        inconnection.thread.outputlistenerthread.haswriteready = true;
+                        socketconnection.thread.outputlistenerthread.haswriteready = true;
                         
-                        inconnection.inqueue.delete(0, input.length());                   
+                        socketconnection.inqueue.delete(0, input.length());                   
                     }                    
                 }
                 else
                 {
-                    this.sleepmillis(500l);
+                    this.sleepmillis(10000l); //oh boy oh boy let's rest half a day
                 }
             }
             catch(Exception e)
@@ -156,59 +156,61 @@ public class Bodiremoteserver extends Basicserver
     
     public Connection getnextqueuedconnection()
     {        
-        Connection connection;
+        Connection connection = this.inputqueue.peek();        
         
-        connection = this.inputqueue.peek();
-        
-        if(connection==null) return null;
-        
-        this.inputqueue.remove(connection);
+        if(connection!=null) this.inputqueue.remove(connection);
         
         return connection;
     }    
     
-    protected void sleepmillis(Long millis)
+    protected void sleepmillis(Long millis) throws Exception
     {
-        try
-        {
-            Thread.currentThread().sleep(150);
-        }
-        catch(InterruptedException ie)
-        {
-            return;
-        }
-        catch(Exception e)
-        {
-            //e.printStackTrace();
-        }
-        finally
-        {
-            //System.out.println("System in sleepmillis mode...");
-        }        
+        Thread.currentThread().sleep(millis);
     }    
     
-    protected Bodiconnection checksessionid(ArrayList<Bodiconnection> bodiconnections, StringBuffer buffer, Bodi bodi) throws Exception
+    protected Bodiconnection checkforexistingconnection(StringBuffer buffer) throws Exception
     {
-       String[] tokens = buffer.toString().split(":");
+       String[] tokens = buffer.toString().split(" ");
         
         for(String token : tokens)
         {          
-            if(token.startsWith("//sessionid")) /* //sessionid = 1234567890 e.g. */
+            if(token.trim().startsWith("//sessionid"))
             {
-                for(Bodiconnection incomingconnection : this.bodiconnections)
+                for(Bodiconnection existingconnection : this.bodiconnections)
                 {
-                    for(String sessionid : incomingconnection.sessionids)
+                    token = token.trim().replace("//sessionid=", "");
                     
-                    if(token.trim().toLowerCase().equalsIgnoreCase(sessionid))
+                    int receivedsessionid = Integer.parseInt(token);
+                    
+                    int existingsessionid = existingconnection.sessionid;
+                    
+                    if(receivedsessionid == existingsessionid)
                     {
-                        return incomingconnection;                        
+                        return existingconnection;
                     }
                 }
             }
         }
         
-        throw new NoValidConnectionFoundException("No valid connection found");
+        throw new Exception("No session with sessionid found.");
     }
+    
+    public Boolean isvalidsessionid(Bodiconnection connection)
+    {
+        if(connection==null) return false;
+        
+        if(connection.sessionid==null) return false;
+        
+        for(Bodiconnection existingconnection : this.bodiconnections)
+        {
+            if(existingconnection.sessionid == connection.sessionid)
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }    
 
     @Override
     public void write(byte[] bytes)

@@ -1,18 +1,12 @@
 package apml.system.bodi.remote;
 
-import java.util.ArrayList;
-import java.util.stream.Stream;
-import javax.swing.SwingUtilities;
-
 /**
  *
  * @author Max Rupplin
  */
 class Inputlistenerthread extends Thread
 {
-    public Boolean hasreadready = false;
-    
-    public Boolean isnotchecking = true;
+    public Boolean hasreadready = false;    
     
     public Boolean running = true;
     
@@ -30,48 +24,45 @@ class Inputlistenerthread extends Thread
     }
     
     public Boolean checkinputqueue()
-    {                
-        synchronized(this.parent.inputlock)
-        {                 
-            try
-            {                
-                if(this.parent.connection.reader.ready() && this.parent.connection.server.doread)
-                {                                           
-                    //please use single line reads only for now
-                    String line = this.parent.connection.reader.readLine();
+    {                            
+        try
+        {                
+           if(this.parent.connection.reader.ready() && this.hasreadready)
+           {                                           
+                //please use single line reads only for now
+                String line = this.parent.connection.reader.readLine();
+                   
+                Connection connection = this.parent.connection;                
                     
-                    Connection connection = this.parent.connection;                    
+                connection.appendline(line);
                     
-                    connection.appendline(line);
-                    
-                    connection.server.inputqueue.add(connection);
-                    
-                    connection.hasreadready = true;
-                }            
-            }
-            catch(Error e)
-            {
-                e.printStackTrace();
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            finally
-            {
-                //
-            }           
-        
-            System.out.println("Call to checkinputqueue exiting...");
-            
-            return true;            
+                connection.server.inputqueue.add(connection);
+                  
+                connection.server.doread = true;
+            }            
         }
+        catch(Error e)
+        {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            //
+        }           
+        
+        //System.out.println("Call to checkinputqueue exiting...");
+            
+        return true;            
     }  
     
     @Override
     public void run()
     {
-        System.out.println(">   Inputlistenerthread started...");
+        //System.out.println(">   Inputlistenerthread started...");
         
         try
         {
@@ -81,45 +72,25 @@ class Inputlistenerthread extends Thread
                 {
                     if(this.parent.connection.reader.ready())
                     {                        
-                        this.hasreadready = true;
-                        
-                        this.parent.connection.server.doread = true;
+                        this.hasreadready = true;                                                
                     }
                 }
                 catch(Exception e)
                 {
                     e.printStackTrace();
                 }
-                finally
-                {
-                    //sleep 400ms
-                    this.sleep(400l);
-                }
             }
+            
+            this.sleepmillis(1000l);
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            //
         }
     }
     
-    protected void sleepmillis(Long millis)
+    protected void sleepmillis(Long millis) throws Exception
     {
-        try
-        {
-            Thread.currentThread().sleep(150);
-        }
-        catch(InterruptedException ie)
-        {
-            return;
-        }
-        catch(Exception e)
-        {
-            //e.printStackTrace();
-        }
-        finally
-        {
-            //System.out.println("System in sleepmillis mode...");
-        }        
+        Thread.currentThread().sleep(millis);
     }    
 }
