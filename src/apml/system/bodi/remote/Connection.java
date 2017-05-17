@@ -51,9 +51,11 @@ class Connection
     
     public Boolean hasreadready;
     
+    public Integer sessionid;
+    
     public Connection()
     {
-        
+        this.sessionid = this.hashCode();
     }
     
     public void appendline(String line) 

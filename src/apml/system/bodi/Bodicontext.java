@@ -2,12 +2,14 @@
 package apml.system.bodi;
 
 import java.io.File;
+import java.util.Collection;
 
 import java.util.HashMap;
 
 import java.util.Map;
 
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.w3c.dom.Element;
 
@@ -127,6 +129,11 @@ public class Bodicontext
         
         return null;
     }
+    
+    public Object pullAll(Integer hashcode)
+    {
+        return null;
+    }
 
     public Object pull(Object object)
     {
@@ -154,5 +161,65 @@ public class Bodicontext
         }
         
         return null;
-    }            
+    }       
+    
+    public Map<Object,Object> pullallpairs()
+    {
+        HashMap<Object, Object> allvals = new HashMap<Object, Object>();
+    
+        allvals.putAll(namemap);
+        
+        allvals.putAll(objectmap);
+        
+        allvals.putAll(hashmap);
+        
+        return allvals;
+    }
+    
+    public Set<Object> pullallkeys()
+    {
+        Map<Object, Object> allvals = this.pullallpairs();
+        
+        return allvals.keySet();
+    }
+    
+    public Collection<Object> pullallvalues()
+    {
+        Map<Object, Object> allvals = this.pullallpairs();
+        
+        return allvals.values();        
+    }
+    
+    
+    public Collection<Object> pullallstringkeyedvalues()
+    {
+        return namemap.values();
+    }    
+    
+    public Set<String> pullallstringkeys()
+    {
+        return namemap.keySet();
+    }
+    
+    
+    public Collection<Object> pullallobjectkeyedvalues()
+    {
+        return objectmap.values();
+    }    
+    
+    public Set<Object> pullallobjectkeys()
+    {
+        return objectmap.keySet();
+    }
+
+    
+    public Collection<Object> pullallhashcodekeyedvalues()
+    {
+        return hashmap.values();
+    }    
+    
+    public Set<Integer> pullAllKeys()
+    {
+        return hashmap.keySet();
+    }    
 }

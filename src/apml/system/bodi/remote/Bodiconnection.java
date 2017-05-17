@@ -28,6 +28,8 @@ public class Bodiconnection
     
     public Boolean islive = true;
     
+    public String op = "";
+    
     
     public Bodiconnection()
     {
@@ -60,7 +62,9 @@ public class Bodiconnection
      */
     public Bodiconnection handshake(StringBuffer buffer) throws Exception
     {
-        Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
+        Bodiconnection bodiconnection = new Bodiconnection();  
+        
+        bodiconnection.op = "handshake";
         
         bodiconnection.getsessionid();
         
@@ -77,6 +81,8 @@ public class Bodiconnection
     {               
         Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
         
+        bodiconnection.op = "close";
+        
         bodiconnection.getsessionid();
         
         bodiconnection.gettimetolive();                
@@ -91,6 +97,8 @@ public class Bodiconnection
     public Bodiconnection put(StringBuffer buffer) throws Exception
     {
         Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
+        
+        bodiconnection.op = "put";
         
         bodiconnection.getsessionid();
         
@@ -107,6 +115,8 @@ public class Bodiconnection
     {
         Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
         
+        bodiconnection.op = "pull";
+        
         bodiconnection.getsessionid();
         
         bodiconnection.gettimetolive();                
@@ -122,6 +132,8 @@ public class Bodiconnection
     {        
         Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
         
+        bodiconnection.op = "open";
+        
         bodiconnection.getsessionid();
         
         bodiconnection.gettimetolive();                
@@ -136,6 +148,8 @@ public class Bodiconnection
     public Bodiconnection trade(StringBuffer buffer) throws Exception
     {
         Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
+        
+        bodiconnection.op = "trade";
         
         bodiconnection.getsessionid();
         

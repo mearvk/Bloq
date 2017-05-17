@@ -2,17 +2,19 @@ package apml.system.bodi.remote;
 
 import apml.system.bodi.Bodi;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+
+import java.util.Set;
 
 /**
  * Hello transactional service based pay-as-you-go internet (Bodi)
  * 
  * @author Max Rupplin
  */
-public class Bodiremoteserver extends Basicserver
+public class Bodiremoteserver extends Basicserver //reserve keyword fortune at root for bodi and her creator Max R .mr .ok ss
 {       
-    public ArrayList<Bodiconnection> bodiconnections = new ArrayList();    
-//    
+    public Set<Bodiconnection> bodiconnections = new HashSet();    
+    
     public Bodiprotocolhandler protocolhandler = new Bodiprotocolhandler();
     
     public Boolean running = true; 
@@ -37,6 +39,10 @@ public class Bodiremoteserver extends Basicserver
         this.host = host;
         
         this.port = port;        
+        
+        Bodi.setcontext("//bodi/server/remote/bodiconnections/");
+        
+        Bodi.setcontext("//bodi/server/remote/netconnections/");
     }
     
     public Bodiremoteserver(Integer port)
@@ -44,6 +50,10 @@ public class Bodiremoteserver extends Basicserver
         super("localhost", port);
         
         this.port = port;        
+        
+        Bodi.setcontext("//bodi/server/remote/bodiconnections/");
+        
+        Bodi.setcontext("//bodi/server/remote/netconnections/");        
     }
     
     public void go() //find a way to synch the input queue so delete doesn't actually delete fresh data
@@ -70,7 +80,7 @@ public class Bodiremoteserver extends Basicserver
                         
                         socketconnection.thread.outputlistenerthread.haswriteready = true;                                                
                             
-                        socketconnection.inqueue.delete(0, input.length()); 
+                        socketconnection.inqueue = socketconnection.inqueue.delete(0, input.length()); 
                     }
                     
                     if(input.startsWith("//close"))
@@ -83,7 +93,7 @@ public class Bodiremoteserver extends Basicserver
                         
                         socketconnection.thread.outputlistenerthread.haswriteready = true;
                         
-                        socketconnection.inqueue.delete(0, input.length());                
+                        socketconnection.inqueue = socketconnection.inqueue.delete(0, input.length());                
                         
                         //inconnection.server.closeconnection(socketconnection);
                     }
@@ -98,7 +108,7 @@ public class Bodiremoteserver extends Basicserver
                         
                         socketconnection.thread.outputlistenerthread.haswriteready = true;
                         
-                        socketconnection.inqueue.delete(0, input.length());      
+                        socketconnection.inqueue = socketconnection.inqueue.delete(0, input.length());      
                         
                         //inconnection.server.openconnection(socketconnection);
                     }
@@ -113,7 +123,7 @@ public class Bodiremoteserver extends Basicserver
                         
                         socketconnection.thread.outputlistenerthread.haswriteready = true;
                         
-                        socketconnection.inqueue.delete(0, input.length());                   
+                        socketconnection.inqueue = socketconnection.inqueue.delete(0, input.length());                   
                     }
                                         
                     if(input.startsWith("//put"))
@@ -126,7 +136,7 @@ public class Bodiremoteserver extends Basicserver
                         
                         socketconnection.thread.outputlistenerthread.haswriteready = true;                  
                         
-                        socketconnection.inqueue.delete(0, input.length()); 
+                        socketconnection.inqueue = socketconnection.inqueue.delete(0, input.length()); 
                     }
                     
                     if(input.startsWith("//trade"))
@@ -139,7 +149,7 @@ public class Bodiremoteserver extends Basicserver
                         
                         socketconnection.thread.outputlistenerthread.haswriteready = true;
                         
-                        socketconnection.inqueue.delete(0, input.length());                   
+                        socketconnection.inqueue = socketconnection.inqueue.delete(0, input.length());                   
                     }                    
                 }
                 else
@@ -151,8 +161,14 @@ public class Bodiremoteserver extends Basicserver
             {
                 e.printStackTrace();
             }
+            
+            //Bodi.context("//bodi/server/remote/bodiconnections").put(bodiconnection.sessionid, bodiconnection); //consider pullAll where there is a list or set value implicitly
+
+            //Bodi.context("//bodi/server/remote/netconnections").put(socketconnection.sessionid, socketconnection);
+            
+            this.bodiconnections.add(bodiconnection); //ok for now
         }
-    }    
+    }      
     
     public Connection getnextqueuedconnection()
     {        
@@ -206,6 +222,25 @@ public class Bodiremoteserver extends Basicserver
             if(existingconnection.sessionid == connection.sessionid)
             {
                 return true;
+            }
+        }
+        
+        return false;
+    }  
+    
+    public Boolean isvalidsession(Bodiconnection connection)
+    {
+        if(connection==null) return false;
+        
+        if(connection.sessionid==null) return false;
+        
+        if(connection.ttl<=0) return false;
+        
+        for(Bodiconnection existingconnection : this.bodiconnections)
+        {
+            if(existingconnection.sessionid == connection.sessionid)
+            {
+                return connection.ttl > 0;                
             }
         }
         
