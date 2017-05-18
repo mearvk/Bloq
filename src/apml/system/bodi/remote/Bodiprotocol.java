@@ -18,6 +18,8 @@ public class Bodiprotocol extends Protocol
     
     public static final String TRADE = "//trade";
     
+    public static final String OTHER = "//other";
+    
     public static final String value = "";
     
     public Bodiprotocol()

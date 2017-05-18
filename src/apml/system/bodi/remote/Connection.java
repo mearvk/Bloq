@@ -10,16 +10,17 @@ import java.io.OutputStream;
 
 import java.net.Socket;
 
-import java.util.ArrayList;
-
-import java.util.stream.Stream;
-
 /**
  *
  * @author Max Rupplin
  */
 class Connection
 {
+    public Connection()
+    {
+        
+    }
+        
     public Connection(Basicserver server)
     {
         this.server = server;
@@ -52,12 +53,7 @@ class Connection
     public Boolean hasreadready;
     
     public Integer sessionid;
-    
-    public Connection()
-    {
-        this.sessionid = this.hashCode();
-    }
-    
+       
     public void appendline(String line) 
     {
         this.inqueue.append(line);
@@ -67,4 +63,19 @@ class Connection
     {
         return this.inqueue!=null && this.inqueue.length()>0;
     }   
+    
+    public Boolean cycle(Bodiserverparameter parameterization)
+    {
+        //set output buffer, flag, and bodi object reference into the output queue
+        
+        parameterization.network.outqueue.append(parameterization.bodiconnection.toString());
+                                                                        
+        parameterization.network.haswriteready = true;
+                        
+        parameterization.network.thread.outputlistenerthread.haswriteready = true;                                                
+                            
+        parameterization.network.inqueue = parameterization.network.inqueue.delete(0, parameterization.inputbuffer.length());      
+        
+        return true;
+    }
 }

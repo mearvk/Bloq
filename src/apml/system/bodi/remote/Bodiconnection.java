@@ -16,7 +16,7 @@ public class Bodiconnection
     
     public Integer sessionid;
     
-    public Long ttl;
+    public Long ttl = 60*1000*8l;
     
     public String result;
     
@@ -30,10 +30,21 @@ public class Bodiconnection
     
     public String op = "";
     
+    public Boolean verified = true;
+    
+    public String error = "";
+    
+    public Long day;
+    
+    public String context;
+    
+    public String key;
     
     public Bodiconnection()
     {
         this.sessionid = this.hashCode();
+        
+        this.day = System.currentTimeMillis();
     }
     
     public Bodiconnection(Bodiremoteserver server, Connection connection)
@@ -41,6 +52,8 @@ public class Bodiconnection
         this.server = server;
         
         this.connection = connection;
+        
+        this.day = System.currentTimeMillis();
     }
     
     private Boolean checkconnection(Bodiconnection bodiconnection)            
@@ -50,117 +63,7 @@ public class Bodiconnection
         if(bodiconnection.ttl <= 0) return false;
         
         return true;
-    }
-    
-    /**
-     * New handshakes should return new Bodiconnection instances with unique sessionid values
-     * 
-     * Existing Bodiconnections should return updated TTLs possibly more.
-     * 
-     * @param buffer
-     * @return 
-     */
-    public Bodiconnection handshake(StringBuffer buffer) throws Exception
-    {
-        Bodiconnection bodiconnection = new Bodiconnection();  
-        
-        bodiconnection.op = "handshake";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                
-        
-        bodiconnection.getrequestedobject("context", "key");
-        
-        bodiconnection.getresult();
-        
-        return bodiconnection;
-    }
-    
-    public Bodiconnection close(StringBuffer buffer) throws Exception
-    {               
-        Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
-        
-        bodiconnection.op = "close";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                
-        
-        bodiconnection.getrequestedobject("context", "key");
-        
-        bodiconnection.getresult();
-        
-        return bodiconnection;
-    }
-    
-    public Bodiconnection put(StringBuffer buffer) throws Exception
-    {
-        Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
-        
-        bodiconnection.op = "put";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                
-        
-        bodiconnection.getrequestedobject("context", "key");
-        
-        bodiconnection.getresult();
-        
-        return bodiconnection;
-    }
-    
-    public Bodiconnection pull(StringBuffer buffer) throws Exception
-    {
-        Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
-        
-        bodiconnection.op = "pull";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                
-        
-        bodiconnection.getrequestedobject("context", "key");
-        
-        bodiconnection.getresult();
-        
-        return bodiconnection;
-    }
-    
-    public Bodiconnection open(StringBuffer buffer) throws Exception
-    {        
-        Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
-        
-        bodiconnection.op = "open";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                
-        
-        bodiconnection.getrequestedobject("context", "key");
-        
-        bodiconnection.getresult();
-        
-        return bodiconnection;
-    }
-    
-    public Bodiconnection trade(StringBuffer buffer) throws Exception
-    {
-        Bodiconnection bodiconnection = this.server.checkforexistingconnection(buffer);                            
-        
-        bodiconnection.op = "trade";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                
-        
-        bodiconnection.getrequestedobject("context", "key");
-        
-        bodiconnection.getresult();
-        
-        return bodiconnection;
-    }
+    }    
     
     protected Integer getsessionid() 
     {
@@ -174,14 +77,21 @@ public class Bodiconnection
     
     protected Long gettimetolive()
     {
-        return 60*1000*8l; //8 minutes of default connect
-    }
+        Long now = System.currentTimeMillis();        
+        
+        Long day = this.day;
+        
+        Long ttl = this.ttl;
+                
+        //
+        
+        return ttl-(now-day);
+    }    
     
     protected Serializable getrequestedobject(String context, String key)
     {
         SerializedCarrier bodicarrier = new SerializedCarrier();
-        
-        
+                
         try
         {   
             Object object = Bodi.context(context).pull(key);
@@ -202,25 +112,40 @@ public class Bodiconnection
     
     protected String getresult()
     {
-        return "ok";
-    }
-}
-
-class SerializedCarrier implements Serializable
-{
-    public Object object = null;
-    
-    public Class _class = null;
-    
-    public SerializedCarrier()
-    {
+        return this.result = "ok";
+    }    
+       
+    public Boolean cycle(Bodiserverparameter parameterization) //in fact reach into a bodi reference and see about getting an object etc.
+    {                
+        this.object = this.getrequestedobject(context, key);
         
+        return this.object == null;
     }
     
-    public SerializedCarrier(Class _class, Object object)
+    @Override
+    public String toString()
     {
-        this._class = _class;
-        
-        this.object = object;
+        switch(this.op)
+        {
+            case "//close": 
+                return "//close //sessionid="+sessionid+" //result=TBI //bodicontext=TBI";
+                            
+            case "//handshake": 
+                return "//handshake //sessionid="+sessionid+" //result="+result;
+            
+            case "//open":
+                return "//open //sessionid="+sessionid+" //result=TBD //bodicontext=TBI";
+            
+            case "//pull": 
+                return "//pull //sessionid="+sessionid+" //result=TBD //bodicontext=TBI";
+            
+            case "//put": 
+                return "//put //sessionid="+sessionid+" //result=TBD //bodicontext=TBI";
+            
+            case "//trade": 
+                return "//trade //sessionid="+sessionid+" //result=TBD //bodicontext=TBI";
+            
+            default: return "//other //result=UNKNOWN";
+        }
     }
 }

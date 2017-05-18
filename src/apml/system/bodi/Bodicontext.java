@@ -1,7 +1,10 @@
 
 package apml.system.bodi;
 
+import apml.system.bodi.remote.BodiError;
+
 import java.io.File;
+
 import java.util.Collection;
 
 import java.util.HashMap;
@@ -9,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import java.util.Map.Entry;
+
 import java.util.Set;
 
 import org.w3c.dom.Element;
@@ -48,41 +52,32 @@ public class Bodicontext
         return this.pull(name).getClass();
     }
     
-    public void put(Integer hashcode, Object object)
-    {
-        try
-        {
-            this.hashmap.put(hashcode, object);
-        }   
-        catch(Exception e)
-        {
-            System.err.println(e);
-        }        
+    public void put(Integer key, Object value) throws Exception
+    {       
+        if(key==null) throw new BodiError("Bodicontext.put :: Key value was null.");
+        
+        if(value==null) throw new BodiError("Bodicontext.put :: Value value was null.");
+        
+        this.hashmap.put(key, value);
+    }
+
+    public void put(Object key, Object value) throws Exception
+    {           
+        if(key==null) throw new BodiError("Bodicontext.put :: Key value was null.");
+        
+        if(value==null) throw new BodiError("Bodicontext.put :: Value value was null.");
+        
+        this.objectmap.put(key, value);                     
     }
     
-    public void put(String name, Object object)
+    public void put(String key, Object value) throws Exception
     {        
-        try
-        {
-            this.namemap.put(name, object);            
-        }                
-        catch(Exception e)
-        {
-            System.err.println(e);
-        }        
-    }           
-    
-    public void put(Object key, Object value)
-    {           
-        try
-        {
-            this.objectmap.put(key, value);                     
-        }                
-        catch(Exception e)
-        {
-            System.err.println(e);
-        }
-    }     
+        if(key==null) throw new BodiError("Bodicontext.put :: Key value was null.");
+        
+        if(value==null) throw new BodiError("Bodicontext.put :: Value value was null.");
+        
+        this.namemap.put(key, value);            
+    }                   
     
     /**
      * Can equality produce errant result early such that we care? /ok /mr /ss
@@ -128,12 +123,7 @@ public class Bodicontext
         }
         
         return null;
-    }
-    
-    public Object pullAll(Integer hashcode)
-    {
-        return null;
-    }
+    }    
 
     public Object pull(Object object)
     {
@@ -163,7 +153,7 @@ public class Bodicontext
         return null;
     }       
     
-    public Map<Object,Object> pullallpairs()
+    public Map<Object,Object> pullall()
     {
         HashMap<Object, Object> allvals = new HashMap<Object, Object>();
     
@@ -176,16 +166,16 @@ public class Bodicontext
         return allvals;
     }
     
-    public Set<Object> pullallkeys()
+    public Set<Object> keys()
     {
-        Map<Object, Object> allvals = this.pullallpairs();
+        Map<Object, Object> allvals = this.pullall();
         
         return allvals.keySet();
     }
     
-    public Collection<Object> pullallvalues()
+    public Collection<Object> values()
     {
-        Map<Object, Object> allvals = this.pullallpairs();
+        Map<Object, Object> allvals = this.pullall();
         
         return allvals.values();        
     }
