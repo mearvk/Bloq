@@ -70,7 +70,14 @@ public class Bloqjcmpopulator
     {
         Bodi.setcontext("system");
         
-        Bodi.context("system").put("bloqpopulatorimpl", this);   
+        try
+        {
+            Bodi.context("system").put("bloqpopulatorimpl", this);   
+        }
+        catch(Exception e)
+        {
+            
+        }
         
         /*----------------------------------------------------------------------*/
         

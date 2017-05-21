@@ -170,17 +170,24 @@ public class Apmlsystem implements Runnable
         
         /* ------------------------ set instances -------------------------------*/
         
-        Bodi.context("//Apmlsystem").put("Apmlsystem", this);
-        
-        Bodi.context("//Apmlsystem/systems").put("Apmlsystem.systems", this.systems);
-        
-        Bodi.context("//Apmlsystem/classes").put("Apmlsystem.classes", this.classes);
-        
-        Bodi.context("//Apmlsystem/state").put("Apmlsystem.state", Apmlsystem.STATE);
-        
-        Bodi.context("//Apmlsystem/listeners").put("Apmlsystem.listeners", Apmlsystem.listeners);
-        
-        Bodi.context("//Apmlsystem.subscribers").put("Apmlsystem.subscribers", Apmlsystem.subscribers);
+        try
+        {
+            Bodi.context("//Apmlsystem").put("Apmlsystem", this);
+
+            Bodi.context("//Apmlsystem/systems").put("Apmlsystem.systems", this.systems);
+
+            Bodi.context("//Apmlsystem/classes").put("Apmlsystem.classes", this.classes);
+
+            Bodi.context("//Apmlsystem/state").put("Apmlsystem.state", Apmlsystem.STATE);
+
+            Bodi.context("//Apmlsystem/listeners").put("Apmlsystem.listeners", Apmlsystem.listeners);
+
+            Bodi.context("//Apmlsystem.subscribers").put("Apmlsystem.subscribers", Apmlsystem.subscribers);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     
     public void start()

@@ -20,27 +20,29 @@ import java.net.Socket;
  *
  * @author Max Rupplin
  */
-public abstract class Bodibaseclient implements Runnable, BasicSystemElement
+public class Bodibaseclient implements Runnable, BasicSystemElement
 {
-    public Socket socket;        
+    public Socket socket;           
     
-    public InputStream inputstream;
-    
-    public OutputStream outputstream;
+    public BufferedReader keyboardreader;
     
     public BufferedReader reader;
     
     public BufferedWriter writer;
     
-    public StringBuffer inputbuffer;
+    public StringBuffer keyboardinputbuffer = new StringBuffer();
     
-    public StringBuffer outputbuffer;
+    public StringBuffer inputbuffer = new StringBuffer();
     
-    public Boolean running = false;
+    public StringBuffer outputbuffer = new StringBuffer();
+    
+    public Boolean running = true;
     
     public Boolean iswriting = false;
     
     public Boolean isreading = false;
+    
+    public Boolean iskeyboardreadready = false;
     
     public Boolean isreadready = false;
     
@@ -52,9 +54,16 @@ public abstract class Bodibaseclient implements Runnable, BasicSystemElement
     
     public Object writelock = new Object();
     
+    
+    public static void main(String...args)
+    {
+        new Bodibaseclient("localhost", 8888).run();
+    }
+    
     public Bodibaseclient(String host, Integer port)
     {        
-
+        if(host==null || port==null) throw new SecurityException();
+        
         try
         {
             this.thread = new Baseservicethread(this);
@@ -70,6 +79,8 @@ public abstract class Bodibaseclient implements Runnable, BasicSystemElement
             System.out.println("Client polling thread up...");
         }        
         
+        /*---------------------------------------------------------------------*/
+        
         try
         {
             socket = new Socket(host, port);
@@ -83,9 +94,11 @@ public abstract class Bodibaseclient implements Runnable, BasicSystemElement
             System.out.println("New connection established to "+socket.getRemoteSocketAddress());
         }
         
+        /*---------------------------------------------------------------------*/
+        
         try
         {
-            this.reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+            this.reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));            
         }
         catch(Exception e)
         {
@@ -93,9 +106,26 @@ public abstract class Bodibaseclient implements Runnable, BasicSystemElement
         }
         finally
         {
-            System.out.println("New inputstream connected.");
+            System.out.println("New network inputstream connected.");
         }
+        
+        /*---------------------------------------------------------------------*/
+        
+        try
+        {            
+            this.keyboardreader = new BufferedReader(new InputStreamReader(System.in));
+        }
+        catch(Exception e)
+        {
+            return;
+        }
+        finally
+        {
+            System.out.println("New keyboard inputstream connected.");
+        }        
 
+        /*---------------------------------------------------------------------*/
+        
         try
         {
             this.writer = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
@@ -106,7 +136,7 @@ public abstract class Bodibaseclient implements Runnable, BasicSystemElement
         }
         finally
         {
-            System.out.println("New outputstream connected.");
+            System.out.println("New network outputstream connected.");
         }        
     }
     
@@ -115,70 +145,85 @@ public abstract class Bodibaseclient implements Runnable, BasicSystemElement
     {
         while(running)
         {                
-            /*------------------- do full write on outputstream ----------------------*/
             try
             {
+                this.checkkeyboardin();
+
+                this.checknetworkin();
+
+                this.checknetworkout();           
                 
-               //check if output is ready     
-                if(this.outputbuffer.length()>0)
-                {
-                    //no reading by parent class until clear with write
-                    synchronized(this.readlock)
-                    {
-                        this.iswriting = true;
-
-                        this.write(this.outputbuffer);
-
-                        this.iswriting = false;
-                        
-                        this.readlock.notify();
-                    }
-                }
+                this.sleepmillis(1000L);
             }
             catch(Exception e)
             {
-                //e.printStackTrace();
+                e.printStackTrace();
             }
-            
+     
+        }
+    }
+    
+    public void sleepmillis(Long millis) throws Exception
+    {
+        Thread.currentThread().sleep(millis); 
+    }
+    
+    public void checknetworkin() throws Exception
+    {
             /*------------------- do full read on inputstream ----------------------*/
             try
             {                                
                 //check if inputbuffer is ready
-                if(this.isreadready)
+                if(this.reader.ready() || this.socket.getInputStream().available()>0 )
                 {
-                    //no writing by parent class until clear with read
-                    synchronized(this.writelock)
-                    {
-                        this.isreading = true;
+                    this.isreading = true;
 
-                        String line = "";
+                    String line=this.reader.readLine();
 
-                        while( (line=this.reader.readLine())!=null )
-                        {
-                            this.inputbuffer.append(line);
-                        }
+                    this.inputbuffer.append(line);
+                            
+                    System.out.println(line);
                         
-                        this.writelock.notify();
-
-                        this.isreading = false;
-                    }
+                    this.isreading = false;
                 }
             }
             catch(Exception e)
             {
                //e.printStackTrace();
-            }
-            
-            try
-            {
-                Thread.currentThread().sleep(150L); //want a better method than freezing main thread here
-            }
-            catch(Exception e)
-            {
-                //e.printStackTrace();
-            }
+            }        
+    }
+    
+    public void checkkeyboardin() throws Exception
+    {
+        if(this.iskeyboardreadready)
+        {
+            this.isreading = true;
+
+            String line=this.keyboardreader.readLine();
+                        
+            this.outputbuffer.append(line);
+                        
+            //this.keyboardinputbuffer.append(line);                   
+
+            this.isreading = false;
+                        
+            this.iskeyboardreadready = false;
         }
     }
+
+    public void checknetworkout() throws Exception
+    {
+        if(this.outputbuffer.length()>0)
+        {
+            this.iswriting = true;
+
+            this.write(this.outputbuffer);                                   
+                        
+            this.outputbuffer.delete(0, this.outputbuffer.length());
+            
+            this.iswriting = false;
+        }     
+    }    
     
     public void write(StringBuffer buffer) throws Exception
     {
@@ -273,13 +318,21 @@ class Baseservicethread extends Thread
                 {    
                     /*------------------- do full read on input stream -------------------------*/
                     
-                    if(this.client.inputstream.available()>0)
+                    if(this.client.reader.ready())
                     {
                         this.client.isreadready = true;
                     }
+                    
+                    if(this.client.keyboardreader.ready())
+                    {
+                        this.client.iskeyboardreadready = true;
+                    }
+                    
                     else
                     {
                         this.client.isreadready = false;
+                        
+                        this.client.iskeyboardreadready = false;
                     }
                 }
                 catch(Exception e)
@@ -287,7 +340,7 @@ class Baseservicethread extends Thread
                     //e.printStackTrace();
                 }   
                 
-                Thread.sleep(250l);
+                Thread.sleep(1500l);
             }
         }
         catch(Exception e)

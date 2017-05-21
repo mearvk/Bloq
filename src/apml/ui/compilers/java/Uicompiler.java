@@ -25,9 +25,16 @@ public class Uicompiler
     {
         Bodi.setcontext("//bodi/version");
         
-        Bodi.context("//bodi/version").put("version", "1.0");
+        try
+        {
+            Bodi.context("//bodi/version").put("version", "1.0");
         
-        Bodi.context("//bodi/version").put("since", "04.18.2017");
+            Bodi.context("//bodi/version").put("since", "04.18.2017");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     
     /**

@@ -37,7 +37,14 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     {                        
         Bodi.setcontext("system");
         
-        Bodi.context("system").put("bloqcompiler", this);
+        try
+        {
+            Bodi.context("system").put("bloqcompiler", this);
+        }
+        catch(Exception e)
+        {
+            
+        }
         
         /*----------------------------------------------------------------------*/
         

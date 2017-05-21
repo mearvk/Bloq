@@ -18,6 +18,8 @@ class Listenerthread extends Thread
     
     public Listenerthread(Connection connection)
     {
+        if(connection==null) throw new SecurityException("//bodi/connect");
+        
         this.connection = connection;
                 
         //
@@ -48,6 +50,8 @@ class Listenerthread extends Thread
             {
                 //System.err.println("Listener thread now looping...");
 
+                //check for socket disconnect here please
+                
                 try
                 {               
                     this.inputlistenerthrread.checkinputqueue();                                   
@@ -67,11 +71,11 @@ class Listenerthread extends Thread
                 }     
             }            
             
-            this.sleepmillis(1000l);
+            this.sleepmillis(500l);
         }
         catch(Exception e)
         {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         
         //System.out.println("Basicserver listener thread exiting...");
@@ -80,5 +84,5 @@ class Listenerthread extends Thread
     protected void sleepmillis(Long millis) throws Exception
     {        
         Thread.currentThread().sleep(millis);     
-    }    
+    }        
 }

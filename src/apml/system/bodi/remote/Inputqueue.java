@@ -10,7 +10,7 @@ import java.util.Queue;
  */
 class Inputqueue 
 {
-    public Queue<Connection> queue = new LinkedList<Connection>();
+    public Queue<Connection> queue = new LinkedList();
     
     public void add(Connection connection)
     {

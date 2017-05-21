@@ -14,5 +14,7 @@ public class SessionStorageError extends Error
     public SessionStorageError(String msg)
     {
         super(msg);
+        
+        if(msg==null) throw new SecurityException("//bodi/connection");
     }
 }

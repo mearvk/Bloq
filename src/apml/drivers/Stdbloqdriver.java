@@ -47,7 +47,14 @@ public class Stdbloqdriver extends Stddriver
     {
         Bodi.setcontext(systemline);
         
-        Bodi.context(systemline).put(extension, this);
+        try
+        {
+            Bodi.context(systemline).put(extension, this);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     
     @Override

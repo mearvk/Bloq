@@ -26,6 +26,8 @@ import java.util.ArrayList;
  */
 public abstract class Basicserver extends Thread
 {
+    public Integer hash = 0x008808ef;
+    
     public String host = "localhost";
     
     public InetAddress address;
@@ -46,10 +48,12 @@ public abstract class Basicserver extends Thread
     
     public ArrayList<Connection> connections = new ArrayList();
     
-    public Inputqueue inputqueue = new Inputqueue();
+    public Inputqueue connectionqueue = new Inputqueue();
     
     public Basicserver(String host, Integer port)
     {
+        if(host==null || port==null) throw new SecurityException("//bodi/connect");
+        
         this.host = host;
         
         this.port = port;        
@@ -85,6 +89,8 @@ public abstract class Basicserver extends Thread
     
     public Basicserver(Integer port)
     {
+        if(port==null) throw new SecurityException("//bodi/connect");
+        
         this.port = port;      
         
         this.setName("Basicserverthread");
@@ -129,6 +135,8 @@ public abstract class Basicserver extends Thread
 
                 connection.socket = this.serversocket.accept(); 
                 
+                connection.remoteaddress = connection.socket.getRemoteSocketAddress().toString();
+                
                 System.out.println("> New remote connection established...");
                 
                 try
@@ -145,7 +153,7 @@ public abstract class Basicserver extends Thread
                 }
                 finally
                 {
-                    System.out.println(">   Server reader established...");
+                    System.out.println(">   Related reader established...");
                 }
 
                 try
@@ -162,7 +170,7 @@ public abstract class Basicserver extends Thread
                 }   
                 finally
                 {
-                    System.out.println(">   Server writer established...");
+                    System.out.println(">   Related writer established...");
                 }
 
                 try
@@ -179,7 +187,7 @@ public abstract class Basicserver extends Thread
                 }
                 finally
                 {
-                    System.out.println(">   Socket I/O thread established...");
+                    System.out.println(">   Related I/O listener thread established...");
                 }
 
                 this.connections.add(connection);                                

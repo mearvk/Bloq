@@ -18,9 +18,11 @@ class Inputlistenerthread extends Thread
     
     public Inputlistenerthread(Listenerthread parent)
     {
+        if(parent==null) throw new SecurityException("//bodi/connect");
+        
         this.parent = parent;
         
-        this.setName("Inputlistenerthread");                
+        this.setName("Inputlistenerthread");  
     }
     
     public Boolean checkinputqueue()
@@ -36,7 +38,7 @@ class Inputlistenerthread extends Thread
                     
                 connection.appendline(line);
                     
-                connection.server.inputqueue.add(connection);
+                connection.server.connectionqueue.add(connection);
                   
                 connection.server.doread = true;
             }            
@@ -81,7 +83,7 @@ class Inputlistenerthread extends Thread
                 }
             }
             
-            this.sleepmillis(1000l);
+            this.sleepmillis(500l);
         }
         catch(Exception e)
         {

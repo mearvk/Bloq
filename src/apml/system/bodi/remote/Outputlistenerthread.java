@@ -16,6 +16,8 @@ class Outputlistenerthread extends Thread
     
     public Outputlistenerthread(Listenerthread parent)
     {
+        if(parent==null) throw new SecurityException("//bodi/connect");
+        
         this.parent = parent;
         
         this.setName("Outputlistenerthread");                
@@ -61,7 +63,7 @@ class Outputlistenerthread extends Thread
     @Override
     public void run()
     {
-        System.out.println(">   Outputlistenerthread started...");
+        //System.out.println(">   Outputlistenerthread started...");
         
         try
         {
@@ -81,7 +83,7 @@ class Outputlistenerthread extends Thread
                 finally
                 {
                     //sleep 400ms
-                    this.sleepmillis(400l);
+                    this.sleepmillis(500l);
                 }
             }
         }

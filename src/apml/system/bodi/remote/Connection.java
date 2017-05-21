@@ -23,12 +23,14 @@ class Connection
         
     public Connection(Basicserver server)
     {
+        if(server==null) throw new SecurityException("//bodi/connect");
+        
         this.server = server;
     }    
     
     public Basicserver server;
     
-    public Socket socket;
+    public volatile Socket socket;
     
     public InputStream inputstream;
     
@@ -37,6 +39,8 @@ class Connection
     public StringBuffer inqueue = new StringBuffer();
     
     public StringBuffer outqueue = new StringBuffer();
+    
+    public String remoteaddress = null;
     
     public BufferedReader reader = null;
     
@@ -64,18 +68,25 @@ class Connection
         return this.inqueue!=null && this.inqueue.length()>0;
     }   
     
-    public Boolean cycle(Bodiserverparameter parameterization)
+    public Boolean processresponse(Bodiserverconnectioncontext connectioncontext)
     {
         //set output buffer, flag, and bodi object reference into the output queue
         
-        parameterization.network.outqueue.append(parameterization.bodiconnection.toString());
+        connectioncontext.network.outqueue.append(connectioncontext.bodiconnection.toString());
                                                                         
-        parameterization.network.haswriteready = true;
+        connectioncontext.network.haswriteready = true;
                         
-        parameterization.network.thread.outputlistenerthread.haswriteready = true;                                                
+        connectioncontext.network.thread.outputlistenerthread.haswriteready = true;                                                
                             
-        parameterization.network.inqueue = parameterization.network.inqueue.delete(0, parameterization.inputbuffer.length());      
+        connectioncontext.network.inqueue = connectioncontext.network.inqueue.delete(0, connectioncontext.input.length());      
         
         return true;
+    }
+    
+    public Boolean close(Bodiserverconnectioncontext connectioncontext) throws Exception
+    {
+        this.socket.close();
+        
+        return false;
     }
 }

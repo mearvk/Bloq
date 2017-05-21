@@ -8,292 +8,238 @@ import java.io.Serializable;
  */
 public class Bodiprotocolhandler
 { 
-    protected Bodiconnection parseprotocol( Bodiserverparameter parameterization ) throws Exception
-    {                      
-        if(parameterization.network!=null)
+    public Integer hash = 0x008808ef;
+    
+    protected Bodiserverconnectioncontext parseprotocol( Bodiserverconnectioncontext connectioncontext ) throws Exception
+    {                        
+        if(connectioncontext==null) throw new SecurityException("//bodi/connect");
+        
+        if(connectioncontext.network!=null) 
         {                                    
-            switch(parameterization.protocol)
-            {                
+            switch(connectioncontext.protocol)
+            {     
                 //
                 case Bodiprotocol.CLOSE:
                     
-                    this.processprotocol(parameterization); 
+                    this.processcloseprotocol(connectioncontext);                                                            
                     
-                    this.processcloserequest(parameterization);                    
-                    
-                    return parameterization.bodiconnection;
+                    return connectioncontext;
 
                 //
                 case Bodiprotocol.HANDSHAKE:    
                     
-                    this.processprotocol(parameterization); 
+                    this.processhandshakeprotocol(connectioncontext);                     
                     
-                    this.processhandshakerequest(parameterization);
-                    
-                    return parameterization.bodiconnection;                                                            
+                    return connectioncontext;                                                            
 
                 //
                 case Bodiprotocol.OPEN:         
                     
-                    this.processprotocol(parameterization); 
-                    
-                    this.processopenrequest(parameterization);                  
-                    
-                    return parameterization.bodiconnection;                                     
+                    this.processopenprotocol(connectioncontext); 
+                                                   
+                    return connectioncontext;                                     
 
                 //
                 case Bodiprotocol.PULL:         
                     
-                    this.processprotocol(parameterization); 
-                                        
-                    this.processpullrequest(parameterization);                    
+                    this.processpullprotocol(connectioncontext);                                         
                     
-                    return parameterization.bodiconnection;                                  
+                    return connectioncontext;                                  
 
                 //
                 case Bodiprotocol.PUT:          
                     
-                    this.processprotocol(parameterization); 
+                    this.processputprotocol(connectioncontext);                     
                     
-                    this.processputrequest(parameterization);                   
-                    
-                    return parameterization.bodiconnection;                   
+                    return connectioncontext;                   
 
                 //
                 case Bodiprotocol.TRADE:        
                     
-                    this.processprotocol(parameterization); 
+                    this.processtradeprotocol(connectioncontext);                                        
                     
-                    this.processtraderequest(parameterization);                   
-                    
-                    return parameterization.bodiconnection;
+                    return connectioncontext;
                    
-                //error & dirty messages
+                //miscellaneous messaging
                 default:
                     
-                    this.processprotocol(parameterization); 
+                    this.processprotocol(connectioncontext);                                         
                     
-                    this.dobodiconnectionsetup(parameterization);                    
-                    
-                    return parameterization.bodiconnection;
+                    return connectioncontext;
             }                        
         }  
         
-        throw new NoValidConnectionFoundException("No valid connection found.");
+        throw new NoValidConnectionException("No valid connection found.");
     } 
     
-    protected Boolean processprotocol(Bodiserverparameter parameter) throws Exception
+    protected Boolean processprotocol(Bodiserverconnectioncontext connectioncontext) throws Exception, SecurityException
     {                       
-        String protocol = parameter.protocol;
+        String protocol = connectioncontext.protocol;
         
-        StringBuffer buffer = parameter.inputbuffer;
+        StringBuffer buffer = connectioncontext.inputbuffer;
                 
+        switch(buffer.toString())
+        {
+            case "//close": 
+                
+                //aheam a drum
+                
+                break;
+            
+            case "//handshake": 
+                
+                //clear use case if any
+                
+                break;
+            
+            case "//open": 
+                
+                //autid a did
+                
+                break;
+            
+            case "//pull": 
+                
+
+            
+                //something about the bodi context here...
+                
+                break;
+            
+            case "//put": 
+                
+                //1234$###$$$@$1419
+            
+                break;
+            
+            case "//trade": 
+                
+                //1040040012344444
+                
+                break;
+            
+            default: break;
+        }
+        
         //        
-        if(!this.subtokenswellformed(buffer)) throw new Exception("One or more tokens malformed; stop.");
-        
-        //        
-        if(protocol.startsWith("//close"))
-        {            
-            if(!this.containssessionsid(buffer)) throw new Exception("BODI //sessionid token missing; stop.");                
-        }        
-        
-        //
-        else if(protocol.startsWith("//handshake"))
-        {            
-            //
-        }
-        
-        //
-        else if(protocol.startsWith("//open"))
-        {
-            if(!this.containssessionsid(buffer)) throw new Exception("BODI //sessionid token missing; stop.");
-            
-            if(!this.containscontext(buffer)) throw new Exception("BODI //context token missing; stop.");            
-
-            //something about the bodi context here...
-        }
-
-        //
-        else if(protocol.startsWith("//pull"))
-        {
-            if(!this.containssessionsid(buffer)) throw new Exception("BODI //sessionid token missing; stop.");
-            
-            if(!this.containscontext(buffer)) throw new Exception("BODI //context token missing; stop.");
-            
-            if(!this.containskey(buffer)) throw new Exception("BODI //key token missing; stop.");
-            
-            //something about the bodi context here...
-        }
-
-        //
-        else if(protocol.startsWith("//put"))
-        {
-            if(!this.containssessionsid(buffer)) throw new Exception("BODI //sessionid token missing; stop.");
-            
-            if(!this.containscontext(buffer)) throw new Exception("BODI //context token missing; stop.");
-            
-            if(!this.containskey(buffer)) throw new Exception("BODI //key token missing; stop.");
-            
-            if(!this.containsvalue(buffer)) throw new Exception("BODI //value token missing; stop.");
-            
-            //something about the bodi context here...
-        }
-
-        //
-        else if(protocol.startsWith("//trade"))
-        {
-            if(!this.containssessionsid(buffer)) throw new Exception("BODI //sessionid token missing; stop.");
-            
-            if(!this.containscontext(buffer)) throw new Exception("BODI //context token missing; stop.");
-
-            if(!this.containskey(buffer)) throw new Exception("BODI //key token missing; stop.");
-            
-            //something about the bodi context here...
-        }                        
-        
-        //
-        else 
-        {
-            //return false
-        }
+        //if(!this.subtokenswellformed(buffer)) throw new Exception("One or more tokens malformed; stop.");       
         
         return true;
-    }   
-    
-    /**
-     * New handshakes should return new Bodiconnection instances with unique sessionid values
-     * 
-     * Existing Bodiconnections should return updated TTLs possibly more.
-     * 
-     * @param buffer
-     * @return 
-     */
-    public Bodiconnection processhandshakerequest(Bodiserverparameter parameter) throws Exception
-    {
-        Bodiconnection bodiconnection = parameter.bodiconnection;
-        
-        bodiconnection.op = "//handshake";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                
-        
-        bodiconnection.getrequestedobject("context", "key");
-        
-        bodiconnection.getresult();
-        
-        return bodiconnection;
-    }
-    
-    public Bodiconnection processcloserequest(Bodiserverparameter parameter) throws Exception
-    {               
-        Bodiconnection bodiconnection = parameter.bodiconnection;                           
-        
-        bodiconnection.op = "//close";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                
-        
-        bodiconnection.getrequestedobject("context", "key");
-        
-        bodiconnection.getresult();
-        
-        return bodiconnection;
-    }
-    
-    public Bodiconnection processputrequest(Bodiserverparameter parameter) throws Exception
-    {
-        Bodiconnection bodiconnection = parameter.bodiconnection;                                                       
-        
-        bodiconnection.op = "//put";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                
-        
-        bodiconnection.getrequestedobject("context", "key");
-        
-        bodiconnection.getresult();
-        
-        return bodiconnection;
-    }
-    
-    public Bodiconnection processpullrequest(Bodiserverparameter parameter) throws Exception
-    {
-        Bodiconnection bodiconnection = parameter.bodiconnection;                                      
-        
-        bodiconnection.op = "//pull";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                
-        
-        bodiconnection.getrequestedobject("context", "key");
-        
-        bodiconnection.getresult();
-        
-        return bodiconnection;
-    }
-    
-    public Bodiconnection processopenrequest(Bodiserverparameter parameter) throws Exception
+    }           
+
+    private void processcloseprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
     {        
-        Bodiconnection bodiconnection = parameter.bodiconnection;                                                  
+        if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
         
-        bodiconnection.op = "//open";
+        if(!this.startsswith(connectioncontext, "//close")) throw new SecurityException("//bodi/connect");        
         
-        bodiconnection.getsessionid();
+        if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping."); 
+    }
+
+    private void processhandshakeprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
+    {
+        if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");
         
-        bodiconnection.gettimetolive();                
-        
-        bodiconnection.getrequestedobject("context", "key");
-        
-        bodiconnection.getresult();
-        
-        return bodiconnection;
+        if(!this.startsswith(connectioncontext, "//handshake")) throw new SecurityException("//bodi/connect");              
     }
     
-    public Bodiconnection processtraderequest(Bodiserverparameter parameter) throws Exception
+    private void processopenprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
     {
-        Bodiconnection bodiconnection = parameter.bodiconnection;                                                       
+        if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
         
-        bodiconnection.op = "//trade";
+        if(!this.startsswith(connectioncontext, "//open")) throw new SecurityException("//bodi/connect");
         
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                
-        
-        bodiconnection.getrequestedobject("context", "key");
-        
-        bodiconnection.getresult();
-        
-        return bodiconnection;
+        if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping.");
+            
+        if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //context token missing; stopping.");                
     }
     
-    public Bodiconnection other(Bodiserverparameter parameter) throws Exception
+    private void processpullprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
     {
-        Bodiconnection bodiconnection = parameter.bodiconnection;                      
+        if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
         
-        bodiconnection.op = "//other";
+        if(!this.startsswith(connectioncontext, "//pull")) throw new SecurityException("//bodi/connect");
         
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                
-        
-        bodiconnection.getrequestedobject("context", "key");
-        
-        bodiconnection.getresult();
-        
-        return bodiconnection;
-    } 
+        if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping.");
+            
+        if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //context token missing; stopping.");
+            
+        if(!this.containskey(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //key token missing; stopping.");
+                                    
+        connectioncontext.key = "";
+                    
+        connectioncontext.context = "";
+    }
     
-    protected Boolean subtokenswellformed(StringBuffer buffer)
+    private void processputprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
+    {        
+        if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
+        
+        if(!this.startsswith(connectioncontext, "//put")) throw new SecurityException("//bodi/connect");
+        
+        if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping.");
+            
+        if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //context token missing; stopping.");
+            
+        if(!this.containskey(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //key token missing; stopping.");
+            
+        if(!this.containsvalue(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //value token missing; stopping.");
+            
+        //something about the bodi context here...
+    }
+    
+    private void processtradeprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
     {
-        String[] tokens = buffer.toString().split(" ");            
+        if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
+        
+        if(!this.startsswith(connectioncontext, "//trade")) throw new SecurityException("//bodi/connect");        
+        
+        if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping.");
+            
+        if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //context token missing; stopping.");
+
+        if(!this.containskey(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //key token missing; stopping.");
+            
+        //something about the bodi context here...        
+    }
+    
+    
+    /*-------------------------------------------------------------------------*/
+    
+    
+    public Boolean startsswith(Bodiserverconnectioncontext connectioncontext, String comparator)
+    {
+        String input = connectioncontext.input;
+        
+        return input.startsWith(comparator);
+    }
+    
+    public String stripforkey(Bodiserverconnectioncontext connectioncontext)
+    {
+        return ProtocolStripper.stripforkey(connectioncontext);
+    }
+    
+    public String stripforvalue(Bodiserverconnectioncontext connectioncontext)
+    {
+        return ProtocolStripper.stripforvalue(connectioncontext);
+    }
+    
+    public String stripforcontext(Bodiserverconnectioncontext connectioncontext)
+    {
+        return ProtocolStripper.stripforcontext(connectioncontext);
+    }            
+    
+    protected Boolean subtokenswellformed(Bodiserverconnectioncontext connectioncontext)
+    {
+        String[] tokens = connectioncontext.input.split(" ");            
         
         for(String token : tokens)
         {
             if(!token.trim().startsWith("//")) return false;
+            
+            //contains =
+                        
+            //so forth
         }        
         
         return true;
@@ -311,7 +257,7 @@ public class Bodiprotocolhandler
         }     
         
         return containssessionid;
-    }
+    }    
     
     protected Boolean containscontext(StringBuffer buffer)
     {
@@ -353,11 +299,6 @@ public class Bodiprotocolhandler
         }     
         
         return containskey;        
-    }
-    
-    protected Bodiconnection dobodiconnectionsetup(Bodiserverparameter parameter)
-    {
-        return null;
     }    
 }
 

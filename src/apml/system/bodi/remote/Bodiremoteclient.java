@@ -23,8 +23,10 @@ public class Bodiremoteclient extends Bodibaseclient implements Runnable
     
     
     public Bodiremoteclient(String host, Integer port)
-    {
+    {        
         super(host, port);                
+        
+        if(host==null || port==null) throw new SecurityException("//bodi/connect");
     }
     
     @Override

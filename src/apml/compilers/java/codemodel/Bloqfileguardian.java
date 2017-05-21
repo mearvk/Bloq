@@ -31,7 +31,14 @@ public class Bloqfileguardian
     {      
         Bodi.setcontext("system");
         
-        Bodi.context("system").put("bloqfileguardian", this);
+        try
+        {
+            Bodi.context("system").put("bloqfileguardian", this);
+        }
+        catch(Exception e)
+        {
+            
+        }
         
         /*----------------------------------------------------------------------*/
         

@@ -58,7 +58,15 @@ public class Bloqinputmanager
     {
         Bodi.setcontext("system");
         
-        Bodi.context("system").put("bloqapmlmanager", this);
+        try
+        {
+            Bodi.context("system").put("bloqapmlmanager", this);    
+        }
+        catch(Exception e)
+        {
+            
+        }
+        
         
         /*----------------------------------------------------------------------*/
         

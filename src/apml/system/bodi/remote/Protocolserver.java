@@ -21,11 +21,15 @@ public abstract class Protocolserver extends Basicserver implements Runnable
     public Protocolserver(String host, Integer port)
     {
         super(host, port);
+        
+        if(host==null || port==null) throw new SecurityException("//bodi/connect");
     }
     
     public Protocolserver(Integer port)
     {
         super(port);
+        
+        if(port==null) throw new SecurityException("//bodi/connect");
     }
     
     @Override

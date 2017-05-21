@@ -93,7 +93,14 @@ public final class Bloqapmlpopulator
     {
         Bodi.setcontext("system");
         
-        Bodi.context("system").put("apmlmodelpopulator", this); 
+        try
+        {
+            Bodi.context("system").put("apmlmodelpopulator", this); 
+        }
+        catch(Exception e)
+        {
+            
+        }
         
         /*----------------------------------------------------------------------*/
         

@@ -9,6 +9,8 @@ public class Objectserializer
 {
     public Objectserializer(Object object)
     {
-        //as required for sending actual objects
+        if(object==null) throw new SecurityException("//bodi/connect");
+        
+        //presumably one sets object as serializable via injection        
     }        
 }

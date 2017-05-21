@@ -25,9 +25,18 @@ public class Bodi
         
         Bodi.setcontext("//apml/tests/");
         
-        Bodi.context("//apml/tests/").put("one",one);
-        Bodi.context("//apml/tests/").put("two",two);
-        Bodi.context("//apml/tests/").put("three",three);
+        try
+        {
+            Bodi.context("//apml/tests/").put("one",one);
+            
+            Bodi.context("//apml/tests/").put("two",two);
+            
+            Bodi.context("//apml/tests/").put("three",three);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         
         Object one1 = Bodi.context("//apml/tests/").pull(one.hashCode());
         Object one2 = Bodi.context("//apml/tests/").pull(one);
@@ -78,5 +87,10 @@ public class Bodi
     {     
         return contexts.get(context);
     }  
+    
+    public static Boolean hascontextat(String context) //new at a^t test me
+    {
+        return contexts.get(context) == null ? false : true;
+    }
 }
 

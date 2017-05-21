@@ -2,6 +2,8 @@ package apml.system.bodi.remote;
 
 import apml.system.bodi.Bodi;
 
+import static apml.system.bodi.remote.Bodiprotocol.*;
+
 import java.util.Collection;
 
 /**
@@ -9,8 +11,11 @@ import java.util.Collection;
  * 
  * @author Max Rupplin
  */
+
 public class Bodiremoteserver extends Basicserver //reserve keyword fortune at root for bodi and her creator Max R .mr .ok ss
 {               
+    public Integer hash = 0x008808ef;
+    
     public Bodiprotocolhandler protocolhandler = new Bodiprotocolhandler();
     
     public Boolean running = true; 
@@ -29,8 +34,10 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
     }       
     
     public Bodiremoteserver(String host, Integer port)
-    {
+    {      
         super(host, port);
+        
+        if(host==null || port==null) throw new SecurityException("//bodi/connect");
         
         this.host = host;
         
@@ -45,6 +52,8 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
     {
         super("localhost", port);
         
+        if(port==null) throw new SecurityException("//bodi/connect");
+        
         this.port = port;        
         
         Bodi.setcontext("//bodi/server/remote/bodiconnections");
@@ -56,191 +65,107 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
     {                                  
         while(running)
         {
-            Connection socketconnection = this.getnextqueuedconnection();
-                              
-            //Bodiconnection unclearedbodiconnection = null;
+            Connection network = this.getnextqueuedconnection();            
             
             try
             {
-                if( socketconnection!=null && socketconnection.inputqueueisready() )
+                if( network!=null && network.inputqueueisready() )
                 {   
+                    Bodiserverconnectioncontext connectioncontext = null;
                     
-                    String input = socketconnection.inqueue.toString();
+                    Bodiconnection unsecuredbodiconnection = this.checkforexistingconnection(network.inqueue);
                     
-                    StringBuffer inputbuffer = socketconnection.inqueue;                                                                                
+                    String input = network.inqueue.toString();
                     
-                    Bodiconnection unclearedbodiconnection = this.checkforexistingconnection(inputbuffer); 
-                    
-                    /*----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-                    
+                    /*----------------------------------------------------------------------------------------------------------------------------------------------------------------*/                                                                                
+                                        
                     if(input.startsWith("//handshake"))
                     {
-                        Bodiserverparameter parameterization = new Bodiserverparameter(Bodiprotocol.HANDSHAKE, socketconnection.inqueue, this, socketconnection, unclearedbodiconnection);
+                         connectioncontext = new Bodiserverconnectioncontext(this, HANDSHAKE, input, network, unsecuredbodiconnection);
                         
-                         parameterization.bodiconnection = protocolhandler.parseprotocol(parameterization);
+                         connectioncontext.parseprotocol(connectioncontext);
                          
-                         parameterization.bodiconnection.cycle(parameterization);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
-                         parameterization.network.cycle(parameterization);
-                         
-                         /*
-                         parameterization.network.outqueue.append("//handshake //sessionid="+unclearedbodiconnection.sessionid+" //result="+unclearedbodiconnection.result);
-                                                                        
-                         parameterization.network.haswriteready = true;
-                        
-                         parameterization.network.thread.outputlistenerthread.haswriteready = true;                                                
-                            
-                         parameterization.network.inqueue = socketconnection.inqueue.delete(0, input.length());                                                  
-                         */
-                         
-                        try
-                        {
-                            Bodi.context("//bodi/server/remote/bodiconnections").put(parameterization.bodiconnection.sessionid, parameterization.bodiconnection);
-
-                            Bodi.context("//bodi/server/remote/netconnections").put(socketconnection.sessionid, socketconnection);
-                        }
-                        catch(BodiError bodierror)
-                        {
-                            bodierror.printStackTrace();
-                        }                             
-                    }
+                         connectioncontext.processresponse(connectioncontext);                                                  
+                    }                    
                     
                     else if(input.startsWith("//close"))
                     {
-                        Bodiserverparameter parameterization = new Bodiserverparameter(Bodiprotocol.CLOSE, socketconnection.inqueue, this, socketconnection, new Bodiconnection());
+                         connectioncontext = new Bodiserverconnectioncontext(this, CLOSE, input, network, unsecuredbodiconnection);
                         
-                         parameterization.bodiconnection = protocolhandler.parseprotocol(parameterization);
+                         connectioncontext.parseprotocol(connectioncontext);
                         
-                         parameterization.bodiconnection.cycle(parameterization);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
-                         parameterization.network.cycle(parameterization);
-                         
-                         /*
-                         parameterization.network.outqueue.append("//close //sessionid="+unclearedbodiconnection.sessionid+" //result="+unclearedbodiconnection.result);
-                        
-                         parameterization.network.haswriteready = true;
-                        
-                         parameterization.network.thread.outputlistenerthread.haswriteready = true;
-                        
-                         parameterization.network.inqueue = socketconnection.inqueue.delete(0, input.length());                
-                         */
-                         
-                        //inconnection.server.closeconnection(socketconnection);
+                         connectioncontext.processresponse(connectioncontext);         
                     }
 
                     else if(input.startsWith("//open"))
                     {
-                        Bodiserverparameter parameterization = new Bodiserverparameter(Bodiprotocol.OPEN, socketconnection.inqueue, this, socketconnection, new Bodiconnection());
+                         connectioncontext = new Bodiserverconnectioncontext(this, OPEN, input, network, unsecuredbodiconnection);
                         
-                         parameterization.bodiconnection = protocolhandler.parseprotocol(parameterization);
+                         connectioncontext.parseprotocol(connectioncontext);
                         
-                         parameterization.bodiconnection.cycle(parameterization);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
-                         parameterization.network.cycle(parameterization);
-                         
-                         /*
-                         parameterization.network.outqueue.append("//open //sessionid="+unclearedbodiconnection.sessionid+" //result="+unclearedbodiconnection.result);
-                        
-                         parameterization.network.haswriteready = true;
-                        
-                         parameterization.network.thread.outputlistenerthread.haswriteready = true;
-                        
-                         parameterization.network.inqueue = socketconnection.inqueue.delete(0, input.length());      
-                         */
-                        
-                        //inconnection.server.openconnection(socketconnection);
+                         connectioncontext.processresponse(connectioncontext);         
                     }
 
-                    else if(input.startsWith("//pull"))
+                    else if(input.startsWith("//pull")) 
                     {
-                        Bodiserverparameter parameterization = new Bodiserverparameter(Bodiprotocol.PULL, socketconnection.inqueue, this, socketconnection, new Bodiconnection());
+                         connectioncontext = new Bodiserverconnectioncontext(this, PULL, input, network, unsecuredbodiconnection);
                         
-                         parameterization.bodiconnection = protocolhandler.parseprotocol(parameterization);
+                         connectioncontext.parseprotocol(connectioncontext);
                         
-                         parameterization.bodiconnection.cycle(parameterization);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
-                         parameterization.network.cycle(parameterization);
-                         
-                         /*
-                         parameterization.network.outqueue.append("//pull //sessionid="+unclearedbodiconnection.sessionid+" //result="+unclearedbodiconnection.result);
-                        
-                         parameterization.network.haswriteready = true;
-                        
-                         parameterization.network.thread.outputlistenerthread.haswriteready = true;
-                        
-                         parameterization.network.inqueue = socketconnection.inqueue.delete(0, input.length());
-                         */
+                         connectioncontext.processresponse(connectioncontext);         
                     }
                                         
                     else if(input.startsWith("//put"))
                     {
-                        Bodiserverparameter parameterization = new Bodiserverparameter(Bodiprotocol.PUT, socketconnection.inqueue, this, socketconnection, new Bodiconnection());
+                         connectioncontext = new Bodiserverconnectioncontext(this, PUT, input, network, unsecuredbodiconnection);
                         
-                         parameterization.bodiconnection = protocolhandler.parseprotocol(parameterization);                         
+                         connectioncontext.parseprotocol(connectioncontext);                         
                          
-                         parameterization.bodiconnection.cycle(parameterization);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
-                         parameterization.network.cycle(parameterization);
-                         
-                        /*
-                         parameterization.network.outqueue.append("//put //sessionid="+unclearedbodiconnection.sessionid+" //result="+unclearedbodiconnection.result);
-                        
-                         parameterization.network.haswriteready = true;
-                        
-                         parameterization.network.thread.outputlistenerthread.haswriteready = true;                  
-                        
-                         parameterization.network.inqueue = socketconnection.inqueue.delete(0, input.length()); 
-                         */
+                         connectioncontext.processresponse(connectioncontext);                              
                     }
                     
                     else if(input.startsWith("//trade"))
                     {
-                        Bodiserverparameter parameterization = new Bodiserverparameter(Bodiprotocol.TRADE, socketconnection.inqueue, this, socketconnection, new Bodiconnection());
+                         connectioncontext = new Bodiserverconnectioncontext(this, TRADE, input, network, unsecuredbodiconnection);
                         
-                         parameterization.bodiconnection = protocolhandler.parseprotocol(parameterization);
+                         connectioncontext.parseprotocol(connectioncontext);
                          
-                         parameterization.bodiconnection.cycle(parameterization);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
-                         parameterization.network.cycle(parameterization);
-                        
-                         /*
-                         parameterization.network.outqueue.append("//trade  //sessionid="+unclearedbodiconnection.sessionid+" //result"+unclearedbodiconnection.result);
-                        
-                         //parameterization.network.haswriteready = true;
-                        
-                         parameterization.network.thread.outputlistenerthread.haswriteready = true;
-                        
-                         parameterization.network.inqueue = socketconnection.inqueue.delete(0, input.length());                   
-                         */
+                         connectioncontext.processresponse(connectioncontext);         
                     }        
                     
                     else
                     {
-                        Bodiserverparameter parameterization = new Bodiserverparameter(Bodiprotocol.OTHER, socketconnection.inqueue, this, socketconnection, new Bodiconnection());
+                         connectioncontext = new Bodiserverconnectioncontext(this, OTHER, input, network, unsecuredbodiconnection);
                         
-                         parameterization.bodiconnection = protocolhandler.parseprotocol(parameterization);
+                         connectioncontext.parseprotocol(connectioncontext);
                          
-                         parameterization.bodiconnection.cycle(parameterization);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
-                         parameterization.network.cycle(parameterization);                         
-                         
-                         /*
-                         parameterization.network.outqueue.append("//trade  //sessionid="+unclearedbodiconnection.sessionid+" //result"+unclearedbodiconnection.result);
-                        
-                         //parameterization.network.haswriteready = true;
-                        
-                         parameterization.network.thread.outputlistenerthread.haswriteready = true;
-                        
-                         parameterization.network.inqueue = socketconnection.inqueue.delete(0, input.length());                   
-                         */                                                 
+                         connectioncontext.processresponse(connectioncontext);                                                                 
                     }
                     
-                
+                    this.storeconnectiondatawithbodi(connectioncontext, network);
                 }
                 else
                 {
-                    this.sleepmillis(10000l); //oh boy oh boy let's rest half a day
+                    this.sleepmillis(500l); //oh boy oh boy let's rest half a day
                 }                
+            }
+            catch(SecurityException se) //here we can receive security exceptions  
+            {                
+                se.printStackTrace();
             }
             catch(Exception e)
             {
@@ -253,6 +178,15 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         }
     }      
     
+    private Boolean storeconnectiondatawithbodi(Bodiserverconnectioncontext connectioncontext, Connection connection) throws Exception
+    {
+        Bodi.context("//bodi/server/remote/bodiconnections").put(connectioncontext.bodiconnection.sessionid, connectioncontext.bodiconnection);
+
+        Bodi.context("//bodi/server/remote/netconnections").put(connection, connection);  //connection.sessionid --> connection SVP ASAP
+        
+        return false;
+    }
+    
     private Collection<Bodiconnection> getbodiconnections()
     {
         Collection<Object> objects = Bodi.context("//bodi/server/remote/bodiconnections").values();
@@ -264,9 +198,9 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
     
     public Connection getnextqueuedconnection()
     {        
-        Connection connection = this.inputqueue.peek();        
+        Connection connection = this.connectionqueue.peek();        
         
-        if(connection!=null) this.inputqueue.remove(connection);
+        if(connection!=null) this.connectionqueue.remove(connection);
         
         return connection;
     }    

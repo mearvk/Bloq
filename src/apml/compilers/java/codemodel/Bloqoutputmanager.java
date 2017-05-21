@@ -61,7 +61,14 @@ public class Bloqoutputmanager
     {
         Bodi.setcontext("system");
         
-        Bodi.context("system").put("bloqjcodemodelmanager", this);        
+        try
+        {
+            Bodi.context("system").put("bloqjcodemodelmanager", this);            
+        }
+        catch(Exception e)
+        {
+            
+        }        
         
         Bloqfileguardian fileguardian = (Bloqfileguardian)Bodi.context("system").pull("bloqfileguardian");
         
