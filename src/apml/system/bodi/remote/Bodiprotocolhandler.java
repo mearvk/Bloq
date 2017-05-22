@@ -134,6 +134,10 @@ public class Bodiprotocolhandler
         if(!this.startsswith(connectioncontext, "//close")) throw new SecurityException("//bodi/connect");        
         
         if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping."); 
+        
+        /*---------------------------------------------------------------------*/
+        
+        connectioncontext.bodiconnection.operation = "//close";
     }
 
     private void processhandshakeprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
@@ -141,6 +145,10 @@ public class Bodiprotocolhandler
         if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");
         
         if(!this.startsswith(connectioncontext, "//handshake")) throw new SecurityException("//bodi/connect");              
+        
+        /*---------------------------------------------------------------------*/
+        
+        connectioncontext.bodiconnection.operation = "//handshake";
     }
     
     private void processopenprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
@@ -152,6 +160,10 @@ public class Bodiprotocolhandler
         if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping.");
             
         if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //context token missing; stopping.");                
+        
+        /*---------------------------------------------------------------------*/
+        
+        connectioncontext.bodiconnection.operation = "//open";
     }
     
     private void processpullprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
@@ -165,10 +177,14 @@ public class Bodiprotocolhandler
         if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //context token missing; stopping.");
             
         if(!this.containskey(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //key token missing; stopping.");
+        
+        /*---------------------------------------------------------------------*/
+        
+        connectioncontext.bodiconnection.operation = "//pull";
                                     
-        connectioncontext.key = "";
+        connectioncontext.key = this.stripforkey(connectioncontext);
                     
-        connectioncontext.context = "";
+        connectioncontext.context = this.stripforcontext(connectioncontext);
     }
     
     private void processputprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
@@ -181,9 +197,19 @@ public class Bodiprotocolhandler
             
         if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //context token missing; stopping.");
             
-        if(!this.containskey(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //key token missing; stopping.");
-            
-        if(!this.containsvalue(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //value token missing; stopping.");
+        if( !this.containskey(connectioncontext.inputbuffer) && this.containsvalue(connectioncontext.inputbuffer) )
+        {
+            throw new SecurityException("Bodi //key token missing; stopping.");
+        }
+        
+        if( this.containskey(connectioncontext.inputbuffer) && !this.containsvalue(connectioncontext.inputbuffer) )
+        {
+            throw new SecurityException("Bodi //value token missing; stopping.");
+        }        
+        
+        /*---------------------------------------------------------------------*/
+        
+        connectioncontext.bodiconnection.operation = "//put";
             
         //something about the bodi context here...
     }
@@ -199,6 +225,10 @@ public class Bodiprotocolhandler
         if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //context token missing; stopping.");
 
         if(!this.containskey(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //key token missing; stopping.");
+        
+        /*---------------------------------------------------------------------*/
+        
+        connectioncontext.bodiconnection.operation = "//trade";
             
         //something about the bodi context here...        
     }
@@ -236,10 +266,6 @@ public class Bodiprotocolhandler
         for(String token : tokens)
         {
             if(!token.trim().startsWith("//")) return false;
-            
-            //contains =
-                        
-            //so forth
         }        
         
         return true;
@@ -302,23 +328,5 @@ public class Bodiprotocolhandler
     }    
 }
 
-class SerializedCarrier implements Serializable
-{
-    public Object object = null;
-    
-    public Class _class = null;
-    
-    public SerializedCarrier()
-    {
-        
-    }
-    
-    public SerializedCarrier(Class _class, Object object)
-    {
-        this._class = _class;
-        
-        this.object = object;
-    }
-}
 
 

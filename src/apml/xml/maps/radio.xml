@@ -1,5 +1,5 @@
 <apml>
-    <system> <!-- to and from computers is concern -->
+    <system type="radio io server"> <!-- to and from computers is concern -->
         <object class="input">
             <listener class="ham radio in">
                 <consumer class="ethernet in"> <!-- listens for input from ham radio, relays it to savrator pjc -->

@@ -5,7 +5,7 @@ package apml.system.bodi.remote;
  *
  * @author Max Rupplin
  */
-public class Objectserializer
+public class Objectserializer //hit 'em with direct fuel injection frontal port only!!!
 {
     public Objectserializer(Object object)
     {

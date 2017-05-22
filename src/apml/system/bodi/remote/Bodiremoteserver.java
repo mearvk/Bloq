@@ -61,130 +61,136 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         Bodi.setcontext("//bodi/server/remote/netconnections");        
     }
     
-    public void go() //find a way to synch the input queue so delete doesn't actually delete fresh data
+    public void go() //find a way to synch the unsecuredinput queue so delete doesn't actually delete fresh data
     {                                  
         while(running)
         {
             Connection network = this.getnextqueuedconnection();            
             
+            Bodiserverconnectioncontext connectioncontext = null;
+            
             try
             {
                 if( network!=null && network.inputqueueisready() )
-                {   
-                    Bodiserverconnectioncontext connectioncontext = null;
-                    
+                {                                          
                     Bodiconnection unsecuredbodiconnection = this.checkforexistingconnection(network.inqueue);
                     
-                    String input = network.inqueue.toString();
+                    String unsecuredinput = network.inqueue.toString();
                     
                     /*----------------------------------------------------------------------------------------------------------------------------------------------------------------*/                                                                                
                                         
-                    if(input.startsWith("//handshake"))
+                    if(unsecuredinput.startsWith("//handshake"))
                     {
-                         connectioncontext = new Bodiserverconnectioncontext(this, HANDSHAKE, input, network, unsecuredbodiconnection);
+                         connectioncontext = new Bodiserverconnectioncontext(this, HANDSHAKE, unsecuredinput, network, unsecuredbodiconnection);
                         
                          connectioncontext.parseprotocol(connectioncontext);
                          
-                         connectioncontext.processrequest(connectioncontext);     
+                         connectioncontext.processbodirequest(connectioncontext);     
                          
-                         connectioncontext.processresponse(connectioncontext);                                                  
+                         connectioncontext.processsesponse(connectioncontext);                                                  
                     }                    
                     
-                    else if(input.startsWith("//close"))
+                    else if(unsecuredinput.startsWith("//close"))
                     {
-                         connectioncontext = new Bodiserverconnectioncontext(this, CLOSE, input, network, unsecuredbodiconnection);
+                         connectioncontext = new Bodiserverconnectioncontext(this, CLOSE, unsecuredinput, network, unsecuredbodiconnection);
                         
                          connectioncontext.parseprotocol(connectioncontext);
                         
-                         connectioncontext.processrequest(connectioncontext);     
+                         connectioncontext.processbodirequest(connectioncontext);     
                          
-                         connectioncontext.processresponse(connectioncontext);         
+                         connectioncontext.processsesponse(connectioncontext);         
                     }
 
-                    else if(input.startsWith("//open"))
+                    else if(unsecuredinput.startsWith("//open"))
                     {
-                         connectioncontext = new Bodiserverconnectioncontext(this, OPEN, input, network, unsecuredbodiconnection);
+                         connectioncontext = new Bodiserverconnectioncontext(this, OPEN, unsecuredinput, network, unsecuredbodiconnection);
                         
                          connectioncontext.parseprotocol(connectioncontext);
                         
-                         connectioncontext.processrequest(connectioncontext);     
+                         connectioncontext.processbodirequest(connectioncontext);     
                          
-                         connectioncontext.processresponse(connectioncontext);         
+                         connectioncontext.processsesponse(connectioncontext);         
                     }
 
-                    else if(input.startsWith("//pull")) 
+                    else if(unsecuredinput.startsWith("//pull")) 
                     {
-                         connectioncontext = new Bodiserverconnectioncontext(this, PULL, input, network, unsecuredbodiconnection);
+                         connectioncontext = new Bodiserverconnectioncontext(this, PULL, unsecuredinput, network, unsecuredbodiconnection);
                         
                          connectioncontext.parseprotocol(connectioncontext);
                         
-                         connectioncontext.processrequest(connectioncontext);     
+                         connectioncontext.processbodirequest(connectioncontext);     
                          
-                         connectioncontext.processresponse(connectioncontext);         
+                         connectioncontext.processsesponse(connectioncontext);         
                     }
                                         
-                    else if(input.startsWith("//put"))
+                    else if(unsecuredinput.startsWith("//put"))
                     {
-                         connectioncontext = new Bodiserverconnectioncontext(this, PUT, input, network, unsecuredbodiconnection);
+                         connectioncontext = new Bodiserverconnectioncontext(this, PUT, unsecuredinput, network, unsecuredbodiconnection);
                         
                          connectioncontext.parseprotocol(connectioncontext);                         
                          
-                         connectioncontext.processrequest(connectioncontext);     
+                         connectioncontext.processbodirequest(connectioncontext);     
                          
-                         connectioncontext.processresponse(connectioncontext);                              
+                         connectioncontext.processsesponse(connectioncontext);                              
                     }
                     
-                    else if(input.startsWith("//trade"))
+                    else if(unsecuredinput.startsWith("//trade"))
                     {
-                         connectioncontext = new Bodiserverconnectioncontext(this, TRADE, input, network, unsecuredbodiconnection);
+                         connectioncontext = new Bodiserverconnectioncontext(this, TRADE, unsecuredinput, network, unsecuredbodiconnection);
                         
                          connectioncontext.parseprotocol(connectioncontext);
                          
-                         connectioncontext.processrequest(connectioncontext);     
+                         connectioncontext.processbodirequest(connectioncontext);     
                          
-                         connectioncontext.processresponse(connectioncontext);         
+                         connectioncontext.processsesponse(connectioncontext);         
                     }        
                     
                     else
                     {
-                         connectioncontext = new Bodiserverconnectioncontext(this, OTHER, input, network, unsecuredbodiconnection);
+                         connectioncontext = new Bodiserverconnectioncontext(this, OTHER, unsecuredinput, network, unsecuredbodiconnection);
                         
                          connectioncontext.parseprotocol(connectioncontext);
                          
-                         connectioncontext.processrequest(connectioncontext);     
+                         connectioncontext.processbodirequest(connectioncontext);     
                          
-                         connectioncontext.processresponse(connectioncontext);                                                                 
-                    }
-                    
-                    this.storeconnectiondatawithbodi(connectioncontext, network);
+                         connectioncontext.processsesponse(connectioncontext);                                                                 
+                    }                                        
                 }
                 else
                 {
                     this.sleepmillis(500l); //oh boy oh boy let's rest half a day
                 }                
             }
-            catch(SecurityException se) //here we can receive security exceptions  
-            {                
-                se.printStackTrace();
-            }
-            catch(Exception e)
+            catch(InvalidSessionException sessionidexception)
             {
-                e.printStackTrace();
+                sessionidexception.printStackTrace(System.err);
+            }
+            catch(SecurityException securityexception) 
+            {                
+                securityexception.printStackTrace(System.err);
+            }
+            catch(Exception exception)
+            {
+                exception.printStackTrace(System.err);
             }  
             finally
             {
-                //
+                try{ this.storeconnectiondatawithbodi(connectioncontext, network); }catch(Exception e){e.printStackTrace();}
             }
         }
     }      
     
     private Boolean storeconnectiondatawithbodi(Bodiserverconnectioncontext connectioncontext, Connection connection) throws Exception
     {
+        if(connectioncontext==null) return false;
+        
+        if(connection==null) return false;
+        
         Bodi.context("//bodi/server/remote/bodiconnections").put(connectioncontext.bodiconnection.sessionid, connectioncontext.bodiconnection);
 
         Bodi.context("//bodi/server/remote/netconnections").put(connection, connection);  //connection.sessionid --> connection SVP ASAP
         
-        return false;
+        return true;
     }
     
     private Collection<Bodiconnection> getbodiconnections()
@@ -226,6 +232,8 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                 {
                     token = token.trim().replace("//sessionid=", "");
                     
+                    if(token==null || existingconnection.sessionid==null) continue;                        
+                    
                     int receivedsessionid = Integer.parseInt(token);
                     
                     int existingsessionid = existingconnection.sessionid;
@@ -243,7 +251,7 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
             return new Bodiconnection();
         }
         
-        else throw new Exception("No session with sessionid found.");
+        else throw new InvalidSessionException("No session with matching sessionid found.");
     }
     
     public Boolean isvalidsessionid(Bodiconnection connection)

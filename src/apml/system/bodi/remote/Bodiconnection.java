@@ -1,6 +1,7 @@
 package apml.system.bodi.remote;
 
 import apml.system.bodi.Bodi;
+import apml.system.bodi.Bodicontext;
 
 import java.io.Serializable;
 
@@ -40,7 +41,9 @@ public class Bodiconnection
     
     public String result;
     
-    public String operation = "";        
+    public String operation = ""; 
+    
+    public String cause;
     
     public String error = "";        
     
@@ -48,7 +51,11 @@ public class Bodiconnection
     
     public String key;    
     
-    public byte[] value;              
+    public String message;
+    
+    public byte[] value;     
+    
+   
     
     public Bodiconnection()
     {
@@ -66,13 +73,17 @@ public class Bodiconnection
         this.day = System.currentTimeMillis();
     }
     
-    public Boolean processrequest(Bodiserverconnectioncontext connectioncontext) //in fact reach into a bodi reference and see about getting an object etc.
+     //in fact reach into a bodi reference and see about getting an object etc.
+    
+    public Boolean processrequest(Bodiserverconnectioncontext connectioncontext)
     {                
-        StringBuffer buffer = connectioncontext.inputbuffer;
+        StringBuffer buffer = connectioncontext.inputbuffer;      
+        
+        String protocol = this.stripforprotocoltoken(connectioncontext);        
         
         try
         {              
-            switch(buffer.toString())
+            switch(protocol)
             {
                 case "//handshake": 
 
@@ -129,7 +140,7 @@ public class Bodiconnection
         }
         catch(Exception e)
         {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         
         //this.object = this.getrequestedobject(context, key);
@@ -170,7 +181,7 @@ public class Bodiconnection
     
     protected String getresult()
     {
-        return this.result = "ok";
+        return this.result = "";
     }    
        
     protected Integer getsessionid() 
@@ -211,7 +222,15 @@ public class Bodiconnection
             
             case "//open":
                 
-                return "//open //sessionid="+sessionid+" //result="+result+" //bodicontext=TBI";
+                if(cause!=null)
+                {
+                    return "//open //sessionid="+sessionid+" //result="+result+" //cause="+cause;
+                }
+               
+                if(message!=null)
+                {
+                    return "//open //sessionid="+sessionid+" //result="+result+" //message="+message;
+                }                
             
             case "//pull": 
                 
@@ -246,25 +265,73 @@ public class Bodiconnection
         return false;
     }    
     
-    public Boolean processopenresponse(Bodiserverconnectioncontext parameterization)
+    public Boolean processopenresponse(Bodiserverconnectioncontext connectioncontext)
     {
         this.islive = true;            
         
-        if(Bodi.hascontextat(parameterization.getcontext(parameterization))) 
+        if(Bodi.hascontextat(connectioncontext.getcontext(connectioncontext))) 
         {
-            return this.lines.add(parameterization.getcontext(parameterization)); //remove a persistent line to bodi instance
+            connectioncontext.bodiconnection.result = "success";
+            
+            connectioncontext.bodiconnection.message = "persistent connection established";
+            
+            return this.lines.add(connectioncontext.getcontext(connectioncontext)); //remove a persistent line to bodi instance
         }
+        
+        connectioncontext.bodiconnection.result = "failure";
+        
+        connectioncontext.bodiconnection.cause = "no such context";
         
         return false;
     }    
     
     public Boolean processpullresponse(Bodiserverconnectioncontext connectioncontext)
     {
+        this.islive = true;
+        
+        String context = this.stripforcontext(connectioncontext);        
+        
+        if(Bodi.hascontextat(context))
+        {
+            Object object = Bodi.context(context).pull(connectioncontext.bodiconnection.key);
+            
+            connectioncontext.bodiconnection.object = new SerializedCarrier(object.getClass(), object);
+            
+            connectioncontext.bodiconnection.result = "success";
+        
+            connectioncontext.bodiconnection.message = "object serialized and ready for return";            
+        }
+        else
+        {
+            connectioncontext.bodiconnection.result = "failure";
+
+            connectioncontext.bodiconnection.message = "context/key pair not found";            
+        }
+        
         return true;
     }    
     
     public Boolean processputresponse(Bodiserverconnectioncontext connectioncontext)
     {
+        this.islive = true;
+        
+        String context = this.stripforcontext(connectioncontext);
+        
+        if(Bodi.hascontextat(context))
+        {
+            connectioncontext.bodiconnection.result = "failure";
+        
+            connectioncontext.bodiconnection.message = "persistent context already established";            
+        }
+        else
+        {
+            Bodi.setcontext(context);
+
+            connectioncontext.bodiconnection.result = "success";
+
+            connectioncontext.bodiconnection.message = "persistent context established";            
+        }
+        
         return true;
     }    
     
@@ -288,6 +355,11 @@ public class Bodiconnection
         return ProtocolStripper.stripforcontext(connectioncontext);
     }     
     
+    public String stripforprotocoltoken(Bodiserverconnectioncontext connectioncontext)
+    {
+        return ProtocolStripper.stripforprotocoltoken(connectioncontext);
+    }
+    
 /**
      * New handshakes should return new Bodiconnection instances with unique sessionid values
      * 
@@ -306,7 +378,7 @@ public class Bodiconnection
         
         bodiconnection.gettimetolive();                
         
-        bodiconnection.getrequestedobject("context", "key");
+        //bodiconnection.getrequestedobject("context", "key");
         
         bodiconnection.getresult();
         
@@ -323,7 +395,7 @@ public class Bodiconnection
         
         bodiconnection.gettimetolive();                
         
-        bodiconnection.getrequestedobject("context", "key");
+        //bodiconnection.getrequestedobject("context", "key");
         
         bodiconnection.getresult();
         
@@ -340,7 +412,7 @@ public class Bodiconnection
         
         bodiconnection.gettimetolive();                
         
-        bodiconnection.getrequestedobject("context", "key");
+        //bodiconnection.getrequestedobject("context", "key");
         
         bodiconnection.getresult();
         

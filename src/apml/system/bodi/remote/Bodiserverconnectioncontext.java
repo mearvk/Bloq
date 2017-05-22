@@ -22,7 +22,7 @@ public class Bodiserverconnectioncontext
     
     public String value;
     
-    public String context;
+    public String context;    
     
     public Bodiserverconnectioncontext()
     {
@@ -56,12 +56,12 @@ public class Bodiserverconnectioncontext
         connectioncontext.bodiserver.protocolhandler.parseprotocol(connectioncontext);
     }
     
-    public void processrequest(Bodiserverconnectioncontext connectioncontext) throws Exception
+    public void processbodirequest(Bodiserverconnectioncontext connectioncontext) throws Exception
     {
         connectioncontext.bodiconnection.processrequest(connectioncontext);
     }
     
-    public void processresponse(Bodiserverconnectioncontext connectioncontext) throws Exception
+    public void processsesponse(Bodiserverconnectioncontext connectioncontext) throws Exception
     {
         connectioncontext.network.processresponse(connectioncontext);
     }
