@@ -64,18 +64,21 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
     public void go() //find a way to synch the unsecuredinput queue so delete doesn't actually delete fresh data
     {                                  
         while(running)
-        {
-            Connection network = this.getnextqueuedconnection();            
-            
+        {                        
             Bodiserverconnectioncontext connectioncontext = null;
+            
+            Connection network = this.getnextqueuedconnection();            
+                                    
+            String unsecuredinput = null;                                   
             
             try
             {
+                unsecuredinput = network.inqueue.toString(); 
+                
                 if( network!=null && network.inputqueueisready() )
                 {                                          
-                    Bodiconnection unsecuredbodiconnection = this.checkforexistingconnection(network.inqueue);
-                    
-                    String unsecuredinput = network.inqueue.toString();
+                    //up for redesign [will not catch malformed token]
+                    Bodiconnection unsecuredbodiconnection = this.checkforexistingconnection(network.inqueue);                                        
                     
                     /*----------------------------------------------------------------------------------------------------------------------------------------------------------------*/                                                                                
                                         
@@ -83,9 +86,9 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                     {
                          connectioncontext = new Bodiserverconnectioncontext(this, HANDSHAKE, unsecuredinput, network, unsecuredbodiconnection);
                         
-                         connectioncontext.parseprotocol(connectioncontext);
+                         connectioncontext.processprotocol(connectioncontext);
                          
-                         connectioncontext.processbodirequest(connectioncontext);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
                          connectioncontext.processsesponse(connectioncontext);                                                  
                     }                    
@@ -94,9 +97,9 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                     {
                          connectioncontext = new Bodiserverconnectioncontext(this, CLOSE, unsecuredinput, network, unsecuredbodiconnection);
                         
-                         connectioncontext.parseprotocol(connectioncontext);
+                         connectioncontext.processprotocol(connectioncontext);
                         
-                         connectioncontext.processbodirequest(connectioncontext);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
                          connectioncontext.processsesponse(connectioncontext);         
                     }
@@ -105,9 +108,9 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                     {
                          connectioncontext = new Bodiserverconnectioncontext(this, OPEN, unsecuredinput, network, unsecuredbodiconnection);
                         
-                         connectioncontext.parseprotocol(connectioncontext);
+                         connectioncontext.processprotocol(connectioncontext);
                         
-                         connectioncontext.processbodirequest(connectioncontext);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
                          connectioncontext.processsesponse(connectioncontext);         
                     }
@@ -116,9 +119,9 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                     {
                          connectioncontext = new Bodiserverconnectioncontext(this, PULL, unsecuredinput, network, unsecuredbodiconnection);
                         
-                         connectioncontext.parseprotocol(connectioncontext);
+                         connectioncontext.processprotocol(connectioncontext);
                         
-                         connectioncontext.processbodirequest(connectioncontext);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
                          connectioncontext.processsesponse(connectioncontext);         
                     }
@@ -127,9 +130,9 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                     {
                          connectioncontext = new Bodiserverconnectioncontext(this, PUT, unsecuredinput, network, unsecuredbodiconnection);
                         
-                         connectioncontext.parseprotocol(connectioncontext);                         
+                         connectioncontext.processprotocol(connectioncontext);                         
                          
-                         connectioncontext.processbodirequest(connectioncontext);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
                          connectioncontext.processsesponse(connectioncontext);                              
                     }
@@ -138,9 +141,9 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                     {
                          connectioncontext = new Bodiserverconnectioncontext(this, TRADE, unsecuredinput, network, unsecuredbodiconnection);
                         
-                         connectioncontext.parseprotocol(connectioncontext);
+                         connectioncontext.processprotocol(connectioncontext);
                          
-                         connectioncontext.processbodirequest(connectioncontext);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
                          connectioncontext.processsesponse(connectioncontext);         
                     }        
@@ -149,38 +152,67 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                     {
                          connectioncontext = new Bodiserverconnectioncontext(this, OTHER, unsecuredinput, network, unsecuredbodiconnection);
                         
-                         connectioncontext.parseprotocol(connectioncontext);
+                         connectioncontext.processprotocol(connectioncontext);
                          
-                         connectioncontext.processbodirequest(connectioncontext);     
+                         connectioncontext.processrequest(connectioncontext);     
                          
                          connectioncontext.processsesponse(connectioncontext);                                                                 
                     }                                        
-                }
-                else
-                {
-                    this.sleepmillis(500l); //oh boy oh boy let's rest half a day
-                }                
+                }         
             }
-            catch(InvalidSessionException sessionidexception)
+            catch(NullPointerException exception)
             {
-                sessionidexception.printStackTrace(System.err);
+                //presume no connection found [for now]
+            }            
+            catch(InvalidSessionException exception)
+            {
+                try
+                {
+                    //connectioncontext.processprotocol(connectioncontext);
+                    connectioncontext = new Bodiserverconnectioncontext(this, OTHER, "", network, new Bodiconnection());
+                
+                    connectioncontext.bodiconnection.operation = "//other";
+                    
+                    connectioncontext.bodiconnection.cause = "unrecognized protocol"; 
+                    
+                    connectioncontext.bodiconnection.message = "unable to complete request";                   
+                    
+                    connectioncontext.processsesponse(connectioncontext);                                                                 
+                }
+                catch(Exception e)
+                {
+                    //
+                }
+                
+                //exception.printStackTrace(System.err);
             }
-            catch(SecurityException securityexception) 
+            catch(SecurityException exception) 
             {                
-                securityexception.printStackTrace(System.err);
+                exception.printStackTrace(System.err);
             }
             catch(Exception exception)
             {
                 exception.printStackTrace(System.err);
-            }  
+            }              
             finally
-            {
-                try{ this.storeconnectiondatawithbodi(connectioncontext, network); }catch(Exception e){e.printStackTrace();}
+            {                
+                this.dohandlecleanup(connectioncontext, network, unsecuredinput);                                                
             }
         }
     }      
     
-    private Boolean storeconnectiondatawithbodi(Bodiserverconnectioncontext connectioncontext, Connection connection) throws Exception
+    public void dohandlecleanup(Bodiserverconnectioncontext connectioncontext, Connection network, String unsecuredinput)
+    {
+        try{ this.storewithbodi(connectioncontext, network); }catch(Exception e){}
+                
+        try{ connectioncontext.network.inqueue.delete(0, unsecuredinput.length()); }catch(Exception e){}
+                
+        try{ connectioncontext.input = ""; }catch(Exception e){}                                
+                
+        try{ this.sleepmillis(500l); /*oh boy oh boy let's rest half a secibd */ }catch(Exception e){}        
+    }
+    
+    private Boolean storewithbodi(Bodiserverconnectioncontext connectioncontext, Connection connection) throws Exception
     {
         if(connectioncontext==null) return false;
         
@@ -282,7 +314,7 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         for(Bodiconnection existingconnection : this.getbodiconnections())
         {
             if(existingconnection.sessionid == connection.sessionid)
-            {
+            {                
                 return connection.ttl > 0;                
             }
         }

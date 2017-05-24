@@ -78,7 +78,7 @@ class Connection
                         
         connectioncontext.network.thread.outputlistenerthread.haswriteready = true;                                                
                             
-        connectioncontext.network.inqueue = connectioncontext.network.inqueue.delete(0, connectioncontext.input.length());      
+        //connectioncontext.network.inqueue = connectioncontext.network.inqueue.delete(0, connectioncontext.input.length());      
         
         return true;
     }

@@ -44,6 +44,8 @@ public class Bodiserverconnectioncontext
         this.network = network;
         
         this.bodiconnection = bodiconnection;
+        
+        this.bodiconnection.operation = protocol;
     }
     
     public String getcontext(Bodiserverconnectioncontext parameterization)
@@ -51,12 +53,12 @@ public class Bodiserverconnectioncontext
         return ProtocolStripper.stripforcontext(parameterization);
     }
     
-    public void parseprotocol(Bodiserverconnectioncontext connectioncontext) throws Exception
+    public void processprotocol(Bodiserverconnectioncontext connectioncontext) throws Exception
     {
         connectioncontext.bodiserver.protocolhandler.parseprotocol(connectioncontext);
     }
     
-    public void processbodirequest(Bodiserverconnectioncontext connectioncontext) throws Exception
+    public void processrequest(Bodiserverconnectioncontext connectioncontext) throws Exception
     {
         connectioncontext.bodiconnection.processrequest(connectioncontext);
     }

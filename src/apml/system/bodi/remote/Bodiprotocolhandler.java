@@ -1,7 +1,5 @@
 package apml.system.bodi.remote;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Max Rupplin
@@ -135,9 +133,7 @@ public class Bodiprotocolhandler
         
         if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping."); 
         
-        /*---------------------------------------------------------------------*/
-        
-        connectioncontext.bodiconnection.operation = "//close";
+        /*---------------------------------------------------------------------*/                
     }
 
     private void processhandshakeprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
@@ -146,9 +142,7 @@ public class Bodiprotocolhandler
         
         if(!this.startsswith(connectioncontext, "//handshake")) throw new SecurityException("//bodi/connect");              
         
-        /*---------------------------------------------------------------------*/
-        
-        connectioncontext.bodiconnection.operation = "//handshake";
+        /*---------------------------------------------------------------------*/        
     }
     
     private void processopenprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
@@ -161,9 +155,7 @@ public class Bodiprotocolhandler
             
         if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //context token missing; stopping.");                
         
-        /*---------------------------------------------------------------------*/
-        
-        connectioncontext.bodiconnection.operation = "//open";
+        /*---------------------------------------------------------------------*/       
     }
     
     private void processpullprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
@@ -178,13 +170,7 @@ public class Bodiprotocolhandler
             
         if(!this.containskey(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //key token missing; stopping.");
         
-        /*---------------------------------------------------------------------*/
-        
-        connectioncontext.bodiconnection.operation = "//pull";
-                                    
-        connectioncontext.key = this.stripforkey(connectioncontext);
-                    
-        connectioncontext.context = this.stripforcontext(connectioncontext);
+        /*---------------------------------------------------------------------*/       
     }
     
     private void processputprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
@@ -207,11 +193,7 @@ public class Bodiprotocolhandler
             throw new SecurityException("Bodi //value token missing; stopping.");
         }        
         
-        /*---------------------------------------------------------------------*/
-        
-        connectioncontext.bodiconnection.operation = "//put";
-            
-        //something about the bodi context here...
+        /*---------------------------------------------------------------------*/        
     }
     
     private void processtradeprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
@@ -227,10 +209,6 @@ public class Bodiprotocolhandler
         if(!this.containskey(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //key token missing; stopping.");
         
         /*---------------------------------------------------------------------*/
-        
-        connectioncontext.bodiconnection.operation = "//trade";
-            
-        //something about the bodi context here...        
     }
     
     

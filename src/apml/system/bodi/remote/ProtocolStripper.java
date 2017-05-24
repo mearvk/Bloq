@@ -14,7 +14,12 @@ public class ProtocolStripper
         
         for(String string : tokens)
         {
-            if(string.trim().startsWith("//key=")) return string;
+            if(string.trim().startsWith("//key="))
+            {
+                String substring = string.replace("//key=", "");
+                
+                return substring;
+            }
         }
         
         return null;
@@ -28,7 +33,12 @@ public class ProtocolStripper
         
         for(String string : tokens)
         {
-            if(string.trim().startsWith("//value=")) return string;
+            if(string.trim().startsWith("//value="))
+            {                
+                String substring = string.replace("//value=", "");
+                
+                return substring;
+            }
         }
         
         return null;
@@ -42,7 +52,12 @@ public class ProtocolStripper
         
         for(String string : tokens)
         {
-            if(string.trim().startsWith("//context=")) return string;
+            if(string.trim().startsWith("//context=")) 
+            {
+                String substring = string.replace("//context=", "");
+                
+                return substring;
+            }
         }
         
         return null;
