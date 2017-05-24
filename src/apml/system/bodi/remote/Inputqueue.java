@@ -10,19 +10,19 @@ import java.util.Queue;
  */
 class Inputqueue 
 {
-    public Queue<Connection> queue = new LinkedList();
+    public Queue<Networkconnectioncontext> queue = new LinkedList();
     
-    public void add(Connection connection)
+    public void add(Networkconnectioncontext connection)
     {
         this.queue.add(connection);
     }
     
-    public void remove(Connection connection)
+    public void remove(Networkconnectioncontext connection)
     {
         this.queue.remove(connection);
     }
     
-    public Connection peek()
+    public Networkconnectioncontext peek()
     {
         return this.queue.peek();
     }

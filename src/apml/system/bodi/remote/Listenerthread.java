@@ -7,7 +7,7 @@ package apml.system.bodi.remote;
 class Listenerthread extends Thread
 {
     
-    public Connection connection;
+    public Networkconnectioncontext connection;
     
     public Boolean running = true;
     
@@ -16,7 +16,7 @@ class Listenerthread extends Thread
     public Outputlistenerthread outputlistenerthread;
     
     
-    public Listenerthread(Connection connection)
+    public Listenerthread(Networkconnectioncontext connection)
     {
         if(connection==null) throw new SecurityException("//bodi/connect");
         

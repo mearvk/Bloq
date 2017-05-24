@@ -26,4 +26,23 @@ public class Bodiprotocol extends Protocol
     {
         super();
     }
+    
+    public static Boolean isbodiprotocol(String comparator)
+    {
+        if(comparator.startsWith(CLOSE)) return true;
+        
+        if(comparator.startsWith(HANDSHAKE)) return true;
+        
+        if(comparator.startsWith(OPEN)) return true;
+        
+        if(comparator.startsWith(PUT)) return true;
+        
+        if(comparator.startsWith(PULL)) return true;
+        
+        if(comparator.startsWith(TRADE)) return true;
+        
+        if(comparator.startsWith(OTHER)) return true;
+        
+        return false;
+    }
 }

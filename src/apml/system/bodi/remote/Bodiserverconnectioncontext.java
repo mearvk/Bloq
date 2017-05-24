@@ -10,7 +10,7 @@ public class Bodiserverconnectioncontext
     
     public Bodiremoteserver bodiserver;
     
-    public Connection network;
+    public Networkconnectioncontext network;
     
     public String protocol;
     
@@ -29,7 +29,7 @@ public class Bodiserverconnectioncontext
         
     }
     
-    public Bodiserverconnectioncontext(Bodiremoteserver bodiserver, String protocol, String input, Connection network, Bodiconnection bodiconnection) throws Exception
+    public Bodiserverconnectioncontext(Bodiremoteserver bodiserver, String protocol, String input, Networkconnectioncontext network, Bodiconnection bodiconnection) throws Exception
     {
         if(protocol==null || input==null || bodiserver==null || network==null || bodiconnection==null) throw new SecurityException("//bodi/connect");
             
