@@ -12,7 +12,7 @@ public class Bodiprotocolhandler
     {                        
         if(connectioncontext==null) throw new SecurityException("//bodi/connect");
         
-        if(connectioncontext.network!=null) 
+        if(connectioncontext.networkconnectioncontext!=null) 
         {                                    
             switch(connectioncontext.protocol)
             {     
@@ -217,7 +217,7 @@ public class Bodiprotocolhandler
     
     public Boolean startsswith(Bodiserverconnectioncontext connectioncontext, String comparator)
     {
-        String input = connectioncontext.input;
+        String input = connectioncontext.inputstring;
         
         return input.startsWith(comparator);
     }
@@ -239,7 +239,7 @@ public class Bodiprotocolhandler
     
     protected Boolean subtokenswellformed(Bodiserverconnectioncontext connectioncontext)
     {
-        String[] tokens = connectioncontext.input.split(" ");            
+        String[] tokens = connectioncontext.inputstring.split(" ");            
         
         for(String token : tokens)
         {

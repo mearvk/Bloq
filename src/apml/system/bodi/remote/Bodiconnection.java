@@ -89,57 +89,57 @@ public class Bodiconnection
             {
                 case "//handshake": 
 
-                    connectioncontext.bodiconnection.processhandshakerequest(connectioncontext);
+                    connectioncontext.bodiconnectioncontext.processhandshakerequest(connectioncontext);
 
-                    connectioncontext.bodiconnection.processhandshakeresponse(connectioncontext);                                 
+                    connectioncontext.bodiconnectioncontext.processhandshakeresponse(connectioncontext);                                 
 
                     break;
 
                 case "//close": //do instance a persistent hinge to processcloseresponse if you please  
 
-                    connectioncontext.bodiconnection.processcloserequest(connectioncontext);
+                    connectioncontext.bodiconnectioncontext.processcloserequest(connectioncontext);
 
-                    connectioncontext.bodiconnection.processcloseresponse(connectioncontext); 
+                    connectioncontext.bodiconnectioncontext.processcloseresponse(connectioncontext); 
 
                     break;
 
                 case "//open": //do instance a persistent bodi hinge at //context
 
-                    connectioncontext.bodiconnection.processopenrequest(connectioncontext);
+                    connectioncontext.bodiconnectioncontext.processopenrequest(connectioncontext);
 
-                    connectioncontext.bodiconnection.processopenresponse(connectioncontext); 
+                    connectioncontext.bodiconnectioncontext.processopenresponse(connectioncontext); 
 
                     break;
 
                 case "//pull": //do instance a persistent bodi hinge at //context
 
-                    connectioncontext.bodiconnection.processpullrequest(connectioncontext);
+                    connectioncontext.bodiconnectioncontext.processpullrequest(connectioncontext);
 
-                    connectioncontext.bodiconnection.processpullresponse(connectioncontext); 
+                    connectioncontext.bodiconnectioncontext.processpullresponse(connectioncontext); 
 
                     break;
 
                 case "//put": //do instance a persistent bodi hinge at //context
 
-                    connectioncontext.bodiconnection.processputrequest(connectioncontext);
+                    connectioncontext.bodiconnectioncontext.processputrequest(connectioncontext);
 
-                    connectioncontext.bodiconnection.processputresponse(connectioncontext); 
+                    connectioncontext.bodiconnectioncontext.processputresponse(connectioncontext); 
 
                     break;   
 
                 case "//trade": //do instance a persistent bodi hinge at //context
 
-                    connectioncontext.bodiconnection.processtraderequest(connectioncontext);
+                    connectioncontext.bodiconnectioncontext.processtraderequest(connectioncontext);
 
-                    connectioncontext.bodiconnection.processtraderesponse(connectioncontext); 
+                    connectioncontext.bodiconnectioncontext.processtraderesponse(connectioncontext); 
 
                     break;
 
                 default: 
                     
-                    connectioncontext.bodiconnection.processotherrequest(connectioncontext);
+                    connectioncontext.bodiconnectioncontext.processotherrequest(connectioncontext);
 
-                    connectioncontext.bodiconnection.processotherresponse(connectioncontext);                    
+                    connectioncontext.bodiconnectioncontext.processotherresponse(connectioncontext);                    
 
                     break;
             }        
@@ -168,9 +168,9 @@ public class Bodiconnection
     
     public Boolean processhandshakeresponse(Bodiserverconnectioncontext connectioncontext)
     {
-        connectioncontext.bodiconnection.result = "success";
+        connectioncontext.bodiconnectioncontext.result = "success";
         
-        connectioncontext.bodiconnection.message = "welcome";
+        connectioncontext.bodiconnectioncontext.message = "welcome";
         
         return false;
     }    
@@ -181,44 +181,44 @@ public class Bodiconnection
         
         if(Bodi.hascontextat(connectioncontext.getcontext(connectioncontext))) 
         {
-            connectioncontext.bodiconnection.result = "success";
+            connectioncontext.bodiconnectioncontext.result = "success";
             
-            connectioncontext.bodiconnection.message = "persistent connection established";
+            connectioncontext.bodiconnectioncontext.message = "persistent connection established";
             
             return this.lines.add(connectioncontext.getcontext(connectioncontext)); //remove a persistent line to bodi instance
         }
         
-        connectioncontext.bodiconnection.result = "failure";
+        connectioncontext.bodiconnectioncontext.result = "failure";
         
-        connectioncontext.bodiconnection.cause = "no such context";
+        connectioncontext.bodiconnectioncontext.cause = "no such context";
         
         return false;
     } 
     
     public Boolean processotherresponse(Bodiserverconnectioncontext connectioncontext)
     {
-        connectioncontext.bodiconnection.operation = "//other";
+        connectioncontext.bodiconnectioncontext.operation = "//other";
         
-        connectioncontext.bodiconnection.result = "rejection";
+        connectioncontext.bodiconnectioncontext.result = "rejection";
         
-        connectioncontext.bodiconnection.message = "unusual; please recheck";
+        connectioncontext.bodiconnectioncontext.message = "unusual; please recheck";
         
         try
         {
             //no valid TTL 
             if(this.gettimetolive()<=0) 
             {
-                connectioncontext.bodiconnection.cause = "TTL expired";    
+                connectioncontext.bodiconnectioncontext.cause = "TTL expired";    
             }                        
             //no valid session issue
-            else if(this.server.isvalidsessionid(connectioncontext.bodiconnection)) 
+            else if(this.server.isvalidsessionid(connectioncontext.bodiconnectioncontext)) 
             {
-                connectioncontext.bodiconnection.cause = "Session ID not valid";                
+                connectioncontext.bodiconnectioncontext.cause = "Session ID not valid";                
             }
             //unclear cause; tokens may be cause
             else 
             {
-                connectioncontext.bodiconnection.cause = "Unclear cause; check all tokens";     
+                connectioncontext.bodiconnectioncontext.cause = "Unclear cause; check all tokens";     
             }
         }
         catch(Exception e)
@@ -242,25 +242,25 @@ public class Bodiconnection
         
         String context = this.stripforcontext(connectioncontext);
         
-        String key = connectioncontext.bodiconnection.key;
+        String key = connectioncontext.bodiconnectioncontext.key;
         
-        String value = connectioncontext.bodiconnection.value;        
+        String value = connectioncontext.bodiconnectioncontext.value;        
 
         //Bodi.context(context).put
         
         /*if(Bodi.hascontextat(context) && key!=null && value!=null) //comprehensive case
         {
-            connectioncontext.bodiconnection.result = "failure";
+            connectioncontext.bodiconnectioncontext.result = "failure";
 
-            connectioncontext.bodiconnection.message = "persistent context already established";            
+            connectioncontext.bodiconnectioncontext.message = "persistent context already established";            
         }
         else if(Bodi.hascontextat(context))
         {
             Bodi.setcontext(context);
 
-            connectioncontext.bodiconnection.result = "success";
+            connectioncontext.bodiconnectioncontext.result = "success";
 
-            connectioncontext.bodiconnection.message = "persistent context established";            
+            connectioncontext.bodiconnectioncontext.message = "persistent context established";            
         }*/              
         
         return true;
@@ -283,7 +283,7 @@ public class Bodiconnection
      */
     public Bodiconnection processhandshakerequest(Bodiserverconnectioncontext connectioncontext) throws Exception
     {
-        Bodiconnection bodiconnection = connectioncontext.bodiconnection;
+        Bodiconnection bodiconnection = connectioncontext.bodiconnectioncontext;
         
         bodiconnection.operation = "//handshake";
         
@@ -300,7 +300,7 @@ public class Bodiconnection
     
     public Bodiconnection processcloserequest(Bodiserverconnectioncontext connectioncontext) throws Exception
     {               
-        Bodiconnection bodiconnection = connectioncontext.bodiconnection;                           
+        Bodiconnection bodiconnection = connectioncontext.bodiconnectioncontext;                           
         
         bodiconnection.operation = "//close";
         
@@ -317,7 +317,7 @@ public class Bodiconnection
     
     public Bodiconnection processputrequest(Bodiserverconnectioncontext connectioncontext) throws Exception
     {
-        Bodiconnection bodiconnection = connectioncontext.bodiconnection;                                                       
+        Bodiconnection bodiconnection = connectioncontext.bodiconnectioncontext;                                                       
         
         bodiconnection.operation = "//put";
         
@@ -356,7 +356,7 @@ public class Bodiconnection
     
     public Bodiconnection processpullrequest(Bodiserverconnectioncontext connectioncontext) throws Exception
     {
-        Bodiconnection bodiconnection = connectioncontext.bodiconnection;                                      
+        Bodiconnection bodiconnection = connectioncontext.bodiconnectioncontext;                                      
         
         bodiconnection.operation = "//pull";
         
@@ -400,7 +400,7 @@ public class Bodiconnection
     
     public Bodiconnection processopenrequest(Bodiserverconnectioncontext connectioncontext) throws Exception
     {        
-        Bodiconnection bodiconnection = connectioncontext.bodiconnection;                                                  
+        Bodiconnection bodiconnection = connectioncontext.bodiconnectioncontext;                                                  
         
         bodiconnection.operation = "//open";
         
@@ -417,12 +417,12 @@ public class Bodiconnection
     
     public Bodiconnection processotherrequest(Bodiserverconnectioncontext connectioncontext) throws Exception
     {
-        return connectioncontext.bodiconnection;
+        return connectioncontext.bodiconnectioncontext;
     }
     
     public Bodiconnection processtraderequest(Bodiserverconnectioncontext connectioncontext) throws Exception
     {
-        Bodiconnection bodiconnection = connectioncontext.bodiconnection;                                                       
+        Bodiconnection bodiconnection = connectioncontext.bodiconnectioncontext;                                                       
         
         bodiconnection.operation = "//trade";
         
@@ -439,7 +439,7 @@ public class Bodiconnection
     
     public Bodiconnection other(Bodiserverconnectioncontext connectioncontext) throws Exception
     {
-        Bodiconnection bodiconnection = connectioncontext.bodiconnection;                      
+        Bodiconnection bodiconnection = connectioncontext.bodiconnectioncontext;                      
         
         bodiconnection.operation = "//other";
         
@@ -476,11 +476,11 @@ public class Bodiconnection
     
     private Boolean checkconnection(Bodiserverconnectioncontext connectioncontext)            
     {
-        if(connectioncontext.bodiconnection==null) return false;
+        if(connectioncontext.bodiconnectioncontext==null) return false;
         
-        if(connectioncontext.bodiconnection.ttl<=0) return false;
+        if(connectioncontext.bodiconnectioncontext.ttl<=0) return false;
         
-        if(this.server.isvalidsession(connectioncontext.bodiconnection)==null) return false;            
+        if(this.server.isvalidsession(connectioncontext.bodiconnectioncontext)==null) return false;            
         
         return true;
     }    

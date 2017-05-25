@@ -72,13 +72,13 @@ class Networkconnectioncontext
     {
         //set output buffer, flag, and bodi object reference into the output queue
         
-        connectioncontext.network.outqueue.append(connectioncontext.bodiconnection.toString());
+        connectioncontext.networkconnectioncontext.outqueue.append(connectioncontext.bodiconnectioncontext.toString());
                                                                         
-        connectioncontext.network.haswriteready = true;
+        connectioncontext.networkconnectioncontext.haswriteready = true;
                         
-        connectioncontext.network.thread.outputlistenerthread.haswriteready = true;                                                
+        connectioncontext.networkconnectioncontext.thread.outputlistenerthread.haswriteready = true;                                                
                             
-        //connectioncontext.network.inqueue = connectioncontext.network.inqueue.delete(0, connectioncontext.input.length());      
+        //connectioncontext.networkconnectioncontext.inqueue = connectioncontext.networkconnectioncontext.inqueue.delete(0, connectioncontext.inputstring.length());      
         
         return true;
     }
@@ -89,4 +89,32 @@ class Networkconnectioncontext
         
         return false;
     }
+    
+    public Boolean issocketclosed()
+    {
+        try
+        {
+            this.writer.write("");
+        }
+        catch(Exception e)
+        {
+            return true;
+        }
+        
+        return false;
+    }    
+    
+    public Boolean issocketconnected()
+    {
+        try
+        {
+            this.writer.write("");
+        }
+        catch(Exception e)
+        {
+            return false;
+        }
+        
+        return true;
+    }      
 }

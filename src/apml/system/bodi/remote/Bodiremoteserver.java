@@ -13,7 +13,6 @@ import java.util.Objects;
  * 
  * @author Max Rupplin
  */
-
 public class Bodiremoteserver extends Basicserver //reserve keyword fortune at root for bodi and her creator Max R .mr .ok ss
 {               
     public Integer hash = 0x008808ef;
@@ -66,99 +65,139 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
     public void go() //find a way to synch the unsecuredinput queue so delete doesn't actually delete fresh data
     {                                  
         while(running)
-        {                        
-            Bodiserverconnectioncontext bodiconnectioncontext = null;
-            
+        {                                                
             Networkconnectioncontext networkcontext = this.pollqueuednetworkconnections();                                      
             
             try
             {                
-                if( this.networkiscleared(networkcontext) )
+                if( this.trysecurenetwork(networkcontext) ) //
                 {
-                    Bodiconnection unsecuredbodiconnection = this.pollqueuedbodiconnections(networkcontext);
                     
-                    String unsecuredinput = networkcontext.inqueue.toString();
+                    Bodiserverconnectioncontext bodiserverconnectioncontext = new Bodiserverconnectioncontext();
                     
-                    /*----------------------------------------------------------------------------------------------------------------------------------------------------------------*/                                                                                
-                                        
-                    if(unsecuredinput.startsWith("//handshake"))
-                    {
-                        bodiconnectioncontext = new Bodiserverconnectioncontext(this, HANDSHAKE, unsecuredinput, networkcontext, unsecuredbodiconnection);
-                        
-                        bodiconnectioncontext.processprotocol(bodiconnectioncontext);
-                         
-                        bodiconnectioncontext.processrequest(bodiconnectioncontext);     
-                         
-                        bodiconnectioncontext.processsesponse(bodiconnectioncontext);                                                  
-                    }                    
+                    bodiserverconnectioncontext.bodiconnectioncontext = this.pollqueuedbodisessions(networkcontext);
                     
-                    else if(unsecuredinput.startsWith("//close"))
-                    {
-                        bodiconnectioncontext = new Bodiserverconnectioncontext(this, CLOSE, unsecuredinput, networkcontext, unsecuredbodiconnection);
+                    bodiserverconnectioncontext.networkconnectioncontext = networkcontext;
+                    
+                    
+                    if( this.trysecurebodiconnection(bodiserverconnectioncontext) ) //
+                    {                                                                                                                                  
                         
-                        bodiconnectioncontext.processprotocol(bodiconnectioncontext);
+                        bodiserverconnectioncontext.inputbuffer = new StringBuffer(bodiserverconnectioncontext.networkconnectioncontext.inqueue);
                         
-                        bodiconnectioncontext.processrequest(bodiconnectioncontext);     
-                         
-                        bodiconnectioncontext.processsesponse(bodiconnectioncontext);         
-                    }
+                        bodiserverconnectioncontext.inputstring = new StringBuffer(bodiserverconnectioncontext.networkconnectioncontext.inqueue).toString();
+                                                
+                        
+                        //8222222222222222222222222222222222222222222222222228 00 8555555555555555555555555555555555555555555555555558//
+                        
+                        //8888888888888888888888888888888888888888888888888888 -- 8888888888888888888888888888888888888888888888888888//
+                        
+                        
+                        if(bodiserverconnectioncontext.inputstring.startsWith(HANDSHAKE))
+                        {
+                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, HANDSHAKE, bodiserverconnectioncontext);
 
-                    else if(unsecuredinput.startsWith("//open"))
-                    {
-                        bodiconnectioncontext = new Bodiserverconnectioncontext(this, OPEN, unsecuredinput, networkcontext, unsecuredbodiconnection);
-                        
-                        bodiconnectioncontext.processprotocol(bodiconnectioncontext);
-                        
-                        bodiconnectioncontext.processrequest(bodiconnectioncontext);     
-                         
-                        bodiconnectioncontext.processsesponse(bodiconnectioncontext);         
-                    }
+                            bodiserverconnectioncontext.processprotocol(bodiserverconnectioncontext);
 
-                    else if(unsecuredinput.startsWith("//pull")) 
-                    {
-                        bodiconnectioncontext = new Bodiserverconnectioncontext(this, PULL, unsecuredinput, networkcontext, unsecuredbodiconnection);
-                        
-                        bodiconnectioncontext.processprotocol(bodiconnectioncontext);
-                        
-                        bodiconnectioncontext.processrequest(bodiconnectioncontext);     
-                         
-                        bodiconnectioncontext.processsesponse(bodiconnectioncontext);         
-                    }
-                                        
-                    else if(unsecuredinput.startsWith("//put"))
-                    {
-                        bodiconnectioncontext = new Bodiserverconnectioncontext(this, PUT, unsecuredinput, networkcontext, unsecuredbodiconnection);
-                        
-                        bodiconnectioncontext.processprotocol(bodiconnectioncontext);                         
-                         
-                        bodiconnectioncontext.processrequest(bodiconnectioncontext);     
-                         
-                        bodiconnectioncontext.processsesponse(bodiconnectioncontext);                              
-                    }
-                    
-                    else if(unsecuredinput.startsWith("//trade"))
-                    {
-                        bodiconnectioncontext = new Bodiserverconnectioncontext(this, TRADE, unsecuredinput, networkcontext, unsecuredbodiconnection);
-                        
-                        bodiconnectioncontext.processprotocol(bodiconnectioncontext);
-                         
-                        bodiconnectioncontext.processrequest(bodiconnectioncontext);     
-                         
-                        bodiconnectioncontext.processsesponse(bodiconnectioncontext);         
-                    }        
-                    
-                    else
-                    {
-                        bodiconnectioncontext = new Bodiserverconnectioncontext(this, OTHER, "", networkcontext, new Bodiconnection());
-                        
-                        bodiconnectioncontext.bodiconnection.cause = "unrecognized protocol"; 
-                    
-                        bodiconnectioncontext.bodiconnection.message = "unable to complete request";  
-                         
-                        bodiconnectioncontext.processsesponse(bodiconnectioncontext);                                                                 
-                    }                                        
-                }         
+                            bodiserverconnectioncontext.processrequest(bodiserverconnectioncontext);     
+
+                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);     
+                            
+                            //
+                            
+                            this.sessiontobodhi(bodiserverconnectioncontext, networkcontext);
+                        }                    
+
+                        else if(bodiserverconnectioncontext.inputstring.startsWith(CLOSE))
+                        {
+                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, CLOSE, bodiserverconnectioncontext);
+
+                            bodiserverconnectioncontext.processprotocol(bodiserverconnectioncontext);
+
+                            bodiserverconnectioncontext.processrequest(bodiserverconnectioncontext);     
+
+                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);         
+                            
+                            //
+                            
+                            this.sessiontobodhi(bodiserverconnectioncontext, networkcontext);
+                        }
+
+                        else if(bodiserverconnectioncontext.inputstring.startsWith(OPEN))
+                        {
+                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, OPEN, bodiserverconnectioncontext);
+
+                            bodiserverconnectioncontext.processprotocol(bodiserverconnectioncontext);
+
+                            bodiserverconnectioncontext.processrequest(bodiserverconnectioncontext);     
+
+                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);      
+                            
+                            //
+                            
+                            this.sessiontobodhi(bodiserverconnectioncontext, networkcontext);
+                        }
+
+                        else if(bodiserverconnectioncontext.inputstring.startsWith(PULL)) 
+                        {
+                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, PULL, bodiserverconnectioncontext);
+
+                            bodiserverconnectioncontext.processprotocol(bodiserverconnectioncontext);
+
+                            bodiserverconnectioncontext.processrequest(bodiserverconnectioncontext);     
+
+                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);         
+                            
+                            //
+                            
+                            this.sessiontobodhi(bodiserverconnectioncontext, networkcontext);
+                        }
+
+                        else if(bodiserverconnectioncontext.inputstring.startsWith(PUT))
+                        {
+                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, PUT, bodiserverconnectioncontext);
+
+                            bodiserverconnectioncontext.processprotocol(bodiserverconnectioncontext);                         
+
+                            bodiserverconnectioncontext.processrequest(bodiserverconnectioncontext);     
+
+                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);                              
+                            
+                            //
+                            
+                            this.sessiontobodhi(bodiserverconnectioncontext, networkcontext);
+                        }
+
+                        else if(bodiserverconnectioncontext.inputstring.startsWith(TRADE))
+                        {
+                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, TRADE, bodiserverconnectioncontext);
+
+                            bodiserverconnectioncontext.processprotocol(bodiserverconnectioncontext);
+
+                            bodiserverconnectioncontext.processrequest(bodiserverconnectioncontext);     
+
+                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);         
+                            
+                            //
+                            
+                            this.sessiontobodhi(bodiserverconnectioncontext, networkcontext);
+                        }        
+
+                        else
+                        {
+                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, OTHER, "", bodiserverconnectioncontext.networkconnectioncontext, new Bodiconnection());
+
+                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);                                                                 
+                        }                        
+                    }                                    
+                }                                                   
             }
+            catch(SecurityException exception) 
+            {                                                
+                exception.printStackTrace(System.err);
+                
+                //
+            }            
             catch(NullPointerException exception)
             {
                 exception.printStackTrace(System.err);
@@ -171,12 +210,6 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                 
                 //
             }
-            catch(SecurityException exception) 
-            {                                                
-                exception.printStackTrace(System.err);
-                
-                //
-            }
             catch(Exception exception)
             {
                 exception.printStackTrace(System.err);
@@ -185,50 +218,40 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
             }              
             finally
             {                
-                this.dohandlecleanup(bodiconnectioncontext, networkcontext);                                                
+                this.purgeinputbuffer(networkcontext);           
+                
+                this.sleepmillis(500L);
+                //
             }
         }
     }      
     
-    public Boolean networkiscleared(Networkconnectioncontext networkcontext)
+    public Boolean trysecurenetwork(Networkconnectioncontext networkcontext)
     {
-        return networkcontext!=null && networkcontext.inputqueueisready();
+        return networkcontext!=null && networkcontext.inputqueueisready() && networkcontext.issocketconnected();
     }
     
-    public void dohandlecleanup(Bodiserverconnectioncontext connectioncontext, Networkconnectioncontext network)
+    public Boolean trysecurebodiconnection(Bodiserverconnectioncontext bodiconnectioncontext)
     {
+        return bodiconnectioncontext!=null && bodiconnectioncontext.protocol.startsWith("//handshake");
+    }    
+    
+    public void purgeinputbuffer(Networkconnectioncontext networkcontext)
+    {                
         try
         { 
-            this.storewithbodi(connectioncontext, network); 
+            networkcontext.inqueue.delete(0, networkcontext.inqueue.length()); 
         }
-        catch(Exception e){}
-                
-        try
-        { 
-            connectioncontext.network.inqueue.delete(0, connectioncontext.network.inqueue.length()); 
-        }
-        catch(Exception e){}
-                
-        try
-        { 
-            connectioncontext.input = ""; 
-        }
-        catch(Exception e){}                                
-                
-        try
-        { 
-            this.sleepmillis(500l); /*oh boy oh boy let's rest half a day ; yawn; yawn */ 
-        }
-        catch(Exception e){}        
+        catch(Exception e){} 
     }
     
-    private Boolean storewithbodi(Bodiserverconnectioncontext connectioncontext, Networkconnectioncontext connection) throws Exception
+    private Boolean sessiontobodhi(Bodiserverconnectioncontext connectioncontext, Networkconnectioncontext connection) throws Exception
     {
         if(connectioncontext==null) return false;
         
         if(connection==null) return false;
         
-        Bodi.context("//bodi/server/remote/bodiconnections").put(connectioncontext.bodiconnection.sessionid, connectioncontext.bodiconnection);
+        Bodi.context("//bodi/server/remote/bodiconnections").put(connectioncontext.bodiconnectioncontext.sessionid, connectioncontext.bodiconnectioncontext);
 
         Bodi.context("//bodi/server/remote/netconnections").put(connection, connection);  //connection.sessionid --> connection SVP ASAP
         
@@ -253,12 +276,19 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         return connection;
     }    
     
-    protected void sleepmillis(Long millis) throws Exception
+    protected void sleepmillis(Long millis) 
     {
-        Thread.currentThread().sleep(millis);
+        try
+        {
+            Thread.currentThread().sleep(millis);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }    
     
-    protected Bodiconnection pollqueuedbodiconnections(Networkconnectioncontext networkcontext) throws Exception
+    protected Bodiconnection pollqueuedbodisessions(Networkconnectioncontext networkcontext) throws Exception
     {
         if(networkcontext==null) throw new SecurityException("//bodi/connect");
         

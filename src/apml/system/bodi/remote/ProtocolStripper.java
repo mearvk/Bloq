@@ -10,7 +10,7 @@ public class ProtocolStripper
     {
         if(parameterization==null) throw new SecurityException("//bodi/connect");
         
-        String tokens[] = parameterization.input.split(" ");
+        String tokens[] = parameterization.inputstring.split(" ");
         
         for(String string : tokens)
         {
@@ -29,7 +29,7 @@ public class ProtocolStripper
     {
         if(parameterization==null) throw new SecurityException("//bodi/connect");
         
-        String tokens[] = parameterization.input.split(" ");
+        String tokens[] = parameterization.inputstring.split(" ");
         
         for(String string : tokens)
         {
@@ -48,7 +48,7 @@ public class ProtocolStripper
     {
         if(parameterization==null) throw new SecurityException("//bodi/connect");
         
-        String tokens[] = parameterization.input.split(" ");
+        String tokens[] = parameterization.inputstring.split(" ");
         
         for(String string : tokens)
         {
@@ -67,7 +67,7 @@ public class ProtocolStripper
     {
         if(parameterization==null) throw new SecurityException("//bodi/connect");
         
-        String tokens[] = parameterization.input.split(" ");
+        String tokens[] = parameterization.inputstring.split(" ");
         
         if(tokens==null) return null;
         
