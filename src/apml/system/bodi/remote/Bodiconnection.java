@@ -27,7 +27,7 @@ public class Bodiconnection
     
     public Boolean islive = true;
             
-    public Networkconnectioncontext connection;            
+    public Networkcontext connection;            
     
     public Integer sessionid;
     
@@ -64,7 +64,7 @@ public class Bodiconnection
         this.day = System.currentTimeMillis();
     }
     
-    public Bodiconnection(Bodiremoteserver server, Networkconnectioncontext connection)
+    public Bodiconnection(Bodiremoteserver server, Networkcontext connection)
     {                
         if(server==null || connection==null) throw new SecurityException("//bodi/connect/exceptions");
         

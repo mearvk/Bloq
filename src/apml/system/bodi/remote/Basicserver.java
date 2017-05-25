@@ -46,7 +46,7 @@ public abstract class Basicserver extends Thread
     
     public Boolean running = true;
     
-    public ArrayList<Networkconnectioncontext> connections = new ArrayList();
+    public ArrayList<Networkcontext> connections = new ArrayList();
     
     public Inputqueue connectionqueue = new Inputqueue();
     
@@ -129,9 +129,9 @@ public abstract class Basicserver extends Thread
         {
             while(running)
             {                                                    
-                Networkconnectioncontext connection;
+                Networkcontext connection;
                 
-                connection = new Networkconnectioncontext(this);
+                connection = new Networkcontext(this);
 
                 connection.socket = this.serversocket.accept(); 
                 

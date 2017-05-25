@@ -34,7 +34,7 @@ class Inputlistenerthread extends Thread
                 //please use single line reads only for now
                 String line = this.parent.connection.reader.readLine();
                    
-                Networkconnectioncontext connection = this.parent.connection;                
+                Networkcontext connection = this.parent.connection;                
                     
                 connection.appendline(line);
                     

@@ -14,14 +14,14 @@ import java.net.Socket;
  *
  * @author Max Rupplin
  */
-class Networkconnectioncontext
+class Networkcontext
 {
-    public Networkconnectioncontext()
+    public Networkcontext()
     {
         
     }
         
-    public Networkconnectioncontext(Basicserver server)
+    public Networkcontext(Basicserver server)
     {
         if(server==null) throw new SecurityException("//bodi/connect");
         

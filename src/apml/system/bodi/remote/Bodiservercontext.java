@@ -11,7 +11,7 @@ public class Bodiservercontext
     
     public Bodiremoteserver bodiserver;
     
-    public Networkconnectioncontext networkcontext;
+    public Networkcontext networkcontext;
     
     public String protocol;
     
@@ -52,26 +52,33 @@ public class Bodiservercontext
     }    
     
     /**
-     * Do not fill this with full expectation
+     * Quick fill for primary loop on Bodiserver; not a total Constructor for BRS at this time. /mr /ok /ss
      * 
      * @param bodiserver
      * @param networkcontext
+     * @param bodicontext
      * @throws Exception 
      */
-    public Bodiservercontext(Bodiremoteserver bodiserver, Networkconnectioncontext networkcontext) throws Exception
-    {
-        if(bodiserver==null || networkcontext==null) throw new SecurityException("//bodi/connect"); 
+    public Bodiservercontext(Bodiremoteserver bodiserver, Networkcontext networkcontext, Bodiconnection bodicontext) throws Exception
+    {                
+        //bodicontext==null ok /mr /ok
+        
+        if(bodiserver==null || networkcontext==null /* || bodicontext==null */) throw new SecurityException("//bodi/connect");  
         
         this.bodiserver = bodiserver;                
         
         this.networkcontext = networkcontext;
         
+        this.bodicontext = bodicontext;
+        
         this.packet = networkcontext.inqueue.toString();
+        
+        this.inputstring = networkcontext.inqueue.toString();
         
         //             
     }
     
-    public Bodiservercontext(Bodiremoteserver bodiserver, String protocol, String input, Networkconnectioncontext network, Bodiconnection bodiconnection) throws Exception
+    public Bodiservercontext(Bodiremoteserver bodiserver, String protocol, String input, Networkcontext network, Bodiconnection bodiconnection) throws Exception
     {
         if( bodiserver==null || protocol==null || input==null || network==null || bodiconnection==null) throw new SecurityException("//bodi/connect");
             

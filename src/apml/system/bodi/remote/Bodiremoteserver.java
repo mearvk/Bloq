@@ -66,27 +66,17 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
     {                                  
         while(running)
         {                                                
-            Networkconnectioncontext networkcontext = this.pollqueuednetworkconnections();                                      
+            Networkcontext networkcontext = this.pollqueuednetworkconnections();                                      
             
             try
             {                
                 if( this.trysecurenetwork(networkcontext) ) //
                 {
-                    
-                    Bodiservercontext bodiservercontext = new Bodiservercontext(this, networkcontext);                                        
-                    
-                    bodiservercontext.networkcontext = networkcontext;                    
-                    
-                    bodiservercontext.bodicontext = this.pollstoredbodisessions(networkcontext);
-                    
+                                        
+                    Bodiservercontext bodiservercontext = new Bodiservercontext(this, networkcontext, this.pollstoredbodisessions(networkcontext));                                                            
                     
                     if( this.trysecurebodiconnection(bodiservercontext) ) //
-                    {
-
-                        bodiservercontext.inputbuffer = new StringBuffer(bodiservercontext.networkcontext.inqueue);
-                        
-                        bodiservercontext.inputstring = new StringBuffer(bodiservercontext.networkcontext.inqueue).toString();                                                                                                
-
+                    {                                                                                              
                         
                         if(bodiservercontext.inputstring.startsWith(HANDSHAKE))
                         {
@@ -224,7 +214,7 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         }
     }      
     
-    public Boolean trysecurenetwork(Networkconnectioncontext networkcontext)
+    public Boolean trysecurenetwork(Networkcontext networkcontext)
     {
         return networkcontext!=null && networkcontext.inputqueueisready() && networkcontext.issocketconnected();
     }
@@ -254,7 +244,7 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
             );
     }    
     
-    public void trypurgeinputbuffer(Networkconnectioncontext networkcontext)
+    public void trypurgeinputbuffer(Networkcontext networkcontext)
     {                
         try
         { 
@@ -263,7 +253,7 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         catch(Exception e){} 
     }
     
-    private Boolean trystorecontextstobodhi(Bodiservercontext connectioncontext, Networkconnectioncontext connection) throws Exception
+    private Boolean trystorecontextstobodhi(Bodiservercontext connectioncontext, Networkcontext connection) throws Exception
     {
         if(connectioncontext==null) return false;
         
@@ -289,9 +279,9 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
      * 
      * @return 
      */
-    public Networkconnectioncontext pollqueuednetworkconnections()
+    public Networkcontext pollqueuednetworkconnections()
     {        
-        Networkconnectioncontext connection = this.connectionqueue.peek();        
+        Networkcontext connection = this.connectionqueue.peek();        
         
         if(connection!=null) this.connectionqueue.remove(connection);
         
@@ -310,7 +300,7 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         }
     }    
     
-    protected Bodiconnection pollstoredbodisessions(Networkconnectioncontext networkcontext) throws Exception
+    protected Bodiconnection pollstoredbodisessions(Networkcontext networkcontext) throws Exception
     {
         if(networkcontext==null) throw new SecurityException("//bodi/connect");
         
