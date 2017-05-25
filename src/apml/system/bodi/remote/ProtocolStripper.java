@@ -6,7 +6,7 @@ package apml.system.bodi.remote;
  */
 public class ProtocolStripper
 {        
-    public static String stripforkey(Bodiserverconnectioncontext parameterization)
+    public static String stripforkey(Bodiservercontext parameterization)
     {
         if(parameterization==null) throw new SecurityException("//bodi/connect");
         
@@ -25,7 +25,7 @@ public class ProtocolStripper
         return null;
     }
     
-    public static String stripforvalue(Bodiserverconnectioncontext parameterization)
+    public static String stripforvalue(Bodiservercontext parameterization)
     {
         if(parameterization==null) throw new SecurityException("//bodi/connect");
         
@@ -44,7 +44,7 @@ public class ProtocolStripper
         return null;
     }
     
-    public static String stripforcontext(Bodiserverconnectioncontext parameterization)
+    public static String stripforcontext(Bodiservercontext parameterization)
     {
         if(parameterization==null) throw new SecurityException("//bodi/connect");
         
@@ -63,11 +63,11 @@ public class ProtocolStripper
         return null;
     }   
     
-    public static String stripforprotocoltoken(Bodiserverconnectioncontext parameterization)
+    public static String stripforprotocoltoken(Bodiservercontext parameterization)
     {
         if(parameterization==null) throw new SecurityException("//bodi/connect");
         
-        String tokens[] = parameterization.inputstring.split(" ");
+        String tokens[] = parameterization.networkcontext.inqueue.toString().split(" ");
         
         if(tokens==null) return null;
         

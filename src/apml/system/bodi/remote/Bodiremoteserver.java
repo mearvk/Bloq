@@ -73,121 +73,116 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                 if( this.trysecurenetwork(networkcontext) ) //
                 {
                     
-                    Bodiserverconnectioncontext bodiserverconnectioncontext = new Bodiserverconnectioncontext();
+                    Bodiservercontext bodiservercontext = new Bodiservercontext(this, networkcontext);                                        
                     
-                    bodiserverconnectioncontext.bodiconnectioncontext = this.pollqueuedbodisessions(networkcontext);
+                    bodiservercontext.networkcontext = networkcontext;                    
                     
-                    bodiserverconnectioncontext.networkconnectioncontext = networkcontext;
+                    bodiservercontext.bodicontext = this.pollstoredbodisessions(networkcontext);
                     
                     
-                    if( this.trysecurebodiconnection(bodiserverconnectioncontext) ) //
-                    {                                                                                                                                  
+                    if( this.trysecurebodiconnection(bodiservercontext) ) //
+                    {
+
+                        bodiservercontext.inputbuffer = new StringBuffer(bodiservercontext.networkcontext.inqueue);
                         
-                        bodiserverconnectioncontext.inputbuffer = new StringBuffer(bodiserverconnectioncontext.networkconnectioncontext.inqueue);
+                        bodiservercontext.inputstring = new StringBuffer(bodiservercontext.networkcontext.inqueue).toString();                                                                                                
+
                         
-                        bodiserverconnectioncontext.inputstring = new StringBuffer(bodiserverconnectioncontext.networkconnectioncontext.inqueue).toString();
-                                                
-                        
-                        //8222222222222222222222222222222222222222222222222228 00 8555555555555555555555555555555555555555555555555558//
-                        
-                        //8888888888888888888888888888888888888888888888888888 -- 8888888888888888888888888888888888888888888888888888//
-                        
-                        
-                        if(bodiserverconnectioncontext.inputstring.startsWith(HANDSHAKE))
+                        if(bodiservercontext.inputstring.startsWith(HANDSHAKE))
                         {
-                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, HANDSHAKE, bodiserverconnectioncontext);
+                            bodiservercontext = new Bodiservercontext(this, HANDSHAKE, bodiservercontext);
 
-                            bodiserverconnectioncontext.processprotocol(bodiserverconnectioncontext);
+                            bodiservercontext.processprotocol(bodiservercontext);
 
-                            bodiserverconnectioncontext.processrequest(bodiserverconnectioncontext);     
+                            bodiservercontext.processrequest(bodiservercontext);     
 
-                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);     
+                            bodiservercontext.processsesponse(bodiservercontext);     
                             
                             //
                             
-                            this.sessiontobodhi(bodiserverconnectioncontext, networkcontext);
+                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }                    
 
-                        else if(bodiserverconnectioncontext.inputstring.startsWith(CLOSE))
+                        else if(bodiservercontext.inputstring.startsWith(CLOSE))
                         {
-                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, CLOSE, bodiserverconnectioncontext);
+                            bodiservercontext = new Bodiservercontext(this, CLOSE, bodiservercontext);
 
-                            bodiserverconnectioncontext.processprotocol(bodiserverconnectioncontext);
+                            bodiservercontext.processprotocol(bodiservercontext);
 
-                            bodiserverconnectioncontext.processrequest(bodiserverconnectioncontext);     
+                            bodiservercontext.processrequest(bodiservercontext);     
 
-                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);         
+                            bodiservercontext.processsesponse(bodiservercontext);         
                             
                             //
                             
-                            this.sessiontobodhi(bodiserverconnectioncontext, networkcontext);
+                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }
 
-                        else if(bodiserverconnectioncontext.inputstring.startsWith(OPEN))
+                        else if(bodiservercontext.inputstring.startsWith(OPEN))
                         {
-                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, OPEN, bodiserverconnectioncontext);
+                            bodiservercontext = new Bodiservercontext(this, OPEN, bodiservercontext);
 
-                            bodiserverconnectioncontext.processprotocol(bodiserverconnectioncontext);
+                            bodiservercontext.processprotocol(bodiservercontext);
 
-                            bodiserverconnectioncontext.processrequest(bodiserverconnectioncontext);     
+                            bodiservercontext.processrequest(bodiservercontext);     
 
-                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);      
+                            bodiservercontext.processsesponse(bodiservercontext);      
                             
                             //
                             
-                            this.sessiontobodhi(bodiserverconnectioncontext, networkcontext);
+                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }
 
-                        else if(bodiserverconnectioncontext.inputstring.startsWith(PULL)) 
+                        else if(bodiservercontext.inputstring.startsWith(PULL)) 
                         {
-                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, PULL, bodiserverconnectioncontext);
+                            bodiservercontext = new Bodiservercontext(this, PULL, bodiservercontext);
 
-                            bodiserverconnectioncontext.processprotocol(bodiserverconnectioncontext);
+                            bodiservercontext.processprotocol(bodiservercontext);
 
-                            bodiserverconnectioncontext.processrequest(bodiserverconnectioncontext);     
+                            bodiservercontext.processrequest(bodiservercontext);     
 
-                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);         
+                            bodiservercontext.processsesponse(bodiservercontext);         
                             
                             //
                             
-                            this.sessiontobodhi(bodiserverconnectioncontext, networkcontext);
+                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }
 
-                        else if(bodiserverconnectioncontext.inputstring.startsWith(PUT))
+                        else if(bodiservercontext.inputstring.startsWith(PUT))
                         {
-                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, PUT, bodiserverconnectioncontext);
+                            bodiservercontext = new Bodiservercontext(this, PUT, bodiservercontext);
 
-                            bodiserverconnectioncontext.processprotocol(bodiserverconnectioncontext);                         
+                            bodiservercontext.processprotocol(bodiservercontext);                         
 
-                            bodiserverconnectioncontext.processrequest(bodiserverconnectioncontext);     
+                            bodiservercontext.processrequest(bodiservercontext);     
 
-                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);                              
+                            bodiservercontext.processsesponse(bodiservercontext);                              
                             
                             //
                             
-                            this.sessiontobodhi(bodiserverconnectioncontext, networkcontext);
+                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }
 
-                        else if(bodiserverconnectioncontext.inputstring.startsWith(TRADE))
+                        else if(bodiservercontext.inputstring.startsWith(TRADE))
                         {
-                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, TRADE, bodiserverconnectioncontext);
+                            bodiservercontext = new Bodiservercontext(this, TRADE, bodiservercontext);
 
-                            bodiserverconnectioncontext.processprotocol(bodiserverconnectioncontext);
+                            bodiservercontext.processprotocol(bodiservercontext);
 
-                            bodiserverconnectioncontext.processrequest(bodiserverconnectioncontext);     
+                            bodiservercontext.processrequest(bodiservercontext);     
 
-                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);         
+                            bodiservercontext.processsesponse(bodiservercontext);         
                             
                             //
                             
-                            this.sessiontobodhi(bodiserverconnectioncontext, networkcontext);
+                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }        
 
                         else
                         {
-                            bodiserverconnectioncontext = new Bodiserverconnectioncontext(this, OTHER, "", bodiserverconnectioncontext.networkconnectioncontext, new Bodiconnection());
+                            bodiservercontext = new Bodiservercontext(this, OTHER, "", bodiservercontext.networkcontext, new Bodiconnection());
 
-                            bodiserverconnectioncontext.processsesponse(bodiserverconnectioncontext);                                                                 
+                            bodiservercontext.processsesponse(bodiservercontext);                                                                 
                         }                        
                     }                                    
                 }                                                   
@@ -218,9 +213,12 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
             }              
             finally
             {                
-                this.purgeinputbuffer(networkcontext);           
+                this.trypurgeinputbuffer(networkcontext);           
+                
+                //
                 
                 this.sleepmillis(500L);
+                
                 //
             }
         }
@@ -231,12 +229,32 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         return networkcontext!=null && networkcontext.inputqueueisready() && networkcontext.issocketconnected();
     }
     
-    public Boolean trysecurebodiconnection(Bodiserverconnectioncontext bodiconnectioncontext)
+    public Boolean trysecurebodiconnection(Bodiservercontext bodiservercontext)
     {
-        return bodiconnectioncontext!=null && bodiconnectioncontext.protocol.startsWith("//handshake");
+        return 
+            
+            bodiservercontext!=null && 
+                
+            bodiservercontext.bodicontext!=null &&                             
+            
+            bodiservercontext.packet!=null &&                    
+            
+            (
+                bodiservercontext.packet.startsWith("//handshake") ||
+                
+                bodiservercontext.packet.startsWith("//close") ||
+                
+                bodiservercontext.packet.startsWith("//open") ||
+                
+                bodiservercontext.packet.startsWith("//pull") ||
+                
+                bodiservercontext.packet.startsWith("//put") ||
+                
+                bodiservercontext.packet.startsWith("//trade")
+            );
     }    
     
-    public void purgeinputbuffer(Networkconnectioncontext networkcontext)
+    public void trypurgeinputbuffer(Networkconnectioncontext networkcontext)
     {                
         try
         { 
@@ -245,13 +263,13 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         catch(Exception e){} 
     }
     
-    private Boolean sessiontobodhi(Bodiserverconnectioncontext connectioncontext, Networkconnectioncontext connection) throws Exception
+    private Boolean trystorecontextstobodhi(Bodiservercontext connectioncontext, Networkconnectioncontext connection) throws Exception
     {
         if(connectioncontext==null) return false;
         
         if(connection==null) return false;
         
-        Bodi.context("//bodi/server/remote/bodiconnections").put(connectioncontext.bodiconnectioncontext.sessionid, connectioncontext.bodiconnectioncontext);
+        Bodi.context("//bodi/server/remote/bodiconnections").put(connectioncontext.bodicontext.sessionid, connectioncontext.bodicontext);
 
         Bodi.context("//bodi/server/remote/netconnections").put(connection, connection);  //connection.sessionid --> connection SVP ASAP
         
@@ -267,6 +285,10 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         return _connections;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public Networkconnectioncontext pollqueuednetworkconnections()
     {        
         Networkconnectioncontext connection = this.connectionqueue.peek();        
@@ -288,7 +310,7 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         }
     }    
     
-    protected Bodiconnection pollqueuedbodisessions(Networkconnectioncontext networkcontext) throws Exception
+    protected Bodiconnection pollstoredbodisessions(Networkconnectioncontext networkcontext) throws Exception
     {
         if(networkcontext==null) throw new SecurityException("//bodi/connect");
         

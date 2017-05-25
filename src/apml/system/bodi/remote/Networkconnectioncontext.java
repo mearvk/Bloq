@@ -68,22 +68,22 @@ class Networkconnectioncontext
         return this.inqueue!=null && this.inqueue.length()>0;
     }   
     
-    public Boolean processresponse(Bodiserverconnectioncontext connectioncontext)
+    public Boolean processresponse(Bodiservercontext connectioncontext)
     {
         //set output buffer, flag, and bodi object reference into the output queue
         
-        connectioncontext.networkconnectioncontext.outqueue.append(connectioncontext.bodiconnectioncontext.toString());
+        connectioncontext.networkcontext.outqueue.append(connectioncontext.bodicontext.toString());
                                                                         
-        connectioncontext.networkconnectioncontext.haswriteready = true;
+        connectioncontext.networkcontext.haswriteready = true;
                         
-        connectioncontext.networkconnectioncontext.thread.outputlistenerthread.haswriteready = true;                                                
+        connectioncontext.networkcontext.thread.outputlistenerthread.haswriteready = true;                                                
                             
-        //connectioncontext.networkconnectioncontext.inqueue = connectioncontext.networkconnectioncontext.inqueue.delete(0, connectioncontext.inputstring.length());      
+        //connectioncontext.networkcontext.inqueue = connectioncontext.networkcontext.inqueue.delete(0, connectioncontext.inputstring.length());      
         
         return true;
     }
     
-    public Boolean close(Bodiserverconnectioncontext connectioncontext) throws Exception
+    public Boolean close(Bodiservercontext connectioncontext) throws Exception
     {
         this.socket.close();
         

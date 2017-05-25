@@ -8,11 +8,11 @@ public class Bodiprotocolhandler
 { 
     public Integer hash = 0x008808ef;
     
-    protected Bodiserverconnectioncontext parseprotocol( Bodiserverconnectioncontext connectioncontext ) throws Exception
+    protected Bodiservercontext parseprotocol( Bodiservercontext connectioncontext ) throws Exception
     {                        
         if(connectioncontext==null) throw new SecurityException("//bodi/connect");
         
-        if(connectioncontext.networkconnectioncontext!=null) 
+        if(connectioncontext.networkcontext!=null) 
         {                                    
             switch(connectioncontext.protocol)
             {     
@@ -70,7 +70,7 @@ public class Bodiprotocolhandler
         throw new NoValidConnectionException("No valid connection found.");
     } 
     
-    protected Boolean processprotocol(Bodiserverconnectioncontext connectioncontext) throws Exception, SecurityException
+    protected Boolean processprotocol(Bodiservercontext connectioncontext) throws Exception, SecurityException
     {                       
         String protocol = connectioncontext.protocol;
         
@@ -125,7 +125,7 @@ public class Bodiprotocolhandler
         return true;
     }           
 
-    private void processcloseprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
+    private void processcloseprotocol(Bodiservercontext connectioncontext) throws SecurityException
     {        
         if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
         
@@ -136,7 +136,7 @@ public class Bodiprotocolhandler
         /*---------------------------------------------------------------------*/                
     }
 
-    private void processhandshakeprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
+    private void processhandshakeprotocol(Bodiservercontext connectioncontext) throws SecurityException
     {
         if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");
         
@@ -145,7 +145,7 @@ public class Bodiprotocolhandler
         /*---------------------------------------------------------------------*/        
     }
     
-    private void processopenprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
+    private void processopenprotocol(Bodiservercontext connectioncontext) throws SecurityException
     {
         if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
         
@@ -158,7 +158,7 @@ public class Bodiprotocolhandler
         /*---------------------------------------------------------------------*/       
     }
     
-    private void processpullprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
+    private void processpullprotocol(Bodiservercontext connectioncontext) throws SecurityException
     {
         if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
         
@@ -173,7 +173,7 @@ public class Bodiprotocolhandler
         /*---------------------------------------------------------------------*/       
     }
     
-    private void processputprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
+    private void processputprotocol(Bodiservercontext connectioncontext) throws SecurityException
     {        
         if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
         
@@ -196,7 +196,7 @@ public class Bodiprotocolhandler
         /*---------------------------------------------------------------------*/        
     }
     
-    private void processtradeprotocol(Bodiserverconnectioncontext connectioncontext) throws SecurityException
+    private void processtradeprotocol(Bodiservercontext connectioncontext) throws SecurityException
     {
         if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
         
@@ -215,29 +215,34 @@ public class Bodiprotocolhandler
     /*-------------------------------------------------------------------------*/
     
     
-    public Boolean startsswith(Bodiserverconnectioncontext connectioncontext, String comparator)
+    public Boolean startsswith(Bodiservercontext connectioncontext, String comparator)
     {
         String input = connectioncontext.inputstring;
         
         return input.startsWith(comparator);
     }
     
-    public String stripforkey(Bodiserverconnectioncontext connectioncontext)
+    public String stripforkey(Bodiservercontext bodiserverconnectioncontext)
     {
-        return ProtocolStripper.stripforkey(connectioncontext);
+        return ProtocolStripper.stripforkey(bodiserverconnectioncontext);
     }
     
-    public String stripforvalue(Bodiserverconnectioncontext connectioncontext)
+    public String stripforvalue(Bodiservercontext bodiserverconnectioncontext)
     {
-        return ProtocolStripper.stripforvalue(connectioncontext);
+        return ProtocolStripper.stripforvalue(bodiserverconnectioncontext);
     }
     
-    public String stripforcontext(Bodiserverconnectioncontext connectioncontext)
+    public String stripforcontext(Bodiservercontext bodiserverconnectioncontext)
     {
-        return ProtocolStripper.stripforcontext(connectioncontext);
-    }            
+        return ProtocolStripper.stripforcontext(bodiserverconnectioncontext);
+    }   
     
-    protected Boolean subtokenswellformed(Bodiserverconnectioncontext connectioncontext)
+    public String stripforprotocoltoken(Bodiservercontext bodiserverconnectioncontext)
+    {
+        return ProtocolStripper.stripforprotocoltoken(bodiserverconnectioncontext);
+    }
+    
+    protected Boolean subtokenswellformed(Bodiservercontext connectioncontext)
     {
         String[] tokens = connectioncontext.inputstring.split(" ");            
         
