@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/apml/xml/handlers/parser/models/apmltaghandler.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>247</line>
+                <key/>
+            </bookmark>
+            <bookmark id="2">
+                <name/>
+                <line>330</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/xml/handlers/parser/models/apmltaghandler.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/Bodicontext.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiremoteserver.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiserverconnectioncontext.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiconnection.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Networkconnectioncontext.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Basicserver.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/Bodi.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiprotocol.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Inputqueue.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiprotocolhandler.java</file>
         </group>
     </open-files>
 </project-private>
