@@ -1,6 +1,0 @@
-apml.examples.echoserver.server.EchoServerOnReadListener
-apml.examples.echoserver.server.EchoServerOnExitListener
-apml.examples.echoserver.server.EchoServerOnDispatchListener
-apml.examples.echoserver.server.EchoServerOnReceiptListener
-apml.examples.echoserver.server.Echoserver
-apml.examples.echoserver.server.EchoServerOnConnectListener
