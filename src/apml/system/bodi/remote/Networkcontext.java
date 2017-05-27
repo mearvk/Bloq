@@ -69,6 +69,8 @@ class Networkcontext
     }   
     
     public Boolean processresponse(Bodiservercontext connectioncontext)
+            
+        //fill here possibly based on errant input as well; //error or //other etc.
     {
         //set output buffer, flag, and bodi object reference into the output queue
         

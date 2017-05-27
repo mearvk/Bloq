@@ -9,6 +9,8 @@ public class Bodiprotocol extends Protocol
     public static final String CLOSE = "//close";
     
     public static final String HANDSHAKE = "//handshake";
+    
+    public static final String LIST = "//list";
             
     public static final String OPEN = "//open";
             
@@ -34,6 +36,8 @@ public class Bodiprotocol extends Protocol
         if(comparator.startsWith(HANDSHAKE)) return true;
         
         if(comparator.startsWith(OPEN)) return true;
+        
+        if(comparator.startsWith(LIST)) return true;
         
         if(comparator.startsWith(PUT)) return true;
         

@@ -62,7 +62,7 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         Bodi.setcontext("//bodi/server/remote/netconnections");        
     }
     
-    public void go() //find a way to synch the unsecuredinput queue so delete doesn't actually delete fresh data
+    public void go() 
     {                                  
         while(running)
         {                                                
@@ -70,12 +70,14 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
             
             try
             {                
-                if( this.trysecurenetwork(networkcontext) ) //
+                if( this.tryisvalidnetwork(networkcontext) ) //
                 {
                                         
-                    Bodiservercontext bodiservercontext = new Bodiservercontext(this, networkcontext, this.pollstoredbodisessions(networkcontext));                                                            
+                    //Ensures that we use only existing bodisessions  or handshakes 
+                    Bodiservercontext bodiservercontext = new Bodiservercontext(this, networkcontext, this.pollstoredbodisessions(networkcontext));                                                                                
                     
-                    if( this.trysecurebodiconnection(bodiservercontext) ) //
+                    
+                    if( this.tryisvalidbodiconnection(bodiservercontext) ) 
                     {                                                                                              
                         
                         if(bodiservercontext.inputstring.startsWith(HANDSHAKE))
@@ -93,7 +95,7 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                             this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }                    
 
-                        else if(bodiservercontext.inputstring.startsWith(CLOSE))
+                        else if(bodiservercontext.inputstring.startsWith(CLOSE)) //could be useful: an a closes an owned connection from use
                         {
                             bodiservercontext = new Bodiservercontext(this, CLOSE, bodiservercontext);
 
@@ -108,7 +110,7 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                             this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }
 
-                        else if(bodiservercontext.inputstring.startsWith(OPEN))
+                        else if(bodiservercontext.inputstring.startsWith(OPEN)) //could be useful: an a opens an owned connection for private/public use
                         {
                             bodiservercontext = new Bodiservercontext(this, OPEN, bodiservercontext);
 
@@ -168,13 +170,34 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                             this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }        
 
+                        else if(bodiservercontext.inputstring.startsWith(LIST))
+                        {
+                            bodiservercontext = new Bodiservercontext(this, LIST, bodiservercontext);
+
+                            bodiservercontext.processprotocol(bodiservercontext);
+
+                            bodiservercontext.processrequest(bodiservercontext);     
+
+                            bodiservercontext.processsesponse(bodiservercontext);         
+                            
+                            //
+                            
+                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
+                        }                         
+                        
                         else
                         {
                             bodiservercontext = new Bodiservercontext(this, OTHER, "", bodiservercontext.networkcontext, new Bodiconnection());
 
                             bodiservercontext.processsesponse(bodiservercontext);                                                                 
-                        }                        
-                    }                                    
+                        }                                                
+                    }  
+                    else
+                    {
+                        bodiservercontext = new Bodiservercontext(this, OTHER, "", bodiservercontext.networkcontext, new Bodiconnection());
+
+                        bodiservercontext.processsesponse(bodiservercontext);                                                                 
+                    }                    
                 }                                                   
             }
             catch(SecurityException exception) 
@@ -210,16 +233,34 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                 this.sleepmillis(500L);
                 
                 //
+                
+                System.gc();
+                
+                //
             }
         }
     }      
     
-    public Boolean trysecurenetwork(Networkcontext networkcontext)
+    /**
+     * That network context is non-null, has a value to be read in the InputQueue and is still connected to a client.
+     * 
+     * @param networkcontext The network context containing the network and the associated the input queue.
+     * 
+     * @return TRUE is underlying network context is not null, has some ready input and the network connection (socket) is not disconnected but connected and open; FALSE otherwise.
+     */
+    public Boolean tryisvalidnetwork(Networkcontext networkcontext)
     {
         return networkcontext!=null && networkcontext.inputqueueisready() && networkcontext.issocketconnected();
     }
     
-    public Boolean trysecurebodiconnection(Bodiservercontext bodiservercontext)
+    /**
+     * We care that only valid Bodiconnections get introduced into the server and her routing procedure.
+     * 
+     * @param bodiservercontext The server context containing the network packet and the bodicontext for inspection.
+     * 
+     * @return TRUE if Bodiconnection is valid by these requirements; FALSE otherwise.
+     */
+    public Boolean tryisvalidbodiconnection(Bodiservercontext bodiservercontext)
     {
         return 
             
@@ -230,6 +271,8 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
             bodiservercontext.packet!=null &&                    
             
             (
+                bodiservercontext.packet.startsWith("//list") ||
+                
                 bodiservercontext.packet.startsWith("//handshake") ||
                 
                 bodiservercontext.packet.startsWith("//close") ||
@@ -244,6 +287,10 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
             );
     }    
     
+    /**
+     * 
+     * @param networkcontext 
+     */
     public void trypurgeinputbuffer(Networkcontext networkcontext)
     {                
         try
@@ -253,7 +300,14 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         catch(Exception e){} 
     }
     
-    private Boolean trystorecontextstobodhi(Bodiservercontext connectioncontext, Networkcontext connection) throws Exception
+    /**
+     * 
+     * @param connectioncontext
+     * @param connection
+     * @return
+     * @throws Exception 
+     */    
+    public Boolean trystorecontextstobodhi(Bodiservercontext connectioncontext, Networkcontext connection) throws Exception
     {
         if(connectioncontext==null) return false;
         
@@ -266,7 +320,12 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         return true;
     }
     
-    private Collection<Bodiconnection> getbodiconnections()
+    /**
+     * Returns the Collection of Bodiconnections from the Bodi server context.
+     * 
+     * @return The Collection of Bodiconnections from the Bodi server context.
+     */
+    public Collection<Bodiconnection> getbodiconnections()
     {
         Collection<Object> objects = Bodi.context("//bodi/server/remote/bodiconnections").values();
         
@@ -276,8 +335,9 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
     }
     
     /**
+     * Returns the next network connection from InputQueue from BasicServer class to Bodiremoteserver
      * 
-     * @return 
+     * @return That particular Networkcontext or null if none found queued
      */
     public Networkcontext pollqueuednetworkconnections()
     {        
@@ -288,7 +348,12 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         return connection;
     }    
     
-    protected void sleepmillis(Long millis) 
+    /**
+     * Talk to system; have it rest millis number of milliseconds before returning to task.
+     * 
+     * @param millis Rest this many milliseconds and no longer.
+     */
+    public void sleepmillis(Long millis) 
     {
         try
         {
@@ -300,7 +365,13 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         }
     }    
     
-    protected Bodiconnection pollstoredbodisessions(Networkcontext networkcontext) throws Exception
+    /**
+     * 
+     * @param networkcontext
+     * @return
+     * @throws Exception 
+     */
+    public Bodiconnection pollstoredbodisessions(Networkcontext networkcontext) throws Exception
     {
         if(networkcontext==null) throw new SecurityException("//bodi/connect");
         
@@ -342,6 +413,11 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         else return null;
     }
     
+    /**
+     * 
+     * @param connection
+     * @return 
+     */
     public Boolean isvalidsessionid(Bodiconnection connection)
     {
         if(connection==null) return false;
@@ -359,6 +435,11 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         return false;
     }  
     
+    /**
+     * 
+     * @param connection
+     * @return 
+     */
     public Boolean isvalidsession(Bodiconnection connection)
     {
         if(connection==null) return false;

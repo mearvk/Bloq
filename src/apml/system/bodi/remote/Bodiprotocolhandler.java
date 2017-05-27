@@ -16,6 +16,12 @@ public class Bodiprotocolhandler
         {                                    
             switch(connectioncontext.protocol)
             {     
+                case Bodiprotocol.LIST:
+                    
+                    //this.processlistprotocol(connectioncontext);
+                    
+                    return connectioncontext;
+                    
                 //
                 case Bodiprotocol.CLOSE:
                     
@@ -58,10 +64,10 @@ public class Bodiprotocolhandler
                     
                     return connectioncontext;
                    
-                //miscellaneous messaging
+                //miscellany; unused messaging
                 default:
                     
-                    this.processprotocol(connectioncontext);                                         
+                    this.processunknownprotocol(connectioncontext);                                         
                     
                     return connectioncontext;
             }                        
@@ -70,7 +76,7 @@ public class Bodiprotocolhandler
         throw new NoValidConnectionException("No valid connection found.");
     } 
     
-    protected Boolean processprotocol(Bodiservercontext connectioncontext) throws Exception, SecurityException
+    protected Boolean processunknownprotocol(Bodiservercontext connectioncontext) throws Exception, SecurityException
     {                       
         String protocol = connectioncontext.protocol;
         
@@ -78,52 +84,27 @@ public class Bodiprotocolhandler
                 
         switch(buffer.toString())
         {
-            case "//close": 
-                
-                //aheam a drum
-                
-                break;
-            
-            case "//handshake": 
-                
-                //clear use case if any
-                
-                break;
-            
-            case "//open": 
-                
-                //autid a did
-                
-                break;
-            
-            case "//pull": 
-                
-
-            
-                //something about the bodi context here...
-                
-                break;
-            
-            case "//put": 
-                
-                //1234$###$$$@$1419
-            
-                break;
-            
-            case "//trade": 
-                
-                //1040040012344444
-                
-                break;
-            
-            default: break;
+    //not yet
         }
         
         //        
-        //if(!this.subtokenswellformed(buffer)) throw new Exception("One or more tokens malformed; stop.");       
+
         
         return true;
-    }           
+    }      
+    
+    private void processlistprotocol(Bodiservercontext connectioncontext) throws SecurityException
+    {
+        if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
+        
+        if(!this.startsswith(connectioncontext, "//list")) throw new SecurityException("//bodi/connect");        
+        
+        if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping.");   
+        
+        if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //context token missing; stopping.");    
+        
+        /*---------------------------------------------------------------------*/                
+    }
 
     private void processcloseprotocol(Bodiservercontext connectioncontext) throws SecurityException
     {        
@@ -132,6 +113,8 @@ public class Bodiprotocolhandler
         if(!this.startsswith(connectioncontext, "//close")) throw new SecurityException("//bodi/connect");        
         
         if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping."); 
+        
+        if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("//bodi/connect");
         
         /*---------------------------------------------------------------------*/                
     }

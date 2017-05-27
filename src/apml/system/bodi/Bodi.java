@@ -1,8 +1,12 @@
 package apml.system.bodi;
 
+import java.util.ArrayList;
+
 import java.util.HashMap;
 
 import java.util.Map;
+
+import java.util.Map.Entry;
 
 /**
  * Bloq Object Directory Interface (BODI)
@@ -14,9 +18,13 @@ import java.util.Map;
 public class Bodi 
 {
     protected final Integer hash = 0x00888FE8;
-            
+           
     public static Map<String, Bodicontext> contexts = new HashMap();
     
+    /**
+     * 
+     * @param args 
+     */
     public static void main(String[] args)
     {        
         Object one = new Object(); 
@@ -65,6 +73,36 @@ public class Bodi
     
     /**
      * 
+     * @param basecontext
+     * @return 
+     */
+    public static ArrayList<String> listcontexts(String basecontext)
+    {
+        Map<String, Bodicontext> bodicontexts = Bodi.contexts;
+        
+        ArrayList<String> matchingcontexts = new ArrayList();
+        
+        Integer count = 0;
+        
+        for(Entry<String, Bodicontext> bodicontext : bodicontexts.entrySet())
+        {
+            String contextname = bodicontext.getKey();
+            
+            Bodicontext contextproper = bodicontext.getValue();                                                
+            
+            if(contextname.startsWith(basecontext))
+            {
+                count = count + 1;
+                
+                matchingcontexts.add(count+". "+contextname);
+            }
+        }
+        
+        return matchingcontexts;
+    }
+    
+    /**
+     * 
      * @param context
      * @return 
      */
@@ -76,18 +114,40 @@ public class Bodi
     /**
      * 
      * @param context
-     * @return 
      */
     public static void setcontext(String context)
     {                   
         if(contexts.get(context)==null) Bodi.contexts.put(context, new Bodicontext(context));
     }          
+    
+    /**
+     * 
+     * @param context
+     * @return
+     * @throws Exception 
+     */
+    public static Boolean removecontext(String context) throws Exception
+    {
+        if(contexts.get(context)==null) return true;
+        
+        return Bodi.contexts.remove(context)!=null;
+    }
        
+    /**
+     * 
+     * @param context
+     * @return 
+     */
     public static Bodicontext context(String context)
     {     
         return contexts.get(context);
     }  
     
+    /**
+     * 
+     * @param context
+     * @return 
+     */
     public static Boolean hascontextat(String context) //new at a^t test me
     {
         return contexts.get(context) == null ? false : true;

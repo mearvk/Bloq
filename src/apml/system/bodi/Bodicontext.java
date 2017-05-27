@@ -180,6 +180,10 @@ public class Bodicontext
         return allvals.values();        
     }
     
+    public Collection<Object> lists(String basecontext, Integer depth)
+    {
+        return null; 
+    }    
     
     public Collection<Object> pullallstringkeyedvalues()
     {
