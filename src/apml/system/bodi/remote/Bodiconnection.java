@@ -50,6 +50,8 @@ public class Bodiconnection
     
     public String context;
     
+    public String tradecontext;
+    
     public String key;    
     
     public String message;
@@ -94,6 +96,8 @@ public class Bodiconnection
         
         String protocol = this.stripforprotocoltoken(connectioncontext);        
         
+        this.tryresetbodiconnection(connectioncontext);
+        
         try
         {              
             if(this.gettimetolive()<=0) protocol = "//other"; //send an other reply for errant bodi request
@@ -116,7 +120,7 @@ public class Bodiconnection
 
                     break;
 
-                case "//close": //do instance a persistent hinge to processcloseresponse if you please  
+                case "//close":
 
                     connectioncontext.bodicontext.processcloserequest(connectioncontext);
 
@@ -124,7 +128,7 @@ public class Bodiconnection
 
                     break;
 
-                case "//open": //do instance a persistent bodi hinge at //context
+                case "//open":
 
                     connectioncontext.bodicontext.processopenrequest(connectioncontext);
 
@@ -132,7 +136,7 @@ public class Bodiconnection
 
                     break;
 
-                case "//pull": //do instance a persistent bodi hinge at //context
+                case "//pull":
 
                     connectioncontext.bodicontext.processpullrequest(connectioncontext);
 
@@ -140,7 +144,7 @@ public class Bodiconnection
 
                     break;
 
-                case "//put": //do instance a persistent bodi hinge at //context
+                case "//put": 
 
                     connectioncontext.bodicontext.processputrequest(connectioncontext);
 
@@ -148,7 +152,7 @@ public class Bodiconnection
 
                     break;   
 
-                case "//trade": //do instance a persistent bodi hinge at //context
+                case "//trade":
 
                     connectioncontext.bodicontext.processtraderequest(connectioncontext);
 
@@ -169,11 +173,36 @@ public class Bodiconnection
         {
             e.printStackTrace();
         }
-        
-        //this.object = this.getrequestedobject(context, key);
+        finally
+        {
+            //
+        }        
         
         return this.object == null;
     }    
+    
+        
+    /**
+     *      * 
+     * @param bodiservercontext
+     * @return 
+     */
+    public Boolean tryresetbodiconnection(Bodiservercontext bodiservercontext)
+    {        
+        bodiservercontext.bodicontext.cause = "";
+        
+        bodiservercontext.bodicontext.message = "";
+        
+        bodiservercontext.bodicontext.result = "";
+        
+        bodiservercontext.bodicontext.cause = null;
+        
+        bodiservercontext.bodicontext.message = null;
+        
+        bodiservercontext.bodicontext.result = null;        
+        
+        return false | true;
+    }
 
     /**
      * 
@@ -235,8 +264,25 @@ public class Bodiconnection
         
         if(Bodi.hascontextat(connectioncontext.getcontext(connectioncontext)))
         {
-            return this.lines.remove(connectioncontext.getcontext(connectioncontext)); //remove a persistent line to bodi instance
+            try
+            {
+                Bodi.removecontext(connectioncontext.getcontext(connectioncontext));
+                
+                connectioncontext.bodicontext.result = "success";
+                
+                connectioncontext.bodicontext.message = "context closed";
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace(System.err);
+            }
         }
+        else
+        {
+            connectioncontext.bodicontext.result = "failure";
+        
+            connectioncontext.bodicontext.cause = "no such open context";            
+        }        
         
         return false;
     }
@@ -261,23 +307,27 @@ public class Bodiconnection
      * @return 
      */
     public Boolean processopenresponse(Bodiservercontext connectioncontext)
-    {
-        this.islive = true;            
+    {                     
+        String _context = connectioncontext.getcontext(connectioncontext);
         
-        if(Bodi.hascontextat(connectioncontext.getcontext(connectioncontext))) 
+        if( Bodi.hascontextat(_context ))
         {
-            connectioncontext.bodicontext.result = "success";
+            connectioncontext.bodicontext.result = "failure";
             
-            connectioncontext.bodicontext.message = "persistent connection established";
+            connectioncontext.bodicontext.cause = "existing context locked";            
+            
+            return false;
+        }
+        else
+        {
+            Bodi.setcontext(_context);
+            
+            connectioncontext.bodicontext.result = "success";
+        
+            connectioncontext.bodicontext.message = "bodi context established";                        
             
             return true;
-        }
-        
-        connectioncontext.bodicontext.result = "failure";
-        
-        connectioncontext.bodicontext.cause = "no such context";
-        
-        return false;
+        }                
     } 
     
     /**
@@ -328,7 +378,34 @@ public class Bodiconnection
      */
     public Boolean processpullresponse(Bodiservercontext connectioncontext)
     {                
-        return true;
+        Bodiconnection bodiconnection = connectioncontext.bodicontext;
+        
+        Object object = Bodi.context(bodiconnection.context).pull(key);          
+                
+        if(object==null) 
+        {
+            bodiconnection.message = "unable to pull that key/context pair; sorry";
+        
+            bodiconnection.value = null;
+        
+            bodiconnection.result = "failure";
+            
+            return false;
+        }
+        else
+        {
+            SerializedCarrier carrier = new SerializedCarrier(object.getClass(), object);
+            
+            bodiconnection.message = "key/context pair found.";
+            
+            bodiconnection.object = carrier;
+                          
+            bodiconnection.value = carrier.object.toString();
+        
+            bodiconnection.result = "success";
+            
+            return true;
+        }                        
     }    
     
     /**
@@ -345,23 +422,6 @@ public class Bodiconnection
         String key = connectioncontext.bodicontext.key;
         
         String value = connectioncontext.bodicontext.value;        
-
-        //Bodi.context(context).put
-        
-        /*if(Bodi.hascontextat(context) && key!=null && value!=null) //comprehensive case
-        {
-            connectioncontext.bodicontext.result = "failure";
-
-            connectioncontext.bodicontext.message = "persistent context already established";            
-        }
-        else if(Bodi.hascontextat(context))
-        {
-            Bodi.setcontext(context);
-
-            connectioncontext.bodicontext.result = "success";
-
-            connectioncontext.bodicontext.message = "persistent context established";            
-        }*/              
         
         return true;
     }    
@@ -373,7 +433,13 @@ public class Bodiconnection
      */
     public Boolean processtraderesponse(Bodiservercontext connectioncontext)
     {
-        return true;
+        String context1 = connectioncontext.bodicontext.context;
+        
+        Object abject1 = Bodi.context(context).pull("");
+                
+        Object abject2 = Bodi.context(context).pull("");
+        
+        return false;
     }        
     
 /**
@@ -381,7 +447,7 @@ public class Bodiconnection
      * 
      * Existing Bodiconnections should return updated TTLs possibly more.
      * 
-     * @param buffer
+     * @param connectioncontext
      * @return 
      */
     public Bodiconnection processhandshakerequest(Bodiservercontext connectioncontext) throws Exception
@@ -392,11 +458,7 @@ public class Bodiconnection
         
         bodiconnection.getsessionid();
         
-        bodiconnection.gettimetolive();                
-        
-        //bodiconnection.getrequestedobject("context", "key");
-        
-        //bodiconnection.getresult();
+        bodiconnection.gettimetolive();                        
         
         return bodiconnection;
     }
@@ -415,11 +477,7 @@ public class Bodiconnection
         
         bodiconnection.getsessionid();
         
-        bodiconnection.gettimetolive();                
-        
-        //bodiconnection.getrequestedobject("context", "key");
-        
-        //bodiconnection.getresult();
+        bodiconnection.gettimetolive();                       
         
         return bodiconnection;
     }
@@ -489,32 +547,7 @@ public class Bodiconnection
         
         bodiconnection.key = this.stripforkey(connectioncontext);
         
-        bodiconnection.context = this.stripforcontext(connectioncontext);
-        
-        Object object = null;
-        
-        object = Bodi.context(bodiconnection.context).pull(key);
-        
-        if(object==null) 
-        {
-            bodiconnection.message = "unable to pull that key/context pair; sorry";
-        
-            bodiconnection.value = null;
-        
-            bodiconnection.result = "failure";
-        }
-        else
-        {
-            SerializedCarrier carrier = new SerializedCarrier(object.getClass(), object);
-            
-            bodiconnection.message = "key/context pair found.";
-            
-            bodiconnection.object = carrier;
-                          
-            bodiconnection.value = carrier.object.toString();
-        
-            bodiconnection.result = "success";
-        }        ;
+        bodiconnection.context = this.stripforcontext(connectioncontext);             
         
         return bodiconnection;
     }
@@ -534,12 +567,7 @@ public class Bodiconnection
         
         bodiconnection.getsessionid();
         
-        bodiconnection.gettimetolive();                
-        
-        //bodiconnection.getrequestedobject("context", "key");
-        
-        //bodiconnection.getresult();
-                
+        bodiconnection.gettimetolive();                                        
         
         return bodiconnection;
     }
@@ -608,7 +636,7 @@ public class Bodiconnection
      */
     public String stripforkey(Bodiservercontext connectioncontext)
     {
-        return ProtocolStripper.stripforkey(connectioncontext);
+        return Protocolstripper.stripforkey(connectioncontext);
     }
     
     /**
@@ -618,7 +646,7 @@ public class Bodiconnection
      */
     public String stripforvalue(Bodiservercontext connectioncontext)
     {
-        return ProtocolStripper.stripforvalue(connectioncontext);
+        return Protocolstripper.stripforvalue(connectioncontext);
     }
     
     /**
@@ -628,7 +656,7 @@ public class Bodiconnection
      */
     public String stripforcontext(Bodiservercontext connectioncontext)
     {
-        return ProtocolStripper.stripforcontext(connectioncontext);
+        return Protocolstripper.stripforcontext(connectioncontext);
     }     
     
     /**
@@ -638,7 +666,7 @@ public class Bodiconnection
      */
     public String stripforprotocoltoken(Bodiservercontext connectioncontext)
     {
-        return ProtocolStripper.stripforprotocoltoken(connectioncontext);
+        return Protocolstripper.stripforprotocoltoken(connectioncontext);
     }
     
     /**

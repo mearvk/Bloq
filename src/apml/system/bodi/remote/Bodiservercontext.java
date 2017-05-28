@@ -27,11 +27,21 @@ public class Bodiservercontext
     
     public String context;    
     
+    /**
+     * 
+     */
     public Bodiservercontext()
     {
         
     }
     
+    /**
+     * 
+     * @param bodiserver
+     * @param protocol
+     * @param bodiservercontext
+     * @throws Exception 
+     */
     public Bodiservercontext(Bodiremoteserver bodiserver, String protocol, Bodiservercontext bodiservercontext) throws Exception
     {
         if(bodiserver==null || protocol==null || bodiservercontext==null) throw new SecurityException("//bodi/connect");                 
@@ -78,6 +88,15 @@ public class Bodiservercontext
         //             
     }
     
+    /**
+     * 
+     * @param bodiserver
+     * @param protocol
+     * @param input
+     * @param network
+     * @param bodiconnection
+     * @throws Exception 
+     */
     public Bodiservercontext(Bodiremoteserver bodiserver, String protocol, String input, Networkcontext network, Bodiconnection bodiconnection) throws Exception
     {
         if( bodiserver==null || protocol==null || input==null || network==null || bodiconnection==null) throw new SecurityException("//bodi/connect");
@@ -108,21 +127,41 @@ public class Bodiservercontext
         }
     }
     
+    /**
+     * 
+     * @param parameterization
+     * @return 
+     */
     public String getcontext(Bodiservercontext parameterization)
     {
-        return ProtocolStripper.stripforcontext(parameterization);
+        return Protocolstripper.stripforcontext(parameterization);
     }
     
+    /**
+     * 
+     * @param connectioncontext
+     * @throws Exception 
+     */
     public void processprotocol(Bodiservercontext connectioncontext) throws Exception
     {
         connectioncontext.bodiserver.protocolhandler.parseprotocol(connectioncontext);
     }
-    
+
+    /**
+     * 
+     * @param connectioncontext
+     * @throws Exception 
+     */
     public void processrequest(Bodiservercontext connectioncontext) throws Exception
     {
         connectioncontext.bodicontext.processrequest(connectioncontext);
     }
     
+    /**
+     * 
+     * @param connectioncontext
+     * @throws Exception 
+     */
     public void processsesponse(Bodiservercontext connectioncontext) throws Exception
     {
         connectioncontext.networkcontext.processresponse(connectioncontext);

@@ -37,21 +37,40 @@ public class Bodicontext
     
     public File file;
     
+    /**
+     * 
+     * @param contextname 
+     */
     public Bodicontext(String contextname)
     {       
         this.contextname = contextname;
     }
 
+    /**
+     * 
+     * @param file 
+     */
     public Bodicontext(File file)
     {
         this.file = file;
     }
     
+    /**
+     * 
+     * @param name
+     * @return 
+     */
     public Class getclass(String name)
     {
         return this.pull(name).getClass();
     }
     
+    /**
+     * 
+     * @param key
+     * @param value
+     * @throws Exception 
+     */
     public void put(Integer key, Object value) throws Exception
     {       
         if(key==null) throw new BodiError("Bodicontext.put :: Key value was null.");
@@ -61,6 +80,12 @@ public class Bodicontext
         this.hashmap.put(key, value);
     }
 
+    /**
+     * 
+     * @param key
+     * @param value
+     * @throws Exception 
+     */
     public void put(Object key, Object value) throws Exception
     {           
         if(key==null) throw new BodiError("Bodicontext.put :: Key value was null.");
@@ -70,6 +95,12 @@ public class Bodicontext
         this.objectmap.put(key, value);                     
     }
     
+    /**
+     * 
+     * @param key
+     * @param value
+     * @throws Exception 
+     */
     public void put(String key, Object value) throws Exception
     {        
         if(key==null) throw new BodiError("Bodicontext.put :: Key value was null.");
@@ -111,6 +142,11 @@ public class Bodicontext
         return null;
     }
     
+    /**
+     * 
+     * @param hashcode
+     * @return 
+     */
     public Object pull(Integer hashcode)
     {
         try
@@ -125,6 +161,11 @@ public class Bodicontext
         return null;
     }    
 
+    /**
+     * 
+     * @param object
+     * @return 
+     */
     public Object pull(Object object)
     {
         try
@@ -139,6 +180,11 @@ public class Bodicontext
         return null;
     }    
     
+    /**
+     * 
+     * @param name
+     * @return 
+     */
     public Object pull(String name)
     {
         try
@@ -153,6 +199,10 @@ public class Bodicontext
         return null;
     }       
     
+    /**
+     * 
+     * @return 
+     */
     public Map<Object,Object> pullall()
     {
         HashMap<Object, Object> allvals = new HashMap<Object, Object>();
@@ -166,6 +216,10 @@ public class Bodicontext
         return allvals;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public Set<Object> keys()
     {
         Map<Object, Object> allvals = this.pullall();
@@ -173,6 +227,10 @@ public class Bodicontext
         return allvals.keySet();
     }
     
+    /**
+     * 
+     * @return 
+     */
     public Collection<Object> values()
     {
         Map<Object, Object> allvals = this.pullall();
@@ -180,38 +238,66 @@ public class Bodicontext
         return allvals.values();        
     }
     
+    /**
+     * 
+     * @param basecontext
+     * @param depth
+     * @return 
+     */
     public Collection<Object> lists(String basecontext, Integer depth)
     {
         return null; 
     }    
     
+    /**
+     * 
+     * @return 
+     */
     public Collection<Object> pullallstringkeyedvalues()
     {
         return namemap.values();
     }    
     
+    /**
+     * 
+     * @return 
+     */
     public Set<String> pullallstringkeys()
     {
         return namemap.keySet();
     }
     
-    
+    /**
+     * 
+     * @return 
+     */
     public Collection<Object> pullallobjectkeyedvalues()
     {
         return objectmap.values();
     }    
     
+    /**
+     * 
+     * @return 
+     */
     public Set<Object> pullallobjectkeys()
     {
         return objectmap.keySet();
     }
 
-    
+    /**
+     * 
+     * @return 
+     */
     public Collection<Object> pullallhashcodekeyedvalues()
     {
         return hashmap.values();
     }    
     
+    /**
+     * 
+     * @return 
+     */
     public Set<Integer> pullAllKeys()
     {
         return hashmap.keySet();

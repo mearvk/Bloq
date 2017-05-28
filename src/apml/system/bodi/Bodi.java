@@ -115,7 +115,7 @@ public class Bodi
      * 
      * @param context
      */
-    public static void setcontext(String context)
+    public synchronized static void setcontext(String context)
     {                   
         if(contexts.get(context)==null) Bodi.contexts.put(context, new Bodicontext(context));
     }          
@@ -126,7 +126,7 @@ public class Bodi
      * @return
      * @throws Exception 
      */
-    public static Boolean removecontext(String context) throws Exception
+    public synchronized static Boolean removecontext(String context) throws Exception
     {
         if(contexts.get(context)==null) return true;
         
@@ -138,7 +138,7 @@ public class Bodi
      * @param context
      * @return 
      */
-    public static Bodicontext context(String context)
+    public synchronized static Bodicontext context(String context)
     {     
         return contexts.get(context);
     }  
@@ -148,7 +148,7 @@ public class Bodi
      * @param context
      * @return 
      */
-    public static Boolean hascontextat(String context) //new at a^t test me
+    public synchronized static Boolean hascontextat(String context) //new at a^t test me
     {
         return contexts.get(context) == null ? false : true;
     }

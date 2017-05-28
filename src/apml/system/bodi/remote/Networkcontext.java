@@ -21,14 +21,14 @@ class Networkcontext
         
     }
         
-    public Networkcontext(Basicserver server)
+    public Networkcontext(Baseserver server)
     {
         if(server==null) throw new SecurityException("//bodi/connect");
         
         this.server = server;
     }    
     
-    public Basicserver server;
+    public Baseserver server;
     
     public volatile Socket socket;
     
@@ -58,19 +58,30 @@ class Networkcontext
     
     public Integer sessionid;
        
+    /**
+     * 
+     * @param line 
+     */
     public void appendline(String line) 
     {
         this.inqueue.append(line);
     }
     
+    /**
+     * 
+     * @return 
+     */
     public Boolean inputqueueisready()
     {
         return this.inqueue!=null && this.inqueue.length()>0;
     }   
     
-    public Boolean processresponse(Bodiservercontext connectioncontext)
-            
-        //fill here possibly based on errant input as well; //error or //other etc.
+    /**
+     * 
+     * @param connectioncontext
+     * @return 
+     */
+    public Boolean processresponse(Bodiservercontext connectioncontext)                
     {
         //set output buffer, flag, and bodi object reference into the output queue
         
@@ -85,6 +96,12 @@ class Networkcontext
         return true;
     }
     
+    /**
+     * 
+     * @param connectioncontext
+     * @return
+     * @throws Exception 
+     */
     public Boolean close(Bodiservercontext connectioncontext) throws Exception
     {
         this.socket.close();
@@ -92,6 +109,10 @@ class Networkcontext
         return false;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public Boolean issocketclosed()
     {
         try
@@ -106,6 +127,10 @@ class Networkcontext
         return false;
     }    
     
+    /**
+     * 
+     * @return 
+     */
     public Boolean issocketconnected()
     {
         try

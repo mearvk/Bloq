@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * 
  * @author Max Rupplin
  */
-public abstract class Basicserver extends Thread
+public abstract class Baseserver extends Thread
 {
     public Integer hash = 0x008808ef;
     
@@ -50,7 +50,7 @@ public abstract class Basicserver extends Thread
     
     public Inputqueue connectionqueue = new Inputqueue();
     
-    public Basicserver(String host, Integer port)
+    public Baseserver(String host, Integer port)
     {
         if(host==null || port==null) throw new SecurityException("//bodi/connect");
         
@@ -87,7 +87,7 @@ public abstract class Basicserver extends Thread
         }           
     }
     
-    public Basicserver(Integer port)
+    public Baseserver(Integer port)
     {
         if(port==null) throw new SecurityException("//bodi/connect");
         

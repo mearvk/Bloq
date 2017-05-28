@@ -24,11 +24,19 @@ public class Bodiprotocol extends Protocol
     
     public static final String value = "";
     
+    /**
+     * 
+     */
     public Bodiprotocol()
     {
         super();
     }
     
+    /**
+     * 
+     * @param comparator
+     * @return 
+     */
     public static Boolean isbodiprotocol(String comparator)
     {
         if(comparator.startsWith(CLOSE)) return true;

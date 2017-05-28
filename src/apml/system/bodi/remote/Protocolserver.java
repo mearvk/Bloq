@@ -8,7 +8,7 @@ import java.net.Socket;
  *
  * @author Max Rupplin
  */
-public abstract class Protocolserver extends Basicserver implements Runnable
+public abstract class Protocolserver extends Baseserver implements Runnable
 {
     public Socket socket;
     

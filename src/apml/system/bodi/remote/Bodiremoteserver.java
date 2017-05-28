@@ -13,8 +13,15 @@ import java.util.Objects;
  * 
  * @author Max Rupplin
  */
-public class Bodiremoteserver extends Basicserver //reserve keyword fortune at root for bodi and her creator Max R .mr .ok ss
-{               
+
+//reserve keyword "fortune" at root for bodi and her creator Max R .mr .ok ss;; 
+
+//reserve keyword "harmony adodo aday" for harmond adu^& it formerly lt. serving us marine corps;
+
+//reserve keyword "adaysru aday at hit ado" reserve please for now with forwarding address only. 
+
+public class Bodiremoteserver extends Baseserver         
+{                       
     public Integer hash = 0x008808ef;
     
     public Bodiprotocolhandler protocolhandler = new Bodiprotocolhandler();
@@ -23,6 +30,10 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
     
     public Bodi bodi;           
     
+    /**
+     * 
+     * @param args 
+     */
     public static void main(String...args)
     {
         Bodiremoteserver server;
@@ -34,6 +45,11 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         server.go();                       
     }       
     
+    /**
+     * 
+     * @param host
+     * @param port 
+     */
     public Bodiremoteserver(String host, Integer port)
     {      
         super(host, port);
@@ -49,6 +65,10 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         Bodi.setcontext("//bodi/server/remote/netconnections");
     }
     
+    /**
+     * 
+     * @param port 
+     */
     public Bodiremoteserver(Integer port)
     {
         super("localhost", port);
@@ -62,6 +82,9 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         Bodi.setcontext("//bodi/server/remote/netconnections");        
     }
     
+    /**
+     * 
+     */
     public void go() 
     {                                  
         while(running)
@@ -74,6 +97,7 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
                 {
                                         
                     //Ensures that we use only existing bodisessions  or handshakes 
+
                     Bodiservercontext bodiservercontext = new Bodiservercontext(this, networkcontext, this.pollstoredbodisessions(networkcontext));                                                                                
                     
                     
@@ -226,7 +250,9 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
             }              
             finally
             {                
-                this.trypurgeinputbuffer(networkcontext);           
+                //
+                
+                this.trypurgeinputbuffer(networkcontext);                
                 
                 //
                 
@@ -240,6 +266,7 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
             }
         }
     }      
+
     
     /**
      * That network context is non-null, has a value to be read in the InputQueue and is still connected to a client.
@@ -295,7 +322,7 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
     {                
         try
         { 
-            networkcontext.inqueue.delete(0, networkcontext.inqueue.length()); 
+            networkcontext.inqueue.delete(0, networkcontext.inqueue.length());                         
         }
         catch(Exception e){} 
     }
@@ -459,12 +486,20 @@ public class Bodiremoteserver extends Basicserver //reserve keyword fortune at r
         return false;
     }    
 
+    /**
+     * 
+     * @param bytes 
+     */
     @Override
     public void write(byte[] bytes)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @return 
+     */
     @Override
     public byte[] read()
     {
