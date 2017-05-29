@@ -6,5 +6,5 @@ package apml.system.bodi.remote;
  */
 public class Bodilag
 {
-    public Long lagmillis;
+    public Long lagmillis = 1000L;
 }

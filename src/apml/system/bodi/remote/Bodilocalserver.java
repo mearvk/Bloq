@@ -28,13 +28,59 @@ public class Bodilocalserver extends Thread
     
     public Integer sessionid;
 
+    //
+    
+    public static void main(String...args)
+    {
+        try
+        {
+            String value = null;
+            
+            Bodilocalserver localserver = new Bodilocalserver();
+
+            localserver.go();                        
+            
+            //
+            
+            localserver.addrequest("//put //context=//test //key=key //value=valuexxx");
+            
+            value = (String)localserver.addrequest("//pull //context=//test //key=key").value;      
+            
+            System.out.println(value);            
+            
+            //
+            
+            localserver.addrequest("//put //context=//test //key=key //value=valueyyy");
+            
+            value = (String)localserver.addrequest("//pull //context=//test //key=key").value;             
+            
+            System.out.println(value);        
+            
+            //
+            
+            localserver.halt();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace(System.err);
+        }
+    }
+    
     /**
      * 
-     * @param context
-     * @param key 
+     * @param context Context to set server against [e.g. //bodi/systems]
+     * @param key Key to store the server in the Context context [e,g, localserver]
+     * 
+     * @throws Exception SecurityException against unaccepted parameters
      */
-    public Bodilocalserver(String context, String key)
+    public Bodilocalserver(String context, String key) throws Exception
     {
+        if(context==null) throw new SecurityException("//bodi/connect");
+        
+        if(key==null) throw new SecurityException("//bodi/connect");
+        
+        if(Bodi.hascontextat(context)) throw new SecurityException("//bodi/connect");
+        
         Bodi.setcontext(context);
         
         try
@@ -48,10 +94,12 @@ public class Bodilocalserver extends Thread
     }
     
     /**
-     * 
+     * @throws Exception 
      */
-    public Bodilocalserver()
+    public Bodilocalserver() throws Exception
     {
+        if(Bodi.hascontextat("//system/bodi")) throw new SecurityException("//bodi/connect");
+        
         Bodi.setcontext("//system/bodi");
         
         try
@@ -68,9 +116,21 @@ public class Bodilocalserver extends Thread
      * 
      */
     @Override
-    public void start()
+    public void run()
     {
-        this.go();
+        while(running)
+        {       
+            this.tryformdiscretionarylag();
+            
+            try
+            {
+                this.sleepmillis(500L);
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace(System.err);
+            }            
+        }
     }
 
     /**
@@ -82,7 +142,14 @@ public class Bodilocalserver extends Thread
     {
         if(input==null) throw new SecurityException("//bodi/connect");
         
-        Bodilocalserver._sleepmillis(Bodilocalserver._tryformdiscretionarylag());
+        try
+        {
+            Bodilocalserver._sleepmillis(Bodilocalserver._lag.lagmillis); //
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
         
         Bodiresponse response = new Bodiresponse();
         
@@ -107,7 +174,14 @@ public class Bodilocalserver extends Thread
     {
         if(input==null) throw new SecurityException("//bodi/connect");
         
-        this.sleepmillis(this.lag.lagmillis);
+        try
+        {
+            this.sleepmillis(this.lag.lagmillis); //
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
         
         Bodiresponse response = new Bodiresponse();
         
@@ -131,7 +205,9 @@ public class Bodilocalserver extends Thread
      */
     private Bodiresponse processprotocol(String input, Bodiresponse response)
     {
-        if(input==null) throw new SecurityException("//bodi/connect");        
+        if(input==null) throw new SecurityException("//bodi/connect");      
+        
+        if(response==null) throw new SecurityException("//bodi/connect");
         
         String protocoltoken = Protocolstripper.stripforprotocoltoken(input).trim().toLowerCase();
         
@@ -169,9 +245,11 @@ public class Bodilocalserver extends Thread
      */
     private Bodiresponse processrequest(String input, Bodiresponse response)
     {
-        if( input==null ) throw new SecurityException("//bodi/connect");        
+        if( input==null ) throw new SecurityException("//bodi/connect");
         
-        if( response.result.equalsIgnoreCase("failure") ) throw new SecurityException("//bodi/connect");
+        if( response==null ) throw new SecurityException("//bodi/connect");
+        
+        if( response.result!=null && response.result.equalsIgnoreCase("failure") ) throw new SecurityException("//bodi/connect");
         
         String protocoltoken = Protocolstripper.stripforprotocoltoken(input).trim().toLowerCase();
         
@@ -205,6 +283,10 @@ public class Bodilocalserver extends Thread
     {      
         //check for too many connections etc from here 
         
+        if(input==null) throw new SecurityException("//bodi/connect");
+        
+        if(response==null) throw new SecurityException("//bodi/connect");
+        
         return response;
     }
     
@@ -216,7 +298,9 @@ public class Bodilocalserver extends Thread
      */
     private static Bodiresponse _processprotocol(String input, Bodiresponse response)
     {
-        if(input==null) throw new SecurityException("//bodi/connect");        
+        if(input==null) throw new SecurityException("//bodi/connect");     
+        
+        if(response==null) throw new SecurityException("//bodi/connect");
         
         String protocoltoken = Protocolstripper.stripforprotocoltoken(input).trim().toLowerCase();
         
@@ -256,7 +340,7 @@ public class Bodilocalserver extends Thread
     {
         if( input==null ) throw new SecurityException("//bodi/connect");        
         
-        if( response.result.equalsIgnoreCase("failure") ) throw new SecurityException("//bodi/connect");
+        if( response.result!=null && response.result.equalsIgnoreCase("failure") ) throw new SecurityException("//bodi/connect");
         
         String protocoltoken = Protocolstripper.stripforprotocoltoken(input).trim().toLowerCase();
         
@@ -289,6 +373,10 @@ public class Bodilocalserver extends Thread
     private static Bodiresponse _processresponse(String input, Bodiresponse response)
     {      
         //check for too many connections etc from here 
+        
+        if(input==null) throw new SecurityException("//bodi/connect");     
+        
+        if(response==null) throw new SecurityException("//bodi/connect");        
         
         return response;
     }    
@@ -374,7 +462,7 @@ public class Bodilocalserver extends Thread
         
         ArrayList<String> array = Bodi.listcontexts(context);
         
-        if(array==null || array.size()==0)
+        if(array==null || array.isEmpty())
         {                       
             response.result = "failure";
             
@@ -779,7 +867,7 @@ public class Bodilocalserver extends Thread
         
         random = new Random();        
         
-        Bodilocalserver._lag.lagmillis = (random.nextLong()*random.nextLong()) % 450L;
+        Bodilocalserver._lag.lagmillis = Math.abs(random.nextLong()*random.nextLong()) % 450L;
         
         return Bodilocalserver._lag.lagmillis;
     }
@@ -794,7 +882,7 @@ public class Bodilocalserver extends Thread
         
         random = new Random();        
         
-        this.lag.lagmillis = (random.nextLong()*random.nextLong()) % 450L;
+        this.lag.lagmillis = Math.abs(random.nextLong()*random.nextLong()) % 450L;
         
         return this.lag.lagmillis;
     }
@@ -802,55 +890,37 @@ public class Bodilocalserver extends Thread
     /**
      * 
      * @param input
+     * @param response
      * @return 
      */
     public static synchronized Bodiresponse _trade(String input, Bodiresponse response)
     {
         return new Bodiresponse();
-    }    
+    }
+    
      /**
      * 
      */
     public void go() 
-    {                                  
-        while(running)
-        {                
-            try
-            {
-                this.tryformdiscretionarylag();
-            }
-            catch(Exception e)
-            {
-                
-            }
-            finally
-            {
-                this.sleepmillis(500L);
-            }                        
-        }
+    {           
+        this.start();        
     }
 
-    public static void _sleepmillis(Long millis)
+    /**
+     * 
+     */
+    public void halt()
     {
-        try
-        {
-            Thread.sleep(millis);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace(System.err);
-        }
+       this.interrupt();
     }
     
-    public void sleepmillis(Long millis)
+    public static void _sleepmillis(Long millis) throws Exception
     {
-        try
-        {
-            Thread.sleep(millis);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace(System.err);
-        }
+        Thread.sleep(millis);
+    }
+    
+    public void sleepmillis(long millis) throws Exception
+    {
+        Thread.sleep(millis);
     }
 }
