@@ -104,22 +104,6 @@ public class Bodiconnection
             
             switch(protocol)
             {
-                case "//list":
-                    
-                    connectioncontext.bodicontext.processlistrequest(connectioncontext);
-
-                    connectioncontext.bodicontext.processlistresponse(connectioncontext);                                 
-
-                    break;                    
-                
-                case "//handshake": 
-
-                    connectioncontext.bodicontext.processhandshakerequest(connectioncontext);
-
-                    connectioncontext.bodicontext.processhandshakeresponse(connectioncontext);                                 
-
-                    break;
-
                 case "//close":
 
                     connectioncontext.bodicontext.processcloserequest(connectioncontext);
@@ -127,6 +111,22 @@ public class Bodiconnection
                     connectioncontext.bodicontext.processcloseresponse(connectioncontext); 
 
                     break;
+
+                case "//handshake": 
+
+                    connectioncontext.bodicontext.processhandshakerequest(connectioncontext);
+
+                    connectioncontext.bodicontext.processhandshakeresponse(connectioncontext);                                 
+
+                    break;                    
+                    
+                case "//list":
+                    
+                    connectioncontext.bodicontext.processlistrequest(connectioncontext);
+
+                    connectioncontext.bodicontext.processlistresponse(connectioncontext);                                 
+
+                    break;                                    
 
                 case "//open":
 
@@ -152,6 +152,14 @@ public class Bodiconnection
 
                     break;   
 
+                case "//touch":                    
+
+                    connectioncontext.bodicontext.processtouchrequest(connectioncontext);
+
+                    connectioncontext.bodicontext.processtouchresponse(connectioncontext);
+                    
+                    break;
+                    
                 case "//trade":
 
                     connectioncontext.bodicontext.processtraderequest(connectioncontext);
@@ -171,7 +179,7 @@ public class Bodiconnection
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
         }
         finally
         {
@@ -425,6 +433,31 @@ public class Bodiconnection
         
         return true;
     }    
+
+    /**
+     * 
+     * @param connectioncontext
+     * @return 
+     */
+    public Boolean processtouchresponse(Bodiservercontext connectioncontext)
+    {
+        String _context = this.stripforcontext(connectioncontext);
+        
+        if(Bodi.hascontextat(_context))
+        {
+            connectioncontext.bodicontext.result = "success";
+            
+            connectioncontext.bodicontext.message = "touched";
+        }
+        else
+        {
+            connectioncontext.bodicontext.result = "failure";
+            
+            connectioncontext.bodicontext.cause = "no such context";
+        }
+        
+        return true | false;
+    }     
     
     /**
      * 
@@ -441,6 +474,25 @@ public class Bodiconnection
         
         return false;
     }        
+    
+    /**
+     * 
+     * @param connectioncontext
+     * @return
+     * @throws Exception 
+     */
+    public Bodiconnection processtouchrequest(Bodiservercontext connectioncontext) throws Exception
+    {
+        Bodiconnection bodiconnection = connectioncontext.bodicontext;        
+        
+        bodiconnection.operation = "//touch";
+        
+        bodiconnection.getsessionid();
+        
+        bodiconnection.gettimetolive();                        
+        
+        return bodiconnection;
+    }
     
 /**
      * New handshakes should return new Bodiconnection instances with unique sessionid values
@@ -508,20 +560,32 @@ public class Bodiconnection
                         
         try
         {
-            if(Bodi.hascontextat(context))
+            if( Bodi.hascontextat(context) )
             {
                 Bodi.context(bodiconnection.context).put(key, value);
+                
+                bodiconnection.result = "success";
+                
+                bodiconnection.message = "key/value pair established";
             }
             else
             {
                 Bodi.setcontext(context);
                 
                 Bodi.context(bodiconnection.context).put(key, value);
+                
+                bodiconnection.result = "success";
+                
+                bodiconnection.message = "context and key/value pair established";
             }
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
+            
+            bodiconnection.result = "failure";
+            
+            bodiconnection.cause = "error inserting context and/or key/value pair";
         }
         
         return bodiconnection;
@@ -831,7 +895,7 @@ public class Bodiconnection
                     return "//handshake //sessionid="+sessionid+" //result="+result+" //message="+message+" //ttl="+ttl;
                 }
                 
-                return "//close //sessionid="+sessionid+" //result="+result+" //ttl="+ttl;
+                return "//handshake //sessionid="+sessionid+" //result="+result+" //ttl="+ttl;
             
             case "//open":
                 
@@ -845,7 +909,7 @@ public class Bodiconnection
                     return "//open //sessionid="+sessionid+" //result="+result+" //message="+message+" //ttl="+ttl;
                 }                
                 
-                return "//close //sessionid="+sessionid+" //result="+result+" //ttl="+ttl;
+                return "//open //sessionid="+sessionid+" //result="+result+" //ttl="+ttl;
             
             case "//pull": 
                 
@@ -856,10 +920,10 @@ public class Bodiconnection
                 
                 if(cause!=null)
                 {
-                    return "//put //sessionid="+sessionid+" //result="+result+" //cause="+cause+" //ttl="+ttl+" //value="+value;
+                    return "//pull //sessionid="+sessionid+" //result="+result+" //cause="+cause+" //ttl="+ttl+" //value="+value;
                 }
                 
-                return "//close //sessionid="+sessionid+" //result="+result+" //ttl="+ttl;
+                return "//pull //sessionid="+sessionid+" //result="+result+" //ttl="+ttl;
             
             case "//put": 
                 
@@ -873,8 +937,22 @@ public class Bodiconnection
                     return "//put //sessionid="+sessionid+" //result="+result+" //cause="+cause+" //ttl="+ttl;
                 }
                 
-                return "//close //sessionid="+sessionid+" //result="+result+" //ttl="+ttl;
+                return "//put //sessionid="+sessionid+" //result="+result+" //ttl="+ttl;
             
+            case "//touch": 
+                
+                if(message!=null)
+                {
+                    return "//touch //sessionid="+sessionid+" //result="+result+" //message="+message+" //ttl="+ttl;
+                }
+                
+                if(cause!=null)
+                {
+                    return "//touch //sessionid="+sessionid+" //result="+result+" //cause="+cause+" //ttl="+ttl;
+                }
+                
+                return "//touch //sessionid="+sessionid+" //result="+result+" //ttl="+ttl;                
+                
             case "//trade": 
                 
                 if(message!=null)
@@ -887,7 +965,7 @@ public class Bodiconnection
                     return "//trade //sessionid="+sessionid+" //result="+result+" //cause="+cause+" //ttl="+ttl;
                 }
                 
-                return "//close //sessionid="+sessionid+" //result="+result+" //ttl="+ttl;
+                return "//trade //sessionid="+sessionid+" //result="+result+" //ttl="+ttl;
             
             default: return "//other //result="+result+" //message="+message+" //cause="+cause;
         }

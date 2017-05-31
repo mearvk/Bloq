@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
+ * Performs Bodi function(s) locally on same JVM as other process(es) /mr /ok /ss
+ * 
  * @author Max Rupplin
  */
 public class Bodilocalserver extends Thread
 {
-    public Integer hash = 0x008808ef;
+    public Integer hash = 0x008808EF;
     
     public Bodiprotocolhandler protocolhandler = new Bodiprotocolhandler();
     
@@ -34,7 +35,7 @@ public class Bodilocalserver extends Thread
     {
         try
         {
-            String value = null;
+            String value = "";
             
             Bodilocalserver localserver = new Bodilocalserver();
 
@@ -67,6 +68,7 @@ public class Bodilocalserver extends Thread
     }
     
     /**
+     * Constructor: fill values passed as parameters.
      * 
      * @param context Context to set server against [e.g. //bodi/systems]
      * @param key Key to store the server in the Context context [e,g, localserver]
@@ -94,6 +96,8 @@ public class Bodilocalserver extends Thread
     }
     
     /**
+     * Constructor; fill values from Bodiset.xml.
+     * 
      * @throws Exception 
      */
     public Bodilocalserver() throws Exception
@@ -113,6 +117,7 @@ public class Bodilocalserver extends Thread
     }
     
     /**
+     * Simply procreates a time lag for processing requests; ok /mr /ok /ss
      * 
      */
     @Override
@@ -120,16 +125,20 @@ public class Bodilocalserver extends Thread
     {
         while(running)
         {       
-            this.tryformdiscretionarylag();
+            this.tryformdiscretionarylag();            
             
             try
             {
-                this.sleepmillis(500L);
+                this.sleepmillis(500L);                     
+            }
+            catch(InterruptedException ie)
+            {
+                this.running = false;
             }
             catch(Exception e)
             {
                 e.printStackTrace(System.err);
-            }            
+            }
         }
     }
 
@@ -279,6 +288,12 @@ public class Bodilocalserver extends Thread
         return response;
     }
     
+    /**
+     * 
+     * @param input
+     * @param response
+     * @return 
+     */
     private Bodiresponse processresponse(String input, Bodiresponse response)
     {      
         //check for too many connections etc from here 
@@ -290,7 +305,7 @@ public class Bodilocalserver extends Thread
         return response;
     }
     
-/**
+     /**
      * 
      * @param input
      * @param response
@@ -370,6 +385,12 @@ public class Bodilocalserver extends Thread
         return response;
     }
     
+    /**
+     * 
+     * @param input
+     * @param response
+     * @return 
+     */
     private static Bodiresponse _processresponse(String input, Bodiresponse response)
     {      
         //check for too many connections etc from here 
@@ -914,11 +935,21 @@ public class Bodilocalserver extends Thread
        this.interrupt();
     }
     
+    /**
+     * 
+     * @param millis
+     * @throws Exception 
+     */
     public static void _sleepmillis(Long millis) throws Exception
     {
         Thread.sleep(millis);
     }
     
+    /**
+     * 
+     * @param millis
+     * @throws Exception 
+     */
     public void sleepmillis(long millis) throws Exception
     {
         Thread.sleep(millis);

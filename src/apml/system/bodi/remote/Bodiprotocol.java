@@ -13,15 +13,17 @@ public class Bodiprotocol extends Protocol
     public static final String LIST = "//list";
             
     public static final String OPEN = "//open";
-            
-    public static final String PUT = "//put";
-            
-    public static final String PULL = "//pull";
-    
-    public static final String TRADE = "//trade";
     
     public static final String OTHER = "//other";
     
+    public static final String PULL = "//pull";
+    
+    public static final String PUT = "//put";
+    
+    public static final String TOUCH = "//touch";
+    
+    public static final String TRADE = "//trade";
+            
     public static final String value = "";
     
     /**
@@ -43,17 +45,19 @@ public class Bodiprotocol extends Protocol
         
         if(comparator.startsWith(HANDSHAKE)) return true;
         
-        if(comparator.startsWith(OPEN)) return true;
-        
         if(comparator.startsWith(LIST)) return true;
         
-        if(comparator.startsWith(PUT)) return true;
+        if(comparator.startsWith(OPEN)) return true;
+        
+        if(comparator.startsWith(OTHER)) return true;                
         
         if(comparator.startsWith(PULL)) return true;
         
-        if(comparator.startsWith(TRADE)) return true;
+        if(comparator.startsWith(PUT)) return true;                
         
-        if(comparator.startsWith(OTHER)) return true;
+        if(comparator.startsWith(TOUCH)) return true;
+        
+        if(comparator.startsWith(TRADE)) return true;                
         
         return false;
     }

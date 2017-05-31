@@ -96,7 +96,7 @@ public class Bodiremoteserver extends Baseserver
                 if( this.tryisvalidnetwork(networkcontext) ) //
                 {
                                         
-                    //Ensures that we use only existing bodisessions  or handshakes 
+                    //Ensures that we use only existing bodisessions or handshakes 
 
                     Bodiservercontext bodiservercontext = new Bodiservercontext(this, networkcontext, this.pollstoredbodisessions(networkcontext));                                                                                
                     
@@ -104,22 +104,7 @@ public class Bodiremoteserver extends Baseserver
                     if( this.tryisvalidbodiconnection(bodiservercontext) ) 
                     {                                                                                              
                         
-                        if(bodiservercontext.inputstring.startsWith(HANDSHAKE))
-                        {
-                            bodiservercontext = new Bodiservercontext(this, HANDSHAKE, bodiservercontext);
-
-                            bodiservercontext.processprotocol(bodiservercontext);
-
-                            bodiservercontext.processrequest(bodiservercontext);     
-
-                            bodiservercontext.processsesponse(bodiservercontext);     
-                            
-                            //
-                            
-                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
-                        }                    
-
-                        else if(bodiservercontext.inputstring.startsWith(CLOSE)) //could be useful: an a closes an owned connection from use
+                        if(bodiservercontext.inputstring.startsWith(CLOSE)) //could be useful: an a closes an owned connection from use
                         {
                             bodiservercontext = new Bodiservercontext(this, CLOSE, bodiservercontext);
 
@@ -133,6 +118,36 @@ public class Bodiremoteserver extends Baseserver
                             
                             this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }
+
+                        else if (bodiservercontext.inputstring.startsWith(HANDSHAKE))
+                        {
+                            bodiservercontext = new Bodiservercontext(this, HANDSHAKE, bodiservercontext);
+
+                            bodiservercontext.processprotocol(bodiservercontext);
+
+                            bodiservercontext.processrequest(bodiservercontext);     
+
+                            bodiservercontext.processsesponse(bodiservercontext);     
+                            
+                            //
+                            
+                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
+                        }                    
+                       
+                        else if(bodiservercontext.inputstring.startsWith(LIST))
+                        {
+                            bodiservercontext = new Bodiservercontext(this, LIST, bodiservercontext);
+
+                            bodiservercontext.processprotocol(bodiservercontext);
+
+                            bodiservercontext.processrequest(bodiservercontext);     
+
+                            bodiservercontext.processsesponse(bodiservercontext);         
+                            
+                            //
+                            
+                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
+                        }                        
 
                         else if(bodiservercontext.inputstring.startsWith(OPEN)) //could be useful: an a opens an owned connection for private/public use
                         {
@@ -179,7 +194,22 @@ public class Bodiremoteserver extends Baseserver
                             this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }
 
-                        else if(bodiservercontext.inputstring.startsWith(TRADE))
+                        else if(bodiservercontext.inputstring.startsWith(TOUCH))
+                        {
+                            bodiservercontext = new Bodiservercontext(this, TOUCH, bodiservercontext);
+
+                            bodiservercontext.processprotocol(bodiservercontext);
+
+                            bodiservercontext.processrequest(bodiservercontext);     
+
+                            bodiservercontext.processsesponse(bodiservercontext);           
+                            
+                            //
+                            
+                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
+                        }                        
+                        
+                        else if(bodiservercontext.inputstring.startsWith(TRADE)) //fork thru a transactional system (database) instead of rewriting the book
                         {
                             bodiservercontext = new Bodiservercontext(this, TRADE, bodiservercontext);
 
@@ -192,22 +222,7 @@ public class Bodiremoteserver extends Baseserver
                             //
                             
                             this.trystorecontextstobodhi(bodiservercontext, networkcontext);
-                        }        
-
-                        else if(bodiservercontext.inputstring.startsWith(LIST))
-                        {
-                            bodiservercontext = new Bodiservercontext(this, LIST, bodiservercontext);
-
-                            bodiservercontext.processprotocol(bodiservercontext);
-
-                            bodiservercontext.processrequest(bodiservercontext);     
-
-                            bodiservercontext.processsesponse(bodiservercontext);         
-                            
-                            //
-                            
-                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
-                        }                         
+                        }                                                
                         
                         else
                         {
@@ -252,7 +267,7 @@ public class Bodiremoteserver extends Baseserver
             {                
                 //
                 
-                this.trypurgeinputbuffer(networkcontext);                
+                this.tryclearbuffers(networkcontext);                
                 
                 //
                 
@@ -297,12 +312,12 @@ public class Bodiremoteserver extends Baseserver
             
             bodiservercontext.packet!=null &&                    
             
-            (
-                bodiservercontext.packet.startsWith("//list") ||
+            (                
+                bodiservercontext.packet.startsWith("//close") ||
                 
                 bodiservercontext.packet.startsWith("//handshake") ||
                 
-                bodiservercontext.packet.startsWith("//close") ||
+                bodiservercontext.packet.startsWith("//list") ||                                
                 
                 bodiservercontext.packet.startsWith("//open") ||
                 
@@ -310,15 +325,18 @@ public class Bodiremoteserver extends Baseserver
                 
                 bodiservercontext.packet.startsWith("//put") ||
                 
+                bodiservercontext.packet.startsWith("//touch") ||
+                
                 bodiservercontext.packet.startsWith("//trade")
             );
     }    
     
     /**
+     * Clear cyclical buffers 
      * 
      * @param networkcontext 
      */
-    public void trypurgeinputbuffer(Networkcontext networkcontext)
+    public void tryclearbuffers(Networkcontext networkcontext)
     {                
         try
         { 
@@ -328,6 +346,7 @@ public class Bodiremoteserver extends Baseserver
     }
     
     /**
+     * Store session objects with a Bodi carekeeper
      * 
      * @param connectioncontext
      * @param connection
