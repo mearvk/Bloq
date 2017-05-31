@@ -17,16 +17,22 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Baseserver.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/Apmlsystem.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodilag.java</file>
             <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/Bodicontext.java</file>
             <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiremoteserver.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiserverconnectioncontext.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Networkcontext.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Protocolstripper.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodilocalserver.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiprotocolhandler.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiservercontext.java</file>
             <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiconnection.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Networkconnectioncontext.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Basicserver.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/CareKeeper.java</file>
             <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/Bodi.java</file>
             <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiprotocol.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Inputqueue.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiprotocolhandler.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodibaseclient.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiresponse.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<ampl>
+        <package default="tonysclaw.org.com" sourcedir="/source" builddir="/build">            
+            <system id="Suits" class="Suitorganizer" implements="apml.interfaces.BasicSystemElement">                
+                <object id="Suitgoaway" class="Suitgoaway" implements="apml.interfaces.BasicSystemElement">                                                                                                                                                                               
+                    <listener id="Inservice" class="Inputservicelistener">
+                        <subscriber class="InputService"/>
+                    </listener>                                                                                
+                    <listener id="Outservice" class="Outputservicelistener">
+                        <subscriber class="OutputService"/>
+                    </listener>                                                              
+                </object>
+            </system>               
+            
+            <system id="Claws" class="Clawgrabbingnesses" implements="apml.interfaces.BasicSystemElement">                
+                <object id="Clawgrabbingnesseses" class="Clawgrabbingnesseses" implements="apml.interfaces.BasicSystemElement">                                                                                                                                                                               
+                    <listener id="Inservice" class="Inputservicelistener">
+                        <subscriber class="InputService"/>
+                    </listener>                                                                                
+                    <listener id="Outservice" class="Outputservicelistener">
+                        <subscriber class="OutputService"/>
+                    </listener>                                                              
+                </object>
+            </system>          
+            
+            <system id="Dogs" class="Dogkidnappingnesses" implements="apml.interfaces.BasicSystemElement">                
+                <object id="Dogkidnappingnesseses" class="Dogkidnappingnesseses" implements="apml.interfaces.BasicSystemElement">                                                                                                                                                                               
+                    <listener id="Inservice" class="Inputservicelistener">
+                        <subscriber class="InputService"/>
+                    </listener>                                                                                
+                    <listener id="Outservice" class="Outputservicelistener">
+                        <subscriber class="OutputService"/>
+                    </listener>                                                              
+                </object>
+            </system>  
+            
+            <system id="Daydreams" class="Daydreamisesness" implements="apml.interfaces.BasicSystemElement">                
+                <object id="Daydreamisesnesses" class="Daydreamisesnesses" implements="apml.interfaces.BasicSystemElement">                                                                                                                                                                               
+                    <listener id="Inservice" class="Inputservicelistener">
+                        <subscriber class="InputService"/>
+                    </listener>                                                                                
+                    <listener id="Outservice" class="Outputservicelistener">
+                        <subscriber class="OutputService"/>
+                    </listener>                                                              
+                </object>
+            </system>                                                                                                                                                 
+        </package>    
+</ampl>

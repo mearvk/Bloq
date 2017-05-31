@@ -1,0 +1,52 @@
+/* should work but no allowance for such implementations*/
+/* java 9 & 10 should allow for multiple identical function names but with different exception handlings */
+/* @Override should allow for multiple identical functions within class with target keyword (see example below)*/
+   
+
+@Override(target="org.mypackage.Classname.functionName")
+public void start()
+{
+    this.run();
+}
+    
+@Override(target="org.mypackage.Classname.functionName")
+public void start() throws IOException
+{
+    this.run();
+}
+
+@Override("")
+public void start()
+{
+    this.run();
+}  
+
+//lemme git diss (crisdad do sayu)
+
+            //check that we have exactly one APML to source code compiler
+            if(!xml.getRoot().getChildNodes().item(nth).toString().equalsIgnoreCase("compiler"))
+                throw new Exception("Root does not equal containment at this time."); 
+
+java should be able to include on the fly method adjuncts:
+
+[1] this.outputdir.mkdir();
+[2] this.outputdir.mkdir().sys(System.out,System.INCLUDE_OUTPUT);
+
+javascript
+<!-->
+            master = webslingers.httpserver.user('dave rollins').branch('master');
+            
+            master.org.network.network.ui.classname.showsource().overwritescript().on;
+
+            master.script.get("http://jimrollins.com/music/playlist.pls").put()
+            {
+                
+            }.overwritescript().on;
+            
+            master.checkin("github.com/drollins/webslingers/httpserver").off;
+            
+            system.out.prinln("dau").fixme("bsg");
+<!-->
+
+
+enum classes should be inheritable...
