@@ -1,253 +1,63 @@
 package apml.examples.echoserver.server;
 
-import apml.annotations.ApmlListener;
+import apml.extensions.AbstractResourceServer;
 
-import apml.objects.networking.ServerSocketImpl;
-
-import java.awt.event.ActionEvent;
-
-import java.awt.event.ActionListener;
-
-import java.io.BufferedReader;
-
-import java.io.BufferedWriter;
-
-import java.io.IOException;
-
-import java.io.InputStreamReader;
-
-import java.io.OutputStreamWriter;
+import apml.extensions.ServerContext;
 
 import java.net.ServerSocket;
 
 import java.net.Socket;
 
-import apml.interfaces.Startable;
-
-import apml.interfaces.Actionlistener;
-
-import apml.interfaces.Runnable;
-
 /**
  *
  * @author Max Rupplin
  */
-public class Echoserver extends ServerSocketImpl implements Runnable, Startable
+public class Echoserver extends AbstractResourceServer 
 {   
-    protected final Integer hash = 0x888fe8;
-    
-    public ServerSocket serversocket;
-    
-    public Boolean running = true;
-    
-    public Integer port = 80;
-    
-    public Socket socket;        
-    
-    public String line;
-    
-    public Echoserver()
+    protected final Integer hash = 0x888fe8;        
+
+    public static void main(String...args)
     {
+        Echoserver server = new Echoserver("localhost", 8989);
         
-    }
-    
-    @Override
-    public void start()
-    {
-        this.run();
-    }   
-    
-    @Override
-    public void stop()
-    {
-        this.running = false;
+        server.start();
         
-        try
-        {
-            this.serversocket.close();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace(System.err);
-        }
+        server.attend();
     }
     
-    @Override
-    @ApmlListener(listener="EchoServerOnReadListener") //now care to inform all subscribers
-    public void read()
-    {        
-        try
-        {
-            BufferedReader reader = null;
-
-            reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));                            
-
-            for(line="";line!=null;line+=reader.readLine()+"\n"){}
-
-            reader.close();            
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace(System.err);
-        }
-    }
-    
-    @Override
-    @ApmlListener(listener="EchoServerOnDispatchListener") //now care to inform all subscribers
-    public void write()
+    public Echoserver(String host, Integer port)
     {
-        try
-        {
-            BufferedWriter writer;
-
-            writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-
-            writer.write(line);
-
-            writer.flush();
-
-            writer.close(); 
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace(System.err);
-        }
+        super(host, port);
     }
-    
-    @ApmlListener(listener="EchoServerOnConnectListener") //now care to inform all subscribers
-    public Socket connect(ServerSocket serversocket) throws Exception
-    {
-        return serversocket.accept();
-    }
-    
+
     @Override
-    public void run()
+    public Boolean dovalidateresourcecontext(ServerContext servercontext)
     {
-        while(running) 
-        {
-            try
-            {                          
-                this.serversocket = new ServerSocket(80);
-                this.socket = connect(this.serversocket);
-                
-                new Thread()                                                    
-                {                
-                    @Override
-                    public void run()
-                    {                        
-                        String line="";  
-                            
-                        try
-                        {                
-                            read();
-                            
-                            write();
-                        }
-                        catch(Exception ioe)
-                        {
-                            ;
-                        }
-                    }
-                }.start();
-            }
-            catch(IOException ioe)
-            {
-                ;
-            }
-            catch(Exception e)
-            {
-                ;
-            }
-            finally
-            {
-                System.out.println("Ok.");
-            }
-        }
+        return true;
+    }
+
+    @Override
+    public void processprotocol(ServerContext connectioncontext) throws Exception
+    {
+        return;
+    }
+
+    @Override
+    public void processrequest(ServerContext connectioncontext) throws Exception
+    {
+        if(connectioncontext==null) throw new SecurityException("//bodi/connect");
+        
+        connectioncontext.resourcecontext.value = connectioncontext.inputstring;                
+    }
+
+    @Override
+    public void processsesponse(ServerContext connectioncontext) throws Exception
+    {
+        if(connectioncontext==null) throw new SecurityException("//bodi/connect");
+        
+        if(connectioncontext.networkcontext==null) throw new SecurityException("//bodi/connect");
+        
+        connectioncontext.networkcontext.processresponse(connectioncontext);
     }
 }
-
-class EchoServerOnConnectListener implements ActionListener
-{
-   @Override
-    public void actionPerformed(ActionEvent ae) 
-    {
-/*
-        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/onconnect");
-        
-        for(Apmlsubscriber s : subscribers)
-        {
-            apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onconnect/notify"));
-        }
-*/
-    }   
-}
-
-class EchoServerOnExitListener implements Actionlistener, ActionListener
-{
-    @Override
-    public void actionEvent(ActionEvent event)
-    {
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent ae) 
-    {
-/*        
-        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/onexit");
-        
-        for(Apmlsubscriber s : subscribers)
-        {
-            apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onconnect/notify"));
-        }        
-*/        
-    }      
-}
-
-class EchoServerOnReadListener implements ActionListener
-{
-    @Override
-    public void actionPerformed(ActionEvent ae) 
-    {
-/*        
-        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/onread");
-        
-        for(Apmlsubscriber s : subscribers)
-        {
-            apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onread/notify"));
-        }  
-*/
-    }      
-}
-
-class EchoServerOnReceiptListener implements ActionListener
-{
-    @Override
-    public void actionPerformed(ActionEvent ae) 
-    {
-/*       
-        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/onreceipt");
-        
-        for(Apmlsubscriber s : subscribers)
-        {
-            apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/onreceipt/notify"));
-        }   
-*/
-    }      
-}
-
-class EchoServerOnDispatchListener implements ActionListener
-{
-    @Override
-    public void actionPerformed(ActionEvent ae) 
-    {
-/*        
-        ArrayList<Apmlsubscriber> subscribers = apml.system.Apmlsystem.getsubscribers("echoserver/ondispatch");
-        
-        for(Apmlsubscriber s : subscribers)
-        {
-            apml.system.Apmlsystem.notify(s,new ActionEvent(this, 0, "echoserver/commands/ondispatch/notify"));
-        }  
-*/
-    }      
-}     
         
