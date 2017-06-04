@@ -138,6 +138,8 @@ import javax.swing.JTree;
  * Handler for the Bloq UI input (conversion from raw APML/XML input) to modelling in the system as JCM models ready for output
  * 
  * @author Max Rupplin
+ * @since 04.30.2017
+ * @version Bloq 1.0
  */
 public class Uiinputmanager
 {    

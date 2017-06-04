@@ -6,7 +6,7 @@ import java.util.logging.Level;
  *
  * @author Max Rupplin
  */
-public class Apmldriver
+public class Bloqdriver
 {
     public static void main(String...args)
     {

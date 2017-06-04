@@ -25,11 +25,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import java.util.Collections;
+
 import java.util.Comparator;
+
 import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -42,6 +43,7 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 
 import org.w3c.dom.Element;
+
 import org.w3c.dom.Node;
 
 import org.w3c.dom.NodeList;

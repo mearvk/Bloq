@@ -7,7 +7,7 @@ package apml.ui.compilers.java;
  * @since  04.30.2017
  * @version Bloq 1.0
  */
-public class Localdriver
+public class Uidriver
 {
     public static void main(String...args)
     {
