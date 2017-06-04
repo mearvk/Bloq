@@ -1,12 +1,12 @@
-package apml.system.bodi.remote;
+package apml.system.bodi.remote.exceptions;
 
 /**
  *
  * @author Max Rupplin
  */
-public class Bodierror extends Error
+public class BodiGeneralError extends Error
 {
-    public Bodierror(String msg)
+    public BodiGeneralError(String msg)
     {
         super(msg);
         

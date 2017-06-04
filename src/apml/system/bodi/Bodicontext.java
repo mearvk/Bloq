@@ -1,7 +1,7 @@
 
 package apml.system.bodi;
 
-import apml.system.bodi.remote.Bodierror;
+import apml.system.bodi.remote.exceptions.BodiGeneralError;
 
 import java.io.File;
 
@@ -73,9 +73,9 @@ public class Bodicontext
      */
     public void put(Integer key, Object value) throws Exception
     {       
-        if(key==null) throw new Bodierror("Bodicontext.put :: Key value was null.");
+        if(key==null) throw new BodiGeneralError("Bodicontext.put :: Key value was null.");
         
-        if(value==null) throw new Bodierror("Bodicontext.put :: Value value was null.");
+        if(value==null) throw new BodiGeneralError("Bodicontext.put :: Value value was null.");
         
         try
         {
@@ -95,9 +95,9 @@ public class Bodicontext
      */
     public void put(Object key, Object value) throws Exception
     {           
-        if(key==null) throw new Bodierror("Bodicontext.put :: Key value was null.");
+        if(key==null) throw new BodiGeneralError("Bodicontext.put :: Key value was null.");
         
-        if(value==null) throw new Bodierror("Bodicontext.put :: Value value was null.");
+        if(value==null) throw new BodiGeneralError("Bodicontext.put :: Value value was null.");
         
         try
         {
@@ -117,9 +117,9 @@ public class Bodicontext
      */
     public void put(String key, Object value) throws Exception
     {        
-        if(key==null) throw new Bodierror("Bodicontext.put :: Key value was null.");
+        if(key==null) throw new BodiGeneralError("Bodicontext.put :: Key value was null.");
         
-        if(value==null) throw new Bodierror("Bodicontext.put :: Value value was null.");        
+        if(value==null) throw new BodiGeneralError("Bodicontext.put :: Value value was null.");        
         
         try
         {

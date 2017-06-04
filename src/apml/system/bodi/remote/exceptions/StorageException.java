@@ -1,16 +1,16 @@
-package apml.system.bodi.remote;
+package apml.system.bodi.remote.exceptions;
 
 /**
  *
  * @author Max Rupplin
  */
-public class Storageerror extends Error
+public class StorageException extends Error
 {
     /**
      * 
      * @param msg 
      */
-    public Storageerror(String msg)
+    public StorageException(String msg)
     {
         super(msg);
         

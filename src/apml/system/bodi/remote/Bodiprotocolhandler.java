@@ -1,5 +1,7 @@
 package apml.system.bodi.remote;
 
+import apml.system.bodi.remote.exceptions.InvalidConnectionException;
+
 /**
  *
  * @author Max Rupplin
@@ -87,7 +89,7 @@ public class Bodiprotocolhandler
             }                        
         }  
         
-        throw new Invalidconnection("No valid connection found.");
+        throw new InvalidConnectionException("No valid connection found.");
     }     
 
     /**

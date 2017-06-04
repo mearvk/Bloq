@@ -1,16 +1,16 @@
-package apml.system.bodi.remote;
+package apml.system.bodi.remote.exceptions;
 
 /**
  *
  * @author Max Rupplin
  */
-public class Bodiduplicatekey extends Bodierror
+public class BodiDuplicateKey extends BodiGeneralError
 {
     /**
      * 
      * @param msg 
      */
-    public Bodiduplicatekey(String msg)
+    public BodiDuplicateKey(String msg)
     {
         super(msg);
         

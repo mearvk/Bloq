@@ -1,5 +1,6 @@
 package apml.system.bodi.remote;
 
+import apml.system.bodi.remote.exceptions.InvalidSessionException;
 import apml.system.bodi.Bodi;
 
 import static apml.system.bodi.remote.Bodiprotocol.*;
@@ -250,7 +251,7 @@ public class Bodiremoteserver extends Baseserver
                 
                 //
             }            
-            catch(Invalidsession exception)
+            catch(InvalidSessionException exception)
             {
                 exception.printStackTrace(System.err);
                 
