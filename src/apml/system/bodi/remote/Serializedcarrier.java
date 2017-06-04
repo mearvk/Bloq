@@ -6,18 +6,26 @@ import java.io.Serializable;
  *
  * @author Max Rupplin
  */
-public class SerializedCarrier implements Serializable
+public class Serializedcarrier implements Serializable
 {
     public Object object = null;
     
     public Class _class = null;
     
-    public SerializedCarrier()
+    /**
+     * 
+     */
+    public Serializedcarrier()
     {
         
     }
     
-    public SerializedCarrier(Class _class, Object object)
+    /**
+     * 
+     * @param _class
+     * @param object 
+     */
+    public Serializedcarrier(Class _class, Object object)
     {
         this._class = _class;
         

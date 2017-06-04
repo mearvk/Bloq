@@ -1,7 +1,7 @@
 
 package apml.system.bodi;
 
-import apml.system.bodi.remote.BodiError;
+import apml.system.bodi.remote.Bodierror;
 
 import java.io.File;
 
@@ -73,11 +73,18 @@ public class Bodicontext
      */
     public void put(Integer key, Object value) throws Exception
     {       
-        if(key==null) throw new BodiError("Bodicontext.put :: Key value was null.");
+        if(key==null) throw new Bodierror("Bodicontext.put :: Key value was null.");
         
-        if(value==null) throw new BodiError("Bodicontext.put :: Value value was null.");
+        if(value==null) throw new Bodierror("Bodicontext.put :: Value value was null.");
         
-        this.hashmap.put(key, value);
+        try
+        {
+            this.hashmap.put(key, value);                     
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -88,11 +95,18 @@ public class Bodicontext
      */
     public void put(Object key, Object value) throws Exception
     {           
-        if(key==null) throw new BodiError("Bodicontext.put :: Key value was null.");
+        if(key==null) throw new Bodierror("Bodicontext.put :: Key value was null.");
         
-        if(value==null) throw new BodiError("Bodicontext.put :: Value value was null.");
+        if(value==null) throw new Bodierror("Bodicontext.put :: Value value was null.");
         
-        this.objectmap.put(key, value);                     
+        try
+        {
+            this.objectmap.put(key, value);                     
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     
     /**
@@ -103,11 +117,18 @@ public class Bodicontext
      */
     public void put(String key, Object value) throws Exception
     {        
-        if(key==null) throw new BodiError("Bodicontext.put :: Key value was null.");
+        if(key==null) throw new Bodierror("Bodicontext.put :: Key value was null.");
         
-        if(value==null) throw new BodiError("Bodicontext.put :: Value value was null.");
+        if(value==null) throw new Bodierror("Bodicontext.put :: Value value was null.");        
         
-        this.namemap.put(key, value);            
+        try
+        {
+            this.namemap.put(key, value);                     
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }   
     }                   
     
     /**

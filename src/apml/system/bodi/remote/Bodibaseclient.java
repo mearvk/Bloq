@@ -50,12 +50,20 @@ public class Bodibaseclient implements Runnable, BasicSystemElement
     
     public Object writelock = new Object();
     
-    
+    /**
+     * 
+     * @param args 
+     */
     public static void main(String...args)
     {
         new Bodibaseclient("localhost", 8888).run();
     }
     
+    /**
+     * 
+     * @param host
+     * @param port 
+     */
     public Bodibaseclient(String host, Integer port)
     {        
         if(host==null || port==null) throw new SecurityException();
@@ -136,6 +144,9 @@ public class Bodibaseclient implements Runnable, BasicSystemElement
         }        
     }
     
+    /**
+     * 
+     */
     @Override
     public void run()
     {
@@ -153,17 +164,26 @@ public class Bodibaseclient implements Runnable, BasicSystemElement
             }
             catch(Exception e)
             {
-                e.printStackTrace();
+                e.printStackTrace(System.err);
             }
      
         }
     }
     
+    /**
+     * 
+     * @param millis
+     * @throws Exception 
+     */
     public void sleepmillis(Long millis) throws Exception
     {
         Thread.currentThread().sleep(millis); 
     }
     
+    /**
+     * 
+     * @throws Exception 
+     */
     public void checknetworkin() throws Exception
     {
             /*------------------- do full read on inputstream ----------------------*/
@@ -189,6 +209,10 @@ public class Bodibaseclient implements Runnable, BasicSystemElement
             }        
     }
     
+    /**
+     * 
+     * @throws Exception 
+     */
     public void checkkeyboardin() throws Exception
     {
         if(this.iskeyboardreadready)
@@ -207,6 +231,10 @@ public class Bodibaseclient implements Runnable, BasicSystemElement
         }
     }
 
+    /**
+     * 
+     * @throws Exception 
+     */
     public void checknetworkout() throws Exception
     {
         if(this.outputbuffer.length()>0)
@@ -228,6 +256,10 @@ public class Bodibaseclient implements Runnable, BasicSystemElement
         this.writer.flush();
     }
     
+    /**
+     * 
+     * @return 
+     */
     public StringBuffer read() 
     {
         String line = "";
@@ -294,6 +326,10 @@ public class Bodibaseclient implements Runnable, BasicSystemElement
     }
 }
 
+/**
+ * 
+ * @author Max Rupplin
+ */
 class Baseservicethread extends Thread
 {
     public Bodibaseclient client; 
@@ -303,6 +339,9 @@ class Baseservicethread extends Thread
         this.client = client;
     }        
     
+    /**
+     * 
+     */
     @Override
     public void run()
     {

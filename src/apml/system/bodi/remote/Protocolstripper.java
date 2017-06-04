@@ -6,6 +6,11 @@ package apml.system.bodi.remote;
  */
 public class Protocolstripper
 {        
+    /**
+     * 
+     * @param parameterization
+     * @return 
+     */
     public static String stripforkey(Bodiservercontext parameterization)
     {
         if(parameterization==null) throw new SecurityException("//bodi/connect");
@@ -25,6 +30,11 @@ public class Protocolstripper
         return null;
     }
     
+    /**
+     * 
+     * @param parameterization
+     * @return 
+     */
     public static String stripforvalue(Bodiservercontext parameterization)
     {
         if(parameterization==null) throw new SecurityException("//bodi/connect");
@@ -44,6 +54,11 @@ public class Protocolstripper
         return null;
     }
     
+    /**
+     * 
+     * @param parameterization
+     * @return 
+     */
     public static String stripforcontext(Bodiservercontext parameterization)
     {
         if(parameterization==null) throw new SecurityException("//bodi/connect");
@@ -63,6 +78,11 @@ public class Protocolstripper
         return null;
     }   
     
+    /**
+     * 
+     * @param parameterization
+     * @return 
+     */
     public static String stripforprotocoltoken(Bodiservercontext parameterization)
     {
         if(parameterization==null) throw new SecurityException("//bodi/connect");
@@ -78,6 +98,11 @@ public class Protocolstripper
         return null;
     }
     
+    /**
+     * 
+     * @param input
+     * @return 
+     */
     public static String stripforkey(String input)
     {
         if(input==null) throw new SecurityException("//bodi/connect");
@@ -97,6 +122,11 @@ public class Protocolstripper
         return null;
     }    
     
+    /**
+     * 
+     * @param input
+     * @return 
+     */
     public static String stripforvalue(String input)
     {
         if(input==null) throw new SecurityException("//bodi/connect");
@@ -120,6 +150,11 @@ public class Protocolstripper
         return null;
     }
     
+    /**
+     * 
+     * @param input
+     * @return 
+     */
     public static String stripforcontext(String input)
     {
         if(input==null) throw new SecurityException("//bodi/connect");
@@ -143,6 +178,11 @@ public class Protocolstripper
         return null;
     }   
     
+    /**
+     * 
+     * @param input
+     * @return 
+     */
     public static String stripforprotocoltoken(String input)
     {
         if(input==null) throw new SecurityException("//bodi/connect");

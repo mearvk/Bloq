@@ -14,6 +14,10 @@ class Outputlistenerthread extends Thread
     
     public Object lock = new Object();
     
+    /**
+     * 
+     * @param parent 
+     */
     public Outputlistenerthread(Listenerthread parent)
     {
         if(parent==null) throw new SecurityException("//bodi/connect");
@@ -23,6 +27,10 @@ class Outputlistenerthread extends Thread
         this.setName("Outputlistenerthread");                
     }
     
+    /**
+     * 
+     * @return 
+     */
     public Boolean checkoutputqueue()
     {
         String output = this.parent.connection.outqueue.toString();
@@ -60,6 +68,9 @@ class Outputlistenerthread extends Thread
         return true;        
     }    
     
+    /**
+     * 
+     */
     @Override
     public void run()
     {
@@ -93,6 +104,10 @@ class Outputlistenerthread extends Thread
         }        
     }
     
+    /**
+     * 
+     * @param millis 
+     */
     protected void sleepmillis(Long millis)
     {
         try

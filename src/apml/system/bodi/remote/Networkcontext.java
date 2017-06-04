@@ -14,13 +14,20 @@ import java.net.Socket;
  *
  * @author Max Rupplin
  */
-class Networkcontext
+public class Networkcontext
 {
+    /**
+     * 
+     */
     public Networkcontext()
     {
         
     }
-        
+       
+    /**
+     * 
+     * @param server 
+     */
     public Networkcontext(Baseserver server)
     {
         if(server==null) throw new SecurityException("//bodi/connect");
@@ -31,6 +38,8 @@ class Networkcontext
     public Baseserver server;
     
     public volatile Socket socket;
+    
+    public String ipaddress;
     
     public InputStream inputstream;
     

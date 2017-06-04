@@ -21,7 +21,11 @@ public class Bodiremoteclient extends Bodibaseclient implements Runnable
     
     //public Bodiconnection connection = new Bodiconnection(bodi);
     
-    
+    /**
+     * 
+     * @param host
+     * @param port 
+     */
     public Bodiremoteclient(String host, Integer port)
     {        
         super(host, port);                
@@ -29,6 +33,9 @@ public class Bodiremoteclient extends Bodibaseclient implements Runnable
         if(host==null || port==null) throw new SecurityException("//bodi/connect");
     }
     
+    /**
+     * 
+     */
     @Override
     public void run()
     {
@@ -47,6 +54,11 @@ public class Bodiremoteclient extends Bodibaseclient implements Runnable
         }
     }
         
+    /**
+     * 
+     * @param buffer
+     * @return 
+     */
     public Object read(StringBuffer buffer) //should return an object via serialization process
     {
         synchronized(this.writelock)
@@ -71,7 +83,10 @@ public class Bodiremoteclient extends Bodibaseclient implements Runnable
         return null;
     }
     
-    //handshake returns 0x012312415156 
+    /**
+     * 
+     * @param buffer 
+     */
     public void write(StringBuffer buffer) //should write out a request for Bodi object
     {
         synchronized(this.readlock)

@@ -14,8 +14,11 @@ class Listenerthread extends Thread
     public Inputlistenerthread inputlistenerthrread;
     
     public Outputlistenerthread outputlistenerthread;
-    
-    
+        
+    /**
+     * 
+     * @param connection 
+     */
     public Listenerthread(Networkcontext connection)
     {
         if(connection==null) throw new SecurityException("//bodi/connect");
@@ -39,19 +42,16 @@ class Listenerthread extends Thread
         this.outputlistenerthread.start();
     }
     
+    /**
+     * 
+     */
     @Override
     public void run()
-    {
-        //System.out.println(">   Server main thread started...");
-        
+    {        
         try
         {
             while(running)            
-            {
-                //System.err.println("Listener thread now looping...");
-
-                //check for socket disconnect here please
-                
+            {              
                 try
                 {               
                     this.inputlistenerthrread.checkinputqueue();                                   
@@ -75,12 +75,15 @@ class Listenerthread extends Thread
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
         }
-        
-        //System.out.println("Basicserver listener thread exiting...");
     } 
     
+    /**
+     * 
+     * @param millis
+     * @throws Exception 
+     */
     protected void sleepmillis(Long millis) throws Exception
     {        
         Thread.currentThread().sleep(millis);     

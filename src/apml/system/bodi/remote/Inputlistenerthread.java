@@ -16,6 +16,10 @@ class Inputlistenerthread extends Thread
     
     public Object readreadylock = new Object();
     
+    /**
+     * 
+     * @param parent 
+     */
     public Inputlistenerthread(Listenerthread parent)
     {
         if(parent==null) throw new SecurityException("//bodi/connect");
@@ -25,6 +29,10 @@ class Inputlistenerthread extends Thread
         this.setName("Inputlistenerthread");  
     }
     
+    /**
+     * 
+     * @return 
+     */
     public Boolean checkinputqueue()
     {                            
         try
@@ -55,17 +63,16 @@ class Inputlistenerthread extends Thread
         {
             //
         }           
-        
-        //System.out.println("Call to checkinputqueue exiting...");
             
         return true;            
     }  
     
+    /**
+     * 
+     */
     @Override
     public void run()
-    {
-        //System.out.println(">   Inputlistenerthread started...");
-        
+    {      
         try
         {
             while(running)
@@ -91,6 +98,11 @@ class Inputlistenerthread extends Thread
         }
     }
     
+    /**
+     * 
+     * @param millis
+     * @throws Exception 
+     */
     protected void sleepmillis(Long millis) throws Exception
     {
         Thread.currentThread().sleep(millis);

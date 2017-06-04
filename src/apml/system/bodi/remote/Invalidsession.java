@@ -4,9 +4,9 @@ package apml.system.bodi.remote;
  *
  * @author Max Rupplin
  */
-public class InvalidSessionException extends Exception
+public class Invalidsession extends Exception
 {
-    public InvalidSessionException(String message)
+    public Invalidsession(String message)
     {
         super(message);
     }

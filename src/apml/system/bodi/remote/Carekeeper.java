@@ -16,7 +16,7 @@ import java.util.Map;
  *
  * @author Max Rupplin
  */
-public class CareKeeper
+public class Carekeeper
 {
     public String key;
     

@@ -4,9 +4,9 @@ package apml.system.bodi.remote;
  *
  * @author Max Rupplin
  */
-public class BodiDuplicateKeyError extends BodiError
+public class Bodierror extends Error
 {
-    public BodiDuplicateKeyError(String msg)
+    public Bodierror(String msg)
     {
         super(msg);
         

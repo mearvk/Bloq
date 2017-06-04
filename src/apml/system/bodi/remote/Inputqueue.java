@@ -8,7 +8,7 @@ import java.util.Queue;
  *
  * @author Max Rupplin
  */
-class Inputqueue 
+public class Inputqueue 
 {
     public Queue<Networkcontext> queue = new LinkedList();
     

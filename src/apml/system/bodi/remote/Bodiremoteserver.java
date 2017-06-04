@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 /**
- * Hello transactional service based pay-as-you-go internet (Bodi)
+ * Hello transactional service based pay-as-you-attend internet (Bodi)
  * 
  * @author Max Rupplin
  */
@@ -26,9 +26,7 @@ public class Bodiremoteserver extends Baseserver
     
     public Bodiprotocolhandler protocolhandler = new Bodiprotocolhandler();
     
-    public Boolean running = true; 
-    
-    public Bodi bodi;           
+    public Boolean running = true;         
     
     /**
      * 
@@ -42,7 +40,7 @@ public class Bodiremoteserver extends Baseserver
         
         server.start();
         
-        server.go();                       
+        server.attend();                       
     }       
     
     /**
@@ -83,28 +81,29 @@ public class Bodiremoteserver extends Baseserver
     }
     
     /**
-     * 
+     * Attend new connections and Bodi requests
      */
-    public void go() 
+    public void attend() 
     {                                  
         while(running)
         {                                                
-            Networkcontext networkcontext = this.pollqueuednetworkconnections();                                      
+            Bodiservercontext bodiservercontext = null;
+            
+            Networkcontext networkcontext = this.pollqueuednetworkconnections();                         
+                        
+            //
             
             try
             {                
-                if( this.tryisvalidnetwork(networkcontext) ) //
-                {
-                                        
-                    //Ensures that we use only existing bodisessions or handshakes 
-
-                    Bodiservercontext bodiservercontext = new Bodiservercontext(this, networkcontext, this.pollstoredbodisessions(networkcontext));                                                                                
+                if( this.tryvalidatenetworkconnection(networkcontext) ) //
+                {                                                            
                     
+                    bodiservercontext = new Bodiservercontext(this, networkcontext, this.pollstoredbodisessions(networkcontext)); //we care to use only existing bodisessions or handshakes                     
                     
-                    if( this.tryisvalidbodiconnection(bodiservercontext) ) 
+                    if( this.tryvalidatebodiconnection(bodiservercontext) ) 
                     {                                                                                              
                         
-                        if(bodiservercontext.inputstring.startsWith(CLOSE)) //could be useful: an a closes an owned connection from use
+                        if(bodiservercontext.inputstring.startsWith(CLOSE)) //closes a persistent context
                         {
                             bodiservercontext = new Bodiservercontext(this, CLOSE, bodiservercontext);
 
@@ -119,7 +118,7 @@ public class Bodiremoteserver extends Baseserver
                             this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }
 
-                        else if (bodiservercontext.inputstring.startsWith(HANDSHAKE))
+                        else if (bodiservercontext.inputstring.startsWith(HANDSHAKE)) //request a session token
                         {
                             bodiservercontext = new Bodiservercontext(this, HANDSHAKE, bodiservercontext);
 
@@ -131,10 +130,10 @@ public class Bodiremoteserver extends Baseserver
                             
                             //
                             
-                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
+                            this.trystorecontextstobodhi(bodiservercontext, networkcontext); 
                         }                    
                        
-                        else if(bodiservercontext.inputstring.startsWith(LIST))
+                        else if(bodiservercontext.inputstring.startsWith(LIST)) //lists contexts
                         {
                             bodiservercontext = new Bodiservercontext(this, LIST, bodiservercontext);
 
@@ -149,7 +148,7 @@ public class Bodiremoteserver extends Baseserver
                             this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }                        
 
-                        else if(bodiservercontext.inputstring.startsWith(OPEN)) //could be useful: an a opens an owned connection for private/public use
+                        else if(bodiservercontext.inputstring.startsWith(OPEN)) //open a persistent context
                         {
                             bodiservercontext = new Bodiservercontext(this, OPEN, bodiservercontext);
 
@@ -164,7 +163,7 @@ public class Bodiremoteserver extends Baseserver
                             this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }
 
-                        else if(bodiservercontext.inputstring.startsWith(PULL)) 
+                        else if(bodiservercontext.inputstring.startsWith(PULL)) //pull a value/object
                         {
                             bodiservercontext = new Bodiservercontext(this, PULL, bodiservercontext);
 
@@ -179,7 +178,7 @@ public class Bodiremoteserver extends Baseserver
                             this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }
 
-                        else if(bodiservercontext.inputstring.startsWith(PUT))
+                        else if(bodiservercontext.inputstring.startsWith(PUT)) //put a value/object
                         {
                             bodiservercontext = new Bodiservercontext(this, PUT, bodiservercontext);
 
@@ -194,7 +193,7 @@ public class Bodiremoteserver extends Baseserver
                             this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }
 
-                        else if(bodiservercontext.inputstring.startsWith(TOUCH))
+                        else if(bodiservercontext.inputstring.startsWith(TOUCH)) //touch a context
                         {
                             bodiservercontext = new Bodiservercontext(this, TOUCH, bodiservercontext);
 
@@ -209,7 +208,7 @@ public class Bodiremoteserver extends Baseserver
                             this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }                        
                         
-                        else if(bodiservercontext.inputstring.startsWith(TRADE)) //fork thru a transactional system (database) instead of rewriting the book
+                        else if(bodiservercontext.inputstring.startsWith(TRADE)) //trade one value/object
                         {
                             bodiservercontext = new Bodiservercontext(this, TRADE, bodiservercontext);
 
@@ -251,7 +250,7 @@ public class Bodiremoteserver extends Baseserver
                 
                 //
             }            
-            catch(InvalidSessionException exception)
+            catch(Invalidsession exception)
             {
                 exception.printStackTrace(System.err);
                 
@@ -267,7 +266,11 @@ public class Bodiremoteserver extends Baseserver
             {                
                 //
                 
-                this.tryclearbuffers(networkcontext);                
+                this.tryflushnetworkcontext(networkcontext);     
+                
+                //
+                
+                this.tryflushbodicontext(bodiservercontext);
                 
                 //
                 
@@ -290,7 +293,7 @@ public class Bodiremoteserver extends Baseserver
      * 
      * @return TRUE is underlying network context is not null, has some ready input and the network connection (socket) is not disconnected but connected and open; FALSE otherwise.
      */
-    public Boolean tryisvalidnetwork(Networkcontext networkcontext)
+    public Boolean tryvalidatenetworkconnection(Networkcontext networkcontext)
     {
         return networkcontext!=null && networkcontext.inputqueueisready() && networkcontext.issocketconnected();
     }
@@ -302,7 +305,7 @@ public class Bodiremoteserver extends Baseserver
      * 
      * @return TRUE if Bodiconnection is valid by these requirements; FALSE otherwise.
      */
-    public Boolean tryisvalidbodiconnection(Bodiservercontext bodiservercontext)
+    public Boolean tryvalidatebodiconnection(Bodiservercontext bodiservercontext)
     {
         return 
             
@@ -332,11 +335,33 @@ public class Bodiremoteserver extends Baseserver
     }    
     
     /**
+     * Clear me
+     * 
+     * @param bodiservercontext 
+     */
+    public void tryflushbodicontext(Bodiservercontext bodiservercontext)
+    {
+        if(bodiservercontext==null) return; //throw new SecurityException("//bodi/connect");
+        
+        bodiservercontext.bodicontext.value = "";
+        
+        bodiservercontext.bodicontext.result = "";
+        
+        bodiservercontext.bodicontext.message = "";
+        
+        bodiservercontext.bodicontext.value = null;
+        
+        bodiservercontext.bodicontext.result = null;
+        
+        bodiservercontext.bodicontext.message = null;        
+    }
+    
+    /**
      * Clear cyclical buffers 
      * 
      * @param networkcontext 
      */
-    public void tryclearbuffers(Networkcontext networkcontext)
+    public void tryflushnetworkcontext(Networkcontext networkcontext)
     {                
         try
         { 
@@ -359,9 +384,11 @@ public class Bodiremoteserver extends Baseserver
         
         if(connection==null) return false;
         
-        Bodi.context("//bodi/server/remote/bodiconnections").put(connectioncontext.bodicontext.sessionid, connectioncontext.bodicontext);
-
-        Bodi.context("//bodi/server/remote/netconnections").put(connection, connection);  //connection.sessionid --> connection SVP ASAP
+        if(connection.socket==null) return false;
+        
+        Bodi.context("//bodi/server/remote/bodiconnections").put(connectioncontext.bodicontext.sessionid.toString(), connectioncontext.bodicontext);
+        
+        Bodi.context("//bodi/server/remote/netconnections").put(connection.socket.getInetAddress().toString(), connection);
         
         return true;
     }

@@ -50,6 +50,11 @@ public abstract class Baseserver extends Thread
     
     public Inputqueue connectionqueue = new Inputqueue();
     
+    /**
+     * 
+     * @param host
+     * @param port 
+     */
     public Baseserver(String host, Integer port)
     {
         if(host==null || port==null) throw new SecurityException("//bodi/connect");
@@ -87,6 +92,10 @@ public abstract class Baseserver extends Thread
         }           
     }
     
+    /**
+     * 
+     * @param port 
+     */
     public Baseserver(Integer port)
     {
         if(port==null) throw new SecurityException("//bodi/connect");
@@ -122,6 +131,9 @@ public abstract class Baseserver extends Thread
         }                        
     }    
     
+    /**
+     * 
+     */
     @Override
     public void run()
     {
@@ -203,7 +215,15 @@ public abstract class Baseserver extends Thread
         }
     }
     
+    /**
+     * 
+     * @param bytes 
+     */
     public abstract void write(byte[] bytes);
     
+    /**
+     * 
+     * @return 
+     */
     public abstract byte[] read();   
 }

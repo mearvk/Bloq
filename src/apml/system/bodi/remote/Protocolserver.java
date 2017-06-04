@@ -18,6 +18,11 @@ public abstract class Protocolserver extends Baseserver implements Runnable
     
     public Boolean running;
 
+    /**
+     * 
+     * @param host
+     * @param port 
+     */
     public Protocolserver(String host, Integer port)
     {
         super(host, port);
@@ -25,6 +30,10 @@ public abstract class Protocolserver extends Baseserver implements Runnable
         if(host==null || port==null) throw new SecurityException("//bodi/connect");
     }
     
+    /**
+     * 
+     * @param port 
+     */
     public Protocolserver(Integer port)
     {
         super(port);
@@ -32,11 +41,22 @@ public abstract class Protocolserver extends Baseserver implements Runnable
         if(port==null) throw new SecurityException("//bodi/connect");
     }
     
+    /**
+     * 
+     */
     @Override
     public void run()
     {
         super.run(); 
     }    
     
+    /**
+     * 
+     * @param protocol
+     * @param buffer
+     * @param server
+     * @return
+     * @throws Exception 
+     */
     protected abstract Object parseprotocol(String protocol , StringBuffer buffer, Bodiprotocolhandler server) throws Exception;
 }

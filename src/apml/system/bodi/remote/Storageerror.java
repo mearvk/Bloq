@@ -4,9 +4,13 @@ package apml.system.bodi.remote;
  *
  * @author Max Rupplin
  */
-public class SessionStorageError extends Error
+public class Storageerror extends Error
 {
-    public SessionStorageError(String msg)
+    /**
+     * 
+     * @param msg 
+     */
+    public Storageerror(String msg)
     {
         super(msg);
         

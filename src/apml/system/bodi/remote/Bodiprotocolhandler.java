@@ -23,13 +23,6 @@ public class Bodiprotocolhandler
             switch(connectioncontext.protocol)
             {     
                 //
-                case Bodiprotocol.LIST:                    
-                    
-                    this.processlistprotocol(connectioncontext);
-                    
-                    return connectioncontext;
-                    
-                //
                 case Bodiprotocol.CLOSE:
                     
                     this.processcloseprotocol(connectioncontext);                                                            
@@ -41,7 +34,14 @@ public class Bodiprotocolhandler
                     
                     this.processhandshakeprotocol(connectioncontext);                     
                     
-                    return connectioncontext;                                                            
+                    return connectioncontext;                                                                                
+                    
+                //
+                case Bodiprotocol.LIST:                    
+                    
+                    this.processlistprotocol(connectioncontext);
+                    
+                    return connectioncontext;                    
 
                 //
                 case Bodiprotocol.OPEN:         
@@ -65,13 +65,20 @@ public class Bodiprotocolhandler
                     return connectioncontext;                   
 
                 //
+                case Bodiprotocol.TOUCH:    
+                    
+                    this.processtouchprotocol(connectioncontext);                     
+                    
+                    return connectioncontext;                                                                                
+                    
+                //
                 case Bodiprotocol.TRADE:        
                     
                     this.processtradeprotocol(connectioncontext);                                        
                     
                     return connectioncontext;
                    
-                //miscellany; unused messaging
+                //
                 default:
                     
                     this.processunknownprotocol(connectioncontext);                                         
@@ -80,52 +87,11 @@ public class Bodiprotocolhandler
             }                        
         }  
         
-        throw new NoValidConnectionException("No valid connection found.");
-    } 
-    
-    /**
-     * 
-     * @param connectioncontext
-     * @return
-     * @throws Exception
-     * @throws SecurityException 
-     */
-    protected Boolean processunknownprotocol(Bodiservercontext connectioncontext) throws Exception, SecurityException
-    {                       
-        String protocol = connectioncontext.protocol;
-        
-        StringBuffer buffer = connectioncontext.inputbuffer;
-                
-        switch(buffer.toString())
-        {
-    //not yet
-        }
-        
-        //        
-
-        
-        return true;
-    }      
-    
-    /**
-     * 
-     * @param connectioncontext
-     * @throws SecurityException 
-     */
-    private void processlistprotocol(Bodiservercontext connectioncontext) throws SecurityException
-    {
-        if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
-        
-        if(!this.startsswith(connectioncontext, "//list")) throw new SecurityException("//bodi/connect");        
-        
-        if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping.");   
-        
-        if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //context token missing; stopping.");    
-        
-        /*---------------------------------------------------------------------*/                
-    }
+        throw new Invalidconnection("No valid connection found.");
+    }     
 
     /**
+     * CLOSE token pre-processing goes here
      * 
      * @param connectioncontext
      * @throws SecurityException 
@@ -141,9 +107,10 @@ public class Bodiprotocolhandler
         if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("//bodi/connect");
         
         /*---------------------------------------------------------------------*/                
-    }
+    }    
 
     /**
+     * HANDSHAKE token pre-processing goes here
      * 
      * @param connectioncontext
      * @throws SecurityException 
@@ -158,6 +125,26 @@ public class Bodiprotocolhandler
     }
     
     /**
+     * LIST token pre-processing goes here
+     * 
+     * @param connectioncontext
+     * @throws SecurityException 
+     */
+    private void processlistprotocol(Bodiservercontext connectioncontext) throws SecurityException
+    {
+        if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
+        
+        if(!this.startsswith(connectioncontext, "//list")) throw new SecurityException("//bodi/connect");        
+        
+        if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping.");   
+        
+        if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //context token missing; stopping.");    
+        
+        /*---------------------------------------------------------------------*/                
+    }    
+    
+    /**
+     * OPEN token pre-processing goes here
      * 
      * @param connectioncontext
      * @throws SecurityException 
@@ -176,6 +163,7 @@ public class Bodiprotocolhandler
     }
     
     /**
+     * PULL token pre-processing goes here
      * 
      * @param connectioncontext
      * @throws SecurityException 
@@ -196,6 +184,7 @@ public class Bodiprotocolhandler
     }
     
     /**
+     * PUT token pre-processing goes here
      * 
      * @param connectioncontext
      * @throws SecurityException 
@@ -222,8 +211,28 @@ public class Bodiprotocolhandler
         
         /*---------------------------------------------------------------------*/        
     }
+
+    /**
+     * TOUCH token pre-processing goes here
+     * 
+     * @param connectioncontext
+     * @throws SecurityException 
+     */
+    private void processtouchprotocol(Bodiservercontext connectioncontext) throws SecurityException
+    {
+        if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
+        
+        if(!this.startsswith(connectioncontext, "//touch")) throw new SecurityException("//bodi/connect");        
+        
+        if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping.");
+            
+        if(!this.containscontext(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //context token missing; stopping.");
+        
+        /*---------------------------------------------------------------------*/
+    }
     
     /**
+     * TRADE token pre-processing goes here
      * 
      * @param connectioncontext
      * @throws SecurityException 
@@ -242,6 +251,28 @@ public class Bodiprotocolhandler
         
         /*---------------------------------------------------------------------*/
     }
+    
+    /**
+     * UNKNOWN token pre-processing goes here
+     * 
+     * @param connectioncontext
+     * @return
+     * @throws Exception
+     * @throws SecurityException 
+     */
+    protected Boolean processunknownprotocol(Bodiservercontext connectioncontext) throws Exception, SecurityException
+    {                       
+        String protocol = connectioncontext.protocol;
+        
+        StringBuffer buffer = connectioncontext.inputbuffer;
+                
+        switch(buffer.toString())
+        {
+            //not yet
+        }        
+        
+        return true;
+    }          
     
     /**
      * 

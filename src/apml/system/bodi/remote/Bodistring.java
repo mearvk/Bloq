@@ -1,8 +1,9 @@
 package apml.system.bodi.remote;
 
 /**
- *
- * @author Fly Jr. McFly //pizza author @ number 1
+ * Supercool class for String extension TBI
+ * 
+ * @author Max Rupplin
  */
 public class Bodistring 
 {

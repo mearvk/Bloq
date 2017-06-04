@@ -402,7 +402,7 @@ public class Bodiconnection
         }
         else
         {
-            SerializedCarrier carrier = new SerializedCarrier(object.getClass(), object);
+            Serializedcarrier carrier = new Serializedcarrier(object.getClass(), object);
             
             bodiconnection.message = "key/context pair found.";
             
@@ -757,7 +757,7 @@ public class Bodiconnection
      */
     protected Serializable getrequestedobject(String context, String key)
     {
-        SerializedCarrier bodicarrier = new SerializedCarrier();
+        Serializedcarrier bodicarrier = new Serializedcarrier();
                 
         try
         {   
