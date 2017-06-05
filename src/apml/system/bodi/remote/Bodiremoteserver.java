@@ -1,6 +1,7 @@
 package apml.system.bodi.remote;
 
 import apml.system.bodi.remote.exceptions.InvalidSessionException;
+
 import apml.system.bodi.Bodi;
 
 import static apml.system.bodi.remote.Bodiprotocol.*;

@@ -4,10 +4,6 @@ import apml.extensions.AbstractResourceServer;
 
 import apml.extensions.ServerContext;
 
-import java.net.ServerSocket;
-
-import java.net.Socket;
-
 /**
  *
  * @author Max Rupplin

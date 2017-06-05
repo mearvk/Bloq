@@ -7,7 +7,7 @@
 
         <package default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
             <system id="Echoserversystem" class="Echoserversystem" implements="apml.interfaces.BasicSystemElement" >
-                <object id="Echoserver" class="Echoserver" implements="apml.interfaces.BasicSystemElement" extends="apml.system.bodi.Basicserver">
+                <object id="Echoserver" class="Echoserver" implements="apml.interfaces.BasicSystemElement" extends="apml.extensions.AbstractBaseServer">
                     <listener id="Inservice" class="Inputservicelistener">
                         <subscriber class="InputService"/>
                     </listener>
