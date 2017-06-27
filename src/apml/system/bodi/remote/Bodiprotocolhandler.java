@@ -30,6 +30,13 @@ public class Bodiprotocolhandler
                     this.processcloseprotocol(connectioncontext);                                                            
                     
                     return connectioncontext;
+                    
+                //
+                case Bodiprotocol.EXIT:
+                    
+                    this.processexitprotocol(connectioncontext);                                                            
+                    
+                    return connectioncontext;                    
 
                 //
                 case Bodiprotocol.HANDSHAKE:    
@@ -110,6 +117,23 @@ public class Bodiprotocolhandler
         
         /*---------------------------------------------------------------------*/                
     }    
+    
+    /**
+     * EXIT token pre-processing goes here
+     * 
+     * @param connectioncontext
+     * @throws SecurityException 
+     */
+    private void processexitprotocol(Bodiservercontext connectioncontext) throws SecurityException
+    {        
+        if(!this.subtokenswellformed(connectioncontext)) throw new SecurityException("//bodi/connect");    
+        
+        if(!this.startsswith(connectioncontext, "//exit")) throw new SecurityException("//bodi/connect");        
+        
+        if(!this.containssessionsid(connectioncontext.inputbuffer)) throw new SecurityException("Bodi //sessionid token missing; stopping.");         
+        
+        /*---------------------------------------------------------------------*/                
+    }        
 
     /**
      * HANDSHAKE token pre-processing goes here

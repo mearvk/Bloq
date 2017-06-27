@@ -8,6 +8,8 @@ public class Bodiprotocol extends Protocol
 {        
     public static final String CLOSE = "//close";
     
+    public static final String EXIT = "//exit";
+    
     public static final String HANDSHAKE = "//handshake";
     
     public static final String LIST = "//list";
@@ -42,6 +44,8 @@ public class Bodiprotocol extends Protocol
     public static Boolean isbodiprotocol(String comparator)
     {
         if(comparator.startsWith(CLOSE)) return true;
+        
+        if(comparator.startsWith(EXIT)) return true;
         
         if(comparator.startsWith(HANDSHAKE)) return true;
         

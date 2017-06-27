@@ -41,7 +41,7 @@ public class Apmlmodelfile
     
     public String bodi;   
     
-    public String classname;    
+    public String classname;        
     
     public String id;    
     

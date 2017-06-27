@@ -47,6 +47,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import apml.annotations.BloqSys;
+import java.lang.annotation.Annotation;
 
 import java.lang.reflect.Parameter;
 
@@ -144,7 +145,7 @@ public class Bloqjcmpopulator
             
             try{this.addjcminterfacemethods(param);}    catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            //try{this.addjcmsuperclassmethods(param);}   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{this.addjcmsuperclassmethods(param);}   catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
             //try{this.addjcmtagmethods(param);}          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                     
             
@@ -416,10 +417,37 @@ public class Bloqjcmpopulator
         param.classref.direct("\t\n\n//TODO: finish adding support...");
     }
     
+    /**
+     * 
+     * @param param 
+     */
     private void doobjectbloqs(Bloqconvenienceparameter param)
     {
-        JDefinedClass theclass = param.classref;
+        JDefinedClass jcmclass = param.classref;
                 
+        /*---------------------------------------------------------------------*/
+        
+        try
+        {   
+            if(param.apmlmodelfile.superclass!=null)
+            {                                            
+                jcmclass._extends(Class.forName(param.apmlmodelfile.superclass));
+                
+                Class parentclass = Class.forName(param.apmlmodelfile.superclass);
+
+                Method[] parentclassmethods = parentclass.getMethods();
+
+                for(Method inheritablemethod : parentclassmethods)
+                {
+                    //jcmclass.supermethod(JMod, parentclass, name);
+                }                
+            }            
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
         /*---------------------------------------------------------------------*/
         
         JMethod constructor1;
@@ -462,11 +490,11 @@ public class Bloqjcmpopulator
         
         /*---------------------------------------------------------------------*/         
         
-        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bodi+"\"");
+        jcmclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\""+param.apmlmodelfile.bodi+"\"");
         
-        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
+        jcmclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\""+param.apmlmodelfile.id+"\"");
                 
-        theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tag=\""+param.apmlmodelfile.tagname+"\"");
+        jcmclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tag=\""+param.apmlmodelfile.tagname+"\"");
         
         /*---------------------------------------------------------------------*/                       
         
@@ -925,53 +953,59 @@ public class Bloqjcmpopulator
                     
                     param.classref._implements(interfacename);
                                         
-                    for(Method m: interfacename.getMethods())
+                    for(Method parentmethod: interfacename.getMethods())
                     {                
                         JMethod method;
                         
-                        switch(m.getModifiers())
+                        switch(parentmethod.getModifiers())
                         {
                             
                             case Modifier.ABSTRACT | Modifier.PUBLIC:
                                 
-                                method = param.classref.method(JMod.PUBLIC, m.getReturnType(), m.getName());
+                                method = param.classref.method(JMod.PUBLIC, parentmethod.getReturnType(), parentmethod.getName());
                                 method.body().directStatement("\n");                                      
-                                method.annotate(BloqSys.class);
+                                method.annotate(BloqSys.class);                                
+                                method.annotate(Override.class);
                                 break;
 
                             case Modifier.ABSTRACT | Modifier.PROTECTED:                                            
                                 
-                                method = param.classref.method(JMod.PROTECTED, m.getReturnType(), m.getName());
+                                method = param.classref.method(JMod.PROTECTED, parentmethod.getReturnType(), parentmethod.getName());
                                 method.body().directStatement("\n");
                                 method.annotate(BloqSys.class);
+                                method.annotate(Override.class);
                                 break;                    
 
                             case Modifier.ABSTRACT | Modifier.NATIVE:
                                 
-                                method = param.classref.method(JMod.NATIVE, m.getReturnType(), m.getName());
+                                method = param.classref.method(JMod.NATIVE, parentmethod.getReturnType(), parentmethod.getName());
                                 method.body().directStatement("\n");
                                 method.annotate(BloqSys.class);
+                                method.annotate(Override.class);
                                 break;   
 
                             case Modifier.ABSTRACT | Modifier.PRIVATE:
                                 
-                                method = param.classref.method(JMod.PRIVATE, m.getReturnType(), m.getName());
+                                method = param.classref.method(JMod.PRIVATE, parentmethod.getReturnType(), parentmethod.getName());
                                 method.body().directStatement("\n");
                                 method.annotate(BloqSys.class);
+                                method.annotate(Override.class);
                                 break;      
 
                             case Modifier.ABSTRACT | Modifier.INTERFACE:
                                 
-                                method = param.classref.method(JMod.PROTECTED, m.getReturnType(), m.getName());
+                                method = param.classref.method(JMod.PROTECTED, parentmethod.getReturnType(), parentmethod.getName());
                                 method.body().directStatement("\n");
                                 method.annotate(BloqSys.class);
+                                method.annotate(Override.class);
                                 break;      
 
                             default: 
                                 
-                                method = param.classref.method(JMod.NONE, m.getReturnType(), m.getName());
+                                method = param.classref.method(JMod.NONE, parentmethod.getReturnType(), parentmethod.getName());
                                 method.body().directStatement("\n");
                                 method.annotate(BloqSys.class);
+                                method.annotate(Override.class);
                                 break;      
                         }                
                     }
@@ -1048,32 +1082,38 @@ public class Bloqjcmpopulator
             
             Class superclass = Class.forName(param.apmlmodelfile.superclass);
             
-            for (Method method : superclass.getMethods()) 
+            for (Method supermethod : superclass.getDeclaredMethods()) 
             {
-                if(method==null) break;
+                JMethod jcmmethod;
+                
+                if(supermethod==null) break;
                    
-                switch (method.getModifiers()) 
+                switch (supermethod.getModifiers()) 
                 {
-                    case Modifier.PUBLIC:
-                        param.classref.method(JMod.PUBLIC, method.getReturnType(), method.getName());
-                        break;
-            
-                    case Modifier.PROTECTED:
-                        param.classref.method(JMod.PROTECTED, method.getReturnType(), method.getName());    
-                        break;
-                                                
-                    case Modifier.NATIVE:                    
-                        param.classref.method(JMod.NATIVE, method.getReturnType(), method.getName());                        
-                        break;                        
-                       
-                    case Modifier.PRIVATE:                            
-                        param.classref.method(JMod.PRIVATE, method.getReturnType(), method.getName());                            
-                        break;
+                    case Modifier.ABSTRACT | Modifier.PUBLIC:
+                        jcmmethod = param.classref.method(JMod.PUBLIC, supermethod.getReturnType(), supermethod.getName());                        
+                        jcmmethod.annotate(apml.annotations.BloqExtension.class);
+                        jcmmethod.annotate(java.lang.Override.class);
+                        jcmmethod.body().directStatement("\n");
                         
-                    default:
-                        param.classref.method(JMod.NONE, method.getReturnType(), method.getName());
-                        break;
+                    break;
+
+                    case Modifier.ABSTRACT | Modifier.PROTECTED:
+                        jcmmethod = param.classref.method(JMod.PROTECTED, supermethod.getReturnType(), supermethod.getName());    
+                        jcmmethod.annotate(apml.annotations.BloqExtension.class);
+                        jcmmethod.annotate(java.lang.Override.class);
+                        jcmmethod.body().directStatement("\n");
+                        
+                    break;
+                } 
+                
+                for(Annotation annotation : supermethod.getAnnotations())
+                {
+                    if(annotation.annotationType().getName().equalsIgnoreCase("BloqExtension"))
+                    {
+                        
                     }
+                }                
             }                 
         }
         catch(InvalidParameterException | NullPointerException | ClassNotFoundException | SecurityException e)

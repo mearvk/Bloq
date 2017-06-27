@@ -1,6 +1,14 @@
-package apml.system.bodi.remote;
+package apml.system.bodi.local;
 
 import apml.system.bodi.Bodi;
+
+import apml.system.bodi.remote.Bodilag;
+
+import apml.system.bodi.remote.Bodiprotocolhandler;
+
+import apml.system.bodi.remote.Bodiresponse;
+
+import apml.system.bodi.remote.Protocolstripper;
 
 import java.util.ArrayList;
 

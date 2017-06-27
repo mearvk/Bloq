@@ -17,19 +17,26 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Baseserver.java</file>
             <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Listenerthread.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Inputlistenerthread.java</file>
             <file>file:/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/extensions/servers/threading/Outputlistenerthread.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/extensions/Resourcecontext.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/extensions/Baseserver.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/extensions/Resourceserver.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodilag.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiremoteserver.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/extensions/HttpServer.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Networkcontext.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/examples/httpserver/server/httpserver.xml</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/local/Bodilocalserver.java</file>
             <file>file:/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/Echoserver.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/extensions/Networkcontext.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/extensions/Servercontext.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/extensions/servers/threading/Listenerthread.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiprotocolhandler.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Outputlistenerthread.java</file>
             <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiservercontext.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/extensions/servers/threading/Inputlistenerthread.java</file>
-            <file>file:/home/oem/NetBeansProjects/APML/src/apml/extensions/Inputqueue.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiconnection.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodiprotocol.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/compilers/java/codemodel/Bloqcompiler.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/system/bodi/remote/Bodibaseclient.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/examples/httpserver/server/Httpserver.java</file>
+            <file>file:/home/oem/NetBeansProjects/APML/src/apml/extensions/NetworkContext.java</file>
         </group>
     </open-files>
 </project-private>

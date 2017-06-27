@@ -104,6 +104,12 @@ public class Bodiremoteserver extends Baseserver
                     
                     if( this.tryvalidatebodiconnection(bodiservercontext) ) 
                     {                                                                                              
+
+                        //map protocol {take many parameters and map to result, long name to short name}
+                        
+                        //alias protocol {take bodi context and alias it}
+                        
+                        //function protocol { take a series of values and compute them }
                         
                         if(bodiservercontext.inputstring.startsWith(CLOSE)) //closes a persistent context
                         {
@@ -119,6 +125,21 @@ public class Bodiremoteserver extends Baseserver
                             
                             this.trystorecontextstobodhi(bodiservercontext, networkcontext);
                         }
+                        
+                        else if(bodiservercontext.inputstring.startsWith(EXIT)) //close network connection to server
+                        {
+                            bodiservercontext = new Bodiservercontext(this, EXIT, bodiservercontext);
+
+                            bodiservercontext.processprotocol(bodiservercontext);
+
+                            bodiservercontext.processrequest(bodiservercontext);     
+
+                            bodiservercontext.processsesponse(bodiservercontext);         
+                            
+                            //
+                            
+                            this.trystorecontextstobodhi(bodiservercontext, networkcontext);
+                        }                        
 
                         else if (bodiservercontext.inputstring.startsWith(HANDSHAKE)) //request a session token
                         {

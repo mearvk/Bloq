@@ -10,7 +10,7 @@ import apml.extensions.ServerContext;
  */
 public class Echoserver extends AbstractResourceServer 
 {   
-    protected final Integer hash = 0x888fe8;        
+    protected final Integer hash = 0x00888fe8;        
 
     public static void main(String...args)
     {
@@ -26,18 +26,33 @@ public class Echoserver extends AbstractResourceServer
         super(host, port);
     }
 
+    /**
+     * 
+     * @param servercontext
+     * @return 
+     */
     @Override
     public Boolean dovalidateresourcecontext(ServerContext servercontext)
     {
         return true;
     }
 
+    /**
+     * 
+     * @param connectioncontext
+     * @throws Exception 
+     */
     @Override
     public void processprotocol(ServerContext connectioncontext) throws Exception
     {
         return;
     }
 
+    /**
+     * 
+     * @param connectioncontext
+     * @throws Exception 
+     */
     @Override
     public void processrequest(ServerContext connectioncontext) throws Exception
     {
@@ -46,6 +61,11 @@ public class Echoserver extends AbstractResourceServer
         connectioncontext.resourcecontext.value = connectioncontext.inputstring;                
     }
 
+    /**
+     * 
+     * @param connectioncontext
+     * @throws Exception 
+     */
     @Override
     public void processsesponse(ServerContext connectioncontext) throws Exception
     {

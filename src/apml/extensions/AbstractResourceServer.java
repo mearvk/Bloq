@@ -1,5 +1,6 @@
 package apml.extensions;
 
+import apml.annotations.BloqExtension;
 import apml.system.bodi.Bodi;
 
 import java.util.Collection;
@@ -148,6 +149,7 @@ public abstract class AbstractResourceServer extends AbstractBaseServer
      * 
      * @return TRUE is underlying network context is not null, has some ready input and the network connection (socket) is not disconnected but connected and open; FALSE otherwise.
      */
+    @BloqExtension
     public Boolean dovalidatenetworkcontext(NetworkContext networkcontext)
     {
         return networkcontext!=null && networkcontext.inputqueueisready() && networkcontext.issocketconnected();
@@ -160,6 +162,7 @@ public abstract class AbstractResourceServer extends AbstractBaseServer
      * 
      * @return TRUE if ResourceContext is valid by these requirements; FALSE otherwise.
      */
+    @BloqExtension
     public abstract Boolean dovalidateresourcecontext(ServerContext servercontext);
     
     /**
@@ -387,6 +390,7 @@ public abstract class AbstractResourceServer extends AbstractBaseServer
      * @param connectioncontext
      * @throws Exception 
      */
+    @BloqExtension
     public abstract void processprotocol(ServerContext connectioncontext) throws Exception;
 
     /**
@@ -394,6 +398,7 @@ public abstract class AbstractResourceServer extends AbstractBaseServer
      * @param connectioncontext
      * @throws Exception 
      */
+    @BloqExtension
     public abstract void processrequest(ServerContext connectioncontext) throws Exception;
     
     /**

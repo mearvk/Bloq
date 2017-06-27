@@ -92,6 +92,18 @@ public class Networkcontext
      */
     public Boolean processresponse(Bodiservercontext connectioncontext)                
     {
+        if(connectioncontext.bodicontext.operation.equals("//exit"))
+        {
+            try
+            {
+                connectioncontext.networkcontext.close(connectioncontext);
+            }
+            catch(Exception e)
+            {
+                //
+            }
+        }
+        
         //set output buffer, flag, and bodi object reference into the output queue
         
         connectioncontext.networkcontext.outqueue.append(connectioncontext.bodicontext.toString());
@@ -100,7 +112,7 @@ public class Networkcontext
                         
         connectioncontext.networkcontext.thread.outputlistenerthread.haswriteready = true;                                                
                             
-        //connectioncontext.networkcontext.inqueue = connectioncontext.networkcontext.inqueue.delete(0, connectioncontext.inputstring.length());      
+        //connectioncontext.networkcontext.inqueue = connectioncontext.networkcontext.inqueue.delete(0, connectioncontext.inputstring.length());               
         
         return true;
     }
@@ -112,7 +124,7 @@ public class Networkcontext
      * @throws Exception 
      */
     public Boolean close(Bodiservercontext connectioncontext) throws Exception
-    {
+    {               
         this.socket.close();
         
         return false;

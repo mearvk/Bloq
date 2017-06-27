@@ -165,7 +165,7 @@ public final class Bloqapmlpopulator
             
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                        
             
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}            
             
@@ -385,7 +385,7 @@ public final class Bloqapmlpopulator
             
             try{modelfile.classname=this.getclassname(xparam, index);}                          catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
-            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                                                
+            try{modelfile.defaultdir=this.getdefaultdir(xparam, index);}                        catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                
             
             try{modelfile.id=this.getidtag(xparam, index);}                                     catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}                       
             
@@ -917,6 +917,6 @@ public final class Bloqapmlpopulator
             throw new NullPointerException("No tag name found");                    
         }
         
-        return xparam.n0012_superclass.item(index).getNodeName();
+        return xparam.n0012_superclass.item(index).getNodeValue();
     }             
 }

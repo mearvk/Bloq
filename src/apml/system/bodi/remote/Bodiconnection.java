@@ -103,7 +103,7 @@ public class Bodiconnection
             if(this.gettimetolive()<=0) protocol = "//other"; //send an other reply for errant bodi request
             
             switch(protocol)
-            {
+            {                
                 case "//close":
 
                     connectioncontext.bodicontext.processcloserequest(connectioncontext);
@@ -111,6 +111,14 @@ public class Bodiconnection
                     connectioncontext.bodicontext.processcloseresponse(connectioncontext); 
 
                     break;
+                    
+                case "//exit":
+
+                    connectioncontext.bodicontext.processexitrequest(connectioncontext);
+
+                    connectioncontext.bodicontext.processexitresponse(connectioncontext); 
+
+                    break;                    
 
                 case "//handshake": 
 
@@ -187,8 +195,7 @@ public class Bodiconnection
         }        
         
         return this.object == null;
-    }    
-    
+    }        
         
     /**
      *      * 
@@ -203,6 +210,8 @@ public class Bodiconnection
         
         bodiservercontext.bodicontext.result = "";
         
+        //
+        
         bodiservercontext.bodicontext.cause = null;
         
         bodiservercontext.bodicontext.message = null;
@@ -211,7 +220,128 @@ public class Bodiconnection
         
         return false | true;
     }
+    
+    /**
+     * 
+     * @param connectioncontext
+     * @return
+     * @throws Exception 
+     */
+    public Bodiconnection processcloserequest(Bodiservercontext connectioncontext) throws Exception
+    {               
+        Bodiconnection bodiconnection = connectioncontext.bodicontext;                           
+        
+        bodiconnection.operation = "//close";
+        
+        bodiconnection.getsessionid();
+        
+        bodiconnection.gettimetolive();                       
+        
+        return bodiconnection;
+    }    
+    
+    /**
+     * 
+     * @param connectioncontext
+     * @return 
+     */
+    public Boolean processcloseresponse(Bodiservercontext connectioncontext)
+    {
+        this.islive = false;       
+        
+        if(Bodi.hascontextat(connectioncontext.getcontext(connectioncontext)))
+        {
+            try
+            {
+                Bodi.removecontext(connectioncontext.getcontext(connectioncontext));
+                
+                connectioncontext.bodicontext.result = "success";
+                
+                connectioncontext.bodicontext.message = "context closed";
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace(System.err);
+            }
+        }
+        else
+        {
+            connectioncontext.bodicontext.result = "failure";
+        
+            connectioncontext.bodicontext.cause = "no such open context";            
+        }        
+        
+        return false;
+    }    
+    
+    /**
+     * 
+     * @param connectioncontext
+     * @return 
+     */
+    public Boolean processexitrequest(Bodiservercontext connectioncontext)
+    {
+        this.islive = false;       
 
+        connectioncontext.bodicontext.result = "";
+        
+        connectioncontext.bodicontext.message = "";
+        
+        return false;
+    }    
+    
+    /**
+     * 
+     * @param connectioncontext
+     * @return 
+     */
+    public Boolean processexitresponse(Bodiservercontext connectioncontext)
+    {
+        connectioncontext.bodicontext.result = "connection closed";
+        
+        connectioncontext.bodicontext.message = "good bye";
+        
+        return false;
+    }    
+    
+    /**
+     * New handshakes should return new Bodiconnection instances with unique sessionid values
+     * 
+     * Existing Bodiconnections should return updated TTLs possibly more.
+     * 
+     * @param connectioncontext
+     * @return 
+     */
+    public Bodiconnection processhandshakerequest(Bodiservercontext connectioncontext) throws Exception
+    {
+        Bodiconnection bodiconnection = connectioncontext.bodicontext;
+        
+        bodiconnection.operation = "//handshake";
+        
+        bodiconnection.getsessionid();
+        
+        bodiconnection.gettimetolive();                        
+        
+        return bodiconnection;
+    }    
+    
+    /**
+     * New handshakes should return new Bodiconnection instances with unique sessionid values
+     * 
+     * Existing Bodiconnections should return updated TTLs possibly more.
+     * 
+     * @param connectioncontext
+     * @return 
+     */
+    public Boolean processhandshakeresponse(Bodiservercontext connectioncontext) throws Exception
+    {
+        connectioncontext.bodicontext.result = "success";
+        
+        connectioncontext.bodicontext.message = "welcome";
+        
+        return false;
+    }               
+    
     /**
      * 
      * @param connectioncontext
@@ -259,54 +389,26 @@ public class Bodiconnection
         }
         
         return connectioncontext.bodicontext;
-    }
+    }    
     
     /**
+     * Will connect a persistent context to a Bodiremoteserver without key/value pair
      * 
      * @param connectioncontext
-     * @return 
+     * @return
+     * @throws Exception 
      */
-    public Boolean processcloseresponse(Bodiservercontext connectioncontext)
-    {
-        this.islive = false;       
+    public Bodiconnection processopenrequest(Bodiservercontext connectioncontext) throws Exception
+    {        
+        Bodiconnection bodiconnection = connectioncontext.bodicontext;                                                  
         
-        if(Bodi.hascontextat(connectioncontext.getcontext(connectioncontext)))
-        {
-            try
-            {
-                Bodi.removecontext(connectioncontext.getcontext(connectioncontext));
-                
-                connectioncontext.bodicontext.result = "success";
-                
-                connectioncontext.bodicontext.message = "context closed";
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace(System.err);
-            }
-        }
-        else
-        {
-            connectioncontext.bodicontext.result = "failure";
+        bodiconnection.operation = "//open";
         
-            connectioncontext.bodicontext.cause = "no such open context";            
-        }        
+        bodiconnection.getsessionid();
         
-        return false;
-    }
-    
-    /**
-     * 
-     * @param connectioncontext
-     * @return 
-     */
-    public Boolean processhandshakeresponse(Bodiservercontext connectioncontext)
-    {
-        connectioncontext.bodicontext.result = "success";
+        bodiconnection.gettimetolive();                                        
         
-        connectioncontext.bodicontext.message = "welcome";
-        
-        return false;
+        return bodiconnection;
     }    
     
     /**
@@ -336,7 +438,7 @@ public class Bodiconnection
             
             return true;
         }                
-    } 
+    }     
     
     /**
      * 
@@ -377,7 +479,32 @@ public class Bodiconnection
         {
             return false;
         }
-    }
+    }    
+    
+    /**
+     * 
+     * @param connectioncontext
+     * @return
+     * @throws Exception 
+     */
+    public Bodiconnection processpullrequest(Bodiservercontext connectioncontext) throws Exception
+    {
+        Bodiconnection bodiconnection = connectioncontext.bodicontext;                                      
+        
+        bodiconnection.operation = "//pull";
+        
+        bodiconnection.getsessionid();
+        
+        bodiconnection.gettimetolive();                
+        
+        //---------------------------------------------------------------------//
+        
+        bodiconnection.key = this.stripforkey(connectioncontext);
+        
+        bodiconnection.context = this.stripforcontext(connectioncontext);             
+        
+        return bodiconnection;
+    }    
     
     /**
      * 
@@ -432,107 +559,7 @@ public class Bodiconnection
         String value = connectioncontext.bodicontext.value;        
         
         return true;
-    }    
-
-    /**
-     * 
-     * @param connectioncontext
-     * @return 
-     */
-    public Boolean processtouchresponse(Bodiservercontext connectioncontext)
-    {
-        String _context = this.stripforcontext(connectioncontext);
-        
-        if(Bodi.hascontextat(_context))
-        {
-            connectioncontext.bodicontext.result = "success";
-            
-            connectioncontext.bodicontext.message = "touched";
-        }
-        else
-        {
-            connectioncontext.bodicontext.result = "failure";
-            
-            connectioncontext.bodicontext.cause = "no such context";
-        }
-        
-        return true | false;
-    }     
-    
-    /**
-     * 
-     * @param connectioncontext
-     * @return 
-     */
-    public Boolean processtraderesponse(Bodiservercontext connectioncontext)
-    {
-        String context1 = connectioncontext.bodicontext.context;
-        
-        Object abject1 = Bodi.context(context).pull("");
-                
-        Object abject2 = Bodi.context(context).pull("");
-        
-        return false;
     }        
-    
-    /**
-     * 
-     * @param connectioncontext
-     * @return
-     * @throws Exception 
-     */
-    public Bodiconnection processtouchrequest(Bodiservercontext connectioncontext) throws Exception
-    {
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;        
-        
-        bodiconnection.operation = "//touch";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                        
-        
-        return bodiconnection;
-    }
-    
-/**
-     * New handshakes should return new Bodiconnection instances with unique sessionid values
-     * 
-     * Existing Bodiconnections should return updated TTLs possibly more.
-     * 
-     * @param connectioncontext
-     * @return 
-     */
-    public Bodiconnection processhandshakerequest(Bodiservercontext connectioncontext) throws Exception
-    {
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;
-        
-        bodiconnection.operation = "//handshake";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                        
-        
-        return bodiconnection;
-    }
-    
-    /**
-     * 
-     * @param connectioncontext
-     * @return
-     * @throws Exception 
-     */
-    public Bodiconnection processcloserequest(Bodiservercontext connectioncontext) throws Exception
-    {               
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;                           
-        
-        bodiconnection.operation = "//close";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                       
-        
-        return bodiconnection;
-    }
     
     /**
      * 
@@ -589,7 +616,32 @@ public class Bodiconnection
         }
         
         return bodiconnection;
-    }
+    }    
+             
+     /**
+     * 
+     * @param connectioncontext
+     * @return 
+     */
+    public Boolean processtouchresponse(Bodiservercontext connectioncontext)
+    {
+        String _context = this.stripforcontext(connectioncontext);
+        
+        if(Bodi.hascontextat(_context))
+        {
+            connectioncontext.bodicontext.result = "success";
+            
+            connectioncontext.bodicontext.message = "touched";
+        }
+        else
+        {
+            connectioncontext.bodicontext.result = "failure";
+            
+            connectioncontext.bodicontext.cause = "no such context";
+        }
+        
+        return true | false;
+    }        
     
     /**
      * 
@@ -597,57 +649,36 @@ public class Bodiconnection
      * @return
      * @throws Exception 
      */
-    public Bodiconnection processpullrequest(Bodiservercontext connectioncontext) throws Exception
+    public Bodiconnection processtouchrequest(Bodiservercontext connectioncontext) throws Exception
     {
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;                                      
+        Bodiconnection bodiconnection = connectioncontext.bodicontext;        
         
-        bodiconnection.operation = "//pull";
+        bodiconnection.operation = "//touch";
         
         bodiconnection.getsessionid();
         
-        bodiconnection.gettimetolive();                
-        
-        //---------------------------------------------------------------------//
-        
-        bodiconnection.key = this.stripforkey(connectioncontext);
-        
-        bodiconnection.context = this.stripforcontext(connectioncontext);             
+        bodiconnection.gettimetolive();                        
         
         return bodiconnection;
-    }
-    
-    /**
-     * Will connect a persistent context to a Bodiremoteserver without key/value pair
-     * 
-     * @param connectioncontext
-     * @return
-     * @throws Exception 
-     */
-    public Bodiconnection processopenrequest(Bodiservercontext connectioncontext) throws Exception
-    {        
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;                                                  
-        
-        bodiconnection.operation = "//open";
-        
-        bodiconnection.getsessionid();
-        
-        bodiconnection.gettimetolive();                                        
-        
-        return bodiconnection;
-    }
+    }  
     
     /**
      * 
      * @param connectioncontext
-     * @return
-     * @throws Exception 
+     * @return 
      */
-    public Bodiconnection processotherrequest(Bodiservercontext connectioncontext) throws Exception
+    public Boolean processtraderesponse(Bodiservercontext connectioncontext)
     {
-        return connectioncontext.bodicontext;
-    }
+        String context1 = connectioncontext.bodicontext.context;
+        
+        Object abject1 = Bodi.context(context).pull("");
+                
+        Object abject2 = Bodi.context(context).pull("");
+        
+        return false;
+    }            
     
-    /**
+     /**
      * 
      * @param connectioncontext
      * @return
@@ -668,7 +699,20 @@ public class Bodiconnection
         //bodiconnection.getresult();
         
         return bodiconnection;
+    }  
+        
+    /**
+     * 
+     * @param connectioncontext
+     * @return
+     * @throws Exception 
+     */
+    public Bodiconnection processotherrequest(Bodiservercontext connectioncontext) throws Exception
+    {
+        return connectioncontext.bodicontext;
     }
+    
+
     
     /**
      * 
@@ -776,6 +820,8 @@ public class Bodiconnection
         
         return this.object = bodicarrier;
     }
+    
+    
     
     /**
      * 
