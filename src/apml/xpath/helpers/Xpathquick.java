@@ -5,8 +5,12 @@
  */
 package apml.xpath.helpers;
 
-import javax.xml.xpath.XPathConstants;
+import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
 
 /**
  * 
@@ -15,12 +19,24 @@ import org.w3c.dom.NodeList;
 public class Xpathquick
 {  
     protected final Integer hash = 0x888fe8;
-    
+
     /**
-     * 
+     *
+     * @param param
+     * @param xpath
+     * @return
+     * @throws Exception
+     */
+    public static NodeList evaluate(Document doc, XPath xpath, String param) throws Exception {
+        XPathExpression expr = xpath.compile(param);
+
+        return (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+    }
+
+    /**
      * @param param
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     public static Xpathparameter evaluate(Xpathparameter param) throws Exception
     {  

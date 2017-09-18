@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/lib/Xerces-J-src.2.11.0.zip!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/codemodel-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/jnetpcap.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/roaster.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

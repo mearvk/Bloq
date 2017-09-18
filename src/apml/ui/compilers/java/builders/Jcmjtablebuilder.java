@@ -5,8 +5,12 @@
  */
 package apml.ui.compilers.java.builders;
 
-import java.io.File;
+import com.sun.codemodel.JCodeModel;
+
+import javax.swing.*;
 import javax.xml.xpath.XPathFactory;
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,17 +18,19 @@ import javax.xml.xpath.XPathFactory;
  */
 public class Jcmjtablebuilder extends Jcmabstractbuilder
 {
-    public static void main(String...args)
+    protected final Integer hash = 0x00888FE8;
+
+    public Jcmjtablebuilder(File apml)
     {
-        //new Jcmjtablebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jtable", JTable.class);
-    }     
-    
-    public Jcmjtablebuilder(File apml, String tagname, Class classname)
-    {
-        super(apml, tagname, classname);
+        super(apml, "//jtable", JTable.class);
         
         this.apml = apml;
         
-        this.xpath = XPathFactory.newInstance().newXPath();            
-    }      
+        this.xpath = XPathFactory.newInstance().newXPath();
+    }
+
+    @Override
+    public ArrayList<JCodeModel> build() {
+        return super.build();
+    }
 }

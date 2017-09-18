@@ -11,7 +11,7 @@ import java.io.File;
  */
 public class Uifileguardian
 {
-    protected final Integer hash = 0x00888fe8;
+    protected final Integer hash = 0x00888FE8;
     
     public File xmlin;
     
@@ -21,7 +21,7 @@ public class Uifileguardian
     {
         try
         {
-            this.xmlin = new File("/home/oem/Desktop/UI/UI 2.xml");    
+            this.xmlin = new File("/Users/macuser/IdeaProjects/UI_0001/UserInterface.xml");
         }
         catch(Exception e)
         {
@@ -30,7 +30,7 @@ public class Uifileguardian
         
         try
         {
-            this.outputdir = new File("/home/oem/Desktop/UI");
+            this.outputdir = new File("/Users/macuser/Desktop/UI");
         }
         catch(Exception e)
         {

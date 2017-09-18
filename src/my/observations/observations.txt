@@ -1,3 +1,8 @@
+//sunday 335 pm est : beginning work alone because that's what we got; no worries
+
+foreach statement for nodelist should be writeable / submit that to oracle as bugfix
+
+
 /* should work but no allowance for such implementations*/
 /* java 9 & 10 should allow for multiple identical function names but with different exception handlings */
 /* @Override should allow for multiple identical functions within class with target keyword (see example below)*/

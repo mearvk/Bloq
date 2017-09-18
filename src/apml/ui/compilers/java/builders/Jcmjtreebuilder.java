@@ -1,27 +1,30 @@
 package apml.ui.compilers.java.builders;
 
-import java.io.File;
+import com.sun.codemodel.JCodeModel;
+
+import javax.swing.*;
 import javax.xml.xpath.XPathFactory;
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
  * @author max rupplin
  */
-public class Jcmjtreebuilder extends Jcmabstractbuilder
-{   
-    protected final Integer hash = 0x888fe8;
-    
-    public static void main(String...args)
+public class Jcmjtreebuilder extends Jcmabstractbuilder {
+    protected final Integer hash = 0x00888FE8;
+
+    public Jcmjtreebuilder(File apml)
     {
-        //new Jcmjtreebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jtree", JTree.class);
-    }     
-    
-    public Jcmjtreebuilder(File apml, String tagname, Class classname)
-    {
-        super(apml, tagname, classname);
+        super(apml, "//jtree", JTree.class);
         
         this.apml = apml;
         
-        this.xpath = XPathFactory.newInstance().newXPath();            
-    }    
+        this.xpath = XPathFactory.newInstance().newXPath();
+    }
+
+    @Override
+    public ArrayList<JCodeModel> build() {
+        return super.build();
+    }
 }

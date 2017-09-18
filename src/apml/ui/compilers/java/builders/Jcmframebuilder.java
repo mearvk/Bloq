@@ -1,31 +1,25 @@
 package apml.ui.compilers.java.builders;
 
 import com.sun.codemodel.JCodeModel;
-import java.awt.Frame;
+
+import javax.swing.*;
+import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.util.ArrayList;
-import javax.xml.xpath.XPathFactory;
 
 /**
  *
- * @author max rupplin
+ * @author Max Rupplin
  */
 public class Jcmframebuilder extends Jcmabstractbuilder
-{      
-    protected final Integer hash = 0x888fe8;
-    
-    public Class _class = Frame.class;
-    
-    public static void main(String...args)
+{
+    protected final Integer hash = 0x00888FE8;
+
+    public Jcmframebuilder(File file)
     {
-        //new Jcmframebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jframe", JFrame.class);
-    }    
-    
-    public Jcmframebuilder(File apml, String tagname, Class classname)
-    {
-        super(apml, tagname, classname);        
-        
-        this.apml = apml;
+        super(file, "//frame", JFrame.class);
+
+        this.apml = file;
         
         this.xpath = XPathFactory.newInstance().newXPath();          
     }    
@@ -33,6 +27,6 @@ public class Jcmframebuilder extends Jcmabstractbuilder
     @Override
     public ArrayList<JCodeModel> build()
     {
-        return super.build();        
+        return super.build();
     }
 }

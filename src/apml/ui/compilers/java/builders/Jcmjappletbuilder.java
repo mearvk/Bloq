@@ -1,30 +1,30 @@
 package apml.ui.compilers.java.builders;
 
-import java.io.File;
-import javax.swing.JApplet;
+import com.sun.codemodel.JCodeModel;
+
+import javax.swing.*;
 import javax.xml.xpath.XPathFactory;
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
  * @author max rupplin
  */
-public class Jcmjappletbuilder extends Jcmabstractbuilder
-{       
-    protected final Integer hash = 0x888fe8;
-    
-    public Class _class = JApplet.class;
-    
-    public static void main(String...args)
+public class Jcmjappletbuilder extends Jcmabstractbuilder {
+    protected final Integer hash = 0x00888FE8;
+
+    public Jcmjappletbuilder(File apml)
     {
-        //new Jcmjappletbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//japplet", JApplet.class);
-    }     
-    
-    public Jcmjappletbuilder(File apml, String tagname, Class classname)
-    {
-        super(apml, tagname, classname);
+        super(apml, "//japplet", JApplet.class);
         
         this.apml = apml;
         
         this.xpath = XPathFactory.newInstance().newXPath();            
+    }
+
+    @Override
+    public ArrayList<JCodeModel> build() {
+        return super.build();
     }
 }

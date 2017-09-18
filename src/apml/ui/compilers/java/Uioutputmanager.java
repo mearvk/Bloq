@@ -1,26 +1,16 @@
 package apml.ui.compilers.java;
 
 import apml.system.bodi.Bodi;
-
 import apml.ui.compilers.java.builders.Jcmabstractbuilder;
-
 import com.sun.codemodel.JCodeModel;
-
 import com.sun.codemodel.JMethod;
-
 import com.sun.codemodel.JMod;
-
-import java.io.File;
-
-import java.util.ArrayList;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.xpath.XPathConstants;
-
-import org.w3c.dom.NamedNodeMap;
-
-import org.w3c.dom.Node;
-
-import org.w3c.dom.NodeList;
+import java.util.ArrayList;
 
 
 /**
@@ -32,7 +22,7 @@ import org.w3c.dom.NodeList;
  */
 public class Uioutputmanager
 {
-    protected final Integer hash = 0x00888fe8;
+    protected final Integer hash = 0x00888FE8;
     
     public Uicompiler compiler;
     
@@ -53,7 +43,7 @@ public class Uioutputmanager
             for(JCodeModel jcodemodel : jcodemodels)
             {                  
                 Uiparameter uip = (Uiparameter)Bodi.context("widgets").pull(jcodemodel); 
-                
+
                 this.setuisetters(uip);
                 
                 this.setfields(uip);
@@ -82,8 +72,8 @@ public class Uioutputmanager
         /*---------------------------------------------------------------------*/
         
         uip.constructor2.javadoc().addParam("system : The APML system object.");
-        
-        uip.constructor2.javadoc().addParam("parent : The parent AWT object.");            
+
+        uip.constructor2.javadoc().addParam("parent : The parent AWT object.");
     }
     
     private void setlisteners(Uiparameter uip)
@@ -101,15 +91,32 @@ public class Uioutputmanager
             
             for(int i=0; i<children.getLength(); i++)
             {
-                new Jcmabstractbuilder().addListeners(uip, children.item(i));            
+                //send only children that are listener elements - quick check - handle 'listeners' on far end
+                if (children.item(i).getNodeName().equalsIgnoreCase("listener")) {
+                    //now sending children that are only UI elements
+                    new Jcmabstractbuilder().addListeners(uip, children.item(i), i);
+                }
             }
-            
             
             /*------------------------- Overridden Methods [handled by Jcmabstractbuilder now] --------------------------*/      
             
             for(int i=0; i<children.getLength(); i++)
             {
-                new Jcmabstractbuilder().addListenerMethods(uip, children.item(i));
+                //send only children that are UI elements - quick check - handle 'listeners' on far end
+                if (children.item(i).getNodeName().equalsIgnoreCase("listener")) {
+                    //now sending children that are only UI elements
+                    new Jcmabstractbuilder().addListenerMethods(uip, children.item(i), i);
+                }
+            }
+
+            /*------------------------- Listener Inner Class and/or Implementations [handled by Jcmabstractbuilder now] --------------------------*/
+
+            for (int i = 0; i < children.getLength(); i++) {
+                //send only children that are UI elements - quick check - handle 'listeners' on far end
+                if (children.item(i).getNodeName().equalsIgnoreCase("listener")) {
+                    //now sending children that are only UI elements
+                    new Jcmabstractbuilder().addListenerClasses(uip, children.item(i));
+                }
             }
         }
         catch(Exception exception)
@@ -131,38 +138,57 @@ public class Uioutputmanager
             for(int i=0; i<attribs.getLength(); i++)
             {
                 Node attribute = attribs.item(i);
-                
-                if(attribute.getNodeName().startsWith("setAccelerator"))
+
+                if (attribute.getNodeName().equalsIgnoreCase("setAccelerator"))
                 {
                     String string = "this.setAccelerator(KeyStroke.getKeyStroke("+attribute.getNodeName()+"));";
                     
                     uip.constructor1.body().directStatement("this.setAccelerator(KeyStroke.getKeyStroke("+string+"));\n\t");
+
                     uip.constructor2.body().directStatement("this.setAccelerator(KeyStroke.getKeyStroke("+string+"));\n\t");
                     
                     continue;
                 }
-                
-                if(attribute.getNodeName().startsWith("setIconAt"))
+
+                if (attribute.getNodeName().equalsIgnoreCase("setBounds")) {
+                    String prestring;
+
+                    prestring = attribute.getNodeValue().replace(":", ","); //move colons (:) to commas (,)
+
+                    prestring = prestring.replace("px", ""); //move pixel (px) notation out completely
+
+                    String string = "this.setBounds(" + prestring + ");\n\t";
+
+                    uip.constructor1.body().directStatement(string);
+
+                    uip.constructor2.body().directStatement(string);
+
+                    continue;
+                }
+
+                if (attribute.getNodeName().equalsIgnoreCase("setIconAt"))
                 {
                     String string = "this.setIconAt(\""+attribute.getNodeValue()+"\");\n\t";
                     
                     uip.constructor1.body().directStatement(string);
+
                     uip.constructor2.body().directStatement(string);
                     
                     continue;
-                }                 
-                
-                if(attribute.getNodeName().startsWith("setIcon"))
+                }
+
+                if (attribute.getNodeName().equalsIgnoreCase("setIcon"))
                 {
                     String string = "this.setIcon(\""+attribute.getNodeValue()+"\");\n\t";
                     
                     uip.constructor1.body().directStatement(string);
+
                     uip.constructor2.body().directStatement(string);
                     
                     continue;
-                }                
-                
-                if(attribute.getNodeName().startsWith("setLabel"))
+                }
+
+                if (attribute.getNodeName().equalsIgnoreCase("setLabel"))
                 {
                     String string = "this.setLabel(\""+attribute.getNodeValue()+"\");\n\t";
                     
@@ -170,9 +196,9 @@ public class Uioutputmanager
                     uip.constructor2.body().directStatement(string);
                     
                     continue;
-                } 
-                
-                if(attribute.getNodeName().startsWith("setName"))
+                }
+
+                if (attribute.getNodeName().equalsIgnoreCase("setName"))
                 {
                     String string = "this.setName(\""+attribute.getNodeValue()+"\");\n\t";
                     
@@ -180,9 +206,9 @@ public class Uioutputmanager
                     uip.constructor2.body().directStatement(string);
                     
                     continue;
-                }     
-                
-               if(attribute.getNodeName().startsWith("setText"))
+                }
+
+                if (attribute.getNodeName().equalsIgnoreCase("setText"))
                 {
                     String string = "this.setText(\""+attribute.getNodeValue()+"\");\n\t";
                     
@@ -190,9 +216,9 @@ public class Uioutputmanager
                     uip.constructor2.body().directStatement(string);
                     
                     continue;
-                }                
-                
-                if(attribute.getNodeName().startsWith("setTitle"))
+                }
+
+                if (attribute.getNodeName().equalsIgnoreCase("setTitle"))
                 {
                     String string = "this.setTitle(\""+attribute.getNodeValue()+"\");\n\t";
                     
@@ -200,9 +226,9 @@ public class Uioutputmanager
                     uip.constructor2.body().directStatement(string);
                     
                     continue;
-                }    
-                
-                if(attribute.getNodeName().startsWith("setToolTipText"))
+                }
+
+                if (attribute.getNodeName().equalsIgnoreCase("setToolTipText"))
                 {
                     String string = "this.setToolTipText(\""+attribute.getNodeValue()+"\");\n\t";
                     
@@ -210,9 +236,12 @@ public class Uioutputmanager
                     uip.constructor2.body().directStatement(string);
                     
                     continue;
-                }             
-                
-                if(attribute.getNodeName().startsWith("setSize"))
+                }
+
+                /**
+                 * This will set size via getPreferredSize, not some other thing.
+                 */
+                if (attribute.getNodeName().equalsIgnoreCase("setSize"))
                 {                  
                     JMethod method;
                     
@@ -313,9 +342,9 @@ public class Uioutputmanager
                     }
                     
                     continue;
-                }                  
-                
-                if(attribute.getNodeName().startsWith("setBackgroundImage"))
+                }
+
+                if (attribute.getNodeName().equalsIgnoreCase("setBackgroundImage"))
                 {
                     String string = "this.backgroundimagename = \""+uip.backgroundimagename+"\";\n\t";
                     
@@ -391,23 +420,29 @@ public class Uioutputmanager
             for(int i=0; i<children.getLength(); i++)                           
             {       
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
-                
+
+                if (uipi == null) continue; //verify correctness
+
                 new Jcmabstractbuilder().addListenerFields(uip, children.item(i));
             }
 
             
-            /*-----------------------------------------------------------------*/            
-            
+            /*-----------------------------------------------------------------*/
+
+            uip.jdc.direct("\n");
+
             for(int i=0; i<children.getLength(); i++)
             {
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
-                
-                uip.jdc.direct("\t"+uipi.classname+" "+uipi.instancename+";\n\n");
+
+                if (uipi == null) continue; //verify correctness
+
+                uip.jdc.direct("    " + uipi.classname + " " + uipi.instancename + ";\n");
             }
         }
         catch(Exception exception)
         {
-            
+            exception.printStackTrace();
         }
     }
     
@@ -418,10 +453,10 @@ public class Uioutputmanager
     private void setdevolvement(Uiparameter uip)
     {        
         try
-        {                                       
-            uip.jdc.direct("\tpublic Component parent;\n\n");
-            
-            uip.jdc.direct("\tpublic Apmlsystem system;\n");
+        {
+            uip.jdc.field(JMod.PUBLIC, java.awt.Component.class, "parent");
+
+            uip.jdc.field(JMod.PUBLIC, apml.system.Apmlsystem.class, "system");
         }
         catch(Exception exception)
         {
@@ -463,33 +498,27 @@ public class Uioutputmanager
         
         uip.constructor2.body().directStatement("/* ------------------  instantiation  ---------------- */\n\t");
         
-        
         if(uip.children==null) return;
-        
-        
+
         /*---------------------------------------------------------------------*/
-                
-        for(int i=0; i<uip.children.getLength(); i++)
-        {               
-            Uiparameter child = (Uiparameter)Bodi.context("widgets").softpull(uip.children.item(i)); 
-            
+
+        for(int i=0; i<uip.children.getLength(); i++) {
+            Uiparameter uipi = (Uiparameter) Bodi.context("widgets").softpull(uip.children.item(i));
+
             //safety check
-            if(child==null) return;
-            
-            uip.constructor1.body().directStatement("this."+child.classname.toLowerCase()+" = new "+child.classname+"(this);\n\t");
-            
-            uip.constructor2.body().directStatement("this."+child.classname.toLowerCase()+" = new "+child.classname+"(this);\n\t");            
-            
+            if (uipi == null) continue;
+
+            uip.constructor1.body().directStatement("this." + uipi.classname.toLowerCase() + " = new " + uipi.classname + "(this);\n\t");
+
+            uip.constructor2.body().directStatement("this." + uipi.classname.toLowerCase() + " = new " + uipi.classname + "(this);\n\t");
+
         }
-        
-        
-        /*---------------------------------------------------------------------*/        
-        
+            /*---------------------------------------------------------------------*/
+
         //listener instantiation
-        for(int i=0; i<uip.children.getLength(); i++)
-        {                
+        for(int i=0; i<uip.children.getLength(); i++) {
             new Jcmabstractbuilder().addListenerInstantiation(uip, uip.children.item(i));
-        }              
+        }
     }
        
     private void dohierarchy(Uiparameter uip)
@@ -505,7 +534,7 @@ public class Uioutputmanager
             Uiparameter child = (Uiparameter)Bodi.context("widgets").softpull(uip.children.item(i));
             
             //safety check
-            if(child==null) return;
+            if (child == null) continue;
                         
             String parentclassname = uip.classname;
             
@@ -516,16 +545,18 @@ public class Uioutputmanager
             //jframe as parent etc
             if(childsuperclass.contains("JMenuBar"))            
             {
-                uip.constructor1.body().directStatement("this.setJMenuBar("+childfieldname+");\n\t"); 
+                uip.constructor1.body().directStatement("this.setJMenuBar(" + childfieldname + ");\n\t");
+
                 uip.constructor2.body().directStatement("this.setJMenuBar("+childfieldname+");\n\t");
                 
                 continue;                
             }                        
 
             //else a more standard case
-            if(!childsuperclass.contains("JMenuBar"))
+            else
             {
                 uip.constructor1.body().directStatement("this.add("+childfieldname+");\n\t");
+
                 uip.constructor2.body().directStatement("this.add("+childfieldname+");\n\t");
                 
                 continue;

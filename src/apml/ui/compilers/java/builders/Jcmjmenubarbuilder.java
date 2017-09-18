@@ -1,61 +1,31 @@
 package apml.ui.compilers.java.builders;
 
-import apml.ui.compilers.java.Uiparameter;
-import java.io.File;
+import com.sun.codemodel.JCodeModel;
+
+import javax.swing.*;
 import javax.xml.xpath.XPathFactory;
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
  * @author max rupplin
  */
-public class Jcmjmenubarbuilder extends Jcmabstractbuilder
-{        
-    public static void main(String...args)
+public class Jcmjmenubarbuilder extends Jcmabstractbuilder {
+    protected final Integer hash = 0x00888FE8;
+
+    public Jcmjmenubarbuilder(File apml)
     {
-        //new Jcmjmenubarbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jmenubar", JMenuBar.class);
-    }     
-    
-    public Jcmjmenubarbuilder()
-    {
-        
-    }
-    
-    public Jcmjmenubarbuilder(File apml, String tagname, Class classname)
-    {
-        super(apml, tagname, classname);
+        super(apml, "//jmenubar", JMenuBar.class);
                 
         this.apml = apml;
         
-        this.xpath = XPathFactory.newInstance().newXPath();            
-    }    
-    
-    public void addListeners(Uiparameter uip)
-    {
-        try
-        {
-            String instancename = uip.instancename;
-                
-            String listener = instancename+"_componentelistener";       
-                
-            uip.constructor1.body().directStatement("this."+instancename+".addComponentListener("+listener+");\n\t");
-                    
-            uip.constructor2.body().directStatement("this."+instancename+".addComponentListener("+listener+");\n\t");                                                    
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        this.xpath = XPathFactory.newInstance().newXPath();
     }
-    
-    public void addListenerMethods(Uiparameter uip)
+
+    @Override
+    public ArrayList<JCodeModel> build()
     {
-        try
-        {
-            
-        }
-        catch(Exception e)
-        {
-            
-        }
+        return super.build();
     }
 }

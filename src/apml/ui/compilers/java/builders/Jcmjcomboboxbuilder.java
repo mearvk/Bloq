@@ -1,47 +1,30 @@
 package apml.ui.compilers.java.builders;
 
 import apml.system.bodi.Bodi;
-
 import apml.system.bodi.Bodicontext;
-
 import apml.ui.compilers.java.Uiparameter;
-
 import com.sun.codemodel.JCodeModel;
-
 import com.sun.codemodel.JMethod;
-
-import java.io.File;
-
-import java.util.ArrayList;
-
-import java.util.Iterator;
-
-import javax.swing.JComboBox;
-
-import javax.xml.xpath.XPathConstants;
-
-import javax.xml.xpath.XPathFactory;
-
 import org.w3c.dom.Element;
-
 import org.w3c.dom.NodeList;
+
+import javax.swing.*;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
  * @author Max Rupplin
  */
-public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
-{       
-    public Class _class = JComboBox.class;
-    
-    public static void main(String...args)
+public class Jcmjcomboboxbuilder extends Jcmabstractbuilder {
+    protected final Integer hash = 0x00888FE8;
+
+    public Jcmjcomboboxbuilder(File apml)
     {
-        //new Jcmjcomboboxbuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jcombobox", JComboBox.class);
-    }     
-    
-    public Jcmjcomboboxbuilder(File apml, String tagname, Class classname)
-    {
-        super(apml, tagname, classname);
+        super(apml, "//jcombobox", JComboBox.class);
     
         this.apml = apml;
         

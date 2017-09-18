@@ -1,80 +1,72 @@
 package apml.ui.compilers.java.builders;
 
 import apml.system.bodi.Bodi;
-import apml.system.bodi.Bodicontext;
 import apml.ui.compilers.java.Uiparameter;
-import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JCodeModel;
-import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JMod;
-import java.io.File;
-import java.util.ArrayList;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import javax.swing.*;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
  * @author Max Rupplin
  */
-public class Jcmjtabbedpanebuilder extends Jcmabstractbuilder
-{   
-    public static void main(String...args)
+public class Jcmjtabbedpanebuilder extends Jcmabstractbuilder {
+    protected final Integer hash = 0x00888FE8;
+
+    public Jcmjtabbedpanebuilder(File apml)
     {
-        //new Jcmjtabbedpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jtabbedpane", JTabbedPane.class);
-    }     
-    
-    public Jcmjtabbedpanebuilder()
-    {
-        
-    }
-    
-    public Jcmjtabbedpanebuilder(File apml, String tagname, Class classname)
-    {
-        super(apml, tagname, classname);
+        super(apml, "//jtabbedpane", JTabbedPane.class);
         
         this.apml = apml;
         
-        this.xpath = XPathFactory.newInstance().newXPath();            
-    }    
-    
+        this.xpath = XPathFactory.newInstance().newXPath();
+    }
+
     @Override
     public ArrayList<JCodeModel> build()
     {
-        super.build();
-                       
-        try
-        {  
-            Bodicontext widgets = Bodi.context("widgets");
-            
-            for(int index=0; index<nodes.getLength(); index++)
-            {                                  
-                Uiparameter uip = (Uiparameter)widgets.pull(this.jcodemodels.get(index)); 
-                                
-                this.addtabs(uip);
-                
-                this.setSelected(uip);
-            }
-        }
-        catch(Exception exception)
-        {
-            exception.printStackTrace();
+        ArrayList<JCodeModel> retval = super.build();
+
+        NodeList nodes;
+
+        for (JCodeModel model : retval) {
+            Uiparameter uip = (Uiparameter) Bodi.context("widgets").pull(model);
+
+            //
+
+            this.addTabs(uip);
+
+            this.setSelected(uip);
+
+            this.addDefaultListener(uip);
         }
 
         return jcodemodels;
     }
-    
+
+    /**
+     * @param uip
+     */
     private void setSelected(Uiparameter uip)
     {
-        //may not need at yet
+        //may not need as of yet
     }
-    
-    private void addtabs(Uiparameter uip)
-    {
-        uip.constructor1.body().directStatement("/*------------------------ tab items -------------------*/");
-        uip.constructor2.body().directStatement("/*------------------------ tab items -------------------*/");
-        
+
+    /**
+     *
+     * @param uip
+     */
+    private void addTabs(Uiparameter uip) {
+        uip.constructor1.body().directStatement("/*---------------------- tab items -------------------*/");
+
+        uip.constructor2.body().directStatement("/*---------------------- tab items -------------------*/");
+
         try
         {
             NodeList nodes = (NodeList)this.xpath.evaluate("./tab", uip.node, XPathConstants.NODESET);
@@ -105,45 +97,59 @@ public class Jcmjtabbedpanebuilder extends Jcmabstractbuilder
             exception.printStackTrace();
         }        
     }
-    
-    public void addListeners(Uiparameter uip)
-    {
+
+    /**
+     *
+     * @param uip
+     */
+    public void addDefaultListener(Uiparameter uip) {
+        NodeList children = uip.element.getChildNodes();
+
+        for (int i = 0; i < children.getLength(); i++) {
+            if (!(children.item(i) instanceof Element)) continue;
+
+            Element e = (Element) children.item(i);
+
+            if (e.getTagName().toLowerCase().trim().equalsIgnoreCase("listener")) {
+                if (!e.getAttribute("type").isEmpty()) {
+                    if (e.getAttribute("type").trim().toLowerCase().equalsIgnoreCase("changelistener")) {
+                        return;
+                    }
+                }
+            }
+        }
+
+        //manually add this here; outputmanager is too late (fix me?)
+
         try
         {
-            String instancename = uip.instancename;
-                
-            String listener = instancename+"_changelistener";       
-                
-            uip.constructor1.body().directStatement("this."+instancename+".addChangeListener("+listener+");\n\t");
-            uip.constructor2.body().directStatement("this."+instancename+".addChangeListener("+listener+");\n\t");                                           
+            uip.jdc._implements(Class.forName("javax.swing.event.ChangeListener"));
+
+            uip.jdc.direct("\n");
+
+            uip.jdc.direct("    public void stateChanged(ChangeEvent ce) {\n");
+
+            uip.jdc.direct("    \tSystem.out.println(\"Event Source: \"+ce.getSource());\n");
+
+            uip.jdc.direct("    }\n");
         }
         catch(Exception e)
         {
-            
+            e.printStackTrace();
         }
-    }
-    
-    public void addListenerMethods(Uiparameter uip)
-    {
-        try
-        {
-            String nestedlistenerclass = classname+"_ChangeListener";                                                               
 
-            JDefinedClass nestedclass = uip.jdc._class(JMod.PRIVATE | JMod.FINAL, nestedlistenerclass, ClassType.CLASS);
+        //for output manager we still must set an XML <listener> reference for the /listener fill in constructor (ok for now)
 
-            nestedclass._implements(Class.forName("javax.swing.event.ChangeListener"));
+        Element e;
 
-            nestedclass.direct("public void stateChanged(ChangeEvent ce)\n\t");
+        e = uip.doc.createElement("listener");
 
-            nestedclass.direct("{\n\t");
+        e.setAttribute("type", "changelistener");
 
-            nestedclass.direct("\tSystem.out.println(\"Event Source: \"+ce.getSource());\n\t");
+        e.setAttribute("studmethod", "true");
 
-            nestedclass.direct("}\n\t");                    
-        }
-        catch(Exception e)
-        {
-            
-        }        
+        e.setAttribute("class", "inherited");
+
+        uip.element.appendChild(e);
     }
 }

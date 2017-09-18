@@ -1,25 +1,30 @@
 package apml.ui.compilers.java.builders;
 
-import java.io.File;
+import com.sun.codemodel.JCodeModel;
+
+import javax.swing.*;
 import javax.xml.xpath.XPathFactory;
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
  * @author max rupplin
  */
-public class Jcmjtextpanebuilder extends Jcmabstractbuilder
-{    
-    public static void main(String...args)
+public class Jcmjtextpanebuilder extends Jcmabstractbuilder {
+    protected final Integer hash = 0x00888FE8;
+
+    public Jcmjtextpanebuilder(File apml)
     {
-        //new Jcmjtextpanebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jtextpane", JTextPane.class);
-    }     
-    
-    public Jcmjtextpanebuilder(File apml, String tagname, Class classname)
-    {
-        super(apml, tagname, classname);
+        super(apml, "//jtextpane", JTextPane.class);
         
         this.apml = apml;
         
-        this.xpath = XPathFactory.newInstance().newXPath();            
-    }    
+        this.xpath = XPathFactory.newInstance().newXPath();
+    }
+
+    @Override
+    public ArrayList<JCodeModel> build() {
+        return super.build();
+    }
 }

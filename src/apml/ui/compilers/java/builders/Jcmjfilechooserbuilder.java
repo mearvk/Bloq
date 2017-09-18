@@ -6,10 +6,11 @@
 package apml.ui.compilers.java.builders;
 
 import com.sun.codemodel.JCodeModel;
-import java.awt.Frame;
+
+import javax.swing.*;
+import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.util.ArrayList;
-import javax.xml.xpath.XPathFactory;
 
 /**
  *
@@ -18,17 +19,10 @@ import javax.xml.xpath.XPathFactory;
 public class Jcmjfilechooserbuilder extends Jcmabstractbuilder
 {
     protected final Integer hash = 0x888fe8;
-    
-    public Class _class = Frame.class;
-    
-    public static void main(String...args)
+
+    public Jcmjfilechooserbuilder(File apml)
     {
-        //new Jcmframebuilder(new File("/home/oem/Desktop/UI/UI.xml")).build("//jframe", JFrame.class);
-    }    
-    
-    public Jcmjfilechooserbuilder(File apml, String tagname, Class classname)
-    {
-        super(apml, tagname, classname);        
+        super(apml, "//jfilechooser", JFileChooser.class);
         
         this.apml = apml;
         

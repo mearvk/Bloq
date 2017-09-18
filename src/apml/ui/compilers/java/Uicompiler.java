@@ -1,7 +1,6 @@
 package apml.ui.compilers.java;
 
 import apml.system.bodi.Bodi;
-
 import com.sun.codemodel.JCodeModel;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Uicompiler
 {
-    protected final Integer hash = 0x00888fe8;
+    protected final Integer hash = 0x00888FE8;
     
     public Uifileguardian fileguardian = new Uifileguardian();
     
@@ -46,7 +45,7 @@ public class Uicompiler
      */
     public void dohandleinputfiles(Uiinputmanager inputmanager)
     {
-        for(String xpathmodel : this.inputmanager.xpathmodels.list)
+        for (String xpathmodel : this.inputmanager.xpathstrings.list)
         {
             inputmanager.generatemodels(xpathmodel);
         }        
