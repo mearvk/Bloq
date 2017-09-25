@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="APML">
+    <output-path>$PROJECT_DIR$/dist</output-path>
+    <root id="archive" name="APML.jar">
+      <element id="module-output" name="bloq" />
+      <element id="library" level="project" name="lib" />
+      <element id="library" level="project" name="mysql-connector-java-5.0.8-bin" />
+    </root>
+  </artifact>
+</component>
