@@ -1,17 +1,12 @@
 package apml.system.bodi.local;
 
 import apml.system.bodi.Bodi;
-
 import apml.system.bodi.remote.Bodilag;
-
 import apml.system.bodi.remote.Bodiprotocolhandler;
-
 import apml.system.bodi.remote.Bodiresponse;
-
 import apml.system.bodi.remote.Protocolstripper;
 
 import java.util.ArrayList;
-
 import java.util.Random;
 
 /**
@@ -50,16 +45,16 @@ public class Bodilocalserver extends Thread
             localserver.go();                        
             
             //
-            
-            localserver.addrequest("//put //context=//test //key=key //value=valuexxx");
+
+            localserver.addrequest("//put //context=//test //key=key //value=valueXXX");
             
             value = (String)localserver.addrequest("//pull //context=//test //key=key").value;      
             
             System.out.println(value);            
             
             //
-            
-            localserver.addrequest("//put //context=//test //key=key //value=valueyyy");
+
+            localserver.addrequest("//put //context=//test //key=key //value=valueYYY");
             
             value = (String)localserver.addrequest("//pull //context=//test //key=key").value;             
             
