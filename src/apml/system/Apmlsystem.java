@@ -1,38 +1,25 @@
 package apml.system;
 
 import apml.compilers.java.codemodel.Bloqcompiler;
-
-import apml.drivers.Stdbloqdriver;
-
 import apml.drivers.Stddriver;
-
 import apml.helpers.Fileloader;
-
 import apml.listeners.Apmllistener;
-
 import apml.modeling.Apmlsubscriber;
-
 import apml.system.bodi.Bodi;
 
 import java.awt.event.ActionEvent;
-
 import java.io.File;
-
 import java.util.ArrayList;
-
 import java.util.HashMap;
-
 import java.util.Map;
-
 import java.util.logging.Level;
-
 import java.util.logging.Logger;
 
 /**
  *
  * @author Max Rupplin
  * @version 1.00
- * @see http://github.com/mearvk/Bloq
+ * @see //github.com/mearvk/Bloq
  */
 public class Apmlsystem implements Runnable
 {   
@@ -81,36 +68,16 @@ public class Apmlsystem implements Runnable
     /*-------------------------------------------------------------------------*/
     
     public static short STATE;
-    
-    public static final short DO_SYSTEM_BOOTUP = 0x00000;
-    
-    public static final short DO_SYSTEM_INITIALIZE = 0x00001;
-    
-    public static final short DO_SYSTEM_RUN = 0x00002;
-    
-    public static final short DO_CLASSFILES_LOAD = 0x00003;
-    
-    public static final short DO_BODI_SETUP = 0x00004;
-    
-    
-    /**
-     * 
-     * @param args 
-     */
-    public static void main(String...args)
-    {
-        Apmlsystem system = new Apmlsystem("/home/oem/Desktop/apml.xml", "/home/oem/Desktop/apml", new Stdbloqdriver());                
-        
-        system.execute(DO_BODI_SETUP);
-        
-        system.execute(DO_CLASSFILES_LOAD);              
-        
-        system.execute(DO_SYSTEM_BOOTUP);
-        
-        system.execute(DO_SYSTEM_INITIALIZE);
-        
-        system.execute(DO_SYSTEM_RUN);               
-    }
+
+    public static final int DO_SYSTEM_BOOTUP = 0x00000;
+
+    public static final int DO_CLASSFILES_LOAD = 0x00001;
+
+    public static final int DO_SYSTEM_INITIALIZE = 0x00002;
+
+    public static final int DO_SYSTEM_RUN = 0x00003;
+
+    public static final int DO_BODI_SETUP = 0x00004;
     
     /**
      * 
@@ -158,7 +125,7 @@ public class Apmlsystem implements Runnable
      * 
      * @param command 
      */
-    public void execute(final short command)
+    public void execute(final int command)
     {
         switch(command)
         {
@@ -214,34 +181,34 @@ public class Apmlsystem implements Runnable
     public void loadbodi()
     {
         /* ------------------------ set contexts -------------------------------*/
-        
-        Bodi.setcontext("//Apmlsystem");
-        
-        Bodi.setcontext("//Apmlsystem/systems");
-        
-        Bodi.setcontext("//Apmlsystem/classes");
-        
-        Bodi.setcontext("//Apmlsystem/state");
-        
-        Bodi.setcontext("//Apmlsystem/listeners");
-        
-        Bodi.setcontext("//Apmlsystem/subscribers");
+
+        Bodi.setcontext("//apml/system");
+
+        Bodi.setcontext("//apml/system/systems");
+
+        Bodi.setcontext("//apml/system/classes");
+
+        Bodi.setcontext("//apml/system/state");
+
+        Bodi.setcontext("//apml/system/listeners");
+
+        Bodi.setcontext("//apml/system/subscribers");
         
         /* ------------------------ set instances -------------------------------*/
         
         try
         {
-            Bodi.context("//Apmlsystem").put("Apmlsystem", this);
+            Bodi.context("//apml/system").put("apmlsystem", this);
 
-            Bodi.context("//Apmlsystem/systems").put("Apmlsystem.systems", this.systems);
+            Bodi.context("//apml/system/systems").put("apmlsystem.systems", systems);
 
-            Bodi.context("//Apmlsystem/classes").put("Apmlsystem.classes", this.classes);
+            Bodi.context("//apml/system/classes").put("apmlsystem.classes", this.classes);
 
-            Bodi.context("//Apmlsystem/state").put("Apmlsystem.state", this.STATE);
+            Bodi.context("//apml/system/state").put("apmlsystem.state", STATE);
 
-            Bodi.context("//Apmlsystem/listeners").put("Apmlsystem.listeners", this.listeners);
+            Bodi.context("//apml/system/listeners").put("apmlsystem.listeners", listeners);
 
-            Bodi.context("//Apmlsystem.subscribers").put("Apmlsystem.subscribers", this.subscribers);
+            Bodi.context("//apml/system/subscribers").put("apmlsystem.subscribers", subscribers);
         }
         catch(Exception e)
         {
@@ -253,8 +220,8 @@ public class Apmlsystem implements Runnable
      * 
      */
     public void start()
-    {                      
-        for(Stdsystem system: this.systems)
+    {
+        for (Stdsystem system : systems)
         {
             system.start();
         }                                 
@@ -265,7 +232,7 @@ public class Apmlsystem implements Runnable
      */
     public void initialize()
     {
-        for(Stdsystem system: this.systems)
+        for (Stdsystem system : systems)
         {
             system.initialize();
         }                             
@@ -276,7 +243,7 @@ public class Apmlsystem implements Runnable
      */
     public void run()
     {
-        for(Stdsystem system: this.systems)
+        for (Stdsystem system : systems)
         {
             system.run();
         }   
@@ -301,10 +268,21 @@ public class Apmlsystem implements Runnable
         try
         {                    
             classnames = new Fileloader().loadclasses(new File(basedir), null, ".class", new ArrayList());             
-            
+
             for(String eachclass : classnames)
             {
-                this.classes.add(Class.forName(eachclass));
+                try
+                {
+                    System.out.println("Apmlsystem adds " + Class.forName(eachclass) + " from classpath " + basedir);
+
+                    this.classes.add(Class.forName(eachclass));
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Apmlsystem fails to add " + Class.forName(eachclass) + " from classpath " + basedir);
+
+                    //  e.printStackTrace();
+                }
             }
         }
         catch(Exception exception)
@@ -415,7 +393,7 @@ public class Apmlsystem implements Runnable
      */
     public Object mountlistener(Apmllistener listener)
     {
-        this.listeners.add(listener);
+        listeners.add(listener);
         
         return "success";
     }
@@ -429,7 +407,7 @@ public class Apmlsystem implements Runnable
     {
         for(Apmllistener listener : listeners)
         {
-            this.listeners.add(listener);
+            Apmlsystem.listeners.add(listener);
         }
         
         return "success";
@@ -442,7 +420,7 @@ public class Apmlsystem implements Runnable
      */
     public Object unmountlistener(Apmllistener listener)
     {
-        this.listeners.remove(listener);
+        listeners.remove(listener);
         
         return "success";
     }    
@@ -454,7 +432,7 @@ public class Apmlsystem implements Runnable
      */
     public Object unmountlisteners(ArrayList<Apmllistener> listeners)
     {
-        this.listeners.removeAll(listeners);
+        Apmlsystem.listeners.removeAll(listeners);
         
         return "success";
     }  
@@ -466,7 +444,7 @@ public class Apmlsystem implements Runnable
      */
     public Object mountsubscriber(Apmlsubscriber subscriber)
     {
-        this.subscribers.add(subscriber);
+        subscribers.add(subscriber);
         
         return "success";
     }
@@ -480,7 +458,7 @@ public class Apmlsystem implements Runnable
     {
         for(Apmlsubscriber subscriber : subscribers)
         {
-            this.subscribers.addAll(subscribers);
+            Apmlsystem.subscribers.addAll(subscribers);
         }
         
         return "success";
@@ -493,7 +471,7 @@ public class Apmlsystem implements Runnable
      */
     public Object unmountsubscriber(Apmlsubscriber subscriber)
     {
-        this.subscribers.remove(subscriber);
+        subscribers.remove(subscriber);
         
         return "success";
     }    
@@ -505,7 +483,7 @@ public class Apmlsystem implements Runnable
      */
     public Object unmountsubscribers(ArrayList<Apmlsubscriber> subscribers)
     {
-        this.subscribers.removeAll(subscribers);
+        Apmlsystem.subscribers.removeAll(subscribers);
         
         return "success";
     }    

@@ -1,22 +1,16 @@
 package apml.compilers.java.codemodel;
 
-import static java.nio.file.StandardCopyOption.*;
-
 import apml.compilers.Standardabstractapmlcompiler;
-
 import apml.system.bodi.Bodi;
 
-import java.nio.file.Files;
-
 import java.io.File;
-
 import java.io.IOException;
-
+import java.nio.file.Files;
 import java.util.logging.FileHandler;
-
 import java.util.logging.Level;
-
 import java.util.logging.Logger;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
  * 
@@ -160,10 +154,34 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
         {
             LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
-    }                               
-          
-    public void setjarfile() throws Exception
-    {
+	}
+
+	public void writebytecode(Bloqinputmanager bloqapmlmanager)
+	{
+		try
+		{
+			this.outputmanager.dowriteclassfiles(bloqapmlmanager.apmlmodels);
+
+			this.outputmanager.dowriteclassfiles(bloqapmlmanager.callbackmodels);
+
+			this.outputmanager.dowriteclassfiles(bloqapmlmanager.dynamiclistenermodels);
+
+			this.outputmanager.dowriteclassfiles(bloqapmlmanager.listenermodels);
+
+			this.outputmanager.dowriteclassfiles(bloqapmlmanager.objectmodels);
+
+			this.outputmanager.dowriteclassfiles(bloqapmlmanager.subscribermodels);
+
+			this.outputmanager.dowriteclassfiles(bloqapmlmanager.systemmodels);
+		}
+		catch (Exception e)
+		{
+			LOGGER.log(Level.WARNING, e.getMessage(), e);
+		}
+	}
+
+	public void writejarfile() throws Exception
+	{
         if(new File(fileguardian.apmloutjarurl).exists())
         {
             Files.copy(new File(fileguardian.apmlinjarurl+fileguardian.apmlfilename).toPath(),new File(fileguardian.apmloutjarurl+fileguardian.apmlfilename).toPath(),REPLACE_EXISTING);

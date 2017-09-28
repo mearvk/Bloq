@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="APML">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/dist/APML.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

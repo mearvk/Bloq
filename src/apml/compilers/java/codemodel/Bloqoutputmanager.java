@@ -1,27 +1,18 @@
 package apml.compilers.java.codemodel;
 
+import apml.helpers.Filegrepper;
 import apml.modeling.Apmlmodelfile;
-
 import apml.system.bodi.Bodi;
-
 import com.sun.codemodel.JCodeModel;
-
 import com.sun.codemodel.JDefinedClass;
-
 import com.sun.codemodel.JPackage;
 
 import java.io.File;
-
 import java.io.IOException;
-
 import java.util.ArrayList;
-
 import java.util.Iterator;
-
 import java.util.logging.FileHandler;
-
 import java.util.logging.Level;
-
 import java.util.logging.Logger;
 
 /**
@@ -56,8 +47,9 @@ public class Bloqoutputmanager
     public static final Logger LOGGER = Logger.getLogger(Bloqoutputmanager.class.getName());
     
     /*--------------------------------------------------------------------------*/
-    
-    public Bloqoutputmanager()
+
+	//
+	public Bloqoutputmanager()
     {
         Bodi.setcontext("system");
         
@@ -83,8 +75,9 @@ public class Bloqoutputmanager
             LOGGER.log(Level.WARNING, e.getMessage(), e);
         }        
     }
-    
-    public ArrayList<JCodeModel> dosetoutputfiles(ArrayList<Apmlmodelfile> apmlmodelfiles, String apmltag)
+
+	//
+	public ArrayList<JCodeModel> dosetoutputfiles(ArrayList<Apmlmodelfile> apmlmodelfiles, String apmltag)
     {
         Bloqjcmpopulator jcmmodelpopulator = new Bloqjcmpopulator();
         
@@ -119,9 +112,10 @@ public class Bloqoutputmanager
         }
         
         return jcmmodels_genericfiles;
-    }    
-    
-    public void dosetsourcefiles(ArrayList<JCodeModel> jcmmodels)
+    }
+
+	//
+	public void dosetsourcefiles(ArrayList<JCodeModel> jcmmodels)
     {       
         if(jcmmodels==null) return;
         
@@ -152,7 +146,46 @@ public class Bloqoutputmanager
             catch(Exception e)
             {
                 /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
-            }                       
-        }                
-    }    
+			}
+		}
+	}
+
+	//
+	public void dowriteclassfiles(ArrayList<Apmlmodelfile> apmlmodelfiles)
+	{
+		if (apmlmodelfiles == null)
+			return;
+
+		Bloqfileguardian fileguardian = (Bloqfileguardian) Bodi.context("system").pull("bloqfileguardian");
+
+		for (int i = 0; i < apmlmodelfiles.size(); i++)
+		{
+			Apmlmodelfile model = apmlmodelfiles.get(i);
+
+			try
+			{
+				String pathname = new Filegrepper().getpackagenameaspathname(model.packagename) + "/";
+
+				//
+
+				String javac = "javac " + fileguardian.basedirurl + fileguardian.projectextensionurl + fileguardian.tempextensionurl + pathname + model.classname + ".java -d " + fileguardian.basedirurl + fileguardian.projectextensionurl + fileguardian.buildextensionurl;
+
+				//
+
+				Runtime runtime;
+
+				runtime = Runtime.getRuntime();
+
+				runtime.exec(javac);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				System.gc();
+			}
+		}
+	}
 }

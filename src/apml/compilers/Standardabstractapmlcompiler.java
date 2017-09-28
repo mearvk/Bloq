@@ -1,9 +1,7 @@
 package apml.compilers;
 
-import apml.compilers.java.codemodel.Bloqinputmanager;
-
 import apml.compilers.java.codemodel.Bloqfileguardian;
-
+import apml.compilers.java.codemodel.Bloqinputmanager;
 import apml.compilers.java.codemodel.Bloqoutputmanager;
 
 import java.io.File;
@@ -90,8 +88,15 @@ public abstract class Standardabstractapmlcompiler
     
     /**
      * Handle outputting of files/models to disk, write out source models to computer hard drive
-     * 
-     * @param astmanager 
-     */
-    public abstract void setsourcefiles(Bloqoutputmanager astmanager);  
+     *
+	 * @param jcmmanager
+	 */
+	public abstract void setsourcefiles(Bloqoutputmanager jcmmanager);
+
+	/**
+	 * Handle final writing of bytecode (class files) to build directory for Apmlsystem to integrate with
+	 *
+	 * @param apmlmanager
+	 */
+	public abstract void writebytecode(Bloqinputmanager apmlmanager);
 }

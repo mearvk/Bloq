@@ -3,13 +3,9 @@ package apml.compilers.java.codemodel;
 import apml.system.bodi.Bodi;
 
 import java.io.File;
-
 import java.io.IOException;
-
 import java.util.logging.FileHandler;
-
 import java.util.logging.Level;
-
 import java.util.logging.Logger;
 
 /**
@@ -77,27 +73,27 @@ public class Bloqfileguardian
     /* ------------------------------ File Names ------------------------------- */
     
     public final String apmljarfilename = "APML.jar";                                                           //name of the APML jar file to be written
-    
-    public final String apmlfilename = "echoserver.xml";                                                        //APML source file
-    
-    public final String loggingfilename = "logging.txt";                                                        //logging output file
+
+	public final String apmlfilename = "system_test_001.xml";                                                   //APML source file
+
+	public final String loggingfilename = "logging.txt";                                                        //logging output file
     
     public final String manifestfilename = "manifest.txt";                                                      //manifest output file 
     
     /* -------------------------- Strings & URLs ------------------------------- */
-    
-    public final String apmlinjarurl = "/home/oem/NetBeansProjects/APML/dist/";                                 //where project jar file is supposed to exist
-    
-    public final String apmloutjarurl = "/home/oem/Desktop/Apml/output/libs/";                                  //where project jar file is supposed to be written    
-    
-    public final String apmlinurl = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/";     //APML source file 
-    
-    public final String basedirurl = "/home/oem/Desktop/Apml/output/";                                          //where .xml or .apml file would be
-    
-    public final String loggingfileurl = "/home/oem/Desktop/Apml/output/echo/logging/";                         //base logging URL for files
-    
-    public final String manifestfileurl = "/home/oem/Desktop/Apml/output/manifest/";                            //manifest URL for files      
-    
+
+	public final String apmlinjarurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/in/jar/";      //where project jar file is supposed to exist
+
+	public final String apmloutjarurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/out/jar/";    //where project jar file is supposed to be written
+
+	public final String apmlinurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/in/xml/";         //APML source file
+
+	public final String basedirurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/";               //where .xml or .apml file would be
+
+	public final String loggingfileurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/logging/";   //base logging URL for files
+
+	public final String manifestfileurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/manifest/"; //manifest URL for files
+
     /* ------------------------------------------------------------------------- */
     
     public final String buildextensionurl = "build/";                                                           //output directory for .class files
@@ -107,10 +103,10 @@ public class Bloqfileguardian
     public final String loggingextensionurl = "logging/";                                                       //output directory for logging files                
     
     public final String manifestextensionurl = "manifest/";                                                     //manifest extension for manifest documents          
-    
-    public final String projectextensionurl = "echo/";                                                          //project extension directory   
-    
-    public final String srcextensionurl = "source/";                                                            //output directory for final .java files
+
+	public final String projectextensionurl = "project/";                                                       //project extension directory
+
+	public final String srcextensionurl = "source/";                                                            //output directory for final .java files
     
     public final String tempextensionurl = "temp/";                                                             //output directory for temporary files (partial builds, etc.)
 }

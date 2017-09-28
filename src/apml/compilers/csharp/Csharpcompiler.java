@@ -1,14 +1,14 @@
 package apml.compilers.csharp;
 
 import apml.compilers.Standardabstractapmlcompiler;
-
+import apml.compilers.java.codemodel.Bloqinputmanager;
 import apml.compilers.java.codemodel.Bloqoutputmanager;
 
 /**
  *
  * @author max rupplin
  */
-public class Csharpcompiler extends Standardabstractapmlcompiler 
+public class Csharpcompiler extends Standardabstractapmlcompiler
 {
 
     @Override
@@ -35,4 +35,9 @@ public class Csharpcompiler extends Standardabstractapmlcompiler
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+	@Override
+	public void writebytecode(Bloqinputmanager apmlmanager)
+	{
+		//
+	}
 }

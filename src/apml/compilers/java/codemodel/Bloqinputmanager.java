@@ -1,23 +1,15 @@
 package apml.compilers.java.codemodel;
 
 import apml.helpers.Filegrepper;
-
 import apml.modeling.Apmlmodelfile;
-
 import apml.system.bodi.Bodi;
-
 import com.sun.codemodel.JCodeModel;
 
 import java.io.File;
-
 import java.io.IOException;
-
 import java.util.ArrayList;
-
 import java.util.logging.FileHandler;
-
 import java.util.logging.Level;
-
 import java.util.logging.Logger;
 
 /**
@@ -177,6 +169,8 @@ public class Bloqinputmanager
             }
             catch(Exception e)
             {
+				//e.printStackTrace();
+
                 /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
             }
             finally

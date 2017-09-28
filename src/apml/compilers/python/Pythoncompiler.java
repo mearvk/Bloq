@@ -1,18 +1,15 @@
 package apml.compilers.python;
 
 import apml.compilers.Standardabstractapmlcompiler;
-
-import apml.compilers.java.codemodel.Bloqinputmanager;
-
 import apml.compilers.java.codemodel.Bloqfileguardian;
-
+import apml.compilers.java.codemodel.Bloqinputmanager;
 import apml.compilers.java.codemodel.Bloqoutputmanager;
 
 /**
  *
  * @author max rupplin
  */
-public class Pythoncompiler extends Standardabstractapmlcompiler 
+public class Pythoncompiler extends Standardabstractapmlcompiler
 {
     @Override
     public void setapmlfiles(Bloqfileguardian fileguardian)
@@ -37,5 +34,10 @@ public class Pythoncompiler extends Standardabstractapmlcompiler
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-   
+
+	@Override
+	public void writebytecode(Bloqinputmanager apmlmanager)
+	{
+		//
+	}
 }

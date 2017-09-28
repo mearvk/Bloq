@@ -13,17 +13,26 @@ public class Bloqdriver
         try
         {
             Bloqcompiler bloqcompiler = new Bloqcompiler();
-            
+
+            //
             bloqcompiler.setapmlfiles(bloqcompiler.fileguardian);
-            
+
+            //
             bloqcompiler.settempfiles(bloqcompiler.inputmanager);
-            
-            bloqcompiler.setoutputfiles(bloqcompiler.inputmanager);         
-            
+
+            //
+            bloqcompiler.setoutputfiles(bloqcompiler.inputmanager);
+
+            //
             bloqcompiler.setsourcefiles(bloqcompiler.outputmanager);
-            
-            bloqcompiler.setjarfile();
-            
+
+            //
+            bloqcompiler.writebytecode(bloqcompiler.inputmanager);
+
+            //
+            bloqcompiler.writejarfile();
+
+            //
             System.gc();
         }
         catch(Exception e)

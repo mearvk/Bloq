@@ -1,7 +1,7 @@
 package apml.compilers.cpp;
 
 import apml.compilers.Standardabstractapmlcompiler;
-
+import apml.compilers.java.codemodel.Bloqinputmanager;
 import apml.compilers.java.codemodel.Bloqoutputmanager;
 
 /**
@@ -32,5 +32,11 @@ public class Cpluspluscompiler extends Standardabstractapmlcompiler
     public void setsourcefiles(Bloqoutputmanager astmanager)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    } 
+	}
+
+	@Override
+	public void writebytecode(Bloqinputmanager apmlmanager)
+	{
+
+	}
 }

@@ -16,9 +16,11 @@ public class Bodiprotocolhandler {
     protected Bodiservercontext parseprotocol(Bodiservercontext connectioncontext) throws Exception {
         if (connectioncontext == null) throw new SecurityException("//bodi/connect");
 
-        if (connectioncontext.networkcontext != null) {
-            switch (connectioncontext.protocol) {
-                //
+		if (connectioncontext.networkcontext != null)
+		{
+			switch (connectioncontext.protocol)
+			{
+				//
                 case Bodiprotocol.CLOSE:
 
                     this.processcloseprotocol(connectioncontext);
