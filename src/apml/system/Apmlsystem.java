@@ -69,17 +69,17 @@ public class Apmlsystem implements Runnable
     
     public static short STATE;
 
-    public static final int DO_SYSTEM_BOOTUP = 0x00000;
+	public static final int EXEC_BOOTUP = 0x00000;
 
-    public static final int DO_CLASSFILES_LOAD = 0x00001;
+	public static final int EXEC_LOAD_CLASSFILES = 0x00001;
 
-    public static final int DO_SYSTEM_INITIALIZE = 0x00002;
+	public static final int EXEC_INIT_SUBSYSTEMS = 0x00002;
 
-    public static final int DO_SYSTEM_RUN = 0x00003;
+	public static final int EXEC_RUN_SUBSYSTEMS = 0x00003;
 
-    public static final int DO_BODI_SETUP = 0x00004;
-    
-    /**
+	public static final int EXEC_LOAD_BODI = 0x00004;
+
+	/**
      * 
      * @param apmlfile
      * @param basedir
@@ -129,43 +129,43 @@ public class Apmlsystem implements Runnable
     {
         switch(command)
         {
-            case DO_BODI_SETUP: 
-            
-                Apmlsystem.STATE = DO_BODI_SETUP; 
-                
-                this.loadbodi();                                
-                
-                break;
-            
-            case DO_CLASSFILES_LOAD:
-                
-                Apmlsystem.STATE = DO_CLASSFILES_LOAD;  
-                
-                this.loadclasses(basedir);                                 
+			case EXEC_LOAD_BODI:
+
+				Apmlsystem.STATE = EXEC_LOAD_BODI;
+
+				this.loadbodi();
                 
                 break;
-            
-            case DO_SYSTEM_BOOTUP: 
-                
-                Apmlsystem.STATE = DO_SYSTEM_BOOTUP; 
-                
-                this.start();                                 
-                
-                break;
-                    
-            case DO_SYSTEM_INITIALIZE: 
-                
-                Apmlsystem.STATE = DO_SYSTEM_INITIALIZE;  
-                
-                this.initialize();                                 
+
+			case EXEC_LOAD_CLASSFILES:
+
+				Apmlsystem.STATE = EXEC_LOAD_CLASSFILES;
+
+				this.loadclasses(basedir);
                 
                 break;
-            
-            case DO_SYSTEM_RUN: 
+
+			case EXEC_BOOTUP:
+
+				Apmlsystem.STATE = EXEC_BOOTUP;
+
+				this.start();
                 
-                Apmlsystem.STATE = DO_SYSTEM_RUN;  
+                break;
+
+			case EXEC_INIT_SUBSYSTEMS:
+
+				Apmlsystem.STATE = EXEC_INIT_SUBSYSTEMS;
+
+				this.initialize();
                 
-                this.run(); 
+                break;
+
+			case EXEC_RUN_SUBSYSTEMS:
+
+				Apmlsystem.STATE = EXEC_RUN_SUBSYSTEMS;
+
+				this.run();
                                                 
                 break;                        
             
