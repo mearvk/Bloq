@@ -21,8 +21,8 @@ public class Uifileguardian
     {
         try
         {
-            this.xmlin = new File("/Users/macuser/IdeaProjects/UI_0001/UserInterface.xml");
-        }
+			this.xmlin = new File("/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/ui/in/apmlgui.xml");
+		}
         catch(Exception e)
         {
             //e.printStackTrace();
@@ -30,8 +30,8 @@ public class Uifileguardian
         
         try
         {
-            this.outputdir = new File("/Users/macuser/Desktop/UI");
-        }
+			this.outputdir = new File("/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/ui/out");
+		}
         catch(Exception e)
         {
             //e.printStackTrace();

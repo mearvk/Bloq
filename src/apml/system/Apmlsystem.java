@@ -23,12 +23,15 @@ public class Apmlsystem implements apml.interfaces.BasicSystemElement
     public final Integer hash = 0x00888FE8;
 
 	//
-
 	public static Map map = null;
 
 	//
 	public ApmlKernelThread runner;
+
+	//
 	public ArrayList<Stdsystem> systems = new ArrayList();
+
+	//
 	public ArrayList<Apmllistener> listeners = new ArrayList();
 
 	//
@@ -40,11 +43,13 @@ public class Apmlsystem implements apml.interfaces.BasicSystemElement
 	//
 	public Stddriver driver;
 
+	//
 	public String apmlfile;
 
 	//
 	public String basedir;
 
+	//
 	public ArrayList<Class> classes = new ArrayList();
 
 	//
@@ -89,22 +94,20 @@ public class Apmlsystem implements apml.interfaces.BasicSystemElement
 		Apmlsystem apml = new Apmlsystem("/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/in/xml/system_test_001.xml", "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development", new Stdbloqdriver());
 
 		//
-
 		apml.init();
 
 		//
-
 		apml.start();
 
 		//
-
 		apml.run();
 
-		//quick exemplar of a work unit throw onto the system to be processed
+		//
+		Work work = new Work("Work Unit #001");
 
-		Work work = new Work("Test Unit #001");
+		work.functions.add(new DisplayMessage(work, "Work Function #001"));
 
-		work.functions.add(new DisplayMessage(work, "Test"));
+		work.functions.add(new DisplayMessage(work, "Work Function #002"));
 
 		apml.runner.queue.add(work);
 	}

@@ -1,0 +1,27 @@
+<apml>
+
+    <jframe setBounds="50:50:800:600" setTitle="APML Editor">
+
+        <jpanel setSize="30%:100%" setBackground="Color.DARK_GRAY">
+
+            <jtree>
+
+            </jtree>
+
+        </jpanel>
+
+        <jpanel setSize="70%:100%" setBackground="Color.YELLOW">
+
+            <jpanel setSize="100%:60px" setBackground="Color.WHITE">
+
+            </jpanel>
+
+            <jpanel setSize="100%:60px" setBackground="Color.GRAY">
+
+            </jpanel>
+
+        </jpanel>
+
+    </jframe>
+
+</apml>
