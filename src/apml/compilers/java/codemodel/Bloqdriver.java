@@ -8,6 +8,8 @@ import java.util.logging.Level;
  */
 public class Bloqdriver
 {
+    public final Integer hash = 0x00888FE8;
+
     public static void main(String...args)
     {
         try

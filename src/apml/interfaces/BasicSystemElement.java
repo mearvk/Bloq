@@ -6,19 +6,21 @@ package apml.interfaces;
  */
 public interface BasicSystemElement
 {
-    public void autostart();
-    
-    public void init();
-    
-    public void pause();
-    
-    public void restart();
-    
-    public void resume();
-    
-    public void run();
-    
-    public void start();
-    
-    public void stop();    
+	Integer hash = 0x00888FE8;
+
+	void autostart();
+
+	void init();
+
+	void pause();
+
+	void restart();
+
+	void resume();
+
+	void run();
+
+	void start();
+
+	void stop();
 }

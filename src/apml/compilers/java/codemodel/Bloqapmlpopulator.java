@@ -1,42 +1,20 @@
 package apml.compilers.java.codemodel;
 
 import apml.helpers.Filegrepper;
-
-import apml.modeling.Apmlimplement;
-
-import apml.modeling.Apmllistener;
-
-import apml.modeling.Apmlmodelfile;
-
-import apml.modeling.Apmlobject;
-
-import apml.modeling.Apmlsubscriber;
-
-import apml.modeling.Apmlsystem;
-
+import apml.modeling.*;
 import apml.system.bodi.Bodi;
-
-import java.io.File;
-
-import java.io.IOException;
-
-import java.util.ArrayList;
-
-import java.util.HashSet;
-
-import java.util.Set;
-
-import java.util.logging.FileHandler;
-
-import java.util.logging.Level;
-
-import java.util.logging.Logger;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import javax.xml.xpath.XPathConstants;
-
-import org.w3c.dom.Element;
-
-import org.w3c.dom.NodeList;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -526,9 +504,9 @@ public final class Bloqapmlpopulator
                 String xpathstring          = "(./ancestor::package/@default)[last()]";
                 
                 subscriber.packagename      = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
-                
-                subscriber.startable        = element.getAttribute("start").equalsIgnoreCase("true");                
-                
+
+				subscriber.startable = element.getAttribute("startsubsystems").equalsIgnoreCase("true");
+
                 /*--------------------------------------------------------------*/
                                
                 subscribers.add(subscriber);
@@ -571,9 +549,9 @@ public final class Bloqapmlpopulator
                 String xpathstring          = "(./ancestor::package/@default)[last()]";
                 
                 listener.packagename        = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
-                
-                listener.startable          = element.getAttribute("start").equalsIgnoreCase("true");
-                
+
+				listener.startable = element.getAttribute("startsubsystems").equalsIgnoreCase("true");
+
                 /*--------------------------------------------------------------*/
 
                 listeners.add(listener);
@@ -616,9 +594,9 @@ public final class Bloqapmlpopulator
                 String xpathstring      = "(./ancestor::package/@default)[last()]";
                 
                 object.packagename      = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
-                
-                object.startable        = element.getAttribute("start").equalsIgnoreCase("true");
-                
+
+				object.startable = element.getAttribute("startsubsystems").equalsIgnoreCase("true");
+
                 /*--------------------------------------------------------------*/
 
                 objects.add(object);
@@ -661,9 +639,9 @@ public final class Bloqapmlpopulator
                 String xpathstring      = "(./ancestor::package/@default)[last()]";
                 
                 system.packagename      = (String)xparam.xpath.evaluate(xpathstring, nodes.item(i), XPathConstants.STRING);
-                
-                system.startable        = element.getAttribute("start").equalsIgnoreCase("true");
-                
+
+				system.startable = element.getAttribute("startsubsystems").equalsIgnoreCase("true");
+
                 /*--------------------------------------------------------------*/
 
                 systems.add(system);
@@ -720,7 +698,7 @@ public final class Bloqapmlpopulator
 
                 implement.packagename       = (String)xparam.xpath.evaluate(xpathstring, implementstags.item(i), XPathConstants.STRING);
 
-                implement.startable         = element.getAttribute("start").equalsIgnoreCase("true");
+				implement.startable = element.getAttribute("startsubsystems").equalsIgnoreCase("true");
 
                 /*--------------------------------------------------------------*/
 
@@ -894,20 +872,20 @@ public final class Bloqapmlpopulator
     {
         if(xparam.n0007_run==null || xparam.n0007_run.item(0)==null)
         {
-            throw new NullPointerException("No run tag found"); 
-        }
-        
-        return xparam.n0007_run.item(0).getNodeName();
+			throw new NullPointerException("No runsystems tag found");
+		}
+
+		return xparam.n0007_run.item(0).getNodeName();
     }    
 
     private String getstarttag(Bloqxpathparameter xparam, Integer index)
     {
         if(xparam.n0008_start==null || xparam.n0008_start.item(0)==null)
         {
-            throw new NullPointerException("No start tag found"); 
-        }
-                
-        return xparam.n0008_start.item(0).getNodeName();
+			throw new NullPointerException("No startsubsystems tag found");
+		}
+
+		return xparam.n0008_start.item(0).getNodeName();
     }    
          
     private String getsuperclass(Bloqxpathparameter xparam, Integer index)

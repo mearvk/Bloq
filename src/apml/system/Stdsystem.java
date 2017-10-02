@@ -11,9 +11,23 @@ package apml.system;
  */
 public abstract class Stdsystem 
 {
+	public final Integer hash = 0x00888FE8;
+
     public abstract void initialize();
     
     public abstract void start();
     
     public abstract void run();
+
+	public abstract void autostart();
+
+	public abstract void init();
+
+	public abstract void pause();
+
+	public abstract void restart();
+
+	public abstract void resume();
+
+	public abstract void stop();
 }
