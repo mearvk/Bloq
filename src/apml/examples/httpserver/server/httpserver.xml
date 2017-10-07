@@ -1,83 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?apml version="1.0" encoding="UTF-8"?>
+<package name="globals" default="examples.echoserver" sourcedir="/source" builddir="/build">
 
-<apml language="Java 9" version="1.0">  
-    
-    <definitions>
-        <httpserver extends="java.lang.Object" class="apml.examples.httpserver.Httpserver"></httpserver>   
-    </definitions>        
+    <apml language="Java 9" version="1.0" class="Apmlsystem" infer="true"
+          implements="apml.interfaces.BasicSystemElement">
 
-    <package default="apml.examples.httpserver.server">
-    <system id="httpserver" class="Httpserversystem">
-        <object class="apml.examples.httpserver.httpserver.java">
-            
-            <listener id="options" class="apml.examples.httpserver.Httpserverinboundmarshaller" with="*" function="">
-                <subscriber class="apml.examples.httpserver.HttpserveronconnectHit"></subscriber>
-            </listener>
-            
-            <listener id="connect" class="Httpserveronconnectlistener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.Httpserveronconnectcall"></subscriber>
-            </listener> 
-             
-            <listener id="delete" class="Httpserverondeleteistener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.Httpserverondeletecall"></subscriber>
-            </listener>                                         
-            
-            <listener id="get" class="Httpserverongetlistener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.Httpserverongettcall"></subscriber>
-            </listener> 
-            
-            <listener id="head" class="Httpserveronheadlistener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.Httpserveronheadcall"></subscriber>
-            </listener>     
-                               
-            <listener id="options" class="Httpserveronoptionslistener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.Httpserveronoptionscall"></subscriber>
-            </listener>                                
-                               
-            <listener id="post" class="Httpserveronpostlistener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.Httpserveronpostcall"></subscriber>
-            </listener> 
-            
-            <listener id="put" class="Httpserveronputlistener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.Httpserveronputtcall"></subscriber>
-            </listener>                            
+        <package default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
+            <system id="Echoserversystem" class="Echoserversystem" implements="apml.interfaces.BasicSystemElement">
+                <object id="Echoserver" class="Echoserver" implements="apml.interfaces.BasicSystemElement"
+                        extends="apml.extensions.AbstractResourceServer"></object>
+            </system>
+        </package>
 
-            <listener id="trace" class="Httpserverontracelistener" with="*" function="apml.examples.httpserver.Classname.function">
-                <subscriber class="apml.examples.httpserver.Httpserverontracecall"></subscriber>
-            </listener>                        
-                                                     
-        </object>
-    </system>  
-    </package>
-    
-    <package default="apml.examples.httpserver.client">
-    <system id="httpclient" class="Httpserverclient">
-        <object class="EchoClient">
-            <listener class="Echoserverclientsocketlistener"></listener>
-        </object>
-    </system>               
-    </package>       
-    
-    <driver class="apml.examples.driver.StandardDriver"> //to start and attach APML objects to system framework; to build out skeleton for starters
-        <template></template>
-        <template></template>
-        <template></template>
-        <template></template>
-    </driver>
-    
-    <compiler class="apml.examples.compiler.StdApmlToJavaCompiler"> //move APML markup over to Java
-        <architect>Max Rupplin</architect>        
-        <template type="camelcase"></template>
-        <template type="annotations">formal</template>
-        <template type="brackets">newline</template>
-        <template type="class_treatment">inner</template>
-    </compiler>
-    
-    <compiler class="apml.examples.compiler.StdJavaToApmlCompiler"> //move Java source code over to APML markup
-        <architect>Max Rupplin</architect>        
-        <template type=""></template>
-        <template type=""></template>
-    </compiler>    
-</apml>
+    </apml>
 
+</package>

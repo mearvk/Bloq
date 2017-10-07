@@ -1,0 +1,7 @@
+<apml>
+    <package default="examples.httpserver.servers">
+        <system id="Httpserversystem" class="Httpserversystem" sourcedir="/source" builddir="/build" implements="apml.interfaces.BasicSystemElement">
+            <object id="Httpserver" class="Httpserver" extends="apml.extensions.AbstractResourceServer" implements="apml.interfaces.BasicSystemElement"/>
+        </system>
+    </package>
+</apml>

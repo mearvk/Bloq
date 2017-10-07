@@ -119,6 +119,52 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
     {
         try
         {
+            if (uip.jdc._extends().name().contains("JSplitPane"))
+            {
+                /*--------------------- first constructor --------------------------*/
+
+                uip.constructor1 = uip.jdc.constructor(JMod.PUBLIC);
+
+                uip.constructor1.param(java.awt.Component.class, "parent");
+
+                uip.constructor1.param(Integer.class, "orientation");
+
+                uip.constructor1.param(java.awt.Component.class, "component_000");
+
+                uip.constructor1.param(java.awt.Component.class, "component_001");
+
+                //
+
+                uip.constructor1.body().directStatement("/*-------------------- super --------------------*/\n\t");
+
+                uip.constructor1.body().directStatement("super(orientation, component_000, component_001);\n\t");
+
+
+                /*--------------------- second constructor -------------------------*/
+
+                uip.constructor2 = uip.jdc.constructor(JMod.PUBLIC);
+
+                uip.constructor2.param(java.awt.Component.class, "parent");
+
+                uip.constructor2.param(apml.system.Apmlsystem.class, "system");
+
+                uip.constructor2.param(Integer.class, "orientation");
+
+                uip.constructor2.param(java.awt.Component.class, "component_000");
+
+                uip.constructor2.param(java.awt.Component.class, "component_001");
+
+                //
+
+                uip.constructor2.body().directStatement("/*-------------------- super --------------------*/\n\t");
+
+                uip.constructor2.body().directStatement("super(orientation, component_000, component_001);\n\t");
+
+                //
+
+                return;
+            }
+
             /*--------------------- first constructor --------------------------*/
             
             uip.constructor1 = uip.jdc.constructor(JMod.PUBLIC);
@@ -132,8 +178,11 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
             uip.constructor2.param(java.awt.Component.class, "parent");
             
             uip.constructor2.param(apml.system.Apmlsystem.class, "system");
-        } 
-        catch(Exception e){}
+        }
+        catch (Exception e)
+        {
+            //
+        }
     }
     
     public void setxpath()

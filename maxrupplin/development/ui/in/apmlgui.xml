@@ -1,26 +1,38 @@
 <apml>
 
-    <jframe setBounds="50:50:800:600" setTitle="APML Editor">
+    <jframe setLayout="new FlowLayout(FlowLayout.LEFT)" setBounds="50:50:800:600" setTitle="APML Editor" setMargin="10:10:10:10">
 
-        <jpanel setSize="30%:100%" setBackground="Color.DARK_GRAY">
+        <jmenubar>
 
-            <jtree>
+            <jmenu setText="View">
 
-            </jtree>
+                <jmenuitem setText="Item 1">
 
-        </jpanel>
+                </jmenuitem>
 
-        <jpanel setSize="70%:100%" setBackground="Color.YELLOW">
+                <jmenuitem setText="Item 2">
 
-            <jpanel setSize="100%:60px" setBackground="Color.WHITE">
+                </jmenuitem>
+
+            </jmenu>
+
+        </jmenubar>
+
+        <jsplitpane setSize="100%:100%" setBackground="new Color(76, 44, 147)" setMargin="10:10:10:10" setDividerLocation="150">
+
+            <jpanel setSize="30%:100%" setBackground="new Color(210, 202, 228)" setMargin="10:10:10:10" setLayout="new FlowLayout(FlowLayout.LEFT)">
+
+                <jtree>
+
+                </jtree>
 
             </jpanel>
 
-            <jpanel setSize="100%:60px" setBackground="Color.GRAY">
+            <jpanel setSize="70%:100%" setBackground="new Color(76, 50, 147)" setMargin="10:10:10:10">
 
             </jpanel>
 
-        </jpanel>
+        </jsplitpane>
 
     </jframe>
 

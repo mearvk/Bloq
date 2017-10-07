@@ -90,9 +90,14 @@ public class Bodi
 
     //
     public synchronized static Bodicontext context(String context)
-    {     
-        return contexts.get(context);
-    }
+	{
+		if (!hascontextat(context))
+		{
+			Bodi.setcontext(context);
+		}
+
+		return Bodi.contexts.get(context);
+	}
 
     //
     public synchronized static Bodicontext persistentcontext(String context) {

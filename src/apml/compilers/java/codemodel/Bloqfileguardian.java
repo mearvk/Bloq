@@ -53,60 +53,36 @@ public class Bloqfileguardian
     }
             
     /* ---------------------------- File Instances ----------------------------- */
-    
-    public File apmlinputfile = null;                                                                           //file for apml (an xml) system specification
-    
-    public File buildoutdirfile = null;                                                                         //file dir for bytecode
-    
-    public File libsdirfile = null;                                                                             //libs dir for byte code
-    
-    public File loggingdirfile = null;                                                                          //logging dir for byte code    
-    
-    public File manifestfile = null;                                                                            //file for manifest 
-    
-    public File manifestdirfile = null;                                                                         //file dir for manifest
-    
-    public File sourceoutdirfile = null;                                                                        //file dir for source code
-    
-    public File tempdirfile = null;                                                                             //temporary dir for byte code   
-            
-    /* ------------------------------ File Names ------------------------------- */
-    
-    public final String apmljarfilename = "APML.jar";                                                           //name of the APML jar file to be written
 
-	public final String apmlfilename = "system_test_001.xml";                                                   //APML source file
+	public final String apmljarfilename = "APML.jar";                                                                //name of the APML jar file to be written
+	public final String apmlfilename = "httpserver.xml";                                                                //APML source file
+	public final String loggingfilename = "logging.txt";                                                                //logging output file
+	public final String manifestfilename = "manifest.txt";                                                            //manifest output file
+	public final String apmlinjarurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/in/jar/";        //where project jar file is supposed to exist
+	public final String apmloutjarurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/out/";            //where project jar file is supposed to be written
+	public final String apmlinurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/in/";                //APML source file
+	public final String basedirurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq";                    //where .xml or .apml file would be
 
-	public final String loggingfilename = "logging.txt";                                                        //logging output file
-    
-    public final String manifestfilename = "manifest.txt";                                                      //manifest output file 
-    
-    /* -------------------------- Strings & URLs ------------------------------- */
+	/* ------------------------------ File Names ------------------------------- */
+	public final String loggingfileurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/logging/";        //base logging URL for files
+	public final String manifestfileurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/manifest/";        //manifest URL for files
+	public final String buildextensionurl = "build/";                                                                //output directory for .class files
+	public final String libsextensionurl = "libs/";                                                                    //output directory for libs files
 
-	public final String apmlinjarurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/in/jar/";      //where project jar file is supposed to exist
+	/* -------------------------- Strings & URLs ------------------------------- */
+	public final String loggingextensionurl = "logging/";                                                            //output directory for logging files
+	public final String manifestextensionurl = "manifest/";                                                            //manifest extension for manifest documents
+	public final String projectextensionurl = "project/";                                                            //project extension directory
+	public final String srcextensionurl = "source/";                                                                    //output directory for final .java files
+	public final String tempextensionurl = "temp/";                                                                    //output directory for temporary files (partial builds, etc.)
+	public File apmlinputfile = null;                                                                                //file for apml (an xml) system specification
 
-	public final String apmloutjarurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/out/jar/";    //where project jar file is supposed to be written
-
-	public final String apmlinurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/in/xml/";         //APML source file
-
-	public final String basedirurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/";               //where .xml or .apml file would be
-
-	public final String loggingfileurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/logging/";   //base logging URL for files
-
-	public final String manifestfileurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/manifest/"; //manifest URL for files
-
-    /* ------------------------------------------------------------------------- */
-    
-    public final String buildextensionurl = "build/";                                                           //output directory for .class files
-                
-    public final String libsextensionurl = "libs/";                                                             //output directory for libs files        
-    
-    public final String loggingextensionurl = "logging/";                                                       //output directory for logging files                
-    
-    public final String manifestextensionurl = "manifest/";                                                     //manifest extension for manifest documents          
-
-	public final String projectextensionurl = "project/";                                                       //project extension directory
-
-	public final String srcextensionurl = "source/";                                                            //output directory for final .java files
-    
-    public final String tempextensionurl = "temp/";                                                             //output directory for temporary files (partial builds, etc.)
+	/* ------------------------------------------------------------------------- */
+	public File buildoutdirfile = null;                                                                                //file dir for bytecode
+	public File libsdirfile = null;                                                                                    //libs dir for byte code
+	public File loggingdirfile = null;                                                                                //logging dir for byte code
+	public File manifestfile = null;                                                                                    //file for manifest
+	public File manifestdirfile = null;                                                                                //file dir for manifest
+	public File sourceoutdirfile = null;                                                                                //file dir for source code
+	public File tempdirfile = null;                                                                                    //temporary dir for byte code
 }

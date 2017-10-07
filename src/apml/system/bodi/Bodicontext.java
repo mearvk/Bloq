@@ -2,22 +2,15 @@
 package apml.system.bodi;
 
 import apml.system.bodi.remote.exceptions.BodiGeneralError;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import java.io.File;
-
 import java.util.Collection;
-
 import java.util.HashMap;
-
 import java.util.Map;
-
 import java.util.Map.Entry;
-
 import java.util.Set;
-
-import org.w3c.dom.Element;
-
-import org.w3c.dom.Node;
 
 /**
  *
@@ -64,14 +57,47 @@ public class Bodicontext
     {
         return this.pull(name).getClass();
     }
-    
-    /**
-     * 
-     * @param key
-     * @param value
-     * @throws Exception 
-     */
-    public void put(Integer key, Object value) throws Exception
+
+	//
+
+	public void nullifyValue(Integer key) throws Exception
+	{
+		this.hashmap.put(key, null);
+	}
+
+	public void nullifyValue(Object key) throws Exception
+	{
+		this.objectmap.put(key, null);
+	}
+
+	public void nullifyValue(String key) throws Exception
+	{
+		this.namemap.put(key, null);
+	}
+
+	//
+
+	public void removeKeyPair(Integer key) throws Exception
+	{
+		this.hashmap.remove(key);
+	}
+
+	public void removeKeyPair(Object key) throws Exception
+	{
+		this.objectmap.remove(key);
+	}
+
+	public void removeKeyPair(String key) throws Exception
+	{
+		this.namemap.remove(key);
+	}
+
+	/**
+	 * @param key
+	 * @param value
+	 * @throws Exception
+	 */
+	public void put(Integer key, Object value) throws Exception
     {       
         if(key==null) throw new BodiGeneralError("Bodicontext.put :: Key value was null.");
         
