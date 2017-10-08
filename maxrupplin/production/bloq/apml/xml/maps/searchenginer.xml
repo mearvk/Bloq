@@ -1,0 +1,32 @@
+<apml>
+
+    <definitions>
+        <searchserver>
+            <class>org.testserver.org.churchservice.org.testserver.com</class>
+            <extends>apml.published.services.httpserver</extends>
+        </searchserver>
+    </definitions>
+    
+    <system id="mysearchserver">
+        <searchserver>
+            <function tiesto="TECH_REQUESTS" name="{PUBLIC}{org.searchserver.GET_handler()}">
+                <listener>
+                    <orderedlist>
+                        <subscriber>IN_INTERPRETIVE</subscriber>
+                        <subscriber>DBLOOKUP</subscriber>
+                        <subscriber>OUT_INTERPRETIVE</subscriber>
+                        <patterns>
+                            <pattern type="technical">
+                                <handler>
+                                    
+                                </handler>
+                            </pattern>
+                        </patterns>
+                    </orderedlist>
+                </listener>
+            </function>
+        </searchserver>
+    </system>
+</apml>
+
+tech: java networking programming hints

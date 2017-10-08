@@ -1,0 +1,15 @@
+<package name="globals" default="examples.echoserver" sourcedir="/source" builddir="/build">
+
+    <apml language="Java 9" version="1.0" class="Apmlsystem" infer="true"
+          implements="apml.interfaces.BasicSystemElement">
+
+        <package default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
+            <system id="Echoserversystem" class="Echoserversystem" implements="apml.interfaces.BasicSystemElement">
+                <object id="Echoserver" class="Echoserver" implements="apml.interfaces.BasicSystemElement"
+                        extends="apml.extensions.AbstractResourceServer"></object>
+            </system>
+        </package>
+
+    </apml>
+
+</package>

@@ -1,0 +1,146 @@
+<!ATTLIST object autostart (true|false) "false">
+<!ATTLIST object start (true|false) "false">
+<!ATTLIST object id CDATA "">
+<!ATTLIST object class CDATA "">
+
+<definitions>
+
+<!-- system -->
+    <system>
+    <language>
+    <software>
+    <time>
+
+<!-- errors/exceptions -->
+    <error>
+    <exception>
+
+<!-- managerial -->
+    <oversee>
+    <warning>
+
+<!-- user interface -->
+    <ui>
+
+<!--interruption -->
+    <interruptor>
+    <interruptable>
+    <interrupted_by>
+    <notify>
+    <sleep>
+    <notifyall>
+    
+<!-- threads -->
+    <thread>
+    <thread_group>
+    <semaphore>
+    <synchronized>
+    <lock>
+    <lockable>
+    <key>
+    <sleep>
+    <notifyall>
+
+<!-- instantiation -->
+    <static>
+    <dynamic>
+
+<!-- timing -->
+    <time>
+
+<!-- structure -->
+    <source>
+    <root>
+    <container>
+    <node>
+    <rootnode>
+    <widget>
+    <element>
+    <object>
+    <hierarchy>
+    <pool>
+    <interface>
+    <composition>
+    <inheritor>
+    <hidden>
+    <wrap>
+    <minimize>
+
+<!-- data structures -->
+    <list>
+    <set>
+    <data>
+    <coupling>
+    <baby>
+
+<!-- function -->
+    <processor>
+    <trim>
+    <coupling>
+    <barrier>
+    <open>
+    <close>
+    <continue_to>
+    <dodge>
+    <split>
+    <hinge>
+
+<!-- patterns -->
+    <pattern>
+    <strategy>
+    <definition>
+    <open>
+    <close>
+    <run>
+    <stop>
+    <hit>
+    <direction>
+
+<!-- producers -->
+    <producer>
+    <product>
+
+<!-- consumer -->
+    <consumer>
+    <consume> (./lrh. ./ron.vetter ./~~!)
+
+<!-- listeners -->
+    <event>
+    <listener>
+    <notify>
+
+<!-- subscribers -->
+    <event>
+    <subscriber>
+    <subscription>
+    <notify>
+
+<!-- logic -->
+    <condition>
+
+<!-- comparators -->
+    <optimum>
+
+<!-- i/o -->
+    <socket>
+    <pipe>
+    <connector>
+    <path>
+    
+<!-- miscellany -->
+    <daydream>
+    <danger>
+    <bandage>
+    
+<!-- (one) day -->
+    <hack>
+    <nowhit>
+    <level1>
+    <level2>
+    <level3>
+    <ultimate>
+    <up>
+    <down>
+    <id>
+
+</definitions>

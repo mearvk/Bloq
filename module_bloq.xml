@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_bloq" default="compile.module.bloq">
+    <dirname property="module.bloq.basedir" file="${ant.file.module_bloq}"/>
+
+    <property name="module.jdk.home.bloq" value="${project.jdk.home}"/>
+    <property name="module.jdk.bin.bloq" value="${project.jdk.bin}"/>
+    <property name="module.jdk.classpath.bloq" value="${project.jdk.classpath}"/>
+
+    <property name="compiler.args.bloq" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
+
+    <property name="bloq.output.dir" value="${module.bloq.basedir}/maxrupplin/production/bloq"/>
+    <property name="bloq.testoutput.dir" value="${module.bloq.basedir}/maxrupplin/test/bloq"/>
+
+    <path id="bloq.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="bloq.module.production.classpath">
+        <path refid="${module.jdk.classpath.bloq}"/>
+        <path refid="library.lib.classpath"/>
+        <path refid="library.mysql-connector-java-5.0.8-bin.classpath"/>
+    </path>
+
+    <path id="bloq.runtime.production.module.classpath">
+        <pathelement location="${bloq.output.dir}"/>
+        <path refid="library.lib.classpath"/>
+        <path refid="library.mysql-connector-java-5.0.8-bin.classpath"/>
+    </path>
+
+    <path id="bloq.module.classpath">
+        <path refid="${module.jdk.classpath.bloq}"/>
+        <pathelement location="${bloq.output.dir}"/>
+        <path refid="library.lib.classpath"/>
+        <path refid="library.mysql-connector-java-5.0.8-bin.classpath"/>
+    </path>
+
+    <path id="bloq.runtime.module.classpath">
+        <pathelement location="${bloq.testoutput.dir}"/>
+        <pathelement location="${bloq.output.dir}"/>
+        <path refid="library.lib.classpath"/>
+        <path refid="library.mysql-connector-java-5.0.8-bin.classpath"/>
+    </path>
+
+
+    <patternset id="excluded.from.module.bloq">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.bloq">
+        <patternset refid="excluded.from.module.bloq"/>
+    </patternset>
+
+    <path id="bloq.module.sourcepath">
+        <dirset dir="${module.bloq.basedir}">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.bloq" depends="compile.module.bloq.production,compile.module.bloq.tests"
+            description="Compile module bloq"/>
+
+    <target name="compile.module.bloq.production" depends="register.custom.compilers"
+            description="Compile module bloq; production classes">
+        <mkdir dir="${bloq.output.dir}"/>
+        <javac2 destdir="${bloq.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+                memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.bloq}/javac">
+            <compilerarg line="${compiler.args.bloq}"/>
+            <bootclasspath refid="bloq.module.bootclasspath"/>
+            <classpath refid="bloq.module.production.classpath"/>
+            <src refid="bloq.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.bloq"/>
+        </javac2>
+
+        <copy todir="${bloq.output.dir}">
+            <fileset dir="${module.bloq.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.bloq.tests" depends="register.custom.compilers,compile.module.bloq.production"
+            description="compile module bloq; test classes" unless="skip.tests"/>
+
+    <target name="clean.module.bloq" description="cleanup module">
+        <delete dir="${bloq.output.dir}"/>
+        <delete dir="${bloq.testoutput.dir}"/>
+    </target>
+</project>
