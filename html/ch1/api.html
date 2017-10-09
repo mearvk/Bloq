@@ -13,15 +13,149 @@
 
 <h2>APML System Elements</h2>
 
+
 <h3>The APML Element</h3>
+
+<p>
+    The APML System element [
+    <apml></apml>
+    ] is a housing element usually for developer defined System [
+    <system></system>
+    ] Elements.
+    It acts both as a container and as a interface between your system(s) and hierarchically removed APML system.
+    One APML Element usually to some few local systems and many APML Elements between systems that are derived
+    independently is how the architecture is conceived.
+    The APML Element is the base (root) element is therefore required for Bloq to forward compile the XML to Source
+    Code.
+</p>
+
+<p>
+    Example: <br><br>
+
+    <apml>
+        <system>
+            <object>
+            </object>
+        </system>
+    </apml>
+</p>
 
 <h3>The System Element</h3>
 
+<p>
+    The System element [
+    <system></system>
+    ] is a intermediate housing element usually for developer defined System Elements.
+    We care to include it to aid organization. A system element would contain many objects each of which could be simple
+    or complicated like a program or server. Ok.
+    The system element is quite standard and we would care to included it as part of regular practice. It is required
+    for the time being.
+</p>
+
+<p>
+    Example: <br><br>
+
+    <apml>
+        <system>
+            <object></object>
+        </system>
+        <system>
+            <object></object>
+            <object></object>
+            <object></object>
+        </system>
+    </apml>
+</p>
+
 <h3>The Object Element</h3>
+
+<p>
+    The System element [
+    <object></object>
+    ] is a generic element used for developer defined Object Elements.
+    Object Elements are useful because they can be extended, be specific or shallow and therefore are taught as a
+    cornerstone of System Theory. Ok.
+    Objects can be very general (a data structure) or they have larger scope like an HTTP server.
+    When you have a more specific APML Element use it. In other cases use the Object Element. Ok.
+</p>
+
+<p>
+    Example: <br><br>
+
+    <apml>
+        <system>
+            <object></object>
+        </system>
+    </apml>
+</p>
 
 <h3>The Callback Element</h3>
 
+<p>
+    The Callback element [
+    <callback></callback>
+    ] is an element used to set against an output a place for that output to be received as an input.
+    Callback elements are well understood in software. We make use of them here because they are more or less a standard
+    design pattern in Application and/or System Development.
+    The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+    would accept into a well understood data-structure the output of the first Object Element.
+    The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+    design would care to implement those guidingly for functional to follow or work with. Ok.
+    Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+</p>
+
+<p>
+    Example: <br><br>
+
+    <apml>
+        <system>
+            <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
+                    outputparametertype="java.lang.String"/>
+
+            <object bodi="//object002/" input="./functions/function001" output="none"
+                    inputparametertype="java.lang.String" outputparametertype="none"/>
+
+            <callback bodi="//callback001" input="//object001/functions/function001"
+                      output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
+        </system>
+    </apml>
+</p>
+
 <h3>The Producer Element</h3>
+
+<p>
+    The Producer element [
+    <producer></producer>
+    ] is an element used to set against an output a place for that output to be received as an input.
+    Callback elements are well understood in software. We make use of them here because they are more or less a standard
+    design pattern in Application and/or System Development.
+    The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+    would accept into a well understood data-structure the output of the first Object Element.
+    The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+    design would care to implement those guidingly for functional to follow or work with. Ok.
+    Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+</p>
+
+<p>
+    Example: <br><br>
+
+    <apml>
+        <system>
+            <object bodi="//object001/" input="/input" output="/output" inputclass="java.lang.String"
+                    outputclass="java.lang.String">
+
+                <object bodi="//object002/" input="/input" output="/output" inputclass="java.lang.String"
+                        outputclass="java.lang.String"/>
+
+                <object bodi="//object003/" input="/input" output="/output" inputclass="java.lang.String"
+                        outputclass="java.lang.String"/>
+
+                <callback bodi="//callback001" input="//object001" output="//object002"/>
+
+                <callback bodi="//callback002" input="//object002" output="//object003"/>
+        </system>
+    </apml>
+</p>
 
 <h3>The Consumer Element</h3>
 
