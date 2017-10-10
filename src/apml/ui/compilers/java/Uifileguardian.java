@@ -12,8 +12,10 @@ import java.io.File;
 public class Uifileguardian
 {
     protected final Integer hash = 0x00888FE8;
-    
-    public File xmlin;
+
+	//
+
+	public File xmlin;
     
     public File outputdir;
 

@@ -9,6 +9,10 @@ package apml.ui.compilers.java;
  */
 public class Uidriver
 {
+	protected final Integer hash = 0x00888FE8;
+
+	//
+
     /**
      * @param args
      */

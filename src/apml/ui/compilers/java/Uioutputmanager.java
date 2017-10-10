@@ -21,7 +21,9 @@ import java.util.ArrayList;
 public class Uioutputmanager
 {
     protected final Integer hash = 0x00888FE8;
-    
+
+	//
+
     public Uicompiler compiler;
     
     public Uioutputmanager(Uicompiler compiler)
@@ -204,6 +206,7 @@ public class Uioutputmanager
                     String string = "this.setLabel(\""+attribute.getNodeValue()+"\");\n\t";
                     
                     uip.constructor1.body().directStatement(string);
+
                     uip.constructor2.body().directStatement(string);
                     
                     continue;
@@ -318,9 +321,9 @@ public class Uioutputmanager
 					//
 
 					if( (sizes[0]!=null && !sizes[0].isEmpty()) && (sizes[1]!=null && !sizes[1].isEmpty()) )
-                    {                       
-                        if(sizes[0].endsWith("%") && sizes[1].endsWith("%")) //uniform; both width and heigh are percentage based
-                        {
+                    {
+						if (sizes[0].endsWith("%") && sizes[1].endsWith("%")) //
+						{
                             try
                             {
                                 Double width = Double.parseDouble(sizes[0].trim().replace("%", ""));
@@ -344,9 +347,9 @@ public class Uioutputmanager
                                 continue;
                             }
                         }
-                        
-                        if(sizes[0].endsWith("%") && sizes[1].endsWith("px")) //mixed; width is percentage based and height is pixel based
-                        {
+
+						if (sizes[0].endsWith("%") && sizes[1].endsWith("px")) //
+						{
                             try
                             {
                                 Double width = Double.parseDouble(sizes[0].trim().replace("%", ""));
@@ -369,10 +372,10 @@ public class Uioutputmanager
                             {
                                 continue;
                             }
-                        }  
-                        
-                        if(sizes[0].endsWith("px") && sizes[1].endsWith("%")) //mixed; width is pixel based and height is percentage based
-                        {
+                        }
+
+						if (sizes[0].endsWith("px") && sizes[1].endsWith("%")) //
+						{
                             try
                             {
                                 Double width = Double.parseDouble(sizes[0].trim().replace("px", ""));
@@ -397,8 +400,8 @@ public class Uioutputmanager
                             }
                         }
 
-                        if(sizes[0].endsWith("px") && sizes[1].endsWith("px")) //uniform; fixed basis in pixels for both width and height
-                        {
+						if (sizes[0].endsWith("px") && sizes[1].endsWith("px")) //
+						{
                             try
                             {
                                 Double width = Double.parseDouble(sizes[0].trim().replace("px", ""));
@@ -513,10 +516,10 @@ public class Uioutputmanager
             uip.jdc.field(JMod.PUBLIC, Class.forName("javax.imageio.ImageIO"), "importref_015");
             
             uip.jdc.field(JMod.PUBLIC, Class.forName("java.io.File"), "importref_016");
-            
-                        
-            NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);
 
+			//
+
+			NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);
 
 			//
 
@@ -534,6 +537,8 @@ public class Uioutputmanager
 			//
 
             uip.jdc.direct("\n");
+
+			//
 
             for(int i=0; i<children.getLength(); i++)
             {

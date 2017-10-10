@@ -133,7 +133,7 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 		{
 			if (uip.jdc._extends().name().contains("JSplitPane"))
 			{
-				//1st constructor - param setup
+				//
 
 				uip.constructor1 = uip.jdc.constructor(JMod.PUBLIC);
 
@@ -145,13 +145,11 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 
 				uip.constructor1.param(java.awt.Component.class, "component_001");
 
-				//1st constructor - body setup
-
 				uip.constructor1.body().directStatement("// super\n\t");
 
 				uip.constructor1.body().directStatement("super(orientation, component_000, component_001);\n\t");
 
-				//2nd constructor - param setup
+				//
 
 				uip.constructor2 = uip.jdc.constructor(JMod.PUBLIC);
 
@@ -165,8 +163,6 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 
 				uip.constructor2.param(java.awt.Component.class, "component_001");
 
-				//2nd constructor - body setup
-
 				uip.constructor2.body().directStatement("// super \n\t");
 
 				uip.constructor2.body().directStatement("super(orientation, component_000, component_001);\n\t");
@@ -178,13 +174,13 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 
 			else
 			{
-				//1st constructor setup
+				//
 
 				uip.constructor1 = uip.jdc.constructor(JMod.PUBLIC);
 
 				uip.constructor1.param(java.awt.Component.class, "parent");
 
-				//2nd constructor setup
+				//
 
 				uip.constructor2 = uip.jdc.constructor(JMod.PUBLIC);
 
@@ -448,8 +444,6 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 
 		String classname = reply[0];
 
-		String fullyqualifiedclassname = reply[1];
-
 		String classful_listener_type = element.getAttribute("class");
 
 		//
@@ -527,8 +521,6 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 
 		//
 
-		// The parent class implements directly the listener methods
-
 		if (element.getAttribute("class") != null && element.getAttribute("class").toLowerCase().equalsIgnoreCase("inherited"))
 		{
 			try
@@ -541,7 +533,7 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 			}
 		}
 
-		// The parent class has local non-public class for working with listeners
+		//
 
 		if (element.getAttribute("class") != null && element.getAttribute("class").toLowerCase().equalsIgnoreCase("local"))
 		{
@@ -589,6 +581,8 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 
 		String fullyqualifiedclassname = reply[1];
 
+		//
+
 		try
 		{
 			uip.jdc.field(JMod.PUBLIC, Class.forName(fullyqualifiedclassname), uip.classname.toLowerCase() + "_" + classname.toLowerCase());
@@ -622,7 +616,7 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 
 		if (classful_listener_type == null || classful_listener_type.toLowerCase().equalsIgnoreCase("inherited"))
 		{
-			//to be implemented
+			//
 		}
 		else if (classful_listener_type.toLowerCase().equalsIgnoreCase("local"))
 		{

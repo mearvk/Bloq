@@ -15,8 +15,10 @@ import java.util.ArrayList;
 public class Uicompiler
 {
     protected final Integer hash = 0x00888FE8;
-    
-    public Uifileguardian fileguardian = new Uifileguardian();
+
+	//
+
+	public Uifileguardian fileguardian = new Uifileguardian();
     
     public Uiinputmanager inputmanager = new Uiinputmanager(this);
 

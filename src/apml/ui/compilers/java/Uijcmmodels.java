@@ -13,6 +13,10 @@ import java.util.ArrayList;
  */
 public class Uijcmmodels
 {
+	protected final Integer hash = 0x00888FE8;
+
+	//
+
     public ArrayList<JCodeModel> jbuttonmodels = new ArrayList<JCodeModel>();
 
     public ArrayList<JCodeModel> jframemodels = new ArrayList<JCodeModel>();
