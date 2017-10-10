@@ -23,19 +23,12 @@ import apml.system.Apmlsystem;
 
 
 /**
- * Bloq software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
- * APML software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
- * Sprung software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
+ * Software programmatically produced by Bloq implementation version 1.05 - Bodi Remote Version
  * 
- * Software programmatically produced by Bloq implementation version 1.0
- * 
- * Hello and thanks to and from the Church of Scientology now in her final Holy Form. /mr /ok /ss
- * Hello and thanks to and from the HUC, Holy Unified Church, (the Church of "Hi, Hello") and welcome now in her lesser manner. /mr /ok /ss
- * 
- * 
- * 
- * 
- * //hi hello
+ * @author
+ * @see
+ * @since
+ * @version
  * 
  */
 public class JFrame_000
@@ -71,7 +64,7 @@ public class JFrame_000
      * @param parent : The parent AWT object.
      */
     public JFrame_000(Component parent) {
-        /* ------------------  setters  ---------------- */
+        // setters 
 	
         this.setBounds(50,50,800,600);
 	
@@ -79,25 +72,25 @@ public class JFrame_000
 	
         this.setTitle("APML Editor");
 	
-        /* ------------------  instantiation  ---------------- */
+        // instantiation 
 	
         this.jmenubar_000 = new JMenuBar_000(this);
 	
         this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
 	
-        /* ------------------  hierarchy  -------------------- */
+        // hierarchy 
 	
         this.setJMenuBar(jmenubar_000);
 	
         this.add(jsplitpane_000);
 	
-        /* ------------------  devolvement  -------------------- */
+        // devolvement 
 	
         this.parent = parent;
 	
         this.setVisible(true);
 	
-        /* ------------------  listeners  -------------------- */
+        // listeners 
 	
     }
 
@@ -107,7 +100,7 @@ public class JFrame_000
      * @param system : The APML system object.
      */
     public JFrame_000(Component parent, Apmlsystem system) {
-        /* ------------------  setters  ---------------- */
+        // setters 
 	
         this.setBounds(50,50,800,600);
 	
@@ -115,19 +108,19 @@ public class JFrame_000
 	
         this.setTitle("APML Editor");
 	
-        /* ------------------  instantiation  ---------------- */
+        // instantiation 
 	
         this.jmenubar_000 = new JMenuBar_000(this);
 	
         this.jsplitpane_000 = new JSplitPane_000(this, system, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
 	
-        /* ------------------  hierarchy  -------------------- */
+        // hierarchy 
 	
         this.setJMenuBar(jmenubar_000);
 	
         this.add(jsplitpane_000);
 	
-        /* ------------------  devolvement  -------------------- */
+        // devolvement 
 	
         this.parent = parent;
 	
@@ -135,7 +128,7 @@ public class JFrame_000
 	
         this.setVisible(true);
 	
-        /* ------------------  listeners  -------------------- */
+        // listeners 
 	
     }
     

@@ -23,19 +23,12 @@ import apml.system.Apmlsystem;
 
 
 /**
- * Bloq software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
- * APML software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
- * Sprung software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
+ * Software programmatically produced by Bloq implementation version 1.05 - Bodi Remote Version
  * 
- * Software programmatically produced by Bloq implementation version 1.0
- * 
- * Hello and thanks to and from the Church of Scientology now in her final Holy Form. /mr /ok /ss
- * Hello and thanks to and from the HUC, Holy Unified Church, (the Church of "Hi, Hello") and welcome now in her lesser manner. /mr /ok /ss
- * 
- * 
- * 
- * 
- * //hi hello
+ * @author
+ * @see
+ * @since
+ * @version
  * 
  */
 public class JTabbedPane_000
@@ -43,10 +36,6 @@ public class JTabbedPane_000
     implements ChangeListener
 {
 
-    public Integer marginleft = 10;
-    public Integer margintop = 10;
-    public Integer marginright = 10;
-    public Integer marginbottom = 10;
     public KeyEvent importref_001;
     public KeyStroke importref_002;
     public ActionEvent importref_003;
@@ -72,27 +61,25 @@ public class JTabbedPane_000
      */
     public JTabbedPane_000(Component parent) {
         /*---------------------- tab items -------------------*/
-        this.addTab("null", null, null, "null");
+        this.addTab("Tab One", null, null, "null");
 
-        this.addTab("null", null, null, "null");
+        this.addTab("Tab Two", null, null, "null");
 
-        this.addTab("null", null, null, "null");
+        this.addTab("Tab Three", null, null, "null");
 
-        /* ------------------  setters  ---------------- */
+        // setters 
 	
-        this.setBackground(new Color(76, 44, 147));
+        // instantiation 
 	
-        /* ------------------  instantiation  ---------------- */
+        // hierarchy 
 	
-        /* ------------------  hierarchy  -------------------- */
-	
-        /* ------------------  devolvement  -------------------- */
+        // devolvement 
 	
         this.parent = parent;
 	
         this.setVisible(true);
 	
-        /* ------------------  listeners  -------------------- */
+        // listeners 
 	
         this.addChangeListener(this);
 
@@ -105,21 +92,19 @@ public class JTabbedPane_000
      */
     public JTabbedPane_000(Component parent, Apmlsystem system) {
         /*---------------------- tab items -------------------*/
-        this.addTab("null", null, null, "null");
+        this.addTab("Tab One", null, null, "null");
 
-        this.addTab("null", null, null, "null");
+        this.addTab("Tab Two", null, null, "null");
 
-        this.addTab("null", null, null, "null");
+        this.addTab("Tab Three", null, null, "null");
 
-        /* ------------------  setters  ---------------- */
+        // setters 
 	
-        this.setBackground(new Color(76, 44, 147));
+        // instantiation 
 	
-        /* ------------------  instantiation  ---------------- */
+        // hierarchy 
 	
-        /* ------------------  hierarchy  -------------------- */
-	
-        /* ------------------  devolvement  -------------------- */
+        // devolvement 
 	
         this.parent = parent;
 	
@@ -127,14 +112,10 @@ public class JTabbedPane_000
 	
         this.setVisible(true);
 	
-        /* ------------------  listeners  -------------------- */
+        // listeners 
 	
         this.addChangeListener(this);
 
-    }
-
-    public Dimension getPreferredSize() {
-        return new Dimension( ((int)(parent.getWidth()*1.0)-this.marginleft), ((int)(parent.getHeight()*0.5)-this.margintop));
     }
     
     public void stateChanged(ChangeEvent ce) {

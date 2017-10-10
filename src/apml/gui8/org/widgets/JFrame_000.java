@@ -1,4 +1,4 @@
-package apml.gui7.org.widgets;
+package apml.gui8.org.widgets;
 
 import apml.system.Apmlsystem;
 
@@ -14,19 +14,11 @@ import java.net.URL;
 
 
 /**
- * Bloq software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
- * APML software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
- * Sprung software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
- * <p>
- * Software programmatically produced by Bloq implementation version 1.0
- * <p>
- * Hello and thanks to and from the Church of Scientology now in her final Holy Form. /mr /ok /ss
- * Hello and thanks to and from the HUC, Holy Unified Church, (the Church of "Hi, Hello") and welcome now in her lesser manner. /mr /ok /ss
- * <p>
- * <p>
- * <p>
- * <p>
- * //hi hello
+ * Software programmatically produced by Bloq implementation version 1.05 - Bodi Remote Version
+ *
+ * @author
+ * @see
+ * @since
  */
 public class JFrame_000 extends JFrame
 {
@@ -51,9 +43,9 @@ public class JFrame_000 extends JFrame
 	public Rectangle importref_014;
 	public ImageIO importref_015;
 	public File importref_016;
-	public JSplitPane importref_017;
 	public Component parent;
 	public Apmlsystem system;
+	public JSplitPane importref_017;
 	JMenuBar_000 jmenubar_000;
 	JSplitPane_000 jsplitpane_000;
 
@@ -62,7 +54,7 @@ public class JFrame_000 extends JFrame
 	 */
 	public JFrame_000(Component parent)
 	{
-		/* ------------------  setters  ---------------- */
+		// setters
 
 		this.setBounds(50, 50, 800, 600);
 
@@ -70,25 +62,25 @@ public class JFrame_000 extends JFrame
 
 		this.setTitle("APML Editor");
 
-        /* ------------------  instantiation  ---------------- */
+		// instantiation
 
 		this.jmenubar_000 = new JMenuBar_000(this);
 
 		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
 
-        /* ------------------  hierarchy  -------------------- */
+		// hierarchy
 
 		this.setJMenuBar(jmenubar_000);
 
 		this.add(jsplitpane_000);
 
-        /* ------------------  devolvement  -------------------- */
+		// devolvement
 
 		this.parent = parent;
 
 		this.setVisible(true);
 
-        /* ------------------  listeners  -------------------- */
+		// listeners
 
 	}
 
@@ -99,7 +91,7 @@ public class JFrame_000 extends JFrame
 	 */
 	public JFrame_000(Component parent, Apmlsystem system)
 	{
-        /* ------------------  setters  ---------------- */
+		// setters
 
 		this.setBounds(50, 50, 800, 600);
 
@@ -107,19 +99,19 @@ public class JFrame_000 extends JFrame
 
 		this.setTitle("APML Editor");
 
-        /* ------------------  instantiation  ---------------- */
+		// instantiation
 
 		this.jmenubar_000 = new JMenuBar_000(this);
 
 		this.jsplitpane_000 = new JSplitPane_000(this, system, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
 
-        /* ------------------  hierarchy  -------------------- */
+		// hierarchy
 
 		this.setJMenuBar(jmenubar_000);
 
 		this.add(jsplitpane_000);
 
-        /* ------------------  devolvement  -------------------- */
+		// devolvement
 
 		this.parent = parent;
 
@@ -127,12 +119,13 @@ public class JFrame_000 extends JFrame
 
 		this.setVisible(true);
 
-        /* ------------------  listeners  -------------------- */
+		// listeners
 
 	}
 
-	public static void main(String... arg)
+	public static void main(String... args)
 	{
 		new JFrame_000(null);
 	}
+
 }

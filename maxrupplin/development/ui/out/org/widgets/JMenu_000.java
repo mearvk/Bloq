@@ -22,19 +22,12 @@ import apml.system.Apmlsystem;
 
 
 /**
- * Bloq software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
- * APML software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
- * Sprung software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
+ * Software programmatically produced by Bloq implementation version 1.05 - Bodi Remote Version
  * 
- * Software programmatically produced by Bloq implementation version 1.0
- * 
- * Hello and thanks to and from the Church of Scientology now in her final Holy Form. /mr /ok /ss
- * Hello and thanks to and from the HUC, Holy Unified Church, (the Church of "Hi, Hello") and welcome now in her lesser manner. /mr /ok /ss
- * 
- * 
- * 
- * 
- * //hi hello
+ * @author
+ * @see
+ * @since
+ * @version
  * 
  */
 public class JMenu_000
@@ -65,29 +58,29 @@ public class JMenu_000
      * @param parent : The parent AWT object.
      */
     public JMenu_000(Component parent) {
-        /* ------------------  setters  ---------------- */
+        // setters 
 	
         this.setText("View");
 	
-        /* ------------------  instantiation  ---------------- */
+        // instantiation 
 	
         this.jmenuitem_000 = new JMenuItem_000(this);
 	
         this.jmenuitem_001 = new JMenuItem_001(this);
 	
-        /* ------------------  hierarchy  -------------------- */
+        // hierarchy 
 	
         this.add(jmenuitem_000);
 	
         this.add(jmenuitem_001);
 	
-        /* ------------------  devolvement  -------------------- */
+        // devolvement 
 	
         this.parent = parent;
 	
         this.setVisible(true);
 	
-        /* ------------------  listeners  -------------------- */
+        // listeners 
 	
     }
 
@@ -97,23 +90,23 @@ public class JMenu_000
      * @param system : The APML system object.
      */
     public JMenu_000(Component parent, Apmlsystem system) {
-        /* ------------------  setters  ---------------- */
+        // setters 
 	
         this.setText("View");
 	
-        /* ------------------  instantiation  ---------------- */
+        // instantiation 
 	
         this.jmenuitem_000 = new JMenuItem_000(this);
 	
         this.jmenuitem_001 = new JMenuItem_001(this);
 	
-        /* ------------------  hierarchy  -------------------- */
+        // hierarchy 
 	
         this.add(jmenuitem_000);
 	
         this.add(jmenuitem_001);
 	
-        /* ------------------  devolvement  -------------------- */
+        // devolvement 
 	
         this.parent = parent;
 	
@@ -121,7 +114,7 @@ public class JMenu_000
 	
         this.setVisible(true);
 	
-        /* ------------------  listeners  -------------------- */
+        // listeners 
 	
     }
     

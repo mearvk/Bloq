@@ -22,19 +22,12 @@ import apml.system.Apmlsystem;
 
 
 /**
- * Bloq software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
- * APML software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
- * Sprung software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
+ * Software programmatically produced by Bloq implementation version 1.05 - Bodi Remote Version
  * 
- * Software programmatically produced by Bloq implementation version 1.0
- * 
- * Hello and thanks to and from the Church of Scientology now in her final Holy Form. /mr /ok /ss
- * Hello and thanks to and from the HUC, Holy Unified Church, (the Church of "Hi, Hello") and welcome now in her lesser manner. /mr /ok /ss
- * 
- * 
- * 
- * 
- * //hi hello
+ * @author
+ * @see
+ * @since
+ * @version
  * 
  */
 public class JPanel_000
@@ -69,27 +62,27 @@ public class JPanel_000
      * @param parent : The parent AWT object.
      */
     public JPanel_000(Component parent) {
-        /* ------------------  setters  ---------------- */
+        // setters 
 	
         this.setBackground(new Color(210, 202, 228));
 	
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
 	
-        /* ------------------  instantiation  ---------------- */
+        // instantiation 
 	
         this.jtree_000 = new JTree_000(this);
 	
-        /* ------------------  hierarchy  -------------------- */
+        // hierarchy 
 	
         this.add(jtree_000);
 	
-        /* ------------------  devolvement  -------------------- */
+        // devolvement 
 	
         this.parent = parent;
 	
         this.setVisible(true);
 	
-        /* ------------------  listeners  -------------------- */
+        // listeners 
 	
     }
 
@@ -99,21 +92,21 @@ public class JPanel_000
      * @param system : The APML system object.
      */
     public JPanel_000(Component parent, Apmlsystem system) {
-        /* ------------------  setters  ---------------- */
+        // setters 
 	
         this.setBackground(new Color(210, 202, 228));
 	
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
 	
-        /* ------------------  instantiation  ---------------- */
+        // instantiation 
 	
         this.jtree_000 = new JTree_000(this);
 	
-        /* ------------------  hierarchy  -------------------- */
+        // hierarchy 
 	
         this.add(jtree_000);
 	
-        /* ------------------  devolvement  -------------------- */
+        // devolvement 
 	
         this.parent = parent;
 	
@@ -121,7 +114,7 @@ public class JPanel_000
 	
         this.setVisible(true);
 	
-        /* ------------------  listeners  -------------------- */
+        // listeners 
 	
     }
 

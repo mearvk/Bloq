@@ -18,6 +18,16 @@
 
         </jmenubar>
 
+        <jtabbedpane>
+
+            <tab setText="Tab One"/>
+
+            <tab setText="Tab Two"/>
+
+            <tab setText="Tab Three"/>
+
+        </jtabbedpane>
+
         <jsplitpane setSize="100%:100%" setBackground="new Color(76, 44, 147)" setMargin="10:10:10:10" setDividerLocation="150">
 
             <jpanel setSize="30%:100%" setBackground="new Color(210, 202, 228)" setMargin="10:10:10:10" setLayout="new FlowLayout(FlowLayout.LEFT)">

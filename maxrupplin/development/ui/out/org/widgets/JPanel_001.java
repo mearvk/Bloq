@@ -22,19 +22,12 @@ import apml.system.Apmlsystem;
 
 
 /**
- * Bloq software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
- * APML software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
- * Sprung software & design courtesy of Max Rupplin. All rights reserved. 2017 AD Earth, Gregorian.
+ * Software programmatically produced by Bloq implementation version 1.05 - Bodi Remote Version
  * 
- * Software programmatically produced by Bloq implementation version 1.0
- * 
- * Hello and thanks to and from the Church of Scientology now in her final Holy Form. /mr /ok /ss
- * Hello and thanks to and from the HUC, Holy Unified Church, (the Church of "Hi, Hello") and welcome now in her lesser manner. /mr /ok /ss
- * 
- * 
- * 
- * 
- * //hi hello
+ * @author
+ * @see
+ * @since
+ * @version
  * 
  */
 public class JPanel_001
@@ -69,21 +62,21 @@ public class JPanel_001
      * @param parent : The parent AWT object.
      */
     public JPanel_001(Component parent) {
-        /* ------------------  setters  ---------------- */
+        // setters 
 	
         this.setBackground(new Color(76, 50, 147));
 	
-        /* ------------------  instantiation  ---------------- */
+        // instantiation 
 	
-        /* ------------------  hierarchy  -------------------- */
+        // hierarchy 
 	
-        /* ------------------  devolvement  -------------------- */
+        // devolvement 
 	
         this.parent = parent;
 	
         this.setVisible(true);
 	
-        /* ------------------  listeners  -------------------- */
+        // listeners 
 	
     }
 
@@ -93,15 +86,15 @@ public class JPanel_001
      * @param system : The APML system object.
      */
     public JPanel_001(Component parent, Apmlsystem system) {
-        /* ------------------  setters  ---------------- */
+        // setters 
 	
         this.setBackground(new Color(76, 50, 147));
 	
-        /* ------------------  instantiation  ---------------- */
+        // instantiation 
 	
-        /* ------------------  hierarchy  -------------------- */
+        // hierarchy 
 	
-        /* ------------------  devolvement  -------------------- */
+        // devolvement 
 	
         this.parent = parent;
 	
@@ -109,7 +102,7 @@ public class JPanel_001
 	
         this.setVisible(true);
 	
-        /* ------------------  listeners  -------------------- */
+        // listeners 
 	
     }
 

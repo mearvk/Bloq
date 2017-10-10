@@ -14,7 +14,9 @@ import java.io.File;
 public class Uiinputmanager
 {
     protected final Integer hash = 0x00888FE8;
-    
+
+	//
+
     public Uicompiler compiler;
 
     public Uixpathstrings xpathstrings = new Uixpathstrings();
@@ -22,15 +24,23 @@ public class Uiinputmanager
     public Uijcmmodels jcmmodels = new Uijcmmodels();
 
     public File file;
-    
-    public Uiinputmanager(Uicompiler compiler)
+
+	/**
+	 * @param compiler The compiler object used by Bloq
+	 */
+	public Uiinputmanager(Uicompiler compiler)
     {
         this.compiler = compiler;
 
         this.file = this.compiler.fileguardian.xmlin;
     }
-    
-    public boolean generatemodels(String tagname)            
+
+    /**
+	 *
+	 * @param tagname The APML tag element
+	 * @return
+	 */
+	public boolean generatemodels(String tagname)
     {            
         switch(tagname)
         {
