@@ -9,14 +9,17 @@ package apml.ui.compilers.java;
  */
 public class Uidriver
 {
+    /**
+     * @param args
+     */
     public static void main(String...args)
     {
         Uicompiler compiler;
-                
+
         compiler = new Uicompiler();
-        
+
         compiler.dohandleinputfiles(compiler.inputmanager);
-        
-        compiler.dohandleoutputfiles(compiler.outputmanager);        
+
+        compiler.dohandleoutputfiles(compiler.outputmanager);
     }    
 }

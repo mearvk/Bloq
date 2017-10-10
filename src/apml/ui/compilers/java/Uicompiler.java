@@ -18,10 +18,13 @@ public class Uicompiler
     
     public Uifileguardian fileguardian = new Uifileguardian();
     
-    public Uiinputmanager inputmanager = new Uiinputmanager(this); 
-    
-    public Uioutputmanager outputmanager = new Uioutputmanager(this);                
-    
+    public Uiinputmanager inputmanager = new Uiinputmanager(this);
+
+    public Uioutputmanager outputmanager = new Uioutputmanager(this);
+
+    /**
+     *
+     */
     public Uicompiler()
     {
         Bodi.setcontext("//bodi/version");

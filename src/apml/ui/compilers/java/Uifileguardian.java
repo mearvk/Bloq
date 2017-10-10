@@ -16,9 +16,12 @@ public class Uifileguardian
     public File xmlin;
     
     public File outputdir;
-    
-    public Uifileguardian()
-    {
+
+	/**
+	 *
+	 */
+	public Uifileguardian()
+	{
         try
         {
 			this.xmlin = new File("/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/ui/in/apmlgui.xml");

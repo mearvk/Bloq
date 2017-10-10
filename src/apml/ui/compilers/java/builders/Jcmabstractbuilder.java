@@ -47,11 +47,19 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 
 	public ArrayList<Uiparameter> storage = new ArrayList<Uiparameter>();
 
+	/**
+	 *
+	 */
 	public Jcmabstractbuilder()
 	{
 		//
 	}
 
+	/**
+	 * @param apml
+	 * @param tagname
+	 * @param classname
+	 */
 	public Jcmabstractbuilder(File apml, String tagname, Class classname)
 	{
 		Bodi.setcontext("widgets");
@@ -77,9 +85,8 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 	}
 
 	/**
-	 * Generic build order for each Java class in turn (//jframe, //jpanel, etc.)
 	 *
-	 * @return Array list
+	 * @return
 	 */
 	public ArrayList<JCodeModel> build()
 	{
@@ -117,7 +124,8 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 	}
 
 	/**
-	 * @param uip The housing parameter for APML element
+	 *
+	 * @param uip
 	 */
 	public void setconstructors(Uiparameter uip)
 	{
@@ -125,7 +133,7 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 		{
 			if (uip.jdc._extends().name().contains("JSplitPane"))
 			{
-				//1st constructor
+				//1st constructor - param setup
 
 				uip.constructor1 = uip.jdc.constructor(JMod.PUBLIC);
 
@@ -137,14 +145,13 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 
 				uip.constructor1.param(java.awt.Component.class, "component_001");
 
-				//
+				//1st constructor - body setup
 
 				uip.constructor1.body().directStatement("// super\n\t");
 
 				uip.constructor1.body().directStatement("super(orientation, component_000, component_001);\n\t");
 
-
-				//2nd constructor
+				//2nd constructor - param setup
 
 				uip.constructor2 = uip.jdc.constructor(JMod.PUBLIC);
 
@@ -158,7 +165,7 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 
 				uip.constructor2.param(java.awt.Component.class, "component_001");
 
-				//
+				//2nd constructor - body setup
 
 				uip.constructor2.body().directStatement("// super \n\t");
 
@@ -171,13 +178,13 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 
 			else
 			{
-				//1st constructor
+				//1st constructor setup
 
 				uip.constructor1 = uip.jdc.constructor(JMod.PUBLIC);
 
 				uip.constructor1.param(java.awt.Component.class, "parent");
 
-				//2nd constructor
+				//2nd constructor setup
 
 				uip.constructor2 = uip.jdc.constructor(JMod.PUBLIC);
 
@@ -407,13 +414,13 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 
 		jdefinedclass = uip.jdc;
 
-		// image variables
+		//
 
 		jdefinedclass.field(JMod.PUBLIC, java.awt.Image.class, "backgroundimage");
 
 		jdefinedclass.field(JMod.PUBLIC, java.lang.String.class, "backgroundimagename");
 
-		// override Swing method
+		//
 
 		JMethod method;
 

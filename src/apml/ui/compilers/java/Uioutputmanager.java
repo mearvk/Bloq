@@ -62,9 +62,12 @@ public class Uioutputmanager
             //e.printStackTrace();
         }    
     }
-    
-    private void setconstructorcomments(Uiparameter uip)
-    {        
+
+	/**
+	 * @param uip
+	 */
+	private void setconstructorcomments(Uiparameter uip)
+	{
         uip.constructor1.javadoc().addParam("parent : The parent AWT object.");
         
         /*---------------------------------------------------------------------*/
@@ -72,10 +75,13 @@ public class Uioutputmanager
         uip.constructor2.javadoc().addParam("system : The APML system object.");
 
         uip.constructor2.javadoc().addParam("parent : The parent AWT object.");
-    }
-    
-    private void setlisteners(Uiparameter uip)
-    {       
+	}
+
+	/**
+	 * @param uip
+	 */
+	private void setlisteners(Uiparameter uip)
+	{
         try
         {
             NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);
@@ -118,10 +124,13 @@ public class Uioutputmanager
         {
 			//exception.printStackTrace();
 		}
-    }
-    
-    private void setuisetters(Uiparameter uip)
-    {
+	}
+
+	/**
+	 * @param uip
+	 */
+	private void setuisetters(Uiparameter uip)
+	{
 		uip.constructor1.body().directStatement("// setters \n\t");
 
 		uip.constructor2.body().directStatement("// setters \n\t");
@@ -437,8 +446,6 @@ public class Uioutputmanager
                 
                 if(attribute.getNodeName().startsWith("set"))
                 {
-                    //
-                    
                     String string = "this."+attribute.getNodeName()+"("+attribute.getNodeValue()+");\n\t";
                     
                     uip.constructor1.body().directStatement(string);
@@ -455,7 +462,6 @@ public class Uioutputmanager
 		}
 		finally
 		{
-			//
 			try
 			{
 				Bodi.removecontext("bodi://apml.org/uioutmanager/build/setters");
@@ -466,9 +472,12 @@ public class Uioutputmanager
 			}
 		}
 	}
-    
-    private void setfields(Uiparameter uip)
-    {
+
+	/**
+	 * @param uip
+	 */
+	private void setfields(Uiparameter uip)
+	{
         try
         {                                       
             uip.jdc.direct("\n\t");
@@ -506,22 +515,23 @@ public class Uioutputmanager
             uip.jdc.field(JMod.PUBLIC, Class.forName("java.io.File"), "importref_016");
             
                         
-            NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);  
-            
-            
-            /*-----------------------------------------------------------------*/
-                        
-            for(int i=0; i<children.getLength(); i++)                           
+            NodeList children = (NodeList)uip.xpath.evaluate("./*", uip.node, XPathConstants.NODESET);
+
+
+			//
+
+			for(int i=0; i<children.getLength(); i++)
             {       
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
 
-                if (uipi == null) continue; //verify correctness
+				if (uipi == null)
+					continue;
 
                 new Jcmabstractbuilder().addListenerFields(uip, children.item(i));
             }
 
-            
-            /*-----------------------------------------------------------------*/
+
+			//
 
             uip.jdc.direct("\n");
 
@@ -529,7 +539,8 @@ public class Uioutputmanager
             {
                 Uiparameter uipi = (Uiparameter)Bodi.context("widgets").softpull(children.item(i));
 
-                if (uipi == null) continue; //verify correctness
+				if (uipi == null)
+					continue;
 
                 uip.jdc.direct("    " + uipi.classname + " " + uipi.instancename + ";\n");
             }
@@ -594,7 +605,7 @@ public class Uioutputmanager
 
 		//
 
-		if (uip.jdc._extends().name().contains("JFrame") || uip.jdc._extends().name().contains("JPanel")) /// jframe & jpanel instantiation case
+		if (uip.jdc._extends().name().contains("JFrame") || uip.jdc._extends().name().contains("JPanel"))
 		{
 			for (int i = 0; i < uip.children.getLength(); i++)
 			{
@@ -607,7 +618,7 @@ public class Uioutputmanager
 
 				//
 
-				if (uipi.jdc._extends().name().contains("JSplitPane")) /// jsplitpane instantiation
+				if (uipi.jdc._extends().name().contains("JSplitPane"))
 				{
 					try
 					{
@@ -650,7 +661,7 @@ public class Uioutputmanager
 
 		//
 
-		if (uip.jdc._extends().name().contains("JSplitPane")) ///  jsplitpane instantiation case
+		if (uip.jdc._extends().name().contains("JSplitPane"))
 		{
 
 			Uiparameter component_000 = (Uiparameter) Bodi.context("widgets").softpull(uip.children.item(0));
@@ -684,7 +695,7 @@ public class Uioutputmanager
 
 		//
 
-		for (int i = 0; i < uip.children.getLength(); i++) /// general javax.swing.JComponent instantiation case
+		for (int i = 0; i < uip.children.getLength(); i++)
 		{
 			Uiparameter uipi = (Uiparameter) Bodi.context("widgets").softpull(uip.children.item(i));
 
@@ -695,7 +706,7 @@ public class Uioutputmanager
 			//
 
 			if (uip.jdc._extends().name().contains("JSplitPane"))
-				continue; /// program to skip the jsplitpane instantiation case
+				continue;
 
 			//
 
@@ -707,14 +718,17 @@ public class Uioutputmanager
 
 		//
 
-		for (int i = 0; i < uip.children.getLength(); i++) /// listener instantiation
+		for (int i = 0; i < uip.children.getLength(); i++)
 		{
 			new Jcmabstractbuilder().addListenerInstantiation(uip, uip.children.item(i));
-        }
-    }
-       
-    private void dohierarchy(Uiparameter uip)
-    {
+		}
+	}
+
+	/**
+	 * @param uip
+	 */
+	private void dohierarchy(Uiparameter uip)
+	{
 		uip.constructor1.body().directStatement("// hierarchy \n\t");
 
 		uip.constructor2.body().directStatement("// hierarchy \n\t");
@@ -724,35 +738,33 @@ public class Uioutputmanager
 		//
 
 		if (uip.jdc._extends().name().contains("JSplitPane"))
-			return; //exception for jsplitpanes (at this time)
+			return;
 
 		//
 
         for(int i=0; i<uip.children.getLength(); i++)
         {    
             Uiparameter child = (Uiparameter)Bodi.context("widgets").softpull(uip.children.item(i));
-            
-            //safety check
+
             if (child == null) continue;
                         
             String parentclassname = uip.classname;
             
             String childsuperclass = child.jdc._extends().name();
             
-            String childfieldname = child.jdc.name().toLowerCase();                            
+            String childfieldname = child.jdc.name().toLowerCase();
 
-            //jframe as parent etc
+			//
+
             if(childsuperclass.contains("JMenuBar"))            
             {
                 uip.constructor1.body().directStatement("this.setJMenuBar(" + childfieldname + ");\n\t");
 
                 uip.constructor2.body().directStatement("this.setJMenuBar("+childfieldname+");\n\t");
                 
-                continue;                
-            }                        
-
-            //else a more standard case
-            else
+                continue;
+			}
+			else
             {
                 uip.constructor1.body().directStatement("this.add("+childfieldname+");\n\t");
 
@@ -760,11 +772,14 @@ public class Uioutputmanager
                 
                 continue;
             }
-        } 
-    }
-    
-    private void dodevolvement(Uiparameter uip)
-    {
+		}
+	}
+
+	/**
+	 * @param uip
+	 */
+	private void dodevolvement(Uiparameter uip)
+	{
 		// devolvement setters
 
 		uip.constructor1.body().directStatement("// devolvement \n\t");
