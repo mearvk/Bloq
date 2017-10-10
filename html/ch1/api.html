@@ -55,16 +55,18 @@
 <p>
     Example: <br><br>
 
-    <apml>
-        <system>
-            <object></object>
-        </system>
-        <system>
-            <object></object>
-            <object></object>
-            <object></object>
-        </system>
-    </apml>
+    <code>
+        <apml>
+            <system>
+                <object></object>
+            </system>
+            <system>
+                <object></object>
+                <object></object>
+                <object></object>
+            </system>
+        </apml>
+    </code>
 </p>
 
 <h3>The Object Element</h3>
@@ -82,11 +84,13 @@
 <p>
     Example: <br><br>
 
-    <apml>
-        <system>
-            <object></object>
-        </system>
-    </apml>
+    <code>
+        <apml>
+            <system>
+                <object></object>
+            </system>
+        </apml>
+    </code>
 </p>
 
 <h3>The Callback Element</h3>
@@ -107,7 +111,9 @@
 <p>
     Example: <br><br>
 
-    <apml>
+    <code>
+        <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
+              readme="http://loveboat/readme/107876512">
         <system>
             <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
                     outputparametertype="java.lang.String"/>
@@ -119,6 +125,7 @@
                       output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
         </system>
     </apml>
+    </code>
 </p>
 
 <h3>The Producer Element</h3>
@@ -139,23 +146,194 @@
 <p>
     Example: <br><br>
 
+    <!--
+    /1* (root element)
+    //2 (child element - 2nd degree)
+    //1 (child element - 2nd degree)
+    ///3 (child of child element - 3rd degree)
+    ///3
+    //1
+    //2
+    //1 (child element - 2nd degree)
+    //1 (closure element - 2nd degree)
+    /1* (closure root element 1st degree)
+
+    //satisfied as correct markup language if a hierarchically (1st order with 1st order, 2nd order with 2nd order, etc.) aware push/pop stack implementation would work (see below)
+
+    /1*  push
+    //2  push
+    //1  push
+    ///3 push
+    ///3 pop
+
+    ...
+
+    //2  pop
+    //1  push
+    //1  pop
+    /1*  pop
+
+    //such that every push at hierarchy N would eventually find a matching 'pop' at hierarchy level N for every element in the markup document
+
+    //so a stack worked like a paper stack - the last thing you added was on top and the first thing was on the bottom
+
+    //as soon as you had a hierarchical match you would pop - the rest would push onto stack
+
+
+    ///3   (push 4)
+    //1    (push 3)
+    //2    (push 2)
+    /1*    (push 1)
+
+    becomes...
+
+    ///3   (pop 1) -> remove this from stack because we have hierarchical match now (two ///3's). ok.
+    ///3   (push 4)
+    //1    (push 3)
+    //2    (push 2)
+    /1*    (push 1)
+
+    becomes...
+
+    //1    (push 3)
+    //2    (push 2)
+    /1     (push 1)
+
+    becomes...
+
+    //1    (pop 2)
+    //1    (push 3)
+    //2    (push 2)
+    /1     (push 1)
+
+    becomes...
+
+    //2    (push 2)
+    /1     (push 1)
+
+    becomes...
+
+    //2    (pop 3)
+    //2    (push 2)
+    /1     (push 1)
+
+    becomes...
+
+    /1     (push 1)
+
+    becomes...
+
+    //1    (push 5)
+    /1     (push 1)
+
+    becomes...
+
+    //1    (pop 4)
+    //1    (push 5)
+    /1     (push 1)
+
+    becomes...
+
+    /1     (push 1)
+
+    becomes...
+
+    /1*    (pop 5)
+    /1*    (push 1)
+
+    becomes push.count == pop.count && root element == root.element (ok as complete STACK)
+
+    Another data structure is a QUEUE
+
+    QUEUEs worked another way; the first person in was the first person served and the last person in was the last person served.
+
+    In computer Science there are many interesting data structures.  Depending on your requirement you would choose a stack or a queue.
+
+    If you wanted, for instance, to implement a series of function calls (a calls b calls c calls d calls e and a is the last to complete since we must complete b-e first) what would you use and why? Ok.  Try to answer.
+
+    //get groceries (function a )
+        //must have find car keys ( function b )
+            //must have be at home ( function c )
+        //must have wallet ( function d )
+            //must have money in it ( function e )
+
+    //hints?
+
+    ok - 3 minutes
+
+    /a
+    //b
+    ///c
+    //d
+    ///e
+
+    could be written as a STACK? YES/NO (might be hard to imagine)
+
+    could be written as a QUEUE? YES/NO (easy to imagine or is it)
+
+    So this is computer science - why choose one or the other?  Hmm.  Let's see.
+
+    First as a stack YES, yes we could write this as a STACK:
+
+    /a (a starts) -> implies we are going to get groceries
+    //b (b starts) -> implies we need to find keys
+    ///c (c starts) -> implies we need to be sure the keys are around
+    ///c (c finishes) -> implies we are sure the keys are around somewhere
+    //b (b finishes) -> implies we found the keys
+    //d (d starts) -> implies wallet is around
+    ///e (e starts) -> implies we are pretty sure there is money in our wallet
+    ///e (e finishes) -> implies we are now 100% sure there is money in our wallet
+    //d (d finishes) -> implies we find the wallet
+    /a (a finishes) -> implies we can go out to get groceries!
+
+    Now isn't that pretty?
+
+    We would submit that yes, that is pretty. 'a' depends on b so we can imagine that b is a child of proper ordering ergo /a imples //b BUT //b also implies ///c doesn't it?
+
+    BUT /a also implies d implies e so we can order these as a STACK because as each function/method is completed its STACK pop will functionally equate to its completion - neat isn't it?
+
+    Callbacks stuff the return values into a memory address instead of a stack's popped return value (a direct function return value).  We ask to be "called back" when the program is ready and check our address for readiness! Ok.
+
+    Intuitively a QUEUE could also be used for STACK functionality:
+
+    QUEUE 'A' could be used like:
+
+    QUEUE A [ A + QUEUE B [ B + QUEUE C ] ] [ A + QUEUE D [ D + QUEUE E ] ]
+
+    QUEUE A [ A + QUEUE B [ B + QUEUE C ] ] [ A + QUEUE D [ D + QUEUE E ] ]
+
+    Which is to say you could have a queue for queues at each point the stack became deeper by a degree and when those queues were satisfied the original value could go:
+
+    A - > B
+
+    B - > C
+
+    A - > D
+
+    D - > E
+
+    Ok? A implies B and B implies C and A also implies D which implies E. Ok.
+
+    So taking this up like a queue we would have A, B, C, D, E respective or A, D, E, B, C.  Ok.  So yes, you could write it up quickly as an ordered list or QUEUE.
+
+    <code>
     <apml>
         <system>
-            <object bodi="//object001/" input="/input" output="/output" inputclass="java.lang.String"
-                    outputclass="java.lang.String">
+                <object bodi="//object001/" input="/input" output="/output" inputclass="java.lang.String" outputclass="java.lang.String"/>
 
-                <object bodi="//object002/" input="/input" output="/output" inputclass="java.lang.String"
-                        outputclass="java.lang.String"/>
+                <object bodi="//object002/" input="/input" output="/output" inputclass="java.lang.String" outputclass="java.lang.String"/>
 
-                <object bodi="//object003/" input="/input" output="/output" inputclass="java.lang.String"
-                        outputclass="java.lang.String"/>
+                <object bodi="//object003/" input="/input" output="/output" inputclass="java.lang.String" outputclass="java.lang.String"/>
 
                 <callback bodi="//callback001" input="//object001" output="//object002"/>
 
                 <callback bodi="//callback002" input="//object002" output="//object003"/>
         </system>
     </apml>
+    </code>
 </p>
+
+-->
 
 <h3>The Consumer Element</h3>
 
