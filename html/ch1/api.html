@@ -13,19 +13,14 @@
 
 <h2>APML System Elements</h2>
 
+<!-- Start of elements -->
 
 <h3>The APML Element</h3>
 
 <p>
     The APML System element [
-<pre>
-    <code>
-        <apml></apml>
-    </code>
-    </pre>
-    ] is a housing element usually for developer defined System [
-    <system></system>
-    ] Elements.
+<pre><code><apml></apml></code></pre>
+] Elements.
     It acts both as a container and as a interface between your system(s) and hierarchically removed APML system.
     One APML Element usually to some few local systems and many APML Elements between systems that are derived
     independently is how the architecture is conceived.
@@ -44,16 +39,18 @@
     </apml>
 </p>
 
-<h3>The System Element</h3>
+<h4>
+    APML Specific XML Attributes
+</h4>
+
+<!-- end element -->
+
+<h4>The System Element</h4>
 
 <p>
     The System element [
-<pre>
-    <code>
-        <system></system>
-    </code>
-    </pre>
-    ] is a intermediate housing element usually for developer defined System Elements.
+<pre><code><system></system></code></pre>
+] is a intermediate housing element usually for developer defined System Elements.
     We care to include it to aid organization. A system element would contain many objects each of which could be simple
     or complicated like a program or server. Ok.
     The system element is quite standard and we would care to included it as part of regular practice. It is required
@@ -64,31 +61,33 @@
     Example: <br><br>
 
 <pre>
-    <code>
-        <apml>
-            <system>
-                <object></object>
-            </system>
-            <system>
-                <object></object>
-                <object></object>
-                <object></object>
-            </system>
-        </apml>
-    </code>
+        <code>
+            <apml>
+                <system>
+                    <object></object>
+                </system>
+                <system>
+                    <object></object>
+                    <object></object>
+                    <object></object>
+                </system>
+            </apml>
+        </code>
     </pre>
 </p>
 
-<h3>The Object Element</h3>
+<p>
+    System Specific XML Attributes
+</p>
+
+<!-- end element -->
+
+<h4>The Object Element</h4>
 
 <p>
-    The System element [
-<pre>
-    <code>
-        <object></object>
-    </code>
-    </pre>
-    ] is a generic element used for developer defined Object Elements.
+    The Object element [
+<pre><code><object></object></code></pre>
+]] is a generic element used for developer defined Object Elements.
     Object Elements are useful because they can be extended, be specific or shallow and therefore are taught as a
     cornerstone of System Theory. Ok.
     Objects can be very general (a data structure) or they have larger scope like an HTTP server.
@@ -99,26 +98,28 @@
     Example: <br><br>
 
 <pre>
-    <code>
-        <apml>
-            <system>
-                <object></object>
-            </system>
-        </apml>
-    </code>
+        <code>
+            <apml>
+                <system>
+                    <object></object>
+                </system>
+            </apml>
+        </code>
     </pre>
 </p>
 
-<h3>The Callback Element</h3>
+<p>
+    Object Specific XML Attributes
+</p>
+
+<!-- end element -->
+
+<h4>The Callback Element</h4>
 
 <p>
     The Callback element [
-<pre>
-    <code>
-        <callback></callback>
-    </code>
-    </pre>
-    ] is an element used to set against an output a place for that output to be received as an input.
+<pre><code><callback></callback></code></pre>
+]] is an element used to set against an output a place for that output to be received as an input.
     Callback elements are well understood in software. We make use of them here because they are more or less a standard
     design pattern in Application and/or System Development.
     The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
@@ -132,34 +133,36 @@
     Example: <br><br>
 
 <pre>
-    <code>
-        <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
-              readme="http://loveboat/readme/107876512">
-        <system>
-            <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
-                    outputparametertype="java.lang.String"/>
+        <code>
+            <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
+                  readme="http://loveboat/readme/107876512">
+                <system>
+                    <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
+                            outputparametertype="java.lang.String"/>
 
-            <object bodi="//object002/" input="./functions/function001" output="none"
-                    inputparametertype="java.lang.String" outputparametertype="none"/>
+                    <object bodi="//object002/" input="./functions/function001" output="none"
+                            inputparametertype="java.lang.String" outputparametertype="none"/>
 
-            <callback bodi="//callback001" input="//object001/functions/function001"
-                      output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
-        </system>
-    </apml>
-    </code>
+                    <callback bodi="//callback001" input="//object001/functions/function001"
+                              output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
+                </system>
+            </apml>
+        </code>
     </pre>
 </p>
 
-<h3>The Producer Element</h3>
+<p>
+    Callback Specific XML Attributes
+</p>
+
+<!-- end element -->
+
+<h4>The Producer Element</h4>
 
 <p>
     The Producer element [
-<pre>
-    <code>
-        <producer></producer>
-    </code>
-    </pre>
-    ] is an element used to set against an output a place for that output to be received as an input.
+<pre><code><producer></producer></code></pre>
+] is an element used to set against an output a place for that output to be received as an input.
     Callback elements are well understood in software. We make use of them here because they are more or less a standard
     design pattern in Application and/or System Development.
     The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
@@ -172,210 +175,334 @@
 <p>
     Example: <br><br>
 
-    <!--
-    /1* (root element)
-    //2 (child element - 2nd degree)
-    //1 (child element - 2nd degree)
-    ///3 (child of child element - 3rd degree)
-    ///3
-    //1
-    //2
-    //1 (child element - 2nd degree)
-    //1 (closure element - 2nd degree)
-    /1* (closure root element 1st degree)
+<pre>
+        <code>
+            <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
+                  readme="http://loveboat/readme/107876512">
+                <system>
+                    <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
+                            outputparametertype="java.lang.String"/>
 
-    //satisfied as correct markup language if a hierarchically (1st order with 1st order, 2nd order with 2nd order, etc.) aware push/pop stack implementation would work (see below)
+                    <object bodi="//object002/" input="./functions/function001" output="none"
+                            inputparametertype="java.lang.String" outputparametertype="none"/>
 
-    /1*  push
-    //2  push
-    //1  push
-    ///3 push
-    ///3 pop
-
-    ...
-
-    //2  pop
-    //1  push
-    //1  pop
-    /1*  pop
-
-    //such that every push at hierarchy N would eventually find a matching 'pop' at hierarchy level N for every element in the markup document
-
-    //so a stack worked like a paper stack - the last thing you added was on top and the first thing was on the bottom
-
-    //as soon as you had a hierarchical match you would pop - the rest would push onto stack
-
-
-    ///3   (push 4)
-    //1    (push 3)
-    //2    (push 2)
-    /1*    (push 1)
-
-    becomes...
-
-    ///3   (pop 1) -> remove this from stack because we have hierarchical match now (two ///3's). ok.
-    ///3   (push 4)
-    //1    (push 3)
-    //2    (push 2)
-    /1*    (push 1)
-
-    becomes...
-
-    //1    (push 3)
-    //2    (push 2)
-    /1     (push 1)
-
-    becomes...
-
-    //1    (pop 2)
-    //1    (push 3)
-    //2    (push 2)
-    /1     (push 1)
-
-    becomes...
-
-    //2    (push 2)
-    /1     (push 1)
-
-    becomes...
-
-    //2    (pop 3)
-    //2    (push 2)
-    /1     (push 1)
-
-    becomes...
-
-    /1     (push 1)
-
-    becomes...
-
-    //1    (push 5)
-    /1     (push 1)
-
-    becomes...
-
-    //1    (pop 4)
-    //1    (push 5)
-    /1     (push 1)
-
-    becomes...
-
-    /1     (push 1)
-
-    becomes...
-
-    /1*    (pop 5)
-    /1*    (push 1)
-
-    becomes push.count == pop.count && root element == root.element (ok as complete STACK)
-
-    Another data structure is a QUEUE
-
-    QUEUEs worked another way; the first person in was the first person served and the last person in was the last person served.
-
-    In computer Science there are many interesting data structures.  Depending on your requirement you would choose a stack or a queue.
-
-    If you wanted, for instance, to implement a series of function calls (a calls b calls c calls d calls e and a is the last to complete since we must complete b-e first) what would you use and why? Ok.  Try to answer.
-
-    //get groceries (function a )
-        //must have find car keys ( function b )
-            //must have be at home ( function c )
-        //must have wallet ( function d )
-            //must have money in it ( function e )
-
-    //hints?
-
-    ok - 3 minutes
-
-    /a
-    //b
-    ///c
-    //d
-    ///e
-
-    could be written as a STACK? YES/NO (might be hard to imagine)
-
-    could be written as a QUEUE? YES/NO (easy to imagine or is it)
-
-    So this is computer science - why choose one or the other?  Hmm.  Let's see.
-
-    First as a stack YES, yes we could write this as a STACK:
-
-    /a (a starts) -> implies we are going to get groceries
-    //b (b starts) -> implies we need to find keys
-    ///c (c starts) -> implies we need to be sure the keys are around
-    ///c (c finishes) -> implies we are sure the keys are around somewhere
-    //b (b finishes) -> implies we found the keys
-    //d (d starts) -> implies wallet is around
-    ///e (e starts) -> implies we are pretty sure there is money in our wallet
-    ///e (e finishes) -> implies we are now 100% sure there is money in our wallet
-    //d (d finishes) -> implies we find the wallet
-    /a (a finishes) -> implies we can go out to get groceries!
-
-    Now isn't that pretty?
-
-    We would submit that yes, that is pretty. 'a' depends on b so we can imagine that b is a child of proper ordering ergo /a imples //b BUT //b also implies ///c doesn't it?
-
-    BUT /a also implies d implies e so we can order these as a STACK because as each function/method is completed its STACK pop will functionally equate to its completion - neat isn't it?
-
-    Callbacks stuff the return values into a memory address instead of a stack's popped return value (a direct function return value).  We ask to be "called back" when the program is ready and check our address for readiness! Ok.
-
-    Intuitively a QUEUE could also be used for STACK functionality:
-
-    QUEUE 'A' could be used like:
-
-    QUEUE A [ A + QUEUE B [ B + QUEUE C ] ] [ A + QUEUE D [ D + QUEUE E ] ]
-
-    QUEUE A [ A + QUEUE B [ B + QUEUE C ] ] [ A + QUEUE D [ D + QUEUE E ] ]
-
-    Which is to say you could have a queue for queues at each point the stack became deeper by a degree and when those queues were satisfied the original value could go:
-
-    A - > B
-
-    B - > C
-
-    A - > D
-
-    D - > E
-
-    Ok? A implies B and B implies C and A also implies D which implies E. Ok.
-
-    So taking this up like a queue we would have A, B, C, D, E respective or A, D, E, B, C.  Ok.  So yes, you could write it up quickly as an ordered list or QUEUE.
-
-    <code>
-    <apml>
-        <system>
-                <object bodi="//object001/" input="/input" output="/output" inputclass="java.lang.String" outputclass="java.lang.String"/>
-
-                <object bodi="//object002/" input="/input" output="/output" inputclass="java.lang.String" outputclass="java.lang.String"/>
-
-                <object bodi="//object003/" input="/input" output="/output" inputclass="java.lang.String" outputclass="java.lang.String"/>
-
-                <callback bodi="//callback001" input="//object001" output="//object002"/>
-
-                <callback bodi="//callback002" input="//object002" output="//object003"/>
-        </system>
-    </apml>
-    </code>
+                    <producer bodi="//callback001" input="//object001/functions/function001"
+                              output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
+                </system>
+            </apml>
+        </code>
+    </pre>
 </p>
 
--->
+<p>
+    Producer Specific XML Attributes
+</p>
 
-<h3>The Consumer Element</h3>
+<!-- end element -->
 
-<h3>The Compiler Element</h3>
+<h4>The Consumer Element</h4>
 
-<h3>The Dynamic Listener Element</h3>
+<p>
+    The Consumer element [
+<pre><code><consumer></consumer></code></pre>
+] is an element used to set against an output a place for that output to be received as an input.
+Callback elements are well understood in software. We make use of them here because they are more or less a standard
+design pattern in Application and/or System Development.
+The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+would accept into a well understood data-structure the output of the first Object Element.
+The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+design would care to implement those guidingly for functional to follow or work with. Ok.
+Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+</p>
 
-<h3>The Listener Element</h3>
+<p>
+    Example: <br><br>
 
-<h3>The Subscriber Element</h3>
+<pre>
+        <code>
+            <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
+                  readme="http://loveboat/readme/107876512">
+                <system>
+                    <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
+                            outputparametertype="java.lang.String"/>
 
-<h3>The Driver Element</h3>
+                    <object bodi="//object002/" input="./functions/function001" output="none"
+                            inputparametertype="java.lang.String" outputparametertype="none"/>
 
-<h3>The Definition Element</h3>
+                    <consumer bodi="//callback001" input="//object001/functions/function001"
+                              output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
+                </system>
+            </apml>
+        </code>
+    </pre>
+</p>
 
-<h3>Common XML Attributes</h3>
+<!-- end element -->
+
+<p>
+    Definition Specific XML Attributes
+</p>
+
+<h4>The Compiler Element</h4>
+
+<p>
+    The Compiler element [
+<pre><code><compiler></compiler></code></pre>
+] is an element used to set against an output a place for that output to be received as an input.
+Callback elements are well understood in software. We make use of them here because they are more or less a standard
+design pattern in Application and/or System Development.
+The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+would accept into a well understood data-structure the output of the first Object Element.
+The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+design would care to implement those guidingly for functional to follow or work with. Ok.
+Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+</p>
+
+<p>
+    Definition Specific XML Attributes
+</p>
+
+<!-- end element -->
+
+<h4>The Dynamic Listener Element</h4>
+
+<p>
+    The Dynamic element [
+<pre><code><dynamiclistener></dynamiclistener></code></pre>
+] is an element used to set against an output a place for that output to be received as an input.
+Callback elements are well understood in software. We make use of them here because they are more or less a standard
+design pattern in Application and/or System Development.
+The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+would accept into a well understood data-structure the output of the first Object Element.
+The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+design would care to implement those guidingly for functional to follow or work with. Ok.
+Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+</p>
+
+<p>
+    Example: <br><br>
+
+<pre>
+        <code>
+            <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
+                  readme="http://loveboat/readme/107876512">
+                <system>
+                    <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
+                            outputparametertype="java.lang.String"/>
+
+                    <object bodi="//object002/" input="./functions/function001" output="none"
+                            inputparametertype="java.lang.String" outputparametertype="none"/>
+
+                    <consumer bodi="//callback001" input="//object001/functions/function001"
+                              output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
+                </system>
+            </apml>
+        </code>
+    </pre>
+</p>
+
+<p>
+    Dynamic Listener Specific XML Attributes
+</p>
+
+<!-- end element -->
+
+<h4>The Listener Element</h4>
+
+<p>
+    The Listener element [
+<pre><code><listener></listener></code></pre>
+] is an element used to set against an output a place for that output to be received as an input.
+Callback elements are well understood in software. We make use of them here because they are more or less a standard
+design pattern in Application and/or System Development.
+The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+would accept into a well understood data-structure the output of the first Object Element.
+The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+design would care to implement those guidingly for functional to follow or work with. Ok.
+Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+</p>
+
+<p>
+    Example: <br><br>
+
+<pre>
+        <code>
+            <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
+                  readme="http://loveboat/readme/107876512">
+                <system>
+                    <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
+                            outputparametertype="java.lang.String"/>
+
+                    <object bodi="//object002/" input="./functions/function001" output="none"
+                            inputparametertype="java.lang.String" outputparametertype="none"/>
+
+                    <consumer bodi="//callback001" input="//object001/functions/function001"
+                              output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
+                </system>
+            </apml>
+        </code>
+    </pre>
+</p>
+
+<p>
+    Listener Specific XML Attributes
+</p>
+
+<!-- end element -->
+
+<h4>The Subscriber Element</h4>
+
+<p>
+    The Subscriber element [
+<pre><code><subscriber></subscriber></code></pre>
+] is an element used to set against an output a place for that output to be received as an input.
+Callback elements are well understood in software. We make use of them here because they are more or less a standard
+design pattern in Application and/or System Development.
+The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+would accept into a well understood data-structure the output of the first Object Element.
+The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+design would care to implement those guidingly for functional to follow or work with. Ok.
+Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+</p>
+
+<p>
+    Example: <br><br>
+
+<pre>
+        <code>
+            <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
+                  readme="http://loveboat/readme/107876512">
+                <system>
+                    <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
+                            outputparametertype="java.lang.String"/>
+
+                    <object bodi="//object002/" input="./functions/function001" output="none"
+                            inputparametertype="java.lang.String" outputparametertype="none"/>
+
+                    <consumer bodi="//callback001" input="//object001/functions/function001"
+                              output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
+                </system>
+            </apml>
+        </code>
+    </pre>
+</p>
+
+<p>
+    Subscriber Specific XML Attributes
+</p>
+
+<!-- end element -->
+
+<h4>The Driver Element</h4>
+
+<p>
+    The Driver element [
+<pre><code><driver></driver></code></pre>
+] is an element used to set against an output a place for that output to be received as an input.
+Callback elements are well understood in software. We make use of them here because they are more or less a standard
+design pattern in Application and/or System Development.
+The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+would accept into a well understood data-structure the output of the first Object Element.
+The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+design would care to implement those guidingly for functional to follow or work with. Ok.
+Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+</p>
+
+<p>
+    Example: <br><br>
+
+<pre>
+        <code>
+            <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
+                  readme="http://loveboat/readme/107876512">
+                <system>
+                    <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
+                            outputparametertype="java.lang.String"/>
+
+                    <object bodi="//object002/" input="./functions/function001" output="none"
+                            inputparametertype="java.lang.String" outputparametertype="none"/>
+
+                    <consumer bodi="//callback001" input="//object001/functions/function001"
+                              output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
+                </system>
+            </apml>
+        </code>
+    </pre>
+</p>
+
+<p>
+    Driver Specific XML Attributes
+</p>
+
+<!-- end element -->
+
+<h4>The Definition Element</h4>
+
+<p>
+    The Definition element [
+<pre><code><definition></definition></code></pre>
+] is an element used to set against an output a place for that output to be received as an input.
+Callback elements are well understood in software. We make use of them here because they are more or less a standard
+design pattern in Application and/or System Development.
+The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+would accept into a well understood data-structure the output of the first Object Element.
+The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+design would care to implement those guidingly for functional to follow or work with. Ok.
+Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+</p>
+
+<p>
+    Example: <br><br>
+
+<pre>
+        <code>
+            <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
+                  readme="http://loveboat/readme/107876512">
+                <system>
+                    <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
+                            outputparametertype="java.lang.String"/>
+
+                    <object bodi="//object002/" input="./functions/function001" output="none"
+                            inputparametertype="java.lang.String" outputparametertype="none"/>
+
+                    <consumer bodi="//callback001" input="//object001/functions/function001"
+                              output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
+                </system>
+            </apml>
+        </code>
+    </pre>
+</p>
+
+<p>
+    Definition Specific XML Attributes
+</p>
+
+<!-- end element -->
+
+<h4>Common XML Attributes</h4>
+
+<p>
+    Here we list common attributes for APML objects. Many APML objects will have similar base function that can be
+    mapped in the XML itself. For instance, an
+<pre><code><object></object></code></pre>
+tag
+may have an id attribute, a Bodi String attribute and a class attribute. These would be common to the core set of APML
+objects since they are factually common to the System Design we are working with. Ok.
+
+<ul>
+    <li>id</li>
+    <li>name</li>
+    <li>bodi</li>
+    <li>class</li>
+    <li>implements</li>
+    <li>extends</li>
+    <li>...add as needed...</li>
+</ul>
+</p>
+
+Consumer
+
+<!-- ok -->
 
 <h2>APML GUI Elements</h2>
 
