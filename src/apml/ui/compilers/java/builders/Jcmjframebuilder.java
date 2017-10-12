@@ -12,39 +12,44 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- *
  * @author Max Rupplin
  */
-public class Jcmjframebuilder extends Jcmabstractbuilder {
-    protected final Integer hash = 0x00888FE8;
+public class Jcmjframebuilder extends Jcmabstractbuilder
+{
+	protected final Integer hash = 0x00888FE8;
 
-    public Jcmjframebuilder(File apml)
-    {
-        super(apml, "//jframe", JFrame.class);
-                
-        this.apml = apml;
-        
-        this.xpath = XPathFactory.newInstance().newXPath();
-    }
+	public Jcmjframebuilder(File apml)
+	{
+		super(apml, "//jframe", JFrame.class);
 
-    @Override
-    public ArrayList<JCodeModel> build() {
-        ArrayList<JCodeModel> retval = super.build();
+		this.apml = apml;
 
-        NodeList nodes;
+		this.xpath = XPathFactory.newInstance().newXPath();
+	}
 
-        for (JCodeModel model : retval) {
-            Uiparameter uip = (Uiparameter) Bodi.context("widgets").pull(model);
+	@Override
+	public ArrayList<JCodeModel> build()
+	{
+		ArrayList<JCodeModel> retval = super.build();
 
-            Element element = uip.element;
+		NodeList nodes;
 
-            if (element.getAttribute("setLayout") == null || element.getAttribute("setLayout").isEmpty()) {
-                element.setAttribute("setLayout", "new FlowLayout()");
+		//
 
-                uip.element = element;
-            }
-        }
+		for (JCodeModel model : retval)
+		{
+			Uiparameter uip = (Uiparameter) Bodi.context("widgets").pull(model);
 
-        return retval;
-    }
+			Element element = uip.element;
+
+			if (element.getAttribute("setLayout") == null || element.getAttribute("setLayout").isEmpty())
+			{
+				element.setAttribute("setLayout", "new FlowLayout()");
+
+				uip.element = element;
+			}
+		}
+
+		return retval;
+	}
 }

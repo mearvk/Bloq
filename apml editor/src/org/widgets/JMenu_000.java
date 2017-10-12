@@ -1,26 +1,17 @@
 
 package org.widgets;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Rectangle;
+import apml.system.Apmlsystem;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.net.URL;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JTabbedPane;
-import javax.swing.KeyStroke;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import apml.system.Apmlsystem;
 
 
 /**
@@ -32,12 +23,10 @@ import apml.system.Apmlsystem;
  * @version
  * 
  */
-public class JTabbedPane_000
-    extends JTabbedPane
+public class JMenu_000
+    extends JMenu
 {
 
-    public Image backgroundimage;
-    public String backgroundimagename;
     public KeyEvent importref_001;
     public KeyStroke importref_002;
     public ActionEvent importref_003;
@@ -61,14 +50,22 @@ public class JTabbedPane_000
      * 
      * @param parent : The parent AWT object.
      */
-    public JTabbedPane_000(Component parent) {
+    public JMenu_000(Component parent) {
         // setters 
 	
-        this.backgroundimagename = "tabbedpane_bg.png";
+        this.setText("View");
 	
         // instantiation 
 	
+        this.jmenuitem_000 = new JMenuItem_000(this);
+	
+        this.jmenuitem_001 = new JMenuItem_001(this);
+	
         // hierarchy 
+	
+        this.add(jmenuitem_000);
+	
+        this.add(jmenuitem_001);
 	
         // devolvement 
 	
@@ -85,14 +82,22 @@ public class JTabbedPane_000
      * @param parent : The parent AWT object.
      * @param system : The APML system object.
      */
-    public JTabbedPane_000(Component parent, Apmlsystem system) {
+    public JMenu_000(Component parent, Apmlsystem system) {
         // setters 
 	
-        this.backgroundimagename = "tabbedpane_bg.png";
+        this.setText("View");
 	
         // instantiation 
 	
+        this.jmenuitem_000 = new JMenuItem_000(this);
+	
+        this.jmenuitem_001 = new JMenuItem_001(this);
+	
         // hierarchy 
+	
+        this.add(jmenuitem_000);
+	
+        this.add(jmenuitem_001);
 	
         // devolvement 
 	
@@ -105,15 +110,9 @@ public class JTabbedPane_000
         // listeners 
 	
     }
-
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        try{this.backgroundimage = ImageIO.read(new File(backgroundimagename));}catch(Exception e){e.printStackTrace();}
-
-        g.drawImage(backgroundimage, 0, 0, this);
-    }
     
 	
+    JMenuItem_000 jmenuitem_000;
+    JMenuItem_001 jmenuitem_001;
 
 }

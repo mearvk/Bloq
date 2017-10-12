@@ -177,8 +177,10 @@ public class Bodicontext
             {
                 Element n1 = (Element)object;
                 
-                Element n2 = (Element)key;                
-                
+                Element n2 = (Element)key;
+
+				//System.out.println(object);
+
                 if(n1.isEqualNode(n2)) 
                 {
                     return value;

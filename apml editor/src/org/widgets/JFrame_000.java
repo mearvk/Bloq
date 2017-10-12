@@ -1,25 +1,17 @@
 
 package org.widgets;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
+import apml.system.Apmlsystem;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.net.URL;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JSplitPane;
-import javax.swing.KeyStroke;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import apml.system.Apmlsystem;
 
 
 /**
@@ -59,6 +51,9 @@ public class JFrame_000
     public Apmlsystem system;
     public JSplitPane importref_017;
 
+	JTabbedPane_000 jtabbedpane_000;
+
+
     /**
      * 
      * @param parent : The parent AWT object.
@@ -75,16 +70,16 @@ public class JFrame_000
         // instantiation 
 	
         this.jmenubar_000 = new JMenuBar_000(this);
-	
-        this.jtabbedpane_000 = new JTabbedPane_000(this);
+
+		this.jtabbedpane_000 = new JTabbedPane_000(this);
 	
         this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
 	
         // hierarchy 
 	
         this.setJMenuBar(jmenubar_000);
-	
-        this.add(jtabbedpane_000);
+
+		this.add(jtabbedpane_000);
 	
         this.add(jsplitpane_000);
 	
@@ -115,16 +110,16 @@ public class JFrame_000
         // instantiation 
 	
         this.jmenubar_000 = new JMenuBar_000(this);
-	
-        this.jtabbedpane_000 = new JTabbedPane_000(this);
+
+		this.jtabbedpane_000 = new JTabbedPane_000(this);
 	
         this.jsplitpane_000 = new JSplitPane_000(this, system, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
 	
         // hierarchy 
 	
         this.setJMenuBar(jmenubar_000);
-	
-        this.add(jtabbedpane_000);
+
+		this.add(jtabbedpane_000);
 	
         this.add(jsplitpane_000);
 	
@@ -142,7 +137,12 @@ public class JFrame_000
     
 	
     JMenuBar_000 jmenubar_000;
-    JTabbedPane_000 jtabbedpane_000;
-    JSplitPane_000 jsplitpane_000;
+
+	public static void main(String... args)
+	{
+		new JFrame_000(null);
+	}
+
+	JSplitPane_000 jsplitpane_000;
 
 }

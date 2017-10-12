@@ -1,49 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <apml>
-
     <jframe setLayout="new FlowLayout(FlowLayout.LEFT)" setBounds="50:50:800:600" setTitle="APML Editor" setMargin="10:10:10:10">
-
         <jmenubar>
-
             <jmenu setText="View">
-
-                <jmenuitem setText="Item 1">
-
-                </jmenuitem>
-
-                <jmenuitem setText="Item 2">
-
-                </jmenuitem>
-
+                <jmenuitem setText="Item 1"/>
+                <jmenuitem setText="Item 2"/>
             </jmenu>
-
         </jmenubar>
-
-        <jtabbedpane>
-
+        <jtabbedpane setBackgroundImage="tabbedpane_bg.png">
             <tab setText="Tab One"/>
-
             <tab setText="Tab Two"/>
-
             <tab setText="Tab Three"/>
-
         </jtabbedpane>
-
-        <jsplitpane setSize="100%:100%" setBackground="new Color(76, 44, 147)" setMargin="10:10:10:10" setDividerLocation="150">
-
-            <jpanel setSize="30%:100%" setBackground="new Color(210, 202, 228)" setMargin="10:10:10:10" setLayout="new FlowLayout(FlowLayout.LEFT)">
-
-                <jtree>
-
-                </jtree>
-
+        <jsplitpane setSize="100%:100%" setBackground="new Color(229,229,229)" setMargin="10:10:10:10" setDividerLocation="150">
+            <jpanel setSize="30%:100%" setBackground="new Color(229,229,229)" setMargin="10:10:10:10" setLayout="new FlowLayout(FlowLayout.LEFT)">
+                <jtree/>
             </jpanel>
-
-            <jpanel setSize="70%:100%" setBackground="new Color(76, 50, 147)" setMargin="10:10:10:10">
-
-            </jpanel>
-
+            <jpanel setSize="70%:100%" setBackground="new Color(229,229,229)" setMargin="10:10:10:10"/>
         </jsplitpane>
-
     </jframe>
-
 </apml>

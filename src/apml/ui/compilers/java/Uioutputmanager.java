@@ -533,7 +533,6 @@ public class Uioutputmanager
                 new Jcmabstractbuilder().addListenerFields(uip, children.item(i));
             }
 
-
 			//
 
             uip.jdc.direct("\n");

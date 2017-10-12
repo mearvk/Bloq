@@ -23,7 +23,7 @@ import java.util.Comparator;
 /**
  * @author Max Rupplin
  */
-public class Jcmabstractbuilder //todo check why dodevolvement must be called from concrete class and is not called on output side (uioutputmanager) where it is natively set; ok /mr /ok /ss
+public class Jcmabstractbuilder
 {
 	protected final Integer hash = 0x00888FE8;
 
@@ -216,7 +216,7 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 	 */
 	public void setuipvalues(Uiparameter uip)
 	{
-		/*----------------------------------------------------------------------*/
+		//
 
 		try
 		{
@@ -224,6 +224,7 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
 		}
 
 		try
@@ -232,6 +233,7 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
 		}
 
 		try
@@ -240,6 +242,7 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
 		}
 
 		try
@@ -312,7 +315,7 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 	 */
 	public void setbodi(Uiparameter uip)
 	{
-		/*----------------------------------------------------------------------*/
+		//
 
 		try
 		{
@@ -326,6 +329,15 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 		try
 		{
 			Bodi.context("widgets").put(uip.node, uip);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace(System.err);
+		}
+
+		try
+		{
+			Bodi.context("widgets").put(uip.classname, uip);
 		}
 		catch (Exception e)
 		{
@@ -386,7 +398,7 @@ public class Jcmabstractbuilder //todo check why dodevolvement must be called fr
 		}
 		catch (Exception e)
 		{
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 

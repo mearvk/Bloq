@@ -1,26 +1,17 @@
 
 package org.widgets;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Rectangle;
+import apml.system.Apmlsystem;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.net.URL;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JTabbedPane;
-import javax.swing.KeyStroke;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import apml.system.Apmlsystem;
 
 
 /**
@@ -32,12 +23,14 @@ import apml.system.Apmlsystem;
  * @version
  * 
  */
-public class JTabbedPane_000
-    extends JTabbedPane
+public class JSplitPane_000
+    extends JSplitPane
 {
 
-    public Image backgroundimage;
-    public String backgroundimagename;
+    public Integer marginleft = 10;
+    public Integer margintop = 10;
+    public Integer marginright = 10;
+    public Integer marginbottom = 10;
     public KeyEvent importref_001;
     public KeyStroke importref_002;
     public ActionEvent importref_003;
@@ -61,12 +54,22 @@ public class JTabbedPane_000
      * 
      * @param parent : The parent AWT object.
      */
-    public JTabbedPane_000(Component parent) {
+    public JSplitPane_000(Component parent, Integer orientation, Component component_000, Component component_001) {
+        // super
+	
+        super(orientation, component_000, component_001);
+	
         // setters 
 	
-        this.backgroundimagename = "tabbedpane_bg.png";
+        this.setBackground(new Color(76, 44, 147));
+	
+        this.setDividerLocation(150);
 	
         // instantiation 
+	
+        this.jpanel_000 = (JPanel_000)component_000;
+	
+        this.jpanel_001 = (JPanel_001)component_001;
 	
         // hierarchy 
 	
@@ -85,12 +88,22 @@ public class JTabbedPane_000
      * @param parent : The parent AWT object.
      * @param system : The APML system object.
      */
-    public JTabbedPane_000(Component parent, Apmlsystem system) {
+    public JSplitPane_000(Component parent, Apmlsystem system, Integer orientation, Component component_000, Component component_001) {
+        // super 
+	
+        super(orientation, component_000, component_001);
+	
         // setters 
 	
-        this.backgroundimagename = "tabbedpane_bg.png";
+        this.setBackground(new Color(76, 44, 147));
+	
+        this.setDividerLocation(150);
 	
         // instantiation 
+	
+        this.jpanel_000 = (JPanel_000)component_000;
+	
+        this.jpanel_001 = (JPanel_001)component_001;
 	
         // hierarchy 
 	
@@ -106,14 +119,12 @@ public class JTabbedPane_000
 	
     }
 
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        try{this.backgroundimage = ImageIO.read(new File(backgroundimagename));}catch(Exception e){e.printStackTrace();}
-
-        g.drawImage(backgroundimage, 0, 0, this);
+    public Dimension getPreferredSize() {
+        return new Dimension( ((int)(parent.getWidth()*1.0)-this.marginleft), ((int)(parent.getHeight()*1.0)-this.margintop));
     }
     
 	
+    JPanel_000 jpanel_000;
+    JPanel_001 jpanel_001;
 
 }
