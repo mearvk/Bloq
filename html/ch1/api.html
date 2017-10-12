@@ -17,27 +17,31 @@
 
 <h3>The APML Element</h3>
 
-<p>
+<div>
     The APML System element [
-<pre><code><apml></apml></code></pre>
-] Elements.
+    <pre><code>&lt;apml&gt;&lt;/apml&gt;</code></pre>
+    ] Elements.
     It acts both as a container and as a interface between your system(s) and hierarchically removed APML system.
     One APML Element usually to some few local systems and many APML Elements between systems that are derived
     independently is how the architecture is conceived.
     The APML Element is the base (root) element is therefore required for Bloq to forward compile the XML to Source
     Code.
-</p>
+</div>
 
-<p>
+<div>
     Example: <br><br>
 
-    <apml>
-        <system>
-            <object>
-            </object>
-        </system>
-    </apml>
-</p>
+    <pre>
+        <code>
+            &lt;apml&gt;
+                &lt;system&gt;
+                    &lt;object&gt;
+                    &lt;/object&gt;
+                &lt;/system&gt;
+            &lt;/apml&gt;
+        </code>
+    </pre>
+</div>
 
 <h4>
     APML Specific XML Attributes
