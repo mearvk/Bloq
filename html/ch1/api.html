@@ -282,24 +282,23 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 <p>
     Example: <br><br>
 
-    &lt;pre&gt;
-    &lt;code&gt;
-    &lt;apml bodi=&quot;//loveboat/published/software/107876512/&quot; repo=&quot;http://loveboat/sourcecode/107876512&quot;
-    readme=&quot;http://loveboat/readme/107876512&quot;&gt;
-    &lt;system&gt;
-    &lt;object bodi=&quot;//object001/&quot; input=&quot;none&quot; output=&quot;./functions/function001&quot;
-    inputparametertype=&quot;none&quot;
-    outputparametertype=&quot;java.lang.String&quot;/&gt;
+<pre>
+        <code>
+            &lt;apml bodi=&quot;//loveboat/published/software/107876512/&quot; repo=&quot;http://loveboat/sourcecode/107876512&quot;
+                  readme=&quot;http://loveboat/readme/107876512&quot;&gt;
+                &lt;system&gt;
+                    &lt;object bodi=&quot;//object001/&quot; input=&quot;none&quot; output=&quot;./functions/function001&quot; inputparametertype=&quot;none&quot;
+                            outputparametertype=&quot;java.lang.String&quot;/&gt;
 
-    &lt;object bodi=&quot;//object002/&quot; input=&quot;./functions/function001&quot; output=&quot;none&quot;
-    inputparametertype=&quot;java.lang.String&quot; outputparametertype=&quot;none&quot;/&gt;
+                    &lt;object bodi=&quot;//object002/&quot; input=&quot;./functions/function001&quot; output=&quot;none&quot;
+                            inputparametertype=&quot;java.lang.String&quot; outputparametertype=&quot;none&quot;/&gt;
 
-    &lt;consumer bodi=&quot;//callback001&quot; input=&quot;//object001/functions/function001&quot;
-    output=&quot;//object002/functions/function001&quot; methodname=&quot;callmeback&quot; parametertype=&quot;infer&quot;/&gt;
-    &lt;/system&gt;
-    &lt;/apml&gt;
-    &lt;/code&gt;
-    &lt;/pre&gt;
+                    &lt;consumer bodi=&quot;//callback001&quot; input=&quot;//object001/functions/function001&quot;
+                              output=&quot;//object002/functions/function001&quot; methodname=&quot;callmeback&quot; parametertype=&quot;infer&quot;/&gt;
+                &lt;/system&gt;
+            &lt;/apml&gt;
+        </code>
+    </pre>
 </p>
 
 <p>
