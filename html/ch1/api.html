@@ -57,7 +57,7 @@
     for the time being.
 </div>
 
-<p>
+<div>
     Example: <br><br>
 
 <pre>
@@ -74,7 +74,7 @@
             </apml>
         </code>
     </pre>
-</p>
+</div>
 
 <p>
     System Specific XML Attributes
@@ -84,15 +84,15 @@
 
 <h4>The Object Element</h4>
 
-<p>
+<div>
     The Object element [<pre><code><object></object></code></pre>] is a generic element used for developer defined Object Elements.
     Object Elements are useful because they can be extended, be specific or shallow and therefore are taught as a
     cornerstone of System Theory. Ok.
     Objects can be very general (a data structure) or they have larger scope like an HTTP server.
     When you have a more specific APML Element use it. In other cases use the Object Element. Ok.
-</p>
+</div>
 
-<p>
+<div>
     Example: <br><br>
 
 <pre>
@@ -104,7 +104,7 @@
             </apml>
         </code>
     </pre>
-</p>
+</div>
 
 <p>
     Object Specific XML Attributes
@@ -114,10 +114,8 @@
 
 <h4>The Callback Element</h4>
 
-<p>
-    The Callback element [
-<pre><code><callback></callback></code></pre>
-] is an element used to set against an output a place for that output to be received as an input.
+<div>
+    The Callback element [<pre><code><callback></callback></code></pre>] is an element used to set against an output a place for that output to be received as an input.
     Callback elements are well understood in software. We make use of them here because they are more or less a standard
     design pattern in Application and/or System Development.
     The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
@@ -125,29 +123,25 @@
     The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
     design would care to implement those guidingly for functional to follow or work with. Ok.
     Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
-</p>
+</div>
 
-<p>
+<div>
     Example: <br><br>
 
-<pre>
+    <pre>
         <code>
-            <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
-                  readme="http://loveboat/readme/107876512">
+            <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512" readme="http://loveboat/readme/107876512">
                 <system>
-                    <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
-                            outputparametertype="java.lang.String"/>
+                    <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none" outputparametertype="java.lang.String"/>
 
-                    <object bodi="//object002/" input="./functions/function001" output="none"
-                            inputparametertype="java.lang.String" outputparametertype="none"/>
+                    <object bodi="//object002/" input="./functions/function001" output="none" inputparametertype="java.lang.String" outputparametertype="none"/>
 
-                    <callback bodi="//callback001" input="//object001/functions/function001"
-                              output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
+                    <callback bodi="//callback001" input="//object001/functions/function001" output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
                 </system>
             </apml>
         </code>
     </pre>
-</p>
+</div>
 
 <p>
     Callback Specific XML Attributes
@@ -157,10 +151,8 @@
 
 <h4>The Producer Element</h4>
 
-<p>
-    The Producer element [
-<pre><code><producer></producer></code></pre>
-] is an element used to set against an output a place for that output to be received as an input.
+<div>
+    The Producer element [<pre><code><producer></producer></code></pre>] is an element used to set against an output a place for that output to be received as an input.
     Callback elements are well understood in software. We make use of them here because they are more or less a standard
     design pattern in Application and/or System Development.
     The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
@@ -168,12 +160,12 @@
     The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
     design would care to implement those guidingly for functional to follow or work with. Ok.
     Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
-</p>
+</div>
 
-<p>
+<div>
     Example: <br><br>
 
-<pre>
+    <pre>
         <code>
             <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
                   readme="http://loveboat/readme/107876512">
@@ -190,7 +182,7 @@
             </apml>
         </code>
     </pre>
-</p>
+</div>
 
 <p>
     Producer Specific XML Attributes
@@ -200,10 +192,8 @@
 
 <h4>The Consumer Element</h4>
 
-<p>
-    The Consumer element [
-<pre><code><consumer></consumer></code></pre>
-] is an element used to set against an output a place for that output to be received as an input.
+<div>
+    The Consumer element [<pre><code><consumer></consumer></code></pre>] is an element used to set against an output a place for that output to be received as an input.
 Callback elements are well understood in software. We make use of them here because they are more or less a standard
 design pattern in Application and/or System Development.
 The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
@@ -211,12 +201,12 @@ would accept into a well understood data-structure the output of the first Objec
 The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
 design would care to implement those guidingly for functional to follow or work with. Ok.
 Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
-</p>
+</div>
 
-<p>
+<div>
     Example: <br><br>
 
-<pre>
+    <pre>
         <code>
             <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
                   readme="http://loveboat/readme/107876512">
@@ -233,7 +223,7 @@ Here we should note that the pattern is conceived flexibly and is written to be 
             </apml>
         </code>
     </pre>
-</p>
+</div>
 
 <!-- end element -->
 
@@ -243,10 +233,8 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 
 <h4>The Compiler Element</h4>
 
-<p>
-    The Compiler element [
-<pre><code><compiler></compiler></code></pre>
-] is an element used to set against an output a place for that output to be received as an input.
+<div>
+    The Compiler element [<pre><code><compiler></compiler></code></pre>] is an element used to set against an output a place for that output to be received as an input.
 Callback elements are well understood in software. We make use of them here because they are more or less a standard
 design pattern in Application and/or System Development.
 The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
@@ -254,7 +242,7 @@ would accept into a well understood data-structure the output of the first Objec
 The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
 design would care to implement those guidingly for functional to follow or work with. Ok.
 Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
-</p>
+</div>
 
 <p>
     Definition Specific XML Attributes
@@ -264,7 +252,7 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 
 <h4>The Dynamic Listener Element</h4>
 
-<p>
+<div>
     The Dynamic element [
 <pre><code>&lt;dynamiclistener&gt;&lt;/dynamiclistener&gt;</code></pre>
 ] is an element used to set against an output a place for that output to be received as an input.
@@ -275,8 +263,9 @@ would accept into a well understood data-structure the output of the first Objec
 The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
 design would care to implement those guidingly for functional to follow or work with. Ok.
 Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+</div>
 
-
+<div>
     Example: <br><br>
 
 <pre>
@@ -296,7 +285,7 @@ Here we should note that the pattern is conceived flexibly and is written to be 
             &lt;/apml&gt;
         </code>
     </pre>
-
+</div>
 
 <p>
     Dynamic Listener Specific XML Attributes
@@ -306,10 +295,8 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 
 <h4>The Listener Element</h4>
 
-<p>
-    The Listener element [
-<pre><code><listener></listener></code></pre>
-] is an element used to set against an output a place for that output to be received as an input.
+<div>
+    The Listener element [<pre><code><listener></listener></code></pre>] is an element used to set against an output a place for that output to be received as an input.
 Callback elements are well understood in software. We make use of them here because they are more or less a standard
 design pattern in Application and/or System Development.
 The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
@@ -317,12 +304,12 @@ would accept into a well understood data-structure the output of the first Objec
 The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
 design would care to implement those guidingly for functional to follow or work with. Ok.
 Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
-</p>
+</div>
 
-<p>
+<div>
     Example: <br><br>
 
-<pre>
+    <pre>
         <code>
             <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
                   readme="http://loveboat/readme/107876512">
@@ -339,7 +326,7 @@ Here we should note that the pattern is conceived flexibly and is written to be 
             </apml>
         </code>
     </pre>
-</p>
+</div>
 
 <p>
     Listener Specific XML Attributes
@@ -349,10 +336,8 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 
 <h4>The Subscriber Element</h4>
 
-<p>
-    The Subscriber element [
-<pre><code><subscriber></subscriber></code></pre>
-] is an element used to set against an output a place for that output to be received as an input.
+<div>
+    The Subscriber element [<pre><code><subscriber></subscriber></code></pre>] is an element used to set against an output a place for that output to be received as an input.
 Callback elements are well understood in software. We make use of them here because they are more or less a standard
 design pattern in Application and/or System Development.
 The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
@@ -360,12 +345,12 @@ would accept into a well understood data-structure the output of the first Objec
 The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
 design would care to implement those guidingly for functional to follow or work with. Ok.
 Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
-</p>
+</div>
 
-<p>
+<div>
     Example: <br><br>
 
-<pre>
+    <pre>
         <code>
             <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
                   readme="http://loveboat/readme/107876512">
@@ -382,7 +367,7 @@ Here we should note that the pattern is conceived flexibly and is written to be 
             </apml>
         </code>
     </pre>
-</p>
+</div>
 
 <p>
     Subscriber Specific XML Attributes
@@ -392,10 +377,8 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 
 <h4>The Driver Element</h4>
 
-<p>
-    The Driver element [
-<pre><code><driver></driver></code></pre>
-] is an element used to set against an output a place for that output to be received as an input.
+<div>
+    The Driver element [<pre><code><driver></driver></code></pre>] is an element used to set against an output a place for that output to be received as an input.
 Callback elements are well understood in software. We make use of them here because they are more or less a standard
 design pattern in Application and/or System Development.
 The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
@@ -403,9 +386,9 @@ would accept into a well understood data-structure the output of the first Objec
 The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
 design would care to implement those guidingly for functional to follow or work with. Ok.
 Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
-</p>
+</div>
 
-<p>
+<div>
     Example: <br><br>
 
 <pre>
@@ -425,7 +408,7 @@ Here we should note that the pattern is conceived flexibly and is written to be 
             </apml>
         </code>
     </pre>
-</p>
+</div>
 
 <p>
     Driver Specific XML Attributes
@@ -435,10 +418,8 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 
 <h4>The Definition Element</h4>
 
-<p>
-    The Definition element [
-<pre><code><definition></definition></code></pre>
-] is an element used to set against an output a place for that output to be received as an input.
+<div>
+    The Definition element [<pre><code><definition></definition></code></pre>] is an element used to set against an output a place for that output to be received as an input.
 Callback elements are well understood in software. We make use of them here because they are more or less a standard
 design pattern in Application and/or System Development.
 The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
@@ -446,12 +427,12 @@ would accept into a well understood data-structure the output of the first Objec
 The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
 design would care to implement those guidingly for functional to follow or work with. Ok.
 Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
-</p>
+</div>
 
-<p>
+<div>
     Example: <br><br>
 
-<pre>
+    <pre>
         <code>
             <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
                   readme="http://loveboat/readme/107876512">
@@ -468,7 +449,7 @@ Here we should note that the pattern is conceived flexibly and is written to be 
             </apml>
         </code>
     </pre>
-</p>
+</div>
 
 <p>
     Definition Specific XML Attributes
@@ -478,24 +459,22 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 
 <h4>Common XML Attributes</h4>
 
-<p>
+<div>
     Here we list common attributes for APML objects. Many APML objects will have similar base function that can be
-    mapped in the XML itself. For instance, an
-<pre><code><object></object></code></pre>
-tag may have an id attribute, a Bodi String attribute and a class attribute however so may any other APML element. These
-would be common to the core set of APML
-objects since they are factually common to the System Design we are working with. Ok.
+    mapped in the XML itself. For instance, an <pre><code><object></object></code></pre> tag may have an id attribute,
+    a Bodi String attribute and a class attribute however so may any other APML element. These would be common to the core set of APM
+    objects since they are factually common to the System Design we are working with. Ok.
 
-<ul>
-    <li>id</li>
-    <li>name</li>
-    <li>bodi</li>
-    <li>class</li>
-    <li>implements</li>
-    <li>extends</li>
-    <li>...add as needed...</li>
-</ul>
-</p>
+    <ul>
+        <li>id</li>
+        <li>name</li>
+        <li>bodi</li>
+        <li>class</li>
+        <li>implements</li>
+        <li>extends</li>
+        <li>...add as needed...</li>
+    </ul>
+</div>
 
 <!-- ok -->
 
