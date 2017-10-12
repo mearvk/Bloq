@@ -282,23 +282,24 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 <p>
     Example: <br><br>
 
-<pre>
-        <code>
-            <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
-                  readme="http://loveboat/readme/107876512">
-                <system>
-                    <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
-                            outputparametertype="java.lang.String"/>
+    &lt;pre&gt;
+    &lt;code&gt;
+    &lt;apml bodi=&quot;//loveboat/published/software/107876512/&quot; repo=&quot;http://loveboat/sourcecode/107876512&quot;
+    readme=&quot;http://loveboat/readme/107876512&quot;&gt;
+    &lt;system&gt;
+    &lt;object bodi=&quot;//object001/&quot; input=&quot;none&quot; output=&quot;./functions/function001&quot;
+    inputparametertype=&quot;none&quot;
+    outputparametertype=&quot;java.lang.String&quot;/&gt;
 
-                    <object bodi="//object002/" input="./functions/function001" output="none"
-                            inputparametertype="java.lang.String" outputparametertype="none"/>
+    &lt;object bodi=&quot;//object002/&quot; input=&quot;./functions/function001&quot; output=&quot;none&quot;
+    inputparametertype=&quot;java.lang.String&quot; outputparametertype=&quot;none&quot;/&gt;
 
-                    <consumer bodi="//callback001" input="//object001/functions/function001"
-                              output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
-                </system>
-            </apml>
-        </code>
-    </pre>
+    &lt;consumer bodi=&quot;//callback001&quot; input=&quot;//object001/functions/function001&quot;
+    output=&quot;//object002/functions/function001&quot; methodname=&quot;callmeback&quot; parametertype=&quot;infer&quot;/&gt;
+    &lt;/system&gt;
+    &lt;/apml&gt;
+    &lt;/code&gt;
+    &lt;/pre&gt;
 </p>
 
 <p>
