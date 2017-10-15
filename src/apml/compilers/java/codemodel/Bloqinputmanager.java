@@ -93,7 +93,7 @@ public class Bloqinputmanager
         {
             switch(apmltag)
             {                    
-                case "//apml": this.apmlmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
+                case "//events": this.apmlmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
                 
                 case "//callback": this.callbackmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag); break;
                 

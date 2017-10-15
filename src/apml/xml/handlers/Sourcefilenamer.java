@@ -2,25 +2,21 @@ package apml.xml.handlers;
 
 import apml.compilers.java.codemodel.Bloqcompiler;
 import apml.xpath.helpers.Xpathparameter;
-import apml.xpath.helpers.Xpathquick;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
-import javax.xml.xpath.XPath;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-import org.w3c.dom.DOMException;
-import org.xml.sax.SAXException;
 
 public class Sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass, RenamesFileByIncr, RenamesFilesByIncr, RenamesFileById, RenamesFilesById
 {    
@@ -31,13 +27,13 @@ public class Sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
     protected String apmltag = null;
     protected String apmlobject = null;    
     
-    protected String rulesURL = "/home/oem/Desktop/apml/rules/rules.xml";
-    protected String apmlURL = "/home/oem/Desktop/apml/apml/echoserver.xml";
-    protected String srcURL = "/home/oem/Desktop/apml/src/Test.java";
+    protected String rulesURL = "/home/oem/Desktop/events/rules/rules.xml";
+    protected String apmlURL = "/home/oem/Desktop/events/events/echoserver.xml";
+    protected String srcURL = "/home/oem/Desktop/events/src/Test.java";
     
-    protected String rulesDIR = "/home/oem/Desktop/apml/rules/";
-    protected String apmlDIR = "/home/oem/Desktop/apml/apml/";        
-    protected String srcDIR = "/home/oem/Desktop/apml/src/";     
+    protected String rulesDIR = "/home/oem/Desktop/events/rules/";
+    protected String apmlDIR = "/home/oem/Desktop/events/events/";
+    protected String srcDIR = "/home/oem/Desktop/events/src/";
     
     protected File rulesfile = new File(rulesURL);
     protected File apmlfile = new File(apmlURL);
@@ -97,13 +93,13 @@ public class Sourcefilenamer implements RenamesFileByClass, RenamesFilesByClass,
     {                        
         Sourcefilenamer namer = new Sourcefilenamer();
         
-        String rulesURL = "/home/oem/Desktop/apml/rules/rules.xml";
-        String apmlURL = "/home/oem/Desktop/apml/apml/echoserver.xml";
-        String srcURL = "/home/oem/Desktop/apml/src/Test.java";
+        String rulesURL = "/home/oem/Desktop/events/rules/rules.xml";
+        String apmlURL = "/home/oem/Desktop/events/events/echoserver.xml";
+        String srcURL = "/home/oem/Desktop/events/src/Test.java";
         
-        String rulesDIR = "/home/oem/Desktop/apml/rules/";
-        String apmlDIR = "/home/oem/Desktop/apml/apml/";        
-        String srcDIR = "/home/oem/Desktop/apml/src/";
+        String rulesDIR = "/home/oem/Desktop/events/rules/";
+        String apmlDIR = "/home/oem/Desktop/events/events/";
+        String srcDIR = "/home/oem/Desktop/events/src/";
         
         for(int i=0;i<10;i++)
         {

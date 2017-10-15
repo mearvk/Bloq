@@ -61,7 +61,7 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     {
         try
         {            
-            this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//apml");
+            this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//events");
             
             this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//callback");
             
@@ -111,7 +111,7 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     {        
         try
         {                        
-            this.outputmanager.dosetoutputfiles(bloqapmlmanager.apmlmodels, "//apml");
+            this.outputmanager.dosetoutputfiles(bloqapmlmanager.apmlmodels, "//events");
             
             this.outputmanager.dosetoutputfiles(bloqapmlmanager.callbackmodels, "//callback");
             

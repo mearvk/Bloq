@@ -89,7 +89,7 @@ public class Bloqoutputmanager
         {                        
             switch(apmltag)
             {
-                case "//apml": jcmmanager.apmlmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
+                case "//events": jcmmanager.apmlmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
                 
                 case "//callback": jcmmanager.callbackmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles); break;
                     

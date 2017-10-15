@@ -140,7 +140,7 @@ public class Uioutputmanager
 
 		//
 
-		Bodi.setcontext("bodi://apml.org/uioutmanager/build/setters");
+		Bodi.setcontext("bodi://events.org/uioutmanager/build/setters");
 
 		//
 
@@ -217,7 +217,7 @@ public class Uioutputmanager
 				{
 					//
 
-					Bodi.context("bodi://apml.org/uioutmanager/build/setters").put("issetmargin", true);
+					Bodi.context("bodi://events.org/uioutmanager/build/setters").put("issetmargin", true);
 
 					//
 
@@ -307,7 +307,7 @@ public class Uioutputmanager
                  */
                 if (attribute.getNodeName().equalsIgnoreCase("setSize"))
 				{
-					Boolean marginisset = (Boolean) Bodi.context("bodi://apml.org/uioutmanager/build/setters").pull("issetmargin");
+					Boolean marginisset = (Boolean) Bodi.context("bodi://events.org/uioutmanager/build/setters").pull("issetmargin");
 
 					//
 
@@ -468,7 +468,7 @@ public class Uioutputmanager
 		{
 			try
 			{
-				Bodi.removecontext("bodi://apml.org/uioutmanager/build/setters");
+				Bodi.removecontext("bodi://events.org/uioutmanager/build/setters");
 			}
 			catch (Exception e)
 			{

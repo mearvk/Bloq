@@ -2,19 +2,20 @@ package apml.runners;
 
 import apml.compilers.Standardabstractapmlcompiler;
 import apml.drivers.Stddriver;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
  * For starting parsing, compiling by 3rd parties directly from command line, etc.
@@ -46,7 +47,7 @@ public final class Apmlrunner
     {        
         Apmlrunner runner = new Apmlrunner();
         
-        runner.setapmlfile(new File("/home/oem/Desktop/apml/apml/echoserver.xml"));
+        runner.setapmlfile(new File("/home/oem/Desktop/events/events/echoserver.xml"));
         
         runner.setbasedir("");
         

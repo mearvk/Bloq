@@ -318,33 +318,33 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	{
 		//
 
-		Bodi.setcontext("bodi//development.apml.org/{system}");
+		Bodi.setcontext("bodi//development.events.org/{system}");
 
-		Bodi.setcontext("bodi//development.apml.org/{system}/{systems}");
+		Bodi.setcontext("bodi//development.events.org/{system}/{systems}");
 
-		Bodi.setcontext("bodi//development.apml.org/{system}/{classes}");
+		Bodi.setcontext("bodi//development.events.org/{system}/{classes}");
 
-		Bodi.setcontext("bodi//development.apml.org/{system}/{state}");
+		Bodi.setcontext("bodi//development.events.org/{system}/{state}");
 
-		Bodi.setcontext("bodi//development.apml.org/{system}/{listeners}");
+		Bodi.setcontext("bodi//development.events.org/{system}/{listeners}");
 
-		Bodi.setcontext("bodi//development.apml.org/{system}/{subscribers}");
+		Bodi.setcontext("bodi//development.events.org/{system}/{subscribers}");
 
 		//
 
 		try
 		{
-			Bodi.context("bodi//development.apml.org/{system}").put("apmlsystem", this);
+			Bodi.context("bodi//development.events.org/{system}").put("apmlsystem", this);
 
-			Bodi.context("bodi//development.apml.org/{system}/{systems}").put("apmlsystem.systems", systems);
+			Bodi.context("bodi//development.events.org/{system}/{systems}").put("apmlsystem.systems", systems);
 
-			Bodi.context("bodi//development.apml.org/{system}/{classes}").put("apmlsystem.classes", this.classes);
+			Bodi.context("bodi//development.events.org/{system}/{classes}").put("apmlsystem.classes", this.classes);
 
-			Bodi.context("bodi//development.apml.org/{system}/{state}").put("apmlsystem.state", this);
+			Bodi.context("bodi//development.events.org/{system}/{state}").put("apmlsystem.state", this);
 
-			Bodi.context("bodi//development.apml.org/{system}/{listeners}").put("apmlsystem.listeners", listeners);
+			Bodi.context("bodi//development.events.org/{system}/{listeners}").put("apmlsystem.listeners", listeners);
 
-			Bodi.context("bodi//development.apml.org/{system}/{subscribers}").put("apmlsystem.subscribers", subscribers);
+			Bodi.context("bodi//development.events.org/{system}/{subscribers}").put("apmlsystem.subscribers", subscribers);
 		}
 		catch(Exception e)
         {
@@ -732,7 +732,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	//
 	public Object getlistener(Integer hashcode)
 	{
-		Apmllistener listener = (Apmllistener) Bodi.context("bodi//development.apml.org/{system}/listeners").pull(hashcode);
+		Apmllistener listener = (Apmllistener) Bodi.context("bodi//development.events.org/{system}/listeners").pull(hashcode);
 
 		return listener;
 	}
@@ -740,7 +740,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	//
 	public Object getlisteners(String bodistring)
 	{
-		Apmllistener listeners = (Apmllistener) Bodi.context("bodi//development.apml.org/{system}/listeners").pull(bodistring);
+		Apmllistener listeners = (Apmllistener) Bodi.context("bodi//development.events.org/{system}/listeners").pull(bodistring);
 
 		return listeners;
 	}
@@ -748,7 +748,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	//
 	public Object getsubscriber(String bodistring)
 	{
-		Apmllistener subscriber = (Apmllistener) Bodi.context("bodi//development.apml.org/{system}/subscribers").pull(bodistring);
+		Apmllistener subscriber = (Apmllistener) Bodi.context("bodi//development.events.org/{system}/subscribers").pull(bodistring);
 
 		return subscriber;
 	}
@@ -756,7 +756,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	//
 	public ArrayList<Apmlsubscriber> getsubscribers(String bodistring)
 	{
-		ArrayList<Apmlsubscriber> subscribers = (ArrayList<Apmlsubscriber>) Bodi.context("bodi//development.apml.org/{system}/subscribers").pull(bodistring);
+		ArrayList<Apmlsubscriber> subscribers = (ArrayList<Apmlsubscriber>) Bodi.context("bodi//development.events.org/{system}/subscribers").pull(bodistring);
 
 		return subscribers;
 	}

@@ -61,7 +61,7 @@ public class Bloqfileguardian
 	public final String apmlinjarurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/in/jar/";        //where project jar file is supposed to exist
 	public final String apmloutjarurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/out/";            //where project jar file is supposed to be written
 	public final String apmlinurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/apml_editor/in/";                //APML source file
-	public final String basedirurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/apml_editor/";                    //where .xml or .apml file would be
+	public final String basedirurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/apml_editor/";                    //where .xml or .events file would be
 
 	/* ------------------------------ File Names ------------------------------- */
 	public final String loggingfileurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/logging/";        //base logging URL for files
@@ -75,7 +75,7 @@ public class Bloqfileguardian
 	public final String projectextensionurl = "project/";                                                            //project extension directory
 	public final String srcextensionurl = "source/";                                                                    //output directory for final .java files
 	public final String tempextensionurl = "temp/";                                                                    //output directory for temporary files (partial builds, etc.)
-	public File apmlinputfile = null;                                                                                //file for apml (an xml) system specification
+	public File apmlinputfile = null;                                                                                //file for events (an xml) system specification
 
 	/* ------------------------------------------------------------------------- */
 	public File buildoutdirfile = null;                                                                                //file dir for bytecode

@@ -43,7 +43,7 @@ public final class Bloqapmlpopulator
             
             File apmlfile = new File("");
                         
-            populator.getapmlmodelfiles(apmlfile,"//apml");   
+            populator.getapmlmodelfiles(apmlfile,"//events");
             
             populator.getapmlmodelfiles(apmlfile,"//callback");  
             
@@ -104,7 +104,7 @@ public final class Bloqapmlpopulator
         {                            
             switch(apmltag) //would probably need a 'parent' reference is all these cases given how it's been implemented
             {
-                case "//apml":              return doapmltags(xparam);
+                case "//events":              return doapmltags(xparam);
                     
                 case "//callback":          return docallbacktags(xparam);
                 
@@ -435,7 +435,7 @@ public final class Bloqapmlpopulator
         
         for(int index=0; index<xparam.getnodecount(); index++)  //show two system tags 
         {
-            Apmlmodelfile modelfile=new Apmlmodelfile();        //show two apml files for each system
+            Apmlmodelfile modelfile=new Apmlmodelfile();        //show two events files for each system
 
             try{modelfile.autostart=this.getautostarttag(xparam, index);}                       catch(Exception e){/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
             
@@ -739,7 +739,7 @@ public final class Bloqapmlpopulator
     
     private String getdefaultdir(Bloqxpathparameter xparam, Integer index)
     {        
-        String dir = "apml.default.unbound";
+        String dir = "events.default.unbound";
         
         try
         {
@@ -757,7 +757,7 @@ public final class Bloqapmlpopulator
 
     private String getsourcedir(Bloqxpathparameter xparam, Integer index)
     {        
-        String dir = "apml.src.unbound";
+        String dir = "events.src.unbound";
         
         try
         {
@@ -775,7 +775,7 @@ public final class Bloqapmlpopulator
 
     private String getbuilddir(Bloqxpathparameter xparam, Integer index)
     {        
-        String dir = "apml.build.unbound";
+        String dir = "events.build.unbound";
         
         try
         {
@@ -854,7 +854,7 @@ public final class Bloqapmlpopulator
 
     private String getpackagename(Bloqxpathparameter xparam, Integer index)
     {        
-        String packagename="apml.unbound.pkg";
+        String packagename="events.unbound.pkg";
         
         try
         {

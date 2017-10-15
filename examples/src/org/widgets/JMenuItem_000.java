@@ -1,6 +1,9 @@
 package org.widgets;
 
 import apml.system.Apmlbasesystem;
+import apml.system.bodi.Bodi;
+import org.editor.UserInterfaceProcessor;
+import org.events.LoadApmlDocumentEvent;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -121,7 +124,7 @@ public class JMenuItem_000 extends JMenuItem
 
 			if (retval == JFileChooser.APPROVE_OPTION)
 			{
-				return;
+				((UserInterfaceProcessor) Bodi.context("//events/editor/{id}").pull("processor")).update(new LoadApmlDocumentEvent("jpanel_001", 0, "load_apml_document_update"));
 			}
 
 			if (retval == JFileChooser.CANCEL_OPTION)

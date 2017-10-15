@@ -20,11 +20,11 @@ public class Bloqfileguardian
     
     public final String apmlinjarurl = "/home/oem/NetBeansProjects/APML/dist/APML.jar";
     
-    public final String apmloutjarurl = "/home/oem/Desktop/apml/output/libs/APML.jar";
+    public final String apmloutjarurl = "/home/oem/Desktop/events/output/libs/APML.jar";
     
-    public final String apmlinurl = "/home/oem/NetBeansProjects/APML/src/apml/examples/echoserver/server/echoserver.xml";
+    public final String apmlinurl = "/home/oem/NetBeansProjects/APML/src/events/examples/echoserver/server/echoserver.xml";
     
-    public final String basedirurl = "/home/oem/Desktop/apml/output/echo/";
+    public final String basedirurl = "/home/oem/Desktop/events/output/echo/";
     
     public final String builddirurl = "build/";
     
@@ -34,5 +34,5 @@ public class Bloqfileguardian
     
     public final String manifestdirurl = "manifest/";
     
-    public final String manifestfileurl = "/home/oem/Desktop/apml/output/manifest/manifest.txt";     
+    public final String manifestfileurl = "/home/oem/Desktop/events/output/manifest/manifest.txt";
 }
