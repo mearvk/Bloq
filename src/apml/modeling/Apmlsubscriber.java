@@ -1,5 +1,7 @@
 package apml.modeling;
 
+import apml.system.Apmlbasesystem;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -11,8 +13,10 @@ import java.util.Observer;
 public class Apmlsubscriber implements Observer
 {
     protected final Integer hash = 0x888fe8;
-        
-    /* -------------------------------------------------------------------------*/
+
+    public Apmlbasesystem monitor;
+
+    //
 
     public Boolean autostartable;
     
@@ -28,7 +32,7 @@ public class Apmlsubscriber implements Observer
     
     public String packagename;        
     
-    /* -------------------------------------------------------------------------*/
+    //
     
     @Override
     public void update(Observable o, Object o1) 

@@ -1,5 +1,6 @@
 package apml.ui.compilers.java;
 
+import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.ui.compilers.java.builders.Jcmabstractbuilder;
 import com.sun.codemodel.*;
@@ -565,7 +566,7 @@ public class Uioutputmanager
         {
             uip.jdc.field(JMod.PUBLIC, java.awt.Component.class, "parent");
 
-            uip.jdc.field(JMod.PUBLIC, apml.system.Apmlsystem.class, "system");
+            uip.jdc.field(JMod.PUBLIC, Apmlbasesystem.class, "system");
         }
         catch(Exception exception)
         {

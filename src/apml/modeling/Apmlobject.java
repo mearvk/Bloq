@@ -1,5 +1,7 @@
 package apml.modeling;
 
+import apml.system.Apmlbasesystem;
+
 import java.util.ArrayList;
 
 /**
@@ -10,12 +12,16 @@ import java.util.ArrayList;
 public class Apmlobject 
 {
     protected final Integer hash = 0x888fe8;
-        
+
+    public Apmlbasesystem monitor;
+
+    //
+
     public boolean startable;
     
     public boolean autostartable;
     
-    /* ------------------------------------------------------------------------*/
+    //
     
     public String alias;
     
@@ -27,7 +33,7 @@ public class Apmlobject
     
     public String packagename;
     
-    /* ------------------------------------------------------------------------*/
+    //
     
     public ArrayList<Apmlobject> objects = new ArrayList();
     

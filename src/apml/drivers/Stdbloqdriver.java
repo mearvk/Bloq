@@ -1,9 +1,8 @@
 package apml.drivers;
 
-import apml.system.Apmlsystem;
+import apml.system.Apmlbasesystem;
 import apml.system.Systemcall;
 import apml.system.bodi.Bodi;
-import java.io.File;
 
 /**
  *
@@ -61,7 +60,7 @@ public class Stdbloqdriver extends Stddriver
     @Systemcall
     public void drive()
     {
-        Apmlsystem apmlsystem = (Apmlsystem)Bodi.context("//bloqsystem").pull("system.system");
+        Apmlbasesystem apmlsystem = (Apmlbasesystem)Bodi.context("//bloqsystem").pull("system.system");
         
         Apmldriverstrategy strategy = (Apmldriverstrategy)Bodi.context("//bloqsystem").pull("system.driver.strategy");
         
@@ -80,7 +79,7 @@ public class Stdbloqdriver extends Stddriver
     @Systemcall
     public void init()
     {
-        Apmlsystem apmlsystem = (Apmlsystem)Bodi.context("//bloqsystem").pull("system.system");
+        Apmlbasesystem apmlsystem = (Apmlbasesystem)Bodi.context("//bloqsystem").pull("system.system");
         
         Apmlinitstrategy strategy = (Apmlinitstrategy)Bodi.context("//bloqsystem").pull("system.init.strategy");
         

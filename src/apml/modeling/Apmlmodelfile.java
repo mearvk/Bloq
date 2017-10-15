@@ -1,5 +1,7 @@
 package apml.modeling;
 
+import apml.system.Apmlbasesystem;
+
 import java.util.ArrayList;
 
 /**
@@ -10,7 +12,11 @@ import java.util.ArrayList;
 public class Apmlmodelfile 
 {   
     protected final Integer hash = 0x888fe8;
-        
+
+    public Apmlbasesystem monitor;
+
+    //
+
     public ArrayList<String> children = new ArrayList();
     
     public ArrayList<String> subscribers = new ArrayList();
@@ -21,7 +27,7 @@ public class Apmlmodelfile
     
     public ArrayList<String> nestedclasses = new ArrayList();
     
-    /* ------------------------------------------------------------------------*/
+    //
     
     public ArrayList<Apmlimplement> apmlimplements = new ArrayList();
     
@@ -37,7 +43,7 @@ public class Apmlmodelfile
     
     public ArrayList<String> apmltaginterfaces = new ArrayList();     
     
-    /* ------------------------------------------------------------------------*/
+    //
     
     public String bodi;   
     
@@ -51,7 +57,7 @@ public class Apmlmodelfile
     
     public String superclass;    
     
-    /* ------------------------------------------------------------------------*/
+    //
     
     public String builddir;
     
@@ -59,7 +65,7 @@ public class Apmlmodelfile
     
     public String sourcedir;
     
-    /* ------------------------------------------------------------------------*/
+    //
     
     public String autostart;    
     
@@ -71,7 +77,7 @@ public class Apmlmodelfile
     
     public String tagname;        
     
-    /* ------------------------------------------------------------------------*/
+    //
     
     public String[] implementors = new String[1];
     

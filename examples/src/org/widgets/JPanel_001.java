@@ -1,6 +1,6 @@
 package org.widgets;
 
-import apml.system.Apmlsystem;
+import apml.system.Apmlbasesystem;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -44,7 +44,7 @@ public class JPanel_001 extends JPanel
 	public ImageIO importref_015;
 	public File importref_016;
 	public Component parent;
-	public Apmlsystem system;
+	public Apmlbasesystem system;
 
 	/**
 	 * @param parent : The parent AWT object.
@@ -73,7 +73,7 @@ public class JPanel_001 extends JPanel
 	 * @param parent : The parent AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JPanel_001(Component parent, Apmlsystem system)
+	public JPanel_001(Component parent, Apmlbasesystem system)
 	{
 		// setters
 

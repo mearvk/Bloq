@@ -10,7 +10,7 @@ public class ApmlKernelThread extends Thread implements BasicSystemElement
 
 	//
 
-	public Apmlsystem system;
+	public Apmlbasesystem system;
 
 	public WorkQueue queue;
 
@@ -20,7 +20,7 @@ public class ApmlKernelThread extends Thread implements BasicSystemElement
 
 	//
 
-	public ApmlKernelThread(Apmlsystem system)
+	public ApmlKernelThread(Apmlbasesystem system)
 	{
 		this.system = system;
 

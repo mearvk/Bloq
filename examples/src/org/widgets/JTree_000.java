@@ -1,17 +1,20 @@
 package org.widgets;
 
-import apml.system.Apmlsystem;
+import apml.system.Apmlbasesystem;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 /**
@@ -41,7 +44,7 @@ public class JTree_000 extends JTree
 	public ImageIO importref_015;
 	public File importref_016;
 	public Component parent;
-	public Apmlsystem system;
+	public Apmlbasesystem system;
 
 	/**
 	 * @param parent : The parent AWT object.
@@ -55,6 +58,8 @@ public class JTree_000 extends JTree
 		this.setCellRenderer(new TranslucentTreeCellRenderer());
 
 		// instantiation
+
+		this.initTree();
 
 		// hierarchy
 
@@ -72,7 +77,7 @@ public class JTree_000 extends JTree
 	 * @param parent : The parent AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JTree_000(Component parent, Apmlsystem system)
+	public JTree_000(Component parent, Apmlbasesystem system)
 	{
 		// setters
 
@@ -81,6 +86,8 @@ public class JTree_000 extends JTree
 		this.setCellRenderer(new TranslucentTreeCellRenderer());
 
 		// instantiation
+
+		this.initTree();
 
 		// hierarchy
 
@@ -94,6 +101,61 @@ public class JTree_000 extends JTree
 
 		// listeners
 
+	}
+
+	public void initTree()
+	{
+		DefaultTreeModel model = (DefaultTreeModel)this.getModel();
+
+		DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
+
+		//
+
+		root.removeAllChildren();
+
+		root.setUserObject("APML Design");
+	}
+
+	public void updateTree(DefaultMutableTreeNode base, ArrayList<DefaultMutableTreeNode> nodes)
+	{
+		DefaultTreeModel model = (DefaultTreeModel)this.getModel();
+
+		DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
+
+		//
+
+		for(int i=0; i<nodes.size(); i++)
+		{
+			model.insertNodeInto(nodes.get(i), base, i);
+		}
+
+		model.insertNodeInto(base, root, root.getChildCount());
+
+		//
+
+		model.reload();
+
+		model.reload(root);
+	}
+
+	public void updateTree(ArrayList<DefaultMutableTreeNode> nodes)
+	{
+		DefaultTreeModel model = (DefaultTreeModel)this.getModel();
+
+		DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
+
+		//
+
+		for(int i=0; i<nodes.size(); i++)
+		{
+			model.insertNodeInto(nodes.get(i), root, i);
+		}
+
+		//
+
+		model.reload();
+
+		model.reload(root);
 	}
 }
 

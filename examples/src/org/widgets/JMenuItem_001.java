@@ -1,6 +1,6 @@
 package org.widgets;
 
-import apml.system.Apmlsystem;
+import apml.system.Apmlbasesystem;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.net.URL;
@@ -40,7 +41,9 @@ public class JMenuItem_001 extends JMenuItem
 	public ImageIO importref_015;
 	public File importref_016;
 	public Component parent;
-	public Apmlsystem system;
+	public Apmlbasesystem system;
+
+	public ActionListener_000 actionlistener;
 
 	/**
 	 * @param parent : The parent AWT object.
@@ -49,9 +52,11 @@ public class JMenuItem_001 extends JMenuItem
 	{
 		// setters
 
-		this.setText("Save");
+		this.setText("Close");
 
 		// instantiation
+
+		this.actionlistener = new ActionListener_000();
 
 		// hierarchy
 
@@ -63,19 +68,23 @@ public class JMenuItem_001 extends JMenuItem
 
 		// listeners
 
+		this.addActionListener(actionlistener);
+
 	}
 
 	/**
 	 * @param parent : The parent AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JMenuItem_001(Component parent, Apmlsystem system)
+	public JMenuItem_001(Component parent, Apmlbasesystem system)
 	{
 		// setters
 
-		this.setText("Save");
+		this.setText("Close");
 
 		// instantiation
+
+		this.actionlistener = new ActionListener_000();
 
 		// hierarchy
 
@@ -89,7 +98,15 @@ public class JMenuItem_001 extends JMenuItem
 
 		// listeners
 
+		this.addActionListener(actionlistener);
+
 	}
 
-
+	class ActionListener_000 implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			System.out.println(event);
+		}
+	}
 }

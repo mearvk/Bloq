@@ -1,5 +1,6 @@
 package apml.ui.compilers.java.builders;
 
+import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.ui.compilers.java.Uiparameter;
 import com.sun.codemodel.JCodeModel;
@@ -155,7 +156,7 @@ public class Jcmabstractbuilder
 
 				uip.constructor2.param(java.awt.Component.class, "parent");
 
-				uip.constructor2.param(apml.system.Apmlsystem.class, "system");
+				uip.constructor2.param(Apmlbasesystem.class, "system");
 
 				uip.constructor2.param(Integer.class, "orientation");
 
@@ -186,7 +187,7 @@ public class Jcmabstractbuilder
 
 				uip.constructor2.param(java.awt.Component.class, "parent");
 
-				uip.constructor2.param(apml.system.Apmlsystem.class, "system");
+				uip.constructor2.param(Apmlbasesystem.class, "system");
 			}
 		}
 		catch (Exception e)

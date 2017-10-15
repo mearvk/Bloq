@@ -55,13 +55,13 @@ public class Bloqfileguardian
     /* ---------------------------- File Instances ----------------------------- */
 
 	public final String apmljarfilename = "APML.jar";                                                                //name of the APML jar file to be written
-	public final String apmlfilename = "httpserver.xml";                                                                //APML source file
+	public final String apmlfilename = "apml_editor.xml";                                                                //APML source file
 	public final String loggingfilename = "logging.txt";                                                                //logging output file
 	public final String manifestfilename = "manifest.txt";                                                            //manifest output file
 	public final String apmlinjarurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/in/jar/";        //where project jar file is supposed to exist
 	public final String apmloutjarurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/out/";            //where project jar file is supposed to be written
-	public final String apmlinurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/in/";                //APML source file
-	public final String basedirurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq";                    //where .xml or .apml file would be
+	public final String apmlinurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/apml_editor/in/";                //APML source file
+	public final String basedirurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/apml_editor/";                    //where .xml or .apml file would be
 
 	/* ------------------------------ File Names ------------------------------- */
 	public final String loggingfileurl = "/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/logging/";        //base logging URL for files

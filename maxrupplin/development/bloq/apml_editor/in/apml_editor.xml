@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<package default="org.apml.editor" build="/build" source="/source">
+    <apml class="APMLEditor" id="apmleditor" bodi="//apml/editor/{id}/apmleditor">
+        <system class="UserInterfaceSystem" id="userinterfacesystem" bodi="//apml/editor/{id}/userinterfacesystem" implements="apml.modeling.Apmlsystem">
+            <object class="UserInterfaceProcessor" id="processor" bodi="//apml/editor/{id}/processor" implements="apml.modeling.Apmlobject"></object>
+        </system>
+        <system class="ModelInterfaceSystem" id="modelinterfacesystem" bodi="//apml/editor/{id}/modelinterfacesystem" implements="apml.modeling.Apmlsystem">
+            <object class="ModelInterfaceObserver" id="observer" bodi="//apml/editor/{id}/observer" implements="apml.modeling.Apmlobject"></object>
+        </system>
+    </apml>
+</package>

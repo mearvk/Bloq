@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<package default="org.apml.editor">
+    <apml id="apml_editor">
+        <system id="apml editor"></system>
+    </apml>
+</package>

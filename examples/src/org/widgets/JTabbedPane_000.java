@@ -1,6 +1,6 @@
 package org.widgets;
 
-import apml.system.Apmlsystem;
+import apml.system.Apmlbasesystem;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -47,7 +47,7 @@ public class JTabbedPane_000 extends JTabbedPane
 	public ImageIO importref_015;
 	public File importref_016;
 	public Component parent;
-	public Apmlsystem system;
+	public Apmlbasesystem system;
 
 	/**
 	 * @param parent : The parent AWT object.
@@ -56,23 +56,27 @@ public class JTabbedPane_000 extends JTabbedPane
 	{
 		// setters
 
-		this.backgroundimagename = "/Users/mrupplin/IdeaProjects/bloq/examples/src/org/widgets/tabbedpane_bg.png";
+		//this.backgroundimagename = "/Users/mrupplin/IdeaProjects/bloq/examples/src/org/widgets/tabbedpane_bg_1.png";
 
-		this.setBackground(Color.DARK_GRAY);
+		//this.setBackground(Color.DARK_GRAY);
 
 		// instantiation
 
 		// hierarchy
 
-		this.addTab("Apml", new JTabbedPaneJPanel(this));
+		//this.a
 
-		this.addTab("Bloq", new JTabbedPaneJPanel(this));
+		this.addTab("◎ Apml", new JTabbedPaneJPanel(this));
 
-		this.addTab("Bodi", new JTabbedPaneJPanel(this));
+		this.addTab("◎ Bloq", new JTabbedPaneJPanel(this));
 
-		this.addTab("Sprung", new JTabbedPaneJPanel(this));
+		this.addTab("◎ Bodi", new JTabbedPaneJPanel(this));
 
-		this.addTab("Falthruu", new JTabbedPaneJPanel(this));
+		this.addTab("◎ Runyn", null);
+
+		this.addTab("◎ Sprung", new JTabbedPaneJPanel(this));
+
+		this.addTab("◎ Falthruu", new JTabbedPaneJPanel(this));
 
 		this.addTab("::", null);
 
@@ -82,11 +86,11 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		//
 
-		this.addTab("Radio", new JTabbedPaneJPanel(this));
+		this.addTab("◎ Radio", new JTabbedPaneJPanel(this));
 
-		this.addTab("Messenger", new JTabbedPaneJPanel(this));
+		this.addTab("◎ Messenger", new JTabbedPaneJPanel(this));
 
-		this.addTab("Email", new JTabbedPaneJPanel(this));
+		this.addTab("◎ Email", new JTabbedPaneJPanel(this));
 
 
 		// devolvement
@@ -103,11 +107,11 @@ public class JTabbedPane_000 extends JTabbedPane
 	 * @param parent : The parent AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JTabbedPane_000(Component parent, Apmlsystem system)
+	public JTabbedPane_000(Component parent, Apmlbasesystem system)
 	{
 		// setters
 
-		this.backgroundimagename = "/Users/mrupplin/IdeaProjects/bloq/examples/src/org/widgets/tabbedpane_bg.png";
+		//this.backgroundimagename = "/Users/mrupplin/IdeaProjects/bloq/examples/src/org/widgets/tabbedpane_bg_1.png";
 
 		this.setBackground(Color.DARK_GRAY);
 
@@ -115,15 +119,17 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		// hierarchy
 
-		this.addTab("Apml", new JLabel(new ImageIcon(this.backgroundimagename)));
+		this.addTab("◎ Apml", new JLabel(new ImageIcon(this.backgroundimagename)));
 
-		this.addTab("Bloq", null);
+		this.addTab("◎ Bloq", null);
 
-		this.addTab("Bodi", null);
+		this.addTab("◎ Bodi", null);
 
-		this.addTab("Sprung", null);
+		this.addTab("◎ Runyn", null);
 
-		this.addTab("Falthruu", null);
+		this.addTab("◎ Sprung", null);
+
+		this.addTab("◎ Falthruu", null);
 
 		this.addTab("::", null);
 
@@ -133,11 +139,11 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		//
 
-		this.addTab("Radio", null);
+		this.addTab("◎ Radio", null);
 
-		this.addTab("Messenger", null);
+		this.addTab("◎ Messenger", null);
 
-		this.addTab("Email", null);
+		this.addTab("◎ Email", null);
 
 		// devolvement
 
@@ -153,6 +159,6 @@ public class JTabbedPane_000 extends JTabbedPane
 
 	public Dimension getPreferredSize()
 	{
-		return new Dimension(((int) (parent.getWidth() * 1.0) - this.marginleft), 200);
+		return new Dimension(((int) (parent.getWidth() * 1.0) - this.marginleft), 100);
 	}
 }

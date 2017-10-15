@@ -1,6 +1,6 @@
 package org.widgets;
 
-import apml.system.Apmlsystem;
+import apml.system.Apmlbasesystem;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.net.URL;
@@ -40,7 +41,9 @@ public class JMenuItem_000 extends JMenuItem
 	public ImageIO importref_015;
 	public File importref_016;
 	public Component parent;
-	public Apmlsystem system;
+	public Apmlbasesystem system;
+
+	public ActionListener_000 actionlistener;
 
 	/**
 	 * @param parent : The parent AWT object.
@@ -53,6 +56,8 @@ public class JMenuItem_000 extends JMenuItem
 
 		// instantiation
 
+		this.actionlistener = new ActionListener_000(this);
+
 		// hierarchy
 
 		// devolvement
@@ -63,19 +68,23 @@ public class JMenuItem_000 extends JMenuItem
 
 		// listeners
 
+		this.addActionListener(actionlistener);
+
 	}
 
 	/**
 	 * @param parent : The parent AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JMenuItem_000(Component parent, Apmlsystem system)
+	public JMenuItem_000(Component parent, Apmlbasesystem system)
 	{
 		// setters
 
 		this.setText("Open");
 
 		// instantiation
+
+		this.actionlistener = new ActionListener_000(this);
 
 		// hierarchy
 
@@ -89,7 +98,36 @@ public class JMenuItem_000 extends JMenuItem
 
 		// listeners
 
+		this.addActionListener(actionlistener);
+
 	}
 
+	class ActionListener_000 implements ActionListener
+	{
+		public Component parent;
 
+		public ActionListener_000(Component parent)
+		{
+			this.parent = parent;
+		}
+
+		public void actionPerformed(ActionEvent event)
+		{
+			JFileChooser chooser = new JFileChooser();
+
+			chooser.setVisible(true);
+
+			int retval = chooser.showOpenDialog(this.parent);
+
+			if (retval == JFileChooser.APPROVE_OPTION)
+			{
+				return;
+			}
+
+			if (retval == JFileChooser.CANCEL_OPTION)
+			{
+				return;
+			}
+		}
+	}
 }

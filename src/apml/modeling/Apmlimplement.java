@@ -1,5 +1,7 @@
 package apml.modeling;
 
+import apml.system.Apmlbasesystem;
+
 /**
  *
  * @author Max Rupplin
@@ -8,12 +10,16 @@ package apml.modeling;
 public class Apmlimplement 
 {
     protected final Integer hash = 0x888fe8;
+
+    public Apmlbasesystem monitor;
+
+    //
     
     public boolean startable;
     
     public boolean autostartable;
     
-    /* ------------------------------------------------------------------------*/    
+    //
     
     public String alias;
     

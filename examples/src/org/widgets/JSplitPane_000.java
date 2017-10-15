@@ -1,6 +1,6 @@
 package org.widgets;
 
-import apml.system.Apmlsystem;
+import apml.system.Apmlbasesystem;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -44,7 +44,7 @@ public class JSplitPane_000 extends JSplitPane
 	public ImageIO importref_015;
 	public File importref_016;
 	public Component parent;
-	public Apmlsystem system;
+	public Apmlbasesystem system;
 	JPanel_000 jpanel_000;
 	JPanel_001 jpanel_001;
 
@@ -88,7 +88,7 @@ public class JSplitPane_000 extends JSplitPane
 	 * @param parent : The parent AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JSplitPane_000(Component parent, Apmlsystem system, Integer orientation, Component component_000, Component component_001)
+	public JSplitPane_000(Component parent, Apmlbasesystem system, Integer orientation, Component component_000, Component component_001)
 	{
 		// super
 

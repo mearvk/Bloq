@@ -3,7 +3,43 @@
 <apml>
     <jframe setLayout="new FlowLayout(FlowLayout.LEFT)" setBounds="50:50:800:600" setTitle="APML Editor" setMargin="10:10:10:10">
         <jmenubar>
+            <jmenu setText="File">
+                <jmenuitem setText="Open">
+                    <listener type="actionlistener" class="local"></listener>
+                </jmenuitem>
+                <jmenuitem setText="Close">
+                    <listener type="actionlistener" class="local"></listener>
+                </jmenuitem>
+            </jmenu>
+            <jmenu setText="Edit">
+                <jmenuitem setText="Item 1"/>
+                <jmenuitem setText="Item 2"/>
+            </jmenu>
             <jmenu setText="View">
+                <jmenuitem setText="Item 1"/>
+                <jmenuitem setText="Item 2"/>
+            </jmenu>
+            <jmenu setText="Code">
+                <jmenuitem setText="Item 1"/>
+                <jmenuitem setText="Item 2"/>
+            </jmenu>
+            <jmenu setText="Analyze">
+                <jmenuitem setText="Item 1"/>
+                <jmenuitem setText="Item 2"/>
+            </jmenu>
+            <jmenu setText="Refactor">
+                <jmenuitem setText="Item 1"/>
+                <jmenuitem setText="Item 2"/>
+            </jmenu>
+            <jmenu setText="Build">
+                <jmenuitem setText="Item 1"/>
+                <jmenuitem setText="Item 2"/>
+            </jmenu>
+            <jmenu setText="Run">
+                <jmenuitem setText="Item 1"/>
+                <jmenuitem setText="Item 2"/>
+            </jmenu>
+            <jmenu setText="Toolz">
                 <jmenuitem setText="Item 1"/>
                 <jmenuitem setText="Item 2"/>
             </jmenu>

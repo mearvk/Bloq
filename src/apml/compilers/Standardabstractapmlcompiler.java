@@ -94,7 +94,7 @@ public abstract class Standardabstractapmlcompiler
 	public abstract void setsourcefiles(Bloqoutputmanager jcmmanager);
 
 	/**
-	 * Handle final writing of bytecode (class files) to build directory for Apmlsystem to integrate with
+	 * Handle final writing of bytecode (class files) to build directory for Apmlbasesystem to integrate with
 	 *
 	 * @param apmlmanager
 	 */

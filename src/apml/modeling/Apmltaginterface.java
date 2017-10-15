@@ -1,5 +1,7 @@
 package apml.modeling;
 
+import apml.system.Apmlbasesystem;
+
 /**
  *
  * @author Max Rupplin
@@ -7,5 +9,7 @@ package apml.modeling;
  */
 public class Apmltaginterface 
 {
-    protected final Integer hash = 0x888fe8;    
+    protected final Integer hash = 0x888fe8;
+
+    public Apmlbasesystem monitor;
 }

@@ -1,55 +1,27 @@
 package apml.compilers.java.codemodel;
 
-import apml.interfaces.Startable;
-
-import apml.interfaces.Autostartable;
-
-import apml.interfaces.Initializable;
-
+import apml.annotations.BloqSys;
 import apml.helpers.Filegrepper;
-
+import apml.interfaces.Autostartable;
+import apml.interfaces.Initializable;
+import apml.interfaces.Startable;
 import apml.modeling.Apmlimplement;
-
 import apml.modeling.Apmlmodelfile;
-
+import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-
-import com.sun.codemodel.JClassAlreadyExistsException;
-
-import com.sun.codemodel.JCodeModel;
-
-import com.sun.codemodel.JDefinedClass;
-
-import com.sun.codemodel.JMod;
-
-import com.sun.codemodel.JPackage;
-
-import com.sun.codemodel.JClass;
-
-import com.sun.codemodel.JMethod;
+import com.sun.codemodel.*;
 
 import java.io.IOException;
-
-import java.lang.reflect.Method;
-
-import java.lang.reflect.Modifier;
-
-import java.security.InvalidParameterException;
-
-import java.util.ArrayList;
-
-import java.util.Iterator;
-
-import java.util.logging.FileHandler;
-
-import java.util.logging.Level;
-
-import java.util.logging.Logger;
-
-import apml.annotations.BloqSys;
 import java.lang.annotation.Annotation;
-
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
+import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -217,7 +189,7 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");
+        constructor1.param(JMod.FINAL, Apmlbasesystem.class, "monitor");
         
         constructor1.body().directStatement("\n");
         
@@ -274,7 +246,7 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");
+        constructor1.param(JMod.FINAL, Apmlbasesystem.class, "monitor");
         
         constructor1.body().directStatement("\n");
         
@@ -321,7 +293,7 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");
+        constructor1.param(JMod.FINAL, Apmlbasesystem.class, "monitor");
         
         constructor1.body().directStatement("\n");
         
@@ -370,7 +342,7 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");
+        constructor1.param(JMod.FINAL, Apmlbasesystem.class, "monitor");
         
         constructor1.body().directStatement("\n\t/*--------------- instantiation ----------------*/\n");
         
@@ -454,7 +426,7 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");
+        constructor1.param(JMod.FINAL, Apmlbasesystem.class, "monitor");
         
         constructor1.body().directStatement("\n\t/*--------------- instantiation ----------------*/\n"); 
         
@@ -511,7 +483,7 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");
+        constructor1.param(JMod.FINAL, Apmlbasesystem.class, "monitor");
         
         constructor1.body().directStatement("\n");
         
@@ -558,7 +530,7 @@ public class Bloqjcmpopulator
         
         constructor1 = param.classref.constructor(JMod.PUBLIC);                
         
-        constructor1.param(JMod.FINAL, apml.system.Apmlsystem.class, "monitor");        
+        constructor1.param(JMod.FINAL, Apmlbasesystem.class, "monitor");
         
         constructor1.body().directStatement("\n\t/*--------------- instantiation ----------------*/\n"); 
         
@@ -747,7 +719,7 @@ public class Bloqjcmpopulator
                 throw new InvalidParameterException("JCodeModel not set; unable to set system(s).");
             }
             
-            param.classref.field(JMod.PROTECTED, apml.system.Apmlsystem.class, "monitor");
+            param.classref.field(JMod.PROTECTED, Apmlbasesystem.class, "monitor");
             
             if(param.apmlmodelfile.apmlsystems==null)
             {
