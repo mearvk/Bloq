@@ -56,27 +56,53 @@ public class JTabbedPane_000 extends JTabbedPane
 	{
 		// setters
 
-		//this.backgroundimagename = "/Users/mrupplin/IdeaProjects/bloq/examples/src/org/widgets/tabbedpane_bg_1.png";
+		this.addTab("㊍ Apml", new JTabbedPaneJPanel(this));
 
-		//this.setBackground(Color.DARK_GRAY);
+		this.setForegroundAt(0, Color.WHITE);
 
-		// instantiation
+		this.setBackgroundAt(0, Color.BLACK);
 
-		// hierarchy
+		//
 
-		//this.a
+		this.addTab("㊍ Bloq", new JTabbedPaneJPanel(this));
 
-		this.addTab("◎ Apml", new JTabbedPaneJPanel(this));
+		this.setForegroundAt(1, Color.WHITE);
 
-		this.addTab("◎ Bloq", new JTabbedPaneJPanel(this));
+		this.setBackgroundAt(1, Color.BLACK);
 
-		this.addTab("◎ Bodi", new JTabbedPaneJPanel(this));
+		//
 
-		this.addTab("◎ Runyn", null);
+		this.addTab("㊍ Bodi", new JTabbedPaneJPanel(this));
 
-		this.addTab("◎ Sprung", new JTabbedPaneJPanel(this));
+		this.setForegroundAt(2, Color.WHITE);
 
-		this.addTab("◎ Falthruu", new JTabbedPaneJPanel(this));
+		this.setBackgroundAt(2, Color.BLACK);
+
+		//
+
+		this.addTab("㊍ Runyn", null);
+
+		this.setForegroundAt(3, Color.WHITE);
+
+		this.setBackgroundAt(3, Color.BLACK);
+
+		//
+
+		this.addTab("㊍ Sprung", new JTabbedPaneJPanel(this));
+
+		this.setForegroundAt(4, Color.WHITE);
+
+		this.setBackgroundAt(4, Color.BLACK);
+
+		//
+
+		this.addTab("㊍ Falthruu", new JTabbedPaneJPanel(this));
+
+		this.setForegroundAt(5, Color.WHITE);
+
+		this.setBackgroundAt(5, Color.BLACK);
+
+		//
 
 		this.addTab("::", null);
 
@@ -86,12 +112,27 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		//
 
-		this.addTab("◎ Radio", new JTabbedPaneJPanel(this));
+		this.addTab("㊍ Radio", new JTabbedPaneJPanel(this));
 
-		this.addTab("◎ Messenger", new JTabbedPaneJPanel(this));
+		this.setForegroundAt(7, Color.WHITE);
 
-		this.addTab("◎ Email", new JTabbedPaneJPanel(this));
+		this.setBackgroundAt(7, Color.BLACK);
 
+		//
+
+		this.addTab("㊍ Messenger", new JTabbedPaneJPanel(this));
+
+		this.setForegroundAt(8, Color.WHITE);
+
+		this.setBackgroundAt(8, Color.BLACK);
+
+		//
+
+		this.addTab("㊍ Email", new JTabbedPaneJPanel(this));
+
+		this.setForegroundAt(9, Color.WHITE);
+
+		this.setBackgroundAt(9, Color.BLACK);
 
 		// devolvement
 
@@ -119,17 +160,17 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		// hierarchy
 
-		this.addTab("◎ Apml", new JLabel(new ImageIcon(this.backgroundimagename)));
+		this.addTab("〒 Apml", new JLabel(new ImageIcon(this.backgroundimagename)));
 
-		this.addTab("◎ Bloq", null);
+		this.addTab("〒 Bloq", null);
 
-		this.addTab("◎ Bodi", null);
+		this.addTab("〒 Bodi", null);
 
-		this.addTab("◎ Runyn", null);
+		this.addTab("〒 Runyn", null);
 
-		this.addTab("◎ Sprung", null);
+		this.addTab("〒 Sprung", null);
 
-		this.addTab("◎ Falthruu", null);
+		this.addTab("〒 Falthruu", null);
 
 		this.addTab("::", null);
 
@@ -139,11 +180,11 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		//
 
-		this.addTab("◎ Radio", null);
+		this.addTab("〒 Radio", null);
 
-		this.addTab("◎ Messenger", null);
+		this.addTab("〒 Messenger", null);
 
-		this.addTab("◎ Email", null);
+		this.addTab("〒 Email", null);
 
 		// devolvement
 

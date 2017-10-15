@@ -4,6 +4,8 @@ package org.apml.editor;
 import apml.modeling.Apmlobject;
 import apml.system.Apmlbasesystem;
 
+import java.awt.*;
+
 public class UserInterfaceProcessor extends Apmlobject
 {
     protected Apmlbasesystem monitor;
@@ -24,5 +26,10 @@ public class UserInterfaceProcessor extends Apmlobject
     public UserInterfaceProcessor()
 	{
 		//
+    }
+
+    public void update(Event event, String target, String action)
+    {
+        //
     }
 }

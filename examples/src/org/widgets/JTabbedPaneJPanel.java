@@ -1,9 +1,7 @@
 package org.widgets;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 public class JTabbedPaneJPanel extends JPanel
 {
@@ -15,7 +13,7 @@ public class JTabbedPaneJPanel extends JPanel
 
 	public JTabbedPaneJPanel(Component parent)
 	{
-		this.backgroundimagename = "/Users/mrupplin/IdeaProjects/bloq/examples/src/org/widgets/images/tabbedpane_bg.png";
+		this.backgroundimagename = "/Users/mrupplin/IdeaProjects/bloq/examples/src/org/widgets/images/tabbedpane_bg_1.png";
 
 		this.setBackground(new Color(220,220, 225));
 
@@ -28,14 +26,14 @@ public class JTabbedPaneJPanel extends JPanel
 
 		try
 		{
-			this.backgroundimage = ImageIO.read(new File(backgroundimagename));
+			//this.backgroundimage = ImageIO.read(new File(backgroundimagename));
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 
-		g.drawImage(backgroundimage, 0, 0, this);
+		//g.drawImage(backgroundimage, 0, 0, this);
 	}
 
 	@Override

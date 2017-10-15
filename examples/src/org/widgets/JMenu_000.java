@@ -50,11 +50,12 @@ public class JMenu_000
      * 
      * @param parent : The parent AWT object.
      */
-    public JMenu_000(Component parent) {
+    public JMenu_000(Component parent)
+	{
         // setters 
 	
         this.setText("File");
-	
+
         // instantiation 
 	
         this.jmenuitem_000 = new JMenuItem_000(this);
@@ -82,7 +83,8 @@ public class JMenu_000
      * @param parent : The parent AWT object.
      * @param system : The APML system object.
      */
-    public JMenu_000(Component parent, Apmlbasesystem system) {
+    public JMenu_000(Component parent, Apmlbasesystem system)
+	{
         // setters 
 	
         this.setText("File");
