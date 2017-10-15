@@ -16,20 +16,17 @@ public class ModelInterfaceSystem extends Apmlsystem
 
     public final String tag="system";
 
+    //
     public ModelInterfaceSystem(final Apmlbasesystem monitor)
     {
-	    //
-
         this.monitor = monitor;
 
         this.object_000 = new ModelInterfaceObserver();
-
     }
 
+    //
     public ModelInterfaceSystem()
     {
-	    //
-
         this.object_000 = new ModelInterfaceObserver();
     }
 }

@@ -16,20 +16,21 @@ public class UserInterfaceProcessor extends Apmlobject
 
     public final String tag="object";
 
+	//
     public UserInterfaceProcessor(final Apmlbasesystem monitor)
 	{
-		//
-
         this.monitor = monitor;
     }
 
+	//
     public UserInterfaceProcessor()
 	{
-		//
+
     }
 
+	//
     public void update(Event event, String target, String action)
     {
-        //
+
     }
 }

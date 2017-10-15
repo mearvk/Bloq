@@ -165,7 +165,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	}
 
 	//
-	public Object _load(Object o, Boolean register)
+	public Object preload(Object o, Boolean register)
 	{
 		System.out.println("Apmlbasesystem doinstantiation() called...");
 
@@ -220,7 +220,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	}
 
 	//
-	public Object _load(Class c, Boolean register)
+	public Object preload(Class c, Boolean register)
 	{
 		System.out.println("Apmlbasesystem doinstantiation() called...");
 

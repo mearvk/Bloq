@@ -3,6 +3,8 @@ package org.apml.editor;
 
 import apml.system.Apmlbasesystem;
 
+import java.awt.*;
+
 public class ModelInterfaceObserver
 {
     public ModelInterfaceObserver observer = this;
@@ -15,15 +17,21 @@ public class ModelInterfaceObserver
 
     public final String tag="object";
 
+    //
     public ModelInterfaceObserver(final Apmlbasesystem monitor)
     {
-	    //
-
         this.monitor = monitor;
     }
 
+    //
     public ModelInterfaceObserver()
     {
-	    //
+
+    }
+
+    //
+    public void update(Event event, String target, String action)
+    {
+
     }
 }
