@@ -1,6 +1,8 @@
 package org.widgets;
 
 import apml.system.Apmlbasesystem;
+import org.editor.UserInterfaceProcessor;
+import org.events.CloseApmlDocumentEvent;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -106,7 +108,7 @@ public class JMenuItem_001 extends JMenuItem
 	{
 		public void actionPerformed(ActionEvent event)
 		{
-			System.out.println(event);
+			((UserInterfaceProcessor)Apmlbasesystem.map.get("//events/editor/{id}/uiprocessor")).update(new CloseApmlDocumentEvent());
 		}
 	}
 }

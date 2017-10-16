@@ -53,7 +53,13 @@
             <jpanel setSize="30%:100%" setBackground="new Color(229,229,229)" setMargin="10:10:10:10" setLayout="new FlowLayout(FlowLayout.LEFT)">
                 <jtree/>
             </jpanel>
-            <jpanel setSize="70%:100%" setBackground="new Color(229,229,229)" setMargin="10:10:10:10"/>
+            <jpanel setSize="70%:100%" setBackground="new Color(229,229,229)" setMargin="10:10:10:10">
+                <jeditorpane setSize="100%:100%" setBackground="new Color(240,240,240)" setMargin="10:10:10:10">
+                    <htmldocument>
+                        <!-- TODO  -->
+                    </htmldocument>
+                </jeditorpane>
+            </jpanel>
         </jsplitpane>
     </jframe>
 </apml>

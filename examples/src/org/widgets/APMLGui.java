@@ -68,6 +68,8 @@ public class APMLGui extends JFrame
 
 		this.setTitle("APML Editor");
 
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		// instantiation
 
 		this.jmenubar_000 = new JMenuBar_000(this);
@@ -107,6 +109,8 @@ public class APMLGui extends JFrame
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
 		this.setTitle("APML Editor");
+
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// instantiation
 

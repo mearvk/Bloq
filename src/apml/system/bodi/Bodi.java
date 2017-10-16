@@ -91,12 +91,16 @@ public class Bodi
     //
     public synchronized static Bodicontext context(String context)
 	{
-		if (!hascontextat(context))
+		if (hascontextat(context))
+		{
+            return Bodi.contexts.get(context);
+		}
+		else
 		{
 			Bodi.setcontext(context);
-		}
 
-		return Bodi.contexts.get(context);
+			return Bodi.contexts.get(context);
+		}
 	}
 
     //

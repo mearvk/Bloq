@@ -59,6 +59,8 @@ public class JSplitPane_000 extends JSplitPane
 
 		// setters
 
+		//this.setResizeWeight(50f);
+
 		this.setBackground(null);
 
 		this.setDividerLocation(150);
@@ -70,6 +72,10 @@ public class JSplitPane_000 extends JSplitPane
 		this.jpanel_000 = (JPanel_000) component_000;
 
 		this.jpanel_001 = (JPanel_001) component_001;
+
+		this.jpanel_000.parent = this;
+
+		this.jpanel_001.parent = this;
 
 		// hierarchy
 
@@ -107,6 +113,10 @@ public class JSplitPane_000 extends JSplitPane
 		this.jpanel_000 = (JPanel_000) component_000;
 
 		this.jpanel_001 = (JPanel_001) component_001;
+
+		this.jpanel_000.parent = this;
+
+		this.jpanel_001.parent = this;
 
 		// hierarchy
 

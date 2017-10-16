@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
+import javax.swing.text.html.HTMLDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -22,6 +23,14 @@ import java.net.URL;
  */
 public class JPanel_001 extends JPanel
 {
+
+	public String bodi = "//ui/editor/jpanel_001";
+
+	public HTMLDocument document;
+
+	public JEditorPane_000 editorpane;
+
+	//
 
 	public Integer marginleft = 10;
 	public Integer margintop = 10;
@@ -57,7 +66,11 @@ public class JPanel_001 extends JPanel
 
 		// instantiation
 
+		this.editorpane = new JEditorPane_000(this);
+
 		// hierarchy
+
+		this.add(editorpane);
 
 		// devolvement
 
@@ -81,7 +94,11 @@ public class JPanel_001 extends JPanel
 
 		// instantiation
 
+		this.editorpane = new JEditorPane_000(this, system);
+
 		// hierarchy
+
+		this.add(editorpane);
 
 		// devolvement
 
@@ -95,10 +112,15 @@ public class JPanel_001 extends JPanel
 
 	}
 
+	@Override
 	public Dimension getPreferredSize()
 	{
 		return new Dimension(((int) (parent.getWidth() * 0.7) - this.marginleft), ((int) (parent.getHeight() * 1.0) - this.margintop));
 	}
 
-
+	@Override
+	public Dimension getMinimumSize()
+	{
+		return new Dimension( 200, ((int) (parent.getHeight() * 1.0) - this.margintop));
+	}
 }

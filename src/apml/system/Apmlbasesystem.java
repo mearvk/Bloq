@@ -52,7 +52,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	public static ArrayList<Apmlsubscriber> _subscribers = new ArrayList();
 
 	//
-	public Map properties = new HashMap();
+	public Map properties = new HashMap<Object,Object>();
 
 	//
 	public Stddriver driver;
@@ -244,23 +244,29 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 
 			if(retval instanceof Apmlsystem)
 			{
-
+				((Apmlsystem)retval).monitor = this;
 
 				mountsystem((Apmlsystem) retval);
 			}
 
 			if(retval instanceof Apmlobject)
 			{
+				((Apmlobject)retval).monitor = this;
+
 				mountobject((Apmlobject) retval);
 			}
 
 			if(retval instanceof Apmllistener)
 			{
+				((Apmllistener)retval).monitor = this;
+
 				mountlistener((Apmllistener) retval);
 			}
 
 			if(retval instanceof Apmlsubscriber)
 			{
+				((Apmlsubscriber)retval).monitor = this;
+
 				mountsubscriber((Apmlsubscriber) retval);
 			}
 		}

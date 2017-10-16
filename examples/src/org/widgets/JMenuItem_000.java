@@ -3,7 +3,6 @@ package org.widgets;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import org.editor.UserInterfaceProcessor;
-import org.events.LoadApmlDocumentEvent;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -118,13 +117,28 @@ public class JMenuItem_000 extends JMenuItem
 		{
 			JFileChooser chooser = new JFileChooser();
 
-			chooser.setVisible(true);
+			//
 
 			int retval = chooser.showOpenDialog(this.parent);
 
 			if (retval == JFileChooser.APPROVE_OPTION)
 			{
-				((UserInterfaceProcessor) Bodi.context("//events/editor/{id}").pull("processor")).update(new LoadApmlDocumentEvent("jpanel_001", 0, "load_apml_document_update"));
+				try
+				{
+					UserInterfaceProcessor processor;
+
+					System.out.println("True or false: "+Bodi.hascontextat("editor"));
+
+					processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//events/editor/{id}/uiprocessor");
+
+					processor.update(event);
+				}
+				catch(Exception e)
+				{
+					//
+				}
+
+				//((UserInterfaceProcessor)Apmlbasesystem.map.get("//events/editor/{id}/uiprocessor")).update(new LoadApmlDocumentEvent(chooser.getSelectedFile()));
 			}
 
 			if (retval == JFileChooser.CANCEL_OPTION)
