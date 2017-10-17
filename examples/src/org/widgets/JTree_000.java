@@ -1,6 +1,12 @@
 package org.widgets;
 
 import apml.system.Apmlbasesystem;
+import apml.system.bodi.Bodi;
+import apml.xpath.helpers.Xpathquick;
+import org.events.LoadApmlDocumentEvent;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -9,12 +15,14 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 
 
 /**
@@ -26,6 +34,7 @@ import java.util.ArrayList;
  */
 public class JTree_000 extends JTree
 {
+	public String bodi = "//ui/editor/jtree_000";
 
 	public KeyEvent importref_001;
 	public KeyStroke importref_002;
@@ -71,6 +80,9 @@ public class JTree_000 extends JTree
 
 		// listeners
 
+		// bodi
+
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	/**
@@ -101,61 +113,112 @@ public class JTree_000 extends JTree
 
 		// listeners
 
+		// bodi
+
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	public void initTree()
 	{
-		DefaultTreeModel model = (DefaultTreeModel)this.getModel();
+		DefaultTreeModel model;
 
-		DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
+		model = (DefaultTreeModel)this.getModel();
+
+		DefaultMutableTreeNode root;
+
+		root = (DefaultMutableTreeNode)model.getRoot();
 
 		//
-
-		root.removeAllChildren();
-
-		root.setUserObject("APML Design");
 	}
 
-	public void updateTree(DefaultMutableTreeNode base, ArrayList<DefaultMutableTreeNode> nodes)
+	public void updateTree(LoadApmlDocumentEvent event)
 	{
-		DefaultTreeModel model = (DefaultTreeModel)this.getModel();
+		File file = event.file;
 
-		DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
+		Document document;
 
-		//
+		XPath xpath;
 
-		for(int i=0; i<nodes.size(); i++)
+		NodeList nodes;
+
+		try
 		{
-			model.insertNodeInto(nodes.get(i), base, i);
+			document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
+
+			xpath = XPathFactory.newInstance().newXPath();
+
+			nodes = Xpathquick.evaluate(document, xpath, "/*");
+
+			//
+
+			DefaultTreeModel model = (DefaultTreeModel)this.getModel();
+
+			//
+
+			((DefaultMutableTreeNode)model.getRoot()).removeAllChildren();
+
+			//
+
+			DefaultMutableTreeNode root = ((DefaultMutableTreeNode)model.getRoot());
+
+			root.setUserObject("Design Area");
+
+			//
+
+			DefaultMutableTreeNode treenode = new DefaultMutableTreeNode("Project Area", true);
+
+			//
+
+			this.updateTree(model, root, root, treenode, nodes, 0);
 		}
-
-		model.insertNodeInto(base, root, root.getChildCount());
-
-		//
-
-		model.reload();
-
-		model.reload(root);
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
-	public void updateTree(ArrayList<DefaultMutableTreeNode> nodes)
+	//
+	private void updateTree(DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode child, NodeList children, Integer depth)
 	{
-		DefaultTreeModel model = (DefaultTreeModel)this.getModel();
-
-		DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
-
-		//
-
-		for(int i=0; i<nodes.size(); i++)
+		try
 		{
-			model.insertNodeInto(nodes.get(i), root, i);
+			if(child==null) return;
+
+			//
+
+			if(parent==null) return;
+
+			//
+
+			model.insertNodeInto(child, parent, depth);
+
+			//
+
+			for(int i = 0; i<children.getLength(); i++)
+			{
+				DefaultMutableTreeNode treenode;
+
+				treenode = new DefaultMutableTreeNode(children.item(i));
+
+				treenode.setAllowsChildren(true);
+
+				//
+
+				model.insertNodeInto(treenode, child, i);
+
+				//
+
+				updateTree(model, root, child, treenode, children.item(i).getChildNodes(), i);
+			}
+
+			//
+
+			model.reload();
 		}
-
-		//
-
-		model.reload();
-
-		model.reload(root);
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
 
@@ -192,5 +255,24 @@ class TranslucentTreeCellRenderer extends TransparentTreeCellRenderer
 	public Color getBackgroundSelectionColor()
 	{
 		return backgroundSelectionColor;
+	}
+}
+
+class APMLJTreeNode extends DefaultMutableTreeNode
+{
+	public APMLJTreeNode(Node node, Boolean children)
+	{
+		super(node, children);
+	}
+
+	public APMLJTreeNode(String object, Boolean children)
+	{
+		super(object, children);
+	}
+
+	@Override
+	public String toString()
+	{
+		return ((Node)this.getUserObject()).getNodeName();
 	}
 }

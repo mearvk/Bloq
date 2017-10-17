@@ -97,7 +97,7 @@ public class Bodicontext
 	 * @param value
 	 * @throws Exception
 	 */
-	public void put(Integer key, Object value) throws Exception
+	public void put(Integer key, Object value) //throws Exception
     {       
         if(key==null) throw new BodiGeneralError("Bodicontext.put :: Key value was null.");
         
@@ -119,7 +119,7 @@ public class Bodicontext
      * @param value
      * @throws Exception 
      */
-    public void put(Object key, Object value) throws Exception
+    public void put(Object key, Object value) //throws Exception
     {           
         if(key==null) throw new BodiGeneralError("Bodicontext.put :: Key value was null.");
         
@@ -141,7 +141,7 @@ public class Bodicontext
      * @param value
      * @throws Exception 
      */
-    public void put(String key, Object value) throws Exception
+    public void put(String key, Object value) //throws Exception
     {        
         if(key==null) throw new BodiGeneralError("Bodicontext.put :: Key value was null.");
         

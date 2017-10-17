@@ -31,7 +31,7 @@ public class JEditorPane_000 extends JEditorPane
 	{
 		//setters
 
-		this.setBackground(new Color(227,227,127));
+		this.setBackground(new Color(227,227,207));
 
 		this.setFont(new Font("Courier", Font.PLAIN, 12));
 
@@ -60,7 +60,7 @@ public class JEditorPane_000 extends JEditorPane
 	{
 		//setters
 
-		this.setBackground(new Color(255,255,255));
+		this.setBackground(new Color(227,227,207));
 
 		this.setFont(new Font("Courier", Font.PLAIN, 12));
 

@@ -54,9 +54,9 @@ public class JPanel_000 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(229, 229, 229));
+		this.setBackground(new Color(227,227,207));
 
-		this.setBackground(Color.DARK_GRAY);
+		//this.setBackground(Color.DARK_GRAY);
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -86,7 +86,7 @@ public class JPanel_000 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(229, 229, 229));
+		this.setBackground(new Color(227,227,207));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 

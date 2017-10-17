@@ -7,6 +7,7 @@ import apml.system.bodi.Bodi;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlDocumentEvent;
 import org.widgets.JEditorPane_000;
+import org.widgets.JTree_000;
 
 import java.awt.event.ActionEvent;
 
@@ -66,6 +67,14 @@ public class UserInterfaceProcessor extends Apmlobject
 				editorpane_000 = (JEditorPane_000)Bodi.context("editor").pull("//ui/editor/jeditorpane_000");
 
 				editorpane_000.loaddocument((LoadApmlDocumentEvent)event);
+
+				//
+
+				JTree_000 tree_000;
+
+				tree_000 = (JTree_000)Bodi.context("editor").pull("//ui/editor/jtree_000");
+
+				tree_000.updateTree((LoadApmlDocumentEvent)event);
 
 				break;
 
