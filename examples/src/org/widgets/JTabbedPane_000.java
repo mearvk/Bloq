@@ -56,7 +56,7 @@ public class JTabbedPane_000 extends JTabbedPane
 	{
 		// setters
 
-		this.addTab("㊍ Apml", new JTabbedPaneJPanel(this));
+		this.addTab("㊍   Apml", new JTabbedPaneJPanel(this));
 
 		this.setForegroundAt(0, Color.WHITE);
 
@@ -64,7 +64,7 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		//
 
-		this.addTab("㊍ Bloq", new JTabbedPaneJPanel(this));
+		this.addTab("㊍   Bloq", new JTabbedPaneJPanel(this));
 
 		this.setForegroundAt(1, Color.WHITE);
 
@@ -72,7 +72,7 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		//
 
-		this.addTab("㊍ Bodi", new JTabbedPaneJPanel(this));
+		this.addTab("㊍   Bodi", new JTabbedPaneJPanel(this));
 
 		this.setForegroundAt(2, Color.WHITE);
 
@@ -80,7 +80,7 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		//
 
-		this.addTab("㊍ Runyn", null);
+		this.addTab("㊍   Runyn", null);
 
 		this.setForegroundAt(3, Color.WHITE);
 
@@ -88,7 +88,7 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		//
 
-		this.addTab("㊍ Sprung", new JTabbedPaneJPanel(this));
+		this.addTab("㊍   Sprung", new JTabbedPaneJPanel(this));
 
 		this.setForegroundAt(4, Color.WHITE);
 
@@ -96,7 +96,7 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		//
 
-		this.addTab("㊍ Falthruu", new JTabbedPaneJPanel(this));
+		this.addTab("㊍   Falthruu", new JTabbedPaneJPanel(this));
 
 		this.setForegroundAt(5, Color.WHITE);
 
@@ -112,7 +112,7 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		//
 
-		this.addTab("㊍ Radio", new JTabbedPaneJPanel(this));
+		this.addTab("㊍   Radio", new JTabbedPaneJPanel(this));
 
 		this.setForegroundAt(7, Color.WHITE);
 
@@ -120,7 +120,7 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		//
 
-		this.addTab("㊍ Messenger", new JTabbedPaneJPanel(this));
+		this.addTab("㊍   Messenger", new JTabbedPaneJPanel(this));
 
 		this.setForegroundAt(8, Color.WHITE);
 
@@ -128,7 +128,7 @@ public class JTabbedPane_000 extends JTabbedPane
 
 		//
 
-		this.addTab("㊍ Email", new JTabbedPaneJPanel(this));
+		this.addTab("㊍   Email", new JTabbedPaneJPanel(this));
 
 		this.setForegroundAt(9, Color.WHITE);
 

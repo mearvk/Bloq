@@ -12,21 +12,8 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.net.URL;
 
-
-/**
- * Software programmatically produced by Bloq implementation version 1.05 - Bodi Remote Version
- *
- * @author
- * @see
- * @since
- */
-public class JPanel_000 extends JPanel
+public class JMenuItem_018 extends JMenuItem
 {
-
-	public Integer marginleft = 10;
-	public Integer margintop = 10;
-	public Integer marginright = 10;
-	public Integer marginbottom = 10;
 	public KeyEvent importref_001;
 	public KeyStroke importref_002;
 	public ActionEvent importref_003;
@@ -45,28 +32,19 @@ public class JPanel_000 extends JPanel
 	public File importref_016;
 	public Component parent;
 	public Apmlbasesystem system;
-	JTree_000 jtree_000;
 
 	/**
+	 *
 	 * @param parent : The parent AWT object.
 	 */
-	public JPanel_000(Component parent)
-	{
+	public JMenuItem_018(Component parent) {
 		// setters
 
-		this.setBackground(new Color(229, 229, 229));
-
-		this.setBackground(Color.DARK_GRAY);
-
-		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+		this.setText("Save");
 
 		// instantiation
 
-		this.jtree_000 = new JTree_000(this);
-
 		// hierarchy
-
-		this.add(jtree_000);
 
 		// devolvement
 
@@ -79,24 +57,18 @@ public class JPanel_000 extends JPanel
 	}
 
 	/**
+	 *
 	 * @param parent : The parent AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JPanel_000(Component parent, Apmlbasesystem system)
-	{
+	public JMenuItem_018(Component parent, Apmlbasesystem system) {
 		// setters
 
-		this.setBackground(new Color(229, 229, 229));
-
-		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+		this.setText("Save");
 
 		// instantiation
 
-		this.jtree_000 = new JTree_000(this);
-
 		// hierarchy
-
-		this.add(jtree_000);
 
 		// devolvement
 
@@ -109,10 +81,4 @@ public class JPanel_000 extends JPanel
 		// listeners
 
 	}
-
-	public Dimension getPreferredSize()
-	{
-		return new Dimension(((int) (parent.getWidth() * 0.3) - this.marginleft), ((int) (parent.getHeight() * 1.0) - this.margintop));
-	}
-
 }

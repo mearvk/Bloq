@@ -4,12 +4,11 @@ import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlDocumentEvent;
+import xmleditorkit.XMLEditorKit;
 
 import javax.swing.*;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
-import java.util.Scanner;
 
 public class JEditorPane_000 extends JEditorPane
 {
@@ -32,7 +31,13 @@ public class JEditorPane_000 extends JEditorPane
 	{
 		//setters
 
-		this.setBackground(new Color(255,255,255));
+		this.setBackground(new Color(227,227,127));
+
+		this.setFont(new Font("Courier", Font.PLAIN, 12));
+
+		this.getDocument().putProperty(PlainDocument.tabSizeAttribute, new Integer(4));
+
+		this.setEditorKit(new XMLEditorKit());
 
 		//devolvement
 
@@ -46,7 +51,7 @@ public class JEditorPane_000 extends JEditorPane
 		}
 		catch(Exception e)
 		{
-
+			e.printStackTrace();
 		}
 	}
 
@@ -56,6 +61,12 @@ public class JEditorPane_000 extends JEditorPane
 		//setters
 
 		this.setBackground(new Color(255,255,255));
+
+		this.setFont(new Font("Courier", Font.PLAIN, 12));
+
+		this.getDocument().putProperty(PlainDocument.tabSizeAttribute, new Integer(4));
+
+		this.setEditorKit(new XMLEditorKit());
 
 		//devolvement
 
@@ -71,7 +82,7 @@ public class JEditorPane_000 extends JEditorPane
 		}
 		catch(Exception e)
 		{
-			//
+			e.printStackTrace();
 		}
 	}
 
@@ -98,29 +109,27 @@ public class JEditorPane_000 extends JEditorPane
 	//
 	public void loaddocument(LoadApmlDocumentEvent event)
 	{
-		SimpleAttributeSet attributeSet = new SimpleAttributeSet();
-
-		StyleConstants.setBackground(attributeSet, Color.WHITE);
-
-		StyleConstants.setForeground(attributeSet, Color.BLACK);
-
-		StyleConstants.setBold(attributeSet, false);
-
 		try
 		{
+			System.out.println("Name: "+event.file.getName());
 
-			Scanner scanner = new Scanner(event.file);
+			System.out.println("Path: "+event.file.getPath());
 
-			String line;
+			System.out.println("Exists: "+event.file.exists());
 
-			while( (line=scanner.nextLine())!=null )
-			{
-				this.getDocument().insertString(getDocument().getLength(), line, attributeSet);
-			}
+			System.out.println("URL: "+event.file.toURI().toURL());
+
+			//
+
+			this.setPage(event.file.toURI().toURL());
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
+		}
+		finally
+		{
+
 		}
 	}
 }

@@ -61,12 +61,16 @@ public class JMenu_000
         this.jmenuitem_000 = new JMenuItem_000(this);
 	
         this.jmenuitem_001 = new JMenuItem_001(this);
+
+		this.jmenuitem_018 = new JMenuItem_018(this);
 	
         // hierarchy 
 	
         this.add(jmenuitem_000);
-	
+
         this.add(jmenuitem_001);
+
+		this.add(jmenuitem_018);
 	
         // devolvement 
 	
@@ -92,14 +96,18 @@ public class JMenu_000
         // instantiation 
 	
         this.jmenuitem_000 = new JMenuItem_000(this);
-	
+
         this.jmenuitem_001 = new JMenuItem_001(this);
+
+		this.jmenuitem_018 = new JMenuItem_018(this);
 	
         // hierarchy 
 	
         this.add(jmenuitem_000);
 	
         this.add(jmenuitem_001);
+
+		this.add(jmenuitem_018);
 	
         // devolvement 
 	
@@ -116,5 +124,5 @@ public class JMenu_000
 	
     JMenuItem_000 jmenuitem_000;
     JMenuItem_001 jmenuitem_001;
-
+    JMenuItem_018 jmenuitem_018;
 }

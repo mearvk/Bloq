@@ -35,6 +35,8 @@ public class APMLEditor extends apml.modeling.Apmlsystem
 
 		apmlsystem.preload(APMLGui.class, true);
 
+		apmlsystem.preload(UserInterfaceProcessor.class, true);
+
 		//
 
 		apmlsystem.init();

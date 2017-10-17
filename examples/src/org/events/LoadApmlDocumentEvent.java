@@ -7,16 +7,9 @@ public class LoadApmlDocumentEvent extends ActionEvent
 {
 	public File file = null;
 
-	public LoadApmlDocumentEvent(File file)
+	public LoadApmlDocumentEvent(ActionEvent event, File file)
 	{
-		super(null, 0, "load_apml_document_update");
-
-		this.file = file;
-	}
-
-	public LoadApmlDocumentEvent(Object object, Integer id, String command, File file)
-	{
-		super(object, id, "load_apml_document_update");
+		super(event.getSource(), event.getID(), "load_apml_document_update");
 
 		this.file = file;
 	}

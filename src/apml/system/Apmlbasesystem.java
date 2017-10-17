@@ -222,7 +222,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	//
 	public Object preload(Class c, Boolean register)
 	{
-		System.out.println("Apmlbasesystem doinstantiation() called...");
+		System.out.println("Apmlbasesystem preloads "+c.getName());
 
 		Object retval = null;
 

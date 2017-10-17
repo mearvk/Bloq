@@ -62,6 +62,8 @@ public class APMLGui extends JFrame
 	{
 		// setters
 
+		this.setBackground(Color.DARK_GRAY);
+
 		this.setBounds(50, 50, 800, 600);
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -103,6 +105,8 @@ public class APMLGui extends JFrame
 	public APMLGui(Component parent, Apmlbasesystem system)
 	{
 		// setters
+
+		this.setBackground(Color.DARK_GRAY);
 
 		this.setBounds(50, 50, 800, 600);
 

@@ -61,13 +61,21 @@ public class UserInterfaceProcessor extends Apmlobject
 		{
 			case "load_apml_document_update":
 
-				((JEditorPane_000)Apmlbasesystem.map.get("//ui/editor/jeditorpane_000")).loaddocument((LoadApmlDocumentEvent)event);
+				JEditorPane_000 editorpane_000;
+
+				editorpane_000 = (JEditorPane_000)Bodi.context("editor").pull("//ui/editor/jeditorpane_000");
+
+				editorpane_000.loaddocument((LoadApmlDocumentEvent)event);
 
 				break;
 
 			case "close_apml_document_update":
 
-				((JEditorPane_000)Apmlbasesystem.map.get("//ui/editor/jeditorpane_000")).closedocument((CloseApmlDocumentEvent)event);
+				JEditorPane_000 editorpane_001;
+
+				editorpane_001 = (JEditorPane_000)Bodi.context("editor").pull("//ui/editor/jeditorpane_000");
+
+				editorpane_001.closedocument((CloseApmlDocumentEvent)event);
 
 				break;
 
