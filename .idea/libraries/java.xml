@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="java">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/dist/lib/rsyntaxtextarea.zip!/RSyntaxTextArea-master/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/rsyntaxtextarea.zip!/RSyntaxTextArea-master/src/test/java" />
+    </SOURCES>
+  </library>
+</component>

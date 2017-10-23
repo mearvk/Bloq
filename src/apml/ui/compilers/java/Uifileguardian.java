@@ -35,7 +35,7 @@ public class Uifileguardian
         
         try
         {
-			this.outputdir = new File("/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/ui/out");
+			this.outputdir = new File("/Users/mrupplin/IdeaProjects/bloq/maxrupplin/development/bloq/out");
 		}
         catch(Exception e)
         {
