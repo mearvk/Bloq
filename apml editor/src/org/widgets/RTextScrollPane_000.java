@@ -41,4 +41,14 @@ public class RTextScrollPane_000 extends RTextScrollPane
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public Dimension getPreferredSize()
+	{
+		Dimension simple;
+
+		simple = new Dimension(this.parent.getWidth(), this.parent.getHeight());
+
+		return simple;
+	}
 }

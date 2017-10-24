@@ -55,7 +55,7 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	}
 
 	//
-	public void setScrollPane(RTextScrollPane_000 scrollpane)
+	public void setscrollpane(RTextScrollPane_000 scrollpane)
 	{
 		this.scrollpane = scrollpane;
 	}
@@ -71,16 +71,16 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 			StringBuffer text = new StringBuffer();
 
-			while((line=reader.readLine())!=null)
-			{
-				text = text.append(line+"\n");
-			}
-
-			//
+			int offset = 0;
 
 			this.document = new RSyntaxDocument(SYNTAX_STYLE_XML);
 
-			this.document.insertString(0, text.toString(), new SimpleAttributeSet());
+			while((line=reader.readLine())!=null)
+			{
+				this.document.insertString(0, line+"\n", new SimpleAttributeSet());
+			}
+
+			//
 
 			this.document.addDocumentListener(new LineCountDocumentListener(this));
 
@@ -103,9 +103,13 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 		//
 
-		int lineheight = 12;
+		int lineheight = 14;
 
-		int linecount = element.getElementCount()+20;
+		int linecount = element.getElementCount()+5;
+
+		//
+
+
 
 		//
 
@@ -142,13 +146,19 @@ class LineCountDocumentListener implements DocumentListener
 
 		//
 
-		System.out.println("We are sure there are now "+element.getElementCount()+" lines.");
+		System.out.println(""+element.getElementCount()+" lines in document.");
+
+		System.out.println(""+this.textarea.getPreferredSize()+" preferred size of document.");
+
+		System.out.println(""+this.textarea.getSize()+" actual size of document.");
+
+		System.out.println(""+this.textarea.scrollpane.getVisibleRect()+" visible rectangle.");
 
 		//
 
-		this.textarea.repaint();
+		//
 
-		this.textarea.scrollpane.repaint();
+		//this.textarea.setColumns(40);
 	}
 }
 

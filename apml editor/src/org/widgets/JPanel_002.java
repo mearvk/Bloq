@@ -71,7 +71,7 @@ public class JPanel_002 extends JPanel
 
 		this.status.setForeground(Color.WHITE);
 
-		this.status.setFont(new Font("Courier", Font.PLAIN, 12));
+		//this.status.setFont(new Font("Courier", Font.PLAIN, 12));
 
 		this.status.setBounds(0,15,this.status.getWidth(), this.status.getHeight());
 

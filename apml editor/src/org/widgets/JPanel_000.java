@@ -56,8 +56,6 @@ public class JPanel_000 extends JPanel
 
 		this.setBackground(new Color(110,96,113));
 
-		//this.setBackground(Color.DARK_GRAY);
-
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
 		// instantiation
@@ -114,5 +112,4 @@ public class JPanel_000 extends JPanel
 	{
 		return new Dimension(((int) (parent.getWidth() * 0.3) - this.marginleft), ((int) (parent.getHeight() * 1.0) - this.margintop));
 	}
-
 }

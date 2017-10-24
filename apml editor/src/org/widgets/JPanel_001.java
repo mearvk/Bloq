@@ -1,8 +1,6 @@
 package org.widgets;
 
 import apml.system.Apmlbasesystem;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
-import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -82,15 +80,15 @@ public class JPanel_001 extends JPanel
 
 		this.rstextpane = new RSTextPane_000(this);
 
-		this.rstextpane.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+		//this.rstextpane.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 
-		this.rstextpane.setCodeFoldingEnabled(true);
+		//this.rstextpane.setCodeFoldingEnabled(true);
 
-		this.rstextpane.setBackground(new Color(240,240,240));
+		//this.rstextpane.setBackground(new Color(240,240,240));
 
-		this.rstextpane.setCurrentLineHighlightColor(new Color(180,180,180));
+		//this.rstextpane.setCurrentLineHighlightColor(new Color(180,180,180));
 
-		this.rstextpane.setAutoscrolls(true);
+		//this.rstextpane.setAutoscrolls(true);
 
 		//
 
@@ -98,17 +96,11 @@ public class JPanel_001 extends JPanel
 
 		this.rstextscrollpane.setViewportView(this.rstextpane);
 
-		this.rstextscrollpane.setHorizontalScrollBarPolicy(RTextScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-
-		this.rstextscrollpane.setVerticalScrollBarPolicy(RTextScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
-		this.rstextscrollpane.setAutoscrolls(true);
-
-		this.rstextscrollpane.setVisible(true);
+		//this.rstextscrollpane.setAutoscrolls(true);
 
 		//
 
-		this.rstextpane.setScrollPane(this.rstextscrollpane);
+		this.rstextpane.setscrollpane(this.rstextscrollpane);
 
 		// hierarchy
 
@@ -140,13 +132,15 @@ public class JPanel_001 extends JPanel
 
 		this.rstextpane = new RSTextPane_000(this);
 
-		this.rstextpane.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+		//this.rstextpane.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 
-		this.rstextpane.setCodeFoldingEnabled(true);
+		//this.rstextpane.setCodeFoldingEnabled(true);
 
-		this.rstextpane.setBackground(new Color(240,240,240));
+		//this.rstextpane.setBackground(new Color(240,240,240));
 
-		this.rstextpane.setCurrentLineHighlightColor(new Color(180,180,180));
+		//this.rstextpane.setCurrentLineHighlightColor(new Color(180,180,180));
+
+		//this.rstextpane.setAutoscrolls(true);
 
 		//
 
@@ -154,7 +148,7 @@ public class JPanel_001 extends JPanel
 
 		this.rstextscrollpane.setViewportView(this.rstextpane);
 
-		this.rstextscrollpane.setAutoscrolls(true);
+		//this.rstextscrollpane.setAutoscrolls(true);
 
 		// hierarchy
 
@@ -172,6 +166,7 @@ public class JPanel_001 extends JPanel
 
 	}
 
+
 	@Override
 	public Dimension getPreferredSize()
 	{
@@ -179,6 +174,7 @@ public class JPanel_001 extends JPanel
 
 		return simple;
 	}
+
 
 	@Override
 	public Dimension getMinimumSize()
