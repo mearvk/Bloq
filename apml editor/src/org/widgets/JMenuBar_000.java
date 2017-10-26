@@ -48,7 +48,7 @@ public class JMenuBar_000
 
     /**
      * 
-     * @param parent : The parent AWT object.
+     * @param parent : The tree AWT object.
      */
     public JMenuBar_000(Component parent) {
         // setters 
@@ -105,7 +105,7 @@ public class JMenuBar_000
 
     /**
      * 
-     * @param parent : The parent AWT object.
+     * @param parent : The tree AWT object.
      * @param system : The APML system object.
      */
     public JMenuBar_000(Component parent, Apmlbasesystem system) {

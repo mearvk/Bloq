@@ -2,18 +2,12 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlDocumentEvent;
-import org.events.SaveApmlDocumentEvent;
 
 import javax.swing.*;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.PlainDocument;
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.net.URL;
 
 public class JEditorPane_000 extends JEditorPane
 {
@@ -115,48 +109,9 @@ public class JEditorPane_000 extends JEditorPane
 		return new Dimension(210, ((int) (parent.getHeight() * 1.0) - this.margintop));
 	}
 
-	//
-	public void closedocument(CloseApmlDocumentEvent event)
-	{
-		try
-		{
-			this.setPage(new URL(""));
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
 
-	//
-	public void savedocument(SaveApmlDocumentEvent event)
-	{
-		try
-		{
-			JFileChooser chooser = new JFileChooser();
 
-			int retval = chooser.showSaveDialog(this);
 
-			if(retval==JFileChooser.APPROVE_OPTION)
-			{
-				File file = chooser.getSelectedFile();
-
-				BufferedWriter writer;
-
-				writer = new BufferedWriter(new FileWriter(file));
-
-				writer.write(this.getText(),0,this.getText().length());
-
-				writer.flush();
-
-				writer.close();
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
 
 	//
 	public void loaddocument(LoadApmlDocumentEvent event)

@@ -48,12 +48,12 @@ public class JMenu_003
 
     /**
      * 
-     * @param parent : The parent AWT object.
+     * @param parent : The tree AWT object.
      */
     public JMenu_003(Component parent) {
         // setters 
 	
-        this.setText("٣ Code");
+        this.setText("ˇ Code");
 	
         // instantiation 
 	
@@ -79,13 +79,13 @@ public class JMenu_003
 
     /**
      * 
-     * @param parent : The parent AWT object.
+     * @param parent : The tree AWT object.
      * @param system : The APML system object.
      */
     public JMenu_003(Component parent, Apmlbasesystem system) {
         // setters 
 	
-        this.setText("٣ Code");
+        this.setText("٠ Code");
 	
         // instantiation 
 	

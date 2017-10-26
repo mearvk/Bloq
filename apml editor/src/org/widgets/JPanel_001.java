@@ -66,7 +66,7 @@ public class JPanel_001 extends JPanel
 	public Apmlbasesystem system;
 
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 */
 	public JPanel_001(Component parent)
 	{
@@ -74,31 +74,17 @@ public class JPanel_001 extends JPanel
 
 		// setters
 
-		this.setBackground(new Color(110,96,113));
+		this.setBackground(Color.LIGHT_GRAY);
 
 		// instantiation
 
 		this.rstextpane = new RSTextPane_000(this);
 
-		//this.rstextpane.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-
-		//this.rstextpane.setCodeFoldingEnabled(true);
-
-		//this.rstextpane.setBackground(new Color(240,240,240));
-
-		//this.rstextpane.setCurrentLineHighlightColor(new Color(180,180,180));
-
-		//this.rstextpane.setAutoscrolls(true);
-
-		//
-
 		this.rstextscrollpane = new RTextScrollPane_000(this);
 
-		this.rstextscrollpane.setViewportView(this.rstextpane);
-
-		//this.rstextscrollpane.setAutoscrolls(true);
-
 		//
+
+		this.rstextscrollpane.setViewportView(this.rstextpane);
 
 		this.rstextpane.setscrollpane(this.rstextscrollpane);
 
@@ -113,11 +99,10 @@ public class JPanel_001 extends JPanel
 		this.setVisible(true);
 
 		// listeners
-
 	}
 
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
 	public JPanel_001(Component parent, Apmlbasesystem system)
@@ -126,29 +111,19 @@ public class JPanel_001 extends JPanel
 
 		// setters
 
-		this.setBackground(new Color(110,96,113));
+		this.setBackground(Color.LIGHT_GRAY);
 
 		// instantiation
 
 		this.rstextpane = new RSTextPane_000(this);
 
-		//this.rstextpane.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-
-		//this.rstextpane.setCodeFoldingEnabled(true);
-
-		//this.rstextpane.setBackground(new Color(240,240,240));
-
-		//this.rstextpane.setCurrentLineHighlightColor(new Color(180,180,180));
-
-		//this.rstextpane.setAutoscrolls(true);
+		this.rstextscrollpane = new RTextScrollPane_000(this);
 
 		//
 
-		this.rstextscrollpane = new RTextScrollPane_000(this);
-
 		this.rstextscrollpane.setViewportView(this.rstextpane);
 
-		//this.rstextscrollpane.setAutoscrolls(true);
+		this.rstextpane.setscrollpane(this.rstextscrollpane);
 
 		// hierarchy
 
@@ -163,7 +138,6 @@ public class JPanel_001 extends JPanel
 		this.setVisible(true);
 
 		// listeners
-
 	}
 
 

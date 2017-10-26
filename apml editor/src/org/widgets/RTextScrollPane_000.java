@@ -15,31 +15,29 @@ public class RTextScrollPane_000 extends RTextScrollPane
 	//
 	public RTextScrollPane_000(Component parent)
 	{
-		this.parent = parent;
+		//setters
 
-		try
-		{
-			Bodi.context("editor").put("//ui/editor/rtextscrollpane_000", this);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		//bodi
+
+		Bodi.context("editor").put("//ui/editor/rtextscrollpane_000", this);
+
+		//devolvement
+
+		this.parent = parent;
 	}
 
 	//
 	public RTextScrollPane_000(Component parent, Apmlbasesystem monitor)
 	{
-		this.parent = parent;
+		//setters
 
-		try
-		{
-			Bodi.context("editor").put("//ui/editor/rtextscrollpane_000", this);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		//bodi
+
+		Bodi.context("editor").put("//ui/editor/rtextscrollpane_000", this);
+
+		//devolvement
+
+		this.parent = parent;
 	}
 
 	@Override

@@ -2,17 +2,21 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
+import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlDocumentEvent;
+import org.events.SaveApmlDocumentEvent;
 import org.fife.ui.rsyntaxtextarea.RSyntaxDocument;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Element;
-import javax.swing.text.SimpleAttributeSet;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.*;
 
 public class RSTextPane_000 extends RSyntaxTextArea
 {
@@ -22,36 +26,70 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 	public Component parent;
 
+	public Apmlbasesystem monitor;
+
 	public RSyntaxDocument document;
 
 	//
 	public RSTextPane_000(Component parent)
 	{
+		//setters
+
+		this.setBackground(new Color(245,245,245));
+
+		this.setCurrentLineHighlightColor(new Color(225,225,225));
+
+		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+
+		//instantiation
+
+		this.document = new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_MXML);
+
+		//bodi
+
+		Bodi.context("editor").put(this.bodi, this);
+
+		//devolvement
+
 		this.parent = parent;
 
-		try
-		{
-			Bodi.context("editor").put("//ui/editor/rstextpane_000", this);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		//listeners
+
+		this.document.addDocumentListener(new LineCountDocumentListener(this));
+
+		this.addKeyListener(new CustomHomeButtonActionDocumentListener(this));
 	}
 
 	//
 	public RSTextPane_000(Component parent, Apmlbasesystem monitor)
 	{
+		//setters
+
+		this.setBackground(new Color(245,245,245));
+
+		this.setCurrentLineHighlightColor(new Color(225,225,225));
+
+		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+
+		//instantiation
+
+		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
+
+		//bodi
+
+		Bodi.context("editor").put(this.bodi, this);
+
+		//devolvement
+
 		this.parent = parent;
 
-		try
-		{
-			Bodi.context("editor").put("//ui/editor/rstextpane_000", this);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		this.monitor = monitor;
+
+		//listeners
+
+		this.document.addDocumentListener(new LineCountDocumentListener(this));
+
+		this.addKeyListener(new CustomHomeButtonActionDocumentListener(this));
 	}
 
 	//
@@ -69,24 +107,65 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 			String line = null;
 
-			StringBuffer text = new StringBuffer();
+			String buffer = new String();
 
-			int offset = 0;
-
-			this.document = new RSyntaxDocument(SYNTAX_STYLE_XML);
+			//
 
 			while((line=reader.readLine())!=null)
 			{
-				this.document.insertString(0, line+"\n", new SimpleAttributeSet());
+				buffer = buffer + line + "\n";
 			}
 
+			//this.document.insertString(0, buffer+"\n", new SimpleAttributeSet());
+
+			this.setText(buffer+"\n");
+
 			//
 
-			this.document.addDocumentListener(new LineCountDocumentListener(this));
+			//this.setDocument(document);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 
-			//
+	//
+	public void closedocument(CloseApmlDocumentEvent event)
+	{
+		try
+		{
+			this.setText("");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 
-			this.setDocument(document);
+	//
+	public void savedocument(SaveApmlDocumentEvent event)
+	{
+		try
+		{
+			JFileChooser chooser = new JFileChooser();
+
+			int retval = chooser.showSaveDialog(this);
+
+			if(retval==JFileChooser.APPROVE_OPTION)
+			{
+				File file = chooser.getSelectedFile();
+
+				BufferedWriter writer;
+
+				writer = new BufferedWriter(new FileWriter(file));
+
+				writer.write(this.getText(),0,this.getText().length());
+
+				writer.flush();
+
+				writer.close();
+			}
 		}
 		catch(Exception e)
 		{
@@ -103,21 +182,124 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 		//
 
-		int lineheight = 14;
+		int lineheight = 15; //12 + 3
 
-		int linecount = element.getElementCount()+5;
-
-		//
-
-
+		int linecount = element.getElementCount();
 
 		//
 
-		Dimension calculated = new Dimension(this.parent.getWidth(), (linecount*lineheight));
+		Dimension calculated;
 
-		//
+		calculated = new Dimension(this.parent.getWidth(), (linecount*lineheight));
 
 		return calculated;
+	}
+}
+
+class CustomHomeButtonActionDocumentListener implements KeyListener
+{
+	public RSTextPane_000 textarea;
+
+	public CustomHomeButtonActionDocumentListener (RSTextPane_000 textarea)
+	{
+		this.textarea = textarea;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e)
+	{
+		//
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e)
+	{
+		int MODS = e.getModifiers();
+
+		//
+
+		if( (e.getKeyCode()==KeyEvent.VK_HOME && MODS == KeyEvent.SHIFT_MASK) || (e.getKeyCode()==KeyEvent.VK_END && MODS == KeyEvent.SHIFT_MASK) )
+		{
+			e.consume();
+
+			//
+
+			int start = 0;
+
+			int end = 0;
+
+			//
+
+			if(e.getKeyCode()==KeyEvent.VK_HOME)
+			{
+				start = this.textarea.getLineStartOffsetOfCurrentLine()+0;
+
+				end = this.textarea.getCaretPosition();
+
+				this.textarea.setCaretPosition(start);
+			}
+
+			if(e.getKeyCode()==KeyEvent.VK_END)
+			{
+				start = this.textarea.getCaretPosition();
+
+				end = this.textarea.getLineEndOffsetOfCurrentLine()-1;
+
+				this.textarea.setCaretPosition(end);
+			}
+
+			//
+
+			this.textarea.select(start, end);
+
+			//System.out.println("Set caret at character position ["+(position-delta)+"]");
+
+			return;
+		}
+
+		//
+
+		if(e.getKeyCode()==KeyEvent.VK_HOME)
+		{
+			e.consume();
+
+			//
+
+			int caretposition = this.textarea.getLineStartOffsetOfCurrentLine()+0;
+
+			//
+
+			this.textarea.setCaretPosition(caretposition);
+
+			//System.out.println("Set caret at character position ["+(position-delta)+"]");
+
+			return;
+		}
+
+		//
+
+		if(e.getKeyCode()==KeyEvent.VK_END)
+		{
+			e.consume();
+
+			//
+
+			int caretposition = this.textarea.getLineEndOffsetOfCurrentLine()-1;
+
+			//
+
+			this.textarea.setCaretPosition(caretposition);
+
+			//System.out.println("Set caret at character position ["+(caretposition)+"]")
+
+			return;
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e)
+	{
+		//
 	}
 }
 
@@ -132,10 +314,24 @@ class LineCountDocumentListener implements DocumentListener
 	}
 
 	@Override
-	public void insertUpdate(DocumentEvent e) { }
+	public void insertUpdate(DocumentEvent e)
+	{
+		Element element;
+
+		element = this.textarea.getDocument().getDefaultRootElement();
+
+		//
+	}
 
 	@Override
-	public void removeUpdate(DocumentEvent e) { }
+	public void removeUpdate(DocumentEvent e)
+	{
+		Element element;
+
+		element = this.textarea.getDocument().getDefaultRootElement();
+
+		//
+	}
 
 	@Override
 	public void changedUpdate(DocumentEvent e)
@@ -145,20 +341,6 @@ class LineCountDocumentListener implements DocumentListener
 		element = this.textarea.getDocument().getDefaultRootElement();
 
 		//
-
-		System.out.println(""+element.getElementCount()+" lines in document.");
-
-		System.out.println(""+this.textarea.getPreferredSize()+" preferred size of document.");
-
-		System.out.println(""+this.textarea.getSize()+" actual size of document.");
-
-		System.out.println(""+this.textarea.scrollpane.getVisibleRect()+" visible rectangle.");
-
-		//
-
-		//
-
-		//this.textarea.setColumns(40);
 	}
 }
 

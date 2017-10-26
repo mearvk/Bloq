@@ -48,12 +48,12 @@ public class JMenu_005
 
     /**
      * 
-     * @param parent : The parent AWT object.
+     * @param parent : The tree AWT object.
      */
     public JMenu_005(Component parent) {
         // setters 
 	
-        this.setText("٥ Refactor");
+        this.setText("ˇ Refactor");
 	
         // instantiation 
 	
@@ -79,13 +79,13 @@ public class JMenu_005
 
     /**
      * 
-     * @param parent : The parent AWT object.
+     * @param parent : The tree AWT object.
      * @param system : The APML system object.
      */
     public JMenu_005(Component parent, Apmlbasesystem system) {
         // setters 
 	
-        this.setText("٥ Refactor");
+        this.setText("٠ Refactor");
 	
         // instantiation 
 	

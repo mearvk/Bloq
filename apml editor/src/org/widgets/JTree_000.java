@@ -13,19 +13,27 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.StringReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.regex.Pattern;
 
 
 /**
@@ -55,11 +63,14 @@ public class JTree_000 extends JTree
 	public Rectangle importref_014;
 	public ImageIO importref_015;
 	public File importref_016;
+
 	public Component parent;
 	public Apmlbasesystem system;
 
+	public Integer selected_child_index;
+
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 */
 	public JTree_000(Component parent)
 	{
@@ -69,7 +80,7 @@ public class JTree_000 extends JTree
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5,10));
 
-		this.setCellRenderer(new TranslucentTreeCellRenderer());
+		this.setCellRenderer(new JTreeTranslucentTransparentCellRenderer());
 
 		// instantiation
 
@@ -85,20 +96,17 @@ public class JTree_000 extends JTree
 
 		// listeners
 
+		this.addTreeSelectionListener(new JTreeSelectionListener(this));
+
+		this.addMouseListener(new JTreeMouseListener((this)));
+
 		// bodi
 
-		try
-		{
-			Bodi.context("editor").put(this.bodi, this);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
 	public JTree_000(Component parent, Apmlbasesystem system)
@@ -107,7 +115,7 @@ public class JTree_000 extends JTree
 
 		this.setBackground(null);
 
-		this.setCellRenderer(new TranslucentTreeCellRenderer());
+		this.setCellRenderer(new JTreeTranslucentTransparentCellRenderer());
 
 		// instantiation
 
@@ -125,16 +133,13 @@ public class JTree_000 extends JTree
 
 		// listeners
 
+		this.addTreeSelectionListener(new JTreeSelectionListener(this));
+
+		this.addMouseListener(new JTreeMouseListener((this)));
+
 		// bodi
 
-		try
-		{
-			Bodi.context("editor").put(this.bodi, this);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	public void initTree()
@@ -241,7 +246,7 @@ public class JTree_000 extends JTree
 
 				DefaultMutableTreeNode treenode;
 
-				treenode = new APMLJTreeNode(node);
+				treenode = new JTreeApmlNode(node);
 
 				treenode.setAllowsChildren(true);
 
@@ -325,7 +330,7 @@ public class JTree_000 extends JTree
 
 }
 
-class TransparentTreeCellRenderer extends DefaultTreeCellRenderer
+class JTreeTransparentCellRenderer extends DefaultTreeCellRenderer
 {
 	private final Color ALPHA_OF_ZERO = new Color(0, true);
 
@@ -342,19 +347,19 @@ class TransparentTreeCellRenderer extends DefaultTreeCellRenderer
 	@Override
 	public Color getBackgroundNonSelectionColor()
 	{
-		return new Color(120,106,123);
+		return new Color(230,230,230);
 	}
 
 	@Override
 	public Color getBackgroundSelectionColor()
 	{
-		return new Color(120,106,123);
+		return new Color(230,230,230);
 	}
 }
 
-class TranslucentTreeCellRenderer extends TransparentTreeCellRenderer
+class JTreeTranslucentTransparentCellRenderer extends JTreeTransparentCellRenderer
 {
-	private final Color backgroundSelectionColor = new Color(100, 100, 255, 100);
+	private final Color backgroundSelectionColor = new Color(55, 55, 55, 100);
 
 	@Override
 	public Color getBackgroundSelectionColor()
@@ -363,19 +368,28 @@ class TranslucentTreeCellRenderer extends TransparentTreeCellRenderer
 	}
 }
 
-class APMLJTreeNode extends DefaultMutableTreeNode
+class JTreeApmlNode extends DefaultMutableTreeNode
 {
-	public APMLJTreeNode(Node node)
+	Integer my_index;
+
+	public JTreeApmlNode(Node node)
 	{
 		super(node, false);
 	}
 
-	public APMLJTreeNode(Node node, Boolean allowsChildren)
+	public JTreeApmlNode(Node node, Integer child_index)
+	{
+		super(node, false);
+
+		this.my_index = child_index;
+	}
+
+	public JTreeApmlNode(Node node, Boolean allowsChildren)
 	{
 		super(node, allowsChildren);
 	}
 
-	public APMLJTreeNode(String object, Boolean allowsChildren)
+	public JTreeApmlNode(String object, Boolean allowsChildren)
 	{
 		super(object, allowsChildren);
 	}
@@ -385,4 +399,233 @@ class APMLJTreeNode extends DefaultMutableTreeNode
 	{
 		return ((Node)this.getUserObject()).getNodeName();
 	}
+}
+
+class JTreeSelectionListener implements TreeSelectionListener
+{
+	public JTree tree;
+
+	public JTreeSelectionListener(JTree tree)
+	{
+		this.tree = tree;
+	}
+
+	@Override
+	public void valueChanged(TreeSelectionEvent event)
+	{
+
+		RSTextPane_000 textpane;
+
+		textpane = (RSTextPane_000)Bodi.context("editor").pull("//ui/editor/rstextpane_000");
+
+		//
+
+		try
+		{
+			DefaultMutableTreeNode treenode;
+
+			treenode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+		}
+		catch(Exception e)
+		{
+			//
+		}
+	}
+}
+
+class JTreeMouseListener implements MouseListener
+{
+	public JTree_000 tree;
+
+	public JTreeMouseListener(JTree_000 tree)
+	{
+		this.tree = tree;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{
+		DefaultMutableTreeNode selected;
+
+		Enumeration<DefaultMutableTreeNode> siblings;
+
+		String finalfullstring = "";
+
+		String finalparentstring = "";
+
+		//
+
+		selected = (DefaultMutableTreeNode)this.tree.getLastSelectedPathComponent();
+
+		if(selected!=null || selected.getParent()!=null)
+		{
+
+			siblings = selected.getParent().children();
+
+			//
+
+			if (selected == null || selected.getParent() == null)
+			{
+				this.tree.selected_child_index = 0;
+			}
+			else
+			{
+				for (int i = 0; i < selected.getParent().getChildCount(); i++)
+				{
+					if (selected.equals(selected.getParent().getChildAt(i)))
+					{
+						this.tree.selected_child_index = i;
+
+						System.out.println("ith index is " + i);
+					}
+				}
+			}
+
+			//
+
+			Point point = e.getPoint();
+
+			TreePath path = this.tree.getClosestPathForLocation(point.x, point.y);
+
+			String pathstring = "";
+
+			//
+
+			String[] tokens;
+
+			pathstring = path.toString().replace("[", "");
+
+			pathstring = pathstring.toString().replace("]", "");
+
+			pathstring = pathstring.toString().replace("Design Area,", "");
+
+			pathstring = pathstring.toString().replace("APML Projects,", "");
+
+			pathstring = pathstring.toString().replace(" ", "");
+
+			//
+
+			tokens = new String[pathstring.split(",").length];
+
+			tokens = pathstring.split(",");
+
+			//
+
+			for (int i = 0; i < tokens.length - 1; i++)
+			{
+				finalfullstring += "/" + tokens[i];
+			}
+
+			//
+
+			ArrayList<DefaultMutableTreeNode> _siblings = new ArrayList<>();
+
+			for (int i = 0; i < this.tree.selected_child_index; i++)
+			{
+				DefaultMutableTreeNode node = siblings.nextElement();
+
+				_siblings.add(node);
+
+				//System.out.println("Siblings: " + node);
+			}
+
+			//
+
+			for (int i = 0; i < this.tree.selected_child_index; i++)
+			{
+				finalfullstring = finalfullstring + "/" + _siblings.get(i);
+			}
+
+			finalfullstring += "/" + selected.toString();
+
+			System.out.println("Child token presumes its own CES line and begins: " + finalfullstring);
+
+		}
+		else
+		{
+			//
+		}
+
+		//
+
+		RSTextPane_000 textpane;
+
+		textpane = (RSTextPane_000) Bodi.context("editor").pull("//ui/editor/rstextpane_000");
+
+		//
+
+		String document = textpane.getText();
+
+		BufferedReader reader = new BufferedReader(new StringReader(document));
+
+		String line = "";
+
+		Integer charcount = 0;
+
+		Integer watched_index = 1;
+
+		try
+		{
+			for (int i=0; (line = reader.readLine()) != null; i++)
+			{
+				charcount += line.length();
+
+				//
+
+				String watching = finalfullstring.split("/")[watched_index];
+
+				if(watching.equals(""))
+				{
+					System.out.println("Correct line could not be found; unable to parse walkable tree path.");
+
+					break;
+				}
+
+				//
+
+				Pattern regex = Pattern.compile("<("+watching+")[(\\s.*)(>)]"); //(<jframe)[(\s.*)(>)]
+
+				if(regex.matcher(line).find())
+				{
+					watched_index+=1;
+
+					System.out.println("Matcher found: "+regex+" in "+line);
+
+					if(watched_index==finalparentstring.split("/").length)
+					{
+						System.out.println("Correct parent line should be around "+i);
+					}
+
+					if(watched_index==finalfullstring.split("/").length)
+					{
+						System.out.println("Correct child line should be around "+i);
+
+						break;
+					}
+				}
+				else
+				{
+					System.out.println("Matcher did not find: "+regex+" in "+line);
+				}
+			}
+
+			textpane.setCaretPosition(charcount);
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) { }
+
+	@Override
+	public void mouseReleased(MouseEvent e) { }
+
+	@Override
+	public void mouseEntered(MouseEvent e) { }
+
+	@Override
+	public void mouseExited(MouseEvent e) { }
 }

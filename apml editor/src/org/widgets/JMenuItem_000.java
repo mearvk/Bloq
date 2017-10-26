@@ -49,7 +49,7 @@ public class JMenuItem_000 extends JMenuItem
 	public ActionListener_000 actionlistener;
 
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 */
 	public JMenuItem_000(Component parent)
 	{
@@ -76,7 +76,7 @@ public class JMenuItem_000 extends JMenuItem
 	}
 
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
 	public JMenuItem_000(Component parent, Apmlbasesystem system)

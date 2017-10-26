@@ -53,7 +53,7 @@ public class JPanel_002 extends JPanel
 	public JLabel status;
 
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 */
 	public JPanel_002(Component parent)
 	{
@@ -71,7 +71,7 @@ public class JPanel_002 extends JPanel
 
 		this.status.setForeground(Color.WHITE);
 
-		//this.status.setFont(new Font("Courier", Font.PLAIN, 12));
+		this.status.setFont(new Font("Courier", Font.PLAIN, 12));
 
 		this.status.setBounds(0,15,this.status.getWidth(), this.status.getHeight());
 
@@ -86,11 +86,10 @@ public class JPanel_002 extends JPanel
 		this.setVisible(true);
 
 		// listeners
-
 	}
 
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
 	public JPanel_002(Component parent, Apmlbasesystem system)
@@ -109,6 +108,8 @@ public class JPanel_002 extends JPanel
 
 		this.status.setForeground(Color.WHITE);
 
+		this.status.setFont(new Font("Courier", Font.PLAIN, 12));
+
 		this.status.setBounds(0,5,this.status.getWidth(), this.status.getHeight());
 
 		// hierarchy
@@ -124,7 +125,6 @@ public class JPanel_002 extends JPanel
 		this.setVisible(true);
 
 		// listeners
-
 	}
 
 	@Override

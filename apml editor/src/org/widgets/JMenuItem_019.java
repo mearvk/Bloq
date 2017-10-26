@@ -39,7 +39,7 @@ public class JMenuItem_019 extends JMenuItem
 
 	/**
 	 *
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 */
 	public JMenuItem_019(Component parent) {
 		// setters
@@ -63,7 +63,7 @@ public class JMenuItem_019 extends JMenuItem
 
 	/**
 	 *
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
 	public JMenuItem_019(Component parent, Apmlbasesystem system) {

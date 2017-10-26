@@ -70,11 +70,11 @@ public class APMLGui extends JFrame
 	{
 		// setters
 
-		UIManager.put("MenuItem.background", new Color(220, 220, 220));
+		UIManager.put("MenuItem.background", new Color(240, 240, 240));
 
-		UIManager.put("MenuBar.background", new Color(220, 220, 220));
+		UIManager.put("TabbedPane.selected",Color.green);
 
-		//this.setBackground(Color.BLACK);
+		//
 
 		this.setBounds(150, 50, 1200, 800);
 
@@ -115,7 +115,7 @@ public class APMLGui extends JFrame
 	}
 
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
 	public APMLGui(Component parent, Apmlbasesystem system)

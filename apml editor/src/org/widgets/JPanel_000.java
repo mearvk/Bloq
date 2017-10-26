@@ -47,14 +47,21 @@ public class JPanel_000 extends JPanel
 	public Apmlbasesystem system;
 	JTree_000 jtree_000;
 
+	public Image backgroundimage;
+
+	public String backgroundimagename;
+
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 */
 	public JPanel_000(Component parent)
 	{
+
+		this.backgroundimagename = "/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/boom.jpg";
+
 		// setters
 
-		this.setBackground(new Color(110,96,113));
+		this.setBackground(new Color(245,245,245));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -77,14 +84,16 @@ public class JPanel_000 extends JPanel
 	}
 
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
 	public JPanel_000(Component parent, Apmlbasesystem system)
 	{
+		this.backgroundimagename = "/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/boom.jpg";
+
 		// setters
 
-		this.setBackground(new Color(110,96,113));
+		this.setBackground(new Color(245,245,245));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -106,6 +115,22 @@ public class JPanel_000 extends JPanel
 
 		// listeners
 
+	}
+
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+
+		try
+		{
+			this.backgroundimage = ImageIO.read(new File(backgroundimagename));
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		//g.drawImage(backgroundimage, 0, 0, this);
 	}
 
 	public Dimension getPreferredSize()

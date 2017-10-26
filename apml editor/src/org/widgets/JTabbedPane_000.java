@@ -51,7 +51,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 	public Apmlbasesystem system;
 
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 */
 	public JTabbedPane_000(Component parent)
 	{
@@ -59,49 +59,49 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		this.addTab("☬   Apml", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(0, Color.WHITE);
+		//this.setForegroundAt(0, Color.BLACK);
 
-		this.setBackgroundAt(0, Color.ORANGE);
+		//this.setBackgroundAt(0, null);
 
 		//
 
 		this.addTab("☬   Bloq", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(1, Color.WHITE);
+		//this.setForegroundAt(1, Color.BLACK);
 
-		this.setBackgroundAt(1, Color.BLACK);
+		//this.setBackgroundAt(1, Color.WHITE);
 
 		//
 
 		this.addTab("☬   Bodi", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(2, Color.WHITE);
+		//this.setForegroundAt(2, Color.BLACK);
 
-		this.setBackgroundAt(2, Color.BLACK);
+		//this.setBackgroundAt(2, Color.WHITE);
 
 		//
 
 		this.addTab("☬   Runyn", null);
 
-		this.setForegroundAt(3, Color.WHITE);
+		//this.setForegroundAt(3, Color.BLACK);
 
-		this.setBackgroundAt(3, Color.BLACK);
+		//this.setBackgroundAt(3, Color.WHITE);
 
 		//
 
 		this.addTab("☬   Sprung", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(4, Color.WHITE);
+		//this.setForegroundAt(4, Color.BLACK);
 
-		this.setBackgroundAt(4, Color.BLACK);
+		//this.setBackgroundAt(4, Color.WHITE);
 
 		//
 
 		this.addTab("☬   Falthruu", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(5, Color.WHITE);
+		//this.setForegroundAt(5, Color.BLACK);
 
-		this.setBackgroundAt(5, Color.BLACK);
+		//this.setBackgroundAt(5, Color.WHITE);
 
 		//
 
@@ -115,25 +115,25 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		this.addTab("☬   Radio", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(7, Color.WHITE);
+		//this.setForegroundAt(7, Color.BLACK);
 
-		this.setBackgroundAt(7, Color.BLACK);
+		//this.setBackgroundAt(7, Color.WHITE);
 
 		//
 
 		this.addTab("☬   Messenger", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(8, Color.WHITE);
+		//this.setForegroundAt(8, Color.BLACK);
 
-		this.setBackgroundAt(8, Color.BLACK);
+		//this.setBackgroundAt(8, Color.WHITE);
 
 		//
 
 		this.addTab("☬   Email", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(9, Color.WHITE);
+		//this.setForegroundAt(9, Color.BLACK);
 
-		this.setBackgroundAt(9, Color.BLACK);
+		//this.setBackgroundAt(9, Color.WHITE);
 
 		// devolvement
 
@@ -148,7 +148,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 	}
 
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
 	public JTabbedPane_000(Component parent, Apmlbasesystem system)
@@ -157,49 +157,49 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		this.addTab("☬   Apml", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(0, Color.WHITE);
+		this.setForegroundAt(0, Color.BLACK);
 
-		this.setBackgroundAt(0, Color.ORANGE);
+		this.setBackgroundAt(0, new Color(0,0,0,Color.TRANSLUCENT));
 
 		//
 
 		this.addTab("☬   Bloq", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(1, Color.WHITE);
+		this.setForegroundAt(1, Color.BLACK);
 
-		this.setBackgroundAt(1, Color.BLACK);
+		this.setBackgroundAt(1, Color.WHITE);
 
 		//
 
 		this.addTab("☬   Bodi", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(2, Color.WHITE);
+		this.setForegroundAt(2, Color.BLACK);
 
-		this.setBackgroundAt(2, Color.BLACK);
+		this.setBackgroundAt(2, Color.WHITE);
 
 		//
 
 		this.addTab("☬   Runyn", null);
 
-		this.setForegroundAt(3, Color.WHITE);
+		this.setForegroundAt(3, Color.BLACK);
 
-		this.setBackgroundAt(3, Color.BLACK);
+		this.setBackgroundAt(3, Color.WHITE);
 
 		//
 
 		this.addTab("☬   Sprung", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(4, Color.WHITE);
+		this.setForegroundAt(4, Color.BLACK);
 
-		this.setBackgroundAt(4, Color.BLACK);
+		this.setBackgroundAt(4, Color.WHITE);
 
 		//
 
 		this.addTab("☬   Falthruu", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(5, Color.WHITE);
+		this.setForegroundAt(5, Color.BLACK);
 
-		this.setBackgroundAt(5, Color.BLACK);
+		this.setBackgroundAt(5, Color.WHITE);
 
 		//
 
@@ -213,25 +213,25 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		this.addTab("☬   Radio", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(7, Color.WHITE);
+		this.setForegroundAt(7, Color.BLACK);
 
-		this.setBackgroundAt(7, Color.BLACK);
+		this.setBackgroundAt(7, Color.WHITE);
 
 		//
 
 		this.addTab("☬   Messenger", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(8, Color.WHITE);
+		this.setForegroundAt(8, Color.BLACK);
 
-		this.setBackgroundAt(8, Color.BLACK);
+		this.setBackgroundAt(8, Color.WHITE);
 
 		//
 
 		this.addTab("☬   Email", new JTabbedPaneJPanel(this));
 
-		this.setForegroundAt(9, Color.WHITE);
+		this.setForegroundAt(9, Color.BLACK);
 
-		this.setBackgroundAt(9, Color.BLACK);
+		this.setBackgroundAt(9, Color.WHITE);
 
 		// devolvement
 
@@ -249,7 +249,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 	public Dimension getPreferredSize()
 	{
-		return new Dimension(((int) (parent.getWidth() * 1.0) - this.marginleft), 151);
+		return new Dimension(((int) (parent.getWidth() * 1.0) - this.marginleft), 191);
 	}
 
 	public void stateChanged(ChangeEvent event)
@@ -267,10 +267,10 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 					{
 						if(i==6) continue;
 
-						JTabbedPane_000.this.setBackgroundAt(i, Color.BLACK);
+						JTabbedPane_000.this.setBackgroundAt(i, new Color(0,0,0,Color.TRANSLUCENT));
 					}
 
-					JTabbedPane_000.this.setBackgroundAt(pane.getSelectedIndex(), Color.ORANGE);
+					JTabbedPane_000.this.setBackgroundAt(pane.getSelectedIndex(), new Color(0,0,0,Color.TRANSLUCENT));
 				}
 			}
 		});

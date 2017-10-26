@@ -49,7 +49,7 @@ public class JSplitPane_000 extends JSplitPane
 	JPanel_001 jpanel_001;
 
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 */
 	public JSplitPane_000(Component parent, Integer orientation, Component component_000, Component component_001)
 	{
@@ -91,7 +91,7 @@ public class JSplitPane_000 extends JSplitPane
 
 
 	/**
-	 * @param parent : The parent AWT object.
+	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
 	public JSplitPane_000(Component parent, Apmlbasesystem system, Integer orientation, Component component_000, Component component_001)
