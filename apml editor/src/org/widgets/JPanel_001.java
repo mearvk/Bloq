@@ -24,7 +24,7 @@ import java.net.URL;
 public class JPanel_001 extends JPanel
 {
 
-	public String bodi = "//ui/editor/jpanel_001";
+	public String bodi = "//ui/system/jpanel_001";
 
 	public HTMLDocument document;
 

@@ -23,7 +23,7 @@ import java.net.URL;
 public class JPanel_002 extends JPanel
 {
 
-	public String bodi = "//ui/editor/jpanel_003";
+	public String bodi = "//ui/system/jpanel_003";
 
 	//
 

@@ -57,7 +57,7 @@ public class JPanel_000 extends JPanel
 	public JPanel_000(Component parent)
 	{
 
-		this.backgroundimagename = "/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/boom.jpg";
+		this.backgroundimagename = "";
 
 		// setters
 
@@ -89,7 +89,7 @@ public class JPanel_000 extends JPanel
 	 */
 	public JPanel_000(Component parent, Apmlbasesystem system)
 	{
-		this.backgroundimagename = "/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/boom.jpg";
+		this.backgroundimagename = "";
 
 		// setters
 
@@ -123,7 +123,7 @@ public class JPanel_000 extends JPanel
 
 		try
 		{
-			this.backgroundimage = ImageIO.read(new File(backgroundimagename));
+			//this.backgroundimage = ImageIO.read(new File(backgroundimagename));
 		}
 		catch (Exception e)
 		{

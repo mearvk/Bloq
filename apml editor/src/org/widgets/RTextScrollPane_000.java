@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class RTextScrollPane_000 extends RTextScrollPane
 {
-	public String bodi = "//ui/editor/rtextscrollpane_000";
+	public String bodi = "//editor/ui/rtextscrollpane_000";
 
 	public Component parent;
 
@@ -19,7 +19,7 @@ public class RTextScrollPane_000 extends RTextScrollPane
 
 		//bodi
 
-		Bodi.context("editor").put("//ui/editor/rtextscrollpane_000", this);
+		Bodi.context("editor").put(this.bodi, this);
 
 		//devolvement
 
@@ -33,7 +33,7 @@ public class RTextScrollPane_000 extends RTextScrollPane
 
 		//bodi
 
-		Bodi.context("editor").put("//ui/editor/rtextscrollpane_000", this);
+		Bodi.context("editor").put(this.bodi, this);
 
 		//devolvement
 

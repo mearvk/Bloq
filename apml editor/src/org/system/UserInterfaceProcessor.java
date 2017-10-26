@@ -1,5 +1,5 @@
 
-package org.editor;
+package org.system;
 
 import apml.modeling.Apmlobject;
 import apml.system.Apmlbasesystem;
@@ -7,6 +7,7 @@ import apml.system.bodi.Bodi;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlDocumentEvent;
 import org.events.SaveApmlDocumentEvent;
+import org.events.TreeStructureUpdatedEvent;
 import org.widgets.JTree_000;
 import org.widgets.RSTextPane_000;
 
@@ -16,7 +17,7 @@ public class UserInterfaceProcessor extends Apmlobject
 {
     protected Apmlbasesystem monitor;
 
-    public final String bodi="//events/editor/{id}/uiprocessor";
+    public final String bodi="//events/system/{id}/uiprocessor";
 
     public final String id="processor_000";
 
@@ -29,9 +30,9 @@ public class UserInterfaceProcessor extends Apmlobject
 
         try
 		{
-			Bodi.setcontext("editor");
+			Bodi.setcontext("system");
 
-			Bodi.context("editor").put(this.bodi, this);
+			Bodi.context("system").put(this.bodi, this);
 		}
 		catch(Exception e)
 		{
@@ -44,9 +45,9 @@ public class UserInterfaceProcessor extends Apmlobject
 	{
 		try
 		{
-			Bodi.setcontext("editor");
+			Bodi.setcontext("system");
 
-			Bodi.context("editor").put(this.bodi, this);
+			Bodi.context("system").put(this.bodi, this);
 		}
 		catch(Exception e)
 		{
@@ -72,19 +73,27 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				break;
 
+			case "tree_structure_updated_event":
+
+				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
+
+				editorpane.updatedocumentbasedontreechange((TreeStructureUpdatedEvent) event);
+
+				//
+
 			case "save_apml_document":
 
-				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//ui/editor/rstextpane_000");
+				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
 
 				editorpane.savedocument((SaveApmlDocumentEvent)event);
 
 				//
 
-				jtree = (JTree_000)Bodi.context("editor").pull("//ui/editor/jpanel_003");
+				jtree = (JTree_000)Bodi.context("editor").pull("//editor/ui/jpanel_003");
 
-				jtree.initTree();
+				jtree.init();
 
-				jtree.updatetree((LoadApmlDocumentEvent)event);
+				jtree.update((LoadApmlDocumentEvent)event);
 
 				jtree.removenewlinetextnodes();
 
@@ -92,17 +101,17 @@ public class UserInterfaceProcessor extends Apmlobject
 
 			case "load_apml_document_update":
 
-				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//ui/editor/rstextpane_000");
+				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
 
 				editorpane.loaddocument((LoadApmlDocumentEvent)event);
 
 				//
 
-				jtree = (JTree_000)Bodi.context("editor").pull("//ui/editor/jtree_000");
+				jtree = (JTree_000)Bodi.context("editor").pull("//editor/ui/jtree_000");
 
-				jtree.initTree();
+				jtree.init();
 
-				jtree.updatetree((LoadApmlDocumentEvent)event);
+				jtree.update((LoadApmlDocumentEvent)event);
 
 				jtree.removenewlinetextnodes();
 
@@ -110,17 +119,17 @@ public class UserInterfaceProcessor extends Apmlobject
 
 			case "close_apml_document_update":
 
-				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//ui/editor/rstextpane_000");
+				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
 
 				editorpane.closedocument((CloseApmlDocumentEvent)event);
 
 				//
 
-				jtree = (JTree_000)Bodi.context("editor").pull("//ui/editor/jtree_000");
+				jtree = (JTree_000)Bodi.context("editor").pull("//editor/ui/jtree_000");
 
-				jtree.initTree();
+				jtree.init();
 
-				jtree.updatetree((CloseApmlDocumentEvent)event);
+				jtree.update((CloseApmlDocumentEvent)event);
 
 				jtree.removenewlinetextnodes();
 

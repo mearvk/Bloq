@@ -5,22 +5,22 @@ import apml.system.bodi.Bodi;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlDocumentEvent;
 import org.events.SaveApmlDocumentEvent;
+import org.events.TreeStructureUpdatedEvent;
 import org.fife.ui.rsyntaxtextarea.RSyntaxDocument;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.listeners.CustomKeyEventListener;
+import org.listeners.LineCountDocumentListener;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import javax.swing.event.TreeSelectionEvent;
 import javax.swing.text.Element;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.*;
 
 public class RSTextPane_000 extends RSyntaxTextArea
 {
-	public String bodi = "//ui/editor/rstextpane_000";
+	public String bodi = "//editor/ui/rstextpane_000";
 
 	public RTextScrollPane_000 scrollpane;
 
@@ -57,7 +57,7 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 		this.document.addDocumentListener(new LineCountDocumentListener(this));
 
-		this.addKeyListener(new CustomHomeButtonActionDocumentListener(this));
+		this.addKeyListener(new CustomKeyEventListener(this));
 	}
 
 	//
@@ -89,7 +89,7 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 		this.document.addDocumentListener(new LineCountDocumentListener(this));
 
-		this.addKeyListener(new CustomHomeButtonActionDocumentListener(this));
+		this.addKeyListener(new CustomKeyEventListener(this));
 	}
 
 	//
@@ -173,6 +173,26 @@ public class RSTextPane_000 extends RSyntaxTextArea
 		}
 	}
 
+	//
+	public void updatedocumentbasedontreechange(TreeStructureUpdatedEvent event)
+	{
+		TreeSelectionEvent treeevent;
+
+		treeevent = (TreeSelectionEvent)event.getSource();
+
+		//finish
+
+		/*
+
+		1. find pertinent line number
+
+		2. insert new line
+
+		3. insert new node
+
+		 */
+	}
+
 	@Override
 	public Dimension getPreferredSize()
 	{
@@ -193,154 +213,6 @@ public class RSTextPane_000 extends RSyntaxTextArea
 		calculated = new Dimension(this.parent.getWidth(), (linecount*lineheight));
 
 		return calculated;
-	}
-}
-
-class CustomHomeButtonActionDocumentListener implements KeyListener
-{
-	public RSTextPane_000 textarea;
-
-	public CustomHomeButtonActionDocumentListener (RSTextPane_000 textarea)
-	{
-		this.textarea = textarea;
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e)
-	{
-		//
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e)
-	{
-		int MODS = e.getModifiers();
-
-		//
-
-		if( (e.getKeyCode()==KeyEvent.VK_HOME && MODS == KeyEvent.SHIFT_MASK) || (e.getKeyCode()==KeyEvent.VK_END && MODS == KeyEvent.SHIFT_MASK) )
-		{
-			e.consume();
-
-			//
-
-			int start = 0;
-
-			int end = 0;
-
-			//
-
-			if(e.getKeyCode()==KeyEvent.VK_HOME)
-			{
-				start = this.textarea.getLineStartOffsetOfCurrentLine()+0;
-
-				end = this.textarea.getCaretPosition();
-
-				this.textarea.setCaretPosition(start);
-			}
-
-			if(e.getKeyCode()==KeyEvent.VK_END)
-			{
-				start = this.textarea.getCaretPosition();
-
-				end = this.textarea.getLineEndOffsetOfCurrentLine()-1;
-
-				this.textarea.setCaretPosition(end);
-			}
-
-			//
-
-			this.textarea.select(start, end);
-
-			//System.out.println("Set caret at character position ["+(position-delta)+"]");
-
-			return;
-		}
-
-		//
-
-		if(e.getKeyCode()==KeyEvent.VK_HOME)
-		{
-			e.consume();
-
-			//
-
-			int caretposition = this.textarea.getLineStartOffsetOfCurrentLine()+0;
-
-			//
-
-			this.textarea.setCaretPosition(caretposition);
-
-			//System.out.println("Set caret at character position ["+(position-delta)+"]");
-
-			return;
-		}
-
-		//
-
-		if(e.getKeyCode()==KeyEvent.VK_END)
-		{
-			e.consume();
-
-			//
-
-			int caretposition = this.textarea.getLineEndOffsetOfCurrentLine()-1;
-
-			//
-
-			this.textarea.setCaretPosition(caretposition);
-
-			//System.out.println("Set caret at character position ["+(caretposition)+"]")
-
-			return;
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e)
-	{
-		//
-	}
-}
-
-class LineCountDocumentListener implements DocumentListener
-{
-
-	public RSTextPane_000 textarea;
-
-	public LineCountDocumentListener(RSTextPane_000 textarea)
-	{
-		this.textarea = textarea;
-	}
-
-	@Override
-	public void insertUpdate(DocumentEvent e)
-	{
-		Element element;
-
-		element = this.textarea.getDocument().getDefaultRootElement();
-
-		//
-	}
-
-	@Override
-	public void removeUpdate(DocumentEvent e)
-	{
-		Element element;
-
-		element = this.textarea.getDocument().getDefaultRootElement();
-
-		//
-	}
-
-	@Override
-	public void changedUpdate(DocumentEvent e)
-	{
-		Element element;
-
-		element = this.textarea.getDocument().getDefaultRootElement();
-
-		//
 	}
 }
 

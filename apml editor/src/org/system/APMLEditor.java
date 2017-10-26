@@ -1,5 +1,5 @@
 
-package org.editor;
+package org.system;
 
 import apml.drivers.Stdbloqdriver;
 import apml.system.Apmlbasesystem;
@@ -17,7 +17,7 @@ public class APMLEditor extends apml.modeling.Apmlsystem
 
     //
 
-    public final String bodi="//events/editor/{id}/apmleditor";
+    public final String bodi="//events/system/{id}/apmleditor";
 
     public final String id="apmleditor";
 

@@ -1,5 +1,5 @@
 
-package org.editor;
+package org.system;
 
 import apml.system.Apmlbasesystem;
 
@@ -11,7 +11,7 @@ public class ModelInterfaceObserver
 
     protected Apmlbasesystem monitor;
 
-    public final String bodi="//events/editor/{id}/observer";
+    public final String bodi="//events/system/{id}/observer";
 
     public final String id="processor";
 
@@ -35,3 +35,7 @@ public class ModelInterfaceObserver
 
     }
 }
+
+
+
+

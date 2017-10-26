@@ -1,5 +1,5 @@
 
-package org.editor;
+package org.system;
 
 import apml.modeling.Apmlsystem;
 import apml.system.Apmlbasesystem;
@@ -10,7 +10,7 @@ public class UserInterfaceSystem extends Apmlsystem
 
     protected Apmlbasesystem monitor;
 
-    public final String bodi="//events/editor/{id}/userinterfacesystem";
+    public final String bodi="//events/system/{id}/userinterfacesystem";
 
     public final String id="userinterfacesystem";
 

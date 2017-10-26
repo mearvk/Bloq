@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class JEditorPane_000 extends JEditorPane
 {
-	public String bodi = "//ui/editor/jeditorpane_000";
+	public String bodi = "//ui/system/jeditorpane_000";
 
 	public Integer marginleft = 10;
 
@@ -52,7 +52,7 @@ public class JEditorPane_000 extends JEditorPane
 
 		try
 		{
-			Bodi.context("editor").put(this.bodi, this);
+			Bodi.context("system").put(this.bodi, this);
 		}
 		catch(Exception e)
 		{
@@ -87,7 +87,7 @@ public class JEditorPane_000 extends JEditorPane
 
 		try
 		{
-			Bodi.context("editor").put(this.bodi, this);
+			Bodi.context("system").put(this.bodi, this);
 		}
 		catch(Exception e)
 		{
@@ -109,10 +109,6 @@ public class JEditorPane_000 extends JEditorPane
 		return new Dimension(210, ((int) (parent.getHeight() * 1.0) - this.margintop));
 	}
 
-
-
-
-
 	//
 	public void loaddocument(LoadApmlDocumentEvent event)
 	{
@@ -130,6 +126,7 @@ public class JEditorPane_000 extends JEditorPane
 		}
 	}
 
+	//
 	public void highlightline(int startcharindex, int endcharindex)
 	{
 		Color highlightcolor = new Color(120,106,123);
@@ -144,6 +141,7 @@ public class JEditorPane_000 extends JEditorPane
 		}
 	}
 
+	//
 	@Override
 	public void paintComponents(Graphics g)
 	{

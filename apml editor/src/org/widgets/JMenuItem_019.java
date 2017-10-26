@@ -2,8 +2,8 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import org.editor.UserInterfaceProcessor;
 import org.events.ExitProgramEvent;
+import org.system.UserInterfaceProcessor;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -103,7 +103,7 @@ class JMenuItem_019_ActionListener implements ActionListener
 	{
 		UserInterfaceProcessor processor;
 
-		processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//events/editor/{id}/uiprocessor");
+		processor = (UserInterfaceProcessor)Bodi.context("system").pull("//events/system/{id}/uiprocessor");
 
 		processor.update(new ExitProgramEvent(this.source));
 	}
