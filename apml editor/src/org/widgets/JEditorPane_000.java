@@ -114,7 +114,7 @@ public class JEditorPane_000 extends JEditorPane
 	{
 		try
 		{
-			this.setPage(event.file.toURI().toURL());
+			this.setPage(event.getFileRef().toURI().toURL());
 		}
 		catch (Exception e)
 		{

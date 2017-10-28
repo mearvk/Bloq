@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<package default="org.apml.editor">
-    <apml id="apml_editor">
-        <system id="apml editor"></system>
+<package default="org.apml.editor" build="/build" source="/source">
+    <apml class="apml_editor" id="apml_editor">
+        <system class="system_001" id="apml editor_001">
+            <object class="object_001" id="test_object_001"></object>
+            <object class="object_002" id="test_object_002"></object>
+        </system>
+        <system class="system_002" id="apml editor_002">
+            <object class="object_003" id="test_object_003"></object>
+            <object class="object_004" id="test_object_004"></object>
+        </system>
     </apml>
 </package>

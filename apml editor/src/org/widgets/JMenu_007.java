@@ -53,7 +53,9 @@ public class JMenu_007
     public JMenu_007(Component parent) {
         // setters 
 	
-        this.setText("ˇ Run");
+        this.setText("  Run  ");
+
+        this.setMnemonic(KeyEvent.VK_R);
 	
         // instantiation 
 	
@@ -85,7 +87,9 @@ public class JMenu_007
     public JMenu_007(Component parent, Apmlbasesystem system) {
         // setters 
 	
-        this.setText("٠ Run");
+        this.setText("  Run  ");
+
+        this.setMnemonic(KeyEvent.VK_R);
 	
         // instantiation 
 	

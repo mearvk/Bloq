@@ -2,6 +2,7 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
+import org.events.DocumentLoadedEvent;
 import org.events.LoadApmlDocumentEvent;
 import org.system.UserInterfaceProcessor;
 
@@ -132,13 +133,15 @@ public class JMenuItem_000 extends JMenuItem
 
 					UserInterfaceProcessor processor;
 
-					processor = (UserInterfaceProcessor)Bodi.context("system").pull("//events/system/{id}/uiprocessor");
+					processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
 					processor.update(new LoadApmlDocumentEvent(event, file));
+
+					processor.update(new DocumentLoadedEvent(event, file));
 				}
 				catch(Exception e)
 				{
-					//
+					e.printStackTrace();
 				}
 			}
 

@@ -54,7 +54,9 @@ public class JMenu_000
 	{
         // setters 
 	
-        this.setText("ˇ File");
+        this.setText("  File  ");
+
+        this.setMnemonic(KeyEvent.VK_F);
 
         // instantiation 
 	
@@ -95,7 +97,9 @@ public class JMenu_000
 	{
         // setters 
 	
-        this.setText("٠ File");
+        this.setText("  File  ");
+
+		this.setMnemonic(KeyEvent.VK_F);
 	
         // instantiation 
 	

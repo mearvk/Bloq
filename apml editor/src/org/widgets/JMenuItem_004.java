@@ -53,7 +53,7 @@ public class JMenuItem_004
     public JMenuItem_004(Component parent) {
         // setters 
 	
-        this.setText("Item 1");
+        this.setText("Rebuild");
 	
         // instantiation 
 	
@@ -65,8 +65,9 @@ public class JMenuItem_004
 	
         this.setVisible(true);
 	
-        // listeners 
-	
+        // listeners
+
+        this.addActionListener(((JMenu_006)this.parent).menu_listener_000);
     }
 
     /**
@@ -77,7 +78,7 @@ public class JMenuItem_004
     public JMenuItem_004(Component parent, Apmlbasesystem system) {
         // setters 
 	
-        this.setText("Item 1");
+        this.setText("Rebuild");
 	
         // instantiation 
 	
@@ -92,9 +93,7 @@ public class JMenuItem_004
         this.setVisible(true);
 	
         // listeners 
-	
-    }
-    
-	
 
+        this.addActionListener(((JMenu_006)this.parent).menu_listener_000);
+    }
 }

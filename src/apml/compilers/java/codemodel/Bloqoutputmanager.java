@@ -138,7 +138,16 @@ public class Bloqoutputmanager
                     while(classes.hasNext())
                     {                                              
                         String cname = classes.next().name();
-                        
+
+                        //
+
+						if( ! new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.srcextensionurl).exists() )
+						{
+							new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.srcextensionurl).mkdirs();
+						}
+
+						//
+
                         jcmmodels.get(i).build(new File(fileguardian.basedirurl+fileguardian.projectextensionurl+fileguardian.srcextensionurl), System.out);           
                     }
                 }
@@ -146,6 +155,8 @@ public class Bloqoutputmanager
             catch(Exception e)
             {
                 /*LOGGER.log(Level.WARNING, e.getMessage(), e);*/
+
+                e.printStackTrace();
 			}
 		}
 	}

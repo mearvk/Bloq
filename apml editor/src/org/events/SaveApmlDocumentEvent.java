@@ -9,7 +9,7 @@ public class SaveApmlDocumentEvent extends ActionEvent
 
 	public SaveApmlDocumentEvent(JComponent source)
 	{
-		super(source, 0, "save_apml_document");
+		super(source, 0, "save_apml_document_event");
 
 		this.source = source;
 	}

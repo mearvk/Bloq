@@ -53,7 +53,7 @@ public class JMenuItem_002
     public JMenuItem_002(Component parent) {
         // setters 
 	
-        this.setText("Item 1");
+        this.setText("Apml Standalone");
 	
         // instantiation 
 	
@@ -65,8 +65,9 @@ public class JMenuItem_002
 	
         this.setVisible(true);
 	
-        // listeners 
-	
+        // listeners
+
+		this.addActionListener(((JMenu_006)this.parent).menu_listener_000);
     }
 
     /**
@@ -77,7 +78,7 @@ public class JMenuItem_002
     public JMenuItem_002(Component parent, Apmlbasesystem system) {
         // setters 
 	
-        this.setText("Item 1");
+        this.setText("Apml Standalone");
 	
         // instantiation 
 	
@@ -91,10 +92,10 @@ public class JMenuItem_002
 	
         this.setVisible(true);
 	
-        // listeners 
-	
-    }
-    
-	
+        // listeners
 
+        this.addActionListener(((JMenu_006)this.parent).menu_listener_000);
+    }
 }
+
+

@@ -6,9 +6,7 @@ import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlDocumentEvent;
 import org.events.SaveApmlDocumentEvent;
 import org.events.TreeStructureUpdatedEvent;
-import org.fife.ui.rsyntaxtextarea.RSyntaxDocument;
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rsyntaxtextarea.*;
 import org.listeners.CustomKeyEventListener;
 import org.listeners.LineCountDocumentListener;
 
@@ -39,11 +37,17 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 		this.setCurrentLineHighlightColor(new Color(225,225,225));
 
-		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
+
+		SyntaxScheme scheme = this.getSyntaxScheme();
+
+		scheme.getStyle(Token.RESERVED_WORD).foreground = new Color(35,35,110);
+
+		scheme.getStyle(Token.LITERAL_STRING_DOUBLE_QUOTE).foreground = new Color(35,35,110);
 
 		//instantiation
 
-		this.document = new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_MXML);
+		this.document = new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_XML);
 
 		//bodi
 
@@ -103,7 +107,7 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	{
 		try
 		{
-			BufferedReader reader = new BufferedReader(new FileReader(event.file));
+			BufferedReader reader = new BufferedReader(new FileReader(event.getFileRef()));
 
 			String line = null;
 
@@ -174,11 +178,13 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	}
 
 	//
-	public void updatedocumentbasedontreechange(TreeStructureUpdatedEvent event)
+	public void processtreechange(TreeStructureUpdatedEvent event)
 	{
 		TreeSelectionEvent treeevent;
 
 		treeevent = (TreeSelectionEvent)event.getSource();
+
+		System.out.println("JTree updated ");
 
 		//finish
 

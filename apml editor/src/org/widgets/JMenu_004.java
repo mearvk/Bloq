@@ -53,7 +53,9 @@ public class JMenu_004
     public JMenu_004(Component parent) {
         // setters 
 	
-        this.setText("ˇ Analyze");
+        this.setText("  Analyze  ");
+
+        this.setMnemonic(KeyEvent.VK_A);
 	
         // instantiation 
 	
@@ -85,7 +87,9 @@ public class JMenu_004
     public JMenu_004(Component parent, Apmlbasesystem system) {
         // setters 
 	
-        this.setText("٠ Analyze");
+        this.setText("  Analyze  ");
+
+        this.setMnemonic(KeyEvent.VK_A);
 	
         // instantiation 
 	

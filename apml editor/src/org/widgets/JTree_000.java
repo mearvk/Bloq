@@ -7,8 +7,7 @@ import org.custom.ui.ApmlJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlDocumentEvent;
-import org.listeners.JTreeMouseListener;
-import org.listeners.JTreeSelectionListener;
+import org.listeners.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -95,6 +94,12 @@ public class JTree_000 extends JTree
 
 		this.addMouseListener(new JTreeMouseListener((this)));
 
+		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
+
+		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
+
+		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
+
 		// bodi
 
 		Bodi.context("editor").put(this.bodi, this);
@@ -131,6 +136,12 @@ public class JTree_000 extends JTree
 		this.addTreeSelectionListener(new JTreeSelectionListener(this));
 
 		this.addMouseListener(new JTreeMouseListener((this)));
+
+		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
+
+		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
+
+		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
 
 		// bodi
 
@@ -170,7 +181,7 @@ public class JTree_000 extends JTree
 
 	public void update(LoadApmlDocumentEvent event)
 	{
-		File file = event.file;
+		File file = event.getFileRef();
 
 		Document document;
 

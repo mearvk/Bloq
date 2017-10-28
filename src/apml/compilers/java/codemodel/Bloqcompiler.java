@@ -5,12 +5,9 @@ import apml.system.bodi.Bodi;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
  * 
@@ -77,7 +74,9 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
         }
         catch(Exception e)
         {
-            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            //LOGGER.log(Level.WARNING, e.getMessage(), e);
+
+			e.printStackTrace();
         }
     }    
     
@@ -102,7 +101,9 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
         }
         catch(Exception e)
         {
-            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            //LOGGER.log(Level.WARNING, e.getMessage(), e);
+
+			e.printStackTrace();
         }
     }
         
@@ -127,7 +128,9 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
         }
         catch(Exception e)
         {
-            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            //LOGGER.log(Level.WARNING, e.getMessage(), e);
+
+			e.printStackTrace();
         }
     }
     
@@ -152,7 +155,9 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
         }
         catch(Exception e)
         {
-            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            //LOGGER.log(Level.WARNING, e.getMessage(), e);
+
+			e.printStackTrace();
         }
 	}
 
@@ -176,19 +181,40 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
 		}
 		catch (Exception e)
 		{
-			LOGGER.log(Level.WARNING, e.getMessage(), e);
+			//LOGGER.log(Level.WARNING, e.getMessage(), e);
+
+			e.printStackTrace();
 		}
 	}
 
 	public void writejarfile() throws Exception
 	{
-        if(new File(fileguardian.apmloutjarurl).exists())
+        if(new File(fileguardian.apmlinjarurl).exists() && new File(fileguardian.apmloutjarurl).exists())
         {
-            Files.copy(new File(fileguardian.apmlinjarurl+fileguardian.apmlfilename).toPath(),new File(fileguardian.apmloutjarurl+fileguardian.apmlfilename).toPath(),REPLACE_EXISTING);
+            //Files.copy(new File(fileguardian.apmlinjarurl+fileguardian.apmlfilename).toPath(),new File(fileguardian.apmloutjarurl+fileguardian.apmlfilename).toPath(),REPLACE_EXISTING);
         }
-        else new File(fileguardian.apmloutjarurl).mkdirs();
+        else
         {
-            Files.copy(new File(fileguardian.apmlinjarurl+fileguardian.apmlfilename).toPath(),new File(fileguardian.apmloutjarurl+fileguardian.apmlfilename).toPath(),REPLACE_EXISTING);                
-        }        
+        	try
+			{
+				if (!new File(fileguardian.apmlinjarurl).exists())
+				{
+					new File(fileguardian.apmlinjarurl).mkdirs();
+				}
+
+				if (!new File(fileguardian.apmloutjarurl).exists())
+				{
+					new File(fileguardian.apmloutjarurl).mkdirs();
+				}
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				//Files.copy(new File(fileguardian.apmlinjarurl+fileguardian.apmlfilename).toPath(),new File(fileguardian.apmloutjarurl+fileguardian.apmlfilename).toPath(),REPLACE_EXISTING);
+			}
+        }
     }
 }

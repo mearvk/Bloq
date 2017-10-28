@@ -53,7 +53,9 @@ public class JMenu_003
     public JMenu_003(Component parent) {
         // setters 
 	
-        this.setText("ˇ Code");
+        this.setText("  Code  ");
+
+        this.setMnemonic(KeyEvent.VK_C);
 	
         // instantiation 
 	
@@ -85,8 +87,10 @@ public class JMenu_003
     public JMenu_003(Component parent, Apmlbasesystem system) {
         // setters 
 	
-        this.setText("٠ Code");
-	
+        this.setText("  Code  ");
+
+        this.setMnemonic(KeyEvent.VK_C);
+
         // instantiation 
 	
         this.jmenuitem_012 = new JMenuItem_012(this);

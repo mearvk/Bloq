@@ -53,7 +53,7 @@ public class JMenuItem_003
     public JMenuItem_003(Component parent) {
         // setters 
 	
-        this.setText("Item 2");
+        this.setText("Apml System");
 	
         // instantiation 
 	
@@ -77,7 +77,7 @@ public class JMenuItem_003
     public JMenuItem_003(Component parent, Apmlbasesystem system) {
         // setters 
 	
-        this.setText("Item 2");
+        this.setText("Apml System");
 	
         // instantiation 
 	
@@ -91,8 +91,9 @@ public class JMenuItem_003
 	
         this.setVisible(true);
 	
-        // listeners 
-	
+        // listeners
+
+        this.addActionListener(((JMenu_006)this.parent).menu_listener_000);
     }
     
 	

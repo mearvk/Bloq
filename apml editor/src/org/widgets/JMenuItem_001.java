@@ -119,7 +119,7 @@ class JMenuItem_001_ActionListener implements ActionListener
 	{
 		UserInterfaceProcessor processor;
 
-		processor = ((UserInterfaceProcessor) Bodi.context("system").pull("//events/system/{id}/uiprocessor"));
+		processor = ((UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000"));
 
 		processor.update(new CloseApmlDocumentEvent(this.source));
 	}

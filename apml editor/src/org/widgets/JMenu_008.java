@@ -53,7 +53,9 @@ public class JMenu_008
     public JMenu_008(Component parent) {
         // setters 
 	
-        this.setText("ˇ Tools");
+        this.setText("  Tools  ");
+
+        this.setMnemonic(KeyEvent.VK_T);
 	
         // instantiation 
 	
@@ -85,7 +87,9 @@ public class JMenu_008
     public JMenu_008(Component parent, Apmlbasesystem system) {
         // setters 
 	
-        this.setText("٠ Tools");
+        this.setText("  Tools  ");
+
+        this.setMnemonic(KeyEvent.VK_T);
 	
         // instantiation 
 	

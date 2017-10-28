@@ -53,7 +53,9 @@ public class JMenu_002
     public JMenu_002(Component parent) {
         // setters 
 	
-        this.setText("ˇ View");
+        this.setText("  View  ");
+
+        this.setMnemonic(KeyEvent.VK_V);
 	
         // instantiation 
 	
@@ -85,7 +87,9 @@ public class JMenu_002
     public JMenu_002(Component parent, Apmlbasesystem system) {
         // setters 
 	
-        this.setText("٠ View");
+        this.setText("  View  ");
+
+        this.setMnemonic(KeyEvent.VK_V);
 	
         // instantiation 
 	

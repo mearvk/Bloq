@@ -38,8 +38,6 @@ public class LineNumberFinder
 
 		tree = (JTree_000)Bodi.context("editor").pull("//editor/ui/jtree_000");
 
-		//selected = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
-
 		//
 
 		if(selected==null)
@@ -197,6 +195,8 @@ public class LineNumberFinder
 		{
 			//
 		}
+
+		this.charcount = charcount;
 
 		return this.linecount;
 	}
@@ -364,6 +364,8 @@ public class LineNumberFinder
 		{
 			e.printStackTrace();
 		}
+
+		this.charcount = charcount;
 
 		return this.linecount;
 	}

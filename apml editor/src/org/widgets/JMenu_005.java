@@ -53,7 +53,9 @@ public class JMenu_005
     public JMenu_005(Component parent) {
         // setters 
 	
-        this.setText("ˇ Refactor");
+        this.setText("  Refactor  ");
+
+        this.setMnemonic(KeyEvent.VK_R);
 	
         // instantiation 
 	
@@ -85,7 +87,9 @@ public class JMenu_005
     public JMenu_005(Component parent, Apmlbasesystem system) {
         // setters 
 	
-        this.setText("٠ Refactor");
+        this.setText("  Refactor  ");
+
+        this.setMnemonic(KeyEvent.VK_R);
 	
         // instantiation 
 	

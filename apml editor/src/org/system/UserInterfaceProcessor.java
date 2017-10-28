@@ -4,24 +4,30 @@ package org.system;
 import apml.modeling.Apmlobject;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import org.events.CloseApmlDocumentEvent;
-import org.events.LoadApmlDocumentEvent;
-import org.events.SaveApmlDocumentEvent;
-import org.events.TreeStructureUpdatedEvent;
+import org.events.*;
 import org.widgets.JTree_000;
 import org.widgets.RSTextPane_000;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class UserInterfaceProcessor extends Apmlobject
 {
     protected Apmlbasesystem monitor;
 
-    public final String bodi="//events/system/{id}/uiprocessor";
+    public final String bodi="//editor/ui/uiprocessor_000";
 
     public final String id="processor_000";
 
     public final String tag="object";
+
+    //
+
+    public String last_loaded_file_url = null;
+
+    public File last_loaded_file = null;
+
+    //
 
 	//
     public UserInterfaceProcessor(final Apmlbasesystem monitor)
@@ -30,7 +36,7 @@ public class UserInterfaceProcessor extends Apmlobject
 
         try
 		{
-			Bodi.setcontext("system");
+			Bodi.setcontext("editor");
 
 			Bodi.context("system").put(this.bodi, this);
 		}
@@ -45,7 +51,7 @@ public class UserInterfaceProcessor extends Apmlobject
 	{
 		try
 		{
-			Bodi.setcontext("system");
+			Bodi.setcontext("editor");
 
 			Bodi.context("system").put(this.bodi, this);
 		}
@@ -67,6 +73,8 @@ public class UserInterfaceProcessor extends Apmlobject
 
 		switch(action)
 		{
+
+
 			case "exit_program":
 
 				System.exit(0);
@@ -77,11 +85,11 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
 
-				editorpane.updatedocumentbasedontreechange((TreeStructureUpdatedEvent) event);
+				editorpane.processtreechange((TreeStructureUpdatedEvent) event);
 
 				//
 
-			case "save_apml_document":
+			case "save_apml_document_event":
 
 				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
 
@@ -99,7 +107,7 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				break;
 
-			case "load_apml_document_update":
+			case "load_apml_document_event":
 
 				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
 
@@ -117,7 +125,15 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				break;
 
-			case "close_apml_document_update":
+			case "document_loaded_event":
+
+				this.last_loaded_file_url = ((DocumentLoadedEvent)event).getFileURL();
+
+				this.last_loaded_file = ((DocumentLoadedEvent)event).getFileRef();
+
+				break;
+
+			case "close_apml_document_event":
 
 				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
 

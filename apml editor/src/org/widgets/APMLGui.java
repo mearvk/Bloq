@@ -1,6 +1,7 @@
 package org.widgets;
 
 import apml.system.Apmlbasesystem;
+import apml.system.bodi.Bodi;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -52,6 +53,8 @@ public class APMLGui extends JFrame
 	public JSplitPane_000 jsplitpane_000;
 	public JPanel_002 jpanel_002;
 
+	public String bodi = "//editor/ui/apmlgui";
+
 	//
 	public APMLGui()
 	{
@@ -60,6 +63,37 @@ public class APMLGui extends JFrame
 			@Override
 			public void run()
 			{
+				try
+				{
+					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+
+					//
+
+					ImageIcon icon=null;
+
+					try
+					{
+						icon = new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/base_folder_sm.png");
+					}
+					catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+
+					if(icon!=null)
+						UIManager.put("Tree.leafIcon", icon);
+
+					if(icon!=null)
+						UIManager.put("Tree.openIcon", icon);
+
+					if(icon!=null)
+						UIManager.put("Tree.closedIcon", icon);
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+
 				new APMLGui(null);
 			}
 		});
@@ -69,10 +103,6 @@ public class APMLGui extends JFrame
 	public APMLGui(Component parent)
 	{
 		// setters
-
-		UIManager.put("MenuItem.background", new Color(240, 240, 240));
-
-		UIManager.put("TabbedPane.selected",Color.green);
 
 		//
 
@@ -112,6 +142,9 @@ public class APMLGui extends JFrame
 
 		// listeners
 
+		// bodi
+
+		Bodi.context("editor").put(this.bodi,this);
 	}
 
 	/**
@@ -122,7 +155,7 @@ public class APMLGui extends JFrame
 	{
 		// setters
 
-		//this.setBackground(Color.BLACK);
+		//
 
 		this.setBounds(150, 50, 1200, 800);
 
@@ -162,6 +195,9 @@ public class APMLGui extends JFrame
 
 		// listeners
 
+		// bodi
+
+		Bodi.context("editor").put(this.bodi,this);
 	}
 
 	public static void main(String... args)
