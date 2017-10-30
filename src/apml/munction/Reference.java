@@ -19,13 +19,17 @@ public class Reference
 
 	//
 
+	public Integer call_code;
+
+	public Integer auth_key;
+
+	//
+
 	public Document document;
 
 	public String description;
 
 	public String bodi_reference;
-
-	public String authorization_key;
 
 	public String session_token;
 

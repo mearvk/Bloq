@@ -108,16 +108,16 @@ public class Munction //pronounced "munchkin"
 
 	//
 
-	public Reference register(Integer Type, String MunchkinFileName, String ClassName, String PackageName, byte[] Bytecode)
+	public Reference register(String GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, byte[] Bytecode)
 	{
-		 return this.registrar.register(Type, MunchkinFileName, ClassName, PackageName, Bytecode);
+		 return this.registrar.register(GroupID, Type, MunchkinFileName, ClassName, PackageName, Bytecode);
 	}
 
 	//
 
-	public Reference register(Integer Type, String MunchkinFileName, String ClassName, String PackageName, String SourceCode)
+	public Reference register(String GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, String SourceCode)
 	{
-		return this.registrar.register(Type, MunchkinFileName, ClassName, PackageName, SourceCode);
+		return this.registrar.register(GroupID, Type, MunchkinFileName, ClassName, PackageName, SourceCode);
 	}
 
 	//
