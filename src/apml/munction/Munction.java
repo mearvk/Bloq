@@ -23,13 +23,17 @@ public class Munction //pronounced "munchkin"
 
 	//
 
-	private Connection connect = null;
+	public Connection connect = null;
 
-	private Statement statement = null;
+	public Statement statement = null;
 
-	private PreparedStatement preparedStatement = null;
+	public PreparedStatement preparedStatement = null;
 
-	private ResultSet resultSet = null;
+	public ResultSet resultSet = null;
+
+	//
+
+	Registrar registrar = new Registrar();
 
 	//
 
@@ -47,6 +51,8 @@ public class Munction //pronounced "munchkin"
 		try
 		{
 			connect = DriverManager.getConnection("jdbc:mysql://"+hostname+"/"+dbname+"?user="+username+"&password="+password);
+
+			Bodi.context("munction").put("//connect", connect);
 		}
 		catch(Exception e)
 		{
@@ -77,6 +83,8 @@ public class Munction //pronounced "munchkin"
 		try
 		{
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/"+dbname+"?user="+username+"&password="+password);
+
+			Bodi.context("munction").put("//connect", connect);
 		}
 		catch(Exception e)
 		{
@@ -100,78 +108,16 @@ public class Munction //pronounced "munchkin"
 
 	//
 
-	public Reference register(Integer Type, String MunchkinFileName, String ClassName, String PackageName, String SourceCode)
+	public Reference register(Integer Type, String MunchkinFileName, String ClassName, String PackageName, byte[] Bytecode)
 	{
-		if(connect==null) return null;
-
-		//
-
-		PreparedStatement preparedStatement;
-
-		try
-		{
-			preparedStatement = connect.prepareStatement("INSERT INTO REGISTERED (TYPE, FILENAME, CLASSNAME, PACKAGENAME, SOURCECODE) VALUES (?,?,?,?,?);");
-
-			preparedStatement.setInt(1, Type);
-
-			preparedStatement.setString(2, MunchkinFileName);
-
-			preparedStatement.setString(3, ClassName);
-
-			preparedStatement.setString( 4, PackageName);
-
-			preparedStatement.setString( 5, SourceCode);
-
-			//
-
-			preparedStatement.execute();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		//
-
-		return new Reference();
+		 return this.registrar.register(Type, MunchkinFileName, ClassName, PackageName, Bytecode);
 	}
 
 	//
 
-	public Reference register(Integer Type, String MunchkinFileName, String ClassName, String PackageName, byte[] Bytecode)
+	public Reference register(Integer Type, String MunchkinFileName, String ClassName, String PackageName, String SourceCode)
 	{
-		if(connect==null) return null;
-
-		//
-
-		PreparedStatement preparedStatement;
-
-		try
-		{
-			preparedStatement = connect.prepareStatement("INSERT INTO REGISTERED (TYPE, FILENAME, CLASSNAME, PACKAGENAME, BYTECODE) VALUES (?,?,?,?,?);");
-
-			preparedStatement.setInt(1, Type);
-
-			preparedStatement.setString(2, MunchkinFileName);
-
-			preparedStatement.setString(3, ClassName);
-
-			preparedStatement.setString( 4, PackageName);
-
-			preparedStatement.setBytes( 5, Bytecode);
-
-			//
-
-			preparedStatement.execute();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		//
-
-		return new Reference();
+		return this.registrar.register(Type, MunchkinFileName, ClassName, PackageName, SourceCode);
 	}
 
 	//
