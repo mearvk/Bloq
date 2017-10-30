@@ -9,17 +9,17 @@ public class Munction //pronounced "munchkin"
 {
 	//
 
-	Integer METHOD = 0x00;
+	public Integer METHOD = 0x00;
 
-	Integer FUNCTION = 0x01;
+	public Integer FUNCTION = 0x01;
 
-	Integer CLASS = 0x02;
+	public Integer CLASS = 0x02;
 
-	Integer DATA = 0x03;
+	public Integer DATA = 0x03;
 
-	Integer OBJECT = 0x04;
+	public Integer OBJECT = 0x04;
 
-	Integer SYSTEM = 0x05;
+	public Integer SYSTEM = 0x05;
 
 	//
 
@@ -33,7 +33,9 @@ public class Munction //pronounced "munchkin"
 
 	//
 
-	Registrar registrar = new Registrar();
+	public static Registrar registrar = new Registrar();
+
+	public static Munction instance = new Munction();
 
 	//
 
@@ -108,14 +110,14 @@ public class Munction //pronounced "munchkin"
 
 	//
 
-	public Reference register(String GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, byte[] Bytecode)
+	public Reference register(Integer GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, byte[] Bytecode)
 	{
 		 return this.registrar.register(GroupID, Type, MunchkinFileName, ClassName, PackageName, Bytecode);
 	}
 
 	//
 
-	public Reference register(String GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, String SourceCode)
+	public Reference register(Integer GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, String SourceCode)
 	{
 		return this.registrar.register(GroupID, Type, MunchkinFileName, ClassName, PackageName, SourceCode);
 	}

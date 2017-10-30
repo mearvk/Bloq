@@ -3,6 +3,7 @@ package org.system;
 
 import apml.compilers.java.codemodel.Bloqcompiler;
 import apml.modeling.Apmlobject;
+import apml.munction.Munction;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import org.events.*;
@@ -57,8 +58,11 @@ public class UserInterfaceProcessor extends Apmlobject
 
 		//
 
+		Munction.registrar.register(0x0000001, Munction.instance.METHOD, "UserInterfaceProcessor.java", "UserInterfaceProcessor", "org.system", new byte[1]);
+
 		switch(action)
 		{
+
 
 			case "build_apml_standalone_request_event":
 

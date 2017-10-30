@@ -15,7 +15,7 @@ public class Registrar
 
 	//
 
-	public Reference register(String GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, String SourceCode)
+	public Reference register(Integer GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, String SourceCode)
 	{
 		Connection connect = (Connection)Bodi.context("munction").pull("//connect");
 
@@ -33,9 +33,9 @@ public class Registrar
 
 		try
 		{
-			preparedStatement = connect.prepareStatement("INSERT INTO REGISTERED (TYPE, FILENAME, CLASSNAME, PACKAGENAME, SOURCECODE) VALUES (?,?,?,?,?);");
+			preparedStatement = connect.prepareStatement("INSERT INTO REGISTERED (GROUPID, TYPE, FILENAME, CLASSNAME, PACKAGENAME, SOURCECODE) VALUES (?,?,?,?,?);");
 
-			preparedStatement.setString(1, GroupID);
+			preparedStatement.setInt(1, GroupID);
 
 			preparedStatement.setInt(2, Type);
 
@@ -73,7 +73,7 @@ public class Registrar
 
 	//
 
-	public Reference register(String GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, byte[] Bytecode)
+	public Reference register(Integer GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, byte[] Bytecode)
 	{
 		Connection connect = (Connection)Bodi.context("munction").pull("//connect");
 
@@ -93,7 +93,7 @@ public class Registrar
 		{
 			preparedStatement = connect.prepareStatement("INSERT INTO REGISTERED (GROUPID, TYPE, FILENAME, CLASSNAME, PACKAGENAME, BYTECODE) VALUES (?,?,?,?,?);");
 
-			preparedStatement.setString(1, GroupID);
+			preparedStatement.setInt(1, GroupID);
 
 			preparedStatement.setInt(2, Type);
 
