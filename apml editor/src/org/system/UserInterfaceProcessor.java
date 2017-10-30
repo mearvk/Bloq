@@ -1,13 +1,16 @@
 
 package org.system;
 
+import apml.compilers.java.codemodel.Bloqcompiler;
 import apml.modeling.Apmlobject;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import org.events.*;
+import org.widgets.APMLGui;
 import org.widgets.JTree_000;
 import org.widgets.RSTextPane_000;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
@@ -34,31 +37,13 @@ public class UserInterfaceProcessor extends Apmlobject
 	{
         this.monitor = monitor;
 
-        try
-		{
-			Bodi.setcontext("editor");
-
-			Bodi.context("system").put(this.bodi, this);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	//
     public UserInterfaceProcessor()
 	{
-		try
-		{
-			Bodi.setcontext("editor");
-
-			Bodi.context("system").put(this.bodi, this);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		Bodi.context("editor").put(this.bodi, this);
     }
 
 	//
@@ -70,12 +55,146 @@ public class UserInterfaceProcessor extends Apmlobject
 
 		JTree_000 jtree;
 
+		//
 
 		switch(action)
 		{
 
+			case "build_apml_standalone_request_event":
 
-			case "exit_program":
+				RSTextPane_000 textpane;
+
+				String target_text;
+
+				Bloqcompiler compiler;
+
+				//
+
+				textpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
+
+				target_text = textpane.getText();
+
+				compiler =  new Bloqcompiler();
+
+				//
+
+				if(target_text==null || target_text.length()==0)
+				{
+					//Bodi.context("editor").pull();
+
+					//
+
+					JFileChooser input;
+
+					input = new JFileChooser();
+
+					input.setDialogTitle("Please Select APML Document");
+
+					input.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+					input.showOpenDialog((APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui"));
+
+					//
+
+					compiler.fileguardian.apmlinputfile = input.getSelectedFile();
+
+					compiler.fileguardian.apmlfilename = input.getSelectedFile().getName() + "/";
+
+					compiler.fileguardian.apmlinurl = input.getSelectedFile().getPath() + "/";
+
+					//
+
+					System.out.println("TODO: Please verify integrity of APML file");
+
+					//
+
+					JFileChooser output;
+
+					output = new JFileChooser();
+
+					output.setDialogTitle("Please Select Output Directory");
+
+					output.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+					output.showSaveDialog((APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui"));
+
+					//
+
+					compiler.fileguardian.basedirurl = output.getSelectedFile().getPath().toString() + "/";
+
+					compiler.fileguardian.apmlinurl = output.getSelectedFile().getPath()+"/in/";
+
+					compiler.fileguardian.apmloutjarurl = output.getSelectedFile().getPath() + "/out/jar/";
+
+					compiler.fileguardian.apmlinjarurl = output.getSelectedFile().getPath() + "/in/jar/";
+
+					//
+
+					compiler.fileguardian.apmlinputfile = output.getSelectedFile();
+
+					compiler.fileguardian.apmlfilename = output.getSelectedFile().getName() + "/";
+
+					compiler.fileguardian.apmlinurl = output.getSelectedFile().getPath() + "/";
+
+					//
+
+					compiler.setapmlfiles(compiler.fileguardian);
+
+					compiler.settempfiles(compiler.inputmanager);
+
+					compiler.setoutputfiles(compiler.inputmanager);
+
+					compiler.setsourcefiles(compiler.outputmanager);
+
+					compiler.writebytecode(compiler.inputmanager);
+
+					try
+					{
+						compiler.writejarfile();
+					}
+					catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+				}
+				else
+				{
+					JFileChooser output;
+
+					output = new JFileChooser();
+
+					output.setDialogTitle("Please Select Output Directory");
+
+					output.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+					output.showSaveDialog((APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui"));
+
+					//
+
+					compiler.fileguardian.basedirurl = output.getSelectedFile().getPath().toString() + "/";
+
+					compiler.fileguardian.apmlinurl = output.getSelectedFile().getPath()+"/in/";
+
+					compiler.fileguardian.apmloutjarurl = output.getSelectedFile().getPath() + "/out/jar/";
+
+					compiler.fileguardian.apmlinjarurl = output.getSelectedFile().getPath() + "/in/jar/";
+
+					//
+
+					compiler.setapmlfiles(compiler.fileguardian);
+
+					compiler.settempfiles(compiler.inputmanager);
+
+					compiler.setoutputfiles(compiler.inputmanager);
+
+					compiler.setsourcefiles(compiler.outputmanager);
+
+					compiler.writebytecode(compiler.inputmanager);
+				}
+
+				break;
+
+			case "exit_program_event":
 
 				System.exit(0);
 

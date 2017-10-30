@@ -47,7 +47,7 @@ public class JMenuItem_000 extends JMenuItem
 	public Component parent;
 	public Apmlbasesystem system;
 
-	public ActionListener_000 actionlistener;
+	public JMenuItem_000_ActionListener actionlistener;
 
 	/**
 	 * @param parent : The tree AWT object.
@@ -60,7 +60,7 @@ public class JMenuItem_000 extends JMenuItem
 
 		// instantiation
 
-		this.actionlistener = new ActionListener_000(this);
+		this.actionlistener = new JMenuItem_000_ActionListener(this);
 
 		// hierarchy
 
@@ -88,7 +88,7 @@ public class JMenuItem_000 extends JMenuItem
 
 		// instantiation
 
-		this.actionlistener = new ActionListener_000(this);
+		this.actionlistener = new JMenuItem_000_ActionListener(this);
 
 		// hierarchy
 
@@ -106,49 +106,51 @@ public class JMenuItem_000 extends JMenuItem
 
 	}
 
-	class ActionListener_000 implements ActionListener
-	{
-		public Component parent;
 
-		public ActionListener_000(Component parent)
+}
+
+class JMenuItem_000_ActionListener implements ActionListener
+{
+	public Component parent;
+
+	public JMenuItem_000_ActionListener(Component parent)
+	{
+		this.parent = parent;
+	}
+
+	public void actionPerformed(ActionEvent event)
+	{
+		JFileChooser chooser = new JFileChooser();
+
+		//
+
+		int retval = chooser.showOpenDialog(this.parent);
+
+		if (retval == JFileChooser.APPROVE_OPTION)
 		{
-			this.parent = parent;
+			try
+			{
+				File file = chooser.getSelectedFile();
+
+				//
+
+				UserInterfaceProcessor processor;
+
+				processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
+
+				processor.update(new LoadApmlDocumentEvent(event, file));
+
+				processor.update(new DocumentLoadedEvent(event, file));
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
 
-		public void actionPerformed(ActionEvent event)
+		if (retval == JFileChooser.CANCEL_OPTION)
 		{
-			JFileChooser chooser = new JFileChooser();
-
-			//
-
-			int retval = chooser.showOpenDialog(this.parent);
-
-			if (retval == JFileChooser.APPROVE_OPTION)
-			{
-				try
-				{
-					File file = chooser.getSelectedFile();
-
-					//
-
-					UserInterfaceProcessor processor;
-
-					processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
-
-					processor.update(new LoadApmlDocumentEvent(event, file));
-
-					processor.update(new DocumentLoadedEvent(event, file));
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-
-			if (retval == JFileChooser.CANCEL_OPTION)
-			{
-				return;
-			}
+			return;
 		}
 	}
 }
