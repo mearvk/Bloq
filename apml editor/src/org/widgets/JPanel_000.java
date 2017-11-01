@@ -1,6 +1,7 @@
 package org.widgets;
 
 import apml.system.Apmlbasesystem;
+import apml.system.bodi.Bodi;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -67,14 +68,13 @@ public class JPanel_000 extends JPanel
 	 */
 	public JPanel_000(Component parent)
 	{
-
-		this.backgroundimagename = "";
-
 		// setters
 
 		this.setBackground(new Color(0xff,0xff,0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+		this.backgroundimagename = "";
 
 		// instantiation
 
@@ -92,6 +92,41 @@ public class JPanel_000 extends JPanel
 
 		// listeners
 
+		Bodi.context("editor").put(this.bodi, this);
+	}
+
+	/**
+	 * @param parent : The tree AWT object.
+	 */
+	public JPanel_000(Component parent, String bodi)
+	{
+		// setters
+
+		this.setBackground(new Color(0xff,0xff,0xff));
+
+		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+		this.backgroundimagename = "";
+
+		this.bodi = bodi;
+
+		// instantiation
+
+		this.jtree_000 = new JTree_000(this);
+
+		// hierarchy
+
+		this.add(jtree_000);
+
+		// devolvement
+
+		this.parent = parent;
+
+		this.setVisible(true);
+
+		// listeners
+
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	/**
@@ -100,13 +135,13 @@ public class JPanel_000 extends JPanel
 	 */
 	public JPanel_000(Component parent, Apmlbasesystem system)
 	{
-		this.backgroundimagename = "";
-
 		// setters
 
 		this.setBackground(new Color(0xff,0xff,0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+		this.backgroundimagename = "";
 
 		// instantiation
 
@@ -126,6 +161,44 @@ public class JPanel_000 extends JPanel
 
 		// listeners
 
+		Bodi.context("editor").put(this.bodi, this);
+	}
+
+	/**
+	 * @param parent : The tree AWT object.
+	 * @param system : The APML system object.
+	 */
+	public JPanel_000(Component parent, Apmlbasesystem system, String bodi)
+	{
+		// setters
+
+		this.setBackground(new Color(0xff,0xff,0xff));
+
+		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+		this.backgroundimagename = "";
+
+		this.bodi = bodi;
+
+		// instantiation
+
+		this.jtree_000 = new JTree_000(this);
+
+		// hierarchy
+
+		this.add(jtree_000);
+
+		// devolvement
+
+		this.parent = parent;
+
+		this.system = system;
+
+		this.setVisible(true);
+
+		// listeners
+
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	public void paintComponent(Graphics g)

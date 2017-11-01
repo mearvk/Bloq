@@ -119,6 +119,8 @@ public class JPanel_001 extends JPanel
 
 		this.setLayout(new FlowLayout());
 
+		this.bodi = bodi;
+
 		// instantiation
 
 		this.rstextpane = new RSTextPane_000(this);

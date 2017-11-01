@@ -76,7 +76,7 @@ public class JPanel_Backboard_For_Sprung extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this, "//editor/ui/jpanel_sprung_001"));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this,"//editor/ui/jpanel_sprung_000"), new JPanel_001(this, "//editor/ui/jpanel_sprung_001"));
 
 		// hierarchy
 
@@ -110,7 +110,7 @@ public class JPanel_Backboard_For_Sprung extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this, "//editor/ui/jpanel_sprung_001"));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this,"//editor/ui/jpanel_sprung_000"), new JPanel_001(this, "//editor/ui/jpanel_sprung_001"));
 
 		// hierarchy
 

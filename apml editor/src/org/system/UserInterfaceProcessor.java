@@ -7,10 +7,7 @@ import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.ui.compilers.java.Uicompiler;
 import org.events.*;
-import org.widgets.APMLGui;
-import org.widgets.JPanel_002;
-import org.widgets.JTree_000;
-import org.widgets.RSTextPane_000;
+import org.widgets.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -301,9 +298,11 @@ public class UserInterfaceProcessor extends Apmlobject
 
 			case "load_apml_document_event":
 
-				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
+				JPanel_001 jpanel_001;
 
-				editorpane.loaddocument((LoadApmlDocumentEvent)event);
+				jpanel_001 = (JPanel_001)Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+
+				jpanel_001.rstextpane.loaddocument((LoadApmlDocumentEvent)event);
 
 				//
 
