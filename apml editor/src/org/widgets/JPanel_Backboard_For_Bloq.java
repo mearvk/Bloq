@@ -66,15 +66,13 @@ public class JPanel_Backboard_For_Bloq extends JPanel
 
 	public JPanel_Backboard_For_Bloq(Component parent)
 	{
-
-
-		this.backgroundimagename = "";
-
 		// setters
 
 		this.setBackground(new Color(0xff,0xff,0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+		this.backgroundimagename = "";
 
 		// instantiation
 
@@ -101,14 +99,13 @@ public class JPanel_Backboard_For_Bloq extends JPanel
 
 	public JPanel_Backboard_For_Bloq(Component parent, Apmlbasesystem system)
 	{
-
-		this.backgroundimagename = "";
-
 		// setters
 
 		this.setBackground(new Color(0xff,0xff,0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+		this.backgroundimagename = "";
 
 		// instantiation
 

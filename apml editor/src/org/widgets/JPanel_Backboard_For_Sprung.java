@@ -65,14 +65,13 @@ public class JPanel_Backboard_For_Sprung extends JPanel
 
 	public JPanel_Backboard_For_Sprung(Component parent)
 	{
-
-		this.backgroundimagename = "";
-
 		// setters
 
 		this.setBackground(new Color(0xff,0xff,0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+		this.backgroundimagename = "";
 
 		// instantiation
 
@@ -99,14 +98,13 @@ public class JPanel_Backboard_For_Sprung extends JPanel
 
 	public JPanel_Backboard_For_Sprung(Component parent, Apmlbasesystem system)
 	{
-
-		this.backgroundimagename = "";
-
 		// setters
 
 		this.setBackground(new Color(0xff,0xff,0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+		this.backgroundimagename = "";
 
 		// instantiation
 

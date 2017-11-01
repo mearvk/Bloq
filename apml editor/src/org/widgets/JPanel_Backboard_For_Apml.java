@@ -68,14 +68,13 @@ public class JPanel_Backboard_For_Apml extends JPanel
 
 	public JPanel_Backboard_For_Apml(Component parent)
 	{
-
-		this.backgroundimagename = "";
-
 		// setters
 
 		this.setBackground(new Color(0xff,0xff,0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+		this.backgroundimagename = "";
 
 		// instantiation
 
@@ -102,13 +101,13 @@ public class JPanel_Backboard_For_Apml extends JPanel
 
 	public JPanel_Backboard_For_Apml(Component parent, Apmlbasesystem system)
 	{
-		this.backgroundimagename = "";
-
 		// setters
 
 		this.setBackground(new Color(0xff,0xff,0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+		this.backgroundimagename = "";
 
 		// instantiation
 
