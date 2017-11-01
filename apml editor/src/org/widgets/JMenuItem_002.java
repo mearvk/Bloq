@@ -53,7 +53,7 @@ public class JMenuItem_002
     public JMenuItem_002(Component parent) {
         // setters 
 	
-        this.setText("Apml Standalone");
+        this.setText("Apml Subsystem");
 	
         // instantiation 
 	
@@ -78,7 +78,7 @@ public class JMenuItem_002
     public JMenuItem_002(Component parent, Apmlbasesystem system) {
         // setters 
 	
-        this.setText("Apml Standalone");
+        this.setText("Apml Subsystem");
 	
         // instantiation 
 	

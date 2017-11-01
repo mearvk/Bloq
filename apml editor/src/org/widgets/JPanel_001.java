@@ -24,7 +24,7 @@ import java.net.URL;
 public class JPanel_001 extends JPanel
 {
 
-	public String bodi = "//ui/system/jpanel_001";
+	public String bodi = "//editor/ui/jpanel_001";
 
 	public HTMLDocument document;
 
@@ -74,7 +74,7 @@ public class JPanel_001 extends JPanel
 
 		// setters
 
-		this.setBackground(Color.LIGHT_GRAY);
+		this.setBackground(new Color(0xff,0xff,0xff));
 
 		// instantiation
 
@@ -87,6 +87,8 @@ public class JPanel_001 extends JPanel
 		this.rstextscrollpane.setViewportView(this.rstextpane);
 
 		this.rstextpane.setscrollpane(this.rstextscrollpane);
+
+		this.rstextscrollpane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 		// hierarchy
 
@@ -111,7 +113,7 @@ public class JPanel_001 extends JPanel
 
 		// setters
 
-		this.setBackground(Color.LIGHT_GRAY);
+		this.setBackground(new Color(0xff,0xff,0xff));
 
 		// instantiation
 
@@ -124,6 +126,8 @@ public class JPanel_001 extends JPanel
 		this.rstextscrollpane.setViewportView(this.rstextpane);
 
 		this.rstextpane.setscrollpane(this.rstextscrollpane);
+
+		this.rstextscrollpane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 		// hierarchy
 

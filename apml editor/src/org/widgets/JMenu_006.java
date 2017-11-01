@@ -3,6 +3,10 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
+import org.events.BuildApmlSubsystemEvent;
+import org.events.BuildApmlUisubsystemEvent;
+import org.events.RebuildApmlSystemEvent;
+import org.system.UserInterfaceProcessor;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -54,6 +58,14 @@ public class JMenu_006
 
 	//
 
+	public JMenuItem_002 jmenuitem_002;
+
+	public JMenuItem_003 jmenuitem_003;
+
+	public JMenuItem_004 jmenuitem_004;
+
+	//
+
     /**
      * 
      * @param parent : The tree AWT object.
@@ -101,52 +113,46 @@ public class JMenu_006
      * @param parent : The tree AWT object.
      * @param system : The APML system object.
      */
-    public JMenu_006(Component parent, Apmlbasesystem system) {
-        // setters 
-	
-        this.setText("  Build  ");
+    public JMenu_006(Component parent, Apmlbasesystem system)
+	{
+		// setters
 
-        this.setMnemonic(KeyEvent.VK_B);
-	
-        // instantiation 
+		this.setText("  Build  ");
+
+		this.setMnemonic(KeyEvent.VK_B);
+
+		// instantiation
 
 		this.menu_listener_000 = new BuildApmlStandaloneListener();
 
-        this.jmenuitem_002 = new JMenuItem_002(this);
+		this.jmenuitem_002 = new JMenuItem_002(this);
 
-        this.jmenuitem_003 = new JMenuItem_003(this);
+		this.jmenuitem_003 = new JMenuItem_003(this);
 
-        this.jmenuitem_004 = new JMenuItem_004(this);
+		this.jmenuitem_004 = new JMenuItem_004(this);
 
-        // hierarchy
+		// hierarchy
 
-        this.add(jmenuitem_002);
+		this.add(jmenuitem_002);
 
-        this.add(jmenuitem_003);
+		this.add(jmenuitem_003);
 
-        this.add(jmenuitem_004);
-	
-        // devolvement 
-	
-        this.parent = parent;
-	
-        this.system = system;
-	
-        this.setVisible(true);
-	
-        // listeners
+		this.add(jmenuitem_004);
+
+		// devolvement
+
+		this.parent = parent;
+
+		this.system = system;
+
+		this.setVisible(true);
+
+		// listeners
 
 		//bodi
 
 		Bodi.context("editor").put(this.bodi, this);
-    }
-    
-	
-    JMenuItem_002 jmenuitem_002;
-    JMenuItem_003 jmenuitem_003;
-    JMenuItem_004 jmenuitem_004;
-
-    //
+	}
 
 	public BuildApmlStandaloneListener menu_listener_000 = new BuildApmlStandaloneListener();
 }
@@ -154,25 +160,25 @@ public class JMenu_006
 class BuildApmlStandaloneListener implements ActionListener
 {
 	@Override
-	public void actionPerformed(ActionEvent e)
+	public void actionPerformed(ActionEvent ae)
 	{
-		switch (e.getActionCommand())
+		switch (ae.getActionCommand())
 		{
-			case "Apml Standalone":
+			case "Apml Subsystem":
 
-				this.doApmlstandalonebuild();
+				this.doApmlsubsystembuild(ae);
 
 				break;
 
-			case "Apml System":
+			case "Apml UI Subsystem":
 
-				this.doApmlsystembuild();
+				this.doApmluisystembuild(ae);
 
 				break;
 
 			case "Rebuild":
 
-				this.doApmlrebuild();
+				this.doApmlrebuildcurrent(ae);
 
 				break;
 
@@ -181,19 +187,32 @@ class BuildApmlStandaloneListener implements ActionListener
 	}
 
 	//
-	private void doApmlstandalonebuild()
+	private void doApmlsubsystembuild(ActionEvent ae)
 	{
+		UserInterfaceProcessor processor;
+
+		processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
+
+		processor.update(new BuildApmlSubsystemEvent(ae));
 	}
 
 	//
-	private void doApmlsystembuild()
+	private void doApmluisystembuild(ActionEvent ae)
 	{
-		System.out.println("xxx");
+		UserInterfaceProcessor processor;
+
+		processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
+
+		processor.update(new BuildApmlUisubsystemEvent(ae));
 	}
 
 	//
-	private void doApmlrebuild()
+	private void doApmlrebuildcurrent(ActionEvent ae)
 	{
-		System.out.println("xxx");
+		UserInterfaceProcessor processor;
+
+		processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
+
+		processor.update(new RebuildApmlSystemEvent(ae));
 	}
 }

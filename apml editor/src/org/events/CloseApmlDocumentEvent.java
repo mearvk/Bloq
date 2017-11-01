@@ -9,13 +9,13 @@ public class CloseApmlDocumentEvent extends ActionEvent
 
 	public CloseApmlDocumentEvent(JComponent source)
 	{
-		super(source, 0, "close_apml_document_update");
+		super(source, 0, "close_apml_document_event");
 
 		this.source = source;
 	}
 
 	public CloseApmlDocumentEvent(Object object, Integer id, String command)
 	{
-		super(object, id, "close_apml_document_update");
+		super(object, id, "close_apml_document_event");
 	}
 }

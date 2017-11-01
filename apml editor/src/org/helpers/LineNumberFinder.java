@@ -40,7 +40,7 @@ public class LineNumberFinder
 
 		//
 
-		if(selected==null)
+		if(selected==null || selected.getParent()==null)
 		{
 			System.err.println("No selected JTreeNode could be found.");
 

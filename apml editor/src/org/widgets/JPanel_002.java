@@ -1,6 +1,7 @@
 package org.widgets;
 
 import apml.system.Apmlbasesystem;
+import apml.system.bodi.Bodi;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -23,7 +24,7 @@ import java.net.URL;
 public class JPanel_002 extends JPanel
 {
 
-	public String bodi = "//ui/system/jpanel_003";
+	public String bodi = "//editor/ui/jpanel_002";
 
 	//
 
@@ -59,21 +60,21 @@ public class JPanel_002 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(110,96,113));
+		this.setBackground(new Color(0x00,0xff,0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-		this.setForeground(Color.GRAY);
+		this.setForeground(Color.WHITE);
 
 		// instantiation
 
 		this.status = new JLabel("Status: APML Editor 1.0");
 
-		this.status.setForeground(Color.WHITE);
-
 		this.status.setFont(new Font("Courier", Font.PLAIN, 12));
 
-		this.status.setBounds(0,15,this.status.getWidth(), this.status.getHeight());
+		this.status.setBounds(0,15, this.status.getWidth(), this.status.getHeight());
+
+		this.status.setForeground(Color.DARK_GRAY);
 
 		// hierarchy
 
@@ -86,6 +87,10 @@ public class JPanel_002 extends JPanel
 		this.setVisible(true);
 
 		// listeners
+
+		// bodi
+
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	/**
@@ -96,21 +101,21 @@ public class JPanel_002 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(110,96,113));
+		this.setBackground(new Color(0x00,0xff,0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-		this.setForeground(Color.GRAY);
+		this.setForeground(Color.WHITE);
 
 		// instantiation
 
 		this.status = new JLabel("Status: APML Editor 1.0");
 
-		this.status.setForeground(Color.WHITE);
-
 		this.status.setFont(new Font("Courier", Font.PLAIN, 12));
 
-		this.status.setBounds(0,5,this.status.getWidth(), this.status.getHeight());
+		this.status.setBounds(0,15, this.status.getWidth(), this.status.getHeight());
+
+		this.status.setForeground(Color.DARK_GRAY);
 
 		// hierarchy
 
@@ -120,11 +125,13 @@ public class JPanel_002 extends JPanel
 
 		this.parent = parent;
 
-		this.system = system;
-
 		this.setVisible(true);
 
 		// listeners
+
+		// bodi
+
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	@Override

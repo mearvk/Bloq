@@ -3,11 +3,12 @@ package org.system;
 
 import apml.compilers.java.codemodel.Bloqcompiler;
 import apml.modeling.Apmlobject;
-import apml.munction.Munction;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
+import apml.ui.compilers.java.Uicompiler;
 import org.events.*;
 import org.widgets.APMLGui;
+import org.widgets.JPanel_002;
 import org.widgets.JTree_000;
 import org.widgets.RSTextPane_000;
 
@@ -54,23 +55,29 @@ public class UserInterfaceProcessor extends Apmlobject
 
 		RSTextPane_000 editorpane;
 
+		RSTextPane_000 textpane;
+
+		Uicompiler ui_compiler;
+
+		Bloqcompiler bloq_compiler;
+
+		JFileChooser chooser;
+
+		JFileChooser output;
+
+		JFileChooser input;
+
 		JTree_000 jtree;
 
 		//
 
-		Munction.registrar.register(0x0000001, Munction.instance.METHOD, "UserInterfaceProcessor.java", "UserInterfaceProcessor", "org.system", new byte[1]);
+		//Munction.registrar.register(0x0000001, Munction.instance.METHOD, "UserInterfaceProcessor.java", "UserInterfaceProcessor", "org.system", new byte[1]);
 
 		switch(action)
 		{
-
-
-			case "build_apml_standalone_request_event":
-
-				RSTextPane_000 textpane;
+			case "build_ui_apml_request_event":
 
 				String target_text;
-
-				Bloqcompiler compiler;
 
 				//
 
@@ -78,17 +85,74 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				target_text = textpane.getText();
 
-				compiler =  new Bloqcompiler();
+				ui_compiler =  new Uicompiler();
 
 				//
 
 				if(target_text==null || target_text.length()==0)
 				{
-					//Bodi.context("editor").pull();
+
+					//JFileChooser input;
+
+					input = new JFileChooser();
+
+					input.setDialogTitle("Please Select UI APML Document");
+
+					input.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+					input.showOpenDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
 
 					//
 
-					JFileChooser input;
+					this.last_loaded_file = ui_compiler.fileguardian.xmlin = input.getSelectedFile();
+
+					this.last_loaded_file_url = input.getSelectedFile().getName();
+
+				}
+
+				//
+
+				//JFileChooser output;
+
+				output = new JFileChooser();
+
+				output.setDialogTitle("Please Select Output Directory");
+
+				output.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+				output.showSaveDialog((APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui"));
+
+				//
+
+				ui_compiler.fileguardian.outputdir = output.getSelectedFile();
+
+				//
+
+				ui_compiler.dohandleinputfiles(ui_compiler.inputmanager);
+
+				ui_compiler.dohandleoutputfiles(ui_compiler.outputmanager);
+
+				//
+
+				break;
+
+			case "build_apml_standalone_request_event":
+
+				//
+
+				textpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
+
+				target_text = textpane.getText();
+
+				bloq_compiler =  new Bloqcompiler();
+
+				//
+
+				if(target_text==null || target_text.length()==0)
+				{
+					//
+
+					//JFileChooser input;
 
 					input = new JFileChooser();
 
@@ -100,11 +164,9 @@ public class UserInterfaceProcessor extends Apmlobject
 
 					//
 
-					compiler.fileguardian.apmlinputfile = input.getSelectedFile();
+					this.last_loaded_file = bloq_compiler.fileguardian.apmlinputfile = input.getSelectedFile();
 
-					compiler.fileguardian.apmlfilename = input.getSelectedFile().getName() + "/";
-
-					compiler.fileguardian.apmlinurl = input.getSelectedFile().getPath() + "/";
+					this.last_loaded_file_url = bloq_compiler.fileguardian.apmlfilename = input.getSelectedFile().getName();
 
 					//
 
@@ -112,7 +174,7 @@ public class UserInterfaceProcessor extends Apmlobject
 
 					//
 
-					JFileChooser output;
+					//JFileChooser output;
 
 					output = new JFileChooser();
 
@@ -124,37 +186,29 @@ public class UserInterfaceProcessor extends Apmlobject
 
 					//
 
-					compiler.fileguardian.basedirurl = output.getSelectedFile().getPath().toString() + "/";
+					bloq_compiler.fileguardian.basedirurl = output.getSelectedFile().getPath().toString() + "/";
 
-					compiler.fileguardian.apmlinurl = output.getSelectedFile().getPath()+"/in/";
+					bloq_compiler.fileguardian.apmloutjarurl = output.getSelectedFile().getPath() + "/out/jar/";
 
-					compiler.fileguardian.apmloutjarurl = output.getSelectedFile().getPath() + "/out/jar/";
+					bloq_compiler.fileguardian.apmlinjarurl = output.getSelectedFile().getPath() + "/in/jar/";
 
-					compiler.fileguardian.apmlinjarurl = output.getSelectedFile().getPath() + "/in/jar/";
-
-					//
-
-					compiler.fileguardian.apmlinputfile = output.getSelectedFile();
-
-					compiler.fileguardian.apmlfilename = output.getSelectedFile().getName() + "/";
-
-					compiler.fileguardian.apmlinurl = output.getSelectedFile().getPath() + "/";
+					bloq_compiler.fileguardian.apmlinurl = output.getSelectedFile().getPath()+"/in/";
 
 					//
 
-					compiler.setapmlfiles(compiler.fileguardian);
+					bloq_compiler.setapmlfiles(bloq_compiler.fileguardian);
 
-					compiler.settempfiles(compiler.inputmanager);
+					bloq_compiler.settempfiles(bloq_compiler.inputmanager);
 
-					compiler.setoutputfiles(compiler.inputmanager);
+					bloq_compiler.setoutputfiles(bloq_compiler.inputmanager);
 
-					compiler.setsourcefiles(compiler.outputmanager);
+					bloq_compiler.setsourcefiles(bloq_compiler.outputmanager);
 
-					compiler.writebytecode(compiler.inputmanager);
+					bloq_compiler.writebytecode(bloq_compiler.inputmanager);
 
 					try
 					{
-						compiler.writejarfile();
+						bloq_compiler.writejarfile();
 					}
 					catch (Exception e)
 					{
@@ -163,7 +217,7 @@ public class UserInterfaceProcessor extends Apmlobject
 				}
 				else
 				{
-					JFileChooser output;
+					//JFileChooser output;
 
 					output = new JFileChooser();
 
@@ -175,25 +229,40 @@ public class UserInterfaceProcessor extends Apmlobject
 
 					//
 
-					compiler.fileguardian.basedirurl = output.getSelectedFile().getPath().toString() + "/";
+					bloq_compiler.fileguardian.basedirurl = output.getSelectedFile().getPath().toString() + "/";
 
-					compiler.fileguardian.apmlinurl = output.getSelectedFile().getPath()+"/in/";
+					bloq_compiler.fileguardian.apmlinurl = output.getSelectedFile().getPath()+"/in/";
 
-					compiler.fileguardian.apmloutjarurl = output.getSelectedFile().getPath() + "/out/jar/";
+					bloq_compiler.fileguardian.apmloutjarurl = output.getSelectedFile().getPath() + "/out/jar/";
 
-					compiler.fileguardian.apmlinjarurl = output.getSelectedFile().getPath() + "/in/jar/";
+					bloq_compiler.fileguardian.apmlinjarurl = output.getSelectedFile().getPath() + "/in/jar/";
 
 					//
 
-					compiler.setapmlfiles(compiler.fileguardian);
+					if(last_loaded_file==null || this.last_loaded_file_url == null || this.last_loaded_file_url.length()==0)
+					{
+						JPanel_002 jpanel_002;
 
-					compiler.settempfiles(compiler.inputmanager);
+						jpanel_002 = (JPanel_002)Bodi.context("editor").pull("//editor/ui/jpanel_002");
 
-					compiler.setoutputfiles(compiler.inputmanager);
+						jpanel_002.status.setText("Unable to determine existing file for APML input.  Double check.");
+					}
 
-					compiler.setsourcefiles(compiler.outputmanager);
+					bloq_compiler.fileguardian.apmlinputfile = this.last_loaded_file;
 
-					compiler.writebytecode(compiler.inputmanager);
+					bloq_compiler.fileguardian.apmlfilename = this.last_loaded_file_url;
+
+					//
+
+					bloq_compiler.setapmlfiles(bloq_compiler.fileguardian);
+
+					bloq_compiler.settempfiles(bloq_compiler.inputmanager);
+
+					bloq_compiler.setoutputfiles(bloq_compiler.inputmanager);
+
+					bloq_compiler.setsourcefiles(bloq_compiler.outputmanager);
+
+					bloq_compiler.writebytecode(bloq_compiler.inputmanager);
 				}
 
 				break;

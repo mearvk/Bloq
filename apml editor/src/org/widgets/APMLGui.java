@@ -44,16 +44,38 @@ public class APMLGui extends JFrame
 	public Rectangle importref_014;
 	public ImageIO importref_015;
 	public File importref_016;
+	public JSplitPane importref_017;
+
+	//
+
 	public Component parent;
 	public Apmlbasesystem system;
-	public JSplitPane importref_017;
+
+	//
 
 	public JMenuBar_000 jmenubar_000;
 	public JTabbedPane_000 jtabbedpane_000;
-	public JSplitPane_000 jsplitpane_000;
 	public JPanel_002 jpanel_002;
 
+	//
+
+	public JPanel_Backboard_For_Apml jpanel_backboard_for_apml;
+	public JPanel_Backboard_For_Bloq jpanel_backboard_for_bloq;
+	public JPanel_Backboard_For_Bodi jpanel_backboard_for_bodi;
+	public JPanel_Backboard_For_Falthruu jpanel_backboard_for_falthruu;
+	public JPanel_Backboard_For_Munction jpanel_backboard_for_munction;
+	public JPanel_Backboard_For_Runyn jpanel_backboard_for_runyn;
+	public JPanel_Backboard_For_Sprung jpanel_backboard_for_sprung;
+
+	//
+
+	public JPanel selected_panel;
+
+	//
+
 	public String bodi = "//editor/ui/apmlgui";
+
+	//
 
 	//
 	public APMLGui()
@@ -66,6 +88,12 @@ public class APMLGui extends JFrame
 				try
 				{
 					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+
+					UIManager.put("nimbusBase", new Color(0x81,0x81,0x81)); //menuitems, jfilechooser
+
+					UIManager.put("nimbusBlueGrey", new Color(0xd1,0xd1,0xd1)); //jmenubar
+
+					UIManager.put("control", new Color(0xdf,0xdf,0xdf)); //jframe background
 
 					//
 
@@ -104,13 +132,11 @@ public class APMLGui extends JFrame
 	{
 		// setters
 
-		//
-
-		this.setBounds(150, 50, 1200, 800);
+		this.setBounds(0, 0, 1920, 1200);
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-		this.setTitle("APML Editor");
+		this.setTitle("Kuanta :: Apml Style Editor");
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -120,9 +146,23 @@ public class APMLGui extends JFrame
 
 		this.jtabbedpane_000 = new JTabbedPane_000(this);
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
-
 		this.jpanel_002 = new JPanel_002(this);
+
+		//
+
+		this.jpanel_backboard_for_apml = new JPanel_Backboard_For_Apml(this);
+
+		this.jpanel_backboard_for_bloq = new JPanel_Backboard_For_Bloq(this);
+
+		this.jpanel_backboard_for_bodi = new JPanel_Backboard_For_Bodi(this);
+
+		this.jpanel_backboard_for_falthruu = new JPanel_Backboard_For_Falthruu(this);
+
+		this.jpanel_backboard_for_munction = new JPanel_Backboard_For_Munction(this);
+
+		this.jpanel_backboard_for_runyn = new JPanel_Backboard_For_Runyn(this);
+
+		this.jpanel_backboard_for_sprung = new JPanel_Backboard_For_Sprung(this);
 
 		// hierarchy
 
@@ -130,13 +170,15 @@ public class APMLGui extends JFrame
 
 		this.add(jtabbedpane_000);
 
-		this.add(jsplitpane_000);
+		this.add(jpanel_backboard_for_apml);
 
-		this.add(jpanel_002);
+		this.add(new JScrollPane_000(jpanel_002));
 
 		// devolvement
 
 		this.parent = parent;
+
+		this.selected_panel = this.jpanel_backboard_for_apml;
 
 		this.setVisible(true);
 
@@ -155,13 +197,11 @@ public class APMLGui extends JFrame
 	{
 		// setters
 
-		//
-
 		this.setBounds(150, 50, 1200, 800);
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-		this.setTitle("APML Editor");
+		this.setTitle("Kuanta :: Apml Style Editor");
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -171,9 +211,23 @@ public class APMLGui extends JFrame
 
 		this.jtabbedpane_000 = new JTabbedPane_000(this);
 
-		this.jsplitpane_000 = new JSplitPane_000(this, system, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
-
 		this.jpanel_002 = new JPanel_002(this);
+
+		//
+
+		this.jpanel_backboard_for_apml = new JPanel_Backboard_For_Apml(this);
+
+		this.jpanel_backboard_for_bloq = new JPanel_Backboard_For_Bloq(this);
+
+		this.jpanel_backboard_for_bodi = new JPanel_Backboard_For_Bodi(this);
+
+		this.jpanel_backboard_for_falthruu = new JPanel_Backboard_For_Falthruu(this);
+
+		this.jpanel_backboard_for_munction = new JPanel_Backboard_For_Munction(this);
+
+		this.jpanel_backboard_for_runyn = new JPanel_Backboard_For_Runyn(this);
+
+		this.jpanel_backboard_for_sprung = new JPanel_Backboard_For_Sprung(this);
 
 		// hierarchy
 
@@ -181,11 +235,13 @@ public class APMLGui extends JFrame
 
 		this.add(jtabbedpane_000);
 
-		this.add(jsplitpane_000);
+		this.add(jpanel_backboard_for_apml);
 
-		this.add(jpanel_002);
+		this.add(new JScrollPane_000(jpanel_002));
 
 		// devolvement
+
+		this.selected_panel = this.jpanel_backboard_for_apml;
 
 		this.parent = parent;
 

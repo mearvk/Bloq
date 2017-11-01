@@ -7,7 +7,7 @@ public class LoadApmlDocumentEvent extends ActionEvent
 {
 	public File fileRef = null;
 
-	public LoadApmlDocumentEvent(ActionEvent event, File file)
+	public LoadApmlDocumentEvent(ActionEvent event, File fileRef)
 	{
 		super(event.getSource(), event.getID(), "load_apml_document_event");
 

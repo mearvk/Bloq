@@ -1,6 +1,7 @@
 package org.widgets;
 
 import apml.system.Apmlbasesystem;
+import apml.system.bodi.Bodi;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,10 +21,8 @@ import java.net.URL;
  * @see
  * @since
  */
-public class JPanel_000 extends JPanel
+public class JPanel_Backboard_For_Munction extends JPanel
 {
-
-	public String bodi = "//editor/ui/jpanel_000";
 
 	public Integer marginleft = 10;
 	public Integer margintop = 10;
@@ -47,16 +46,23 @@ public class JPanel_000 extends JPanel
 	public File importref_016;
 	public Component parent;
 	public Apmlbasesystem system;
+
+	//
+
 	JTree_000 jtree_000;
 
-	public Image backgroundimage;
+	//
 
+	public JSplitPane_000 jsplitpane_000;
+
+	//
+
+	public Image backgroundimage;
 	public String backgroundimagename;
 
-	/**
-	 * @param parent : The tree AWT object.
-	 */
-	public JPanel_000(Component parent)
+	//
+
+	public JPanel_Backboard_For_Munction(Component parent)
 	{
 
 		this.backgroundimagename = "";
@@ -65,15 +71,15 @@ public class JPanel_000 extends JPanel
 
 		this.setBackground(new Color(0xff,0xff,0xff));
 
-		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
 		// instantiation
 
-		this.jtree_000 = new JTree_000(this);
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
 
 		// hierarchy
 
-		this.add(jtree_000);
+		this.add(jsplitpane_000);
 
 		// devolvement
 
@@ -83,29 +89,31 @@ public class JPanel_000 extends JPanel
 
 		// listeners
 
+		// bodi
+
+		Bodi.context("editor").put("//editor/ui/jpanel_backboard_for_munction", this);
 	}
 
-	/**
-	 * @param parent : The tree AWT object.
-	 * @param system : The APML system object.
-	 */
-	public JPanel_000(Component parent, Apmlbasesystem system)
+	//
+
+	public JPanel_Backboard_For_Munction(Component parent, Apmlbasesystem system)
 	{
+
 		this.backgroundimagename = "";
 
 		// setters
 
 		this.setBackground(new Color(0xff,0xff,0xff));
 
-		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
 		// instantiation
 
-		this.jtree_000 = new JTree_000(this);
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
 
 		// hierarchy
 
-		this.add(jtree_000);
+		this.add(jsplitpane_000);
 
 		// devolvement
 
@@ -117,6 +125,9 @@ public class JPanel_000 extends JPanel
 
 		// listeners
 
+		// bodi
+
+		Bodi.context("editor").put("//editor/ui/jpanel_backboard_for_munction", this);
 	}
 
 	public void paintComponent(Graphics g)
@@ -125,7 +136,7 @@ public class JPanel_000 extends JPanel
 
 		try
 		{
-			//this.backgroundimage = ImageIO.read(new File(backgroundimagename));
+			//this.backgroundimage = ImageIO.read(new File("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/hexagon_wallpaper.jpg"));
 		}
 		catch (Exception e)
 		{
@@ -137,6 +148,6 @@ public class JPanel_000 extends JPanel
 
 	public Dimension getPreferredSize()
 	{
-		return new Dimension(((int) (parent.getWidth() * 0.3) - this.marginleft), ((int) (parent.getHeight() * 1.0) - this.margintop));
+		return new Dimension(((int) (parent.getWidth() * 1.0) - this.marginleft), ((int) (parent.getHeight() * 1.0) - this.margintop));
 	}
 }

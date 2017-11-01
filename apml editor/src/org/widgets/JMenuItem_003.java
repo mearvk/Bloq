@@ -53,7 +53,7 @@ public class JMenuItem_003
     public JMenuItem_003(Component parent) {
         // setters 
 	
-        this.setText("Apml System");
+        this.setText("Apml UI Subsystem");
 	
         // instantiation 
 	
@@ -65,8 +65,9 @@ public class JMenuItem_003
 	
         this.setVisible(true);
 	
-        // listeners 
-	
+        // listeners
+
+        this.addActionListener(((JMenu_006)this.parent).menu_listener_000);
     }
 
     /**
@@ -77,7 +78,7 @@ public class JMenuItem_003
     public JMenuItem_003(Component parent, Apmlbasesystem system) {
         // setters 
 	
-        this.setText("Apml System");
+        this.setText("Apml UI Subsystem");
 	
         // instantiation 
 	
@@ -95,7 +96,4 @@ public class JMenuItem_003
 
         this.addActionListener(((JMenu_006)this.parent).menu_listener_000);
     }
-    
-	
-
 }

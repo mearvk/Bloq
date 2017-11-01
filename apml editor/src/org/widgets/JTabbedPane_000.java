@@ -1,6 +1,7 @@
 package org.widgets;
 
 import apml.system.Apmlbasesystem;
+import apml.system.bodi.Bodi;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -97,15 +98,15 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		//
 
-		this.addTab("☬   Radio ", new JTabbedPaneJPanel(this));
+		this.addTab("◊   Radio ", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("☬   Messenger ", new JTabbedPaneJPanel(this));
+		this.addTab("◊   Messenger ", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("☬   Email ", new JTabbedPaneJPanel(this));
+		this.addTab("◊   Email ", new JTabbedPaneJPanel(this));
 
 		//
 
@@ -117,11 +118,11 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		//
 
-		this.addTab("☬   Bible ", new JTabbedPaneJPanel(this));
+		this.addTab("❃   Bible ", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("☬   Quran ", new JTabbedPaneJPanel(this));
+		this.addTab("❃   Quran ", new JTabbedPaneJPanel(this));
 
 		// devolvement
 
@@ -203,11 +204,11 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		//
 
-		this.addTab("☬   Bible ", new JTabbedPaneJPanel(this));
+		this.addTab("❃   Bible ", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("☬   Quran ", new JTabbedPaneJPanel(this));
+		this.addTab("❃   Quran ", new JTabbedPaneJPanel(this));
 
 		// devolvement
 
@@ -225,7 +226,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 	public Dimension getPreferredSize()
 	{
-		return new Dimension(((int) (parent.getWidth() * 1.0) - this.marginleft), 181);
+		return new Dimension(((int) (parent.getWidth() * 1.0) - this.marginleft), 171);
 	}
 
 	public void stateChanged(ChangeEvent event)
@@ -239,14 +240,140 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 				{
 					JTabbedPane pane = (JTabbedPane) event.getSource();
 
-					for(int i=0; i<JTabbedPane_000.this.getTabCount(); i++)
+					int hat = pane.getSelectedIndex();
+
+					String panetitle = pane.getTitleAt(hat);
+
+					APMLGui apmlgui;
+
+					switch(panetitle)
 					{
-						if(i==6) continue;
+						case "☬   Apml ":
 
-						JTabbedPane_000.this.setBackgroundAt(i, new Color(0,0,0,Color.TRANSLUCENT));
+							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+							apmlgui.remove(apmlgui.selected_panel);
+
+							apmlgui.add(apmlgui.jpanel_backboard_for_apml);
+
+							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_apml;
+
+							apmlgui.jpanel_backboard_for_apml.revalidate();
+
+							apmlgui.jpanel_backboard_for_apml.invalidate();
+
+							apmlgui.jpanel_backboard_for_apml.repaint();
+
+							break;
+
+						case "☬   Bloq ":
+
+							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+							apmlgui.remove(apmlgui.selected_panel);
+
+							apmlgui.add(apmlgui.jpanel_backboard_for_bloq);
+
+							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_bloq;
+
+							apmlgui.jpanel_backboard_for_bloq.revalidate();
+
+							apmlgui.jpanel_backboard_for_bloq.invalidate();
+
+							apmlgui.jpanel_backboard_for_bloq.repaint();
+
+							break;
+
+						case "☬   Bodi ":
+
+							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+							apmlgui.remove(apmlgui.selected_panel);
+
+							apmlgui.add(apmlgui.jpanel_backboard_for_bodi);
+
+							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_bodi;
+
+							apmlgui.jpanel_backboard_for_bodi.revalidate();
+
+							apmlgui.jpanel_backboard_for_bodi.invalidate();
+
+							apmlgui.jpanel_backboard_for_bodi.repaint();
+
+							break;
+
+						case "☬   Munction ":
+
+							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+							apmlgui.remove(apmlgui.selected_panel);
+
+							apmlgui.add(apmlgui.jpanel_backboard_for_munction);
+
+							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_munction;
+
+							apmlgui.jpanel_backboard_for_munction.revalidate();
+
+							apmlgui.jpanel_backboard_for_munction.invalidate();
+
+							apmlgui.jpanel_backboard_for_munction.repaint();
+
+							break;
+
+						case "☬   Sprung ":
+
+							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+							apmlgui.remove(apmlgui.selected_panel);
+
+							apmlgui.add(apmlgui.jpanel_backboard_for_sprung);
+
+							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_sprung;
+
+							apmlgui.jpanel_backboard_for_sprung.revalidate();
+
+							apmlgui.jpanel_backboard_for_sprung.invalidate();
+
+							apmlgui.jpanel_backboard_for_sprung.repaint();
+
+							break;
+
+						case "☬   Runyn ":
+
+							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+							apmlgui.remove(apmlgui.selected_panel);
+
+							apmlgui.add(apmlgui.jpanel_backboard_for_runyn);
+
+							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_runyn;
+
+							apmlgui.jpanel_backboard_for_runyn.revalidate();
+
+							apmlgui.jpanel_backboard_for_runyn.invalidate();
+
+							apmlgui.jpanel_backboard_for_runyn.repaint();
+
+							break;
+
+						case "☬   Falthruu ":
+
+							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+							apmlgui.remove(apmlgui.selected_panel);
+
+							apmlgui.add(apmlgui.jpanel_backboard_for_falthruu);
+
+							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_falthruu;
+
+							apmlgui.jpanel_backboard_for_falthruu.revalidate();
+
+							apmlgui.jpanel_backboard_for_falthruu.invalidate();
+
+							apmlgui.jpanel_backboard_for_falthruu.repaint();
+
+							break;
 					}
-
-					JTabbedPane_000.this.setBackgroundAt(pane.getSelectedIndex(), Color.RED);
 				}
 			}
 		});

@@ -35,6 +35,8 @@ public class Munction //pronounced "munchkin"
 
 	public static Registrar registrar = new Registrar();
 
+	public static Persistor persistor = new Persistor();
+
 	public static Munction instance = new Munction();
 
 	//

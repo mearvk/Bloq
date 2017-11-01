@@ -122,6 +122,8 @@ class JMenuItem_000_ActionListener implements ActionListener
 	{
 		JFileChooser chooser = new JFileChooser();
 
+		File file;
+
 		//
 
 		int retval = chooser.showOpenDialog(this.parent);
@@ -130,7 +132,7 @@ class JMenuItem_000_ActionListener implements ActionListener
 		{
 			try
 			{
-				File file = chooser.getSelectedFile();
+				file = chooser.getSelectedFile();
 
 				//
 

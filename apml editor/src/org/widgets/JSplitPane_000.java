@@ -23,6 +23,8 @@ import java.net.URL;
 public class JSplitPane_000 extends JSplitPane
 {
 
+	public String bodi = "//editor/ui/jsplitpane_000";
+
 	public Integer marginleft = 30;
 	public Integer margintop = 150;
 	public Integer marginright = 10;
@@ -45,6 +47,9 @@ public class JSplitPane_000 extends JSplitPane
 	public File importref_016;
 	public Component parent;
 	public Apmlbasesystem system;
+
+	//
+
 	JPanel_000 jpanel_000;
 	JPanel_001 jpanel_001;
 
@@ -61,11 +66,11 @@ public class JSplitPane_000 extends JSplitPane
 
 		//this.setResizeWeight(50f);
 
-		this.setBackground(new Color(207,207,187));
+		this.setBackground(new Color(0xff,0xff,0xff));
 
 		this.setDividerLocation(250);
 
-		this.setBorder(new EmptyBorder(0, 0, 0, 0));
+		//this.setBorder(new EmptyBorder(0, 0, 0, 0));
 
 		// instantiation
 
@@ -86,7 +91,6 @@ public class JSplitPane_000 extends JSplitPane
 		this.setVisible(true);
 
 		// listeners
-
 	}
 
 
@@ -102,11 +106,11 @@ public class JSplitPane_000 extends JSplitPane
 
 		// setters
 
-		this.setBackground(new Color(207,207,187));
+		this.setBackground(new Color(0xff,0xff,0xff));
 
 		this.setDividerLocation(250);
 
-		this.setBorder(new EmptyBorder(0, 0, 0, 0));
+		//this.setBorder(new EmptyBorder(0, 0, 0, 0));
 
 		// instantiation
 
@@ -134,7 +138,6 @@ public class JSplitPane_000 extends JSplitPane
 
 	public Dimension getPreferredSize()
 	{
-		return new Dimension(((int) (parent.getWidth() * 1.0) - this.marginleft), ((int) (parent.getHeight() * 1.0) - 250));
+		return new Dimension(((int) (parent.getWidth() * 1.0) - this.marginleft), ((int) (parent.getHeight() * 1.0) - 270));
 	}
-
 }
