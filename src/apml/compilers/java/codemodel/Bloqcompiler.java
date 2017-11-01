@@ -57,7 +57,9 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     public void setapmlfiles(Bloqfileguardian fileguardian)
     {
         try
-        {            
+        {
+			this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//factory");
+
             this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//events");
             
             this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//callback");
@@ -111,7 +113,9 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     public void setoutputfiles(Bloqinputmanager bloqapmlmanager)
     {        
         try
-        {                        
+        {
+			this.outputmanager.dosetoutputfiles(bloqapmlmanager.factorymodels, "//factory");
+
             this.outputmanager.dosetoutputfiles(bloqapmlmanager.apmlmodels, "//events");
             
             this.outputmanager.dosetoutputfiles(bloqapmlmanager.callbackmodels, "//callback");
@@ -139,6 +143,8 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
     {
         try
         {
+			this.outputmanager.dosetsourcefiles(bloqjcmmanager.factorymodels);
+
             this.outputmanager.dosetsourcefiles(bloqjcmmanager.apmlmodels);
             
             this.outputmanager.dosetsourcefiles(bloqjcmmanager.callbackmodels);
@@ -165,6 +171,8 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
 	{
 		try
 		{
+			this.outputmanager.dowriteclassfiles(bloqapmlmanager.factorymodels);
+
 			this.outputmanager.dowriteclassfiles(bloqapmlmanager.apmlmodels);
 
 			this.outputmanager.dowriteclassfiles(bloqapmlmanager.callbackmodels);

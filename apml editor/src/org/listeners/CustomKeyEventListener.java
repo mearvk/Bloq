@@ -1,15 +1,15 @@
 package org.listeners;
 
-import org.widgets.RSTextPane_000;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class CustomKeyEventListener implements KeyListener
 {
-	public RSTextPane_000 textarea;
+	public RSyntaxTextArea textarea;
 
-	public CustomKeyEventListener(RSTextPane_000 textarea)
+	public CustomKeyEventListener(RSyntaxTextArea textarea)
 	{
 		this.textarea = textarea;
 	}

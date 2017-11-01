@@ -24,6 +24,8 @@ import java.net.URL;
 public class JPanel_Backboard_For_Falthruu extends JPanel
 {
 
+	public String bodi = "//editor/ui/jpanel_backboard_for_falthruu";
+
 	public Integer marginleft = 10;
 	public Integer margintop = 10;
 	public Integer marginright = 10;
@@ -75,7 +77,7 @@ public class JPanel_Backboard_For_Falthruu extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this, "//editor/ui/jpanel_falthruu_001"));
 
 		// hierarchy
 
@@ -91,7 +93,7 @@ public class JPanel_Backboard_For_Falthruu extends JPanel
 
 		// bodi
 
-		Bodi.context("editor").put("//editor/ui/jpanel_backboard_for_falthruu", this);
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	//
@@ -109,7 +111,7 @@ public class JPanel_Backboard_For_Falthruu extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this,"//editor/ui/jpanel_falthruu_001"));
 
 		// hierarchy
 
@@ -125,7 +127,7 @@ public class JPanel_Backboard_For_Falthruu extends JPanel
 
 		// bodi
 
-		Bodi.context("editor").put("//editor/ui/jpanel_backboard_for_falthruu", this);
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	public void paintComponent(Graphics g)

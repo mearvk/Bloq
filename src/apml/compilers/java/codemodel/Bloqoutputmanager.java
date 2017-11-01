@@ -25,8 +25,10 @@ public class Bloqoutputmanager
     private final Integer hash = 0x00888fe8;  
     
     /*--------------------------------------------------------------------------*/
-    
-    public ArrayList<JCodeModel> apmlmodels;  
+
+	public ArrayList<JCodeModel> factorymodels;
+
+	public ArrayList<JCodeModel> apmlmodels;
     
     public ArrayList<JCodeModel> callbackmodels;  
     

@@ -16,9 +16,9 @@ import javax.swing.text.Element;
 import java.awt.*;
 import java.io.*;
 
-public class RSTextPane_000 extends RSyntaxTextArea
+public class RSTextPane_Munction_000 extends RSyntaxTextArea
 {
-	public String bodi = "//editor/ui/rstextpane_000";
+	public String bodi = "//editor/ui/rstextpane_munction_000";
 
 	public RTextScrollPane_000 scrollpane;
 
@@ -29,7 +29,7 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	public RSyntaxDocument document;
 
 	//
-	public RSTextPane_000(Component parent)
+	public RSTextPane_Munction_000(Component parent)
 	{
 		//setters
 
@@ -65,7 +65,7 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	}
 
 	//
-	public RSTextPane_000(Component parent, Apmlbasesystem monitor)
+	public RSTextPane_Munction_000(Component parent, Apmlbasesystem monitor)
 	{
 		//setters
 
@@ -88,74 +88,6 @@ public class RSTextPane_000 extends RSyntaxTextArea
 		this.parent = parent;
 
 		this.monitor = monitor;
-
-		//listeners
-
-		this.document.addDocumentListener(new LineCountDocumentListener(this));
-
-		this.addKeyListener(new CustomKeyEventListener(this));
-	}
-
-	//
-	public RSTextPane_000(Component parent, String bodi)
-	{
-		//setters
-
-		this.setBackground(new Color(245,245,245));
-
-		this.setCurrentLineHighlightColor(new Color(225,225,225));
-
-		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-
-		//instantiation
-
-		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
-
-		//bodi
-
-		Bodi.context("editor").put(bodi, this);
-
-		//devolvement
-
-		this.parent = parent;
-
-		this.monitor = monitor;
-
-		this.bodi = bodi;
-
-		//listeners
-
-		this.document.addDocumentListener(new LineCountDocumentListener(this));
-
-		this.addKeyListener(new CustomKeyEventListener(this));
-	}
-
-	//
-	public RSTextPane_000(Component parent, Apmlbasesystem monitor, String bodi)
-	{
-		//setters
-
-		this.setBackground(new Color(245,245,245));
-
-		this.setCurrentLineHighlightColor(new Color(225,225,225));
-
-		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-
-		//instantiation
-
-		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
-
-		//bodi
-
-		Bodi.context("editor").put(bodi, this);
-
-		//devolvement
-
-		this.parent = parent;
-
-		this.monitor = monitor;
-
-		this.bodi = bodi;
 
 		//listeners
 

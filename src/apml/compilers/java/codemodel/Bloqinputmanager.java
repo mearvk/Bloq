@@ -23,7 +23,10 @@ public class Bloqinputmanager
     private final Integer hash = 0x00888fe8;
     
     /*--------------------------------------------------------------------------*/
-    
+
+
+    public ArrayList<Apmlmodelfile> factorymodels;
+
     public ArrayList<Apmlmodelfile> apmlmodels;  
     
     public ArrayList<Apmlmodelfile> callbackmodels;  

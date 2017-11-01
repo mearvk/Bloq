@@ -79,7 +79,7 @@ public class JPanel_Backboard_For_Apml extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this, "//editor/ui/jpanel_apml_001"));
 
 		// hierarchy
 
@@ -95,7 +95,7 @@ public class JPanel_Backboard_For_Apml extends JPanel
 
 		// bodi
 
-		Bodi.context("editor").put("//editor/ui/jpanel_backboard_for_apml", this);
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	//
@@ -112,7 +112,7 @@ public class JPanel_Backboard_For_Apml extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this), new JPanel_001(this, "//editor/ui/jpanel_apml_001"));
 
 		// hierarchy
 
@@ -130,7 +130,7 @@ public class JPanel_Backboard_For_Apml extends JPanel
 
 		// bodi
 
-		Bodi.context("editor").put("//editor/ui/jpanel_backboard_for_apml", this);
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	public void paintComponent(Graphics g)

@@ -1,6 +1,6 @@
 package org.listeners;
 
-import org.widgets.RSTextPane_000;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -9,9 +9,9 @@ import javax.swing.text.Element;
 public class LineCountDocumentListener implements DocumentListener
 {
 
-	public RSTextPane_000 textarea;
+	public RSyntaxTextArea textarea;
 
-	public LineCountDocumentListener(RSTextPane_000 textarea)
+	public LineCountDocumentListener(RSyntaxTextArea textarea)
 	{
 		this.textarea = textarea;
 	}

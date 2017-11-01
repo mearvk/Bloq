@@ -1,6 +1,7 @@
 package org.widgets;
 
 import apml.system.Apmlbasesystem;
+import apml.system.bodi.Bodi;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -101,6 +102,52 @@ public class JPanel_001 extends JPanel
 		this.setVisible(true);
 
 		// listeners
+
+		// bodi
+
+		Bodi.context("editor").put(this.bodi, this);
+	}
+
+	/**
+	 * @param parent : The tree AWT object.
+	 */
+	public JPanel_001(Component parent, String bodi)
+	{
+		// setters
+
+		this.setBackground(new Color(0xff,0xff,0xff));
+
+		this.setLayout(new FlowLayout());
+
+		// instantiation
+
+		this.rstextpane = new RSTextPane_000(this);
+
+		this.rstextscrollpane = new RTextScrollPane_000(this);
+
+		//
+
+		this.rstextscrollpane.setViewportView(this.rstextpane);
+
+		this.rstextpane.setscrollpane(this.rstextscrollpane);
+
+		this.rstextscrollpane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+		// hierarchy
+
+		this.add(this.rstextscrollpane);
+
+		// devolvement
+
+		this.parent = parent;
+
+		this.setVisible(true);
+
+		// listeners
+
+		// bodi
+
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	/**
@@ -109,11 +156,11 @@ public class JPanel_001 extends JPanel
 	 */
 	public JPanel_001(Component parent, Apmlbasesystem system)
 	{
-		this.setLayout(new FlowLayout());
-
 		// setters
 
 		this.setBackground(new Color(0xff,0xff,0xff));
+
+		this.setLayout(new FlowLayout());
 
 		// instantiation
 
@@ -142,6 +189,57 @@ public class JPanel_001 extends JPanel
 		this.setVisible(true);
 
 		// listeners
+
+		// bodi
+
+		Bodi.context("editor").put(this.bodi, this);
+	}
+
+	/**
+	 * @param parent : The tree AWT object.
+	 * @param system : The APML system object.
+	 */
+	public JPanel_001(Component parent, Apmlbasesystem system, String bodi)
+	{
+		// setters
+
+		this.setBackground(new Color(0xff,0xff,0xff));
+
+		this.setLayout(new FlowLayout());
+
+		this.bodi = bodi;
+
+		// instantiation
+
+		this.rstextpane = new RSTextPane_000(this);
+
+		this.rstextscrollpane = new RTextScrollPane_000(this);
+
+		//
+
+		this.rstextscrollpane.setViewportView(this.rstextpane);
+
+		this.rstextpane.setscrollpane(this.rstextscrollpane);
+
+		this.rstextscrollpane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+		// hierarchy
+
+		this.add(this.rstextscrollpane);
+
+		// devolvement
+
+		this.parent = parent;
+
+		this.system = system;
+
+		this.setVisible(true);
+
+		// listeners
+
+		// bodi
+
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 

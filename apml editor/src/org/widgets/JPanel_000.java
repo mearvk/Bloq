@@ -45,13 +45,22 @@ public class JPanel_000 extends JPanel
 	public Rectangle importref_014;
 	public ImageIO importref_015;
 	public File importref_016;
+
+	//
+
 	public Component parent;
 	public Apmlbasesystem system;
+
+	//
+
 	JTree_000 jtree_000;
 
-	public Image backgroundimage;
+	//
 
+	public Image backgroundimage;
 	public String backgroundimagename;
+
+	//
 
 	/**
 	 * @param parent : The tree AWT object.
