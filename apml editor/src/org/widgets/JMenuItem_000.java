@@ -2,8 +2,7 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import org.events.DocumentLoadedEvent;
-import org.events.LoadApmlDocumentEvent;
+import org.events.OpenDocumentEvent;
 import org.system.UserInterfaceProcessor;
 
 import javax.imageio.ImageIO;
@@ -140,9 +139,11 @@ class JMenuItem_000_ActionListener implements ActionListener
 
 				processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
-				processor.update(new LoadApmlDocumentEvent(event, file));
+				processor.update(new OpenDocumentEvent(event, file));
 
-				processor.update(new DocumentLoadedEvent(event, file));
+				//processor.update(new LoadApmlTreeEvent(event, file));
+
+				//processor.update(new DocumentLoadedEvent(event, file));
 			}
 			catch(Exception e)
 			{

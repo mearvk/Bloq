@@ -6,10 +6,17 @@ import apml.modeling.Apmlobject;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.ui.compilers.java.Uicompiler;
+import apml.xpath.helpers.Xpathquick;
 import org.events.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.widgets.*;
 
 import javax.swing.*;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
@@ -17,7 +24,7 @@ public class UserInterfaceProcessor extends Apmlobject
 {
     protected Apmlbasesystem monitor;
 
-    public final String bodi="//editor/ui/uiprocessor_000";
+    public final String bodi= "//editor/ui/uiprocessor_000";
 
     public final String id="processor_000";
 
@@ -66,12 +73,178 @@ public class UserInterfaceProcessor extends Apmlobject
 
 		JTree_000 jtree;
 
+		Document document;
+
+		XPath xpath;
+
+		NodeList nodes;
+
+		JTabbedPane_000 jTabbedPane_000;
+
 		//
 
 		//Munction.registrar.register(0x0000001, Munction.instance.METHOD, "UserInterfaceProcessor.java", "UserInterfaceProcessor", "org.system", new byte[1]);
 
 		switch(action)
 		{
+			case "open_document_event":
+
+				//
+
+				try
+				{
+					OpenDocumentEvent opendocumentevent;
+
+					opendocumentevent = (OpenDocumentEvent)event;
+
+					document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(opendocumentevent.getFileRef());
+
+					xpath = XPathFactory.newInstance().newXPath();
+
+					nodes = Xpathquick.evaluate(document, xpath,"//project[@type]");
+
+					//
+
+					APMLGui apmlgui;
+
+					apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+					//
+
+					if(nodes.getLength()==0)
+						JOptionPane.showMessageDialog(apmlgui, "Unable to locate any document type; make sure you have a project type set ( //apml/project[@type] ).");
+
+					if(nodes.getLength()>1)
+						JOptionPane.showMessageDialog(apmlgui, "Unable to locate unambiguous document type; make sure you have a single project type set ( //apml/project[@type] ).");
+
+
+					Element element;
+
+					element = (Element)nodes.item(0);
+
+					String type;
+
+					type = element.getAttribute("type");
+
+					opendocumentevent.fileType = type.trim().toLowerCase();
+
+					switch(opendocumentevent.fileType)
+					{
+						case "apml": break;
+
+						case "bloq": break;
+
+						case "bodi": break;
+
+						case "munction": break;
+
+						case "runyn": break;
+
+						case "sprung": break;
+
+						case "falthruu": break;
+
+						default:
+
+							JOptionPane.showMessageDialog(apmlgui, "Unknown file type; no can help.");
+
+							return;
+					}
+
+					JOptionPane.showMessageDialog(apmlgui, "Document type located as ["+opendocumentevent.fileType+"].");
+
+					//
+
+					UserInterfaceProcessor processor;
+
+					processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
+
+					//
+
+					switch(opendocumentevent.fileType)
+					{
+						case "apml":
+
+							processor.update(new LoadApmlDocumentEvent(opendocumentevent, opendocumentevent.fileRef));
+
+							processor.update(new LoadApmlTreeEvent(opendocumentevent, opendocumentevent.fileRef));
+
+							//
+
+							//JTabbedPane_000 jTabbedPane_000;
+
+							jTabbedPane_000 = (JTabbedPane_000)Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
+
+							jTabbedPane_000.setSelectedIndex(0);
+
+							break;
+
+						case "bloq":
+
+							processor.update(new LoadBloqDocumentEvent(opendocumentevent,opendocumentevent.fileRef));
+
+							processor.update(new LoadBloqTreeEvent(opendocumentevent,opendocumentevent.fileRef));
+
+							//
+
+							//JTabbedPane_000 jTabbedPane_000;
+
+							jTabbedPane_000 = (JTabbedPane_000)Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
+
+							jTabbedPane_000.setSelectedIndex(1);
+
+							break;
+
+						case "bodi":
+
+							processor.update(new LoadBodiDocumentEvent(opendocumentevent,opendocumentevent.fileRef));
+
+							//processor.update(new LoadBodiTreeEvent(this,this.fileRef));
+
+							break;
+
+						case "munction":
+
+							processor.update(new LoadMunctionDocumentEvent(opendocumentevent,opendocumentevent.fileRef));
+
+							//processor.update(new LoadMunctionTreeEvent(this,this.fileRef));
+
+							break;
+
+						case "runyn":
+
+							processor.update(new LoadRunynDocumentEvent(opendocumentevent,opendocumentevent.fileRef));
+
+							//processor.update(new LoadRunynTreeEvent(this,this.fileRef));
+
+							break;
+
+						case "sprung":
+
+							processor.update(new LoadSprungDocumentEvent(opendocumentevent,opendocumentevent.fileRef));
+
+							//processor.update(new LoadSprungTreeEvent(this,this.fileRef));
+
+							break;
+
+						case "falthruu":
+
+							processor.update(new LoadFalthruuDocumentEvent(opendocumentevent,opendocumentevent.fileRef));
+
+							//processor.update(new LoadFalthruuTreeEvent(this,this.fileRef));
+
+							break;
+
+						default: JOptionPane.showMessageDialog(apmlgui, "Unknown file type; no can help.");
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+
+				break;
+
 			case "build_ui_apml_request_event":
 
 				String target_text;
@@ -139,9 +312,11 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				//
 
-				textpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
+				jpanel_001 = (JPanel_001)Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
 
-				target_text = textpane.getText();
+				target_text = jpanel_001.rstextpane.getText();
+
+				//
 
 				bloq_compiler =  new Bloqcompiler();
 
@@ -238,18 +413,18 @@ public class UserInterfaceProcessor extends Apmlobject
 
 					//
 
+					this.last_loaded_file = bloq_compiler.fileguardian.apmlinputfile;
+
+					this.last_loaded_file_url = bloq_compiler.fileguardian.apmlfilename;
+
 					if(last_loaded_file==null || this.last_loaded_file_url == null || this.last_loaded_file_url.length()==0)
 					{
-						JPanel_002 jpanel_002;
+						APMLGui apmlgui;
 
-						jpanel_002 = (JPanel_002)Bodi.context("editor").pull("//editor/ui/jpanel_002");
+						apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
 
-						jpanel_002.status.setText("Unable to determine existing file for APML input.  Double check.");
+						JOptionPane.showMessageDialog(apmlgui, "Unable to determing existing file for APML input. Double check.");
 					}
-
-					bloq_compiler.fileguardian.apmlinputfile = this.last_loaded_file;
-
-					bloq_compiler.fileguardian.apmlfilename = this.last_loaded_file_url;
 
 					//
 
@@ -262,6 +437,14 @@ public class UserInterfaceProcessor extends Apmlobject
 					bloq_compiler.setsourcefiles(bloq_compiler.outputmanager);
 
 					bloq_compiler.writebytecode(bloq_compiler.inputmanager);
+
+					//
+
+					APMLGui apmlgui;
+
+					apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+					JOptionPane.showMessageDialog(apmlgui, "Compilation successful; check folder for files.");
 				}
 
 				break;
@@ -304,15 +487,41 @@ public class UserInterfaceProcessor extends Apmlobject
 
 			case "load_apml_tree_event":
 
-				JPanel_000 jpanel_000;
+				JTree_Apml_000 jtree_apml_000;
 
-				jpanel_000 = (JPanel_000)Bodi.context("editor").pull("//editor/ui/jtree_apml_000");
+				jtree_apml_000 = (JTree_Apml_000)Bodi.context("editor").pull("//editor/ui/jtree_apml_000");
 
-				jpanel_000.jtree_000.init();
+				jtree_apml_000.init();
 
-				jpanel_000.jtree_000.update((LoadApmlDocumentEvent)event);
+				jtree_apml_000.update((LoadApmlTreeEvent)event);
 
-				jpanel_000.jtree_000.removenewlinetextnodes();
+				jtree_apml_000.removenewlinetextnodes();
+
+				break;
+
+			case "load_bloq_document_event":
+
+				//JPanel_001 jpanel_001;
+
+				jpanel_001 = (JPanel_001)Bodi.context("editor").pull("//editor/ui/jpanel_bloq_001");
+
+				jpanel_001.rstextpane.loaddocument((LoadApmlDocumentEvent)event);
+
+				break;
+
+			//
+
+			case "load_bloq_tree_event":
+
+				JTree_Bloq_000 jtree_bloq_000;
+
+				jtree_bloq_000 = (JTree_Bloq_000)Bodi.context("editor").pull("//editor/ui/jtree_bloq_000");
+
+				jtree_bloq_000.init();
+
+				jtree_bloq_000.update((LoadBloqTreeEvent)event);
+
+				jtree_bloq_000.removenewlinetextnodes();
 
 				break;
 

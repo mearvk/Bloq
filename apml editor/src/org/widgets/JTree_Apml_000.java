@@ -6,7 +6,7 @@ import apml.xpath.helpers.Xpathquick;
 import org.custom.ui.ApmlJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseApmlDocumentEvent;
-import org.events.LoadApmlDocumentEvent;
+import org.events.LoadApmlTreeEvent;
 import org.listeners.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -179,7 +179,7 @@ public class JTree_Apml_000 extends JTree
 		((DefaultMutableTreeNode)this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void update(LoadApmlDocumentEvent event)
+	public void update(LoadApmlTreeEvent event)
 	{
 		File file = event.getFileRef();
 

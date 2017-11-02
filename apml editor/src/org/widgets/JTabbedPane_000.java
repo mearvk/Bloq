@@ -24,6 +24,8 @@ import java.net.URL;
  */
 public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 {
+	public String bodi = "//editor/ui/jtabbedpane_000";
+
 	public Image backgroundimage;
 	public String backgroundimagename;
 
@@ -48,6 +50,9 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 	public Rectangle importref_014;
 	public ImageIO importref_015;
 	public File importref_016;
+
+	//
+
 	public Component parent;
 	public Apmlbasesystem system;
 
@@ -134,6 +139,9 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		this.addChangeListener(this);
 
+		// bodi
+
+		Bodi.context("editor").put(this.bodi,this);
 	}
 
 	/**
@@ -221,6 +229,10 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 		// listeners
 
 		this.addChangeListener(this);
+
+		// bodi
+
+		Bodi.context("editor").put(this.bodi,this);
 
 	}
 
