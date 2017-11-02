@@ -2,9 +2,9 @@ package org.listeners;
 
 import apml.system.bodi.Bodi;
 import org.helpers.LineNumberFinder;
-import org.widgets.JTree_000;
 import org.widgets.RSTextPane_000;
 
+import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,9 +13,9 @@ import java.awt.event.MouseListener;
 
 public class JTreeMouseListener implements MouseListener
 {
-	public JTree_000 tree;
+	public JTree tree;
 
-	public JTreeMouseListener(JTree_000 tree)
+	public JTreeMouseListener(JTree tree)
 	{
 		this.tree = tree;
 	}

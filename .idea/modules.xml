@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Quran/Quran.iml" filepath="$PROJECT_DIR$/Quran/Quran.iml" />
       <module fileurl="file://$PROJECT_DIR$/apml editor/apml editor.iml" filepath="$PROJECT_DIR$/apml editor/apml editor.iml" />
       <module fileurl="file://$PROJECT_DIR$/apml examples/apml examples.iml" filepath="$PROJECT_DIR$/apml examples/apml examples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apml feedback/apml feedback.iml" filepath="$PROJECT_DIR$/apml feedback/apml feedback.iml" />
       <module fileurl="file://$PROJECT_DIR$/apml rsyntax/apml rsyntax.iml" filepath="$PROJECT_DIR$/apml rsyntax/apml rsyntax.iml" />
       <module fileurl="file://$PROJECT_DIR$/bloq.iml" filepath="$PROJECT_DIR$/bloq.iml" />
     </modules>

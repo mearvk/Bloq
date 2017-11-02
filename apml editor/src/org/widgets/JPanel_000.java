@@ -54,7 +54,7 @@ public class JPanel_000 extends JPanel
 
 	//
 
-	JTree_000 jtree_000;
+	public JTree_000 jtree_000;
 
 	//
 

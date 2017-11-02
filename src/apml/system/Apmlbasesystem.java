@@ -219,6 +219,60 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 		return retval;
 	}
 
+	public Object postload(Class c, Boolean register)
+	{
+		System.out.println("Apmlbasesystem postloads "+c.getName());
+
+		Object retval = null;
+
+		try
+		{
+			retval = c.newInstance();
+		}
+		catch (Exception e)
+		{
+			//
+		}
+		finally
+		{
+			if(retval==null) 		return null;
+
+			if(register==false) 	return retval;
+
+			//
+
+			if(retval instanceof Apmlsystem)
+			{
+				((Apmlsystem)retval).monitor = this;
+
+				this.mountsystem((Apmlsystem) retval);
+			}
+
+			if(retval instanceof Apmlobject)
+			{
+				((Apmlobject)retval).monitor = this;
+
+				this.mountobject((Apmlobject) retval);
+			}
+
+			if(retval instanceof Apmllistener)
+			{
+				((Apmllistener)retval).monitor = this;
+
+				this.mountlistener((Apmllistener) retval);
+			}
+
+			if(retval instanceof Apmlsubscriber)
+			{
+				((Apmlsubscriber)retval).monitor = this;
+
+				this.mountsubscriber((Apmlsubscriber) retval);
+			}
+		}
+
+		return retval;
+	}
+
 	//
 	public Object preload(Class c, Boolean register)
 	{
@@ -246,28 +300,28 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 			{
 				((Apmlsystem)retval).monitor = this;
 
-				mountsystem((Apmlsystem) retval);
+				this.mountsystem((Apmlsystem) retval);
 			}
 
 			if(retval instanceof Apmlobject)
 			{
 				((Apmlobject)retval).monitor = this;
 
-				mountobject((Apmlobject) retval);
+				this.mountobject((Apmlobject) retval);
 			}
 
 			if(retval instanceof Apmllistener)
 			{
 				((Apmllistener)retval).monitor = this;
 
-				mountlistener((Apmllistener) retval);
+				this.mountlistener((Apmllistener) retval);
 			}
 
 			if(retval instanceof Apmlsubscriber)
 			{
 				((Apmlsubscriber)retval).monitor = this;
 
-				mountsubscriber((Apmlsubscriber) retval);
+				this.mountsubscriber((Apmlsubscriber) retval);
 			}
 		}
 

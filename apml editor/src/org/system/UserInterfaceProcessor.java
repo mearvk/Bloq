@@ -78,9 +78,11 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				//
 
-				textpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
+				JPanel_001 jpanel_001;
 
-				target_text = textpane.getText();
+				jpanel_001 = (JPanel_001)Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+
+				target_text = jpanel_001.rstextpane.getText();
 
 				ui_compiler =  new Uicompiler();
 
@@ -280,25 +282,17 @@ public class UserInterfaceProcessor extends Apmlobject
 
 			case "save_apml_document_event":
 
-				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
+				jpanel_001 = (JPanel_001)Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
 
-				editorpane.savedocument((SaveApmlDocumentEvent)event);
+				jpanel_001.rstextpane.savedocument((SaveApmlDocumentEvent)event);
 
 				//
-
-				jtree = (JTree_000)Bodi.context("editor").pull("//editor/ui/jpanel_003");
-
-				jtree.init();
-
-				jtree.update((LoadApmlDocumentEvent)event);
-
-				jtree.removenewlinetextnodes();
 
 				break;
 
 			case "load_apml_document_event":
 
-				JPanel_001 jpanel_001;
+				//JPanel_001 jpanel_001;
 
 				jpanel_001 = (JPanel_001)Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
 
@@ -306,13 +300,15 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				//
 
-				jtree = (JTree_000)Bodi.context("editor").pull("//editor/ui/jtree_000");
+				JPanel_000 jpanel_000;
 
-				jtree.init();
+				jpanel_000 = (JPanel_000)Bodi.context("editor").pull("//editor/ui/jpanel_apml_000");
 
-				jtree.update((LoadApmlDocumentEvent)event);
+				jpanel_000.jtree_000.init();
 
-				jtree.removenewlinetextnodes();
+				jpanel_000.jtree_000.update((LoadApmlDocumentEvent)event);
+
+				jpanel_000.jtree_000.removenewlinetextnodes();
 
 				break;
 
@@ -326,19 +322,11 @@ public class UserInterfaceProcessor extends Apmlobject
 
 			case "close_apml_document_event":
 
-				editorpane = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
+				jpanel_001 = (JPanel_001)Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
 
-				editorpane.closedocument((CloseApmlDocumentEvent)event);
+				jpanel_001.rstextpane.closedocument((CloseApmlDocumentEvent)event);
 
 				//
-
-				jtree = (JTree_000)Bodi.context("editor").pull("//editor/ui/jtree_000");
-
-				jtree.init();
-
-				jtree.update((CloseApmlDocumentEvent)event);
-
-				jtree.removenewlinetextnodes();
 
 				break;
 

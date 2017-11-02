@@ -188,13 +188,11 @@ public class RSTextPane_000 extends RSyntaxTextArea
 				buffer = buffer + line + "\n";
 			}
 
-			//this.document.insertString(0, buffer+"\n", new SimpleAttributeSet());
+			//
 
 			this.setText(buffer+"\n");
 
-			//
-
-			//this.setDocument(document);
+			this.setCaretPosition(000);
 		}
 		catch(Exception e)
 		{

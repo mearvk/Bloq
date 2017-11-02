@@ -89,33 +89,47 @@ public class APMLGui extends JFrame
 				{
 					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 
-					UIManager.put("nimbusBase", new Color(0x81,0x81,0x81)); //menuitems, jfilechooser
+					UIManager.put("nimbusBase", new Color(0x91,0x91,0x91)); //menuitems, jfilechooser
 
 					UIManager.put("nimbusBlueGrey", new Color(0xd1,0xd1,0xd1)); //jmenubar
 
 					UIManager.put("control", new Color(0xdf,0xdf,0xdf)); //jframe background
 
+					UIManager.put("nimbusFocus", new Color(0xff,0xff,0xff, Color.TRANSLUCENT));
+
+					UIManager.put("nimbusSelectionBackground", Color.LIGHT_GRAY);
+
+					UIManager.put("TabbedPane.background", Color.DARK_GRAY);
+
 					//
 
-					ImageIcon icon=null;
+					ImageIcon open=null;
+
+					ImageIcon closed=null;
+
+					ImageIcon leaf=null;
 
 					try
 					{
-						icon = new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/base_folder_sm.png");
+						open = new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/folder_icon_open_20x20.png");
+
+						closed = new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/folder_icon_closed_20x20.png");
+
+						leaf = new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/java_icon.png");
 					}
 					catch (Exception e)
 					{
 						e.printStackTrace();
 					}
 
-					if(icon!=null)
-						UIManager.put("Tree.leafIcon", icon);
+					if(leaf!=null)
+						UIManager.put("Tree.leafIcon", leaf);
 
-					if(icon!=null)
-						UIManager.put("Tree.openIcon", icon);
+					if(open!=null)
+						UIManager.put("Tree.openIcon", open);
 
-					if(icon!=null)
-						UIManager.put("Tree.closedIcon", icon);
+					if(closed!=null)
+						UIManager.put("Tree.closedIcon", closed);
 				}
 				catch(Exception e)
 				{
