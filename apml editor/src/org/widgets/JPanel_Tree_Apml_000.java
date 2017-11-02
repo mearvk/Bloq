@@ -54,7 +54,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 
 	//
 
-	public JTree_000 jtree_000;
+	public JTree jtree_000;
 
 	//
 
@@ -112,7 +112,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 
 		// instantiation
 
-		this.jtree_000 = new JTree_000(this);
+		this.jtree_000 = new JTree_Apml_000(this);
 
 		// hierarchy
 
@@ -145,7 +145,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 
 		// instantiation
 
-		this.jtree_000 = new JTree_000(this);
+		this.jtree_000 = new JTree_Apml_000(this);
 
 		// hierarchy
 
