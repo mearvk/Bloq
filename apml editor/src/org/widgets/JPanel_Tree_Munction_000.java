@@ -21,10 +21,10 @@ import java.net.URL;
  * @see
  * @since
  */
-public class JPanel_Tree_Runyn_000 extends JPanel
+public class JPanel_Tree_Munction_000 extends JPanel
 {
 
-	public String bodi = "//editor/ui/jpanel_tree_runyn_000";
+	public String bodi = "//editor/ui/jpanel_tree_munction_000";
 
 	public Integer marginleft = 10;
 	public Integer margintop = 10;
@@ -66,7 +66,7 @@ public class JPanel_Tree_Runyn_000 extends JPanel
 	/**
 	 * @param parent : The tree AWT object.
 	 */
-	public JPanel_Tree_Runyn_000(Component parent)
+	public JPanel_Tree_Munction_000(Component parent)
 	{
 		// setters
 
@@ -98,7 +98,7 @@ public class JPanel_Tree_Runyn_000 extends JPanel
 	/**
 	 * @param parent : The tree AWT object.
 	 */
-	public JPanel_Tree_Runyn_000(Component parent, String bodi)
+	public JPanel_Tree_Munction_000(Component parent, String bodi)
 	{
 		// setters
 
@@ -133,7 +133,7 @@ public class JPanel_Tree_Runyn_000 extends JPanel
 	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JPanel_Tree_Runyn_000(Component parent, Apmlbasesystem system)
+	public JPanel_Tree_Munction_000(Component parent, Apmlbasesystem system)
 	{
 		// setters
 
@@ -168,7 +168,7 @@ public class JPanel_Tree_Runyn_000 extends JPanel
 	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JPanel_Tree_Runyn_000(Component parent, Apmlbasesystem system, String bodi)
+	public JPanel_Tree_Munction_000(Component parent, Apmlbasesystem system, String bodi)
 	{
 		// setters
 

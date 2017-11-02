@@ -24,7 +24,7 @@ import java.net.URL;
 public class JPanel_Tree_Apml_000 extends JPanel
 {
 
-	public String bodi = "//editor/ui/jpanel_000";
+	public String bodi = "//editor/ui/jpanel_tree_apml_000";
 
 	public Integer marginleft = 10;
 	public Integer margintop = 10;
