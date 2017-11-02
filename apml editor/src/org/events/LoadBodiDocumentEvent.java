@@ -3,13 +3,13 @@ package org.events;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
-public class LoadApmlTreeEvent extends ActionEvent
+public class LoadBodiDocumentEvent extends ActionEvent
 {
 	public File fileRef = null;
 
-	public LoadApmlTreeEvent(ActionEvent event, File fileRef)
+	public LoadBodiDocumentEvent(ActionEvent event, File fileRef)
 	{
-		super(event.getSource(), event.getID(), "load_apml_tree_event");
+		super(event.getSource(), event.getID(), "load_bodi_document_event");
 
 		this.fileRef = fileRef;
 	}
