@@ -164,7 +164,7 @@ public class JTree_Apml_000 extends JTree
 		{
 			root.removeAllChildren();
 
-			root.setUserObject("User Design Area");
+			root.setUserObject("APML Design Area");
 
 			model.reload();
 		}

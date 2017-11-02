@@ -164,7 +164,7 @@ public class JTree_Munction_000 extends JTree
 		{
 			root.removeAllChildren();
 
-			root.setUserObject("User Design Area");
+			root.setUserObject("Munction Design Area");
 
 			model.reload();
 		}
@@ -211,7 +211,7 @@ public class JTree_Munction_000 extends JTree
 
 			//
 
-			treenode = new DefaultMutableTreeNode("APML Projects", true);
+			treenode = new DefaultMutableTreeNode("Munction Projects", true);
 
 			//
 
