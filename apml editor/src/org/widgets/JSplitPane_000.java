@@ -50,8 +50,8 @@ public class JSplitPane_000 extends JSplitPane
 
 	//
 
-	JPanel_000 jpanel_000;
-	JPanel_001 jpanel_001;
+	JPanel jpanel_000;
+	JPanel jpanel_001;
 
 	/**
 	 * @param parent : The tree AWT object.
@@ -74,13 +74,13 @@ public class JSplitPane_000 extends JSplitPane
 
 		// instantiation
 
-		this.jpanel_000 = (JPanel_000) component_000;
+		this.jpanel_000 = (JPanel) component_000;
 
-		this.jpanel_001 = (JPanel_001) component_001;
+		this.jpanel_001 = (JPanel) component_001;
 
-		this.jpanel_000.parent = this;
+		//this.jpanel_000.parent = this;
 
-		this.jpanel_001.parent = this;
+		//this.jpanel_001.parent = this;
 
 		// hierarchy
 
@@ -118,9 +118,9 @@ public class JSplitPane_000 extends JSplitPane
 
 		this.jpanel_001 = (JPanel_001) component_001;
 
-		this.jpanel_000.parent = this;
+		//this.jpanel_000.parent = this;
 
-		this.jpanel_001.parent = this;
+		//this.jpanel_001.parent = this;
 
 		// hierarchy
 

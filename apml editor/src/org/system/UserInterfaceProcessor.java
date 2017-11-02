@@ -298,11 +298,15 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				jpanel_001.rstextpane.loaddocument((LoadApmlDocumentEvent)event);
 
+				break;
+
 				//
+
+			case "load_apml_tree_event":
 
 				JPanel_000 jpanel_000;
 
-				jpanel_000 = (JPanel_000)Bodi.context("editor").pull("//editor/ui/jpanel_apml_000");
+				jpanel_000 = (JPanel_000)Bodi.context("editor").pull("//editor/ui/jtree_apml_000");
 
 				jpanel_000.jtree_000.init();
 
