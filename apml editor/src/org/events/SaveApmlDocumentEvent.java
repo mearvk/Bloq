@@ -5,9 +5,9 @@ import java.io.File;
 
 public class SaveApmlDocumentEvent extends ActionEvent
 {
-	SaveApmlDocumentEvent event;
+	public SaveApmlDocumentEvent event;
 
-	File fileRef;
+	public File fileRef;
 
 	public SaveApmlDocumentEvent(ActionEvent event, File fileRef)
 	{

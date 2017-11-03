@@ -2,7 +2,7 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import org.events.SaveApmlDocumentEvent;
+import org.events.SaveDocumentEvent;
 import org.system.UserInterfaceProcessor;
 
 import javax.imageio.ImageIO;
@@ -107,6 +107,6 @@ class JMenuItem_018_ActionListener implements ActionListener
 
 		processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
-		processor.update(new SaveApmlDocumentEvent(this.source));
+		processor.update(new SaveDocumentEvent(e,null));
 	}
 }

@@ -911,61 +911,41 @@ class SaveDocumentRequest
 
 					this.processor.update(new SaveApmlDocumentEvent(event, event.fileRef));
 
-					JOptionPane.showMessageDialog(apmlgui, "APML document saved.");
-
 				break;
 
 				case "bloq":
 
-					this.processor.update(new LoadBloqDocumentEvent(event, event.fileRef));
-
-					this.processor.update(new LoadBloqTreeEvent(event, event.fileRef));
-
-					//
-
-					this.jtabbedpane_000 = (JTabbedPane_000) Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
-
-					this.jtabbedpane_000.setSelectedIndex(1);
+					//this.processor.update(new SaveBloqDocumentEvent(event, event.fileRef));
 
 					break;
 
 				case "bodi":
 
-					this.processor.update(new LoadBodiDocumentEvent(event, event.fileRef));
-
-					//processor.update(new LoadBodiTreeEvent(this,this.fileRef));
+					this.processor.update(new SaveBodiDocumentEvent(event, event.fileRef));
 
 					break;
 
 				case "munction":
 
-					this.processor.update(new LoadMunctionDocumentEvent(event, event.fileRef));
-
-					//processor.update(new LoadMunctionTreeEvent(this,this.fileRef));
+					//this.processor.update(new SaveMunctionDocumentEvent(event, event.fileRef));
 
 					break;
 
 				case "runyn":
 
-					this.processor.update(new LoadRunynDocumentEvent(event, event.fileRef));
-
-					//processor.update(new LoadRunynTreeEvent(this,this.fileRef));
+					//this.processor.update(new SaveRunynDocumentEvent(event, event.fileRef));
 
 					break;
 
 				case "sprung":
 
-					this.processor.update(new LoadSprungDocumentEvent(event, event.fileRef));
-
-					//processor.update(new LoadSprungTreeEvent(this,this.fileRef));
+					//this.processor.update(new SaveSprungDocumentEvent(event, event.fileRef));
 
 					break;
 
 				case "falthruu":
 
-					this.processor.update(new LoadFalthruuDocumentEvent(event, event.fileRef));
-
-					//processor.update(new LoadFalthruuTreeEvent(this,this.fileRef));
+					//this.processor.update(new SaveFalthruuDocumentEvent(event, event.fileRef));
 
 					break;
 

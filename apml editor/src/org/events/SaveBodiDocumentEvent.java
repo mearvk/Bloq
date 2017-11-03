@@ -1,17 +1,19 @@
 package org.events;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class SaveBodiDocumentEvent extends ActionEvent
 {
-	JComponent source;
+	public SaveBodiDocumentEvent event;
 
-	public SaveBodiDocumentEvent(ActionEvent event)
+	public File fileRef;
+
+	public SaveBodiDocumentEvent(ActionEvent event, File fileRef)
 	{
 		super(event.getSource(), event.getID(), "save_bodi_document_event");
 
-		this.source = source;
+		this.event = (SaveBodiDocumentEvent)event;
 	}
 
 	public SaveBodiDocumentEvent(Object object, Integer id, String command)
