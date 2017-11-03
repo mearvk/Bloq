@@ -150,11 +150,11 @@ class CloseApmlDocumentRequest
 
 	public void run()
 	{
-		JPanel_001 jpanel_001;
+		RSTextPane_Apml_000 rstextpane_apml_000;
 
-		jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+		rstextpane_apml_000 = (RSTextPane_Apml_000) Bodi.context("editor").pull("//editor/ui/rstextpane_apml_000");
 
-		jpanel_001.rstextpane.closedocument((CloseApmlDocumentEvent) event);
+		rstextpane_apml_000.setText("");
 	}
 }
 
@@ -173,9 +173,9 @@ class UpdateAllOnDocumentLoadedRequest
 
 	public void run()
 	{
-		processor.last_loaded_file_url = ((DocumentLoadedEvent) event).getFileURL();
+		processor.last_loaded_file_url = (event).getFileURL();
 
-		processor.last_loaded_file = ((DocumentLoadedEvent) event).getFileRef();
+		processor.last_loaded_file = (event).getFileRef();
 	}
 }
 
@@ -235,31 +235,31 @@ class LoadBloqDocumentRequest
 
 		rstextpane_bloq_000 = (RSTextPane_Bloq_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bloq_000");
 
-		try
-		{
-			BufferedReader reader = new BufferedReader(new FileReader(event.getFileRef()));
+				try
+				{
+					BufferedReader reader = new BufferedReader(new FileReader(event.getFileRef()));
 
-			String line = null;
+					String line = null;
 
-			String buffer = new String();
+					String buffer = new String();
 
-			//
+					//
 
-			while ((line = reader.readLine()) != null)
-			{
-				buffer = buffer + line + "\n";
-			}
+					while ((line = reader.readLine()) != null)
+					{
+						buffer = buffer + line + "\n";
+					}
 
-			//
+					//
 
-			rstextpane_bloq_000.setText(buffer + "\n");
+					rstextpane_bloq_000.setText(buffer + "\n");
 
-			rstextpane_bloq_000.setCaretPosition(000);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+					rstextpane_bloq_000.setCaretPosition(000);
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
 	}
 }
 
@@ -324,11 +324,42 @@ class LoadApmlDocumentRequest
 
 	public void run()
 	{
-		JPanel_001 jpanel_001;
+		this.loaddocument(event);
+	}
 
-		jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+	private void loaddocument(LoadApmlDocumentEvent event)
+	{
+		RSTextPane_Apml_000 rstextpane_apml_000;
 
-		jpanel_001.rstextpane.loaddocument((LoadApmlDocumentEvent) event);
+		rstextpane_apml_000 = (RSTextPane_Apml_000) Bodi.context("editor").pull("//editor/ui/rstextpane_apml_000");
+
+		//
+
+		try
+		{
+			BufferedReader reader = new BufferedReader(new FileReader(event.getFileRef()));
+
+			String line = null;
+
+			String buffer = new String();
+
+			//
+
+			while ((line = reader.readLine()) != null)
+			{
+				buffer = buffer + line + "\n";
+			}
+
+			//
+
+			rstextpane_apml_000.setText(buffer + "\n");
+
+			rstextpane_apml_000.setCaretPosition(000);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
 
@@ -416,7 +447,6 @@ class SaveApmlDocumentRequest
 			JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
 		}
 	}
-
 }
 
 class OpenDocumentRequest

@@ -73,7 +73,7 @@ public class JPanel_Backboard_For_Bloq extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Bloq_000(this, "//editor/ui/jpanel_bloq_000"), new JPanel_001(this, "//editor/ui/jpanel_bloq_001"));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Bloq_000(this, "//editor/ui/jpanel_bloq_000"), new JPanel_Bloq_001(this, "//editor/ui/jpanel_bloq_001"));
 
 		// hierarchy
 

@@ -74,7 +74,7 @@ public class JPanel_Backboard_For_Bodi extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Bodi_000(this, "//editor/ui/jpanel_bodi_000"), new JPanel_001(this, "//editor/ui/jpanel_bodi_001"));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Bodi_000(this, "//editor/ui/jpanel_bodi_000"), new JPanel_Tree_Bodi_000(this, "//editor/ui/jpanel_bodi_001"));
 
 		// hierarchy
 

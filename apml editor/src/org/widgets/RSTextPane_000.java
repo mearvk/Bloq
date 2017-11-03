@@ -2,8 +2,6 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import org.events.CloseApmlDocumentEvent;
-import org.events.LoadApmlDocumentEvent;
 import org.events.SaveApmlDocumentEvent;
 import org.events.TreeStructureUpdatedEvent;
 import org.fife.ui.rsyntaxtextarea.*;
@@ -173,26 +171,7 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	}
 
 	//
-	public void loaddocument(LoadApmlDocumentEvent event)
-	{
-
-	}
-
-	//
-	public void closedocument(CloseApmlDocumentEvent event)
-	{
-		try
-		{
-			this.setText("");
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	//
-	public void savedocument(SaveApmlDocumentEvent event)
+	public void savedocument(SaveApmlDocumentEvent event) throws Exception
 	{
 		try
 		{
