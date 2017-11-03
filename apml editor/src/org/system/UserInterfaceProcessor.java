@@ -62,29 +62,7 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				break;
 
-			case "build_ui_apml_request_event":
-
-				new BuildApmlUserInterfaceRequest(this).run();
-
-				break;
-
-			case "build_apml_standalone_request_event":
-
-				new BuildApmlStandaloneRequest(this).run();
-
-				break;
-
-			case "exit_program_event":
-
-				new ExitProgramRequest(this, event).run();
-
-				break;
-
-			case "tree_structure_updated_event":
-
-				new TreeStructureUpdatedRequest(this, event).run();
-
-				break;
+				// apml //
 
 			case "save_apml_document_event":
 
@@ -98,11 +76,45 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				break;
 
+			case "build_ui_apml_request_event":
+
+				new BuildApmlUserInterfaceRequest(this).run();
+
+				break;
+
+			case "build_apml_standalone_request_event":
+
+				new BuildApmlStandaloneRequest(this).run();
+
+				break;
+
+			case "close_apml_document_event":
+
+				new CloseApmlDocumentRequest(this, event).run();
+
+				break;
+
 			case "load_apml_tree_event":
 
 				new LoadApmlTreeRequest(this, event).run();
 
 				break;
+
+				// bodi //
+
+			case "load_bodi_document_event":
+
+				new LoadBodiDocumentRequest(this, event).run();
+
+				break;
+
+			case "load_bodi_tree_event":
+
+				new LoadBodiTreeRequest(this, event).run();
+
+				break;
+
+				// bloq //
 
 			case "load_bloq_document_event":
 
@@ -116,17 +128,30 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				break;
 
+				//
+
 			case "document_loaded_event":
 
 				new UpdateAllOnDocumentLoadedRequest(this, event).run();
 
 				break;
 
-			case "close_apml_document_event":
+				//
 
-				new CloseApmlDocumentRequest(this, event).run();
+
+			case "exit_program_event":
+
+				new ExitProgramRequest(this, event).run();
 
 				break;
+
+			case "tree_structure_updated_event":
+
+				new TreeStructureUpdatedRequest(this, event).run();
+
+				break;
+
+				//
 
 			default:
 
@@ -179,6 +204,86 @@ class UpdateAllOnDocumentLoadedRequest
 	}
 }
 
+class LoadBodiTreeRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public LoadBodiTreeEvent event;
+
+	public LoadBodiTreeRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (LoadBodiTreeEvent) event;
+	}
+
+	public void run()
+	{
+		JTree_Bodi_000 jtree_bodi_000;
+
+		jtree_bodi_000 = (JTree_Bodi_000) Bodi.context("editor").pull("//editor/ui/jtree_bodi_000");
+
+		jtree_bodi_000.init();
+
+		jtree_bodi_000.update(event);
+
+		jtree_bodi_000.removenewlinetextnodes();
+	}
+}
+
+class LoadBodiDocumentRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public LoadBodiDocumentEvent event;
+
+	public LoadBodiDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (LoadBodiDocumentEvent) event;
+	}
+
+	public void run()
+	{
+		this.loaddocument(event);
+	}
+
+	private void loaddocument(LoadBodiDocumentEvent event)
+	{
+		RSTextPane_Bodi_000 rstextpane_bodi_000;
+
+		rstextpane_bodi_000 = (RSTextPane_Bodi_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bodi_000");
+
+		try
+		{
+			BufferedReader reader = new BufferedReader(new FileReader(event.getFileRef()));
+
+			String line = null;
+
+			String buffer = new String();
+
+			//
+
+			while ((line = reader.readLine()) != null)
+			{
+				buffer = buffer + line + "\n";
+			}
+
+			//
+
+			rstextpane_bodi_000.setText(buffer + "\n");
+
+			rstextpane_bodi_000.setCaretPosition(000);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+}
+
+
 class LoadBloqTreeRequest
 {
 	public UserInterfaceProcessor processor;
@@ -206,6 +311,8 @@ class LoadBloqTreeRequest
 	}
 
 }
+
+
 
 class LoadBloqDocumentRequest
 {

@@ -11,8 +11,8 @@ and open the template in the system.
         <compilation>
             <output>
                 <rule>
-                    output.parator.id                
-                </rule>            
+                    output.parator.id
+                </rule>
             </output>
         </compilation>
     </system>

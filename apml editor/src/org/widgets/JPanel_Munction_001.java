@@ -31,7 +31,7 @@ public class JPanel_Munction_001 extends JPanel
 
 	public JEditorPane_000 editorpane;
 
-	public RSTextPane_000 rstextpane;
+	public RSTextPane_Munction_000 rstextpane;
 
 	public RTextScrollPane_000 rstextscrollpane;
 
@@ -79,7 +79,7 @@ public class JPanel_Munction_001 extends JPanel
 
 		// instantiation
 
-		this.rstextpane = new RSTextPane_000(this);
+		this.rstextpane = new RSTextPane_Munction_000(this);
 
 		this.rstextscrollpane = new RTextScrollPane_000(this);
 
@@ -123,7 +123,7 @@ public class JPanel_Munction_001 extends JPanel
 
 		// instantiation
 
-		this.rstextpane = new RSTextPane_000(this);
+		this.rstextpane = new RSTextPane_Munction_000(this);
 
 		this.rstextscrollpane = new RTextScrollPane_000(this);
 
@@ -166,7 +166,7 @@ public class JPanel_Munction_001 extends JPanel
 
 		// instantiation
 
-		this.rstextpane = new RSTextPane_000(this);
+		this.rstextpane = new RSTextPane_Munction_000(this);
 
 		this.rstextscrollpane = new RTextScrollPane_000(this);
 
@@ -213,7 +213,7 @@ public class JPanel_Munction_001 extends JPanel
 
 		// instantiation
 
-		this.rstextpane = new RSTextPane_000(this);
+		this.rstextpane = new RSTextPane_Munction_000(this);
 
 		this.rstextscrollpane = new RTextScrollPane_000(this);
 

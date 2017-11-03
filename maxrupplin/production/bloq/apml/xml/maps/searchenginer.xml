@@ -6,7 +6,7 @@
             <extends>apml.published.services.httpserver</extends>
         </searchserver>
     </definitions>
-    
+
     <system id="mysearchserver">
         <searchserver>
             <function tiesto="TECH_REQUESTS" name="{PUBLIC}{org.searchserver.GET_handler()}">
@@ -18,7 +18,7 @@
                         <patterns>
                             <pattern type="technical">
                                 <handler>
-                                    
+
                                 </handler>
                             </pattern>
                         </patterns>
@@ -29,4 +29,4 @@
     </system>
 </apml>
 
-tech: java networking programming hints
+        tech: java networking programming hints

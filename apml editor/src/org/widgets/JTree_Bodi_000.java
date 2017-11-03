@@ -5,8 +5,8 @@ import apml.system.bodi.Bodi;
 import apml.xpath.helpers.Xpathquick;
 import org.custom.ui.ApmlJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
-import org.events.CloseApmlDocumentEvent;
-import org.events.LoadApmlDocumentEvent;
+import org.events.CloseBodiDocumentEvent;
+import org.events.LoadBodiTreeEvent;
 import org.listeners.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -174,12 +174,12 @@ public class JTree_Bodi_000 extends JTree
 		}
 	}
 
-	public void update(CloseApmlDocumentEvent event)
+	public void update(CloseBodiDocumentEvent event)
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void update(LoadApmlDocumentEvent event)
+	public void update(LoadBodiTreeEvent event)
 	{
 		File file = event.getFileRef();
 
