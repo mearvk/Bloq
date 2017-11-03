@@ -56,9 +56,17 @@ public class UserInterfaceProcessor extends Apmlobject
 
 		switch (action)
 		{
+			// multiplexing required //
+
 			case "open_document_event":
 
 				new OpenDocumentRequest(this, event).run();
+
+				break;
+
+			case "save_document_event":
+
+				new SaveDocumentRequest(this, event).run();
 
 				break;
 
@@ -111,6 +119,12 @@ public class UserInterfaceProcessor extends Apmlobject
 			case "load_bodi_tree_event":
 
 				new LoadBodiTreeRequest(this, event).run();
+
+				break;
+
+			case "save_bodi_document_event":
+
+				new SaveBodiDocumentRequest(this, event).run();
 
 				break;
 
@@ -370,6 +384,69 @@ class LoadBloqDocumentRequest
 	}
 }
 
+class SaveBodiDocumentRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public SaveBodiDocumentEvent event;
+
+	public APMLGui apmlgui;
+
+	public RSTextPane_Bodi_000 rstextpane_bodi_000;
+
+	//
+
+	public SaveBodiDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (SaveBodiDocumentEvent) event;
+
+		this.apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+		this.rstextpane_bodi_000 = (RSTextPane_Bodi_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bodi_000");
+	}
+
+	public void run()
+	{
+		this.savedocument(event);
+	}
+
+	//
+	private void savedocument(SaveBodiDocumentEvent event)
+	{
+		try
+		{
+			JFileChooser chooser = new JFileChooser();
+
+			int retval = chooser.showSaveDialog(this.apmlgui);
+
+			if (retval == JFileChooser.APPROVE_OPTION)
+			{
+				File file = chooser.getSelectedFile();
+
+				BufferedWriter writer;
+
+				writer = new BufferedWriter(new FileWriter(file));
+
+				writer.write(this.rstextpane_bodi_000.getText(), 0, this.rstextpane_bodi_000.getText().length());
+
+				writer.flush();
+
+				writer.close();
+			}
+
+			JOptionPane.showMessageDialog(this.apmlgui, "Document successfully saved.");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+
+			JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+		}
+	}
+}
+
 class LoadApmlTreeRequest
 {
 	public UserInterfaceProcessor processor;
@@ -552,6 +629,145 @@ class SaveApmlDocumentRequest
 			e.printStackTrace();
 
 			JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+		}
+	}
+}
+
+class SaveDocumentRequest
+{
+	private UserInterfaceProcessor processor;
+
+	private OpenDocumentEvent event;
+
+	private Element element;
+
+	private String type;
+
+	private Document document;
+
+	private XPath xpath;
+
+	private NodeList nodes;
+
+	private JTabbedPane_000 jtabbedpane_000;
+
+	private APMLGui apmlgui;
+
+	//
+
+	public SaveDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (OpenDocumentEvent) event;
+	}
+
+	public void run()
+	{
+		//
+
+		this.processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
+
+		this.apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+		//
+
+		try
+		{
+			this.document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(event.getFileRef());
+
+			this.xpath = XPathFactory.newInstance().newXPath();
+
+			this.nodes = Xpathquick.evaluate(this.document, this.xpath, "//project[@type]");
+
+			//
+
+			if (this.nodes.getLength() == 0)
+					JOptionPane.showMessageDialog(apmlgui, "Unable to locate any document type; make sure you have a project type set ( //apml/project[@type] ).");
+
+			if (this.nodes.getLength() > 1)
+					JOptionPane.showMessageDialog(apmlgui, "Unable to locate unambiguous document type; make sure you have a single project type set ( //apml/project[@type] ).");
+
+				//
+
+			switch (event.fileType)
+			{
+				case "apml":
+
+					this.processor.update(new LoadApmlDocumentEvent(event, event.fileRef));
+
+					this.processor.update(new LoadApmlTreeEvent(event, event.fileRef));
+
+				//
+
+					this.jtabbedpane_000 = (JTabbedPane_000) Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
+
+					this.jtabbedpane_000.setSelectedIndex(0);
+
+				break;
+
+				case "bloq":
+
+					this.processor.update(new LoadBloqDocumentEvent(event, event.fileRef));
+
+					this.processor.update(new LoadBloqTreeEvent(event, event.fileRef));
+
+					//
+
+					this.jtabbedpane_000 = (JTabbedPane_000) Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
+
+					this.jtabbedpane_000.setSelectedIndex(1);
+
+					break;
+
+				case "bodi":
+
+					this.processor.update(new LoadBodiDocumentEvent(event, event.fileRef));
+
+					//processor.update(new LoadBodiTreeEvent(this,this.fileRef));
+
+					break;
+
+				case "munction":
+
+					this.processor.update(new LoadMunctionDocumentEvent(event, event.fileRef));
+
+					//processor.update(new LoadMunctionTreeEvent(this,this.fileRef));
+
+					break;
+
+				case "runyn":
+
+					this.processor.update(new LoadRunynDocumentEvent(event, event.fileRef));
+
+					//processor.update(new LoadRunynTreeEvent(this,this.fileRef));
+
+					break;
+
+				case "sprung":
+
+					this.processor.update(new LoadSprungDocumentEvent(event, event.fileRef));
+
+					//processor.update(new LoadSprungTreeEvent(this,this.fileRef));
+
+					break;
+
+				case "falthruu":
+
+					this.processor.update(new LoadFalthruuDocumentEvent(event, event.fileRef));
+
+					//processor.update(new LoadFalthruuTreeEvent(this,this.fileRef));
+
+					break;
+
+				default:
+
+					JOptionPane.showMessageDialog(apmlgui, "Unknown file type; no can help."); break;
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 }
