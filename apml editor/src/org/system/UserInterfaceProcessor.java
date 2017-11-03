@@ -854,17 +854,11 @@ class SaveDocumentRequest
 
 	private OpenDocumentEvent event;
 
-	private Element element;
-
-	private String type;
-
 	private Document document;
 
 	private XPath xpath;
 
 	private NodeList nodes;
-
-	private JTabbedPane_000 jtabbedpane_000;
 
 	private APMLGui apmlgui;
 
