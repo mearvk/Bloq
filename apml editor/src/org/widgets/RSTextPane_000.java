@@ -14,7 +14,9 @@ import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.text.Element;
 import java.awt.*;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 public class RSTextPane_000 extends RSyntaxTextArea
 {
@@ -173,31 +175,7 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	//
 	public void loaddocument(LoadApmlDocumentEvent event)
 	{
-		try
-		{
-			BufferedReader reader = new BufferedReader(new FileReader(event.getFileRef()));
 
-			String line = null;
-
-			String buffer = new String();
-
-			//
-
-			while((line=reader.readLine())!=null)
-			{
-				buffer = buffer + line + "\n";
-			}
-
-			//
-
-			this.setText(buffer+"\n");
-
-			this.setCaretPosition(000);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	//

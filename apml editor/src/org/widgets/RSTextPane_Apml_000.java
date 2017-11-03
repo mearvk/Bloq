@@ -4,17 +4,16 @@ import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlDocumentEvent;
-import org.events.SaveApmlDocumentEvent;
 import org.events.TreeStructureUpdatedEvent;
 import org.fife.ui.rsyntaxtextarea.*;
 import org.listeners.CustomKeyEventListener;
 import org.listeners.LineCountDocumentListener;
 
-import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.text.Element;
 import java.awt.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class RSTextPane_Apml_000 extends RSyntaxTextArea
 {
@@ -147,35 +146,7 @@ public class RSTextPane_Apml_000 extends RSyntaxTextArea
 		}
 	}
 
-	//
-	public void savedocument(SaveApmlDocumentEvent event)
-	{
-		try
-		{
-			JFileChooser chooser = new JFileChooser();
 
-			int retval = chooser.showSaveDialog(this);
-
-			if(retval==JFileChooser.APPROVE_OPTION)
-			{
-				File file = chooser.getSelectedFile();
-
-				BufferedWriter writer;
-
-				writer = new BufferedWriter(new FileWriter(file));
-
-				writer.write(this.getText(),0,this.getText().length());
-
-				writer.flush();
-
-				writer.close();
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
 
 	//
 	public void processtreechange(TreeStructureUpdatedEvent event)
