@@ -6,9 +6,9 @@
 package apml.examples.httpserver.client;
 
 /**
- *
  * @author oem
  */
-public class Httpclient {
-    
+public class Httpclient
+{
+
 }

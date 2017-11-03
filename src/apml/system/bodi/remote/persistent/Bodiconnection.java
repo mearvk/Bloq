@@ -8,872 +8,983 @@ import java.util.ArrayList;
 /**
  * @author Max Rupplin
  */
-public class Bodiconnection {
-    public Integer hash = 0x00888FE8;
-    
+public class Bodiconnection
+{
+	public Integer hash = 0x00888FE8;
+
     /*-------------------------------------------------------------------------*/
 
-    public ArrayList<String> lines = new ArrayList();
+	public ArrayList<String> lines = new ArrayList();
 
-    public Bodi bodi;
+	public Bodi bodi;
 
-    public Bodiremoteserver server;
+	public Bodiremoteserver server;
 
-    public Boolean verified = true;
+	public Boolean verified = true;
 
-    public Boolean islive = true;
+	public Boolean islive = true;
 
-    public Networkcontext connection;
+	public Networkcontext connection;
 
-    public Integer sessionid;
+	public Integer sessionid;
 
-    public Integer userid;
+	public Integer userid;
 
-    public Long ttl = 60 * 1000 * 100L;
+	public Long ttl = 60 * 1000 * 100L;
 
-    public Long day;
+	public Long day;
 
-    public Serializable object;
+	public Serializable object;
 
-    public String host;
+	public String host;
 
-    public String result;
+	public String result;
 
-    public String operation = "";
+	public String operation = "";
 
-    public String cause;
+	public String cause;
 
-    public String error = "";
+	public String error = "";
 
-    public String context;
+	public String context;
 
-    public String tradecontext;
+	public String tradecontext;
 
-    public String key;
+	public String key;
 
-    public String message;
+	public String message;
 
-    public String value;
+	public String value;
 
-    public ArrayList<String> values;
+	public ArrayList<String> values;
 
 
-    /**
-     *
-     */
-    public Bodiconnection() {
-        this.sessionid = this.hashCode();
+	/**
+	 *
+	 */
+	public Bodiconnection()
+	{
+		this.sessionid = this.hashCode();
 
-        this.day = System.currentTimeMillis();
-    }
+		this.day = System.currentTimeMillis();
+	}
 
-    /**
-     * @param server
-     * @param connection
-     */
-    public Bodiconnection(Bodiremoteserver server, Networkcontext connection) {
-        if (server == null || connection == null) throw new SecurityException("//bodi/connect/exceptions");
+	/**
+	 * @param server
+	 * @param connection
+	 */
+	public Bodiconnection(Bodiremoteserver server, Networkcontext connection)
+	{
+		if (server == null || connection == null)
+			throw new SecurityException("//bodi/connect/exceptions");
 
-        this.connection = connection;
+		this.connection = connection;
 
-        this.day = System.currentTimeMillis();
-    }
+		this.day = System.currentTimeMillis();
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public Boolean processrequest(Bodiservercontext connectioncontext) {
-        StringBuffer buffer = connectioncontext.inputbuffer;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public Boolean processrequest(Bodiservercontext connectioncontext)
+	{
+		StringBuffer buffer = connectioncontext.inputbuffer;
 
-        String protocol = this.stripforprotocoltoken(connectioncontext);
+		String protocol = this.stripforprotocoltoken(connectioncontext);
 
-        this.tryresetbodiconnection(connectioncontext);
+		this.tryresetbodiconnection(connectioncontext);
 
-        try {
-            if (this.gettimetolive() <= 0) protocol = "//other"; //send an other reply for errant bodi request
+		try
+		{
+			if (this.gettimetolive() <= 0)
+				protocol = "//other"; //send an other reply for errant bodi request
 
-            switch (protocol) {
-                case "//close":
+			switch (protocol)
+			{
+				case "//close":
 
-                    connectioncontext.bodicontext.processcloserequest(connectioncontext);
+					connectioncontext.bodicontext.processcloserequest(connectioncontext);
 
-                    connectioncontext.bodicontext.processcloseresponse(connectioncontext);
+					connectioncontext.bodicontext.processcloseresponse(connectioncontext);
 
-                    break;
+					break;
 
-                case "//exit":
+				case "//exit":
 
-                    connectioncontext.bodicontext.processexitrequest(connectioncontext);
+					connectioncontext.bodicontext.processexitrequest(connectioncontext);
 
-                    connectioncontext.bodicontext.processexitresponse(connectioncontext);
+					connectioncontext.bodicontext.processexitresponse(connectioncontext);
 
-                    break;
+					break;
 
-                case "//handshake":
+				case "//handshake":
 
-                    connectioncontext.bodicontext.processhandshakerequest(connectioncontext);
+					connectioncontext.bodicontext.processhandshakerequest(connectioncontext);
 
-                    connectioncontext.bodicontext.processhandshakeresponse(connectioncontext);
+					connectioncontext.bodicontext.processhandshakeresponse(connectioncontext);
 
-                    break;
+					break;
 
-                case "//list":
+				case "//list":
 
-                    connectioncontext.bodicontext.processlistrequest(connectioncontext);
+					connectioncontext.bodicontext.processlistrequest(connectioncontext);
 
-                    connectioncontext.bodicontext.processlistresponse(connectioncontext);
+					connectioncontext.bodicontext.processlistresponse(connectioncontext);
 
-                    break;
+					break;
 
-                case "//open":
+				case "//open":
 
-                    connectioncontext.bodicontext.processopenrequest(connectioncontext);
+					connectioncontext.bodicontext.processopenrequest(connectioncontext);
 
-                    connectioncontext.bodicontext.processopenresponse(connectioncontext);
+					connectioncontext.bodicontext.processopenresponse(connectioncontext);
 
-                    break;
+					break;
 
-                case "//pull":
+				case "//pull":
 
-                    connectioncontext.bodicontext.processpullrequest(connectioncontext);
+					connectioncontext.bodicontext.processpullrequest(connectioncontext);
 
-                    connectioncontext.bodicontext.processpullresponse(connectioncontext);
+					connectioncontext.bodicontext.processpullresponse(connectioncontext);
 
-                    break;
+					break;
 
-                case "//put":
+				case "//put":
 
-                    connectioncontext.bodicontext.processputrequest(connectioncontext);
+					connectioncontext.bodicontext.processputrequest(connectioncontext);
 
-                    connectioncontext.bodicontext.processputresponse(connectioncontext);
+					connectioncontext.bodicontext.processputresponse(connectioncontext);
 
-                    break;
+					break;
 
-                case "//touch":
+				case "//touch":
 
-                    connectioncontext.bodicontext.processtouchrequest(connectioncontext);
+					connectioncontext.bodicontext.processtouchrequest(connectioncontext);
 
-                    connectioncontext.bodicontext.processtouchresponse(connectioncontext);
+					connectioncontext.bodicontext.processtouchresponse(connectioncontext);
 
-                    break;
+					break;
 
-                case "//trade":
+				case "//trade":
 
-                    connectioncontext.bodicontext.processtraderequest(connectioncontext);
+					connectioncontext.bodicontext.processtraderequest(connectioncontext);
 
-                    connectioncontext.bodicontext.processtraderesponse(connectioncontext);
+					connectioncontext.bodicontext.processtraderesponse(connectioncontext);
 
-                    break;
+					break;
 
-                default:
+				default:
 
-                    connectioncontext.bodicontext.processotherrequest(connectioncontext);
+					connectioncontext.bodicontext.processotherrequest(connectioncontext);
 
-                    connectioncontext.bodicontext.processotherresponse(connectioncontext);
+					connectioncontext.bodicontext.processotherresponse(connectioncontext);
 
-                    break;
-            }
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
-        } finally {
-            //
-        }
+					break;
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace(System.err);
+		}
+		finally
+		{
+			//
+		}
 
-        return this.object == null;
-    }
+		return this.object == null;
+	}
 
-    /**
-     * *
-     *
-     * @param bodiservercontext
-     * @return
-     */
-    public Boolean tryresetbodiconnection(Bodiservercontext bodiservercontext) {
-        bodiservercontext.bodicontext.cause = "";
+	/**
+	 * *
+	 *
+	 * @param bodiservercontext
+	 * @return
+	 */
+	public Boolean tryresetbodiconnection(Bodiservercontext bodiservercontext)
+	{
+		bodiservercontext.bodicontext.cause = "";
 
-        bodiservercontext.bodicontext.message = "";
+		bodiservercontext.bodicontext.message = "";
 
-        bodiservercontext.bodicontext.result = "";
+		bodiservercontext.bodicontext.result = "";
 
-        //
+		//
 
-        bodiservercontext.bodicontext.cause = null;
+		bodiservercontext.bodicontext.cause = null;
 
-        bodiservercontext.bodicontext.message = null;
+		bodiservercontext.bodicontext.message = null;
 
-        bodiservercontext.bodicontext.result = null;
+		bodiservercontext.bodicontext.result = null;
 
-        return false | true;
-    }
+		return false | true;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     * @throws Exception
-     */
-    public Bodiconnection processcloserequest(Bodiservercontext connectioncontext) throws Exception {
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 * @throws Exception
+	 */
+	public Bodiconnection processcloserequest(Bodiservercontext connectioncontext) throws Exception
+	{
+		Bodiconnection bodiconnection = connectioncontext.bodicontext;
 
-        bodiconnection.operation = "//close";
+		bodiconnection.operation = "//close";
 
-        bodiconnection.getsessionid();
+		bodiconnection.getsessionid();
 
-        bodiconnection.gettimetolive();
+		bodiconnection.gettimetolive();
 
-        return bodiconnection;
-    }
+		return bodiconnection;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public Boolean processcloseresponse(Bodiservercontext connectioncontext) {
-        this.islive = false;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public Boolean processcloseresponse(Bodiservercontext connectioncontext)
+	{
+		this.islive = false;
 
-        if (Bodi.hascontextat(connectioncontext.getcontext(connectioncontext))) {
-            try {
-                Bodi.removecontext(connectioncontext.getcontext(connectioncontext));
+		if (Bodi.hascontextat(connectioncontext.getcontext(connectioncontext)))
+		{
+			try
+			{
+				Bodi.removecontext(connectioncontext.getcontext(connectioncontext));
 
-                connectioncontext.bodicontext.result = "success";
+				connectioncontext.bodicontext.result = "success";
 
-                connectioncontext.bodicontext.message = "context closed";
-            } catch (Exception e) {
-                e.printStackTrace(System.err);
-            }
-        } else {
-            connectioncontext.bodicontext.result = "failure";
+				connectioncontext.bodicontext.message = "context closed";
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace(System.err);
+			}
+		}
+		else
+		{
+			connectioncontext.bodicontext.result = "failure";
 
-            connectioncontext.bodicontext.cause = "no such open context";
-        }
+			connectioncontext.bodicontext.cause = "no such open context";
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public Boolean processexitrequest(Bodiservercontext connectioncontext) {
-        this.islive = false;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public Boolean processexitrequest(Bodiservercontext connectioncontext)
+	{
+		this.islive = false;
 
-        connectioncontext.bodicontext.result = "";
+		connectioncontext.bodicontext.result = "";
 
-        connectioncontext.bodicontext.message = "";
+		connectioncontext.bodicontext.message = "";
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public Boolean processexitresponse(Bodiservercontext connectioncontext) {
-        connectioncontext.bodicontext.result = "connection closed";
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public Boolean processexitresponse(Bodiservercontext connectioncontext)
+	{
+		connectioncontext.bodicontext.result = "connection closed";
 
-        connectioncontext.bodicontext.message = "good bye";
+		connectioncontext.bodicontext.message = "good bye";
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * New handshakes should return new Bodiconnection instances with unique sessionid values
-     * <p>
-     * Existing Bodiconnections should return updated TTLs possibly more.
-     *
-     * @param connectioncontext
-     * @return
-     */
-    public Bodiconnection processhandshakerequest(Bodiservercontext connectioncontext) throws Exception {
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;
+	/**
+	 * New handshakes should return new Bodiconnection instances with unique sessionid values
+	 * <p>
+	 * Existing Bodiconnections should return updated TTLs possibly more.
+	 *
+	 * @param connectioncontext
+	 * @return
+	 */
+	public Bodiconnection processhandshakerequest(Bodiservercontext connectioncontext) throws Exception
+	{
+		Bodiconnection bodiconnection = connectioncontext.bodicontext;
 
-        bodiconnection.operation = "//handshake";
+		bodiconnection.operation = "//handshake";
 
-        bodiconnection.getsessionid();
+		bodiconnection.getsessionid();
 
-        bodiconnection.gettimetolive();
+		bodiconnection.gettimetolive();
 
-        return bodiconnection;
-    }
+		return bodiconnection;
+	}
 
-    /**
-     * New handshakes should return new Bodiconnection instances with unique sessionid values
-     * <p>
-     * Existing Bodiconnections should return updated TTLs possibly more.
-     *
-     * @param connectioncontext
-     * @return
-     */
-    public Boolean processhandshakeresponse(Bodiservercontext connectioncontext) throws Exception {
-        connectioncontext.bodicontext.result = "success";
+	/**
+	 * New handshakes should return new Bodiconnection instances with unique sessionid values
+	 * <p>
+	 * Existing Bodiconnections should return updated TTLs possibly more.
+	 *
+	 * @param connectioncontext
+	 * @return
+	 */
+	public Boolean processhandshakeresponse(Bodiservercontext connectioncontext) throws Exception
+	{
+		connectioncontext.bodicontext.result = "success";
 
-        connectioncontext.bodicontext.message = "welcome";
+		connectioncontext.bodicontext.message = "welcome";
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public Bodiconnection processlistrequest(Bodiservercontext connectioncontext) {
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public Bodiconnection processlistrequest(Bodiservercontext connectioncontext)
+	{
+		Bodiconnection bodiconnection = connectioncontext.bodicontext;
 
-        bodiconnection.operation = "//list";
+		bodiconnection.operation = "//list";
 
-        bodiconnection.getsessionid();
+		bodiconnection.getsessionid();
 
-        bodiconnection.gettimetolive();
+		bodiconnection.gettimetolive();
 
-        //
-        bodiconnection.context = this.stripforcontext(connectioncontext);
+		//
+		bodiconnection.context = this.stripforcontext(connectioncontext);
 
-        return bodiconnection;
-    }
+		return bodiconnection;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     * @throws SecurityException
-     */
-    public Bodiconnection processlistresponse(Bodiservercontext connectioncontext) throws SecurityException {
-        if (connectioncontext == null) throw new SecurityException("//bodi//connect");
+	/**
+	 * @param connectioncontext
+	 * @return
+	 * @throws SecurityException
+	 */
+	public Bodiconnection processlistresponse(Bodiservercontext connectioncontext) throws SecurityException
+	{
+		if (connectioncontext == null)
+			throw new SecurityException("//bodi//connect");
 
-        if (connectioncontext.bodicontext == null) throw new SecurityException("//bodi/connect");
+		if (connectioncontext.bodicontext == null)
+			throw new SecurityException("//bodi/connect");
 
-        if (connectioncontext.bodicontext.context == null) throw new SecurityException("//bodi/connect");
+		if (connectioncontext.bodicontext.context == null)
+			throw new SecurityException("//bodi/connect");
 
-        connectioncontext.bodicontext.values = Bodi.listcontexts(connectioncontext.bodicontext.context);
+		connectioncontext.bodicontext.values = Bodi.listcontexts(connectioncontext.bodicontext.context);
 
-        if (connectioncontext.bodicontext.values.size() > 0) {
-            connectioncontext.bodicontext.message = "subcontexts found";
-        } else {
-            connectioncontext.bodicontext.message = "no subcontexts listed";
-        }
+		if (connectioncontext.bodicontext.values.size() > 0)
+		{
+			connectioncontext.bodicontext.message = "subcontexts found";
+		}
+		else
+		{
+			connectioncontext.bodicontext.message = "no subcontexts listed";
+		}
 
-        return connectioncontext.bodicontext;
-    }
+		return connectioncontext.bodicontext;
+	}
 
-    /**
-     * Will connect a persistent context to a Bodiremoteserver without key/value pair
-     *
-     * @param connectioncontext
-     * @return
-     * @throws Exception
-     */
-    public Bodiconnection processopenrequest(Bodiservercontext connectioncontext) throws Exception {
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;
+	/**
+	 * Will connect a persistent context to a Bodiremoteserver without key/value pair
+	 *
+	 * @param connectioncontext
+	 * @return
+	 * @throws Exception
+	 */
+	public Bodiconnection processopenrequest(Bodiservercontext connectioncontext) throws Exception
+	{
+		Bodiconnection bodiconnection = connectioncontext.bodicontext;
 
-        bodiconnection.operation = "//open";
+		bodiconnection.operation = "//open";
 
-        bodiconnection.getsessionid();
+		bodiconnection.getsessionid();
 
-        bodiconnection.gettimetolive();
+		bodiconnection.gettimetolive();
 
-        return bodiconnection;
-    }
+		return bodiconnection;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public Boolean processopenresponse(Bodiservercontext connectioncontext) {
-        String _context = connectioncontext.getcontext(connectioncontext);
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public Boolean processopenresponse(Bodiservercontext connectioncontext)
+	{
+		String _context = connectioncontext.getcontext(connectioncontext);
 
-        if (Bodi.hascontextat(_context)) {
-            connectioncontext.bodicontext.result = "failure";
+		if (Bodi.hascontextat(_context))
+		{
+			connectioncontext.bodicontext.result = "failure";
 
-            connectioncontext.bodicontext.cause = "existing context locked";
+			connectioncontext.bodicontext.cause = "existing context locked";
 
-            return false;
-        } else {
-            Bodi.setcontext(_context);
+			return false;
+		}
+		else
+		{
+			Bodi.setcontext(_context);
 
-            connectioncontext.bodicontext.result = "success";
+			connectioncontext.bodicontext.result = "success";
 
-            connectioncontext.bodicontext.message = "bodi context established";
+			connectioncontext.bodicontext.message = "bodi context established";
 
-            return true;
-        }
-    }
+			return true;
+		}
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public Boolean processotherresponse(Bodiservercontext connectioncontext) {
-        connectioncontext.bodicontext.operation = "//other";
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public Boolean processotherresponse(Bodiservercontext connectioncontext)
+	{
+		connectioncontext.bodicontext.operation = "//other";
 
-        connectioncontext.bodicontext.result = "rejection";
+		connectioncontext.bodicontext.result = "rejection";
 
-        connectioncontext.bodicontext.message = "unusual; please recheck";
+		connectioncontext.bodicontext.message = "unusual; please recheck";
 
-        try {
-            //no valid TTL
-            if (this.gettimetolive() <= 0) {
-                connectioncontext.bodicontext.cause = "TTL expired";
-            }
-            //no valid session issue
-            else if (this.server.isvalidsessionid(connectioncontext.bodicontext)) {
-                connectioncontext.bodicontext.cause = "Session ID not valid";
-            }
-            //unclear cause; tokens may be cause
-            else {
-                connectioncontext.bodicontext.cause = "Unclear cause; check all tokens";
-            }
-        } catch (Exception e) {
-            //
-        } finally {
-            return false;
-        }
-    }
+		try
+		{
+			//no valid TTL
+			if (this.gettimetolive() <= 0)
+			{
+				connectioncontext.bodicontext.cause = "TTL expired";
+			}
+			//no valid session issue
+			else if (this.server.isvalidsessionid(connectioncontext.bodicontext))
+			{
+				connectioncontext.bodicontext.cause = "Session ID not valid";
+			}
+			//unclear cause; tokens may be cause
+			else
+			{
+				connectioncontext.bodicontext.cause = "Unclear cause; check all tokens";
+			}
+		}
+		catch (Exception e)
+		{
+			//
+		}
+		finally
+		{
+			return false;
+		}
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     * @throws Exception
-     */
-    public Bodiconnection processpullrequest(Bodiservercontext connectioncontext) throws Exception {
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 * @throws Exception
+	 */
+	public Bodiconnection processpullrequest(Bodiservercontext connectioncontext) throws Exception
+	{
+		Bodiconnection bodiconnection = connectioncontext.bodicontext;
 
-        bodiconnection.operation = "//pull";
+		bodiconnection.operation = "//pull";
 
-        bodiconnection.getsessionid();
+		bodiconnection.getsessionid();
 
-        bodiconnection.gettimetolive();
+		bodiconnection.gettimetolive();
 
-        //---------------------------------------------------------------------//
+		//---------------------------------------------------------------------//
 
-        bodiconnection.key = this.stripforkey(connectioncontext);
+		bodiconnection.key = this.stripforkey(connectioncontext);
 
-        bodiconnection.context = this.stripforcontext(connectioncontext);
+		bodiconnection.context = this.stripforcontext(connectioncontext);
 
-        return bodiconnection;
-    }
+		return bodiconnection;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public Boolean processpullresponse(Bodiservercontext connectioncontext) {
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public Boolean processpullresponse(Bodiservercontext connectioncontext)
+	{
+		Bodiconnection bodiconnection = connectioncontext.bodicontext;
 
-        Object object = Bodi.context(bodiconnection.context).pull(key);
+		Object object = Bodi.context(bodiconnection.context).pull(key);
 
-        if (object == null) {
-            bodiconnection.message = "unable to pull that key/context pair; sorry";
+		if (object == null)
+		{
+			bodiconnection.message = "unable to pull that key/context pair; sorry";
 
-            bodiconnection.value = null;
+			bodiconnection.value = null;
 
-            bodiconnection.result = "failure";
+			bodiconnection.result = "failure";
 
-            return false;
-        } else {
-            Serializedcarrier carrier = new Serializedcarrier(object.getClass(), object);
+			return false;
+		}
+		else
+		{
+			Serializedcarrier carrier = new Serializedcarrier(object.getClass(), object);
 
-            bodiconnection.message = "key/context pair found.";
+			bodiconnection.message = "key/context pair found.";
 
-            bodiconnection.object = carrier;
+			bodiconnection.object = carrier;
 
-            bodiconnection.value = carrier.object.toString();
+			bodiconnection.value = carrier.object.toString();
 
-            bodiconnection.result = "success";
+			bodiconnection.result = "success";
 
-            return true;
-        }
-    }
+			return true;
+		}
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public Boolean processputresponse(Bodiservercontext connectioncontext) {
-        this.islive = true;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public Boolean processputresponse(Bodiservercontext connectioncontext)
+	{
+		this.islive = true;
 
-        String context = this.stripforcontext(connectioncontext);
+		String context = this.stripforcontext(connectioncontext);
 
-        String key = connectioncontext.bodicontext.key;
+		String key = connectioncontext.bodicontext.key;
 
-        String value = connectioncontext.bodicontext.value;
+		String value = connectioncontext.bodicontext.value;
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     * @throws Exception
-     */
-    public Bodiconnection processputrequest(Bodiservercontext connectioncontext) throws Exception {
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 * @throws Exception
+	 */
+	public Bodiconnection processputrequest(Bodiservercontext connectioncontext) throws Exception
+	{
+		Bodiconnection bodiconnection = connectioncontext.bodicontext;
 
-        bodiconnection.operation = "//put";
+		bodiconnection.operation = "//put";
 
-        bodiconnection.getsessionid();
+		bodiconnection.getsessionid();
 
-        bodiconnection.gettimetolive();
+		bodiconnection.gettimetolive();
 
-        //---------------------------------------------------------------------//
+		//---------------------------------------------------------------------//
 
-        bodiconnection.key = this.stripforkey(connectioncontext);
+		bodiconnection.key = this.stripforkey(connectioncontext);
 
-        bodiconnection.context = this.stripforcontext(connectioncontext);
+		bodiconnection.context = this.stripforcontext(connectioncontext);
 
-        bodiconnection.value = this.stripforvalue(connectioncontext);
+		bodiconnection.value = this.stripforvalue(connectioncontext);
 
-        try {
-            if (Bodi.hascontextat(context)) {
-                Bodi.context(bodiconnection.context).put(key, value);
+		try
+		{
+			if (Bodi.hascontextat(context))
+			{
+				Bodi.context(bodiconnection.context).put(key, value);
 
-                bodiconnection.result = "success";
+				bodiconnection.result = "success";
 
-                bodiconnection.message = "key/value pair established";
-            } else {
-                Bodi.setcontext(context);
+				bodiconnection.message = "key/value pair established";
+			}
+			else
+			{
+				Bodi.setcontext(context);
 
-                Bodi.context(bodiconnection.context).put(key, value);
+				Bodi.context(bodiconnection.context).put(key, value);
 
-                bodiconnection.result = "success";
+				bodiconnection.result = "success";
 
-                bodiconnection.message = "context and key/value pair established";
-            }
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
+				bodiconnection.message = "context and key/value pair established";
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace(System.err);
 
-            bodiconnection.result = "failure";
+			bodiconnection.result = "failure";
 
-            bodiconnection.cause = "error inserting context and/or key/value pair";
-        }
+			bodiconnection.cause = "error inserting context and/or key/value pair";
+		}
 
-        return bodiconnection;
-    }
+		return bodiconnection;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public Boolean processtouchresponse(Bodiservercontext connectioncontext) {
-        String _context = this.stripforcontext(connectioncontext);
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public Boolean processtouchresponse(Bodiservercontext connectioncontext)
+	{
+		String _context = this.stripforcontext(connectioncontext);
 
-        if (Bodi.hascontextat(_context)) {
-            connectioncontext.bodicontext.result = "success";
+		if (Bodi.hascontextat(_context))
+		{
+			connectioncontext.bodicontext.result = "success";
 
-            connectioncontext.bodicontext.message = "touched";
-        } else {
-            connectioncontext.bodicontext.result = "failure";
+			connectioncontext.bodicontext.message = "touched";
+		}
+		else
+		{
+			connectioncontext.bodicontext.result = "failure";
 
-            connectioncontext.bodicontext.cause = "no such context";
-        }
+			connectioncontext.bodicontext.cause = "no such context";
+		}
 
-        return true | false;
-    }
+		return true | false;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     * @throws Exception
-     */
-    public Bodiconnection processtouchrequest(Bodiservercontext connectioncontext) throws Exception {
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 * @throws Exception
+	 */
+	public Bodiconnection processtouchrequest(Bodiservercontext connectioncontext) throws Exception
+	{
+		Bodiconnection bodiconnection = connectioncontext.bodicontext;
 
-        bodiconnection.operation = "//touch";
+		bodiconnection.operation = "//touch";
 
-        bodiconnection.getsessionid();
+		bodiconnection.getsessionid();
 
-        bodiconnection.gettimetolive();
+		bodiconnection.gettimetolive();
 
-        return bodiconnection;
-    }
+		return bodiconnection;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public Boolean processtraderesponse(Bodiservercontext connectioncontext) {
-        String context1 = connectioncontext.bodicontext.context;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public Boolean processtraderesponse(Bodiservercontext connectioncontext)
+	{
+		String context1 = connectioncontext.bodicontext.context;
 
-        Object abject1 = Bodi.context(context).pull("");
+		Object abject1 = Bodi.context(context).pull("");
 
-        Object abject2 = Bodi.context(context).pull("");
+		Object abject2 = Bodi.context(context).pull("");
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     * @throws Exception
-     */
-    public Bodiconnection processtraderequest(Bodiservercontext connectioncontext) throws Exception {
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 * @throws Exception
+	 */
+	public Bodiconnection processtraderequest(Bodiservercontext connectioncontext) throws Exception
+	{
+		Bodiconnection bodiconnection = connectioncontext.bodicontext;
 
-        bodiconnection.operation = "//trade";
+		bodiconnection.operation = "//trade";
 
-        bodiconnection.getsessionid();
+		bodiconnection.getsessionid();
 
-        bodiconnection.gettimetolive();
+		bodiconnection.gettimetolive();
 
-        bodiconnection.getrequestedobject("context", "key");
+		bodiconnection.getrequestedobject("context", "key");
 
-        //bodiconnection.getresult();
+		//bodiconnection.getresult();
 
-        return bodiconnection;
-    }
+		return bodiconnection;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     * @throws Exception
-     */
-    public Bodiconnection processotherrequest(Bodiservercontext connectioncontext) throws Exception {
-        return connectioncontext.bodicontext;
-    }
+	/**
+	 * @param connectioncontext
+	 * @return
+	 * @throws Exception
+	 */
+	public Bodiconnection processotherrequest(Bodiservercontext connectioncontext) throws Exception
+	{
+		return connectioncontext.bodicontext;
+	}
 
 
-    /**
-     * @param connectioncontext
-     * @return
-     * @throws Exception
-     */
-    public Bodiconnection other(Bodiservercontext connectioncontext) throws Exception {
-        Bodiconnection bodiconnection = connectioncontext.bodicontext;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 * @throws Exception
+	 */
+	public Bodiconnection other(Bodiservercontext connectioncontext) throws Exception
+	{
+		Bodiconnection bodiconnection = connectioncontext.bodicontext;
 
-        bodiconnection.operation = "//other";
+		bodiconnection.operation = "//other";
 
-        bodiconnection.getsessionid();
+		bodiconnection.getsessionid();
 
-        bodiconnection.gettimetolive();
+		bodiconnection.gettimetolive();
 
-        bodiconnection.getrequestedobject("context", "key");
+		bodiconnection.getrequestedobject("context", "key");
 
-        //bodiconnection.getresult();
+		//bodiconnection.getresult();
 
-        return bodiconnection;
-    }
+		return bodiconnection;
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public String stripforkey(Bodiservercontext connectioncontext) {
-        return Protocolstripper.stripforkey(connectioncontext);
-    }
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public String stripforkey(Bodiservercontext connectioncontext)
+	{
+		return Protocolstripper.stripforkey(connectioncontext);
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public String stripforvalue(Bodiservercontext connectioncontext) {
-        return Protocolstripper.stripforvalue(connectioncontext);
-    }
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public String stripforvalue(Bodiservercontext connectioncontext)
+	{
+		return Protocolstripper.stripforvalue(connectioncontext);
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public String stripforcontext(Bodiservercontext connectioncontext) {
-        return Protocolstripper.stripforcontext(connectioncontext);
-    }
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public String stripforcontext(Bodiservercontext connectioncontext)
+	{
+		return Protocolstripper.stripforcontext(connectioncontext);
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    public String stripforprotocoltoken(Bodiservercontext connectioncontext) {
-        return Protocolstripper.stripforprotocoltoken(connectioncontext);
-    }
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	public String stripforprotocoltoken(Bodiservercontext connectioncontext)
+	{
+		return Protocolstripper.stripforprotocoltoken(connectioncontext);
+	}
 
-    /**
-     * @param connectioncontext
-     * @return
-     */
-    private Boolean checkconnection(Bodiservercontext connectioncontext) {
-        if (connectioncontext.bodicontext == null) return false;
+	/**
+	 * @param connectioncontext
+	 * @return
+	 */
+	private Boolean checkconnection(Bodiservercontext connectioncontext)
+	{
+		if (connectioncontext.bodicontext == null)
+			return false;
 
-        if (connectioncontext.bodicontext.ttl <= 0) return false;
+		if (connectioncontext.bodicontext.ttl <= 0)
+			return false;
 
-        return this.server.isvalidsession(connectioncontext.bodicontext) != null;
-    }
+		return this.server.isvalidsession(connectioncontext.bodicontext) != null;
+	}
 
-    /**
-     * @param context
-     * @param key
-     * @return
-     */
-    protected Serializable getrequestedobject(String context, String key) {
-        Serializedcarrier bodicarrier = new Serializedcarrier();
+	/**
+	 * @param context
+	 * @param key
+	 * @return
+	 */
+	protected Serializable getrequestedobject(String context, String key)
+	{
+		Serializedcarrier bodicarrier = new Serializedcarrier();
 
-        try {
-            Object object = Bodi.context(context).pull(key);
+		try
+		{
+			Object object = Bodi.context(context).pull(key);
 
-            Class _class = Bodi.context(context).getclass(key);
+			Class _class = Bodi.context(context).getclass(key);
 
-            bodicarrier.object = object;
+			bodicarrier.object = object;
 
-            bodicarrier._class = _class;
-        } catch (Exception e) {
-            //
-        }
+			bodicarrier._class = _class;
+		}
+		catch (Exception e)
+		{
+			//
+		}
 
-        return this.object = bodicarrier;
-    }
+		return this.object = bodicarrier;
+	}
 
 
-    /**
-     * @return
-     */
-    protected String getresult() {
-        return this.result = "";
-    }
+	/**
+	 * @return
+	 */
+	protected String getresult()
+	{
+		return this.result = "";
+	}
 
-    /**
-     * @return
-     */
-    protected Integer getsessionid() {
-        if (this.sessionid == null || this.sessionid == 0) {
-            return this.hashCode();
-        }
+	/**
+	 * @return
+	 */
+	protected Integer getsessionid()
+	{
+		if (this.sessionid == null || this.sessionid == 0)
+		{
+			return this.hashCode();
+		}
 
-        return this.sessionid;
-    }
+		return this.sessionid;
+	}
 
-    /**
-     * @return
-     */
-    protected Long gettimetolive() {
-        Long now = System.currentTimeMillis();
+	/**
+	 * @return
+	 */
+	protected Long gettimetolive()
+	{
+		Long now = System.currentTimeMillis();
 
-        Long day = this.day;
+		Long day = this.day;
 
-        Long ttl = this.ttl;
+		Long ttl = this.ttl;
 
-        //
+		//
 
-        if ((this.ttl = ttl - (now - day)) < 0) {
-            return -1L;
-        }
+		if ((this.ttl = ttl - (now - day)) < 0)
+		{
+			return -1L;
+		}
 
-        return this.ttl;
-    }
+		return this.ttl;
+	}
 
-    /**
-     * @return
-     */
-    @Override
-    public String toString() {
-        switch (this.operation) {
-            case "//list":
+	/**
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		switch (this.operation)
+		{
+			case "//list":
 
-                if (this.values != null) {
-                    String output = "//list //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
+				if (this.values != null)
+				{
+					String output = "//list //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
 
-                    if (message != null) {
-                        output += " //message=" + message;
-                    }
+					if (message != null)
+					{
+						output += " //message=" + message;
+					}
 
-                    if (this.values != null) {
-                        String temp = " //value={as list}\n\n";
+					if (this.values != null)
+					{
+						String temp = " //value={as list}\n\n";
 
-                        for (String matchingcontext : this.values) {
-                            temp += matchingcontext + "\n";
-                        }
+						for (String matchingcontext : this.values)
+						{
+							temp += matchingcontext + "\n";
+						}
 
-                        output = output + temp;
-                    }
+						output = output + temp;
+					}
 
-                    return output;
-                } else if (this.cause != null) {
-                    return "//list //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
-                } else if (this.message != null) {
-                    return "//list //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
-                } else return "//list //message=new";
+					return output;
+				}
+				else if (this.cause != null)
+				{
+					return "//list //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
+				}
+				else if (this.message != null)
+				{
+					return "//list //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
+				}
+				else
+					return "//list //message=new";
 
-            case "//close":
+			case "//close":
 
-                if (cause != null) {
-                    return "//close //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
-                }
+				if (cause != null)
+				{
+					return "//close //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
+				}
 
-                if (message != null) {
-                    return "//close //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
-                }
+				if (message != null)
+				{
+					return "//close //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
+				}
 
-                return "//close //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
+				return "//close //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
 
-            case "//handshake":
+			case "//handshake":
 
-                if (cause != null) {
-                    return "//handshake //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
-                }
+				if (cause != null)
+				{
+					return "//handshake //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
+				}
 
-                if (message != null) {
-                    return "//handshake //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
-                }
+				if (message != null)
+				{
+					return "//handshake //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
+				}
 
-                return "//handshake //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
+				return "//handshake //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
 
-            case "//open":
+			case "//open":
 
-                if (cause != null) {
-                    return "//open //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
-                }
+				if (cause != null)
+				{
+					return "//open //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
+				}
 
-                if (message != null) {
-                    return "//open //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
-                }
+				if (message != null)
+				{
+					return "//open //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
+				}
 
-                return "//open //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
+				return "//open //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
 
-            case "//pull":
+			case "//pull":
 
-                if (message != null) {
-                    return "//pull //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //object=" + object + " //ttl=" + ttl + " //value=" + value;
-                }
+				if (message != null)
+				{
+					return "//pull //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //object=" + object + " //ttl=" + ttl + " //value=" + value;
+				}
 
-                if (cause != null) {
-                    return "//pull //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl + " //value=" + value;
-                }
+				if (cause != null)
+				{
+					return "//pull //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl + " //value=" + value;
+				}
 
-                return "//pull //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
+				return "//pull //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
 
-            case "//put":
+			case "//put":
 
-                if (message != null) {
-                    return "//put //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
-                }
+				if (message != null)
+				{
+					return "//put //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
+				}
 
-                if (cause != null) {
-                    return "//put //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
-                }
+				if (cause != null)
+				{
+					return "//put //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
+				}
 
-                return "//put //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
+				return "//put //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
 
-            case "//touch":
+			case "//touch":
 
-                if (message != null) {
-                    return "//touch //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
-                }
+				if (message != null)
+				{
+					return "//touch //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
+				}
 
-                if (cause != null) {
-                    return "//touch //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
-                }
+				if (cause != null)
+				{
+					return "//touch //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
+				}
 
-                return "//touch //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
+				return "//touch //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
 
-            case "//trade":
+			case "//trade":
 
-                if (message != null) {
-                    return "//trade //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
-                }
+				if (message != null)
+				{
+					return "//trade //sessionid=" + sessionid + " //result=" + result + " //message=" + message + " //ttl=" + ttl;
+				}
 
-                if (cause != null) {
-                    return "//trade //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
-                }
+				if (cause != null)
+				{
+					return "//trade //sessionid=" + sessionid + " //result=" + result + " //cause=" + cause + " //ttl=" + ttl;
+				}
 
-                return "//trade //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
+				return "//trade //sessionid=" + sessionid + " //result=" + result + " //ttl=" + ttl;
 
-            default:
-                return "//other //result=" + result + " //message=" + message + " //cause=" + cause;
-        }
-    }
+			default:
+				return "//other //result=" + result + " //message=" + message + " //cause=" + cause;
+		}
+	}
 }

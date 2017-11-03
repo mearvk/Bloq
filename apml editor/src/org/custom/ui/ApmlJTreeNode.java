@@ -33,6 +33,6 @@ public class ApmlJTreeNode extends DefaultMutableTreeNode
 	@Override
 	public String toString()
 	{
-		return ((Node)this.getUserObject()).getNodeName();
+		return ((Node) this.getUserObject()).getNodeName();
 	}
 }

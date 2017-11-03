@@ -35,17 +35,17 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	{
 		//setters
 
-		this.setBackground(new Color(245,245,245));
+		this.setBackground(new Color(245, 245, 245));
 
-		this.setCurrentLineHighlightColor(new Color(225,225,225));
+		this.setCurrentLineHighlightColor(new Color(225, 225, 225));
 
 		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
 
 		SyntaxScheme scheme = this.getSyntaxScheme();
 
-		scheme.getStyle(Token.RESERVED_WORD).foreground = new Color(35,35,110);
+		scheme.getStyle(Token.RESERVED_WORD).foreground = new Color(35, 35, 110);
 
-		scheme.getStyle(Token.LITERAL_STRING_DOUBLE_QUOTE).foreground = new Color(35,35,110);
+		scheme.getStyle(Token.LITERAL_STRING_DOUBLE_QUOTE).foreground = new Color(35, 35, 110);
 
 		//instantiation
 
@@ -71,9 +71,9 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	{
 		//setters
 
-		this.setBackground(new Color(245,245,245));
+		this.setBackground(new Color(245, 245, 245));
 
-		this.setCurrentLineHighlightColor(new Color(225,225,225));
+		this.setCurrentLineHighlightColor(new Color(225, 225, 225));
 
 		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 
@@ -103,9 +103,9 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	{
 		//setters
 
-		this.setBackground(new Color(245,245,245));
+		this.setBackground(new Color(245, 245, 245));
 
-		this.setCurrentLineHighlightColor(new Color(225,225,225));
+		this.setCurrentLineHighlightColor(new Color(225, 225, 225));
 
 		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 
@@ -137,9 +137,9 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	{
 		//setters
 
-		this.setBackground(new Color(245,245,245));
+		this.setBackground(new Color(245, 245, 245));
 
-		this.setCurrentLineHighlightColor(new Color(225,225,225));
+		this.setCurrentLineHighlightColor(new Color(225, 225, 225));
 
 		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 
@@ -185,7 +185,7 @@ public class RSTextPane_000 extends RSyntaxTextArea
 		{
 			this.setText("");
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -200,7 +200,7 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 			int retval = chooser.showSaveDialog(this);
 
-			if(retval==JFileChooser.APPROVE_OPTION)
+			if (retval == JFileChooser.APPROVE_OPTION)
 			{
 				File file = chooser.getSelectedFile();
 
@@ -208,14 +208,14 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 				writer = new BufferedWriter(new FileWriter(file));
 
-				writer.write(this.getText(),0,this.getText().length());
+				writer.write(this.getText(), 0, this.getText().length());
 
 				writer.flush();
 
 				writer.close();
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -226,7 +226,7 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	{
 		TreeSelectionEvent treeevent;
 
-		treeevent = (TreeSelectionEvent)event.getSource();
+		treeevent = (TreeSelectionEvent) event.getSource();
 
 		System.out.println("JTree updated ");
 
@@ -260,7 +260,7 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 		Dimension calculated;
 
-		calculated = new Dimension(this.parent.getWidth(), (linecount*lineheight));
+		calculated = new Dimension(this.parent.getWidth(), (linecount * lineheight));
 
 		return calculated;
 	}

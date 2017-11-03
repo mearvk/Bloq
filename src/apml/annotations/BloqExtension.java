@@ -5,14 +5,11 @@
  */
 package apml.annotations;
 
-import java.lang.annotation.Annotation;
-
 /**
- *
  * @author oem
  */
 public @interface BloqExtension
 {
-    
+
 }
 

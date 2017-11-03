@@ -15,8 +15,7 @@ import java.awt.event.MouseMotionListener;
  *  Track the movement of the Caret by painting a background line at the
  *  current caret position.
  */
-public class Linepainter
-		implements Highlighter.HighlightPainter, CaretListener, MouseListener, MouseMotionListener
+public class Linepainter implements Highlighter.HighlightPainter, CaretListener, MouseListener, MouseMotionListener
 {
 	private JTextComponent component;
 
@@ -45,13 +44,13 @@ public class Linepainter
 	public Linepainter(JTextComponent component, Color color)
 	{
 		this.component = component;
-		setColor( color );
+		setColor(color);
 
 		//  Add listeners so we know when to change highlighting
 
-		component.addCaretListener( this );
-		component.addMouseListener( this );
-		component.addMouseMotionListener( this );
+		component.addCaretListener(this);
+		component.addMouseListener(this);
+		component.addMouseMotionListener(this);
 
 		//  Turn highlighting on by adding a dummy highlight
 
@@ -59,7 +58,9 @@ public class Linepainter
 		{
 			component.getHighlighter().addHighlight(0, 0, this);
 		}
-		catch(BadLocationException ble) {}
+		catch (BadLocationException ble)
+		{
+		}
 	}
 
 	/*
@@ -79,11 +80,11 @@ public class Linepainter
 	 */
 	public void setLighter(Color color)
 	{
-		int red   = Math.min(255, (int)(color.getRed() * 1.2));
-		int green = Math.min(255, (int)(color.getGreen() * 1.2));
-		int blue  = Math.min(255, (int)(color.getBlue() * 1.2));
+		int red = Math.min(255, (int) (color.getRed() * 1.2));
+		int green = Math.min(255, (int) (color.getGreen() * 1.2));
+		int blue = Math.min(255, (int) (color.getBlue() * 1.2));
 
-		setColor(new Color(200,200,220));
+		setColor(new Color(200, 200, 220));
 	}
 
 	//  Paint the background highlight
@@ -93,13 +94,16 @@ public class Linepainter
 		try
 		{
 			Rectangle r = c.modelToView(c.getCaretPosition());
-			g.setColor( color );
+			g.setColor(color);
 			g.fillRect(0, r.y, c.getWidth(), r.height);
 
 			if (lastView == null)
 				lastView = r;
 		}
-		catch(BadLocationException ble) {System.out.println(ble);}
+		catch (BadLocationException ble)
+		{
+			System.out.println(ble);
+		}
 	}
 
 	/*
@@ -116,7 +120,7 @@ public class Linepainter
 			{
 				try
 				{
-					int offset =  component.getCaretPosition();
+					int offset = component.getCaretPosition();
 					Rectangle currentView = component.modelToView(offset);
 
 					//  Remove the highlighting from the previously highlighted line
@@ -127,7 +131,9 @@ public class Linepainter
 						lastView = currentView;
 					}
 				}
-				catch(BadLocationException ble) {}
+				catch (BadLocationException ble)
+				{
+				}
 			}
 		});
 	}
@@ -146,10 +152,21 @@ public class Linepainter
 		resetHighlight();
 	}
 
-	public void mouseClicked(MouseEvent e) {}
-	public void mouseEntered(MouseEvent e) {}
-	public void mouseExited(MouseEvent e) {}
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e)
+	{
+	}
+
+	public void mouseEntered(MouseEvent e)
+	{
+	}
+
+	public void mouseExited(MouseEvent e)
+	{
+	}
+
+	public void mouseReleased(MouseEvent e)
+	{
+	}
 
 	//  Implement MouseMotionListener
 
@@ -158,5 +175,7 @@ public class Linepainter
 		resetHighlight();
 	}
 
-	public void mouseMoved(MouseEvent e) {}
+	public void mouseMoved(MouseEvent e)
+	{
+	}
 }

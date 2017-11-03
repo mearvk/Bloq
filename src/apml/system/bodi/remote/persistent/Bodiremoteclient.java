@@ -9,81 +9,99 @@ import java.util.ArrayList;
  *
  * @author Max Rupplin
  */
-public class Bodiremoteclient extends Bodibaseclient implements Runnable {
-    public StringBuffer inputbuffer; //presume this is keyboard input for now
+public class Bodiremoteclient extends Bodibaseclient implements Runnable
+{
+	public StringBuffer inputbuffer; //presume this is keyboard input for now
 
-    public StringBuffer outputbuffer; //presume this request to bodi server        
+	public StringBuffer outputbuffer; //presume this request to bodi server
 
-    public ArrayList<Object> objectbuffer = new ArrayList(); //returned serialized Bodi objects [possibly json impl required]
+	public ArrayList<Object> objectbuffer = new ArrayList(); //returned serialized Bodi objects [possibly json impl required]
 
-    public Bodi bodi;
+	public Bodi bodi;
 
-    //public Bodiconnection connection = new Bodiconnection(bodi);
+	//public Bodiconnection connection = new Bodiconnection(bodi);
 
-    /**
-     * @param host
-     * @param port
-     */
-    public Bodiremoteclient(String host, Integer port) {
-        super(host, port);
+	/**
+	 * @param host
+	 * @param port
+	 */
+	public Bodiremoteclient(String host, Integer port)
+	{
+		super(host, port);
 
-        if (host == null || port == null) throw new SecurityException("//bodi/connect");
-    }
+		if (host == null || port == null)
+			throw new SecurityException("//bodi/connect");
+	}
 
-    /**
-     *
-     */
-    @Override
-    public void run() {
-        while (true) {
-            try {
-                this.read(inputbuffer);
+	/**
+	 *
+	 */
+	@Override
+	public void run()
+	{
+		while (true)
+		{
+			try
+			{
+				this.read(inputbuffer);
 
-                this.write(outputbuffer);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+				this.write(outputbuffer);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
 
-    /**
-     * @param buffer
-     * @return
-     */
-    public Object read(StringBuffer buffer) //should return an object via serialization process
-    {
-        synchronized (this.writelock) {
-            try {
-                this.writelock.wait(); //wait on baseclient to finish any writing into inputbuffer
+	/**
+	 * @param buffer
+	 * @return
+	 */
+	public Object read(StringBuffer buffer) //should return an object via serialization process
+	{
+		synchronized (this.writelock)
+		{
+			try
+			{
+				this.writelock.wait(); //wait on baseclient to finish any writing into inputbuffer
 
-                if (this.inputbuffer.length() > 0) {
-                    return this.inputbuffer;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+				if (this.inputbuffer.length() > 0)
+				{
+					return this.inputbuffer;
+				}
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
 
-        this.inputbuffer.delete(0, this.inputbuffer.length());
+		this.inputbuffer.delete(0, this.inputbuffer.length());
 
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * @param buffer
-     */
-    public void write(StringBuffer buffer) //should write out a request for Bodi object
-    {
-        synchronized (this.readlock) {
-            try {
-                this.readlock.wait(); //wait on baseclient to finish any reading into outputbuffer
+	/**
+	 * @param buffer
+	 */
+	public void write(StringBuffer buffer) //should write out a request for Bodi object
+	{
+		synchronized (this.readlock)
+		{
+			try
+			{
+				this.readlock.wait(); //wait on baseclient to finish any reading into outputbuffer
 
-                if (this.outputbuffer.length() > 0) {
-                    this.writer.write(buffer.toString(), 0, buffer.toString().length());
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+				if (this.outputbuffer.length() > 0)
+				{
+					this.writer.write(buffer.toString(), 0, buffer.toString().length());
+				}
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
 }

@@ -8,23 +8,24 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- *
  * @author max rupplin
  */
-public class Jcmjtreebuilder extends Jcmabstractbuilder {
-    protected final Integer hash = 0x00888FE8;
+public class Jcmjtreebuilder extends Jcmabstractbuilder
+{
+	protected final Integer hash = 0x00888FE8;
 
-    public Jcmjtreebuilder(File apml)
-    {
-        super(apml, "//jtree", JTree.class);
-        
-        this.apml = apml;
-        
-        this.xpath = XPathFactory.newInstance().newXPath();
-    }
+	public Jcmjtreebuilder(File apml)
+	{
+		super(apml, "//jtree", JTree.class);
 
-    @Override
-    public ArrayList<JCodeModel> build() {
-        return super.build();
-    }
+		this.apml = apml;
+
+		this.xpath = XPathFactory.newInstance().newXPath();
+	}
+
+	@Override
+	public ArrayList<JCodeModel> build()
+	{
+		return super.build();
+	}
 }

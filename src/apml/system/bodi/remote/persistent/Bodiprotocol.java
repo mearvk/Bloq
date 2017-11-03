@@ -3,60 +3,72 @@ package apml.system.bodi.remote.persistent;
 /**
  * @author Max Rupplin
  */
-public class Bodiprotocol extends Protocol {
-    public static final String CLOSE = "//close";
+public class Bodiprotocol extends Protocol
+{
+	public static final String CLOSE = "//close";
 
-    public static final String EXIT = "//exit";
+	public static final String EXIT = "//exit";
 
-    public static final String HANDSHAKE = "//handshake";
+	public static final String HANDSHAKE = "//handshake";
 
-    public static final String LIST = "//list";
+	public static final String LIST = "//list";
 
-    public static final String OPEN = "//open";
+	public static final String OPEN = "//open";
 
-    public static final String OTHER = "//other";
+	public static final String OTHER = "//other";
 
-    public static final String PULL = "//pull";
+	public static final String PULL = "//pull";
 
-    public static final String PUT = "//put";
+	public static final String PUT = "//put";
 
-    public static final String TOUCH = "//touch";
+	public static final String TOUCH = "//touch";
 
-    public static final String TRADE = "//trade";
+	public static final String TRADE = "//trade";
 
-    public static final String value = "";
+	public static final String value = "";
 
-    /**
-     *
-     */
-    public Bodiprotocol() {
-        super();
-    }
+	/**
+	 *
+	 */
+	public Bodiprotocol()
+	{
+		super();
+	}
 
-    /**
-     * @param comparator
-     * @return
-     */
-    public static Boolean isbodiprotocol(String comparator) {
-        if (comparator.startsWith(CLOSE)) return true;
+	/**
+	 * @param comparator
+	 * @return
+	 */
+	public static Boolean isbodiprotocol(String comparator)
+	{
+		if (comparator.startsWith(CLOSE))
+			return true;
 
-        if (comparator.startsWith(EXIT)) return true;
+		if (comparator.startsWith(EXIT))
+			return true;
 
-        if (comparator.startsWith(HANDSHAKE)) return true;
+		if (comparator.startsWith(HANDSHAKE))
+			return true;
 
-        if (comparator.startsWith(LIST)) return true;
+		if (comparator.startsWith(LIST))
+			return true;
 
-        if (comparator.startsWith(OPEN)) return true;
+		if (comparator.startsWith(OPEN))
+			return true;
 
-        if (comparator.startsWith(OTHER)) return true;
+		if (comparator.startsWith(OTHER))
+			return true;
 
-        if (comparator.startsWith(PULL)) return true;
+		if (comparator.startsWith(PULL))
+			return true;
 
-        if (comparator.startsWith(PUT)) return true;
+		if (comparator.startsWith(PUT))
+			return true;
 
-        if (comparator.startsWith(TOUCH)) return true;
+		if (comparator.startsWith(TOUCH))
+			return true;
 
-        return comparator.startsWith(TRADE);
+		return comparator.startsWith(TRADE);
 
-    }
+	}
 }

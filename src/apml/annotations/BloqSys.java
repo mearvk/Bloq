@@ -6,10 +6,9 @@
 package apml.annotations;
 
 /**
- *
  * @author oem
  */
 public @interface BloqSys
 {
-    
+
 }

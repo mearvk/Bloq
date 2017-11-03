@@ -8,10 +8,9 @@ package apml.system;
 import java.util.Map;
 
 /**
- *
  * @author Max Rupplin
  */
 public abstract class ApmlMap implements Map
 {
-    protected final Integer hash = 0x888fe8;    
+	protected final Integer hash = 0x888fe8;
 }

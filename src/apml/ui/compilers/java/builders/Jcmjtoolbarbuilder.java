@@ -8,23 +8,24 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- *
  * @author max rupplin
  */
-public class Jcmjtoolbarbuilder extends Jcmabstractbuilder {
-    protected final Integer hash = 0x00888FE8;
+public class Jcmjtoolbarbuilder extends Jcmabstractbuilder
+{
+	protected final Integer hash = 0x00888FE8;
 
-    public Jcmjtoolbarbuilder(File apml)
-    {
-        super(apml, "//jtoolbar", JToolBar.class);
-        
-        this.apml = apml;
-        
-        this.xpath = XPathFactory.newInstance().newXPath();
-    }
+	public Jcmjtoolbarbuilder(File apml)
+	{
+		super(apml, "//jtoolbar", JToolBar.class);
 
-    @Override
-    public ArrayList<JCodeModel> build() {
-        return super.build();
-    }
+		this.apml = apml;
+
+		this.xpath = XPathFactory.newInstance().newXPath();
+	}
+
+	@Override
+	public ArrayList<JCodeModel> build()
+	{
+		return super.build();
+	}
 }

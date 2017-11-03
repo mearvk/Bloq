@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <apml>
-    <jframe setLayout="new FlowLayout(FlowLayout.LEFT)" setBounds="50:50:800:600" setTitle="APML Editor" setMargin="10:10:10:10">
+    <jframe setLayout="new FlowLayout(FlowLayout.LEFT)" setBounds="50:50:800:600" setTitle="APML Editor"
+            setMargin="10:10:10:10">
         <jmenubar>
             <jmenu setText="File">
                 <jmenuitem setText="Open">
@@ -49,12 +50,15 @@
             <tab setText="Tab Two"/>
             <tab setText="Tab Three"/>
         </jtabbedpane>
-        <jsplitpane setSize="100%:100%" setBackground="new Color(229,229,229)" setMargin="10:10:10:10" setDividerLocation="150">
-            <jpanel setSize="30%:100%" setBackground="new Color(229,229,229)" setMargin="10:10:10:10" setLayout="new FlowLayout(FlowLayout.LEFT)">
+        <jsplitpane setSize="100%:100%" setBackground="new Color(229,229,229)" setMargin="10:10:10:10"
+                    setDividerLocation="150">
+            <jpanel setSize="30%:100%" setBackground="new Color(229,229,229)" setMargin="10:10:10:10"
+                    setLayout="new FlowLayout(FlowLayout.LEFT)">
                 <jtree scrolling="vertical"/> <!-- TODO -->
             </jpanel>
             <jpanel setSize="70%:100%" setBackground="new Color(229,229,229)" setMargin="10:10:10:10">
-                <jeditorpane setSize="100%:100%" setBackground="new Color(240,240,240)" setMargin="10:10:10:10" scrolling="vertical"> <!-- TODO -->
+                <jeditorpane setSize="100%:100%" setBackground="new Color(240,240,240)" setMargin="10:10:10:10"
+                             scrolling="vertical"> <!-- TODO -->
                     <htmldocument>
                         <!-- TODO  -->
                     </htmldocument>

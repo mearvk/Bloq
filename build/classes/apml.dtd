@@ -1,146 +1,149 @@
 <!ATTLIST object autostart (true|false) "false">
-<!ATTLIST object start (true|false) "false">
-<!ATTLIST object id CDATA "">
-<!ATTLIST object class CDATA "">
+        <!ATTLIST object start (true|false) "false">
+        <!ATTLIST object id CDATA "">
+        <!ATTLIST object class CDATA "">
 
-<definitions>
+        <definitions>
 
-<!-- system -->
-    <system>
+        <!-- system -->
+<system>
     <language>
-    <software>
-    <time>
+        <software>
+            <time>
 
-<!-- errors/exceptions -->
-    <error>
-    <exception>
+                <!-- errors/exceptions -->
+                <error>
+                    <exception>
 
-<!-- managerial -->
-    <oversee>
-    <warning>
+                        <!-- managerial -->
+                        <oversee>
+                            <warning>
 
-<!-- user interface -->
-    <ui>
+                                <!-- user interface -->
+                                <ui>
 
-<!--interruption -->
-    <interruptor>
-    <interruptable>
-    <interrupted_by>
-    <notify>
-    <sleep>
-    <notifyall>
-    
-<!-- threads -->
-    <thread>
-    <thread_group>
-    <semaphore>
-    <synchronized>
-    <lock>
-    <lockable>
-    <key>
-    <sleep>
-    <notifyall>
+                                    <!--interruption -->
+                                    <interruptor>
+                                        <interruptable>
+                                            <interrupted_by>
+                                                <notify>
+                                                    <sleep>
+                                                        <notifyall>
 
-<!-- instantiation -->
-    <static>
-    <dynamic>
+                                                            <!-- threads -->
+                                                            <thread>
+                                                                <thread_group>
+                                                                    <semaphore>
+                                                                        <synchronized>
+                                                                            <lock>
+                                                                                <lockable>
+                                                                                    <key>
+                                                                                        <sleep>
+                                                                                            <notifyall>
 
-<!-- timing -->
-    <time>
+                                                                                                <!-- instantiation -->
+                                                                                                <static>
+                                                                                                    <dynamic>
 
-<!-- structure -->
-    <source>
-    <root>
-    <container>
-    <node>
-    <rootnode>
-    <widget>
-    <element>
-    <object>
-    <hierarchy>
-    <pool>
-    <interface>
-    <composition>
-    <inheritor>
-    <hidden>
-    <wrap>
-    <minimize>
+                                                                                                        <!-- timing -->
+                                                                                                        <time>
 
-<!-- data structures -->
-    <list>
-    <set>
-    <data>
-    <coupling>
-    <baby>
+                                                                                                            <!-- structure -->
+                                                                                                            <source>
+                                                                                                                <root>
+                                                                                                                    <container>
+                                                                                                                        <node>
+                                                                                                                            <rootnode>
+                                                                                                                                <widget>
+                                                                                                                                    <element>
+                                                                                                                                        <object>
+                                                                                                                                            <hierarchy>
+                                                                                                                                                <pool>
+                                                                                                                                                    <interface>
+                                                                                                                                                        <composition>
+                                                                                                                                                            <inheritor>
+                                                                                                                                                                <hidden>
+                                                                                                                                                                    <wrap>
+                                                                                                                                                                        <minimize>
 
-<!-- function -->
-    <processor>
-    <trim>
-    <coupling>
-    <barrier>
-    <open>
-    <close>
-    <continue_to>
-    <dodge>
-    <split>
-    <hinge>
+                                                                                                                                                                            <!-- data structures -->
+                                                                                                                                                                            <list>
+                                                                                                                                                                                <set>
+                                                                                                                                                                                    <data>
+                                                                                                                                                                                        <coupling>
+                                                                                                                                                                                            <baby>
 
-<!-- patterns -->
-    <pattern>
-    <strategy>
-    <definition>
-    <open>
-    <close>
-    <run>
-    <stop>
-    <hit>
-    <direction>
+                                                                                                                                                                                                <!-- function -->
+                                                                                                                                                                                                <processor>
+                                                                                                                                                                                                    <trim>
+                                                                                                                                                                                                        <coupling>
+                                                                                                                                                                                                            <barrier>
+                                                                                                                                                                                                                <open>
+                                                                                                                                                                                                                    <close>
+                                                                                                                                                                                                                        <continue_to>
+                                                                                                                                                                                                                            <dodge>
+                                                                                                                                                                                                                                <split>
+                                                                                                                                                                                                                                    <hinge>
 
-<!-- producers -->
-    <producer>
-    <product>
+                                                                                                                                                                                                                                        <!-- patterns -->
+                                                                                                                                                                                                                                        <pattern>
+                                                                                                                                                                                                                                            <strategy>
+                                                                                                                                                                                                                                                <definition>
+                                                                                                                                                                                                                                                    <open>
+                                                                                                                                                                                                                                                        <close>
+                                                                                                                                                                                                                                                            <run>
+                                                                                                                                                                                                                                                                <stop>
+                                                                                                                                                                                                                                                                    <hit>
+                                                                                                                                                                                                                                                                        <direction>
 
-<!-- consumer -->
-    <consumer>
-    <consume> (./lrh. ./ron.vetter ./~~!)
+                                                                                                                                                                                                                                                                            <!-- producers -->
+                                                                                                                                                                                                                                                                            <producer>
+                                                                                                                                                                                                                                                                                <product>
 
-<!-- listeners -->
-    <event>
-    <listener>
-    <notify>
+                                                                                                                                                                                                                                                                                    <!-- consumer -->
+                                                                                                                                                                                                                                                                                    <consumer>
+                                                                                                                                                                                                                                                                                        <consume>
+                                                                                                                                                                                                                                                                                            (./lrh.
+                                                                                                                                                                                                                                                                                            ./ron.vetter
+                                                                                                                                                                                                                                                                                            ./~~!)
 
-<!-- subscribers -->
-    <event>
-    <subscriber>
-    <subscription>
-    <notify>
+                                                                                                                                                                                                                                                                                            <!-- listeners -->
+                                                                                                                                                                                                                                                                                            <event>
+                                                                                                                                                                                                                                                                                                <listener>
+                                                                                                                                                                                                                                                                                                    <notify>
 
-<!-- logic -->
-    <condition>
+                                                                                                                                                                                                                                                                                                        <!-- subscribers -->
+                                                                                                                                                                                                                                                                                                        <event>
+                                                                                                                                                                                                                                                                                                            <subscriber>
+                                                                                                                                                                                                                                                                                                                <subscription>
+                                                                                                                                                                                                                                                                                                                    <notify>
 
-<!-- comparators -->
-    <optimum>
+                                                                                                                                                                                                                                                                                                                        <!-- logic -->
+                                                                                                                                                                                                                                                                                                                        <condition>
 
-<!-- i/o -->
-    <socket>
-    <pipe>
-    <connector>
-    <path>
-    
-<!-- miscellany -->
-    <daydream>
-    <danger>
-    <bandage>
-    
-<!-- (one) day -->
-    <hack>
-    <nowhit>
-    <level1>
-    <level2>
-    <level3>
-    <ultimate>
-    <up>
-    <down>
-    <id>
+                                                                                                                                                                                                                                                                                                                            <!-- comparators -->
+                                                                                                                                                                                                                                                                                                                            <optimum>
 
-</definitions>
+                                                                                                                                                                                                                                                                                                                                <!-- i/o -->
+                                                                                                                                                                                                                                                                                                                                <socket>
+                                                                                                                                                                                                                                                                                                                                    <pipe>
+                                                                                                                                                                                                                                                                                                                                        <connector>
+                                                                                                                                                                                                                                                                                                                                            <path>
+
+                                                                                                                                                                                                                                                                                                                                                <!-- miscellany -->
+                                                                                                                                                                                                                                                                                                                                                <daydream>
+                                                                                                                                                                                                                                                                                                                                                    <danger>
+                                                                                                                                                                                                                                                                                                                                                        <bandage>
+
+                                                                                                                                                                                                                                                                                                                                                            <!-- (one) day -->
+                                                                                                                                                                                                                                                                                                                                                            <hack>
+                                                                                                                                                                                                                                                                                                                                                                <nowhit>
+                                                                                                                                                                                                                                                                                                                                                                    <level1>
+                                                                                                                                                                                                                                                                                                                                                                        <level2>
+                                                                                                                                                                                                                                                                                                                                                                            <level3>
+                                                                                                                                                                                                                                                                                                                                                                                <ultimate>
+                                                                                                                                                                                                                                                                                                                                                                                    <up>
+                                                                                                                                                                                                                                                                                                                                                                                        <down>
+                                                                                                                                                                                                                                                                                                                                                                                            <id>
+
+                                                                                                                                                                                                                                                                                                                                                                                            </definitions>

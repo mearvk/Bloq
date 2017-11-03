@@ -6,210 +6,209 @@ import java.io.File;
 
 /**
  * Handler for the Bloq UI input (conversion from raw APML/XML input) to modelling in the system as JCM models ready for output
- * 
+ *
  * @author Max Rupplin
- * @since 04.30.2017
  * @version Bloq 1.0
+ * @since 04.30.2017
  */
 public class Uiinputmanager
 {
-    protected final Integer hash = 0x00888FE8;
+	protected final Integer hash = 0x00888FE8;
 
 	//
 
-    public Uicompiler compiler;
+	public Uicompiler compiler;
 
-    public Uixpathstrings xpathstrings = new Uixpathstrings();
-    
-    public Uijcmmodels jcmmodels = new Uijcmmodels();
+	public Uixpathstrings xpathstrings = new Uixpathstrings();
 
-    public File file;
+	public Uijcmmodels jcmmodels = new Uijcmmodels();
+
+	public File file;
 
 	/**
 	 * @param compiler The compiler object used by Bloq
 	 */
 	public Uiinputmanager(Uicompiler compiler)
-    {
-        this.compiler = compiler;
+	{
+		this.compiler = compiler;
 
-        this.file = this.compiler.fileguardian.xmlin;
-    }
+		this.file = this.compiler.fileguardian.xmlin;
+	}
 
-    /**
-	 *
+	/**
 	 * @param tagname The APML tag element
 	 * @return
 	 */
 	public boolean generatemodels(String tagname)
-    {            
-        switch(tagname)
-        {
-            case "//frame":
+	{
+		switch (tagname)
+		{
+			case "//frame":
 
-                this.jcmmodels.framemodels.addAll(new Jcmframebuilder(file).builder.build());
-                break;
+				this.jcmmodels.framemodels.addAll(new Jcmframebuilder(file).builder.build());
+				break;
 
-            case "//japplet":
+			case "//japplet":
 
-                this.jcmmodels.jappletmodels.addAll(new Jcmjappletbuilder(file).builder.build());
-                break;
+				this.jcmmodels.jappletmodels.addAll(new Jcmjappletbuilder(file).builder.build());
+				break;
 
-            case "//jbutton":
+			case "//jbutton":
 
-                this.jcmmodels.jbuttonmodels.addAll(new Jcmjbuttonbuilder(file).builder.build());
-                break;
+				this.jcmmodels.jbuttonmodels.addAll(new Jcmjbuttonbuilder(file).builder.build());
+				break;
 
-            case "//jcheckbox":
+			case "//jcheckbox":
 
-                this.jcmmodels.jcheckboxmodels.addAll(new Jcmjcheckboxbuilder(file).builder.build());
-                break;
+				this.jcmmodels.jcheckboxmodels.addAll(new Jcmjcheckboxbuilder(file).builder.build());
+				break;
 
-            case "//jcolorchooser":
+			case "//jcolorchooser":
 
-                this.jcmmodels.jcolorchoosermodels.addAll(new Jcmjcolorchooserbuilder(file).builder.build());
-                break;
-                
-            case "//jcombobox":
+				this.jcmmodels.jcolorchoosermodels.addAll(new Jcmjcolorchooserbuilder(file).builder.build());
+				break;
 
-                this.jcmmodels.jcomboboxmodels.addAll(new Jcmjcomboboxbuilder(file).builder.build());
-                break;
+			case "//jcombobox":
 
-            case "//jeditorpane":
+				this.jcmmodels.jcomboboxmodels.addAll(new Jcmjcomboboxbuilder(file).builder.build());
+				break;
 
-                this.jcmmodels.jeditorpanemodels.addAll(new Jcmjeditorpanebuilder(file).builder.build());
-                break;
-                
-            case "//jfilechooser":
+			case "//jeditorpane":
 
-                this.jcmmodels.jfilechoosermodels.addAll(new Jcmjfilechooserbuilder(file).builder.build());
-                break;
+				this.jcmmodels.jeditorpanemodels.addAll(new Jcmjeditorpanebuilder(file).builder.build());
+				break;
 
-            case "//jframe":
+			case "//jfilechooser":
 
-                this.jcmmodels.jframemodels.addAll(new Jcmjframebuilder(file).builder.build());
-                break;
+				this.jcmmodels.jfilechoosermodels.addAll(new Jcmjfilechooserbuilder(file).builder.build());
+				break;
 
-            case "//jinternalframe":
+			case "//jframe":
 
-                this.jcmmodels.jinternalframemodels.addAll(new Jcmjinternalframebuilder(file).builder.build());
-                break;
-                
-            case "//jlabel":
+				this.jcmmodels.jframemodels.addAll(new Jcmjframebuilder(file).builder.build());
+				break;
 
-                this.jcmmodels.jlabelmodels.addAll(new Jcmjlabelbuilder(file).builder.build());
-                break;
-                
-            case "//jlayeredpane":
+			case "//jinternalframe":
 
-                this.jcmmodels.jlayeredpanemodels.addAll(new Jcmjlayeredpanebuilder(file).builder.build());
-                break;
-                
-            case "//jlist":
+				this.jcmmodels.jinternalframemodels.addAll(new Jcmjinternalframebuilder(file).builder.build());
+				break;
 
-                this.jcmmodels.jlistmodels.addAll(new Jcmjlistbuilder(file).builder.build());
-                break;
+			case "//jlabel":
 
-            case "//jmenu":
+				this.jcmmodels.jlabelmodels.addAll(new Jcmjlabelbuilder(file).builder.build());
+				break;
 
-                this.jcmmodels.jmenumodels.addAll(new Jcmjmenubuilder(file).builder.build());
-                break;
-            
-            case "//jmenubar":
+			case "//jlayeredpane":
 
-                this.jcmmodels.jmenubarmodels.addAll(new Jcmjmenubarbuilder(file).builder.build());
-                break;
-            
-            case "//jmenuitem":
+				this.jcmmodels.jlayeredpanemodels.addAll(new Jcmjlayeredpanebuilder(file).builder.build());
+				break;
 
-                this.jcmmodels.jmenuitemmodels.addAll(new Jcmjmenuitembuilder(file).builder.build());
-                break;
+			case "//jlist":
 
-            case "//jpanel":
+				this.jcmmodels.jlistmodels.addAll(new Jcmjlistbuilder(file).builder.build());
+				break;
 
-                this.jcmmodels.jpanelmodels.addAll(new Jcmjpanelbuilder(file).builder.build());
-                break;
+			case "//jmenu":
 
-            case "//jpasswordfield":
+				this.jcmmodels.jmenumodels.addAll(new Jcmjmenubuilder(file).builder.build());
+				break;
 
-                this.jcmmodels.jpasswordfieldmodels.addAll(new Jcmjpasswordfieldbuilder(file).builder.build());
-                break;
-                
-            case "//jprogressbar":
+			case "//jmenubar":
 
-                this.jcmmodels.jprogressbarmodels.addAll(new Jcmjprogressbarbuilder(file).builder.build());
-                break;
-                
-            case "//jradiobutton":
+				this.jcmmodels.jmenubarmodels.addAll(new Jcmjmenubarbuilder(file).builder.build());
+				break;
 
-                this.jcmmodels.jradiobuttonmodels.addAll(new Jcmjradiobuttonbuilder(this.file).builder.build());
-                break;
+			case "//jmenuitem":
 
-            case "//jrootpane":
+				this.jcmmodels.jmenuitemmodels.addAll(new Jcmjmenuitembuilder(file).builder.build());
+				break;
 
-                this.jcmmodels.jrootpanemodels.addAll(new Jcmjrootpanebuilder(file).builder.build());
-                break;
-                
-            case "//jscrollpane":
+			case "//jpanel":
 
-                this.jcmmodels.jscrollpanemodels.addAll(new Jcmjscrollpanebuilder(file).builder.build());
-                break;
-                
-            case "//jseparator":
+				this.jcmmodels.jpanelmodels.addAll(new Jcmjpanelbuilder(file).builder.build());
+				break;
 
-                this.jcmmodels.jseparatormodels.addAll(new Jcmjseparatorbuilder(file).builder.build());
-                break;
-                
-            case "//jslider":
+			case "//jpasswordfield":
 
-                this.jcmmodels.jslidermodels.addAll(new Jcmjsliderbuilder(file).builder.build());
-                break;
+				this.jcmmodels.jpasswordfieldmodels.addAll(new Jcmjpasswordfieldbuilder(file).builder.build());
+				break;
 
-            case "//jspinner":
+			case "//jprogressbar":
 
-                this.jcmmodels.jspinnermodels.addAll(new Jcmjspinnerbuilder(file).builder.build());
-                break;
+				this.jcmmodels.jprogressbarmodels.addAll(new Jcmjprogressbarbuilder(file).builder.build());
+				break;
 
-            case "//jsplitpane":
+			case "//jradiobutton":
 
-                this.jcmmodels.jsplitpanemodels.addAll(new Jcmjsplitpanebuilder(file).builder.build());
-                break;
+				this.jcmmodels.jradiobuttonmodels.addAll(new Jcmjradiobuttonbuilder(this.file).builder.build());
+				break;
 
-            case "//jtable":
+			case "//jrootpane":
 
-                this.jcmmodels.jsplitpanemodels.addAll(new Jcmjtablebuilder(file).builder.build());
-                break;
-                
-            case "//jtabbedpane":
+				this.jcmmodels.jrootpanemodels.addAll(new Jcmjrootpanebuilder(file).builder.build());
+				break;
 
-                this.jcmmodels.jtabbedpanemodels.addAll(new Jcmjtabbedpanebuilder(file).builder.build());
-                break;
-                
-            case "//jtextfield":
+			case "//jscrollpane":
 
-                this.jcmmodels.jtextfieldmodels.addAll(new Jcmjtextfieldbuilder(file).builder.build());
-                break;
+				this.jcmmodels.jscrollpanemodels.addAll(new Jcmjscrollpanebuilder(file).builder.build());
+				break;
 
-            case "//jtextpane":
+			case "//jseparator":
 
-                this.jcmmodels.jtextpanemodels.addAll(new Jcmjtextpanebuilder(file).builder.build());
-                break;
+				this.jcmmodels.jseparatormodels.addAll(new Jcmjseparatorbuilder(file).builder.build());
+				break;
 
-            case "//jtree":
+			case "//jslider":
 
-                this.jcmmodels.jtreemodels.addAll(new Jcmjtreebuilder(file).builder.build());
-                break;
+				this.jcmmodels.jslidermodels.addAll(new Jcmjsliderbuilder(file).builder.build());
+				break;
 
-            case "//jtoolbar":
+			case "//jspinner":
 
-                this.jcmmodels.jtoolbarmodels.addAll(new Jcmjtoolbarbuilder(file).builder.build());
-                break;
-                
-            case "//jtooltip":
+				this.jcmmodels.jspinnermodels.addAll(new Jcmjspinnerbuilder(file).builder.build());
+				break;
 
-                this.jcmmodels.jtooltipmodels.addAll(new Jcmjtooltipbuilder(file).builder.build());
-                break;
-        }        
-        
-        return true;
-    }     
+			case "//jsplitpane":
+
+				this.jcmmodels.jsplitpanemodels.addAll(new Jcmjsplitpanebuilder(file).builder.build());
+				break;
+
+			case "//jtable":
+
+				this.jcmmodels.jsplitpanemodels.addAll(new Jcmjtablebuilder(file).builder.build());
+				break;
+
+			case "//jtabbedpane":
+
+				this.jcmmodels.jtabbedpanemodels.addAll(new Jcmjtabbedpanebuilder(file).builder.build());
+				break;
+
+			case "//jtextfield":
+
+				this.jcmmodels.jtextfieldmodels.addAll(new Jcmjtextfieldbuilder(file).builder.build());
+				break;
+
+			case "//jtextpane":
+
+				this.jcmmodels.jtextpanemodels.addAll(new Jcmjtextpanebuilder(file).builder.build());
+				break;
+
+			case "//jtree":
+
+				this.jcmmodels.jtreemodels.addAll(new Jcmjtreebuilder(file).builder.build());
+				break;
+
+			case "//jtoolbar":
+
+				this.jcmmodels.jtoolbarmodels.addAll(new Jcmjtoolbarbuilder(file).builder.build());
+				break;
+
+			case "//jtooltip":
+
+				this.jcmmodels.jtooltipmodels.addAll(new Jcmjtooltipbuilder(file).builder.build());
+				break;
+		}
+
+		return true;
+	}
 }

@@ -9,35 +9,23 @@ public class Munction //pronounced "munchkin"
 {
 	//
 
+	public static Registrar registrar = new Registrar();
+	public static Persistor persistor = new Persistor();
+	public static Munction instance = new Munction();
 	public Integer METHOD = 0x00;
-
 	public Integer FUNCTION = 0x01;
-
 	public Integer CLASS = 0x02;
 
-	public Integer DATA = 0x03;
-
-	public Integer OBJECT = 0x04;
-
-	public Integer SYSTEM = 0x05;
-
 	//
-
+	public Integer DATA = 0x03;
+	public Integer OBJECT = 0x04;
+	public Integer SYSTEM = 0x05;
 	public Connection connect = null;
 
-	public Statement statement = null;
-
-	public PreparedStatement preparedStatement = null;
-
-	public ResultSet resultSet = null;
-
 	//
-
-	public static Registrar registrar = new Registrar();
-
-	public static Persistor persistor = new Persistor();
-
-	public static Munction instance = new Munction();
+	public Statement statement = null;
+	public PreparedStatement preparedStatement = null;
+	public ResultSet resultSet = null;
 
 	//
 
@@ -50,15 +38,15 @@ public class Munction //pronounced "munchkin"
 
 	//
 
-	public Reference init(String hostname, String dbname,  String username, String password )
+	public Reference init(String hostname, String dbname, String username, String password)
 	{
 		try
 		{
-			connect = DriverManager.getConnection("jdbc:mysql://"+hostname+"/"+dbname+"?user="+username+"&password="+password);
+			connect = DriverManager.getConnection("jdbc:mysql://" + hostname + "/" + dbname + "?user=" + username + "&password=" + password);
 
 			Bodi.context("munction").put("//connect", connect);
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -82,15 +70,15 @@ public class Munction //pronounced "munchkin"
 
 	//
 
-	public Reference init(String dbname,  String username, String password )
+	public Reference init(String dbname, String username, String password)
 	{
 		try
 		{
-			connect = DriverManager.getConnection("jdbc:mysql://localhost/"+dbname+"?user="+username+"&password="+password);
+			connect = DriverManager.getConnection("jdbc:mysql://localhost/" + dbname + "?user=" + username + "&password=" + password);
 
 			Bodi.context("munction").put("//connect", connect);
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -114,7 +102,7 @@ public class Munction //pronounced "munchkin"
 
 	public Reference register(Integer GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, byte[] Bytecode)
 	{
-		 return this.registrar.register(GroupID, Type, MunchkinFileName, ClassName, PackageName, Bytecode);
+		return this.registrar.register(GroupID, Type, MunchkinFileName, ClassName, PackageName, Bytecode);
 	}
 
 	//
@@ -128,7 +116,8 @@ public class Munction //pronounced "munchkin"
 
 	public Reference call(Integer CallCode, Integer AuthKey)
 	{
-		if(connect==null) return null;
+		if (connect == null)
+			return null;
 
 		//
 
@@ -150,7 +139,7 @@ public class Munction //pronounced "munchkin"
 
 			//
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}

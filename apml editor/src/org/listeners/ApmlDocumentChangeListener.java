@@ -45,7 +45,7 @@ public class ApmlDocumentChangeListener implements DocumentListener
 
 			System.out.println(count);
 		}
-		catch(Exception exception)
+		catch (Exception exception)
 		{
 			exception.printStackTrace();
 		}

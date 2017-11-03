@@ -1,10 +1,9 @@
 package apml.compilers.cpp;
 
 /**
- *
  * @author max rupplin
  */
-public class Bloqfileguardian 
+public class Bloqfileguardian
 {
-    
+
 }

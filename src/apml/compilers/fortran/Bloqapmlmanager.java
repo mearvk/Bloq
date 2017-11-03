@@ -1,10 +1,9 @@
 package apml.compilers.fortran;
 
 /**
- *
  * @author max rupplin
  */
-public class Bloqapmlmanager 
+public class Bloqapmlmanager
 {
-    
+
 }

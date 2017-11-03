@@ -10,7 +10,6 @@ public class OpenDocumentEvent extends ActionEvent
 	public String fileType = "";
 
 
-
 	//
 
 	public OpenDocumentEvent(ActionEvent event, File fileRef)
@@ -18,7 +17,6 @@ public class OpenDocumentEvent extends ActionEvent
 		super(event.getSource(), event.getID(), "open_document_event");
 
 		this.fileRef = fileRef;
-
 
 
 		//

@@ -86,7 +86,6 @@ public class Jcmabstractbuilder
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public ArrayList<JCodeModel> build()
@@ -125,7 +124,6 @@ public class Jcmabstractbuilder
 	}
 
 	/**
-	 *
 	 * @param uip
 	 */
 	public void setconstructors(Uiparameter uip)

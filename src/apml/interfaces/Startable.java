@@ -6,10 +6,9 @@
 package apml.interfaces;
 
 /**
- *
  * @author oem
  */
-public interface Startable 
+public interface Startable
 {
-    public void start();
+	public void start();
 }

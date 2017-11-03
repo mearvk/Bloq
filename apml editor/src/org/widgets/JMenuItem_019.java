@@ -38,10 +38,10 @@ public class JMenuItem_019 extends JMenuItem
 	public Apmlbasesystem system;
 
 	/**
-	 *
 	 * @param parent : The tree AWT object.
 	 */
-	public JMenuItem_019(Component parent) {
+	public JMenuItem_019(Component parent)
+	{
 		// setters
 
 		this.setText("Exit");
@@ -62,11 +62,11 @@ public class JMenuItem_019 extends JMenuItem
 	}
 
 	/**
-	 *
 	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JMenuItem_019(Component parent, Apmlbasesystem system) {
+	public JMenuItem_019(Component parent, Apmlbasesystem system)
+	{
 		// setters
 
 		this.setText("Exit");
@@ -103,7 +103,7 @@ class JMenuItem_019_ActionListener implements ActionListener
 	{
 		UserInterfaceProcessor processor;
 
-		processor = (UserInterfaceProcessor)Bodi.context("system").pull("//events/system/{id}/uiprocessor");
+		processor = (UserInterfaceProcessor) Bodi.context("system").pull("//events/system/{id}/uiprocessor");
 
 		processor.update(new ExitProgramEvent(this.source));
 	}

@@ -8,25 +8,24 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- *
  * @author Max Rupplin
  */
 public class Jcmframebuilder extends Jcmabstractbuilder
 {
-    protected final Integer hash = 0x00888FE8;
+	protected final Integer hash = 0x00888FE8;
 
-    public Jcmframebuilder(File file)
-    {
-        super(file, "//frame", JFrame.class);
+	public Jcmframebuilder(File file)
+	{
+		super(file, "//frame", JFrame.class);
 
-        this.apml = file;
-        
-        this.xpath = XPathFactory.newInstance().newXPath();          
-    }    
-    
-    @Override
-    public ArrayList<JCodeModel> build()
-    {
-        return super.build();
-    }
+		this.apml = file;
+
+		this.xpath = XPathFactory.newInstance().newXPath();
+	}
+
+	@Override
+	public ArrayList<JCodeModel> build()
+	{
+		return super.build();
+	}
 }

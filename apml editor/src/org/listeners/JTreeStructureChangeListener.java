@@ -51,11 +51,11 @@ public class JTreeStructureChangeListener implements TreeSelectionListener, Tree
 
 		DefaultMutableTreeNode source_node;
 
-		source_node = (DefaultMutableTreeNode)e.getSource();
+		source_node = (DefaultMutableTreeNode) e.getSource();
 
 		UserInterfaceProcessor processor;
 
-		processor = (UserInterfaceProcessor)Bodi.context("system").pull("//events/system/{id}/uiprocessor");
+		processor = (UserInterfaceProcessor) Bodi.context("system").pull("//events/system/{id}/uiprocessor");
 
 		processor.update(new TreeStructureUpdatedEvent(e, e.hashCode(), "tree_structure_updated_event"));
 	}

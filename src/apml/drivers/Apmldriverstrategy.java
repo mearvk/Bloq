@@ -5,15 +5,12 @@
  */
 package apml.drivers;
 
-import apml.drivers.Strategyitem;
-
 /**
- *
  * @author Max Rupplin
  */
 public class Apmldriverstrategy
 {
-    public Boolean issimple;
-    
-    public Strategyitem array;
+	public Boolean issimple;
+
+	public Strategyitem array;
 }

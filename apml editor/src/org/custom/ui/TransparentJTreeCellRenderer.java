@@ -21,12 +21,12 @@ class TransparentJTreeCellRenderer extends DefaultTreeCellRenderer
 	@Override
 	public Color getBackgroundNonSelectionColor()
 	{
-		return new Color(230,230,230);
+		return new Color(230, 230, 230);
 	}
 
 	@Override
 	public Color getBackgroundSelectionColor()
 	{
-		return new Color(230,230,230);
+		return new Color(230, 230, 230);
 	}
 }

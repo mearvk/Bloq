@@ -1,4 +1,3 @@
-
 package org.system;
 
 import apml.compilers.java.codemodel.Bloqcompiler;
@@ -24,43 +23,38 @@ import java.io.*;
 
 public class UserInterfaceProcessor extends Apmlobject
 {
-    protected Apmlbasesystem monitor;
+	public final String bodi = "//editor/ui/uiprocessor_000";
+	public final String id = "processor_000";
+	public final String tag = "object";
+	public String last_loaded_file_url = null;
 
-    public final String bodi= "//editor/ui/uiprocessor_000";
-
-    public final String id="processor_000";
-
-    public final String tag="object";
-
-    //
-
-    public String last_loaded_file_url = null;
-
-    public File last_loaded_file = null;
+	//
+	public File last_loaded_file = null;
+	protected Apmlbasesystem monitor;
 
 	//
 
-    public UserInterfaceProcessor(final Apmlbasesystem monitor)
+	public UserInterfaceProcessor(final Apmlbasesystem monitor)
 	{
-        this.monitor = monitor;
+		this.monitor = monitor;
 
 		Bodi.context("editor").put(this.bodi, this);
 	}
 
-    public UserInterfaceProcessor()
+	public UserInterfaceProcessor()
 	{
 		Bodi.context("editor").put(this.bodi, this);
-    }
+	}
 
 	//
 
-    public void update(ActionEvent event)
-    {
+	public void update(ActionEvent event)
+	{
 		String action = event.getActionCommand();
 
 		//
 
-		switch(action)
+		switch (action)
 		{
 			case "open_document_event":
 
@@ -82,7 +76,7 @@ public class UserInterfaceProcessor extends Apmlobject
 
 			case "exit_program_event":
 
-				new ExitProgramRequest(this,event).run();
+				new ExitProgramRequest(this, event).run();
 
 				break;
 
@@ -94,43 +88,43 @@ public class UserInterfaceProcessor extends Apmlobject
 
 			case "save_apml_document_event":
 
-				new SaveApmlDocumentRequest(this,event).run();
+				new SaveApmlDocumentRequest(this, event).run();
 
 				break;
 
 			case "load_apml_document_event":
 
-				new LoadApmlDocumentRequest(this,event).run();
+				new LoadApmlDocumentRequest(this, event).run();
 
 				break;
 
 			case "load_apml_tree_event":
 
-				new LoadApmlTreeRequest(this,event).run();
+				new LoadApmlTreeRequest(this, event).run();
 
 				break;
 
 			case "load_bloq_document_event":
 
-				new LoadBloqDocumentRequest(this,event).run();
+				new LoadBloqDocumentRequest(this, event).run();
 
 				break;
 
 			case "load_bloq_tree_event":
 
-				new LoadBloqTreeRequest(this,event).run();
+				new LoadBloqTreeRequest(this, event).run();
 
 				break;
 
 			case "document_loaded_event":
 
-				new UpdateAllOnDocumentLoadedRequest(this,event).run();
+				new UpdateAllOnDocumentLoadedRequest(this, event).run();
 
 				break;
 
 			case "close_apml_document_event":
 
-				new CloseApmlDocumentRequest(this,event).run();
+				new CloseApmlDocumentRequest(this, event).run();
 
 				break;
 
@@ -138,7 +132,7 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				break;
 		}
-    }
+	}
 }
 
 class CloseApmlDocumentRequest
@@ -151,16 +145,16 @@ class CloseApmlDocumentRequest
 	{
 		this.processor = processor;
 
-		this.event = (CloseApmlDocumentEvent)event;
+		this.event = (CloseApmlDocumentEvent) event;
 	}
 
 	public void run()
 	{
 		JPanel_001 jpanel_001;
 
-		jpanel_001 = (JPanel_001)Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+		jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
 
-		jpanel_001.rstextpane.closedocument((CloseApmlDocumentEvent)event);
+		jpanel_001.rstextpane.closedocument((CloseApmlDocumentEvent) event);
 	}
 }
 
@@ -174,14 +168,14 @@ class UpdateAllOnDocumentLoadedRequest
 	{
 		this.processor = processor;
 
-		this.event = (DocumentLoadedEvent)event;
+		this.event = (DocumentLoadedEvent) event;
 	}
 
 	public void run()
 	{
-		processor.last_loaded_file_url = ((DocumentLoadedEvent)event).getFileURL();
+		processor.last_loaded_file_url = ((DocumentLoadedEvent) event).getFileURL();
 
-		processor.last_loaded_file = ((DocumentLoadedEvent)event).getFileRef();
+		processor.last_loaded_file = ((DocumentLoadedEvent) event).getFileRef();
 	}
 }
 
@@ -195,18 +189,18 @@ class LoadBloqTreeRequest
 	{
 		this.processor = processor;
 
-		this.event = (LoadBloqTreeEvent)event;
+		this.event = (LoadBloqTreeEvent) event;
 	}
 
 	public void run()
 	{
 		JTree_Bloq_000 jtree_bloq_000;
 
-		jtree_bloq_000 = (JTree_Bloq_000)Bodi.context("editor").pull("//editor/ui/jtree_bloq_000");
+		jtree_bloq_000 = (JTree_Bloq_000) Bodi.context("editor").pull("//editor/ui/jtree_bloq_000");
 
 		jtree_bloq_000.init();
 
-		jtree_bloq_000.update((LoadBloqTreeEvent)event);
+		jtree_bloq_000.update((LoadBloqTreeEvent) event);
 
 		jtree_bloq_000.removenewlinetextnodes();
 	}
@@ -223,14 +217,14 @@ class LoadBloqDocumentRequest
 	{
 		this.processor = processor;
 
-		this.event = (LoadBloqDocumentEvent)event;
+		this.event = (LoadBloqDocumentEvent) event;
 	}
 
 	public void run()
 	{
 		JPanel_001 jpanel_001;
 
-		jpanel_001 = (JPanel_001)Bodi.context("editor").pull("//editor/ui/jpanel_bloq_001");
+		jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_bloq_001");
 
 		this.loaddocument(event);
 	}
@@ -239,7 +233,7 @@ class LoadBloqDocumentRequest
 	{
 		RSTextPane_Bloq_000 rstextpane_bloq_000;
 
-		rstextpane_bloq_000 = (RSTextPane_Bloq_000)Bodi.context("editor").pull("//editor/ui/rstextpane_bloq_000");
+		rstextpane_bloq_000 = (RSTextPane_Bloq_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bloq_000");
 
 		try
 		{
@@ -251,18 +245,18 @@ class LoadBloqDocumentRequest
 
 			//
 
-			while((line=reader.readLine())!=null)
+			while ((line = reader.readLine()) != null)
 			{
 				buffer = buffer + line + "\n";
 			}
 
 			//
 
-			rstextpane_bloq_000.setText(buffer+"\n");
+			rstextpane_bloq_000.setText(buffer + "\n");
 
 			rstextpane_bloq_000.setCaretPosition(000);
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -279,18 +273,18 @@ class LoadApmlTreeRequest
 	{
 		this.processor = processor;
 
-		this.event = (LoadApmlTreeEvent)event;
+		this.event = (LoadApmlTreeEvent) event;
 	}
 
 	public void run()
 	{
 		JTree_Apml_000 jtree_apml_000;
 
-		jtree_apml_000 = (JTree_Apml_000)Bodi.context("editor").pull("//editor/ui/jtree_apml_000");
+		jtree_apml_000 = (JTree_Apml_000) Bodi.context("editor").pull("//editor/ui/jtree_apml_000");
 
 		jtree_apml_000.init();
 
-		jtree_apml_000.update((LoadApmlTreeEvent)event);
+		jtree_apml_000.update((LoadApmlTreeEvent) event);
 
 		jtree_apml_000.removenewlinetextnodes();
 	}
@@ -306,7 +300,7 @@ class ExitProgramRequest
 	{
 		this.processor = processor;
 
-		this.event = (ExitProgramEvent)event;
+		this.event = (ExitProgramEvent) event;
 	}
 
 	public void run()
@@ -325,16 +319,16 @@ class LoadApmlDocumentRequest
 	{
 		this.processor = processor;
 
-		this.event = (LoadApmlDocumentEvent)event;
+		this.event = (LoadApmlDocumentEvent) event;
 	}
 
 	public void run()
 	{
 		JPanel_001 jpanel_001;
 
-		jpanel_001 = (JPanel_001)Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+		jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
 
-		jpanel_001.rstextpane.loaddocument((LoadApmlDocumentEvent)event);
+		jpanel_001.rstextpane.loaddocument((LoadApmlDocumentEvent) event);
 	}
 }
 
@@ -348,14 +342,14 @@ class TreeStructureUpdatedRequest
 	{
 		this.processor = processor;
 
-		this.event = (TreeStructureUpdatedEvent)event;
+		this.event = (TreeStructureUpdatedEvent) event;
 	}
 
 	public void run()
 	{
 		RSTextPane_000 rstextpane_000;
 
-		rstextpane_000 = (RSTextPane_000)Bodi.context("editor").pull("//editor/ui/rstextpane_000");
+		rstextpane_000 = (RSTextPane_000) Bodi.context("editor").pull("//editor/ui/rstextpane_000");
 
 		rstextpane_000.processtreechange((TreeStructureUpdatedEvent) event);
 	}
@@ -377,11 +371,11 @@ class SaveApmlDocumentRequest
 	{
 		this.processor = processor;
 
-		this.event = (SaveApmlDocumentEvent)event;
+		this.event = (SaveApmlDocumentEvent) event;
 
-		this.apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+		this.apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
-		this.rstextpane_apml_000 = (RSTextPane_Apml_000)Bodi.context("editor").pull("//editor/ui/rstextpane_apml_000");
+		this.rstextpane_apml_000 = (RSTextPane_Apml_000) Bodi.context("editor").pull("//editor/ui/rstextpane_apml_000");
 	}
 
 	public void run()
@@ -398,7 +392,7 @@ class SaveApmlDocumentRequest
 
 			int retval = chooser.showSaveDialog(this.apmlgui);
 
-			if(retval==JFileChooser.APPROVE_OPTION)
+			if (retval == JFileChooser.APPROVE_OPTION)
 			{
 				File file = chooser.getSelectedFile();
 
@@ -406,7 +400,7 @@ class SaveApmlDocumentRequest
 
 				writer = new BufferedWriter(new FileWriter(file));
 
-				writer.write(this.rstextpane_apml_000.getText(),0,this.rstextpane_apml_000.getText().length());
+				writer.write(this.rstextpane_apml_000.getText(), 0, this.rstextpane_apml_000.getText().length());
 
 				writer.flush();
 
@@ -415,7 +409,7 @@ class SaveApmlDocumentRequest
 
 			JOptionPane.showMessageDialog(this.apmlgui, "Document successfully saved.");
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 
@@ -449,12 +443,12 @@ class OpenDocumentRequest
 	{
 		this.processor = processor;
 
-		this.event = (OpenDocumentEvent)event;
+		this.event = (OpenDocumentEvent) event;
 	}
 
 	public void run()
 	{
-		APMLGui apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+		APMLGui apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
 		try
 		{
@@ -462,19 +456,19 @@ class OpenDocumentRequest
 
 			this.xpath = XPathFactory.newInstance().newXPath();
 
-			this.nodes = Xpathquick.evaluate(this.document, this.xpath,"//project[@type]");
+			this.nodes = Xpathquick.evaluate(this.document, this.xpath, "//project[@type]");
 
 			//
 
-			if(this.nodes.getLength()==0)
+			if (this.nodes.getLength() == 0)
 				JOptionPane.showMessageDialog(apmlgui, "Unable to locate any document type; make sure you have a project type set ( //apml/project[@type] ).");
 
-			if(this.nodes.getLength()>1)
+			if (this.nodes.getLength() > 1)
 				JOptionPane.showMessageDialog(apmlgui, "Unable to locate unambiguous document type; make sure you have a single project type set ( //apml/project[@type] ).");
 
 			//
 
-			element = (Element)this.nodes.item(0);
+			element = (Element) this.nodes.item(0);
 
 			type = element.getAttribute("type");
 
@@ -482,38 +476,46 @@ class OpenDocumentRequest
 
 			//
 
-			switch(event.fileType)
+			switch (event.fileType)
 			{
-				case "apml": break;
+				case "apml":
+					break;
 
-				case "bloq": break;
+				case "bloq":
+					break;
 
-				case "bodi": break;
+				case "bodi":
+					break;
 
-				case "munction": break;
+				case "munction":
+					break;
 
-				case "runyn": break;
+				case "runyn":
+					break;
 
-				case "sprung": break;
+				case "sprung":
+					break;
 
-				case "falthruu": break;
+				case "falthruu":
+					break;
 
 				default:
 
-					JOptionPane.showMessageDialog(apmlgui, "Unknown file type; no can help."); return;
+					JOptionPane.showMessageDialog(apmlgui, "Unknown file type; no can help.");
+					return;
 			}
 
 			//
 
-			JOptionPane.showMessageDialog(apmlgui, "Document type located as ["+event.fileType+"].");
+			JOptionPane.showMessageDialog(apmlgui, "Document type located as [" + event.fileType + "].");
 
 			//
 
-			this.processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
+			this.processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
 			//
 
-			switch(event.fileType)
+			switch (event.fileType)
 			{
 				case "apml":
 
@@ -523,7 +525,7 @@ class OpenDocumentRequest
 
 					//
 
-					this.jtabbedpane_000 = (JTabbedPane_000)Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
+					this.jtabbedpane_000 = (JTabbedPane_000) Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
 
 					this.jtabbedpane_000.setSelectedIndex(0);
 
@@ -531,13 +533,13 @@ class OpenDocumentRequest
 
 				case "bloq":
 
-					this.processor.update(new LoadBloqDocumentEvent(event,event.fileRef));
+					this.processor.update(new LoadBloqDocumentEvent(event, event.fileRef));
 
-					this.processor.update(new LoadBloqTreeEvent(event,event.fileRef));
+					this.processor.update(new LoadBloqTreeEvent(event, event.fileRef));
 
 					//
 
-					this.jtabbedpane_000 = (JTabbedPane_000)Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
+					this.jtabbedpane_000 = (JTabbedPane_000) Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
 
 					this.jtabbedpane_000.setSelectedIndex(1);
 
@@ -545,7 +547,7 @@ class OpenDocumentRequest
 
 				case "bodi":
 
-					this.processor.update(new LoadBodiDocumentEvent(event,event.fileRef));
+					this.processor.update(new LoadBodiDocumentEvent(event, event.fileRef));
 
 					//processor.update(new LoadBodiTreeEvent(this,this.fileRef));
 
@@ -553,7 +555,7 @@ class OpenDocumentRequest
 
 				case "munction":
 
-					this.processor.update(new LoadMunctionDocumentEvent(event,event.fileRef));
+					this.processor.update(new LoadMunctionDocumentEvent(event, event.fileRef));
 
 					//processor.update(new LoadMunctionTreeEvent(this,this.fileRef));
 
@@ -561,7 +563,7 @@ class OpenDocumentRequest
 
 				case "runyn":
 
-					this.processor.update(new LoadRunynDocumentEvent(event,event.fileRef));
+					this.processor.update(new LoadRunynDocumentEvent(event, event.fileRef));
 
 					//processor.update(new LoadRunynTreeEvent(this,this.fileRef));
 
@@ -569,7 +571,7 @@ class OpenDocumentRequest
 
 				case "sprung":
 
-					this.processor.update(new LoadSprungDocumentEvent(event,event.fileRef));
+					this.processor.update(new LoadSprungDocumentEvent(event, event.fileRef));
 
 					//processor.update(new LoadSprungTreeEvent(this,this.fileRef));
 
@@ -577,16 +579,17 @@ class OpenDocumentRequest
 
 				case "falthruu":
 
-					this.processor.update(new LoadFalthruuDocumentEvent(event,event.fileRef));
+					this.processor.update(new LoadFalthruuDocumentEvent(event, event.fileRef));
 
 					//processor.update(new LoadFalthruuTreeEvent(this,this.fileRef));
 
 					break;
 
-				default: JOptionPane.showMessageDialog(apmlgui, "Unknown file type; no can help.");
+				default:
+					JOptionPane.showMessageDialog(apmlgui, "Unknown file type; no can help.");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -598,7 +601,7 @@ class BuildApmlUserInterfaceRequest
 {
 	private UserInterfaceProcessor processor;
 
-	private JPanel_001 jpanel_001 = (JPanel_001)Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+	private JPanel_001 jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
 
 	private Uicompiler ui_compiler = new Uicompiler();
 
@@ -616,15 +619,15 @@ class BuildApmlUserInterfaceRequest
 	public void run()
 	{
 
-		jpanel_001 = (JPanel_001)Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+		jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
 
 		this.target_text = jpanel_001.rstextpane.getText();
 
-		this.ui_compiler =  new Uicompiler();
+		this.ui_compiler = new Uicompiler();
 
 		//
 
-		if(this.target_text==null || this.target_text.length()==0)
+		if (this.target_text == null || this.target_text.length() == 0)
 		{
 			this.input.setDialogTitle("Please Select UI APML Document");
 
@@ -647,7 +650,7 @@ class BuildApmlUserInterfaceRequest
 
 		this.output.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-		this.output.showSaveDialog((APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui"));
+		this.output.showSaveDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
 
 		//
 
@@ -665,9 +668,9 @@ class BuildApmlStandaloneRequest
 {
 	private UserInterfaceProcessor processor;
 
-	private APMLGui apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+	private APMLGui apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
-	private JPanel_001 jpanel_001 = (JPanel_001)Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+	private JPanel_001 jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
 
 	private Bloqcompiler bloq_compiler = new Bloqcompiler();
 
@@ -690,11 +693,11 @@ class BuildApmlStandaloneRequest
 
 		//
 
-		this.bloq_compiler =  new Bloqcompiler();
+		this.bloq_compiler = new Bloqcompiler();
 
 		//
 
-		if(this.target_text==null || this.target_text.length()==0)
+		if (this.target_text == null || this.target_text.length() == 0)
 		{
 			//
 
@@ -704,7 +707,7 @@ class BuildApmlStandaloneRequest
 
 			this.input.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-			this.input.showOpenDialog((APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui"));
+			this.input.showOpenDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
 
 			//
 
@@ -722,7 +725,7 @@ class BuildApmlStandaloneRequest
 
 			this.output.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-			this.output.showSaveDialog((APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui"));
+			this.output.showSaveDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
 
 			//
 
@@ -732,7 +735,7 @@ class BuildApmlStandaloneRequest
 
 			this.bloq_compiler.fileguardian.apmlinjarurl = this.output.getSelectedFile().getPath() + "/in/jar/";
 
-			this.bloq_compiler.fileguardian.apmlinurl = this.output.getSelectedFile().getPath()+"/in/";
+			this.bloq_compiler.fileguardian.apmlinurl = this.output.getSelectedFile().getPath() + "/in/";
 
 			//
 
@@ -763,13 +766,13 @@ class BuildApmlStandaloneRequest
 
 			this.output.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-			this.output.showSaveDialog((APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui"));
+			this.output.showSaveDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
 
 			//
 
 			this.bloq_compiler.fileguardian.basedirurl = this.output.getSelectedFile().getPath().toString() + "/";
 
-			this.bloq_compiler.fileguardian.apmlinurl = this.output.getSelectedFile().getPath()+"/in/";
+			this.bloq_compiler.fileguardian.apmlinurl = this.output.getSelectedFile().getPath() + "/in/";
 
 			this.bloq_compiler.fileguardian.apmloutjarurl = this.output.getSelectedFile().getPath() + "/out/jar/";
 
@@ -781,7 +784,7 @@ class BuildApmlStandaloneRequest
 
 			processor.last_loaded_file_url = this.bloq_compiler.fileguardian.apmlfilename;
 
-			if(processor.last_loaded_file==null || processor.last_loaded_file_url == null || processor.last_loaded_file_url.length()==0)
+			if (processor.last_loaded_file == null || processor.last_loaded_file_url == null || processor.last_loaded_file_url.length() == 0)
 			{
 				JOptionPane.showMessageDialog(apmlgui, "Unable to determing existing file for APML input. Double check.");
 			}

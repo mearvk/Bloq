@@ -1,10 +1,9 @@
 package apml.interfaces;
 
 /**
- *
  * @author oem
  */
-public interface Restartable 
+public interface Restartable
 {
-    public void restart();
+	public void restart();
 }

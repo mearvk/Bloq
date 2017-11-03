@@ -6,10 +6,9 @@
 package apml.interfaces;
 
 /**
- *
  * @author oem
  */
-public interface Runnable 
+public interface Runnable
 {
-    public void run();
+	public void run();
 }

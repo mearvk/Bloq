@@ -6,15 +6,14 @@
 package apml.runners;
 
 /**
- *
  * @author oem
  */
-public class Apmlpreparser 
+public class Apmlpreparser
 {
-    protected final Integer hash = 0x888fe8;
-        
-    public Apmlpreparser()
-    {
-        
-    }
+	protected final Integer hash = 0x888fe8;
+
+	public Apmlpreparser()
+	{
+
+	}
 }

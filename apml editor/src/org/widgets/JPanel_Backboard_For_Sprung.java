@@ -49,17 +49,14 @@ public class JPanel_Backboard_For_Sprung extends JPanel
 	public Apmlbasesystem system;
 
 	//
-
-	JTree_000 jtree_000;
-
-	//
-
 	public JSplitPane_000 jsplitpane_000;
 
 	//
-
 	public Image backgroundimage;
+
+	//
 	public String backgroundimagename;
+	JTree_000 jtree_000;
 
 	//
 
@@ -67,7 +64,7 @@ public class JPanel_Backboard_For_Sprung extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0xff,0xff,0xff));
+		this.setBackground(new Color(0xff, 0xff, 0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -75,7 +72,7 @@ public class JPanel_Backboard_For_Sprung extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Sprung_000(this,"//editor/ui/jpanel_sprung_000"), new JPanel_001(this, "//editor/ui/jpanel_sprung_001"));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Sprung_000(this, "//editor/ui/jpanel_sprung_000"), new JPanel_001(this, "//editor/ui/jpanel_sprung_001"));
 
 		// hierarchy
 
@@ -100,7 +97,7 @@ public class JPanel_Backboard_For_Sprung extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0xff,0xff,0xff));
+		this.setBackground(new Color(0xff, 0xff, 0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -108,7 +105,7 @@ public class JPanel_Backboard_For_Sprung extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this,"//editor/ui/jpanel_sprung_000"), new JPanel_001(this, "//editor/ui/jpanel_sprung_001"));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_000(this, "//editor/ui/jpanel_sprung_000"), new JPanel_001(this, "//editor/ui/jpanel_sprung_001"));
 
 		// hierarchy
 

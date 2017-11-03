@@ -6,10 +6,9 @@
 package apml.interfaces;
 
 /**
- *
  * @author oem
  */
-public interface Pausable 
+public interface Pausable
 {
-    public void pause();
+	public void pause();
 }

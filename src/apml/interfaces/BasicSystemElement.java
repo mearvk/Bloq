@@ -1,8 +1,7 @@
 package apml.interfaces;
 
 /**
- *
- * @author Max Rupplin 
+ * @author Max Rupplin
  */
 public interface BasicSystemElement
 {

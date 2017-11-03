@@ -1,10 +1,9 @@
 package apml.compilers.java.ast;
 
 /**
- *
  * @author max rupplin
  */
-public class Bloqastmanager 
+public class Bloqastmanager
 {
-    
+
 }

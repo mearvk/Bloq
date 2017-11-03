@@ -8,10 +8,9 @@ package apml.interfaces;
 import java.awt.event.ActionEvent;
 
 /**
- *
  * @author Max Rupplin
  */
-public interface Actionlistener 
+public interface Actionlistener
 {
-    public void actionEvent(ActionEvent event);
+	public void actionEvent(ActionEvent event);
 }

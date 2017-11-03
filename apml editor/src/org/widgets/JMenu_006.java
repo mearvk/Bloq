@@ -1,4 +1,3 @@
-
 package org.widgets;
 
 import apml.system.Apmlbasesystem;
@@ -22,37 +21,34 @@ import java.net.URL;
 
 /**
  * Software programmatically produced by Bloq implementation version 1.05 - Bodi Remote Version
- * 
+ *
  * @author
  * @see
  * @since
- * @version
- * 
  */
-public class JMenu_006
-    extends JMenu
+public class JMenu_006 extends JMenu
 {
 
-    public KeyEvent importref_001;
-    public KeyStroke importref_002;
-    public ActionEvent importref_003;
-    public ImageIcon importref_004;
-    public URL importref_005;
-    public Color importref_006;
-    public BorderLayout importref_007;
-    public FlowLayout importref_008;
-    public GridLayout importref_009;
-    public Color importref_010;
-    public EmptyBorder importref_011;
-    public ChangeEvent importref_012;
-    public Dimension importref_013;
-    public Rectangle importref_014;
-    public ImageIO importref_015;
-    public File importref_016;
-    public Component parent;
-    public Apmlbasesystem system;
+	public KeyEvent importref_001;
+	public KeyStroke importref_002;
+	public ActionEvent importref_003;
+	public ImageIcon importref_004;
+	public URL importref_005;
+	public Color importref_006;
+	public BorderLayout importref_007;
+	public FlowLayout importref_008;
+	public GridLayout importref_009;
+	public Color importref_010;
+	public EmptyBorder importref_011;
+	public ChangeEvent importref_012;
+	public Dimension importref_013;
+	public Rectangle importref_014;
+	public ImageIO importref_015;
+	public File importref_016;
+	public Component parent;
+	public Apmlbasesystem system;
 
-    //
+	//
 
 	public String bodi = "//editor/ui/jmenu_006";
 
@@ -65,55 +61,55 @@ public class JMenu_006
 	public JMenuItem_004 jmenuitem_004;
 
 	//
+	public BuildApmlStandaloneListener menu_listener_000 = new BuildApmlStandaloneListener();
 
-    /**
-     * 
-     * @param parent : The tree AWT object.
-     */
-    public JMenu_006(Component parent) {
-        // setters 
-	
-        this.setText("  Build  ");
+	/**
+	 * @param parent : The tree AWT object.
+	 */
+	public JMenu_006(Component parent)
+	{
+		// setters
 
-        this.setMnemonic(KeyEvent.VK_B);
-	
-        // instantiation
+		this.setText("  Build  ");
+
+		this.setMnemonic(KeyEvent.VK_B);
+
+		// instantiation
 
 		this.menu_listener_000 = new BuildApmlStandaloneListener();
-	
-        this.jmenuitem_002 = new JMenuItem_002(this);
-	
-        this.jmenuitem_003 = new JMenuItem_003(this);
 
-        this.jmenuitem_004 = new JMenuItem_004(this);
-	
-        // hierarchy 
-	
-        this.add(jmenuitem_002);
-	
-        this.add(jmenuitem_003);
+		this.jmenuitem_002 = new JMenuItem_002(this);
 
-        this.add(jmenuitem_004);
-	
-        // devolvement 
-	
-        this.parent = parent;
-	
-        this.setVisible(true);
-	
-        // listeners 
+		this.jmenuitem_003 = new JMenuItem_003(this);
+
+		this.jmenuitem_004 = new JMenuItem_004(this);
+
+		// hierarchy
+
+		this.add(jmenuitem_002);
+
+		this.add(jmenuitem_003);
+
+		this.add(jmenuitem_004);
+
+		// devolvement
+
+		this.parent = parent;
+
+		this.setVisible(true);
+
+		// listeners
 
 		//bodi
 
 		Bodi.context("editor").put(this.bodi, this);
 	}
 
-    /**
-     * 
-     * @param parent : The tree AWT object.
-     * @param system : The APML system object.
-     */
-    public JMenu_006(Component parent, Apmlbasesystem system)
+	/**
+	 * @param parent : The tree AWT object.
+	 * @param system : The APML system object.
+	 */
+	public JMenu_006(Component parent, Apmlbasesystem system)
 	{
 		// setters
 
@@ -153,8 +149,6 @@ public class JMenu_006
 
 		Bodi.context("editor").put(this.bodi, this);
 	}
-
-	public BuildApmlStandaloneListener menu_listener_000 = new BuildApmlStandaloneListener();
 }
 
 class BuildApmlStandaloneListener implements ActionListener
@@ -182,7 +176,8 @@ class BuildApmlStandaloneListener implements ActionListener
 
 				break;
 
-			default: break;
+			default:
+				break;
 		}
 	}
 
@@ -191,7 +186,7 @@ class BuildApmlStandaloneListener implements ActionListener
 	{
 		UserInterfaceProcessor processor;
 
-		processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
+		processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
 		processor.update(new BuildApmlSubsystemEvent(ae));
 	}
@@ -201,7 +196,7 @@ class BuildApmlStandaloneListener implements ActionListener
 	{
 		UserInterfaceProcessor processor;
 
-		processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
+		processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
 		processor.update(new BuildApmlUisubsystemEvent(ae));
 	}
@@ -211,7 +206,7 @@ class BuildApmlStandaloneListener implements ActionListener
 	{
 		UserInterfaceProcessor processor;
 
-		processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
+		processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
 		processor.update(new RebuildApmlSystemEvent(ae));
 	}

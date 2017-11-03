@@ -13,24 +13,24 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- *
  * @author oem
  */
 public class Jcmjtablebuilder extends Jcmabstractbuilder
 {
-    protected final Integer hash = 0x00888FE8;
+	protected final Integer hash = 0x00888FE8;
 
-    public Jcmjtablebuilder(File apml)
-    {
-        super(apml, "//jtable", JTable.class);
-        
-        this.apml = apml;
-        
-        this.xpath = XPathFactory.newInstance().newXPath();
-    }
+	public Jcmjtablebuilder(File apml)
+	{
+		super(apml, "//jtable", JTable.class);
 
-    @Override
-    public ArrayList<JCodeModel> build() {
-        return super.build();
-    }
+		this.apml = apml;
+
+		this.xpath = XPathFactory.newInstance().newXPath();
+	}
+
+	@Override
+	public ArrayList<JCodeModel> build()
+	{
+		return super.build();
+	}
 }

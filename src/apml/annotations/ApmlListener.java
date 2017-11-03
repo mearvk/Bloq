@@ -6,11 +6,10 @@
 package apml.annotations;
 
 /**
- *
  * @author oem
  * 0x888fe8;
  */
-public @interface ApmlListener 
+public @interface ApmlListener
 {
-    String listener() default "door";
+	String listener() default "door";
 }

@@ -2,35 +2,38 @@
 <?apml version="1.0" encoding="UTF-8"?>
 
 <package name="globals" default="examples.echoserver" sourcedir="/source" builddir="/build">
-    
-    <apml language="Java 9" version="1.0" class="Apmlsystem" infer="true" implements="apml.interfaces.BasicSystemElement">  
-        
+
+    <apml language="Java 9" version="1.0" class="Apmlsystem" infer="true"
+          implements="apml.interfaces.BasicSystemElement">
+
         <package default="examples.echoserver.servers" sourcedir="/source" builddir="/build">
-            <system id="Echoserversystem" class="Echoserversystem" implements="apml.interfaces.BasicSystemElement" >
-                <object id="Echoserver" class="Echoserver" implements="apml.interfaces.BasicSystemElement" extends="apml.extensions.AbstractResourceServer"></object>
-            </system>               
+            <system id="Echoserversystem" class="Echoserversystem" implements="apml.interfaces.BasicSystemElement">
+                <object id="Echoserver" class="Echoserver" implements="apml.interfaces.BasicSystemElement"
+                        extends="apml.extensions.AbstractResourceServer"></object>
+            </system>
         </package>
 
-        <driver class="StandardDriver"> //to start and attach APML objects to system framework; to build out skeleton for starters
+        <driver class="StandardDriver">//to start and attach APML objects to system framework; to build out skeleton for
+            starters
             <template></template>
             <template></template>
             <template></template>
             <template></template>
         </driver>
 
-        <compiler class="StdApmlToJavaCompiler"> //move APML markup over to Java
-            <architect>Max Rupplin</architect>        
+        <compiler class="StdApmlToJavaCompiler">//move APML markup over to Java
+            <architect>Max Rupplin</architect>
             <template type="camelcase"></template>
             <template type="annotations">formal</template>
             <template type="brackets">newline</template>
             <template type="class_treatment">inner</template>
         </compiler>
 
-        <compiler class="StdJavaToApmlCompiler"> //move Java source code over to APML markup
-            <architect>Max Rupplin</architect>        
+        <compiler class="StdJavaToApmlCompiler">//move Java source code over to APML markup
+            <architect>Max Rupplin</architect>
             <template type=""></template>
             <template type=""></template>
-        </compiler>    
+        </compiler>
 
         <dynamiclistener class="StdDynamicListener" bodi="//dynamiclisteners/1">
             <object start="true"></object>

@@ -8,23 +8,24 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- *
  * @author max rupplin
  */
-public class Jcmjeditorpanebuilder extends Jcmabstractbuilder {
-    protected final Integer hash = 0x00888FE8;
+public class Jcmjeditorpanebuilder extends Jcmabstractbuilder
+{
+	protected final Integer hash = 0x00888FE8;
 
-    public Jcmjeditorpanebuilder(File apml)
-    {
-        super(apml, "//jeditorpane", JEditorPane.class);
-        
-        this.apml = apml;
-        
-        this.xpath = XPathFactory.newInstance().newXPath();
-    }
+	public Jcmjeditorpanebuilder(File apml)
+	{
+		super(apml, "//jeditorpane", JEditorPane.class);
 
-    @Override
-    public ArrayList<JCodeModel> build() {
-        return super.build();
-    }
+		this.apml = apml;
+
+		this.xpath = XPathFactory.newInstance().newXPath();
+	}
+
+	@Override
+	public ArrayList<JCodeModel> build()
+	{
+		return super.build();
+	}
 }

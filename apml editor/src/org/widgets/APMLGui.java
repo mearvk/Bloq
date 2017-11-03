@@ -89,13 +89,13 @@ public class APMLGui extends JFrame
 				{
 					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 
-					UIManager.put("nimbusBase", new Color(0x91,0x91,0x91)); //menuitems, jfilechooser
+					UIManager.put("nimbusBase", new Color(0x91, 0x91, 0x91)); //menuitems, jfilechooser
 
-					UIManager.put("nimbusBlueGrey", new Color(0xd1,0xd1,0xd1)); //jmenubar
+					UIManager.put("nimbusBlueGrey", new Color(0xd1, 0xd1, 0xd1)); //jmenubar
 
-					UIManager.put("control", new Color(0xdf,0xdf,0xdf)); //jframe background
+					UIManager.put("control", new Color(0xdf, 0xdf, 0xdf)); //jframe background
 
-					UIManager.put("nimbusFocus", new Color(0xff,0xff,0xff, Color.TRANSLUCENT));
+					UIManager.put("nimbusFocus", new Color(0xff, 0xff, 0xff, Color.TRANSLUCENT));
 
 					UIManager.put("nimbusSelectionBackground", Color.LIGHT_GRAY);
 
@@ -103,11 +103,11 @@ public class APMLGui extends JFrame
 
 					//
 
-					ImageIcon open=null;
+					ImageIcon open = null;
 
-					ImageIcon closed=null;
+					ImageIcon closed = null;
 
-					ImageIcon leaf=null;
+					ImageIcon leaf = null;
 
 					try
 					{
@@ -122,16 +122,16 @@ public class APMLGui extends JFrame
 						e.printStackTrace();
 					}
 
-					if(leaf!=null)
+					if (leaf != null)
 						UIManager.put("Tree.leafIcon", leaf);
 
-					if(open!=null)
+					if (open != null)
 						UIManager.put("Tree.openIcon", open);
 
-					if(closed!=null)
+					if (closed != null)
 						UIManager.put("Tree.closedIcon", closed);
 				}
-				catch(Exception e)
+				catch (Exception e)
 				{
 					e.printStackTrace();
 				}
@@ -200,7 +200,7 @@ public class APMLGui extends JFrame
 
 		// bodi
 
-		Bodi.context("editor").put(this.bodi,this);
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	/**
@@ -267,7 +267,7 @@ public class APMLGui extends JFrame
 
 		// bodi
 
-		Bodi.context("editor").put(this.bodi,this);
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	public static void main(String... args)

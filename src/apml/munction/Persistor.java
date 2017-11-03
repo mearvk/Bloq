@@ -12,7 +12,8 @@ public class Persistor
 	{
 		Connection connect = (Connection) Bodi.context("munction").pull("//connect");
 
-		if(connect==null) return null;
+		if (connect == null)
+			return null;
 
 		//
 
@@ -34,9 +35,9 @@ public class Persistor
 
 			preparedStatement.setString(3, MunchkinFileName);
 
-			preparedStatement.setString( 4, ClassName);
+			preparedStatement.setString(4, ClassName);
 
-			preparedStatement.setString( 5, PackageName);
+			preparedStatement.setString(5, PackageName);
 
 			preparedStatement.setString(6, SourceCode);
 
@@ -56,7 +57,7 @@ public class Persistor
 
 			reference.auth_key = resultSet.getInt("AUTHKEY");
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -68,9 +69,10 @@ public class Persistor
 
 	public Reference register(Integer GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, byte[] Bytecode)
 	{
-		Connection connect = (Connection)Bodi.context("munction").pull("//connect");
+		Connection connect = (Connection) Bodi.context("munction").pull("//connect");
 
-		if(connect==null) return null;
+		if (connect == null)
+			return null;
 
 		//
 
@@ -92,9 +94,9 @@ public class Persistor
 
 			preparedStatement.setString(3, MunchkinFileName);
 
-			preparedStatement.setString( 4, ClassName);
+			preparedStatement.setString(4, ClassName);
 
-			preparedStatement.setString( 5, PackageName);
+			preparedStatement.setString(5, PackageName);
 
 			preparedStatement.setBytes(6, Bytecode);
 
@@ -118,7 +120,7 @@ public class Persistor
 
 			reference.auth_key = resultSet.getInt("AUTHKEY");
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}

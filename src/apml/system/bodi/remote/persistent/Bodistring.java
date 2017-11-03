@@ -5,6 +5,7 @@ package apml.system.bodi.remote.persistent;
  *
  * @author Max Rupplin
  */
-public class Bodistring {
+public class Bodistring
+{
 
 }

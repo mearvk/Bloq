@@ -13,25 +13,24 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- *
  * @author oem
  */
 public class Jcmjfilechooserbuilder extends Jcmabstractbuilder
 {
-    protected final Integer hash = 0x888fe8;
+	protected final Integer hash = 0x888fe8;
 
-    public Jcmjfilechooserbuilder(File apml)
-    {
-        super(apml, "//jfilechooser", JFileChooser.class);
-        
-        this.apml = apml;
-        
-        this.xpath = XPathFactory.newInstance().newXPath();          
-    }    
-    
-    @Override
-    public ArrayList<JCodeModel> build()
-    {
-        return super.build();        
-    }    
+	public Jcmjfilechooserbuilder(File apml)
+	{
+		super(apml, "//jfilechooser", JFileChooser.class);
+
+		this.apml = apml;
+
+		this.xpath = XPathFactory.newInstance().newXPath();
+	}
+
+	@Override
+	public ArrayList<JCodeModel> build()
+	{
+		return super.build();
+	}
 }

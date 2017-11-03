@@ -6,10 +6,9 @@
 package apml.interfaces;
 
 /**
- *
  * @author oem
  */
 public interface Reader
 {
-    public void read();
+	public void read();
 }

@@ -38,10 +38,10 @@ public class JMenuItem_018 extends JMenuItem
 	public Apmlbasesystem system;
 
 	/**
-	 *
 	 * @param parent : The tree AWT object.
 	 */
-	public JMenuItem_018(Component parent) {
+	public JMenuItem_018(Component parent)
+	{
 		// setters
 
 		this.setText("Save");
@@ -63,11 +63,11 @@ public class JMenuItem_018 extends JMenuItem
 	}
 
 	/**
-	 *
 	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JMenuItem_018(Component parent, Apmlbasesystem system) {
+	public JMenuItem_018(Component parent, Apmlbasesystem system)
+	{
 		// setters
 
 		this.setText("Save");

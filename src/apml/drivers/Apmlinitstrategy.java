@@ -6,14 +6,13 @@
 package apml.drivers;
 
 /**
- *
  * @author Max Rupplin
  */
 public class Apmlinitstrategy
 {
-    public Boolean issimple = true;
-    
-    public Strategyitem array;    
-    
-    
+	public Boolean issimple = true;
+
+	public Strategyitem array;
+
+
 }

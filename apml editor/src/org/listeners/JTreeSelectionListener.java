@@ -33,7 +33,7 @@ public class JTreeSelectionListener implements TreeSelectionListener
 
 			treenode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			//
 		}

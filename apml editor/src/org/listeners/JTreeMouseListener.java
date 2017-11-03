@@ -25,7 +25,7 @@ public class JTreeMouseListener implements MouseListener
 	{
 		DefaultMutableTreeNode selected;
 
-		selected = (DefaultMutableTreeNode)this.tree.getLastSelectedPathComponent();
+		selected = (DefaultMutableTreeNode) this.tree.getLastSelectedPathComponent();
 
 		//
 
@@ -47,14 +47,22 @@ public class JTreeMouseListener implements MouseListener
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) { }
+	public void mousePressed(MouseEvent e)
+	{
+	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) { }
+	public void mouseReleased(MouseEvent e)
+	{
+	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) { }
+	public void mouseEntered(MouseEvent e)
+	{
+	}
 
 	@Override
-	public void mouseExited(MouseEvent e) { }
+	public void mouseExited(MouseEvent e)
+	{
+	}
 }

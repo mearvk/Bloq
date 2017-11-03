@@ -16,11 +16,12 @@ public class JTreeEditorLeftClickMouseListener implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		if(e.getClickCount()==1 && SwingUtilities.isLeftMouseButton(e))
+		if (e.getClickCount() == 1 && SwingUtilities.isLeftMouseButton(e))
 		{
 			e.consume();
 		}
-		else return;
+		else
+			return;
 
 		//
 

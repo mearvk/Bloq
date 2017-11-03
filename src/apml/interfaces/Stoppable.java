@@ -6,10 +6,9 @@
 package apml.interfaces;
 
 /**
- *
  * @author oem
  */
-public interface Stoppable 
+public interface Stoppable
 {
-    public void stop();
+	public void stop();
 }

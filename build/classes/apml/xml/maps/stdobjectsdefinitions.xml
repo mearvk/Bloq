@@ -7,13 +7,19 @@ and open the template in the system.
 
 <apml author="Max Rupplin" date="01.07.2017">
     <definitions>
-        
+
         <clientsocketimpl class="apml.package.std.ClientSocketImpl">
-            <day>Client socket attaches remotely to an external/remote server socket and is not used to listen for initial connection (see ServerSocket)</day>
+            <day>Client socket attaches remotely to an external/remote server socket and is not used to listen for
+                initial connection (see ServerSocket)
+            </day>
             <see>JDK java.net.Socket.java</see>
             <see>JDK java.net.ServerSocket.java</see>
-            <alias><socket></socket></alias>
-            <alias><client></client></alias>
+            <alias>
+                <socket></socket>
+            </alias>
+            <alias>
+                <client></client>
+            </alias>
             <implements>
                 <function>onstart</function>
                 <function>onrestart</function>
@@ -28,7 +34,7 @@ and open the template in the system.
                 <function>onwrite</function>
                 <function>onevent</function>
                 <function>onstatus</function>
-                
+
                 <function>start</function>
                 <function>onrestart</function>
                 <function>pause</function>
@@ -39,18 +45,24 @@ and open the template in the system.
                 <function>disconnect</function>
                 <function>read</function>
                 <function>poll</function>
-                <function>write</function>   
-                <function>event</function> 
-                <function>status</function>           
+                <function>write</function>
+                <function>event</function>
+                <function>status</function>
             </implements>
         </clientsocketimpl>
-        
+
         <serversocketimpl id="ssid" class="apml.package.std.ServerSocketImpl">
-            <day>Server socket listens initially for incoming connection as opposed to socket which is used to connect initially to an external/remote server socket.</day>
+            <day>Server socket listens initially for incoming connection as opposed to socket which is used to connect
+                initially to an external/remote server socket.
+            </day>
             <see>JDK java.net.Socket.java</see>
-            <see>JDK java.net.ServerSocket.java</see>            
-            <alias><serversocket></serversocket></alias>
-            <alias><server></server></alias>
+            <see>JDK java.net.ServerSocket.java</see>
+            <alias>
+                <serversocket></serversocket>
+            </alias>
+            <alias>
+                <server></server>
+            </alias>
             <implements>
                 <function>onstart</function>
                 <function>onrestart</function>
@@ -65,7 +77,7 @@ and open the template in the system.
                 <function>onwrite</function>
                 <function>onevent</function>
                 <function>onstatus</function>
-                
+
                 <function>start</function>
                 <function>onrestart</function>
                 <function>pause</function>
@@ -76,15 +88,15 @@ and open the template in the system.
                 <function>disconnect</function>
                 <function>read</function>
                 <function>poll</function>
-                <function>write</function>   
-                <function>event</function>  
-                <function>status</function>           
-            </implements>            
+                <function>write</function>
+                <function>event</function>
+                <function>status</function>
+            </implements>
         </serversocketimpl>
-        
+
         <listener>
-            
+
         </listener>
-        
+
     </definitions>
 </apml>

@@ -18,41 +18,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
-{   
-    public final Integer hash = 0x00888FE8;
-
+{
 	//
 	public static Map map = null;
-
-	//
-	public ApmlKernelThread runner;
-
-	//
-	public ArrayList<Apmlsystem> systems = new ArrayList();
-
 	//
 	public static ArrayList<Apmlsystem> _systems = new ArrayList();
-
-	//
-	public ArrayList<Apmlobject> objects = new ArrayList();
-
 	//
 	public static ArrayList<Apmlobject> _objects = new ArrayList();
-
-	//
-	public ArrayList<Apmllistener> listeners = new ArrayList();
-
 	//
 	public static ArrayList<Apmllistener> _listeners = new ArrayList();
-
-	//
-	public ArrayList<Apmlsubscriber> subscribers = new ArrayList();
-
 	//
 	public static ArrayList<Apmlsubscriber> _subscribers = new ArrayList();
-
+	public final Integer hash = 0x00888FE8;
 	//
-	public Map properties = new HashMap<Object,Object>();
+	public ApmlKernelThread runner;
+	//
+	public ArrayList<Apmlsystem> systems = new ArrayList();
+	//
+	public ArrayList<Apmlobject> objects = new ArrayList();
+	//
+	public ArrayList<Apmllistener> listeners = new ArrayList();
+	//
+	public ArrayList<Apmlsubscriber> subscribers = new ArrayList();
+	//
+	public Map properties = new HashMap<Object, Object>();
 
 	//
 	public Stddriver driver;
@@ -71,16 +60,15 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 
 
 	/**
-	 *
 	 * @param apmlfile
 	 * @param basedir
 	 * @param driver
 	 */
 	public Apmlbasesystem(String apmlfile, String basedir, Stddriver driver)
-    {
-        this.setapmlfile(apmlfile);
+	{
+		this.setapmlfile(apmlfile);
 
-        this.setbasedir(basedir);
+		this.setbasedir(basedir);
 
 		this.setdriver(driver);
 	}
@@ -165,170 +153,6 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	}
 
 	//
-	public Object preload(Object o, Boolean register)
-	{
-		System.out.println("Apmlbasesystem doinstantiation() called...");
-
-		Object retval = null;
-
-		try
-		{
-			retval = o;
-		}
-		catch (Exception e)
-		{
-			//
-		}
-		finally
-		{
-			if(retval==null) 		return null;
-
-			if(register==false) 	return retval;
-
-			//
-
-			if(retval instanceof Apmlsystem)
-			{
-				((Apmlsystem)retval).monitor = this;
-
-				mountsystem( (Apmlsystem) retval );
-			}
-
-			if(retval instanceof Apmlobject)
-			{
-				((Apmlobject)retval).monitor = this;
-
-				mountobject( (Apmlobject) retval );
-			}
-
-			if(retval instanceof Apmllistener)
-			{
-				((Apmllistener)retval).monitor = this;
-
-				mountlistener( (Apmllistener) retval );
-			}
-
-			if(retval instanceof Apmlsubscriber)
-			{
-				((Apmlsubscriber)retval).monitor = this;
-
-				mountsubscriber( (Apmlsubscriber) retval );
-			}
-		}
-
-		return retval;
-	}
-
-	public Object postload(Class c, Boolean register)
-	{
-		System.out.println("Apmlbasesystem postloads "+c.getName());
-
-		Object retval = null;
-
-		try
-		{
-			retval = c.newInstance();
-		}
-		catch (Exception e)
-		{
-			//
-		}
-		finally
-		{
-			if(retval==null) 		return null;
-
-			if(register==false) 	return retval;
-
-			//
-
-			if(retval instanceof Apmlsystem)
-			{
-				((Apmlsystem)retval).monitor = this;
-
-				this.mountsystem((Apmlsystem) retval);
-			}
-
-			if(retval instanceof Apmlobject)
-			{
-				((Apmlobject)retval).monitor = this;
-
-				this.mountobject((Apmlobject) retval);
-			}
-
-			if(retval instanceof Apmllistener)
-			{
-				((Apmllistener)retval).monitor = this;
-
-				this.mountlistener((Apmllistener) retval);
-			}
-
-			if(retval instanceof Apmlsubscriber)
-			{
-				((Apmlsubscriber)retval).monitor = this;
-
-				this.mountsubscriber((Apmlsubscriber) retval);
-			}
-		}
-
-		return retval;
-	}
-
-	//
-	public Object preload(Class c, Boolean register)
-	{
-		System.out.println("Apmlbasesystem preloads "+c.getName());
-
-		Object retval = null;
-
-		try
-		{
-			retval = c.newInstance();
-		}
-		catch (Exception e)
-		{
-			//
-		}
-		finally
-		{
-			if(retval==null) 		return null;
-
-			if(register==false) 	return retval;
-
-			//
-
-			if(retval instanceof Apmlsystem)
-			{
-				((Apmlsystem)retval).monitor = this;
-
-				this.mountsystem((Apmlsystem) retval);
-			}
-
-			if(retval instanceof Apmlobject)
-			{
-				((Apmlobject)retval).monitor = this;
-
-				this.mountobject((Apmlobject) retval);
-			}
-
-			if(retval instanceof Apmllistener)
-			{
-				((Apmllistener)retval).monitor = this;
-
-				this.mountlistener((Apmllistener) retval);
-			}
-
-			if(retval instanceof Apmlsubscriber)
-			{
-				((Apmlsubscriber)retval).monitor = this;
-
-				this.mountsubscriber((Apmlsubscriber) retval);
-			}
-		}
-
-		return retval;
-	}
-
-	//
 	public static void doputelementsonstartup(Map map)
 	{
 		Apmlbasesystem.map.putAll(map);
@@ -356,21 +180,191 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	}
 
 	//
+	public Object preload(Object o, Boolean register)
+	{
+		System.out.println("Apmlbasesystem doinstantiation() called...");
+
+		Object retval = null;
+
+		try
+		{
+			retval = o;
+		}
+		catch (Exception e)
+		{
+			//
+		}
+		finally
+		{
+			if (retval == null)
+				return null;
+
+			if (register == false)
+				return retval;
+
+			//
+
+			if (retval instanceof Apmlsystem)
+			{
+				((Apmlsystem) retval).monitor = this;
+
+				mountsystem((Apmlsystem) retval);
+			}
+
+			if (retval instanceof Apmlobject)
+			{
+				((Apmlobject) retval).monitor = this;
+
+				mountobject((Apmlobject) retval);
+			}
+
+			if (retval instanceof Apmllistener)
+			{
+				((Apmllistener) retval).monitor = this;
+
+				mountlistener((Apmllistener) retval);
+			}
+
+			if (retval instanceof Apmlsubscriber)
+			{
+				((Apmlsubscriber) retval).monitor = this;
+
+				mountsubscriber((Apmlsubscriber) retval);
+			}
+		}
+
+		return retval;
+	}
+
+	public Object postload(Class c, Boolean register)
+	{
+		System.out.println("Apmlbasesystem postloads " + c.getName());
+
+		Object retval = null;
+
+		try
+		{
+			retval = c.newInstance();
+		}
+		catch (Exception e)
+		{
+			//
+		}
+		finally
+		{
+			if (retval == null)
+				return null;
+
+			if (register == false)
+				return retval;
+
+			//
+
+			if (retval instanceof Apmlsystem)
+			{
+				((Apmlsystem) retval).monitor = this;
+
+				this.mountsystem((Apmlsystem) retval);
+			}
+
+			if (retval instanceof Apmlobject)
+			{
+				((Apmlobject) retval).monitor = this;
+
+				this.mountobject((Apmlobject) retval);
+			}
+
+			if (retval instanceof Apmllistener)
+			{
+				((Apmllistener) retval).monitor = this;
+
+				this.mountlistener((Apmllistener) retval);
+			}
+
+			if (retval instanceof Apmlsubscriber)
+			{
+				((Apmlsubscriber) retval).monitor = this;
+
+				this.mountsubscriber((Apmlsubscriber) retval);
+			}
+		}
+
+		return retval;
+	}
+
+	//
+	public Object preload(Class c, Boolean register)
+	{
+		System.out.println("Apmlbasesystem preloads " + c.getName());
+
+		Object retval = null;
+
+		try
+		{
+			retval = c.newInstance();
+		}
+		catch (Exception e)
+		{
+			//
+		}
+		finally
+		{
+			if (retval == null)
+				return null;
+
+			if (register == false)
+				return retval;
+
+			//
+
+			if (retval instanceof Apmlsystem)
+			{
+				((Apmlsystem) retval).monitor = this;
+
+				this.mountsystem((Apmlsystem) retval);
+			}
+
+			if (retval instanceof Apmlobject)
+			{
+				((Apmlobject) retval).monitor = this;
+
+				this.mountobject((Apmlobject) retval);
+			}
+
+			if (retval instanceof Apmllistener)
+			{
+				((Apmllistener) retval).monitor = this;
+
+				this.mountlistener((Apmllistener) retval);
+			}
+
+			if (retval instanceof Apmlsubscriber)
+			{
+				((Apmlsubscriber) retval).monitor = this;
+
+				this.mountsubscriber((Apmlsubscriber) retval);
+			}
+		}
+
+		return retval;
+	}
+
+	//
 	public final void setapmlfile(String apmlfile)
 	{
-        this.apmlfile = apmlfile;
+		this.apmlfile = apmlfile;
 	}
 
 	//
 	public final void setbasedir(String basedir)
 	{
-        this.basedir = basedir;
+		this.basedir = basedir;
 	}
 
 	//
 	public final void setdriver(Stddriver driver)
 	{
-        this.driver = driver;
+		this.driver = driver;
 	}
 
 	//
@@ -406,9 +400,9 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 
 			Bodi.context("bodi//development.events.org/{system}/{subscribers}").put("apmlsystem.subscribers", subscribers);
 		}
-		catch(Exception e)
-        {
-            e.printStackTrace();
+		catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 
@@ -416,8 +410,8 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	public void startsystems()
 	{
 		for (Apmlsystem system : systems)
-        {
-            system.start();
+		{
+			system.start();
 		}
 	}
 
@@ -425,8 +419,8 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	public void initsystems()
 	{
 		for (Apmlsystem system : systems)
-        {
-            system.initialize();
+		{
+			system.initialize();
 		}
 	}
 
@@ -434,7 +428,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	public void runsystems()
 	{
 		for (Apmlsystem system : systems)
-        {
+		{
 			system.run();
 		}
 	}
@@ -620,7 +614,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	//
 	public void put(Object key, Object value)
 	{
-        this.properties.put(key, value);
+		this.properties.put(key, value);
 	}
 
 	//
@@ -632,21 +626,21 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 		{
 			classnames = new Fileloader().loadclasses(new File(basedir), null, ".class", new ArrayList());
 
-            for(String eachclass : classnames)
-            {
-                try
-                {
-                    System.out.println("Apmlbasesystem adds " + Class.forName(eachclass) + " from classpath " + basedir);
+			for (String eachclass : classnames)
+			{
+				try
+				{
+					System.out.println("Apmlbasesystem adds " + Class.forName(eachclass) + " from classpath " + basedir);
 
-                    this.classes.add(Class.forName(eachclass));
-                }
-                catch (Exception e)
-                {
-                    System.out.println("Apmlbasesystem fails to add " + Class.forName(eachclass) + " from classpath " + basedir);
-                }
-            }
-        }
-        catch(Exception exception)
+					this.classes.add(Class.forName(eachclass));
+				}
+				catch (Exception e)
+				{
+					System.out.println("Apmlbasesystem fails to add " + Class.forName(eachclass) + " from classpath " + basedir);
+				}
+			}
+		}
+		catch (Exception exception)
 		{
 			//System.out.println(exception);
 		}
@@ -655,26 +649,27 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	//
 	public void _loadclasses(String[] basedirs)
 	{
-		for(String basedir : basedirs)
-        {
-            this._loadclasses(basedir);
+		for (String basedir : basedirs)
+		{
+			this._loadclasses(basedir);
 		}
 	}
 
 	//
 	public void setproperty(Object object, Object state) throws Exception
 	{
-        Object certain = this.getproperty(object);
+		Object certain = this.getproperty(object);
 
-        if(certain==null) throw new Exception("System property ["+object+"] was not found; returning");
+		if (certain == null)
+			throw new Exception("System property [" + object + "] was not found; returning");
 
-        this.properties.put(object, state);
+		this.properties.put(object, state);
 	}
 
 	//
 	public Object getproperty(Object object)
 	{
-        return this.properties.get(object);
+		return this.properties.get(object);
 	}
 
 	//
@@ -712,9 +707,9 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	//
 	public Object mountlistener(Apmllistener listener)
 	{
-        this.listeners.add(listener);
+		this.listeners.add(listener);
 
-        return "success";
+		return "success";
 	}
 
 	//
@@ -722,15 +717,15 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	{
 		this.listeners.addAll(listeners);
 
-        return "success";
+		return "success";
 	}
 
 	//
 	public Object unmountlistener(Apmllistener listener)
 	{
-        listeners.remove(listener);
+		listeners.remove(listener);
 
-        return "success";
+		return "success";
 	}
 
 	//
@@ -738,13 +733,13 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	{
 		this.listeners.removeAll(listeners);
 
-        return "success";
+		return "success";
 	}
 
 	//
 	public Object mountsubscriber(Apmlsubscriber subscriber)
 	{
-        subscribers.add(subscriber);
+		subscribers.add(subscriber);
 
 		return "success";
 	}
@@ -754,7 +749,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	{
 		this.subscribers.addAll(subscribers);
 
-        return "success";
+		return "success";
 	}
 
 	//
@@ -776,7 +771,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	//
 	public Object unmountsubscriber(Apmlsubscriber subscriber)
 	{
-        subscribers.remove(subscriber);
+		subscribers.remove(subscriber);
 
 		return "success";
 	}

@@ -141,7 +141,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		// bodi
 
-		Bodi.context("editor").put(this.bodi,this);
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	/**
@@ -232,7 +232,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		// bodi
 
-		Bodi.context("editor").put(this.bodi,this);
+		Bodi.context("editor").put(this.bodi, this);
 
 	}
 
@@ -258,11 +258,11 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 					APMLGui apmlgui;
 
-					switch(panetitle)
+					switch (panetitle)
 					{
 						case "☬   Apml ":
 
-							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
 							apmlgui.remove(apmlgui.selected_panel);
 
@@ -280,7 +280,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 						case "☬   Bloq ":
 
-							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
 							apmlgui.remove(apmlgui.selected_panel);
 
@@ -298,7 +298,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 						case "☬   Bodi ":
 
-							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
 							apmlgui.remove(apmlgui.selected_panel);
 
@@ -316,7 +316,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 						case "☬   Munction ":
 
-							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
 							apmlgui.remove(apmlgui.selected_panel);
 
@@ -334,7 +334,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 						case "☬   Sprung ":
 
-							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
 							apmlgui.remove(apmlgui.selected_panel);
 
@@ -352,7 +352,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 						case "☬   Runyn ":
 
-							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
 							apmlgui.remove(apmlgui.selected_panel);
 
@@ -370,7 +370,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 						case "☬   Falthruu ":
 
-							apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
 							apmlgui.remove(apmlgui.selected_panel);
 

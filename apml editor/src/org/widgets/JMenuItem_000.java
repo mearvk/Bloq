@@ -137,7 +137,7 @@ class JMenuItem_000_ActionListener implements ActionListener
 
 				UserInterfaceProcessor processor;
 
-				processor = (UserInterfaceProcessor)Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
+				processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
 				processor.update(new OpenDocumentEvent(event, file));
 
@@ -145,7 +145,7 @@ class JMenuItem_000_ActionListener implements ActionListener
 
 				//processor.update(new DocumentLoadedEvent(event, file));
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				e.printStackTrace();
 			}

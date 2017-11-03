@@ -32,7 +32,7 @@ public class JEditorPane_000 extends JEditorPane
 	{
 		//setters
 
-		this.setBackground(new Color(120,106,123));
+		this.setBackground(new Color(120, 106, 123));
 
 		this.setFont(new Font("Courier", Font.PLAIN, 12));
 
@@ -54,7 +54,7 @@ public class JEditorPane_000 extends JEditorPane
 		{
 			Bodi.context("system").put(this.bodi, this);
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -65,7 +65,7 @@ public class JEditorPane_000 extends JEditorPane
 	{
 		//setters
 
-		this.setBackground(new Color(120,106,123));
+		this.setBackground(new Color(120, 106, 123));
 
 		this.setFont(new Font("Courier", Font.PLAIN, 12));
 
@@ -89,7 +89,7 @@ public class JEditorPane_000 extends JEditorPane
 		{
 			Bodi.context("system").put(this.bodi, this);
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -129,13 +129,13 @@ public class JEditorPane_000 extends JEditorPane
 	//
 	public void highlightline(int startcharindex, int endcharindex)
 	{
-		Color highlightcolor = new Color(120,106,123);
+		Color highlightcolor = new Color(120, 106, 123);
 
 		try
 		{
 			this.getHighlighter().addHighlight(startcharindex, endcharindex, new DefaultHighlighter.DefaultHighlightPainter(highlightcolor));
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -155,15 +155,17 @@ public class JEditorPane_000 extends JEditorPane
 
 		//
 
-		for(int i=0; i<rectangles; i++)
+		for (int i = 0; i < rectangles; i++)
 		{
-			if(i%2==0) g.setColor(new Color(240,240,240));
+			if (i % 2 == 0)
+				g.setColor(new Color(240, 240, 240));
 
-			if(i%2==1) g.setColor(new Color(235,235,235));
+			if (i % 2 == 1)
+				g.setColor(new Color(235, 235, 235));
 
 			//
 
-			g.fillRect(0, lineheight*i, width, lineheight);
+			g.fillRect(0, lineheight * i, width, lineheight);
 		}
 
 		super.paintComponents(g);

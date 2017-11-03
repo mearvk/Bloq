@@ -60,7 +60,7 @@ public class JPanel_002 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0x00,0xff,0xff));
+		this.setBackground(new Color(0x00, 0xff, 0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -72,7 +72,7 @@ public class JPanel_002 extends JPanel
 
 		this.status.setFont(new Font("Courier", Font.PLAIN, 12));
 
-		this.status.setBounds(0,15, this.status.getWidth(), this.status.getHeight());
+		this.status.setBounds(0, 15, this.status.getWidth(), this.status.getHeight());
 
 		this.status.setForeground(Color.DARK_GRAY);
 
@@ -101,7 +101,7 @@ public class JPanel_002 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0x00,0xff,0xff));
+		this.setBackground(new Color(0x00, 0xff, 0xff));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -113,7 +113,7 @@ public class JPanel_002 extends JPanel
 
 		this.status.setFont(new Font("Courier", Font.PLAIN, 12));
 
-		this.status.setBounds(0,15, this.status.getWidth(), this.status.getHeight());
+		this.status.setBounds(0, 15, this.status.getWidth(), this.status.getHeight());
 
 		this.status.setForeground(Color.DARK_GRAY);
 

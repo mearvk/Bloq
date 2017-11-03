@@ -1,4 +1,3 @@
-
 package org.widgets;
 
 import apml.system.Apmlbasesystem;
@@ -16,124 +15,115 @@ import java.net.URL;
 
 /**
  * Software programmatically produced by Bloq implementation version 1.05 - Bodi Remote Version
- * 
+ *
  * @author
  * @see
  * @since
- * @version
- * 
  */
-public class JMenu_000
-    extends JMenu
+public class JMenu_000 extends JMenu
 {
 
-    public KeyEvent importref_001;
-    public KeyStroke importref_002;
-    public ActionEvent importref_003;
-    public ImageIcon importref_004;
-    public URL importref_005;
-    public Color importref_006;
-    public BorderLayout importref_007;
-    public FlowLayout importref_008;
-    public GridLayout importref_009;
-    public Color importref_010;
-    public EmptyBorder importref_011;
-    public ChangeEvent importref_012;
-    public Dimension importref_013;
-    public Rectangle importref_014;
-    public ImageIO importref_015;
-    public File importref_016;
-    public Component parent;
-    public Apmlbasesystem system;
-
-    /**
-     * 
-     * @param parent : The tree AWT object.
-     */
-    public JMenu_000(Component parent)
+	public KeyEvent importref_001;
+	public KeyStroke importref_002;
+	public ActionEvent importref_003;
+	public ImageIcon importref_004;
+	public URL importref_005;
+	public Color importref_006;
+	public BorderLayout importref_007;
+	public FlowLayout importref_008;
+	public GridLayout importref_009;
+	public Color importref_010;
+	public EmptyBorder importref_011;
+	public ChangeEvent importref_012;
+	public Dimension importref_013;
+	public Rectangle importref_014;
+	public ImageIO importref_015;
+	public File importref_016;
+	public Component parent;
+	public Apmlbasesystem system;
+	JMenuItem_000 jmenuitem_000;
+	JMenuItem_001 jmenuitem_001;
+	JMenuItem_018 jmenuitem_018;
+	JMenuItem_019 jmenuitem_019;
+	/**
+	 * @param parent : The tree AWT object.
+	 */
+	public JMenu_000(Component parent)
 	{
-        // setters 
-	
-        this.setText("  File  ");
+		// setters
 
-        this.setMnemonic(KeyEvent.VK_F);
+		this.setText("  File  ");
 
-        // instantiation 
-	
-        this.jmenuitem_000 = new JMenuItem_000(this);
-	
-        this.jmenuitem_001 = new JMenuItem_001(this);
+		this.setMnemonic(KeyEvent.VK_F);
+
+		// instantiation
+
+		this.jmenuitem_000 = new JMenuItem_000(this);
+
+		this.jmenuitem_001 = new JMenuItem_001(this);
 
 		this.jmenuitem_018 = new JMenuItem_018(this);
 
-        this.jmenuitem_019 = new JMenuItem_019(this);
-	
-        // hierarchy 
-	
-        this.add(jmenuitem_000);
+		this.jmenuitem_019 = new JMenuItem_019(this);
 
-        this.add(jmenuitem_001);
+		// hierarchy
+
+		this.add(jmenuitem_000);
+
+		this.add(jmenuitem_001);
 
 		this.add(jmenuitem_018);
 
 		this.add(jmenuitem_019);
-	
-        // devolvement 
-	
-        this.parent = parent;
-	
-        this.setVisible(true);
-	
-        // listeners 
-	
-    }
 
-    /**
-     * 
-     * @param parent : The tree AWT object.
-     * @param system : The APML system object.
-     */
-    public JMenu_000(Component parent, Apmlbasesystem system)
+		// devolvement
+
+		this.parent = parent;
+
+		this.setVisible(true);
+
+		// listeners
+
+	}
+	/**
+	 * @param parent : The tree AWT object.
+	 * @param system : The APML system object.
+	 */
+	public JMenu_000(Component parent, Apmlbasesystem system)
 	{
-        // setters 
-	
-        this.setText("  File  ");
+		// setters
+
+		this.setText("  File  ");
 
 		this.setMnemonic(KeyEvent.VK_F);
-	
-        // instantiation 
-	
-        this.jmenuitem_000 = new JMenuItem_000(this);
 
-        this.jmenuitem_001 = new JMenuItem_001(this);
+		// instantiation
+
+		this.jmenuitem_000 = new JMenuItem_000(this);
+
+		this.jmenuitem_001 = new JMenuItem_001(this);
 
 		this.jmenuitem_018 = new JMenuItem_018(this);
 
-        this.jmenuitem_019 = new JMenuItem_019(this);
-	
-        // hierarchy 
-	
-        this.add(jmenuitem_000);
-	
-        this.add(jmenuitem_001);
+		this.jmenuitem_019 = new JMenuItem_019(this);
+
+		// hierarchy
+
+		this.add(jmenuitem_000);
+
+		this.add(jmenuitem_001);
 
 		this.add(jmenuitem_018);
-	
-        // devolvement 
-	
-        this.parent = parent;
-	
-        this.system = system;
-	
-        this.setVisible(true);
-	
-        // listeners 
-	
-    }
-    
-	
-    JMenuItem_000 jmenuitem_000;
-    JMenuItem_001 jmenuitem_001;
-    JMenuItem_018 jmenuitem_018;
-    JMenuItem_019 jmenuitem_019;
+
+		// devolvement
+
+		this.parent = parent;
+
+		this.system = system;
+
+		this.setVisible(true);
+
+		// listeners
+
+	}
 }

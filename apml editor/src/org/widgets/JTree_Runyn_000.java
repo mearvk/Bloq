@@ -72,7 +72,7 @@ public class JTree_Runyn_000 extends JTree
 
 		this.setBackground(null);
 
-		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5,10));
+		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 10));
 
 		this.setCellRenderer(new TranslucentJTreeCellRenderer());
 
@@ -150,9 +150,9 @@ public class JTree_Runyn_000 extends JTree
 
 	public void init()
 	{
-		DefaultMutableTreeNode root = ((DefaultMutableTreeNode)this.getModel().getRoot());
+		DefaultMutableTreeNode root = ((DefaultMutableTreeNode) this.getModel().getRoot());
 
-		DefaultTreeModel model = (DefaultTreeModel)this.getModel();
+		DefaultTreeModel model = (DefaultTreeModel) this.getModel();
 
 		Document document;
 
@@ -168,7 +168,7 @@ public class JTree_Runyn_000 extends JTree
 
 			model.reload();
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -176,7 +176,7 @@ public class JTree_Runyn_000 extends JTree
 
 	public void update(CloseApmlDocumentEvent event)
 	{
-		((DefaultMutableTreeNode)this.getModel().getRoot()).removeAllChildren();
+		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
 	public void update(LoadApmlDocumentEvent event)
@@ -205,9 +205,9 @@ public class JTree_Runyn_000 extends JTree
 
 			nodes = Xpathquick.evaluate(document, xpath, "/*");
 
-			model = (DefaultTreeModel)this.getModel();
+			model = (DefaultTreeModel) this.getModel();
 
-			root = (DefaultMutableTreeNode)model.getRoot();
+			root = (DefaultMutableTreeNode) model.getRoot();
 
 			//
 
@@ -225,7 +225,7 @@ public class JTree_Runyn_000 extends JTree
 
 			model.reload();
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -236,15 +236,17 @@ public class JTree_Runyn_000 extends JTree
 	{
 		try
 		{
-			if(child==null) return;
+			if (child == null)
+				return;
 
 			//
 
-			if(parent==null) return;
+			if (parent == null)
+				return;
 
 			//
 
-			for(int i = 0; i<children.getLength(); i++)
+			for (int i = 0; i < children.getLength(); i++)
 			{
 				Node node = children.item(i);
 
@@ -264,7 +266,7 @@ public class JTree_Runyn_000 extends JTree
 
 				NodeList rawnodes = children.item(i).getChildNodes();
 
-				update(model, root, child, treenode, rawnodes, depth+1);
+				update(model, root, child, treenode, rawnodes, depth + 1);
 
 				//
 			}
@@ -281,9 +283,9 @@ public class JTree_Runyn_000 extends JTree
 
 	public void removenewlinetextnodes()
 	{
-		DefaultMutableTreeNode root = (DefaultMutableTreeNode)this.getModel().getRoot();
+		DefaultMutableTreeNode root = (DefaultMutableTreeNode) this.getModel().getRoot();
 
-		DefaultTreeModel model = (DefaultTreeModel)this.getModel();
+		DefaultTreeModel model = (DefaultTreeModel) this.getModel();
 
 		Enumeration children = root.breadthFirstEnumeration();
 
@@ -297,24 +299,24 @@ public class JTree_Runyn_000 extends JTree
 
 		ArrayList<DefaultMutableTreeNode> remove = new ArrayList<>(500);
 
-		for(;children.hasMoreElements();)
+		for (; children.hasMoreElements(); )
 		{
 			current_child = (DefaultMutableTreeNode) children.nextElement();
 
 			current_object = current_child.getUserObject();
 
-			current_type = current_object instanceof Node ? ((Node)current_object).getNodeType() : -1;
+			current_type = current_object instanceof Node ? ((Node) current_object).getNodeType() : -1;
 
 			//
 
-			if(current_object instanceof String)
+			if (current_object instanceof String)
 			{
 				System.out.println(current_object);
 			}
 
 			//
 
-			else if(current_type==Node.TEXT_NODE)
+			else if (current_type == Node.TEXT_NODE)
 			{
 				//System.out.println("Removing carriage return: "+((Node)current_object).getNodeName()+" : "+((Node)current_object).getNodeValue().replace("\n","\\n"));
 
@@ -324,7 +326,7 @@ public class JTree_Runyn_000 extends JTree
 
 		//
 
-		for(int i=0; i<remove.size(); i++)
+		for (int i = 0; i < remove.size(); i++)
 		{
 			model.removeNodeFromParent(remove.get(i));
 		}

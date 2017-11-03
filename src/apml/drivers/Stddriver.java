@@ -8,28 +8,27 @@ package apml.drivers;
 import java.io.File;
 
 /**
- *
  * @author Max Rupplin
  */
-public abstract class Stddriver 
+public abstract class Stddriver
 {
-    protected final Integer hash = 0x888fe8;
-    
-    protected String workingdir;
-    
-    protected File basedir;
-        
-    public Stddriver()
-    {
-        
-    }
-    
-    public Stddriver(String workingdir)
-    {
-        this.workingdir = workingdir;
-    }
-    
-    public abstract void drive();
-    
-    public abstract void init();
+	protected final Integer hash = 0x888fe8;
+
+	protected String workingdir;
+
+	protected File basedir;
+
+	public Stddriver()
+	{
+
+	}
+
+	public Stddriver(String workingdir)
+	{
+		this.workingdir = workingdir;
+	}
+
+	public abstract void drive();
+
+	public abstract void init();
 }

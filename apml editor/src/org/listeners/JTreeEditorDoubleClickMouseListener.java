@@ -16,11 +16,12 @@ public class JTreeEditorDoubleClickMouseListener implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		if(e.getClickCount()>=2)
+		if (e.getClickCount() >= 2)
 		{
 			e.consume();
 		}
-		else return;
+		else
+			return;
 
 		//
 

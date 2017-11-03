@@ -66,7 +66,7 @@ public class JSplitPane_000 extends JSplitPane
 
 		//this.setResizeWeight(50f);
 
-		this.setBackground(new Color(0xff,0xff,0xff));
+		this.setBackground(new Color(0xff, 0xff, 0xff));
 
 		this.setDividerLocation(250);
 
@@ -106,7 +106,7 @@ public class JSplitPane_000 extends JSplitPane
 
 		// setters
 
-		this.setBackground(new Color(0xff,0xff,0xff));
+		this.setBackground(new Color(0xff, 0xff, 0xff));
 
 		this.setDividerLocation(250);
 

@@ -6,10 +6,9 @@
 package apml.examples.jgpserver.server;
 
 /**
- *
  * @author Max Rupplin
  */
-public class Jgpserver 
+public class Jgpserver
 {
-    protected final Integer hash = 0x888fe8;    
+	protected final Integer hash = 0x888fe8;
 }

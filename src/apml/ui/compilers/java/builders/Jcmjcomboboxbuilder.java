@@ -16,77 +16,81 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- *
  * @author Max Rupplin
  */
-public class Jcmjcomboboxbuilder extends Jcmabstractbuilder {
-    protected final Integer hash = 0x00888FE8;
+public class Jcmjcomboboxbuilder extends Jcmabstractbuilder
+{
+	protected final Integer hash = 0x00888FE8;
 
-    public Jcmjcomboboxbuilder(File apml)
-    {
-        super(apml, "//jcombobox", JComboBox.class);
-    
-        this.apml = apml;
-        
-        this.xpath = XPathFactory.newInstance().newXPath();            
-    }    
-    
-    @Override
-    public ArrayList<JCodeModel> build()
-    {
-        super.build();
-               
-        try
-        {  
-            Bodicontext widgets = Bodi.context("widgets");
-            
-            for(int index=0; index<nodes.getLength(); index++)
-            {                                  
-                Uiparameter uip = (Uiparameter)widgets.pull(this.jcodemodels.get(index)); 
-                                
-                this.additems(uip);
-            }
-        }
-        catch(Exception exception)
-        {
-            System.err.println(exception);
-        }        
-        
-        return this.jcodemodels;
-    }
+	public Jcmjcomboboxbuilder(File apml)
+	{
+		super(apml, "//jcombobox", JComboBox.class);
 
-    public void additems(Uiparameter uip)
-    {
-        try
-        {
-            uip.constructor1.body().directStatement("\n");
-            
-            uip.constructor2.body().directStatement("\n");
-            
-            uip.constructor1.body().directStatement("/*---------------------- combobox items ---------------------*/\n");
-            
-            uip.constructor2.body().directStatement("/*---------------------- combobox items ---------------------*/\n");
-            
-            NodeList nodes =  (NodeList)xpath.evaluate("./item", this.nodes.item(uip.index), XPathConstants.NODESET); 
-            
-            for(int i=0; i<nodes.getLength(); i++)
-            {
-                Element element = (Element)nodes.item(i);
-                
-                if(element.getAttribute("name")==null) continue;                
-                
-                Iterator iterator = uip.jdc.constructors();
-                
-                while(iterator.hasNext())
-                {
-                    JMethod constructor;
-                    
-                    constructor = (JMethod)iterator.next();                    
-                    
-                    constructor.body().directStatement("this.addItem(\""+element.getAttribute("name")+"\");\n");
-                }                
-            }
-        }
-        catch(Exception e){e.printStackTrace();}
-    }               
+		this.apml = apml;
+
+		this.xpath = XPathFactory.newInstance().newXPath();
+	}
+
+	@Override
+	public ArrayList<JCodeModel> build()
+	{
+		super.build();
+
+		try
+		{
+			Bodicontext widgets = Bodi.context("widgets");
+
+			for (int index = 0; index < nodes.getLength(); index++)
+			{
+				Uiparameter uip = (Uiparameter) widgets.pull(this.jcodemodels.get(index));
+
+				this.additems(uip);
+			}
+		}
+		catch (Exception exception)
+		{
+			System.err.println(exception);
+		}
+
+		return this.jcodemodels;
+	}
+
+	public void additems(Uiparameter uip)
+	{
+		try
+		{
+			uip.constructor1.body().directStatement("\n");
+
+			uip.constructor2.body().directStatement("\n");
+
+			uip.constructor1.body().directStatement("/*---------------------- combobox items ---------------------*/\n");
+
+			uip.constructor2.body().directStatement("/*---------------------- combobox items ---------------------*/\n");
+
+			NodeList nodes = (NodeList) xpath.evaluate("./item", this.nodes.item(uip.index), XPathConstants.NODESET);
+
+			for (int i = 0; i < nodes.getLength(); i++)
+			{
+				Element element = (Element) nodes.item(i);
+
+				if (element.getAttribute("name") == null)
+					continue;
+
+				Iterator iterator = uip.jdc.constructors();
+
+				while (iterator.hasNext())
+				{
+					JMethod constructor;
+
+					constructor = (JMethod) iterator.next();
+
+					constructor.body().directStatement("this.addItem(\"" + element.getAttribute("name") + "\");\n");
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 }

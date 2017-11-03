@@ -11,161 +11,204 @@ import java.util.ArrayList;
  *
  * @author Max Rupplin
  */
-public abstract class Baseserver extends Thread {
-    public Integer hash = 0x008808ef;
+public abstract class Baseserver extends Thread
+{
+	public Integer hash = 0x008808ef;
 
-    public String host = "localhost";
+	public String host = "localhost";
 
-    public InetAddress address;
+	public InetAddress address;
 
-    public Integer port;
+	public Integer port;
 
-    public ServerSocket serversocket;
+	public ServerSocket serversocket;
 
-    public Boolean doread;
+	public Boolean doread;
 
-    public Boolean dowrite;
+	public Boolean dowrite;
 
-    public Boolean isdonereading;
+	public Boolean isdonereading;
 
-    public Boolean isdonewriting;
+	public Boolean isdonewriting;
 
-    public Boolean running = true;
+	public Boolean running = true;
 
-    public ArrayList<Networkcontext> connections = new ArrayList();
+	public ArrayList<Networkcontext> connections = new ArrayList();
 
-    public Inputqueue connectionqueue = new Inputqueue();
+	public Inputqueue connectionqueue = new Inputqueue();
 
-    /**
-     * @param host
-     * @param port
-     */
-    public Baseserver(String host, Integer port) {
-        if (host == null || port == null) throw new SecurityException("//bodi/connect");
+	/**
+	 * @param host
+	 * @param port
+	 */
+	public Baseserver(String host, Integer port)
+	{
+		if (host == null || port == null)
+			throw new SecurityException("//bodi/connect");
 
-        this.host = host;
+		this.host = host;
 
-        this.port = port;
+		this.port = port;
 
-        this.setName("Basicserverthread");
+		this.setName("Basicserverthread");
 
-        try {
-            this.address = InetAddress.getByName(host);
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
+		try
+		{
+			this.address = InetAddress.getByName(host);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace(System.err);
 
-            return;
-        }
+			return;
+		}
 
-        try {
-            this.serversocket = new ServerSocket(this.port, 4096, this.address);
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
+		try
+		{
+			this.serversocket = new ServerSocket(this.port, 4096, this.address);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace(System.err);
 
-            return;
-        } finally {
-            System.out.println("Serversocket created on port " + this.port);
-        }
-    }
+			return;
+		}
+		finally
+		{
+			System.out.println("Serversocket created on port " + this.port);
+		}
+	}
 
-    /**
-     * @param port
-     */
-    public Baseserver(Integer port) {
-        if (port == null) throw new SecurityException("//bodi/connect");
+	/**
+	 * @param port
+	 */
+	public Baseserver(Integer port)
+	{
+		if (port == null)
+			throw new SecurityException("//bodi/connect");
 
-        this.port = port;
+		this.port = port;
 
-        this.setName("Basicserverthread");
+		this.setName("Basicserverthread");
 
-        try {
-            this.address = InetAddress.getByName(host);
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
+		try
+		{
+			this.address = InetAddress.getByName(host);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace(System.err);
 
-            return;
-        }
+			return;
+		}
 
-        try {
-            this.serversocket = new ServerSocket(this.port, 4096, this.address);
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
+		try
+		{
+			this.serversocket = new ServerSocket(this.port, 4096, this.address);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace(System.err);
 
-            return;
-        } finally {
-            System.out.println("Serversocket created on port " + this.port);
-        }
-    }
+			return;
+		}
+		finally
+		{
+			System.out.println("Serversocket created on port " + this.port);
+		}
+	}
 
-    /**
-     *
-     */
-    @Override
-    public void run() {
-        try {
-            while (running) {
-                Networkcontext connection;
+	/**
+	 *
+	 */
+	@Override
+	public void run()
+	{
+		try
+		{
+			while (running)
+			{
+				Networkcontext connection;
 
-                connection = new Networkcontext(this);
+				connection = new Networkcontext(this);
 
-                connection.socket = this.serversocket.accept();
+				connection.socket = this.serversocket.accept();
 
-                connection.remoteaddress = connection.socket.getRemoteSocketAddress().toString();
+				connection.remoteaddress = connection.socket.getRemoteSocketAddress().toString();
 
-                System.out.println("> New remote connection established...");
+				System.out.println("> New remote connection established...");
 
-                try {
-                    connection.inputstream = connection.socket.getInputStream();
+				try
+				{
+					connection.inputstream = connection.socket.getInputStream();
 
-                    connection.reader = new BufferedReader(new InputStreamReader(connection.inputstream));
-                } catch (Exception e) {
-                    e.printStackTrace(System.err);
+					connection.reader = new BufferedReader(new InputStreamReader(connection.inputstream));
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace(System.err);
 
-                    return;
-                } finally {
-                    System.out.println(">   Related reader established...");
-                }
+					return;
+				}
+				finally
+				{
+					System.out.println(">   Related reader established...");
+				}
 
-                try {
-                    connection.outputstream = connection.socket.getOutputStream();
+				try
+				{
+					connection.outputstream = connection.socket.getOutputStream();
 
-                    connection.writer = new BufferedWriter(new OutputStreamWriter(connection.outputstream));
-                } catch (Exception e) {
-                    e.printStackTrace(System.err);
+					connection.writer = new BufferedWriter(new OutputStreamWriter(connection.outputstream));
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace(System.err);
 
-                    return;
-                } finally {
-                    System.out.println(">   Related writer established...");
-                }
+					return;
+				}
+				finally
+				{
+					System.out.println(">   Related writer established...");
+				}
 
-                try {
-                    connection.thread = new Listenerthread(connection);
+				try
+				{
+					connection.thread = new Listenerthread(connection);
 
-                    connection.thread.start();
-                } catch (Exception e) {
-                    e.printStackTrace(System.err);
+					connection.thread.start();
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace(System.err);
 
-                    return;
-                } finally {
-                    System.out.println(">   Related I/O listener thread established...");
-                }
+					return;
+				}
+				finally
+				{
+					System.out.println(">   Related I/O listener thread established...");
+				}
 
-                this.connections.add(connection);
-            }
-        } catch (SocketException se) {
-            se.printStackTrace(System.err);
-        } catch (IOException ioe) {
-            ioe.printStackTrace(System.err);
-        }
-    }
+				this.connections.add(connection);
+			}
+		}
+		catch (SocketException se)
+		{
+			se.printStackTrace(System.err);
+		}
+		catch (IOException ioe)
+		{
+			ioe.printStackTrace(System.err);
+		}
+	}
 
-    /**
-     * @param bytes
-     */
-    public abstract void write(byte[] bytes);
+	/**
+	 * @param bytes
+	 */
+	public abstract void write(byte[] bytes);
 
-    /**
-     * @return
-     */
-    public abstract byte[] read();
+	/**
+	 * @return
+	 */
+	public abstract byte[] read();
 }

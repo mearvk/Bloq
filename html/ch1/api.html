@@ -18,7 +18,9 @@
 <h3>The APML Element</h3>
 
 <div>
-    The APML System element [<pre><code>&lt;apml&gt;&lt;/apml&gt;</code></pre>] Elements.
+    The APML System element [
+    <pre><code>&lt;apml&gt;&lt;/apml&gt;</code></pre>
+    ] Elements.
     It acts both as a container and as a interface between your system(s) and hierarchically removed APML system.
     One APML Element usually to some few local systems and many APML Elements between systems that are derived
     independently is how the architecture is conceived.
@@ -50,7 +52,9 @@
 <h4>The System Element</h4>
 
 <div>
-    The System element [<pre><code><system></system></code></pre>] is a intermediate housing element usually for developer defined System Elements.
+    The System element [
+    <pre><code><system></system></code></pre>
+    ] is a intermediate housing element usually for developer defined System Elements.
     We care to include it to aid organization. A system element would contain many objects each of which could be simple
     or complicated like a program or server. Ok.
     The system element is quite standard and we would care to included it as part of regular practice. It is required
@@ -85,7 +89,9 @@
 <h4>The Object Element</h4>
 
 <div>
-    The Object element [<pre><code><object></object></code></pre>] is a generic element used for developer defined Object Elements.
+    The Object element [
+    <pre><code><object></object></code></pre>
+    ] is a generic element used for developer defined Object Elements.
     Object Elements are useful because they can be extended, be specific or shallow and therefore are taught as a
     cornerstone of System Theory. Ok.
     Objects can be very general (a data structure) or they have larger scope like an HTTP server.
@@ -115,7 +121,9 @@
 <h4>The Callback Element</h4>
 
 <div>
-    The Callback element [<pre><code><callback></callback></code></pre>] is an element used to set against an output a place for that output to be received as an input.
+    The Callback element [
+    <pre><code><callback></callback></code></pre>
+    ] is an element used to set against an output a place for that output to be received as an input.
     Callback elements are well understood in software. We make use of them here because they are more or less a standard
     design pattern in Application and/or System Development.
     The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
@@ -130,13 +138,17 @@
 
     <pre>
         <code>
-            <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512" readme="http://loveboat/readme/107876512">
+            <apml bodi="//loveboat/published/software/107876512/" repo="http://loveboat/sourcecode/107876512"
+                  readme="http://loveboat/readme/107876512">
                 <system>
-                    <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none" outputparametertype="java.lang.String"/>
+                    <object bodi="//object001/" input="none" output="./functions/function001" inputparametertype="none"
+                            outputparametertype="java.lang.String"/>
 
-                    <object bodi="//object002/" input="./functions/function001" output="none" inputparametertype="java.lang.String" outputparametertype="none"/>
+                    <object bodi="//object002/" input="./functions/function001" output="none"
+                            inputparametertype="java.lang.String" outputparametertype="none"/>
 
-                    <callback bodi="//callback001" input="//object001/functions/function001" output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
+                    <callback bodi="//callback001" input="//object001/functions/function001"
+                              output="//object002/functions/function001" methodname="callmeback" parametertype="infer"/>
                 </system>
             </apml>
         </code>
@@ -152,7 +164,9 @@
 <h4>The Producer Element</h4>
 
 <div>
-    The Producer element [<pre><code><producer></producer></code></pre>] is an element used to set against an output a place for that output to be received as an input.
+    The Producer element [
+    <pre><code><producer></producer></code></pre>
+    ] is an element used to set against an output a place for that output to be received as an input.
     Callback elements are well understood in software. We make use of them here because they are more or less a standard
     design pattern in Application and/or System Development.
     The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
@@ -193,14 +207,16 @@
 <h4>The Consumer Element</h4>
 
 <div>
-    The Consumer element [<pre><code><consumer></consumer></code></pre>] is an element used to set against an output a place for that output to be received as an input.
-Callback elements are well understood in software. We make use of them here because they are more or less a standard
-design pattern in Application and/or System Development.
-The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
-would accept into a well understood data-structure the output of the first Object Element.
-The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
-design would care to implement those guidingly for functional to follow or work with. Ok.
-Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+    The Consumer element [
+    <pre><code><consumer></consumer></code></pre>
+    ] is an element used to set against an output a place for that output to be received as an input.
+    Callback elements are well understood in software. We make use of them here because they are more or less a standard
+    design pattern in Application and/or System Development.
+    The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+    would accept into a well understood data-structure the output of the first Object Element.
+    The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+    design would care to implement those guidingly for functional to follow or work with. Ok.
+    Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
 </div>
 
 <div>
@@ -234,14 +250,16 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 <h4>The Compiler Element</h4>
 
 <div>
-    The Compiler element [<pre><code><compiler></compiler></code></pre>] is an element used to set against an output a place for that output to be received as an input.
-Callback elements are well understood in software. We make use of them here because they are more or less a standard
-design pattern in Application and/or System Development.
-The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
-would accept into a well understood data-structure the output of the first Object Element.
-The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
-design would care to implement those guidingly for functional to follow or work with. Ok.
-Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+    The Compiler element [
+    <pre><code><compiler></compiler></code></pre>
+    ] is an element used to set against an output a place for that output to be received as an input.
+    Callback elements are well understood in software. We make use of them here because they are more or less a standard
+    design pattern in Application and/or System Development.
+    The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+    would accept into a well understood data-structure the output of the first Object Element.
+    The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+    design would care to implement those guidingly for functional to follow or work with. Ok.
+    Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
 </div>
 
 <p>
@@ -253,14 +271,16 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 <h4>The Dynamic Listener Element</h4>
 
 <div>
-    The Dynamic element [<pre><code>&lt;dynamiclistener&gt;&lt;/dynamiclistener&gt;</code></pre>] is an element used to set against an output a place for that output to be received as an input.
-Callback elements are well understood in software. We make use of them here because they are more or less a standard
-design pattern in Application and/or System Development.
-The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
-would accept into a well understood data-structure the output of the first Object Element.
-The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
-design would care to implement those guidingly for functional to follow or work with. Ok.
-Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+    The Dynamic element [
+    <pre><code>&lt;dynamiclistener&gt;&lt;/dynamiclistener&gt;</code></pre>
+    ] is an element used to set against an output a place for that output to be received as an input.
+    Callback elements are well understood in software. We make use of them here because they are more or less a standard
+    design pattern in Application and/or System Development.
+    The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+    would accept into a well understood data-structure the output of the first Object Element.
+    The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+    design would care to implement those guidingly for functional to follow or work with. Ok.
+    Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
 </div>
 
 <div>
@@ -294,14 +314,16 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 <h4>The Listener Element</h4>
 
 <div>
-    The Listener element [<pre><code><listener></listener></code></pre>] is an element used to set against an output a place for that output to be received as an input.
-Callback elements are well understood in software. We make use of them here because they are more or less a standard
-design pattern in Application and/or System Development.
-The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
-would accept into a well understood data-structure the output of the first Object Element.
-The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
-design would care to implement those guidingly for functional to follow or work with. Ok.
-Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+    The Listener element [
+    <pre><code><listener></listener></code></pre>
+    ] is an element used to set against an output a place for that output to be received as an input.
+    Callback elements are well understood in software. We make use of them here because they are more or less a standard
+    design pattern in Application and/or System Development.
+    The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+    would accept into a well understood data-structure the output of the first Object Element.
+    The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+    design would care to implement those guidingly for functional to follow or work with. Ok.
+    Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
 </div>
 
 <div>
@@ -335,14 +357,16 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 <h4>The Subscriber Element</h4>
 
 <div>
-    The Subscriber element [<pre><code><subscriber></subscriber></code></pre>] is an element used to set against an output a place for that output to be received as an input.
-Callback elements are well understood in software. We make use of them here because they are more or less a standard
-design pattern in Application and/or System Development.
-The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
-would accept into a well understood data-structure the output of the first Object Element.
-The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
-design would care to implement those guidingly for functional to follow or work with. Ok.
-Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+    The Subscriber element [
+    <pre><code><subscriber></subscriber></code></pre>
+    ] is an element used to set against an output a place for that output to be received as an input.
+    Callback elements are well understood in software. We make use of them here because they are more or less a standard
+    design pattern in Application and/or System Development.
+    The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+    would accept into a well understood data-structure the output of the first Object Element.
+    The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+    design would care to implement those guidingly for functional to follow or work with. Ok.
+    Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
 </div>
 
 <div>
@@ -376,14 +400,16 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 <h4>The Driver Element</h4>
 
 <div>
-    The Driver element [<pre><code><driver></driver></code></pre>] is an element used to set against an output a place for that output to be received as an input.
-Callback elements are well understood in software. We make use of them here because they are more or less a standard
-design pattern in Application and/or System Development.
-The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
-would accept into a well understood data-structure the output of the first Object Element.
-The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
-design would care to implement those guidingly for functional to follow or work with. Ok.
-Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+    The Driver element [
+    <pre><code><driver></driver></code></pre>
+    ] is an element used to set against an output a place for that output to be received as an input.
+    Callback elements are well understood in software. We make use of them here because they are more or less a standard
+    design pattern in Application and/or System Development.
+    The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+    would accept into a well understood data-structure the output of the first Object Element.
+    The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+    design would care to implement those guidingly for functional to follow or work with. Ok.
+    Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
 </div>
 
 <div>
@@ -421,14 +447,16 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 <h4>The Definition Element</h4>
 
 <div>
-    The Definition element [<pre><code><definition></definition></code></pre>] is an element used to set against an output a place for that output to be received as an input.
-Callback elements are well understood in software. We make use of them here because they are more or less a standard
-design pattern in Application and/or System Development.
-The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
-would accept into a well understood data-structure the output of the first Object Element.
-The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
-design would care to implement those guidingly for functional to follow or work with. Ok.
-Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
+    The Definition element [
+    <pre><code><definition></definition></code></pre>
+    ] is an element used to set against an output a place for that output to be received as an input.
+    Callback elements are well understood in software. We make use of them here because they are more or less a standard
+    design pattern in Application and/or System Development.
+    The Callback would have an output and a type tied usually to an Object Element and some other APML Element that
+    would accept into a well understood data-structure the output of the first Object Element.
+    The nature of the Callback element is to save time and to quickly wire inputs and outputs together where structural
+    design would care to implement those guidingly for functional to follow or work with. Ok.
+    Here we should note that the pattern is conceived flexibly and is written to be easily understood. Ok.
 </div>
 
 <div>
@@ -463,8 +491,11 @@ Here we should note that the pattern is conceived flexibly and is written to be 
 
 <div>
     Here we list common attributes for APML objects. Many APML objects will have similar base function that can be
-    mapped in the XML itself. For instance, an <pre><code><object></object></code></pre> tag may have an id attribute,
-    a Bodi String attribute and a class attribute however so may any other APML element. These would be common to the core set of APM
+    mapped in the XML itself. For instance, an
+    <pre><code><object></object></code></pre>
+    tag may have an id attribute,
+    a Bodi String attribute and a class attribute however so may any other APML element. These would be common to the
+    core set of APM
     objects since they are factually common to the System Design we are working with. Ok.
 
     <ul>

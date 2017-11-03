@@ -6,10 +6,9 @@
 package apml.interfaces;
 
 /**
- *
  * @author oem
  */
 public interface Writer
 {
-    public void write();
+	public void write();
 }

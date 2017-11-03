@@ -7,12 +7,11 @@ package apml.annotations;
  */
 
 /**
- *
  * @author Max Rupplin
  * 0x888fe8;
  */
-public @interface ApmlId 
+public @interface ApmlId
 {
-        
-    String id() default "";
+
+	String id() default "";
 }

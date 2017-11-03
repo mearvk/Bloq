@@ -6,17 +6,17 @@ and open the template in the system.
 -->
 
 <systemTheory>
-    
+
     <constructs>
         <it/>
         <should/>
         <must/>
         <can/>
         <contains/>
-        <has/>       
+        <has/>
         <instantiates/>
     </constructs>
-        
+
     <object>
         <can>
             <have>
@@ -28,7 +28,7 @@ and open the template in the system.
                 <object></object>
             </have>
         </can>
-        
+
         <can>
             <instantiate>
                 <system></system>
@@ -40,7 +40,7 @@ and open the template in the system.
             </instantiate>
         </can>
     </object>
-        
+
     <system>
         <can>
             <have>
@@ -52,7 +52,7 @@ and open the template in the system.
                 <object></object>
             </have>
         </can>
-        
+
         <can>
             <instantiate>
                 <system></system>

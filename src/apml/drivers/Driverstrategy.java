@@ -6,14 +6,13 @@
 package apml.drivers;
 
 /**
- *
  * @author oem
  */
 public class Driverstrategy extends Strategyitem
 {
-    @Override
-    public void dostrategy()
-    {
-        
-    }    
+	@Override
+	public void dostrategy()
+	{
+
+	}
 }

@@ -8,17 +8,16 @@ package apml.drivers;
 import java.util.ArrayList;
 
 /**
- *
  * @author oem
  */
 public abstract class Strategyitem
 {
-    public ArrayList<Strategyitem> list = new ArrayList();
-    
-    public Strategyitem()
-    {
-        
-    }
-    
-    public abstract void dostrategy();
+	public ArrayList<Strategyitem> list = new ArrayList();
+
+	public Strategyitem()
+	{
+
+	}
+
+	public abstract void dostrategy();
 }

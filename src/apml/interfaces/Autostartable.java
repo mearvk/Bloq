@@ -6,10 +6,9 @@
 package apml.interfaces;
 
 /**
- *
  * @author oem
  */
-public interface Autostartable 
+public interface Autostartable
 {
-    public void autostart();
+	public void autostart();
 }

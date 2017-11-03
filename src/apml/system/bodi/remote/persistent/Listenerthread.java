@@ -3,72 +3,87 @@ package apml.system.bodi.remote.persistent;
 /**
  * @author Max Rupplin
  */
-class Listenerthread extends Thread {
+class Listenerthread extends Thread
+{
 
-    public Networkcontext connection;
+	public Networkcontext connection;
 
-    public Boolean running = true;
+	public Boolean running = true;
 
-    public Inputlistenerthread inputlistenerthrread;
+	public Inputlistenerthread inputlistenerthrread;
 
-    public Outputlistenerthread outputlistenerthread;
+	public Outputlistenerthread outputlistenerthread;
 
-    /**
-     * @param connection
-     */
-    public Listenerthread(Networkcontext connection) {
-        if (connection == null) throw new SecurityException("//bodi/connect");
+	/**
+	 * @param connection
+	 */
+	public Listenerthread(Networkcontext connection)
+	{
+		if (connection == null)
+			throw new SecurityException("//bodi/connect");
 
-        this.connection = connection;
+		this.connection = connection;
 
-        //
+		//
 
-        this.setName("Listenerthread");
+		this.setName("Listenerthread");
 
-        //
+		//
 
-        this.inputlistenerthrread = new Inputlistenerthread(this);
+		this.inputlistenerthrread = new Inputlistenerthread(this);
 
-        this.inputlistenerthrread.start();
+		this.inputlistenerthrread.start();
 
-        //
+		//
 
-        this.outputlistenerthread = new Outputlistenerthread(this);
+		this.outputlistenerthread = new Outputlistenerthread(this);
 
-        this.outputlistenerthread.start();
-    }
+		this.outputlistenerthread.start();
+	}
 
-    /**
-     *
-     */
-    @Override
-    public void run() {
-        try {
-            while (running) {
-                try {
-                    this.inputlistenerthrread.checkinputqueue();
-                } catch (Exception e) {
-                    e.printStackTrace(System.err);
-                }
+	/**
+	 *
+	 */
+	@Override
+	public void run()
+	{
+		try
+		{
+			while (running)
+			{
+				try
+				{
+					this.inputlistenerthrread.checkinputqueue();
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace(System.err);
+				}
 
-                try {
-                    this.outputlistenerthread.checkoutputqueue();
-                } catch (Exception e) {
-                    e.printStackTrace(System.err);
-                }
-            }
+				try
+				{
+					this.outputlistenerthread.checkoutputqueue();
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace(System.err);
+				}
+			}
 
-            this.sleepmillis(500l);
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
-        }
-    }
+			this.sleepmillis(500l);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace(System.err);
+		}
+	}
 
-    /**
-     * @param millis
-     * @throws Exception
-     */
-    protected void sleepmillis(Long millis) throws Exception {
-        Thread.currentThread().sleep(millis);
-    }
+	/**
+	 * @param millis
+	 * @throws Exception
+	 */
+	protected void sleepmillis(Long millis) throws Exception
+	{
+		Thread.currentThread().sleep(millis);
+	}
 }

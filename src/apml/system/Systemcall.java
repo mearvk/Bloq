@@ -6,10 +6,9 @@
 package apml.system;
 
 /**
- *
  * @author oem
  */
 public @interface Systemcall
 {
-    
+
 }

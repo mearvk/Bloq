@@ -16,9 +16,9 @@ import java.util.regex.Pattern;
 
 public class LineNumberFinder
 {
-	public Integer charcount=0;
+	public Integer charcount = 0;
 
-	public Integer linecount=0;
+	public Integer linecount = 0;
 
 	//
 
@@ -36,11 +36,11 @@ public class LineNumberFinder
 
 		//
 
-		tree = (JTree_000)Bodi.context("editor").pull("//editor/ui/jtree_000");
+		tree = (JTree_000) Bodi.context("editor").pull("//editor/ui/jtree_000");
 
 		//
 
-		if(selected==null || selected.getParent()==null)
+		if (selected == null || selected.getParent() == null)
 		{
 			System.err.println("No selected JTreeNode could be found.");
 
@@ -217,11 +217,11 @@ public class LineNumberFinder
 
 		//
 
-		tree = (JTree_000)Bodi.context("editor").pull("//editor/ui/jtree_000");
+		tree = (JTree_000) Bodi.context("editor").pull("//editor/ui/jtree_000");
 
-		selected = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
+		selected = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 
-		if(selected!=null || selected.getParent()!=null)
+		if (selected != null || selected.getParent() != null)
 		{
 
 			siblings = selected.getParent().children();

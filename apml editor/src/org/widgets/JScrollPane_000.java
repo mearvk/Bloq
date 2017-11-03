@@ -15,7 +15,7 @@ public class JScrollPane_000 extends JScrollPane
 	{
 		// setters
 
-		this.setBackground(new Color(0xff,0xff,0xff));
+		this.setBackground(new Color(0xff, 0xff, 0xff));
 
 		this.setForeground(Color.BLACK);
 

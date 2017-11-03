@@ -75,7 +75,7 @@ public class JPanel_001 extends JPanel
 
 		// setters
 
-		this.setBackground(new Color(0xff,0xff,0xff));
+		this.setBackground(new Color(0xff, 0xff, 0xff));
 
 		// instantiation
 
@@ -115,7 +115,7 @@ public class JPanel_001 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0xff,0xff,0xff));
+		this.setBackground(new Color(0xff, 0xff, 0xff));
 
 		this.setLayout(new FlowLayout());
 
@@ -160,7 +160,7 @@ public class JPanel_001 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0xff,0xff,0xff));
+		this.setBackground(new Color(0xff, 0xff, 0xff));
 
 		this.setLayout(new FlowLayout());
 
@@ -205,7 +205,7 @@ public class JPanel_001 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0xff,0xff,0xff));
+		this.setBackground(new Color(0xff, 0xff, 0xff));
 
 		this.setLayout(new FlowLayout());
 
@@ -248,7 +248,7 @@ public class JPanel_001 extends JPanel
 	@Override
 	public Dimension getPreferredSize()
 	{
-		Dimension simple =  new Dimension(((int) (parent.getWidth() * 0.7) - this.marginleft), ((int) (parent.getHeight() * 1.0) - this.margintop));
+		Dimension simple = new Dimension(((int) (parent.getWidth() * 0.7) - this.marginleft), ((int) (parent.getHeight() * 1.0) - this.margintop));
 
 		return simple;
 	}
@@ -257,6 +257,6 @@ public class JPanel_001 extends JPanel
 	@Override
 	public Dimension getMinimumSize()
 	{
-		return new Dimension( 200, ((int) (parent.getHeight() * 1.0) - this.margintop));
+		return new Dimension(200, ((int) (parent.getHeight() * 1.0) - this.margintop));
 	}
 }
