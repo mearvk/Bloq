@@ -1,21 +1,23 @@
 package org.events;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class SaveApmlDocumentEvent extends ActionEvent
 {
-	JComponent source;
+	SaveApmlDocumentEvent event;
 
-	public SaveApmlDocumentEvent(JComponent source)
+	File fileRef;
+
+	public SaveApmlDocumentEvent(ActionEvent event, File fileRef)
 	{
-		super(source, 0, "save_apml_document_event");
+		super(event.getSource(), event.getID(), "save_apml_document_event");
 
-		this.source = source;
+		this.event = (SaveApmlDocumentEvent)event;
 	}
 
 	public SaveApmlDocumentEvent(Object object, Integer id, String command)
 	{
-		super(object, id, "save_apml_document");
+		super(object, id, "save_apml_document_event");
 	}
 }

@@ -197,6 +197,10 @@ class CloseApmlDocumentRequest
 	}
 }
 
+//end apml
+
+//start general case
+
 class UpdateAllOnDocumentLoadedRequest
 {
 	public UserInterfaceProcessor processor;
@@ -547,29 +551,6 @@ class LoadApmlDocumentRequest
 	}
 }
 
-class TreeStructureUpdatedRequest
-{
-	public UserInterfaceProcessor processor;
-
-	public TreeStructureUpdatedEvent event;
-
-	public TreeStructureUpdatedRequest(UserInterfaceProcessor processor, ActionEvent event)
-	{
-		this.processor = processor;
-
-		this.event = (TreeStructureUpdatedEvent) event;
-	}
-
-	public void run()
-	{
-		RSTextPane_000 rstextpane_000;
-
-		rstextpane_000 = (RSTextPane_000) Bodi.context("editor").pull("//editor/ui/rstextpane_000");
-
-		rstextpane_000.processtreechange((TreeStructureUpdatedEvent) event);
-	}
-}
-
 class SaveApmlDocumentRequest
 {
 	public UserInterfaceProcessor processor;
@@ -630,6 +611,240 @@ class SaveApmlDocumentRequest
 
 			JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
 		}
+	}
+}
+
+class BuildApmlUserInterfaceRequest
+{
+	private UserInterfaceProcessor processor;
+
+	private JPanel_001 jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+
+	private Uicompiler ui_compiler = new Uicompiler();
+
+	private JFileChooser output = new JFileChooser();
+
+	private JFileChooser input = new JFileChooser();
+
+	private String target_text;
+
+	public BuildApmlUserInterfaceRequest(UserInterfaceProcessor processor)
+	{
+		this.processor = processor;
+	}
+
+	public void run()
+	{
+
+		jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+
+		this.target_text = jpanel_001.rstextpane.getText();
+
+		this.ui_compiler = new Uicompiler();
+
+		//
+
+		if (this.target_text == null || this.target_text.length() == 0)
+		{
+			this.input.setDialogTitle("Please Select UI APML Document");
+
+			this.input.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+			this.input.showOpenDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
+
+			//
+
+			processor.last_loaded_file = this.ui_compiler.fileguardian.xmlin = this.input.getSelectedFile();
+
+			processor.last_loaded_file_url = this.input.getSelectedFile().getName();
+		}
+
+		//
+
+		this.output = new JFileChooser();
+
+		this.output.setDialogTitle("Please Select Output Directory");
+
+		this.output.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+		this.output.showSaveDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
+
+		//
+
+		this.ui_compiler.fileguardian.outputdir = this.output.getSelectedFile();
+
+		//
+
+		this.ui_compiler.dohandleinputfiles(this.ui_compiler.inputmanager);
+
+		this.ui_compiler.dohandleoutputfiles(this.ui_compiler.outputmanager);
+	}
+}
+
+class BuildApmlStandaloneRequest
+{
+	private UserInterfaceProcessor processor;
+
+	private APMLGui apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+	private JPanel_001 jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+
+	private Bloqcompiler bloq_compiler = new Bloqcompiler();
+
+	private JFileChooser output = new JFileChooser();
+
+	private JFileChooser input = new JFileChooser();
+
+	private String target_text;
+
+	public BuildApmlStandaloneRequest(UserInterfaceProcessor processor)
+	{
+		this.processor = processor;
+	}
+
+	public void run()
+	{
+		//
+
+		this.target_text = jpanel_001.rstextpane.getText();
+
+		//
+
+		this.bloq_compiler = new Bloqcompiler();
+
+		//
+
+		if (this.target_text == null || this.target_text.length() == 0)
+		{
+			//
+
+			this.input = new JFileChooser();
+
+			this.input.setDialogTitle("Please Select APML Document");
+
+			this.input.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+			this.input.showOpenDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
+
+			//
+
+			processor.last_loaded_file = this.bloq_compiler.fileguardian.apmlinputfile = this.input.getSelectedFile();
+
+			processor.last_loaded_file_url = this.bloq_compiler.fileguardian.apmlfilename = this.input.getSelectedFile().getName();
+
+			//
+
+			System.out.println("TODO: Please verify integrity of APML file");
+
+			//
+
+			this.output.setDialogTitle("Please Select Output Directory");
+
+			this.output.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+			this.output.showSaveDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
+
+			//
+
+			this.bloq_compiler.fileguardian.basedirurl = this.output.getSelectedFile().getPath().toString() + "/";
+
+			this.bloq_compiler.fileguardian.apmloutjarurl = this.output.getSelectedFile().getPath() + "/out/jar/";
+
+			this.bloq_compiler.fileguardian.apmlinjarurl = this.output.getSelectedFile().getPath() + "/in/jar/";
+
+			this.bloq_compiler.fileguardian.apmlinurl = this.output.getSelectedFile().getPath() + "/in/";
+
+			//
+
+			this.bloq_compiler.setapmlfiles(this.bloq_compiler.fileguardian);
+
+			this.bloq_compiler.settempfiles(this.bloq_compiler.inputmanager);
+
+			this.bloq_compiler.setoutputfiles(this.bloq_compiler.inputmanager);
+
+			this.bloq_compiler.setsourcefiles(this.bloq_compiler.outputmanager);
+
+			this.bloq_compiler.writebytecode(this.bloq_compiler.inputmanager);
+
+			try
+			{
+				this.bloq_compiler.writejarfile();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			this.output = new JFileChooser();
+
+			this.output.setDialogTitle("Please Select Output Directory");
+
+			this.output.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+			this.output.showSaveDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
+
+			//
+
+			this.bloq_compiler.fileguardian.basedirurl = this.output.getSelectedFile().getPath().toString() + "/";
+
+			this.bloq_compiler.fileguardian.apmlinurl = this.output.getSelectedFile().getPath() + "/in/";
+
+			this.bloq_compiler.fileguardian.apmloutjarurl = this.output.getSelectedFile().getPath() + "/out/jar/";
+
+			this.bloq_compiler.fileguardian.apmlinjarurl = this.output.getSelectedFile().getPath() + "/in/jar/";
+
+			//
+
+			processor.last_loaded_file = this.bloq_compiler.fileguardian.apmlinputfile;
+
+			processor.last_loaded_file_url = this.bloq_compiler.fileguardian.apmlfilename;
+
+			if (processor.last_loaded_file == null || processor.last_loaded_file_url == null || processor.last_loaded_file_url.length() == 0)
+			{
+				JOptionPane.showMessageDialog(apmlgui, "Unable to determing existing file for APML input. Double check.");
+			}
+
+			//
+
+			this.bloq_compiler.setapmlfiles(this.bloq_compiler.fileguardian);
+
+			this.bloq_compiler.settempfiles(this.bloq_compiler.inputmanager);
+
+			this.bloq_compiler.setoutputfiles(this.bloq_compiler.inputmanager);
+
+			this.bloq_compiler.setsourcefiles(this.bloq_compiler.outputmanager);
+
+			this.bloq_compiler.writebytecode(this.bloq_compiler.inputmanager);
+
+			//
+
+			JOptionPane.showMessageDialog(apmlgui, "Compilation successful; check folder for files.");
+		}
+	}
+}
+
+class TreeStructureUpdatedRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public TreeStructureUpdatedEvent event;
+
+	public TreeStructureUpdatedRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (TreeStructureUpdatedEvent) event;
+	}
+
+	public void run()
+	{
+		RSTextPane_000 rstextpane_000;
+
+		rstextpane_000 = (RSTextPane_000) Bodi.context("editor").pull("//editor/ui/rstextpane_000");
+
+		rstextpane_000.processtreechange((TreeStructureUpdatedEvent) event);
 	}
 }
 
@@ -694,15 +909,9 @@ class SaveDocumentRequest
 			{
 				case "apml":
 
-					this.processor.update(new LoadApmlDocumentEvent(event, event.fileRef));
+					this.processor.update(new SaveApmlDocumentEvent(event, event.fileRef));
 
-					this.processor.update(new LoadApmlTreeEvent(event, event.fileRef));
-
-				//
-
-					this.jtabbedpane_000 = (JTabbedPane_000) Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
-
-					this.jtabbedpane_000.setSelectedIndex(0);
+					JOptionPane.showMessageDialog(apmlgui, "APML document saved.");
 
 				break;
 
@@ -950,213 +1159,3 @@ class OpenDocumentRequest
 	}
 }
 
-class BuildApmlUserInterfaceRequest
-{
-	private UserInterfaceProcessor processor;
-
-	private JPanel_001 jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
-
-	private Uicompiler ui_compiler = new Uicompiler();
-
-	private JFileChooser output = new JFileChooser();
-
-	private JFileChooser input = new JFileChooser();
-
-	private String target_text;
-
-	public BuildApmlUserInterfaceRequest(UserInterfaceProcessor processor)
-	{
-		this.processor = processor;
-	}
-
-	public void run()
-	{
-
-		jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
-
-		this.target_text = jpanel_001.rstextpane.getText();
-
-		this.ui_compiler = new Uicompiler();
-
-		//
-
-		if (this.target_text == null || this.target_text.length() == 0)
-		{
-			this.input.setDialogTitle("Please Select UI APML Document");
-
-			this.input.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
-			this.input.showOpenDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
-
-			//
-
-			processor.last_loaded_file = this.ui_compiler.fileguardian.xmlin = this.input.getSelectedFile();
-
-			processor.last_loaded_file_url = this.input.getSelectedFile().getName();
-		}
-
-		//
-
-		this.output = new JFileChooser();
-
-		this.output.setDialogTitle("Please Select Output Directory");
-
-		this.output.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-		this.output.showSaveDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
-
-		//
-
-		this.ui_compiler.fileguardian.outputdir = this.output.getSelectedFile();
-
-		//
-
-		this.ui_compiler.dohandleinputfiles(this.ui_compiler.inputmanager);
-
-		this.ui_compiler.dohandleoutputfiles(this.ui_compiler.outputmanager);
-	}
-}
-
-class BuildApmlStandaloneRequest
-{
-	private UserInterfaceProcessor processor;
-
-	private APMLGui apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
-
-	private JPanel_001 jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
-
-	private Bloqcompiler bloq_compiler = new Bloqcompiler();
-
-	private JFileChooser output = new JFileChooser();
-
-	private JFileChooser input = new JFileChooser();
-
-	private String target_text;
-
-	public BuildApmlStandaloneRequest(UserInterfaceProcessor processor)
-	{
-		this.processor = processor;
-	}
-
-	public void run()
-	{
-		//
-
-		this.target_text = jpanel_001.rstextpane.getText();
-
-		//
-
-		this.bloq_compiler = new Bloqcompiler();
-
-		//
-
-		if (this.target_text == null || this.target_text.length() == 0)
-		{
-			//
-
-			this.input = new JFileChooser();
-
-			this.input.setDialogTitle("Please Select APML Document");
-
-			this.input.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
-			this.input.showOpenDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
-
-			//
-
-			processor.last_loaded_file = this.bloq_compiler.fileguardian.apmlinputfile = this.input.getSelectedFile();
-
-			processor.last_loaded_file_url = this.bloq_compiler.fileguardian.apmlfilename = this.input.getSelectedFile().getName();
-
-			//
-
-			System.out.println("TODO: Please verify integrity of APML file");
-
-			//
-
-			this.output.setDialogTitle("Please Select Output Directory");
-
-			this.output.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-			this.output.showSaveDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
-
-			//
-
-			this.bloq_compiler.fileguardian.basedirurl = this.output.getSelectedFile().getPath().toString() + "/";
-
-			this.bloq_compiler.fileguardian.apmloutjarurl = this.output.getSelectedFile().getPath() + "/out/jar/";
-
-			this.bloq_compiler.fileguardian.apmlinjarurl = this.output.getSelectedFile().getPath() + "/in/jar/";
-
-			this.bloq_compiler.fileguardian.apmlinurl = this.output.getSelectedFile().getPath() + "/in/";
-
-			//
-
-			this.bloq_compiler.setapmlfiles(this.bloq_compiler.fileguardian);
-
-			this.bloq_compiler.settempfiles(this.bloq_compiler.inputmanager);
-
-			this.bloq_compiler.setoutputfiles(this.bloq_compiler.inputmanager);
-
-			this.bloq_compiler.setsourcefiles(this.bloq_compiler.outputmanager);
-
-			this.bloq_compiler.writebytecode(this.bloq_compiler.inputmanager);
-
-			try
-			{
-				this.bloq_compiler.writejarfile();
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			this.output = new JFileChooser();
-
-			this.output.setDialogTitle("Please Select Output Directory");
-
-			this.output.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-			this.output.showSaveDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
-
-			//
-
-			this.bloq_compiler.fileguardian.basedirurl = this.output.getSelectedFile().getPath().toString() + "/";
-
-			this.bloq_compiler.fileguardian.apmlinurl = this.output.getSelectedFile().getPath() + "/in/";
-
-			this.bloq_compiler.fileguardian.apmloutjarurl = this.output.getSelectedFile().getPath() + "/out/jar/";
-
-			this.bloq_compiler.fileguardian.apmlinjarurl = this.output.getSelectedFile().getPath() + "/in/jar/";
-
-			//
-
-			processor.last_loaded_file = this.bloq_compiler.fileguardian.apmlinputfile;
-
-			processor.last_loaded_file_url = this.bloq_compiler.fileguardian.apmlfilename;
-
-			if (processor.last_loaded_file == null || processor.last_loaded_file_url == null || processor.last_loaded_file_url.length() == 0)
-			{
-				JOptionPane.showMessageDialog(apmlgui, "Unable to determing existing file for APML input. Double check.");
-			}
-
-			//
-
-			this.bloq_compiler.setapmlfiles(this.bloq_compiler.fileguardian);
-
-			this.bloq_compiler.settempfiles(this.bloq_compiler.inputmanager);
-
-			this.bloq_compiler.setoutputfiles(this.bloq_compiler.inputmanager);
-
-			this.bloq_compiler.setsourcefiles(this.bloq_compiler.outputmanager);
-
-			this.bloq_compiler.writebytecode(this.bloq_compiler.inputmanager);
-
-			//
-
-			JOptionPane.showMessageDialog(apmlgui, "Compilation successful; check folder for files.");
-		}
-	}
-}
