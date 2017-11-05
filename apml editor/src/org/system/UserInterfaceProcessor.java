@@ -1071,13 +1071,25 @@ class OpenDocumentRequest
 
 					this.processor.update(new LoadBodiTreeEvent(event,event.fileRef));
 
+					//
+
+					this.jtabbedpane_000 = (JTabbedPane_000) Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
+
+					this.jtabbedpane_000.setSelectedIndex(2);
+
 					break;
 
 				case "munction":
 
 					this.processor.update(new LoadMunctionDocumentEvent(event, event.fileRef));
 
-					//processor.update(new LoadMunctionTreeEvent(this,this.fileRef));
+					this.processor.update(new LoadMunctionTreeEvent(event,event.fileRef));
+
+					//
+
+					this.jtabbedpane_000 = (JTabbedPane_000) Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
+
+					this.jtabbedpane_000.setSelectedIndex(3);
 
 					break;
 
@@ -1085,7 +1097,13 @@ class OpenDocumentRequest
 
 					this.processor.update(new LoadRunynDocumentEvent(event, event.fileRef));
 
-					//processor.update(new LoadRunynTreeEvent(this,this.fileRef));
+					this.processor.update(new LoadRunynTreeEvent(event,event.fileRef));
+
+					//
+
+					this.jtabbedpane_000 = (JTabbedPane_000) Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
+
+					this.jtabbedpane_000.setSelectedIndex(4);
 
 					break;
 
@@ -1093,7 +1111,13 @@ class OpenDocumentRequest
 
 					this.processor.update(new LoadSprungDocumentEvent(event, event.fileRef));
 
-					//processor.update(new LoadSprungTreeEvent(this,this.fileRef));
+					this.processor.update(new LoadSprungTreeEvent(event,event.fileRef));
+
+					//
+
+					this.jtabbedpane_000 = (JTabbedPane_000) Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
+
+					this.jtabbedpane_000.setSelectedIndex(5);
 
 					break;
 
@@ -1101,11 +1125,18 @@ class OpenDocumentRequest
 
 					this.processor.update(new LoadFalthruuDocumentEvent(event, event.fileRef));
 
-					//processor.update(new LoadFalthruuTreeEvent(this,this.fileRef));
+					this.processor.update(new LoadFalthruuTreeEvent(event,event.fileRef));
+
+					//
+
+					this.jtabbedpane_000 = (JTabbedPane_000) Bodi.context("editor").pull("//editor/ui/jtabbedpane_000");
+
+					this.jtabbedpane_000.setSelectedIndex(6);
 
 					break;
 
 				default:
+
 					JOptionPane.showMessageDialog(apmlgui, "Unknown file type; no can help.");
 			}
 		}
