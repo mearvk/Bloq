@@ -13,7 +13,7 @@ public class SaveDocumentEvent extends ActionEvent
 	{
 		super(event.getSource(), event.getID(), "save_document_event");
 
-		this.event = (SaveDocumentEvent)event;
+		this.fileRef = fileRef;
 	}
 
 	public SaveDocumentEvent(Object object, Integer id, String command)

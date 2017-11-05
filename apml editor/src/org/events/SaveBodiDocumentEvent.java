@@ -5,7 +5,7 @@ import java.io.File;
 
 public class SaveBodiDocumentEvent extends ActionEvent
 {
-	public SaveBodiDocumentEvent event;
+	public ActionEvent event;
 
 	public File fileRef;
 
@@ -13,7 +13,7 @@ public class SaveBodiDocumentEvent extends ActionEvent
 	{
 		super(event.getSource(), event.getID(), "save_bodi_document_event");
 
-		this.event = (SaveBodiDocumentEvent)event;
+		this.event = event;
 	}
 
 	public SaveBodiDocumentEvent(Object object, Integer id, String command)

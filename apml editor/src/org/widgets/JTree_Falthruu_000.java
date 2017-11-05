@@ -3,11 +3,12 @@ package org.widgets;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.xpath.helpers.Xpathquick;
-import org.custom.ui.ApmlJTreeNode;
+import org.custom.ui.BloqJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseApmlDocumentEvent;
-import org.events.LoadApmlDocumentEvent;
+import org.events.LoadFalthruuDocumentEvent;
 import org.listeners.*;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -179,7 +180,7 @@ public class JTree_Falthruu_000 extends JTree
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void update(LoadApmlDocumentEvent event)
+	public void update(LoadFalthruuDocumentEvent event)
 	{
 		File file = event.getFileRef();
 
@@ -219,7 +220,7 @@ public class JTree_Falthruu_000 extends JTree
 
 			//
 
-			this.update(model, root, root, treenode, nodes, 0);
+			this.update(event.getFileRef(), event, document, model, root, treenode, treenode, nodes, 0);
 
 			//
 
@@ -232,46 +233,62 @@ public class JTree_Falthruu_000 extends JTree
 	}
 
 	//
-	private void update(DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode child, NodeList children, Integer depth)
+	private void update(File file, ActionEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode child, NodeList children, Integer depth)
 	{
 		try
 		{
-			if (child == null)
-				return;
+			if (child == null) return;
+
+			if (parent == null) return;
 
 			//
 
-			if (parent == null)
-				return;
+			DefaultMutableTreeNode item_previous = null;
 
 			//
 
-			for (int i = 0; i < children.getLength(); i++)
+			File[] files = file.isDirectory() ? file.listFiles() : new File(file.getParent()).listFiles();
+
+			//
+
+			for(int j=0; j<files.length; j++)
 			{
-				Node node = children.item(i);
+				System.out.println(files[j].getName());
 
-				//
+				try
+				{
+					DefaultMutableTreeNode item;
 
-				DefaultMutableTreeNode treenode;
+					//
 
-				treenode = new ApmlJTreeNode(node);
+					item = new BloqJTreeNode(document.createElement(files[j].getName()));
 
-				treenode.setAllowsChildren(true);
+					item.setAllowsChildren(true);
 
-				//
+					//
 
-				model.insertNodeInto(treenode, child, i);
+					model.insertNodeInto(item, parent, 0);
 
-				//
+					//
 
-				NodeList rawnodes = children.item(i).getChildNodes();
+					if(files[j].isDirectory())
+					{
+						System.out.println(files[j].getName()+" isDirectory :"+files[j].isDirectory());
 
-				update(model, root, child, treenode, rawnodes, depth + 1);
+						this.update(files[j], event, document, model, root, item, child, children, depth);
+					}
 
-				//
+					//
+				}
+				catch (DOMException dom_exception)
+				{
+					//dom_exception.printStackTrace();
+				}
+				catch(Exception exception)
+				{
+					exception.printStackTrace();
+				}
 			}
-
-			//
 
 			model.reload();
 		}

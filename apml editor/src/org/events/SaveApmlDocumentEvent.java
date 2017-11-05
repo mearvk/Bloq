@@ -12,8 +12,6 @@ public class SaveApmlDocumentEvent extends ActionEvent
 	public SaveApmlDocumentEvent(ActionEvent event, File fileRef)
 	{
 		super(event.getSource(), event.getID(), "save_apml_document_event");
-
-		this.event = (SaveApmlDocumentEvent)event;
 	}
 
 	public SaveApmlDocumentEvent(Object object, Integer id, String command)

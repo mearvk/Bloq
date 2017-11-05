@@ -1,16 +1,15 @@
 package org.events;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class ExitProgramEvent extends ActionEvent
 {
-	public JComponent source;
+	public ActionEvent event;
 
-	public ExitProgramEvent(JComponent source)
+	public ExitProgramEvent(ActionEvent event)
 	{
-		super(source, 0, "exit_program");
+		super(event.getSource(), event.getID(), "exit_program_event");
 
-		this.source = source;
+		this.event = event;
 	}
 }
