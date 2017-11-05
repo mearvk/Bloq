@@ -9,7 +9,7 @@ public class LoadFalthruuTreeEvent extends ActionEvent
 
 	public LoadFalthruuTreeEvent(ActionEvent event, File fileRef)
 	{
-		super(event.getSource(), event.getID(), "load_bodi_tree_event");
+		super(event.getSource(), event.getID(), "load_falthruu_tree_event");
 
 		this.fileRef = fileRef;
 	}

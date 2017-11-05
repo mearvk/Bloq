@@ -154,6 +154,92 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				break;
 
+			case "save_bloq_document_event":
+
+				new SaveBloqDocumentRequest(this, event).run();
+
+				break;
+
+			// sprung //
+
+			case "load_sprung_document_event":
+
+				new LoadSprungDocumentRequest(this, event).run();
+
+				break;
+
+			case "load_sprung_tree_event":
+
+				new LoadSprungTreeRequest(this, event).run();
+
+				break;
+
+			case "save_sprung_document_event":
+
+				new SaveSprungDocumentRequest(this, event).run();
+
+				break;
+
+			// runyn //
+
+			case "load_runyn_document_event":
+
+				new LoadRunynDocumentRequest(this, event).run();
+
+				break;
+
+			case "load_runyn_tree_event":
+
+				new LoadRunynTreeRequest(this, event).run();
+
+				break;
+
+			case "save_runyn_document_event":
+
+				new SaveRunynDocumentRequest(this, event).run();
+
+				break;
+
+			// falthruu //
+
+			case "load_falthruu_document_event":
+
+				new LoadFalthruuDocumentRequest(this, event).run();
+
+				break;
+
+			case "load_falthruu_tree_event":
+
+				new LoadFalthruuTreeRequest(this, event).run();
+
+				break;
+
+			case "save_falthruu_document_event":
+
+				new SaveFalthruuDocumentRequest(this, event).run();
+
+				break;
+
+			// munction //
+
+			case "load_munction_document_event":
+
+				new LoadMunctionDocumentRequest(this, event).run();
+
+				break;
+
+			case "load_munction_tree_event":
+
+				new LoadMunctionTreeRequest(this, event).run();
+
+				break;
+
+			case "save_munction_document_event":
+
+				new SaveMunctionDocumentRequest(this, event).run();
+
+				break;
+
 			//
 
 			case "document_loaded_event":
@@ -229,7 +315,7 @@ class LoadBodiTreeRequest
 	{
 		this.processor = processor;
 
-		this.event = (LoadBodiTreeEvent) event;
+		this.event = (LoadBodiTreeEvent)event;
 	}
 
 	public void run()
@@ -376,6 +462,253 @@ class LoadBloqDocumentRequest
 		{
 			e.printStackTrace();
 		}
+	}
+}
+
+class SaveBloqDocumentRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public SaveBloqDocumentEvent event;
+
+	public SaveBloqDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (SaveBloqDocumentEvent) event;
+	}
+
+	public void run()
+	{
+
+	}
+}
+
+class LoadFalthruuDocumentRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public LoadFalthruuDocumentEvent event;
+
+	public LoadFalthruuDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (LoadFalthruuDocumentEvent) event;
+	}
+
+	public void run()
+	{
+
+	}
+}
+
+class LoadFalthruuTreeRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public LoadFalthruuTreeEvent event;
+
+	public LoadFalthruuTreeRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (LoadFalthruuTreeEvent) event;
+	}
+
+	public void run()
+	{
+
+	}
+}
+
+class SaveFalthruuDocumentRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public SaveFalthruuDocumentEvent event;
+
+	public SaveFalthruuDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (SaveFalthruuDocumentEvent) event;
+	}
+
+	public void run()
+	{
+
+	}
+}
+
+class LoadMunctionDocumentRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public LoadMunctionDocumentEvent event;
+
+	public LoadMunctionDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (LoadMunctionDocumentEvent) event;
+	}
+
+	public void run()
+	{
+
+	}
+}
+
+class LoadMunctionTreeRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public LoadMunctionTreeEvent event;
+
+	public LoadMunctionTreeRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (LoadMunctionTreeEvent) event;
+	}
+
+	public void run()
+	{
+
+	}
+}
+
+class SaveMunctionDocumentRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public SaveMunctionDocumentEvent event;
+
+	public SaveMunctionDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (SaveMunctionDocumentEvent) event;
+	}
+
+	public void run()
+	{
+
+	}
+}
+
+class LoadRunynDocumentRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public LoadRunynDocumentEvent event;
+
+	public LoadRunynDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (LoadRunynDocumentEvent) event;
+	}
+
+	public void run()
+	{
+
+	}
+}
+
+class LoadRunynTreeRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public LoadRunynTreeEvent event;
+
+	public LoadRunynTreeRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (LoadRunynTreeEvent) event;
+	}
+
+	public void run()
+	{
+
+	}
+}
+
+class SaveRunynDocumentRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public SaveRunynDocumentEvent event;
+
+	public SaveRunynDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (SaveRunynDocumentEvent) event;
+	}
+
+	public void run()
+	{
+
+	}
+}
+
+class LoadSprungDocumentRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public LoadSprungDocumentEvent event;
+
+	public LoadSprungDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (LoadSprungDocumentEvent) event;
+	}
+
+	public void run()
+	{
+
+	}
+}
+
+class LoadSprungTreeRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public LoadSprungTreeEvent event;
+
+	public LoadSprungTreeRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (LoadSprungTreeEvent) event;
+	}
+
+	public void run()
+	{
+
+	}
+}
+
+class SaveSprungDocumentRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public SaveSprungDocumentEvent event;
+
+	public SaveSprungDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (SaveSprungDocumentEvent) event;
+	}
+
+	public void run()
+	{
+
 	}
 }
 

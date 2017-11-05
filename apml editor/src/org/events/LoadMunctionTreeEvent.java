@@ -9,7 +9,7 @@ public class LoadMunctionTreeEvent extends ActionEvent
 
 	public LoadMunctionTreeEvent(ActionEvent event, File fileRef)
 	{
-		super(event.getSource(), event.getID(), "load_bodi_tree_event");
+		super(event.getSource(), event.getID(), "load_munction_tree_event");
 
 		this.fileRef = fileRef;
 	}

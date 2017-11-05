@@ -9,7 +9,7 @@ public class LoadSprungTreeEvent extends ActionEvent
 
 	public LoadSprungTreeEvent(ActionEvent event, File fileRef)
 	{
-		super(event.getSource(), event.getID(), "load_bodi_tree_event");
+		super(event.getSource(), event.getID(), "load_sprung_tree_event");
 
 		this.fileRef = fileRef;
 	}

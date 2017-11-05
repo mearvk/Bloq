@@ -9,7 +9,7 @@ public class LoadRunynTreeEvent extends ActionEvent
 
 	public LoadRunynTreeEvent(ActionEvent event, File fileRef)
 	{
-		super(event.getSource(), event.getID(), "load_bodi_tree_event");
+		super(event.getSource(), event.getID(), "load_runyn_tree_event");
 
 		this.fileRef = fileRef;
 	}
