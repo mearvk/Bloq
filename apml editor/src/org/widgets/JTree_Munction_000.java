@@ -6,7 +6,7 @@ import apml.xpath.helpers.Xpathquick;
 import org.custom.ui.BloqJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseApmlDocumentEvent;
-import org.events.LoadMunctionDocumentEvent;
+import org.events.LoadMunctionTreeEvent;
 import org.listeners.*;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -180,7 +180,7 @@ public class JTree_Munction_000 extends JTree
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void update(LoadMunctionDocumentEvent event)
+	public void update(LoadMunctionTreeEvent event)
 	{
 		File file = event.getFileRef();
 

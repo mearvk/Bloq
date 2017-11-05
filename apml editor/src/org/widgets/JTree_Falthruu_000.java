@@ -6,7 +6,7 @@ import apml.xpath.helpers.Xpathquick;
 import org.custom.ui.BloqJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseApmlDocumentEvent;
-import org.events.LoadFalthruuDocumentEvent;
+import org.events.LoadFalthruuTreeEvent;
 import org.listeners.*;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -180,7 +180,7 @@ public class JTree_Falthruu_000 extends JTree
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void update(LoadFalthruuDocumentEvent event)
+	public void update(LoadFalthruuTreeEvent event)
 	{
 		File file = event.getFileRef();
 

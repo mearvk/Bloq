@@ -6,7 +6,7 @@ import apml.xpath.helpers.Xpathquick;
 import org.custom.ui.BloqJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseApmlDocumentEvent;
-import org.events.LoadRunynDocumentEvent;
+import org.events.LoadRunynTreeEvent;
 import org.listeners.*;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -180,7 +180,7 @@ public class JTree_Runyn_000 extends JTree
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void update(LoadRunynDocumentEvent event)
+	public void update(LoadRunynTreeEvent event)
 	{
 		File file = event.getFileRef();
 

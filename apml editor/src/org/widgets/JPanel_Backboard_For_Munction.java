@@ -73,7 +73,7 @@ public class JPanel_Backboard_For_Munction extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Munction_000(this, "//editor/ui/jpanel_munction_000"), new JPanel_Falthruu_001(this, "//editor/ui/jpanel_munction_001"));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Munction_000(this, "//editor/ui/jpanel_munction_000"), new JPanel_Munction_001(this, "//editor/ui/jpanel_munction_001"));
 
 		// hierarchy
 
@@ -106,7 +106,7 @@ public class JPanel_Backboard_For_Munction extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Munction_000(this, "//editor/ui/jpanel_munction_000"), new JPanel_001(this, "//editor/ui/jpanel_munction_001"));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Munction_000(this, "//editor/ui/jpanel_munction_000"), new JPanel_Munction_001(this, "//editor/ui/jpanel_munction_001"));
 
 		// hierarchy
 

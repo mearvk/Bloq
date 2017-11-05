@@ -499,7 +499,40 @@ class LoadFalthruuDocumentRequest
 
 	public void run()
 	{
+		this.loaddocument(event);
+	}
 
+	private void loaddocument(LoadFalthruuDocumentEvent event)
+	{
+		RSTextPane_Falthruu_000 rstextpane_falthruu_000;
+
+		rstextpane_falthruu_000 = (RSTextPane_Falthruu_000) Bodi.context("editor").pull("//editor/ui/rstextpane_falthruu_000");
+
+		try
+		{
+			BufferedReader reader = new BufferedReader(new FileReader(event.getFileRef()));
+
+			String line = null;
+
+			String buffer = new String();
+
+			//
+
+			while ((line = reader.readLine()) != null)
+			{
+				buffer = buffer + line + "\n";
+			}
+
+			//
+
+			rstextpane_falthruu_000.setText(buffer + "\n");
+
+			rstextpane_falthruu_000.setCaretPosition(000);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
 
@@ -518,7 +551,15 @@ class LoadFalthruuTreeRequest
 
 	public void run()
 	{
+		JTree_Falthruu_000 jtree_falthruu_000;
 
+		jtree_falthruu_000 = (JTree_Falthruu_000) Bodi.context("editor").pull("//editor/ui/jtree_falthruu_000");
+
+		jtree_falthruu_000.init();
+
+		jtree_falthruu_000.update(event);
+
+		jtree_falthruu_000.removenewlinetextnodes();
 	}
 }
 
@@ -556,7 +597,40 @@ class LoadMunctionDocumentRequest
 
 	public void run()
 	{
+		this.loaddocument(event);
+	}
 
+	private void loaddocument(LoadMunctionDocumentEvent event)
+	{
+		RSTextPane_Munction_000 rstextpane_munction_000;
+
+		rstextpane_munction_000 = (RSTextPane_Munction_000) Bodi.context("editor").pull("//editor/ui/rstextpane_munction_000");
+
+		try
+		{
+			BufferedReader reader = new BufferedReader(new FileReader(event.getFileRef()));
+
+			String line = null;
+
+			String buffer = new String();
+
+			//
+
+			while ((line = reader.readLine()) != null)
+			{
+				buffer = buffer + line + "\n";
+			}
+
+			//
+
+			rstextpane_munction_000.setText(buffer + "\n");
+
+			rstextpane_munction_000.setCaretPosition(000);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
 
@@ -575,7 +649,15 @@ class LoadMunctionTreeRequest
 
 	public void run()
 	{
+		JTree_Munction_000 jtree_munction_000;
 
+		jtree_munction_000 = (JTree_Munction_000) Bodi.context("editor").pull("//editor/ui/jtree_munction_000");
+
+		jtree_munction_000.init();
+
+		jtree_munction_000.update(event);
+
+		jtree_munction_000.removenewlinetextnodes();
 	}
 }
 
@@ -613,7 +695,40 @@ class LoadRunynDocumentRequest
 
 	public void run()
 	{
+		this.loaddocument(event);
+	}
 
+	private void loaddocument(LoadRunynDocumentEvent event)
+	{
+		RSTextPane_Runyn_000 rstextpane_runyn_000;
+
+		rstextpane_runyn_000 = (RSTextPane_Runyn_000) Bodi.context("editor").pull("//editor/ui/rstextpane_runyn_000");
+
+		try
+		{
+			BufferedReader reader = new BufferedReader(new FileReader(event.getFileRef()));
+
+			String line = null;
+
+			String buffer = new String();
+
+			//
+
+			while ((line = reader.readLine()) != null)
+			{
+				buffer = buffer + line + "\n";
+			}
+
+			//
+
+			rstextpane_runyn_000.setText(buffer + "\n");
+
+			rstextpane_runyn_000.setCaretPosition(000);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
 
@@ -632,7 +747,15 @@ class LoadRunynTreeRequest
 
 	public void run()
 	{
+		JTree_Runyn_000 jtree_runyn_000;
 
+		jtree_runyn_000 = (JTree_Runyn_000) Bodi.context("editor").pull("//editor/ui/jtree_runyn_000");
+
+		jtree_runyn_000.init();
+
+		jtree_runyn_000.update(event);
+
+		jtree_runyn_000.removenewlinetextnodes();
 	}
 }
 
@@ -670,7 +793,40 @@ class LoadSprungDocumentRequest
 
 	public void run()
 	{
+		this.loaddocument(event);
+	}
 
+	private void loaddocument(LoadSprungDocumentEvent event)
+	{
+		RSTextPane_Sprung_000 rstextpane_sprung_000;
+
+		rstextpane_sprung_000 = (RSTextPane_Sprung_000) Bodi.context("editor").pull("//editor/ui/rstextpane_sprung_000");
+
+		try
+		{
+			BufferedReader reader = new BufferedReader(new FileReader(event.getFileRef()));
+
+			String line = null;
+
+			String buffer = new String();
+
+			//
+
+			while ((line = reader.readLine()) != null)
+			{
+				buffer = buffer + line + "\n";
+			}
+
+			//
+
+			rstextpane_sprung_000.setText(buffer + "\n");
+
+			rstextpane_sprung_000.setCaretPosition(000);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
 
@@ -689,7 +845,15 @@ class LoadSprungTreeRequest
 
 	public void run()
 	{
+		JTree_Sprung_000 jtree_sprung_000;
 
+		jtree_sprung_000 = (JTree_Sprung_000) Bodi.context("editor").pull("//editor/ui/jtree_sprung_000");
+
+		jtree_sprung_000.init();
+
+		jtree_sprung_000.update(event);
+
+		jtree_sprung_000.removenewlinetextnodes();
 	}
 }
 
