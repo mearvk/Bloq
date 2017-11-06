@@ -9,7 +9,6 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.listeners.CustomKeyEventListener;
 import org.listeners.LineCountDocumentListener;
 
-import javax.swing.event.TreeSelectionEvent;
 import javax.swing.text.Element;
 import java.awt.*;
 
@@ -164,23 +163,7 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	//
 	public void processtreechange(TreeStructureUpdatedEvent event)
 	{
-		TreeSelectionEvent treeevent;
 
-		treeevent = (TreeSelectionEvent) event.getSource();
-
-		System.out.println("JTree updated ");
-
-		//finish
-
-		/*
-
-		1. find pertinent line number
-
-		2. insert new line
-
-		3. insert new node
-
-		 */
 	}
 
 	@Override
