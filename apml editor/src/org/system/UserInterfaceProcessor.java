@@ -496,6 +496,12 @@ class SaveBloqDocumentRequest
 	{
 		try
 		{
+			String text = this.rstextpane_bloq_000.getText();
+
+			if(text==null || text.length()==0) throw new Exception("No data");
+
+			//
+
 			JFileChooser chooser = new JFileChooser();
 
 			int retval = chooser.showSaveDialog(this.apmlgui);
@@ -507,10 +513,6 @@ class SaveBloqDocumentRequest
 				BufferedWriter writer;
 
 				writer = new BufferedWriter(new FileWriter(file));
-
-				String text = this.rstextpane_bloq_000.getText();
-
-				if(text==null || text.length()==0) throw new Exception("No data");
 
 				writer.write(this.rstextpane_bloq_000.getText(), 0, this.rstextpane_bloq_000.getText().length());
 
@@ -630,6 +632,10 @@ class SaveFalthruuDocumentRequest
 		this.processor = processor;
 
 		this.event = (SaveFalthruuDocumentEvent) event;
+
+		this.apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+		this.rstextpane_falthruu_000 = (RSTextPane_Falthruu_000) Bodi.context("editor").pull("//editor/ui/rstextpane_falthruu_000");
 	}
 
 	public void run()
@@ -642,6 +648,12 @@ class SaveFalthruuDocumentRequest
 	{
 		try
 		{
+			String text = this.rstextpane_falthruu_000.getText();
+
+			if(text==null || text.length()==0) throw new Exception("No data");
+
+			//
+
 			JFileChooser chooser = new JFileChooser();
 
 			int retval = chooser.showSaveDialog(this.apmlgui);
@@ -653,10 +665,6 @@ class SaveFalthruuDocumentRequest
 				BufferedWriter writer;
 
 				writer = new BufferedWriter(new FileWriter(file));
-
-				String text = this.rstextpane_falthruu_000.getText();
-
-				if(text==null || text.length()==0) throw new Exception("No data");
 
 				writer.write(this.rstextpane_falthruu_000.getText(), 0, this.rstextpane_falthruu_000.getText().length());
 
@@ -776,6 +784,10 @@ class SaveMunctionDocumentRequest
 		this.processor = processor;
 
 		this.event = (SaveMunctionDocumentEvent) event;
+
+		this.apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+		this.rstextpane_munction_000 = (RSTextPane_Munction_000) Bodi.context("editor").pull("//editor/ui/rstextpane_munction_000");
 	}
 
 
@@ -789,6 +801,12 @@ class SaveMunctionDocumentRequest
 	{
 		try
 		{
+			String text = this.rstextpane_munction_000.getText();
+
+			if(text==null || text.length()==0) throw new Exception("No data");
+
+			//
+
 			JFileChooser chooser = new JFileChooser();
 
 			int retval = chooser.showSaveDialog(this.apmlgui);
@@ -800,10 +818,6 @@ class SaveMunctionDocumentRequest
 				BufferedWriter writer;
 
 				writer = new BufferedWriter(new FileWriter(file));
-
-				String text = this.rstextpane_munction_000.getText();
-
-				if(text==null || text.length()==0) throw new Exception("No data");
 
 				writer.write(this.rstextpane_munction_000.getText(), 0, this.rstextpane_munction_000.getText().length());
 
@@ -923,6 +937,10 @@ class SaveRunynDocumentRequest
 		this.processor = processor;
 
 		this.event = (SaveRunynDocumentEvent) event;
+
+		this.apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+		this.rstextpane_runyn_000 = (RSTextPane_Runyn_000) Bodi.context("editor").pull("//editor/ui/rstextpane_runyn_000");
 	}
 
 
@@ -936,6 +954,12 @@ class SaveRunynDocumentRequest
 	{
 		try
 		{
+			String text = this.rstextpane_runyn_000.getText();
+
+			if(text==null || text.length()==0) throw new Exception("No data");
+
+			//
+
 			JFileChooser chooser = new JFileChooser();
 
 			int retval = chooser.showSaveDialog(this.apmlgui);
@@ -947,10 +971,6 @@ class SaveRunynDocumentRequest
 				BufferedWriter writer;
 
 				writer = new BufferedWriter(new FileWriter(file));
-
-				String text = this.rstextpane_runyn_000.getText();
-
-				if(text==null || text.length()==0) throw new Exception("No data");
 
 				writer.write(this.rstextpane_runyn_000.getText(), 0, this.rstextpane_runyn_000.getText().length());
 
@@ -1070,6 +1090,10 @@ class SaveSprungDocumentRequest
 		this.processor = processor;
 
 		this.event = (SaveSprungDocumentEvent) event;
+
+		this.apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+		this.rstextpane_sprung_000 = (RSTextPane_Sprung_000) Bodi.context("editor").pull("//editor/ui/rstextpane_sprung_000");
 	}
 
 	public void run()
@@ -1082,6 +1106,12 @@ class SaveSprungDocumentRequest
 	{
 		try
 		{
+			String text = this.rstextpane_sprung_000.getText();
+
+			if(text==null || text.length()==0) throw new Exception("No data");
+
+			//
+
 			JFileChooser chooser = new JFileChooser();
 
 			int retval = chooser.showSaveDialog(this.apmlgui);
@@ -1093,10 +1123,6 @@ class SaveSprungDocumentRequest
 				BufferedWriter writer;
 
 				writer = new BufferedWriter(new FileWriter(file));
-
-				String text = this.rstextpane_sprung_000.getText();
-
-				if(text==null || text.length()==0) throw new Exception("No data");
 
 				writer.write(this.rstextpane_sprung_000.getText(), 0, this.rstextpane_sprung_000.getText().length());
 
@@ -1155,6 +1181,12 @@ class SaveBodiDocumentRequest
 	{
 		try
 		{
+			String text = this.rstextpane_bodi_000.getText();
+
+			if(text==null || text.length()==0) throw new Exception("No data");
+
+			//
+
 			JFileChooser chooser = new JFileChooser();
 
 			int retval = chooser.showSaveDialog(this.apmlgui);
@@ -1166,10 +1198,6 @@ class SaveBodiDocumentRequest
 				BufferedWriter writer;
 
 				writer = new BufferedWriter(new FileWriter(file));
-
-				String text = this.rstextpane_bodi_000.getText();
-
-				if(text==null || text.length()==0) throw new Exception("No data");
 
 				writer.write(this.rstextpane_bodi_000.getText(), 0, this.rstextpane_bodi_000.getText().length());
 
@@ -1328,6 +1356,12 @@ class SaveApmlDocumentRequest
 	{
 		try
 		{
+			String text = this.rstextpane_apml_000.getText();
+
+			if(text==null || text.length()==0) throw new Exception("No data");
+
+			//
+
 			JFileChooser chooser = new JFileChooser();
 
 			int retval = chooser.showSaveDialog(this.apmlgui);
@@ -1339,10 +1373,6 @@ class SaveApmlDocumentRequest
 				BufferedWriter writer;
 
 				writer = new BufferedWriter(new FileWriter(file));
-
-				String text = this.rstextpane_apml_000.getText();
-
-				if(text==null || text.length()==0) throw new Exception("No data");
 
 				writer.write(this.rstextpane_apml_000.getText(), 0, this.rstextpane_apml_000.getText().length());
 
