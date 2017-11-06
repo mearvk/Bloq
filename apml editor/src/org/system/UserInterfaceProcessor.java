@@ -471,16 +471,68 @@ class SaveBloqDocumentRequest
 
 	public SaveBloqDocumentEvent event;
 
+	public APMLGui apmlgui;
+
+	public RSTextPane_Bloq_000 rstextpane_bloq_000;
+
 	public SaveBloqDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
 	{
 		this.processor = processor;
 
 		this.event = (SaveBloqDocumentEvent) event;
+
+		this.apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+		this.rstextpane_bloq_000 = (RSTextPane_Bloq_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bloq_000");
 	}
 
 	public void run()
 	{
+		this.savedocument(event);
+	}
 
+	//
+	private void savedocument(SaveBloqDocumentEvent event)
+	{
+		try
+		{
+			JFileChooser chooser = new JFileChooser();
+
+			int retval = chooser.showSaveDialog(this.apmlgui);
+
+			if (retval == JFileChooser.APPROVE_OPTION)
+			{
+				File file = chooser.getSelectedFile();
+
+				BufferedWriter writer;
+
+				writer = new BufferedWriter(new FileWriter(file));
+
+				String text = this.rstextpane_bloq_000.getText();
+
+				if(text==null || text.length()==0) throw new Exception("No data");
+
+				writer.write(this.rstextpane_bloq_000.getText(), 0, this.rstextpane_bloq_000.getText().length());
+
+				writer.flush();
+
+				writer.close();
+			}
+			else throw new Exception("Aborted.");
+
+			JOptionPane.showMessageDialog(this.apmlgui, "Document successfully saved.");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+
+			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
+			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			else
+				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+		}
 	}
 }
 
@@ -569,6 +621,10 @@ class SaveFalthruuDocumentRequest
 
 	public SaveFalthruuDocumentEvent event;
 
+	public APMLGui apmlgui;
+
+	public RSTextPane_Falthruu_000 rstextpane_falthruu_000;
+
 	public SaveFalthruuDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
 	{
 		this.processor = processor;
@@ -578,7 +634,51 @@ class SaveFalthruuDocumentRequest
 
 	public void run()
 	{
+		this.savedocument(event);
+	}
 
+	//
+	private void savedocument(SaveFalthruuDocumentEvent event)
+	{
+		try
+		{
+			JFileChooser chooser = new JFileChooser();
+
+			int retval = chooser.showSaveDialog(this.apmlgui);
+
+			if (retval == JFileChooser.APPROVE_OPTION)
+			{
+				File file = chooser.getSelectedFile();
+
+				BufferedWriter writer;
+
+				writer = new BufferedWriter(new FileWriter(file));
+
+				String text = this.rstextpane_falthruu_000.getText();
+
+				if(text==null || text.length()==0) throw new Exception("No data");
+
+				writer.write(this.rstextpane_falthruu_000.getText(), 0, this.rstextpane_falthruu_000.getText().length());
+
+				writer.flush();
+
+				writer.close();
+			}
+			else throw new Exception("Aborted.");
+
+			JOptionPane.showMessageDialog(this.apmlgui, "Document successfully saved.");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+
+			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
+			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			else
+				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+		}
 	}
 }
 
@@ -667,6 +767,10 @@ class SaveMunctionDocumentRequest
 
 	public SaveMunctionDocumentEvent event;
 
+	public APMLGui apmlgui;
+
+	public RSTextPane_Munction_000 rstextpane_munction_000;
+
 	public SaveMunctionDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
 	{
 		this.processor = processor;
@@ -674,9 +778,54 @@ class SaveMunctionDocumentRequest
 		this.event = (SaveMunctionDocumentEvent) event;
 	}
 
+
 	public void run()
 	{
+		this.savedocument(event);
+	}
 
+	//
+	private void savedocument(SaveMunctionDocumentEvent event)
+	{
+		try
+		{
+			JFileChooser chooser = new JFileChooser();
+
+			int retval = chooser.showSaveDialog(this.apmlgui);
+
+			if (retval == JFileChooser.APPROVE_OPTION)
+			{
+				File file = chooser.getSelectedFile();
+
+				BufferedWriter writer;
+
+				writer = new BufferedWriter(new FileWriter(file));
+
+				String text = this.rstextpane_munction_000.getText();
+
+				if(text==null || text.length()==0) throw new Exception("No data");
+
+				writer.write(this.rstextpane_munction_000.getText(), 0, this.rstextpane_munction_000.getText().length());
+
+				writer.flush();
+
+				writer.close();
+			}
+			else throw new Exception("Aborted.");
+
+			JOptionPane.showMessageDialog(this.apmlgui, "Document successfully saved.");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+
+			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
+			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			else
+				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+		}
 	}
 }
 
@@ -765,6 +914,10 @@ class SaveRunynDocumentRequest
 
 	public SaveRunynDocumentEvent event;
 
+	public APMLGui apmlgui;
+
+	public RSTextPane_Runyn_000 rstextpane_runyn_000;
+
 	public SaveRunynDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
 	{
 		this.processor = processor;
@@ -772,9 +925,54 @@ class SaveRunynDocumentRequest
 		this.event = (SaveRunynDocumentEvent) event;
 	}
 
+
 	public void run()
 	{
+		this.savedocument(event);
+	}
 
+	//
+	private void savedocument(SaveRunynDocumentEvent event)
+	{
+		try
+		{
+			JFileChooser chooser = new JFileChooser();
+
+			int retval = chooser.showSaveDialog(this.apmlgui);
+
+			if (retval == JFileChooser.APPROVE_OPTION)
+			{
+				File file = chooser.getSelectedFile();
+
+				BufferedWriter writer;
+
+				writer = new BufferedWriter(new FileWriter(file));
+
+				String text = this.rstextpane_runyn_000.getText();
+
+				if(text==null || text.length()==0) throw new Exception("No data");
+
+				writer.write(this.rstextpane_runyn_000.getText(), 0, this.rstextpane_runyn_000.getText().length());
+
+				writer.flush();
+
+				writer.close();
+			}
+			else throw new Exception("Aborted.");
+
+			JOptionPane.showMessageDialog(this.apmlgui, "Document successfully saved.");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+
+			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
+			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			else
+				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+		}
 	}
 }
 
@@ -863,6 +1061,10 @@ class SaveSprungDocumentRequest
 
 	public SaveSprungDocumentEvent event;
 
+	public APMLGui apmlgui;
+
+	public RSTextPane_Sprung_000 rstextpane_sprung_000;
+
 	public SaveSprungDocumentRequest(UserInterfaceProcessor processor, ActionEvent event)
 	{
 		this.processor = processor;
@@ -872,7 +1074,51 @@ class SaveSprungDocumentRequest
 
 	public void run()
 	{
+		this.savedocument(event);
+	}
 
+	//
+	private void savedocument(SaveSprungDocumentEvent event)
+	{
+		try
+		{
+			JFileChooser chooser = new JFileChooser();
+
+			int retval = chooser.showSaveDialog(this.apmlgui);
+
+			if (retval == JFileChooser.APPROVE_OPTION)
+			{
+				File file = chooser.getSelectedFile();
+
+				BufferedWriter writer;
+
+				writer = new BufferedWriter(new FileWriter(file));
+
+				String text = this.rstextpane_sprung_000.getText();
+
+				if(text==null || text.length()==0) throw new Exception("No data");
+
+				writer.write(this.rstextpane_sprung_000.getText(), 0, this.rstextpane_sprung_000.getText().length());
+
+				writer.flush();
+
+				writer.close();
+			}
+			else throw new Exception("Aborted.");
+
+			JOptionPane.showMessageDialog(this.apmlgui, "Document successfully saved.");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+
+			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
+			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			else
+				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+		}
 	}
 }
 
@@ -921,12 +1167,17 @@ class SaveBodiDocumentRequest
 
 				writer = new BufferedWriter(new FileWriter(file));
 
+				String text = this.rstextpane_bodi_000.getText();
+
+				if(text==null || text.length()==0) throw new Exception("No data");
+
 				writer.write(this.rstextpane_bodi_000.getText(), 0, this.rstextpane_bodi_000.getText().length());
 
 				writer.flush();
 
 				writer.close();
 			}
+			else throw new Exception("Aborted.");
 
 			JOptionPane.showMessageDialog(this.apmlgui, "Document successfully saved.");
 		}
@@ -934,7 +1185,12 @@ class SaveBodiDocumentRequest
 		{
 			e.printStackTrace();
 
-			JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
+			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			else
+				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
 		}
 	}
 }
@@ -1084,12 +1340,17 @@ class SaveApmlDocumentRequest
 
 				writer = new BufferedWriter(new FileWriter(file));
 
+				String text = this.rstextpane_apml_000.getText();
+
+				if(text==null || text.length()==0) throw new Exception("No data");
+
 				writer.write(this.rstextpane_apml_000.getText(), 0, this.rstextpane_apml_000.getText().length());
 
 				writer.flush();
 
 				writer.close();
 			}
+			else throw new Exception("Aborted.");
 
 			JOptionPane.showMessageDialog(this.apmlgui, "Document successfully saved.");
 		}
@@ -1097,7 +1358,12 @@ class SaveApmlDocumentRequest
 		{
 			e.printStackTrace();
 
-			JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
+			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			else
+				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
 		}
 	}
 }
@@ -1380,12 +1646,12 @@ class SaveDocumentRequest
 
 					this.processor.update(new SaveApmlDocumentEvent(event, event.fileRef));
 
-				break;
+					break;
 
 				//bloq
 				case 1:
 
-					//this.processor.update(new SaveBloqDocumentEvent(event, event.fileRef));
+					this.processor.update(new SaveBloqDocumentEvent(event, event.fileRef));
 
 					break;
 
@@ -1399,28 +1665,28 @@ class SaveDocumentRequest
 				//munction
 				case 3:
 
-					//this.processor.update(new SaveMunctionDocumentEvent(event, event.fileRef));
+					this.processor.update(new SaveMunctionDocumentEvent(event, event.fileRef));
 
 					break;
 
 				//runyn
 				case 4:
 
-					//this.processor.update(new SaveRunynDocumentEvent(event, event.fileRef));
+					this.processor.update(new SaveRunynDocumentEvent(event, event.fileRef));
 
 					break;
 
 				//sprung
 				case 5:
 
-					//this.processor.update(new SaveSprungDocumentEvent(event, event.fileRef));
+					this.processor.update(new SaveSprungDocumentEvent(event, event.fileRef));
 
 					break;
 
 				//falthruu
 				case 6:
 
-					//this.processor.update(new SaveFalthruuDocumentEvent(event, event.fileRef));
+					this.processor.update(new SaveFalthruuDocumentEvent(event, event.fileRef));
 
 					break;
 

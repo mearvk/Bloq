@@ -2,19 +2,16 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import org.events.SaveApmlDocumentEvent;
 import org.events.TreeStructureUpdatedEvent;
-import org.fife.ui.rsyntaxtextarea.*;
+import org.fife.ui.rsyntaxtextarea.RSyntaxDocument;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.listeners.CustomKeyEventListener;
 import org.listeners.LineCountDocumentListener;
 
-import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.text.Element;
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 
 public class RSTextPane_000 extends RSyntaxTextArea
 {
@@ -38,12 +35,6 @@ public class RSTextPane_000 extends RSyntaxTextArea
 		this.setCurrentLineHighlightColor(new Color(225, 225, 225));
 
 		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
-
-		SyntaxScheme scheme = this.getSyntaxScheme();
-
-		scheme.getStyle(Token.RESERVED_WORD).foreground = new Color(35, 35, 110);
-
-		scheme.getStyle(Token.LITERAL_STRING_DOUBLE_QUOTE).foreground = new Color(35, 35, 110);
 
 		//instantiation
 
@@ -168,36 +159,6 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	public void setscrollpane(RTextScrollPane_000 scrollpane)
 	{
 		this.scrollpane = scrollpane;
-	}
-
-	//
-	public void savedocument(SaveApmlDocumentEvent event) throws Exception
-	{
-		try
-		{
-			JFileChooser chooser = new JFileChooser();
-
-			int retval = chooser.showSaveDialog(this);
-
-			if (retval == JFileChooser.APPROVE_OPTION)
-			{
-				File file = chooser.getSelectedFile();
-
-				BufferedWriter writer;
-
-				writer = new BufferedWriter(new FileWriter(file));
-
-				writer.write(this.getText(), 0, this.getText().length());
-
-				writer.flush();
-
-				writer.close();
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	//

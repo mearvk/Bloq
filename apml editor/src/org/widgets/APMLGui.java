@@ -89,7 +89,11 @@ public class APMLGui extends JFrame
 				{
 					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 
-					UIManager.put("nimbusBase", new Color(0x91, 0x91, 0x91)); //menuitems, jfilechooser
+					//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+
+					//
+
+					UIManager.put("nimbusBase", new Color(0x61, 0x61, 0x61)); //menuitems, jfilechooser
 
 					UIManager.put("nimbusBlueGrey", new Color(0xd1, 0xd1, 0xd1)); //jmenubar
 
@@ -97,9 +101,41 @@ public class APMLGui extends JFrame
 
 					UIManager.put("nimbusFocus", new Color(0xff, 0xff, 0xff, Color.TRANSLUCENT));
 
-					UIManager.put("nimbusSelectionBackground", Color.LIGHT_GRAY);
+					UIManager.put("nimbusSelectionBackground", new Color(0x61, 0x61, 0x61));
 
-					UIManager.put("TabbedPane.background", Color.DARK_GRAY);
+					//
+
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].backgroundPainter", new BackgroundPainter(new Color(0xba,0xba,0xba)));
+
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+MouseOver].backgroundPainter", new BackgroundPainter(new Color(0xda,0xda,0xda)));
+
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+Pressed].backgroundPainter", new BackgroundPainter(new Color(0x4f, 0x5a, 0x5a)));
+
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+Selected].backgroundPainter", new BackgroundPainter(new Color(0x4f, 0x5a, 0x5a)));
+
+
+
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+MouseOver+Selected].backgroundPainter", new BackgroundPainter(new Color(0x6f, 0x6a, 0x7a)));
+
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Pressed+Selected].backgroundPainter", new BackgroundPainter(new Color(0x5f, 0x6a, 0x6a)));
+
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Selected].backgroundPainter", new BackgroundPainter(new Color(0x5f, 0x6a, 0x6a)));
+
+
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[MouseOver+Selected].backgroundPainter", new BackgroundPainter(new Color(0xfa,0xfa,0xfa)));
+
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Pressed+Selected].backgroundPainter", new BackgroundPainter(new Color(0xfa,0xfa,0xfa)));
+
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Selected].backgroundPainter", new BackgroundPainter(new Color(0xfa,0xfa,0xfa)));
+
+
+					//
+
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].textForeground", Color.BLACK);
+
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+Selected].textForeground", Color.WHITE);
+
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Selected].textForeground", Color.WHITE);
 
 					//
 
@@ -122,14 +158,14 @@ public class APMLGui extends JFrame
 						e.printStackTrace();
 					}
 
-					if (leaf != null)
-						UIManager.put("Tree.leafIcon", leaf);
+					//if (leaf != null)
+						//UIManager.put("Tree.leafIcon", leaf);
 
-					if (open != null)
-						UIManager.put("Tree.openIcon", open);
+					//if (open != null)
+						//UIManager.put("Tree.openIcon", open);
 
-					if (closed != null)
-						UIManager.put("Tree.closedIcon", closed);
+					//if (closed != null)
+						//UIManager.put("Tree.closedIcon", closed);
 				}
 				catch (Exception e)
 				{
@@ -275,4 +311,84 @@ public class APMLGui extends JFrame
 		new APMLGui(null);
 	}
 
+}
+
+class BackgroundPainter implements Painter<JComponent>
+{
+	private Color color = null;
+
+	BackgroundPainter(Color c)
+	{
+		color = c;
+	}
+
+	@Override
+	public void paint(Graphics2D g, JComponent object, int width, int height) {
+
+		if (color != null)
+		{
+			g.setColor(color);
+
+			g.fillRect(0, 0, width - 1, height - 1);
+
+			for(int i=0;i<height-20;i++)
+			{
+				Color newcolor = new Color(color.getRed()-(2*i), color.getGreen()-(2*i), color.getBlue()-(2*i));
+
+				g.setColor(newcolor);
+
+				g.drawLine(3,11-i, width-3, 11-i);
+			}
+
+			//
+
+			g.setColor(Color.WHITE); //top
+
+			g.drawLine(0,height-1,width-1,height-1);
+
+			//
+
+			g.setColor(Color.LIGHT_GRAY); //left
+
+			g.drawLine(0,0,0,height-1);
+
+			//
+
+			g.setColor(Color.GRAY); //right
+
+			g.drawLine(width,0,width,height-1);
+
+			//
+
+			g.setColor(Color.GRAY); //bottom
+
+			g.drawLine(2,1,width-2,1);
+
+			//
+
+			g.setColor(Color.LIGHT_GRAY);
+
+			g.fillRect(2,height-5,3,3); //highlight 1
+
+			//
+
+			g.fillRect(0,height-2,2,2); //highlight 2
+
+			//
+
+			g.setColor(Color.LIGHT_GRAY.darker()); //bottom
+
+			g.fillRect(0,height-16,1,13);
+
+			g.setColor(Color.LIGHT_GRAY.darker().darker()); //bottom
+
+			g.fillRect(0,12,1,10);
+
+			g.setColor(Color.LIGHT_GRAY); //bottom
+
+			g.fillRect(1,2,1,6);
+
+			g.fillRect(width,2,1,6);
+		}
+	}
 }

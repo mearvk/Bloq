@@ -2,18 +2,11 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import org.events.CloseApmlDocumentEvent;
-import org.events.LoadApmlDocumentEvent;
-import org.events.TreeStructureUpdatedEvent;
 import org.fife.ui.rsyntaxtextarea.*;
 import org.listeners.CustomKeyEventListener;
 import org.listeners.LineCountDocumentListener;
 
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.text.Element;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 public class RSTextPane_Apml_000 extends RSyntaxTextArea
 {
@@ -36,17 +29,11 @@ public class RSTextPane_Apml_000 extends RSyntaxTextArea
 
 		this.setCurrentLineHighlightColor(new Color(225, 225, 225));
 
-		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
-
-		SyntaxScheme scheme = this.getSyntaxScheme();
-
-		scheme.getStyle(Token.RESERVED_WORD).foreground = new Color(35, 35, 110);
-
-		scheme.getStyle(Token.LITERAL_STRING_DOUBLE_QUOTE).foreground = new Color(35, 35, 110);
-
 		//instantiation
 
 		this.document = new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_XML);
+
+		this.setCodeFoldingEnabled(true);
 
 		//bodi
 
@@ -55,6 +42,24 @@ public class RSTextPane_Apml_000 extends RSyntaxTextArea
 		//devolvement
 
 		this.parent = parent;
+
+		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
+
+		SyntaxScheme scheme = this.getSyntaxScheme();
+
+		//
+
+		scheme.getStyle(Token.MARKUP_TAG_NAME).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE).foreground = Color.DARK_GRAY.brighter();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE_VALUE).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_DELIMITER).foreground = Color.DARK_GRAY.darker();
+
+		//
+
+		this.revalidate();
 
 		//listeners
 
@@ -99,96 +104,6 @@ public class RSTextPane_Apml_000 extends RSyntaxTextArea
 	public void setscrollpane(RTextScrollPane_000 scrollpane)
 	{
 		this.scrollpane = scrollpane;
-	}
-
-	//
-	public void loaddocument(LoadApmlDocumentEvent event)
-	{
-		try
-		{
-			BufferedReader reader = new BufferedReader(new FileReader(event.getFileRef()));
-
-			String line = null;
-
-			String buffer = new String();
-
-			//
-
-			while ((line = reader.readLine()) != null)
-			{
-				buffer = buffer + line + "\n";
-			}
-
-			//this.document.insertString(0, buffer+"\n", new SimpleAttributeSet());
-
-			this.setText(buffer + "\n");
-
-			//
-
-			//this.setDocument(document);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	//
-	public void closedocument(CloseApmlDocumentEvent event)
-	{
-		try
-		{
-			this.setText("");
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-
-	//
-	public void processtreechange(TreeStructureUpdatedEvent event)
-	{
-		TreeSelectionEvent treeevent;
-
-		treeevent = (TreeSelectionEvent) event.getSource();
-
-		System.out.println("JTree updated ");
-
-		//finish
-
-		/*
-
-		1. find pertinent line number
-
-		2. insert new line
-
-		3. insert new node
-
-		 */
-	}
-
-	@Override
-	public Dimension getPreferredSize()
-	{
-		Element element;
-
-		element = this.getDocument().getDefaultRootElement();
-
-		//
-
-		int lineheight = 15; //12 + 3
-
-		int linecount = element.getElementCount();
-
-		//
-
-		Dimension calculated;
-
-		calculated = new Dimension(this.parent.getWidth(), (linecount * lineheight));
-
-		return calculated;
 	}
 }
 

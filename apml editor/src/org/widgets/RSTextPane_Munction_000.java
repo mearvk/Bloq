@@ -39,15 +39,21 @@ public class RSTextPane_Munction_000 extends RSyntaxTextArea
 
 		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
 
-		SyntaxScheme scheme = this.getSyntaxScheme();
-
-		scheme.getStyle(Token.RESERVED_WORD).foreground = new Color(35, 35, 110);
-
-		scheme.getStyle(Token.LITERAL_STRING_DOUBLE_QUOTE).foreground = new Color(35, 35, 110);
-
 		//instantiation
 
 		this.document = new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_XML);
+
+		SyntaxScheme scheme = this.getSyntaxScheme();
+
+		//
+
+		scheme.getStyle(Token.MARKUP_TAG_NAME).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE).foreground = Color.DARK_GRAY.brighter();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE_VALUE).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_DELIMITER).foreground = Color.DARK_GRAY.darker();
 
 		//bodi
 
