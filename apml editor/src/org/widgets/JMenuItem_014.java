@@ -49,7 +49,7 @@ public class JMenuItem_014 extends JMenuItem
 	{
 		// setters
 
-		this.setText("Prototype");
+		this.setText("Bodi");
 
 		// instantiation
 
@@ -62,7 +62,6 @@ public class JMenuItem_014 extends JMenuItem
 		this.setVisible(true);
 
 		// listeners
-
 	}
 
 	/**
@@ -73,7 +72,7 @@ public class JMenuItem_014 extends JMenuItem
 	{
 		// setters
 
-		this.setText("Prototype");
+		this.setText("Bodi");
 
 		// instantiation
 
@@ -90,6 +89,4 @@ public class JMenuItem_014 extends JMenuItem
 		// listeners
 
 	}
-
-
 }

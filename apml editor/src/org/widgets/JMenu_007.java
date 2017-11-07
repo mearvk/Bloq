@@ -41,7 +41,7 @@ public class JMenu_007 extends JMenu
 	public File importref_016;
 	public Component parent;
 	public Apmlbasesystem system;
-	JMenuItem_014 jmenuitem_014;
+	JMenuItem_011 jmenuitem_014;
 	JMenuItem_015 jmenuitem_015;
 
 
@@ -58,7 +58,7 @@ public class JMenu_007 extends JMenu
 
 		// instantiation
 
-		this.jmenuitem_014 = new JMenuItem_014(this);
+		this.jmenuitem_014 = new JMenuItem_011(this);
 
 		this.jmenuitem_015 = new JMenuItem_015(this);
 
@@ -91,7 +91,7 @@ public class JMenu_007 extends JMenu
 
 		// instantiation
 
-		this.jmenuitem_014 = new JMenuItem_014(this);
+		this.jmenuitem_014 = new JMenuItem_011(this);
 
 		this.jmenuitem_015 = new JMenuItem_015(this);
 

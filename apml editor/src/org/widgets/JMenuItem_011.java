@@ -49,7 +49,7 @@ public class JMenuItem_011 extends JMenuItem
 	{
 		// setters
 
-		this.setText("Item 2");
+		this.setText("Prototype");
 
 		// instantiation
 
@@ -73,7 +73,7 @@ public class JMenuItem_011 extends JMenuItem
 	{
 		// setters
 
-		this.setText("Item 2");
+		this.setText("Prototype");
 
 		// instantiation
 

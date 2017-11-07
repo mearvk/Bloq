@@ -41,8 +41,13 @@ public class JMenu_004 extends JMenu
 	public File importref_016;
 	public Component parent;
 	public Apmlbasesystem system;
-	JMenuItem_012 jmenuitem_012;
-	JMenuItem_017 jmenuitem_017;
+
+
+	public JMenuItem_012 jmenuitem_012;
+
+	public JMenuItem_013 jmenuitem_013;
+
+	public JMenuItem_014 jmenuitem_014;
 
 
 	/**
@@ -60,13 +65,17 @@ public class JMenu_004 extends JMenu
 
 		this.jmenuitem_012 = new JMenuItem_012(this);
 
-		this.jmenuitem_017 = new JMenuItem_017(this);
+		this.jmenuitem_013 = new JMenuItem_013(this);
+
+		this.jmenuitem_014 = new JMenuItem_014(this);
 
 		// hierarchy
 
 		this.add(jmenuitem_012);
 
-		this.add(jmenuitem_017);
+		this.add(jmenuitem_013);
+
+		this.add(jmenuitem_014);
 
 		// devolvement
 
@@ -93,13 +102,17 @@ public class JMenu_004 extends JMenu
 
 		this.jmenuitem_012 = new JMenuItem_012(this);
 
-		this.jmenuitem_017 = new JMenuItem_017(this);
+		this.jmenuitem_013 = new JMenuItem_013(this);
+
+		this.jmenuitem_014 = new JMenuItem_014(this);
 
 		// hierarchy
 
 		this.add(jmenuitem_012);
 
-		this.add(jmenuitem_017);
+		this.add(jmenuitem_013);
+
+		this.add(jmenuitem_014);
 
 		// devolvement
 

@@ -9,7 +9,6 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.listeners.CustomKeyEventListener;
 import org.listeners.LineCountDocumentListener;
 
-import javax.swing.text.Element;
 import java.awt.*;
 
 public class RSTextPane_000 extends RSyntaxTextArea
@@ -163,29 +162,13 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	//
 	public void processtreechange(TreeStructureUpdatedEvent event)
 	{
-
+		System.err.println("Possible errant call: "+this.getClass()+" processtreechange");
 	}
 
 	@Override
 	public Dimension getPreferredSize()
 	{
-		Element element;
-
-		element = this.getDocument().getDefaultRootElement();
-
-		//
-
-		int lineheight = 15; //12 + 3
-
-		int linecount = element.getElementCount();
-
-		//
-
-		Dimension calculated;
-
-		calculated = new Dimension(this.parent.getWidth(), (linecount * lineheight));
-
-		return calculated;
+		return new Dimension(this.parent.getWidth(), this.parent.getHeight());
 	}
 }
 

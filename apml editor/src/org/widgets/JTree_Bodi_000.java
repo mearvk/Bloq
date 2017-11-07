@@ -3,11 +3,11 @@ package org.widgets;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.xpath.helpers.Xpathquick;
-import org.custom.ui.BloqJTreeNode;
+import org.custom.ui.BodiJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseBodiDocumentEvent;
 import org.events.LoadBodiTreeEvent;
-import org.listeners.*;
+import org.listeners.BodiJTreeSelectionListener;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -91,15 +91,9 @@ public class JTree_Bodi_000 extends JTree
 
 		// listeners
 
-		this.addTreeSelectionListener(new JTreeSelectionListener(this));
+		this.addTreeSelectionListener(new BodiJTreeSelectionListener(this));
 
-		this.addMouseListener(new JTreeMouseListener((this)));
-
-		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
+		this.addMouseListener(new BodiJTreeSelectionListener(this));
 
 		// bodi
 
@@ -134,15 +128,9 @@ public class JTree_Bodi_000 extends JTree
 
 		// listeners
 
-		this.addTreeSelectionListener(new JTreeSelectionListener(this));
+		this.addTreeSelectionListener(new BodiJTreeSelectionListener(this));
 
-		this.addMouseListener(new JTreeMouseListener((this)));
-
-		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
+		this.addMouseListener(new BodiJTreeSelectionListener(this));
 
 		// bodi
 
@@ -243,7 +231,7 @@ public class JTree_Bodi_000 extends JTree
 
 			//
 
-			DefaultMutableTreeNode item_previous = null;
+			BodiJTreeNode item_previous = null;
 
 			//
 
@@ -257,11 +245,11 @@ public class JTree_Bodi_000 extends JTree
 
 				try
 				{
-					DefaultMutableTreeNode item;
+					BodiJTreeNode item;
 
 					//
 
-					item = new BloqJTreeNode(document.createElement(files[j].getName()));
+					item = new BodiJTreeNode(document.createElement(files[j].getName()), files[j]);
 
 					item.setAllowsChildren(true);
 
