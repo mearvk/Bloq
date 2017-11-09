@@ -19,15 +19,29 @@ public class ModelInterfaceSystem extends Apmlsystem
 	//
 	public ModelInterfaceSystem(final Apmlbasesystem monitor)
 	{
-		this.monitor = monitor;
+		//instantiation
 
 		this.object_000 = new ModelInterfaceObserver();
+
+		// bodi
+
+		Bodi.context("editor").put("//editor/ui/observers/model_interface_system", this);
+
+		// devolvement
+
+		this.monitor = monitor;
 	}
 
 	//
 	public ModelInterfaceSystem()
 	{
+		//instantiation
+
 		this.object_000 = new ModelInterfaceObserver();
+
+		// bodi
+
+		Bodi.context("editor").put("//editor/ui/observers/model_interface_system", this);
 	}
 
 	public void update(ActionEvent event)
@@ -91,15 +105,15 @@ class ApmlStructureUpdateRequest implements Runnable
 
 	ApmlStructureUpdateRequest()
 	{
-		this.textpane = (RSTextPane_Apml_000) Bodi.context("").pull("//editor/ui/rstextpane_apml_000");
+		this.textpane = (RSTextPane_Apml_000) Bodi.context("editor").pull("//editor/ui/rstextpane_apml_000");
 
-		this.jtree = (JTree_Apml_000) Bodi.context("").pull("");
+		this.jtree = (JTree_Apml_000) Bodi.context("editor").pull("//editor/ui/jtree_apml_000");
 	}
 
 	@Override
 	public void run()
 	{
-		JOptionPane.showMessageDialog(null, "UI call did work");
+		JOptionPane.showMessageDialog(null, "Number of elements or attributes has changed.");
 	}
 }
 
@@ -111,15 +125,15 @@ class BloqStructureUpdateRequest implements Runnable
 
 	BloqStructureUpdateRequest()
 	{
-		this.textpane = (RSTextPane_Bloq_000) Bodi.context("").pull("//editor/ui/rstextpane_bloq_000");
+		this.textpane = (RSTextPane_Bloq_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bloq_000");
 
-		this.jtree = (JTree_Bloq_000) Bodi.context("").pull("");
+		this.jtree = (JTree_Bloq_000) Bodi.context("editor").pull("//editor/ui/jtree_bloq_000");
 	}
 
 	@Override
 	public void run()
 	{
-
+		JOptionPane.showMessageDialog(null, "APML UI call did work");
 	}
 }
 
@@ -131,15 +145,15 @@ class BodiStructureUpdateRequest implements Runnable
 
 	BodiStructureUpdateRequest()
 	{
-		this.textpane = (RSTextPane_Bodi_000) Bodi.context("").pull("//editor/ui/rstextpane_bodi_000");
+		this.textpane = (RSTextPane_Bodi_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bodi_000");
 
-		this.jtree = (JTree_Bodi_000) Bodi.context("").pull("");
+		this.jtree = (JTree_Bodi_000) Bodi.context("editor").pull("//editor/ui/jtree_bodi_000");
 	}
 
 	@Override
 	public void run()
 	{
-
+		JOptionPane.showMessageDialog(null, "APML UI call did work");
 	}
 }
 
@@ -151,16 +165,16 @@ class MunctionStructureUpdateRequest implements Runnable
 
 	MunctionStructureUpdateRequest()
 	{
-		this.textpane = (RSTextPane_Munction_000) Bodi.context("").pull("//editor/ui/rstextpane_munction_000");
+		this.textpane = (RSTextPane_Munction_000) Bodi.context("editor").pull("//editor/ui/rstextpane_munction_000");
 
-		this.jtree = (JTree_Munction_000) Bodi.context("").pull("");
+		this.jtree = (JTree_Munction_000) Bodi.context("editor").pull("//editor/ui/jtree_munction_000");
 	}
 
 
 	@Override
 	public void run()
 	{
-
+		JOptionPane.showMessageDialog(null, "APML UI call did work");
 	}
 }
 
@@ -172,16 +186,16 @@ class RunynStructureUpdateRequest implements Runnable
 
 	RunynStructureUpdateRequest()
 	{
-		this.textpane = (RSTextPane_Runyn_000) Bodi.context("").pull("//editor/ui/rstextpane_runyn_000");
+		this.textpane = (RSTextPane_Runyn_000) Bodi.context("editor").pull("//editor/ui/rstextpane_runyn_000");
 
-		this.jtree = (JTree_Runyn_000) Bodi.context("").pull("");
+		this.jtree = (JTree_Runyn_000) Bodi.context("editor").pull("//editor/ui/jtree_runyn_000");
 	}
 
 
 	@Override
 	public void run()
 	{
-
+		JOptionPane.showMessageDialog(null, "APML UI call did work");
 	}
 }
 
@@ -193,15 +207,15 @@ class SprungStructureUpdateRequest implements Runnable
 
 	SprungStructureUpdateRequest()
 	{
-		this.textpane = (RSTextPane_Sprung_000) Bodi.context("").pull("//editor/ui/rstextpane_sprung_000");
+		this.textpane = (RSTextPane_Sprung_000) Bodi.context("editor").pull("//editor/ui/rstextpane_sprung_000");
 
-		this.jtree = (JTree_Sprung_000) Bodi.context("").pull("");
+		this.jtree = (JTree_Sprung_000) Bodi.context("editor").pull("//editor/ui/jtree_apml_000");
 	}
 
 	@Override
 	public void run()
 	{
-
+		JOptionPane.showMessageDialog(null, "APML UI call did work");
 	}
 }
 
@@ -213,14 +227,14 @@ class FalthruuStructureUpdateRequest implements Runnable
 
 	FalthruuStructureUpdateRequest()
 	{
-		this.textpane = (RSTextPane_Falthruu_000) Bodi.context("").pull("//editor/ui/rstextpane_falthruu_000");
+		this.textpane = (RSTextPane_Falthruu_000) Bodi.context("editor").pull("//editor/ui/rstextpane_falthruu_000");
 
-		this.jtree = (JTree_Falthruu_000) Bodi.context("").pull("");
+		this.jtree = (JTree_Falthruu_000) Bodi.context("editor").pull("//editor/ui/jtree_falthruu_000");
 	}
 
 	@Override
 	public void run()
 	{
-
+		JOptionPane.showMessageDialog(null, "APML UI call did work");
 	}
 }

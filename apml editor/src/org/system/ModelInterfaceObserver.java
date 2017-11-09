@@ -2,14 +2,12 @@ package org.system;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import apml.xpath.helpers.Xpathparameter;
-import apml.xpath.helpers.Xpathquick;
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.widgets.JTree_Apml_000;
 import org.widgets.RSTextPane_Apml_000;
 import org.xml.sax.InputSource;
 
-import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -17,7 +15,6 @@ import javax.swing.event.TreeSelectionListener;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
@@ -34,9 +31,9 @@ public class ModelInterfaceObserver
 
 	//
 
-	ApmlTextPaneObserver apmltextpaneobsever;
+	public ApmlTextPaneObserver apmltextpaneobserver;
 
-	ApmlJTreeObserver apmljtreeobsever;
+	public ApmlJTreeObserver apmljtreeobserver;
 
 	//
 
@@ -49,27 +46,15 @@ public class ModelInterfaceObserver
 
 	public ModelInterfaceObserver()
 	{
+		//
+
+		this.apmltextpaneobserver = new ApmlTextPaneObserver();
+
+		this.apmljtreeobserver = new ApmlJTreeObserver();
+
 		// bodi
 
-		Bodi.context("editor").put("//editor/ui/observers/model_interface_observer", this);
-
-		//
-
-		this.apmltextpaneobsever = new ApmlTextPaneObserver();
-
-		this.apmljtreeobsever = new ApmlJTreeObserver();
-
-		//
-
-		this.apmltextpaneobsever.start();
-
-		this.apmljtreeobsever.start();
-	}
-
-	//
-	public void update(Event event, String target, String action)
-	{
-
+		Bodi.context("editor").put(this.bodi, this);
 	}
 }
 
@@ -81,23 +66,23 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 
 	public XPath xpath;
 
-	public Xpathquick xpathquick;
+	public Map<String, Integer> counted_nodes = new HashMap<>();
 
-	public Map<String, Integer> counts = new HashMap<>();
+	//
 
 	public ApmlTextPaneObserver()
 	{
 		this.textpane = (RSTextPane_Apml_000) Bodi.context("editor").pull("//editor/ui/rstextpane_apml_000");
 
-		this.textpane.document.addDocumentListener(this);
+		this.textpane.getDocument().addDocumentListener(this);
 
 		//
 
-		this.counts.put("apml_tags", 0);
+		this.counted_nodes.put("//apml/tags", 0);
 
-		this.counts.put("apml_attributes", 0);
+		this.counted_nodes.put("//apml/attributes", 0);
 
-		this.counts.put("apml_errors", 0);
+		this.counted_nodes.put("//apml/errors", 0);
 
 		//
 
@@ -113,17 +98,13 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 	@Override
 	public void insertUpdate(DocumentEvent e)
 	{
-		//
 
-		JOptionPane.showMessageDialog(null, "insert");
 	}
 
 	@Override
 	public void removeUpdate(DocumentEvent e)
 	{
-		//
 
-		JOptionPane.showMessageDialog(null, "removal");
 	}
 
 	@Override
@@ -131,54 +112,90 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 	{
 		try
 		{
-			this.document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new ByteArrayInputStream(this.textpane.getText().getBytes())));
+			this.requestUpdateOnElementCountChange();
 
-			this.requestElementCountVote();
+			this.requestUpdateOnAttributeCountChange();
 		}
 		catch(Exception ex)
 		{
-			ex.printStackTrace();
+			//
 		}
 	}
 
-	private int requestElementCountVote()
+	private int requestUpdateOnAttributeCountChange()
 	{
 		try
 		{
 			this.document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new ByteArrayInputStream(this.textpane.getText().getBytes())));
 
-			Xpathparameter xparam;
+			//
 
-			xparam = new Xpathparameter();
-
-			xparam.document = this.document;
-
-			xparam.xpath = this.xpath;
-
-			xparam.apmltag = "/*";
+			ModelInterfaceSystem mis = (ModelInterfaceSystem) Bodi.context("editor").pull("//editor/ui/observers/model_interface_system");
 
 			//
 
-			int _old = this.counts.get("tags");
+			int _old_ = this.counted_nodes.get("//apml/attributes");
 
-			int _new = Xpathquick.count(xparam);
+			int _new_ = 0;
 
 			//
 
-			if(_old != _new)
+			NodeList nodes = this.document.getDocumentElement().getChildNodes();
+
+			for(int i=0; i<nodes.getLength(); i++)
 			{
-				ModelInterfaceSystem mis;
-
-				mis = (ModelInterfaceSystem) Bodi.context("editor").pull("//editor/ui/observers/model_interface_system");
-
-				mis.update(new ActionEvent(null,0,"apml_structure_updated_event"));
+				_new_ += nodes.item(i).getAttributes().getLength();
 			}
 
-			return _new;
+			//
+
+			if(_old_ != _new_)
+			{
+				mis.update(new ActionEvent(this,0,"apml_structure_updated_event"));
+
+				this.counted_nodes.put("//apml/attributes", _new_);
+			}
+
+			return _new_;
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+
+		}
+
+		return 0;
+	}
+
+	private int requestUpdateOnElementCountChange()
+	{
+		try
+		{
+			this.document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new ByteArrayInputStream(this.textpane.getText().getBytes())));
+
+			//
+
+			ModelInterfaceSystem mis = (ModelInterfaceSystem) Bodi.context("editor").pull("//editor/ui/observers/model_interface_system");
+
+			//
+
+			int _old_ = this.counted_nodes.get("//apml/tags");
+
+			int _new_ = this.document.getDocumentElement().getChildNodes().getLength();
+
+			//
+
+			if(_old_ != _new_)
+			{
+				mis.update(new ActionEvent(this,0,"apml_structure_updated_event"));
+
+				this.counted_nodes.put("//apml/tags", _new_);
+			}
+
+			return _new_;
+		}
+		catch(Exception e)
+		{
+
 		}
 
 		return 0;
@@ -191,7 +208,7 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 
 	private void requestErrorCountVote()
 	{
-		//xml rule base if possible
+
 	}
 }
 
@@ -201,7 +218,7 @@ class ApmlJTreeObserver extends Thread implements TreeSelectionListener
 
 	public ApmlJTreeObserver()
 	{
-		jtree = (JTree_Apml_000) Bodi.context("editor").pull("//editor/ui/jtree_apml_000");
+		this.jtree = (JTree_Apml_000) Bodi.context("editor").pull("//editor/ui/jtree_apml_000");
 
 		this.jtree.addTreeSelectionListener(this);
 	}

@@ -1,7 +1,10 @@
 package org.listeners;
 
+import apml.system.bodi.Bodi;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.widgets.APMLGui;
 
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Element;
@@ -22,6 +25,10 @@ public class LineCountDocumentListener implements DocumentListener
 		Element element;
 
 		element = this.textarea.getDocument().getDefaultRootElement();
+
+		APMLGui apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+		JOptionPane.showMessageDialog(apmlgui, "TEST");
 
 		//
 	}

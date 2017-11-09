@@ -29,6 +29,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	public static ArrayList<Apmllistener> _listeners = new ArrayList();
 	//
 	public static ArrayList<Apmlsubscriber> _subscribers = new ArrayList();
+	//
 	public final Integer hash = 0x00888FE8;
 	//
 	public ApmlKernelThread runner;
@@ -293,6 +294,36 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	}
 
 	//
+	public Object preload(Class c, Boolean register, Long predelay, Long postdelay)
+	{
+		Object retval = null;
+
+		try
+		{
+			Thread.sleep(predelay);
+		}
+		catch(Exception predelayexception)
+		{
+			predelayexception.printStackTrace();
+		}
+		finally
+		{
+			retval = this.preload(c,register);
+
+			try
+			{
+				Thread.sleep(postdelay);
+			}
+			catch(Exception postdelayexception)
+			{
+				postdelayexception.printStackTrace();
+			}
+		}
+
+		return retval;
+	}
+
+	//
 	public Object preload(Class c, Boolean register)
 	{
 		System.out.println("Apmlbasesystem preloads " + c.getName());
@@ -305,7 +336,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 		}
 		catch (Exception e)
 		{
-			//
+			e.printStackTrace();
 		}
 		finally
 		{
