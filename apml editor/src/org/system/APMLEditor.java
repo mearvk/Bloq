@@ -44,6 +44,7 @@ public class APMLEditor extends apml.modeling.Apmlsystem
 
 		apmlsystem.preload(UserInterfaceProcessor.class, true);
 
+		apmlsystem.preload(ModelInterfaceObserver.class, true);
 
 		//
 

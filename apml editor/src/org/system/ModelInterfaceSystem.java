@@ -5,6 +5,7 @@ import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import org.widgets.*;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class ModelInterfaceSystem extends Apmlsystem
@@ -98,7 +99,7 @@ class ApmlStructureUpdateRequest implements Runnable
 	@Override
 	public void run()
 	{
-
+		JOptionPane.showMessageDialog(null, "UI call did work");
 	}
 }
 

@@ -43,7 +43,7 @@ public class JTextPane_000 extends JTextPane
 	{
 		// setters
 
-		this.setText("APML Program 1.05 ... \n\nAnalysis Services\n\n--- --- --- --- ---\n\nStep 001. Syntactic Analysis\n\nStep 002. Suggestive Analysis\n\nStep 003. Integrative Analysis\n\nStep 004. Conclusion");
+		this.setText("APML Program 1.05 ... \n\nAnalysis Services\n\n--- --- --- --- ---\n\nStep 001. Syntactic Analysis\n\nStep 002. Suggestive Analysis\n\nStep 003. Integrative Analysis\n\nStep 004. Conclusion\n\nMore like this APML\n\nMore like this Object");
 
 		// instantiation
 

@@ -9,6 +9,7 @@ import org.widgets.JTree_Apml_000;
 import org.widgets.RSTextPane_Apml_000;
 import org.xml.sax.InputSource;
 
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -17,6 +18,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,9 +53,17 @@ public class ModelInterfaceObserver
 
 		Bodi.context("editor").put("//editor/ui/observers/model_interface_observer", this);
 
+		//
+
 		this.apmltextpaneobsever = new ApmlTextPaneObserver();
 
 		this.apmljtreeobsever = new ApmlJTreeObserver();
+
+		//
+
+		this.apmltextpaneobsever.start();
+
+		this.apmljtreeobsever.start();
 	}
 
 	//
@@ -77,21 +87,19 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 
 	public ApmlTextPaneObserver()
 	{
-		textpane = (RSTextPane_Apml_000) Bodi.context("editor").pull("//editor/ui/rstextpane_apml_000");
+		this.textpane = (RSTextPane_Apml_000) Bodi.context("editor").pull("//editor/ui/rstextpane_apml_000");
 
 		this.textpane.document.addDocumentListener(this);
 
 		//
 
-		this.counts.put("tags", 0);
+		this.counts.put("apml_tags", 0);
 
-		this.counts.put("attributes", 0);
+		this.counts.put("apml_attributes", 0);
 
-		this.counts.put("errors", 0);
+		this.counts.put("apml_errors", 0);
 
 		//
-
-		this.xpathquick = new Xpathquick();
 
 		this.xpath = XPathFactory.newInstance().newXPath();
 	}
@@ -99,40 +107,41 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 	@Override
 	public void run()
 	{
-		try
-		{
-			this.document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new ByteArrayInputStream(this.textpane.getText().getBytes())));
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
 
-		while(true)
-		{
-			return;
-		}
 	}
 
 	@Override
 	public void insertUpdate(DocumentEvent e)
 	{
+		//
 
+		JOptionPane.showMessageDialog(null, "insert");
 	}
 
 	@Override
 	public void removeUpdate(DocumentEvent e)
 	{
+		//
 
+		JOptionPane.showMessageDialog(null, "removal");
 	}
 
 	@Override
 	public void changedUpdate(DocumentEvent e)
 	{
+		try
+		{
+			this.document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new ByteArrayInputStream(this.textpane.getText().getBytes())));
 
+			this.requestElementCountVote();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 
-	private void counttags()
+	private int requestElementCountVote()
 	{
 		try
 		{
@@ -161,20 +170,26 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 				ModelInterfaceSystem mis;
 
 				mis = (ModelInterfaceSystem) Bodi.context("editor").pull("//editor/ui/observers/model_interface_system");
+
+				mis.update(new ActionEvent(null,0,"apml_structure_updated_event"));
 			}
+
+			return _new;
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
+
+		return 0;
 	}
 
-	private void countattribs()
+	private void requestAttributeCountVote()
 	{
 
 	}
 
-	private void counterrors()
+	private void requestErrorCountVote()
 	{
 		//xml rule base if possible
 	}
