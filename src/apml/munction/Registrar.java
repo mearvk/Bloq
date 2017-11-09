@@ -13,7 +13,7 @@ public class Registrar
 
 	public Registrar()
 	{
-		Bodi.context("munction").put("//registrar", this);
+		Bodi.context("munction_analysis").put("//registrar", this);
 	}
 
 	//

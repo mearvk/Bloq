@@ -21,6 +21,18 @@ public class ApmlDocumentChangeListener implements DocumentListener
 	@Override
 	public void insertUpdate(DocumentEvent e)
 	{
+		//
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent e)
+	{
+		//
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent e)
+	{
 		javax.swing.text.Document plain_doc;
 
 		org.w3c.dom.Document xml_doc;
@@ -51,17 +63,5 @@ public class ApmlDocumentChangeListener implements DocumentListener
 		}
 
 		//
-	}
-
-	@Override
-	public void removeUpdate(DocumentEvent e)
-	{
-
-	}
-
-	@Override
-	public void changedUpdate(DocumentEvent e)
-	{
-
 	}
 }

@@ -67,31 +67,31 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		//
 
-		this.addTab("  Apml ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Apml ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Bloq ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Bloq ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Bodi ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Bodi ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Munction ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Munction ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Runyn ☬", null);
+		this.addTab("      Runyn ☬", null);
 
 		//
 
-		this.addTab("  Sprung ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Sprung ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Falthruu ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Falthruu ☬", new JTabbedPaneJPanel(this));
 
 		//
 
@@ -103,15 +103,15 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		//
 
-		this.addTab("  Radio  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Radio  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Messenger  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Messenger  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Email  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Email  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
@@ -123,11 +123,11 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		//
 
-		this.addTab("  Bible  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Bible  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Quran  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Quran  ☬", new JTabbedPaneJPanel(this));
 
 		// devolvement
 
@@ -156,31 +156,31 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		//
 
-		this.addTab("  Apml  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Apml  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Bloq  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Bloq  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Bodi  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Bodi  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Munction  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Munction  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Runyn  ☬", null);
+		this.addTab("      Runyn  ☬", null);
 
 		//
 
-		this.addTab("  Sprung  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Sprung  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Falthruu  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Falthruu  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
@@ -192,15 +192,15 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		//
 
-		this.addTab("  Radio  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Radio  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Messenger  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Messenger  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Email  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Email  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
@@ -212,11 +212,11 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		//
 
-		this.addTab("  Bible  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Bible  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("  Quran  ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Quran  ☬", new JTabbedPaneJPanel(this));
 
 		// devolvement
 
@@ -238,7 +238,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 	public Dimension getPreferredSize()
 	{
-		return new Dimension(((int) (parent.getWidth() * 1.0) - this.marginleft), 200);
+		return new Dimension(((int) (parent.getWidth() * 1.0) - this.marginleft), 240);
 	}
 
 	public void stateChanged(ChangeEvent event)
@@ -266,7 +266,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 					switch (panetitle)
 					{
-						case "  Apml ☬":
+						case "      Apml ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -284,7 +284,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "  Bloq ☬":
+						case "      Bloq ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -302,7 +302,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "  Bodi ☬":
+						case "      Bodi ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -320,7 +320,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "  Munction ☬":
+						case "      Munction ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -338,7 +338,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "  Sprung ☬":
+						case "      Sprung ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -356,7 +356,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "  Runyn ☬":
+						case "      Runyn ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -374,7 +374,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "  Falthruu ☬":
+						case "      Falthruu ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 

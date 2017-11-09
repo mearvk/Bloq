@@ -33,7 +33,7 @@ public class Munction //pronounced "munchkin"
 	{
 		//bodi
 
-		Bodi.context("munction").put("//munction", this);
+		Bodi.context("munction_analysis").put("//munction_analysis", this);
 	}
 
 	//
@@ -44,7 +44,7 @@ public class Munction //pronounced "munchkin"
 		{
 			connect = DriverManager.getConnection("jdbc:mysql://" + hostname + "/" + dbname + "?user=" + username + "&password=" + password);
 
-			Bodi.context("munction").put("//connect", connect);
+			Bodi.context("munction_analysis").put("//connect", connect);
 		}
 		catch (Exception e)
 		{
@@ -76,7 +76,7 @@ public class Munction //pronounced "munchkin"
 		{
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/" + dbname + "?user=" + username + "&password=" + password);
 
-			Bodi.context("munction").put("//connect", connect);
+			Bodi.context("munction_analysis").put("//connect", connect);
 		}
 		catch (Exception e)
 		{

@@ -89,6 +89,10 @@ public class APMLGui extends JFrame
 				{
 					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 
+					//UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+
+					//UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+
 					//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 
 					//
@@ -105,7 +109,7 @@ public class APMLGui extends JFrame
 
 					//
 
-					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].backgroundPainter", new BackgroundPainter(new Color(0xba,0xba,0xba)));
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].backgroundPainter", new BackgroundPainter(new Color(0xff,0xff,0xff)));
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+MouseOver].backgroundPainter", new BackgroundPainter(new Color(0xda,0xda,0xda)));
 
@@ -342,7 +346,7 @@ class BackgroundPainter implements Painter<JComponent>
 
 			//
 
-			g.setColor(Color.WHITE); //top
+			g.setColor(Color.WHITE.darker()); //top
 
 			g.drawLine(0,height-1,width-1,height-1);
 
@@ -386,7 +390,7 @@ class BackgroundPainter implements Painter<JComponent>
 
 			g.setColor(Color.LIGHT_GRAY); //bottom
 
-			g.fillRect(1,2,1,6);
+			g.fillRect(0,2,1,6);
 
 			g.fillRect(width,2,1,6);
 		}

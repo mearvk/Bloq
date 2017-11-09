@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.net.URL;
@@ -20,7 +21,7 @@ import java.net.URL;
  * @see
  * @since
  */
-public class JMenuItem_010 extends JMenuItem
+public class JMenuItem_010 extends JMenuItem implements ActionListener
 {
 
 	public KeyEvent importref_001;
@@ -49,7 +50,7 @@ public class JMenuItem_010 extends JMenuItem
 	{
 		// setters
 
-		this.setText("Item 1");
+		this.setText("Falthruu");
 
 		// instantiation
 
@@ -63,6 +64,7 @@ public class JMenuItem_010 extends JMenuItem
 
 		// listeners
 
+		this.addActionListener(this);
 	}
 
 	/**
@@ -73,7 +75,7 @@ public class JMenuItem_010 extends JMenuItem
 	{
 		// setters
 
-		this.setText("Item 1");
+		this.setText("Falthruu");
 
 		// instantiation
 
@@ -89,7 +91,12 @@ public class JMenuItem_010 extends JMenuItem
 
 		// listeners
 
+		this.addActionListener(this);
 	}
 
-
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		new org.widgets.analysis.falthruu.JFrame_000(null);
+	}
 }

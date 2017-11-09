@@ -49,6 +49,13 @@ public class JMenu_004 extends JMenu
 
 	public JMenuItem_014 jmenuitem_014;
 
+	public JMenuItem_007 jmenuitem_007;
+
+	public JMenuItem_008 jmenuitem_008;
+
+	public JMenuItem_009 jmenuitem_009;
+
+	public JMenuItem_010 jmenuitem_010;
 
 	/**
 	 * @param parent : The tree AWT object.
@@ -69,6 +76,14 @@ public class JMenu_004 extends JMenu
 
 		this.jmenuitem_014 = new JMenuItem_014(this);
 
+		this.jmenuitem_007 = new JMenuItem_007(this);
+
+		this.jmenuitem_008 = new JMenuItem_008(this);
+
+		this.jmenuitem_009 = new JMenuItem_009(this);
+
+		this.jmenuitem_010 = new JMenuItem_010(this);
+
 		// hierarchy
 
 		this.add(jmenuitem_012);
@@ -76,6 +91,14 @@ public class JMenu_004 extends JMenu
 		this.add(jmenuitem_013);
 
 		this.add(jmenuitem_014);
+
+		this.add(jmenuitem_007);
+
+		this.add(jmenuitem_008);
+
+		this.add(jmenuitem_009);
+
+		this.add(jmenuitem_010);
 
 		// devolvement
 
@@ -106,6 +129,14 @@ public class JMenu_004 extends JMenu
 
 		this.jmenuitem_014 = new JMenuItem_014(this);
 
+		this.jmenuitem_007 = new JMenuItem_007(this);
+
+		this.jmenuitem_008 = new JMenuItem_008(this);
+
+		this.jmenuitem_009 = new JMenuItem_009(this);
+
+		this.jmenuitem_010 = new JMenuItem_010(this);
+
 		// hierarchy
 
 		this.add(jmenuitem_012);
@@ -113,6 +144,14 @@ public class JMenu_004 extends JMenu
 		this.add(jmenuitem_013);
 
 		this.add(jmenuitem_014);
+
+		this.add(jmenuitem_007);
+
+		this.add(jmenuitem_008);
+
+		this.add(jmenuitem_009);
+
+		this.add(jmenuitem_010);
 
 		// devolvement
 

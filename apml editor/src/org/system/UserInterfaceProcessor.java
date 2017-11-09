@@ -220,7 +220,7 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				break;
 
-			// munction //
+			// munction_analysis //
 
 			case "load_munction_document_event":
 
@@ -1402,7 +1402,7 @@ class BuildApmlUserInterfaceRequest
 {
 	private UserInterfaceProcessor processor;
 
-	private JPanel_001 jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+	private JPanel_Apml_001 jpanel_001 = (JPanel_Apml_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
 
 	private Uicompiler ui_compiler = new Uicompiler();
 
@@ -1420,7 +1420,7 @@ class BuildApmlUserInterfaceRequest
 	public void run()
 	{
 
-		jpanel_001 = (JPanel_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
+		jpanel_001 = (JPanel_Apml_001) Bodi.context("editor").pull("//editor/ui/jpanel_apml_001");
 
 		this.target_text = jpanel_001.rstextpane.getText();
 
@@ -1438,9 +1438,38 @@ class BuildApmlUserInterfaceRequest
 
 			//
 
-			processor.last_loaded_file = this.ui_compiler.fileguardian.xmlin = this.input.getSelectedFile();
+			this.processor.last_loaded_file = this.ui_compiler.fileguardian.xmlin = this.ui_compiler.inputmanager.file = this.input.getSelectedFile();
 
-			processor.last_loaded_file_url = this.input.getSelectedFile().getName();
+			this.processor.last_loaded_file_url = this.input.getSelectedFile().getName();
+		}
+		else
+		{
+			try
+			{
+				FileWriter writer;
+
+				File file;
+
+				writer = new FileWriter((file=new File("./tmp")));
+
+				writer.write(this.target_text, 0, this.target_text.length());
+
+				writer.flush();
+
+				writer.close();
+
+				this.ui_compiler.inputmanager.file = file;
+
+				//
+
+				this.processor.last_loaded_file = this.ui_compiler.fileguardian.xmlin = this.ui_compiler.inputmanager.file = file;
+
+				this.processor.last_loaded_file_url = file.getPath();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
 
 		//
@@ -1692,7 +1721,7 @@ class SaveDocumentRequest
 
 					break;
 
-				//munction
+				//munction_analysis
 				case 3:
 
 					this.processor.update(new SaveMunctionDocumentEvent(event, event.fileRef));
@@ -1800,7 +1829,7 @@ class OpenDocumentRequest
 				case "bodi":
 					break;
 
-				case "munction":
+				case "munction_analysis":
 					break;
 
 				case "runyn":
@@ -1872,7 +1901,7 @@ class OpenDocumentRequest
 
 					break;
 
-				case "munction":
+				case "munction_analysis":
 
 					this.processor.update(new LoadMunctionDocumentEvent(event, event.fileRef));
 

@@ -10,7 +10,7 @@ public class Persistor
 {
 	public Reference register(Integer GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, String SourceCode)
 	{
-		Connection connect = (Connection) Bodi.context("munction").pull("//connect");
+		Connection connect = (Connection) Bodi.context("munction_analysis").pull("//connect");
 
 		if (connect == null)
 			return null;
@@ -69,7 +69,7 @@ public class Persistor
 
 	public Reference register(Integer GroupID, Integer Type, String MunchkinFileName, String ClassName, String PackageName, byte[] Bytecode)
 	{
-		Connection connect = (Connection) Bodi.context("munction").pull("//connect");
+		Connection connect = (Connection) Bodi.context("munction_analysis").pull("//connect");
 
 		if (connect == null)
 			return null;

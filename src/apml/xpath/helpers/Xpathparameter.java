@@ -27,6 +27,8 @@ public final class Xpathparameter
 
 	public File apmlfile;
 
+	public String apmltag;
+
 	public NodeList attrs;
 
 	public Object obj;
@@ -140,6 +142,11 @@ public final class Xpathparameter
     /*--------------------------------------------------------------------------*/
 
 	public XPath xpath;
+
+	public Xpathparameter()
+	{
+		//
+	}
 
 	/**
 	 * @param apmltag
