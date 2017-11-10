@@ -1862,7 +1862,7 @@ class OpenDocumentRequest
 				case "bodi":
 					break;
 
-				case "munction_analysis":
+				case "munction":
 					break;
 
 				case "runyn":
@@ -1882,7 +1882,7 @@ class OpenDocumentRequest
 
 			//
 
-			JOptionPane.showMessageDialog(apmlgui, "Document type located as [" + event.fileType + "].");
+			JOptionPane.showMessageDialog(apmlgui, event.fileType+"™ Document found; loading...");
 
 			//
 
