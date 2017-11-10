@@ -3,12 +3,17 @@ package org.system;
 import apml.modeling.Apmlsystem;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import org.events.LoadApmlTreeEvent;
+import org.events.ReloadApmlTreeEvent;
 import org.widgets.*;
 
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
 import java.awt.event.ActionEvent;
 import java.io.ByteArrayInputStream;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 
 public class ModelInterfaceSystem extends Apmlsystem
 {
@@ -105,6 +110,10 @@ class ApmlStructureUpdateRequest implements Runnable
 
 	public JTree_Apml_000 jtree;
 
+	public JTree_Apml_000 jtree_prior;
+
+	//
+
 	ApmlStructureUpdateRequest()
 	{
 		this.textpane = (RSTextPane_Apml_000) Bodi.context("editor").pull("//editor/ui/rstextpane_apml_000");
@@ -115,21 +124,53 @@ class ApmlStructureUpdateRequest implements Runnable
 	@Override
 	public void run()
 	{
-
-		//JOptionPane.showMessageDialog(null, "Number of elements or attributes has changed.");
 		ByteArrayInputStream bais;
 
-		LoadApmlTreeEvent reload_tree_event;
+		ReloadApmlTreeEvent reload_tree_event;
 
 		//
 
 		bais = new ByteArrayInputStream(this.textpane.getText().getBytes());
 
-		reload_tree_event = new LoadApmlTreeEvent(new ActionEvent(this.jtree, 0, "reload_apml_tree_event"), bais);
+		reload_tree_event = new ReloadApmlTreeEvent(new ActionEvent(this.jtree, 0, "reload_apml_jtree_event"),bais);
 
 		//
 
-		this.jtree.update(reload_tree_event);
+		this.jtree._update(reload_tree_event);
+
+		this.jtree.removenewlinetextnodes();
+
+		//
+
+		Enumeration <DefaultMutableTreeNode> enumeration;
+
+		enumeration = ((DefaultMutableTreeNode)this.jtree.getModel().getRoot()).depthFirstEnumeration();
+
+		//
+
+		List<DefaultMutableTreeNode> list = Collections.list(enumeration);
+
+		//
+
+		DefaultMutableTreeNode[] array;
+
+		array = new DefaultMutableTreeNode[list.size()];
+
+		array = list.toArray(array);
+
+		//
+
+		//TreePath path = new TreePath(array);
+
+		for(int i=0; i<array.length; i++)
+		{
+			if(!array[i].isLeaf())
+			{
+				this.jtree.expandPath(new TreePath(array[i].getPath()));
+			}
+		}
+
+		//this.jtree.
 	}
 }
 

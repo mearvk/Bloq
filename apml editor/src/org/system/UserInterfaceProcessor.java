@@ -116,7 +116,7 @@ public class UserInterfaceProcessor extends Apmlobject
 
 			case "reload_apml_tree_event":
 
-				new LoadApmlTreeRequest(this, event).run();
+				new ReloadApmlTreeRequest(this, event).run();
 
 				break;
 
@@ -1233,13 +1233,13 @@ class ReloadApmlTreeRequest
 {
 	public UserInterfaceProcessor processor;
 
-	public LoadApmlTreeEvent event;
+	public ReloadApmlTreeEvent event;
 
 	public ReloadApmlTreeRequest(UserInterfaceProcessor processor, ActionEvent event)
 	{
 		this.processor = processor;
 
-		this.event = (LoadApmlTreeEvent) event;
+		this.event = (ReloadApmlTreeEvent) event;
 	}
 
 	public void run()
@@ -1250,7 +1250,7 @@ class ReloadApmlTreeRequest
 
 		jtree_apml_000.init();
 
-		jtree_apml_000._update((LoadApmlTreeEvent) event);
+		jtree_apml_000._update((ReloadApmlTreeEvent) event);
 
 		jtree_apml_000.removenewlinetextnodes();
 	}

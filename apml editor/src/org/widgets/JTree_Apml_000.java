@@ -7,6 +7,7 @@ import org.custom.ui.ApmlJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlTreeEvent;
+import org.events.ReloadApmlTreeEvent;
 import org.listeners.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -180,9 +181,11 @@ public class JTree_Apml_000 extends JTree
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void _update(LoadApmlTreeEvent event)
+	public void _update(ReloadApmlTreeEvent event)
 	{
-		System.out.println("_update called...");
+		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
+
+		System.out.println("ReloadApmlTreeEvent :: _update called...");
 
 		ByteArrayInputStream bytes = event.byteRef;
 
