@@ -24,6 +24,7 @@ import javax.xml.xpath.XPathFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -177,6 +178,60 @@ public class JTree_Apml_000 extends JTree
 	public void update(CloseApmlDocumentEvent event)
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
+	}
+
+	public void _update(LoadApmlTreeEvent event)
+	{
+		System.out.println("_update called...");
+
+		ByteArrayInputStream bytes = event.byteRef;
+
+		Document document;
+
+		DefaultTreeModel model;
+
+		DefaultMutableTreeNode root;
+
+		DefaultMutableTreeNode treenode;
+
+		XPath xpath;
+
+		NodeList nodes;
+
+		//
+
+		try
+		{
+			document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(bytes);
+
+			xpath = XPathFactory.newInstance().newXPath();
+
+			nodes = Xpathquick.evaluate(document, xpath, "/*");
+
+			model = (DefaultTreeModel) this.getModel();
+
+			root = (DefaultMutableTreeNode) model.getRoot();
+
+			//
+
+			treenode = new DefaultMutableTreeNode("APML Projects", true);
+
+			//
+
+			model.insertNodeInto(treenode, root, 0);
+
+			//
+
+			this.update(model, root, root, treenode, nodes, 0);
+
+			//
+
+			model.reload();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public void update(LoadApmlTreeEvent event)

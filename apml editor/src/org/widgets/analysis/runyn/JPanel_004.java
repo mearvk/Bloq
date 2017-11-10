@@ -61,7 +61,7 @@ public class JPanel_004
 
 		JLabel label;
 
-		label = new JLabel("☬ Step 4: ");
+		label = new JLabel("☬ Step 4: Compilation & Summary");
 
 		label.setForeground(Color.WHITE);
 
@@ -95,7 +95,7 @@ public class JPanel_004
 
 		JLabel label;
 
-		label = new JLabel("☬ Step 4: ");
+		label = new JLabel("☬ Step 4: Compilation & Summary");
 
 		label.setForeground(Color.WHITE);
 

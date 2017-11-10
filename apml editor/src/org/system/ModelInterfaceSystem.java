@@ -3,10 +3,12 @@ package org.system;
 import apml.modeling.Apmlsystem;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
+import org.events.LoadApmlTreeEvent;
 import org.widgets.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.ByteArrayInputStream;
 
 public class ModelInterfaceSystem extends Apmlsystem
 {
@@ -113,7 +115,21 @@ class ApmlStructureUpdateRequest implements Runnable
 	@Override
 	public void run()
 	{
-		JOptionPane.showMessageDialog(null, "Number of elements or attributes has changed.");
+
+		//JOptionPane.showMessageDialog(null, "Number of elements or attributes has changed.");
+		ByteArrayInputStream bais;
+
+		LoadApmlTreeEvent reload_tree_event;
+
+		//
+
+		bais = new ByteArrayInputStream(this.textpane.getText().getBytes());
+
+		reload_tree_event = new LoadApmlTreeEvent(new ActionEvent(this.jtree, 0, "reload_apml_tree_event"), bais);
+
+		//
+
+		this.jtree.update(reload_tree_event);
 	}
 }
 
@@ -133,7 +149,7 @@ class BloqStructureUpdateRequest implements Runnable
 	@Override
 	public void run()
 	{
-		JOptionPane.showMessageDialog(null, "APML UI call did work");
+		JOptionPane.showMessageDialog(null, "Number of elements or attributes has changed.");
 	}
 }
 
@@ -153,7 +169,7 @@ class BodiStructureUpdateRequest implements Runnable
 	@Override
 	public void run()
 	{
-		JOptionPane.showMessageDialog(null, "APML UI call did work");
+		JOptionPane.showMessageDialog(null, "Number of elements or attributes has changed.");
 	}
 }
 
@@ -174,7 +190,7 @@ class MunctionStructureUpdateRequest implements Runnable
 	@Override
 	public void run()
 	{
-		JOptionPane.showMessageDialog(null, "APML UI call did work");
+		JOptionPane.showMessageDialog(null, "Number of elements or attributes has changed.");
 	}
 }
 
@@ -195,7 +211,7 @@ class RunynStructureUpdateRequest implements Runnable
 	@Override
 	public void run()
 	{
-		JOptionPane.showMessageDialog(null, "APML UI call did work");
+		JOptionPane.showMessageDialog(null, "Number of elements or attributes has changed.");
 	}
 }
 
@@ -215,7 +231,7 @@ class SprungStructureUpdateRequest implements Runnable
 	@Override
 	public void run()
 	{
-		JOptionPane.showMessageDialog(null, "APML UI call did work");
+		JOptionPane.showMessageDialog(null, "Number of elements or attributes has changed.");
 	}
 }
 
@@ -235,6 +251,6 @@ class FalthruuStructureUpdateRequest implements Runnable
 	@Override
 	public void run()
 	{
-		JOptionPane.showMessageDialog(null, "APML UI call did work");
+		JOptionPane.showMessageDialog(null, "Number of elements or attributes has changed.");
 	}
 }

@@ -63,7 +63,7 @@ public class JPanel_001
 
 		JLabel label;
 
-		label = new JLabel("☬ Step 1: ");
+		label = new JLabel("☬ Step 1: Syntactic Analysis");
 
 		label.setForeground(Color.WHITE);
 
@@ -99,7 +99,7 @@ public class JPanel_001
 
 		JLabel label;
 
-		label = new JLabel("☬ Step 1: ");
+		label = new JLabel("☬ Step 1: Syntactic Analysis");
 
 		label.setForeground(Color.WHITE);
 

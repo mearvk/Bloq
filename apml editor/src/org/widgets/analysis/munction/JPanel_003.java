@@ -61,7 +61,7 @@ public class JPanel_003
 
         JLabel label;
 
-        label = new JLabel("☬ Step 3: ");
+        label = new JLabel("☬ Step 3: Integrative Analysis");
 
         label.setForeground(Color.WHITE);
 
@@ -95,7 +95,7 @@ public class JPanel_003
 
         JLabel label;
 
-        label = new JLabel("☬ Step 3: ");
+        label = new JLabel("☬ Step 3: Integrative Analysis");
 
         label.setForeground(Color.WHITE);
 

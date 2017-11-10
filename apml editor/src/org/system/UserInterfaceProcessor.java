@@ -114,6 +114,12 @@ public class UserInterfaceProcessor extends Apmlobject
 
 				break;
 
+			case "reload_apml_tree_event":
+
+				new LoadApmlTreeRequest(this, event).run();
+
+				break;
+
 			case "save_apml_document_event":
 
 				new SaveApmlDocumentRequest(this, event).run();
@@ -1220,6 +1226,33 @@ class SaveBodiDocumentRequest
 			else
 				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
 		}
+	}
+}
+
+class ReloadApmlTreeRequest
+{
+	public UserInterfaceProcessor processor;
+
+	public LoadApmlTreeEvent event;
+
+	public ReloadApmlTreeRequest(UserInterfaceProcessor processor, ActionEvent event)
+	{
+		this.processor = processor;
+
+		this.event = (LoadApmlTreeEvent) event;
+	}
+
+	public void run()
+	{
+		JTree_Apml_000 jtree_apml_000;
+
+		jtree_apml_000 = (JTree_Apml_000) Bodi.context("editor").pull("//editor/ui/jtree_apml_000");
+
+		jtree_apml_000.init();
+
+		jtree_apml_000._update((LoadApmlTreeEvent) event);
+
+		jtree_apml_000.removenewlinetextnodes();
 	}
 }
 
