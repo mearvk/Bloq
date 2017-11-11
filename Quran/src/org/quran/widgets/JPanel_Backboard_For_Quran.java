@@ -79,7 +79,7 @@ public class JPanel_Backboard_For_Quran extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Apml_000(this, "//editor/ui/jpanel_apml_000"), new JPanel_Apml_001(this,"//editor/ui/jpanel_apml_001"));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Quran_000(this, "//editor/ui/jpanel_quran_000"), new JPanel_Apml_001(this,"//editor/ui/jpanel_quran_001"));
 
 		// hierarchy
 
@@ -112,7 +112,7 @@ public class JPanel_Backboard_For_Quran extends JPanel
 
 		// instantiation
 
-		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Quran_000(this, "//editor/ui/jpanel_apml_000"), new JPanel_001(this, "//editor/ui/jpanel_quran_001"));
+		this.jsplitpane_000 = new JSplitPane_000(this, JSplitPane.HORIZONTAL_SPLIT, new JPanel_Tree_Quran_000(this, "//editor/ui/jpanel_quran_000"), new JPanel_001(this, "//editor/ui/jpanel_quran_001"));
 
 		// hierarchy
 
