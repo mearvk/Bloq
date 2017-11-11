@@ -9,6 +9,9 @@ import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlTreeEvent;
 import org.events.ReloadApmlTreeEvent;
 import org.listeners.*;
+import org.quran.events.CloseQuranDocumentEvent;
+import org.quran.events.LoadQuranTreeEvent;
+import org.quran.events.ReloadQuranTreeEvent;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -41,7 +44,7 @@ import java.util.Enumeration;
  */
 public class JTree_Quran_000 extends JTree
 {
-	public String bodi = "//editor/ui/jtree_apml_000";
+	public String bodi = "//editor/ui/jtree_quran_000";
 
 	public KeyEvent importref_001;
 	public KeyStroke importref_002;
@@ -166,7 +169,7 @@ public class JTree_Quran_000 extends JTree
 		{
 			root.removeAllChildren();
 
-			root.setUserObject("APML Design Area");
+			root.setUserObject("Al Quran");
 
 			model.reload();
 		}
@@ -176,16 +179,16 @@ public class JTree_Quran_000 extends JTree
 		}
 	}
 
-	public void update(CloseApmlDocumentEvent event)
+	public void update(CloseQuranDocumentEvent event)
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void _update(ReloadApmlTreeEvent event)
+	public void _update(ReloadQuranTreeEvent event)
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 
-		System.out.println("ReloadApmlTreeEvent :: _update called...");
+		System.out.println("ReloadQuranTreeEvent :: _update called...");
 
 		ByteArrayInputStream bytes = event.byteRef;
 
@@ -217,7 +220,7 @@ public class JTree_Quran_000 extends JTree
 
 			//
 
-			treenode = new DefaultMutableTreeNode("APML Projects", true);
+			treenode = new DefaultMutableTreeNode("-- -- --", true);
 
 			//
 
@@ -237,7 +240,7 @@ public class JTree_Quran_000 extends JTree
 		}
 	}
 
-	public void update(LoadApmlTreeEvent event)
+	public void update(LoadQuranTreeEvent event)
 	{
 		File file = event.getFileRef();
 
@@ -269,7 +272,7 @@ public class JTree_Quran_000 extends JTree
 
 			//
 
-			treenode = new DefaultMutableTreeNode("APML Projects", true);
+			treenode = new DefaultMutableTreeNode("-- -- --", true);
 
 			//
 

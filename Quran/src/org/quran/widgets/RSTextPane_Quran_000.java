@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class RSTextPane_Quran_000 extends RSyntaxTextArea
 {
-	public String bodi = "//editor/ui/rstextpane_apml_000";
+	public String bodi = "//editor/ui/rstextpane_quran_000";
 
 	public RTextScrollPane_000 scrollpane;
 

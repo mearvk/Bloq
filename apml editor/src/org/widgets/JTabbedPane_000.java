@@ -391,6 +391,24 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 							apmlgui.jpanel_backboard_for_falthruu.repaint();
 
 							break;
+
+						case "      Quran  ☬":
+
+							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+							apmlgui.remove(apmlgui.selected_panel);
+
+							apmlgui.add(apmlgui.jpanel_backboard_for_quran);
+
+							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_quran;
+
+							apmlgui.jpanel_backboard_for_quran.revalidate();
+
+							apmlgui.jpanel_backboard_for_quran.invalidate();
+
+							apmlgui.jpanel_backboard_for_quran.repaint();
+
+							break;
 					}
 				}
 			}

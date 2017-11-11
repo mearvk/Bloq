@@ -2,6 +2,7 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
+import org.quran.widgets.JTree_Quran_000;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -24,7 +25,7 @@ import java.net.URL;
 public class JPanel_Tree_Quran_000 extends JPanel
 {
 
-	public String bodi = "//editor/ui/jpanel_tree_apml_000";
+	public String bodi = "//editor/ui/jpanel_tree_quran_000";
 
 	public Integer marginleft = 10;
 	public Integer margintop = 10;
@@ -78,7 +79,7 @@ public class JPanel_Tree_Quran_000 extends JPanel
 
 		// instantiation
 
-		this.jtree_000 = new JTree_000(this);
+		this.jtree_000 = new JTree_Quran_000(this);
 
 		// hierarchy
 
@@ -112,7 +113,7 @@ public class JPanel_Tree_Quran_000 extends JPanel
 
 		// instantiation
 
-		this.jtree_000 = new JTree_Apml_000(this);
+		this.jtree_000 = new JTree_Quran_000(this);
 
 		// hierarchy
 
@@ -145,7 +146,7 @@ public class JPanel_Tree_Quran_000 extends JPanel
 
 		// instantiation
 
-		this.jtree_000 = new JTree_Apml_000(this);
+		this.jtree_000 = new JTree_Quran_000(this);
 
 		// hierarchy
 
@@ -182,7 +183,7 @@ public class JPanel_Tree_Quran_000 extends JPanel
 
 		// instantiation
 
-		this.jtree_000 = new JTree_000(this);
+		this.jtree_000 = new JTree_Quran_000(this);
 
 		// hierarchy
 

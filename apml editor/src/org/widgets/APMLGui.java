@@ -2,6 +2,7 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
+import org.quran.widgets.JPanel_Backboard_For_Quran;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -66,6 +67,10 @@ public class APMLGui extends JFrame
 	public JPanel_Backboard_For_Munction jpanel_backboard_for_munction;
 	public JPanel_Backboard_For_Runyn jpanel_backboard_for_runyn;
 	public JPanel_Backboard_For_Sprung jpanel_backboard_for_sprung;
+
+	//
+
+	public JPanel_Backboard_For_Quran jpanel_backboard_for_quran;
 
 	//
 
@@ -218,6 +223,10 @@ public class APMLGui extends JFrame
 
 		this.jpanel_backboard_for_sprung = new JPanel_Backboard_For_Sprung(this);
 
+		//
+
+		this.jpanel_backboard_for_quran = new JPanel_Backboard_For_Quran(this);
+
 		// hierarchy
 
 		this.setJMenuBar(jmenubar_000);
@@ -282,6 +291,10 @@ public class APMLGui extends JFrame
 		this.jpanel_backboard_for_runyn = new JPanel_Backboard_For_Runyn(this);
 
 		this.jpanel_backboard_for_sprung = new JPanel_Backboard_For_Sprung(this);
+
+		//
+
+		this.jpanel_backboard_for_quran = new JPanel_Backboard_For_Quran(this);
 
 		// hierarchy
 
