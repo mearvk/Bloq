@@ -2,6 +2,7 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
+import org.bible.widgets.JPanel_Backboard_For_Bible;
 import org.quran.widgets.JPanel_Backboard_For_Quran;
 
 import javax.imageio.ImageIO;
@@ -67,6 +68,10 @@ public class APMLGui extends JFrame
 	public JPanel_Backboard_For_Munction jpanel_backboard_for_munction;
 	public JPanel_Backboard_For_Runyn jpanel_backboard_for_runyn;
 	public JPanel_Backboard_For_Sprung jpanel_backboard_for_sprung;
+
+	//
+
+	public JPanel_Backboard_For_Bible jpanel_backboard_for_bible;
 
 	//
 
@@ -222,6 +227,10 @@ public class APMLGui extends JFrame
 		this.jpanel_backboard_for_runyn = new JPanel_Backboard_For_Runyn(this);
 
 		this.jpanel_backboard_for_sprung = new JPanel_Backboard_For_Sprung(this);
+
+		//
+
+		this.jpanel_backboard_for_bible = new JPanel_Backboard_For_Bible(this);
 
 		//
 

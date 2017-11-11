@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Bible/Bible.iml" filepath="$PROJECT_DIR$/Bible/Bible.iml" />
       <module fileurl="file://$PROJECT_DIR$/Quran/Quran.iml" filepath="$PROJECT_DIR$/Quran/Quran.iml" />
       <module fileurl="file://$PROJECT_DIR$/apml editor/apml editor.iml" filepath="$PROJECT_DIR$/apml editor/apml editor.iml" />
       <module fileurl="file://$PROJECT_DIR$/apml examples/apml examples.iml" filepath="$PROJECT_DIR$/apml examples/apml examples.iml" />

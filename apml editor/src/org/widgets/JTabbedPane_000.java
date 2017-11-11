@@ -392,6 +392,24 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
+						case "      Bible  ☬":
+
+							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+							apmlgui.remove(apmlgui.selected_panel);
+
+							apmlgui.add(apmlgui.jpanel_backboard_for_bible);
+
+							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_bible;
+
+							apmlgui.jpanel_backboard_for_bible.revalidate();
+
+							apmlgui.jpanel_backboard_for_bible.invalidate();
+
+							apmlgui.jpanel_backboard_for_bible.repaint();
+
+							break;
+
 						case "      Quran  ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");

@@ -37,40 +37,7 @@ public class QuranJTreeSelectionListener implements TreeSelectionListener, Mouse
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		/*
-		Component component;
 
-		QuranJTreeNode clickednode;
-
-		//BodiJTreeNode bodinode;
-
-		RSTextPane_Quran_000 rstextpane_quran_000;
-
-		//
-
-		clickednode = (QuranJTreeNode)	this.jtree.getComponentAt(e.getX(),e.getY()); //this.jtree.getLastSelectedPathComponent();
-
-		//
-
-		APMLGui apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
-
-		//
-
-		rstextpane_quran_000 = (RSTextPane_Quran_000)Bodi.context("editor").pull("//editor/ui/rstextpane_quran_000");
-
-		try
-		{
-			String line = "";
-
-			String text = "";
-
-			rstextpane_quran_000.setText("Quran: "+clickednode._toString());
-		}
-		catch(Exception exception)
-		{
-			exception.printStackTrace();
-		}
-		*/
 	}
 
 	@Override
@@ -100,21 +67,13 @@ public class QuranJTreeSelectionListener implements TreeSelectionListener, Mouse
 	@Override
 	public void valueChanged(TreeSelectionEvent e)
 	{
-		Component component;
-
 		QuranJTreeNode clickednode;
-
-		//BodiJTreeNode bodinode;
 
 		RSTextPane_Quran_000 rstextpane_quran_000;
 
 		//
 
 		clickednode = (QuranJTreeNode) this.jtree.getLastSelectedPathComponent();
-
-		//
-
-		APMLGui apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
 		//
 
