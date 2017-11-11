@@ -67,7 +67,7 @@ public class JPanel_Backboard_For_Apml extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0xff, 0xff, 0xff));
+		this.setBackground(new Color(223,223,223));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -100,7 +100,7 @@ public class JPanel_Backboard_For_Apml extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0xff, 0xff, 0xff));
+		this.setBackground(new Color(223,223,223));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 

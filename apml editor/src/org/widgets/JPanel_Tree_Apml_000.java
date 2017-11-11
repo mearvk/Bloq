@@ -70,7 +70,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0xff, 0xff, 0xff));
+		this.setBackground(new Color(223,223,223));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -102,7 +102,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0xff, 0xff, 0xff));
+		this.setBackground(new Color(223,223,223));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 

@@ -75,7 +75,7 @@ public class JPanel_Apml_001 extends JPanel
 
 		// setters
 
-		this.setBackground(new Color(0xff, 0xff, 0xff));
+		this.setBackground(Color.LIGHT_GRAY);
 
 		// instantiation
 
@@ -115,7 +115,7 @@ public class JPanel_Apml_001 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0xff, 0xff, 0xff));
+		this.setBackground(new Color(223,223,223));
 
 		this.setLayout(new FlowLayout());
 
@@ -160,7 +160,7 @@ public class JPanel_Apml_001 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0xff, 0xff, 0xff));
+		this.setBackground(new Color(223,223,223));
 
 		this.setLayout(new FlowLayout());
 

@@ -15,7 +15,7 @@ public class JTabbedPaneJPanel extends JPanel
 
 	public JTabbedPaneJPanel(Component parent)
 	{
-		this.backgroundimagename = "/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/bahama_002.jpeg";
+		this.backgroundimagename = "/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/bahama_002.jpeg"; //org/widgets/images/rainy_background.png
 
 		this.setBackground(new Color(80, 80, 80));
 

@@ -109,9 +109,9 @@ public class APMLGui extends JFrame
 
 					//
 
-					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].backgroundPainter", new BackgroundPainter(new Color(0xff,0xff,0xff)));
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].backgroundPainter", new BackgroundPainter(new Color(0xac,0xac,0xac))); //86,198,192
 
-					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+MouseOver].backgroundPainter", new BackgroundPainter(new Color(0xda,0xda,0xda)));
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+MouseOver].backgroundPainter", new BackgroundPainter(new Color(0x9c,0x9c,0x9c))); //52, 168, 171
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+Pressed].backgroundPainter", new BackgroundPainter(new Color(0x4f, 0x5a, 0x5a)));
 
@@ -119,11 +119,11 @@ public class APMLGui extends JFrame
 
 
 
-					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+MouseOver+Selected].backgroundPainter", new BackgroundPainter(new Color(0x6f, 0x6a, 0x7a)));
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+MouseOver+Selected].backgroundPainter", new BackgroundPainter(new Color(0x9c, 0x9c, 0x9c))); //56, 160, 161
 
-					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Pressed+Selected].backgroundPainter", new BackgroundPainter(new Color(0x5f, 0x6a, 0x6a)));
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Pressed+Selected].backgroundPainter", new BackgroundPainter(new Color(56, 160, 161)));
 
-					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Selected].backgroundPainter", new BackgroundPainter(new Color(0x5f, 0x6a, 0x6a)));
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Selected].backgroundPainter", new BackgroundPainter(new Color(62, 172, 176)));
 
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[MouseOver+Selected].backgroundPainter", new BackgroundPainter(new Color(0xfa,0xfa,0xfa)));
@@ -335,13 +335,43 @@ class BackgroundPainter implements Painter<JComponent>
 
 			g.fillRect(0, 0, width - 1, height - 1);
 
-			for(int i=0;i<height-20;i++)
+			/*for(int i=0; i<height-20; i++)
 			{
-				Color newcolor = new Color(color.getRed()-(2*i), color.getGreen()-(2*i), color.getBlue()-(2*i));
+				Color newcolor = new Color(color.getRed()-(3*i), color.getGreen()-(3*i), color.getBlue()-(3*i));
 
 				g.setColor(newcolor);
 
-				g.drawLine(3,11-i, width-3, 11-i);
+				g.drawLine(8,11-i, width-8, 11-i);
+			}*/
+
+			/*for(int i=0; i<height/2; i++)
+			{
+				int red = (color.getRed()-(1*i)) < 0 ? 0 : color.getRed()-(1*i);
+
+				int green = (color.getGreen()-(1*i)) < 0 ? 0 : color.getGreen()-(1*i);
+
+				int blue = (color.getBlue()-(1*i)) < 0 ? 0 : color.getBlue()-(1*i);
+
+				Color newcolor = new Color(red, green, blue);
+
+				g.setColor(newcolor);
+
+				g.drawLine(0,i, width-1, height-1);
+			}*/
+
+			for(int i=height; i>0; i--)
+			{
+				int red = (color.getRed()-(1*i)) < 0 ? 0 : color.getRed()-(1*i);
+
+				int green = (color.getGreen()-(1*i)) < 0 ? 0 : color.getGreen()-(1*i);
+
+				int blue = (color.getBlue()-(1*i)) < 0 ? 0 : color.getBlue()-(1*i);
+
+				Color newcolor = new Color(red, green, blue);
+
+				g.setColor(newcolor);
+
+				g.drawLine(0, i, width-1, height-i);
 			}
 
 			//
@@ -372,23 +402,23 @@ class BackgroundPainter implements Painter<JComponent>
 
 			g.setColor(Color.LIGHT_GRAY);
 
-			g.fillRect(2,height-5,3,3); //highlight 1
+			g.fillRect(2,height-6,2,4); //highlight 1
 
 			//
 
-			g.fillRect(0,height-2,2,2); //highlight 2
+			g.fillRect(5,height-6,2,4); //highlight 2
 
 			//
 
-			g.setColor(Color.LIGHT_GRAY.darker()); //bottom
+			g.setColor(new Color(45,180,190).darker()); //bottom
 
 			g.fillRect(0,height-16,1,13);
 
-			g.setColor(Color.LIGHT_GRAY.darker().darker()); //bottom
+			g.setColor(new Color(45,180,190).darker().darker()); //bottom
 
 			g.fillRect(0,12,1,10);
 
-			g.setColor(Color.LIGHT_GRAY); //bottom
+			g.setColor(new Color(45,180,190)); //bottom
 
 			g.fillRect(0,2,1,6);
 

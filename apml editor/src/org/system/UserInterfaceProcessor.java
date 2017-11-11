@@ -1854,35 +1854,57 @@ class OpenDocumentRequest
 			switch (event.fileType)
 			{
 				case "apml":
+
+					JOptionPane.showMessageDialog(apmlgui, "Apml™ Document Loading...");
+
 					break;
 
 				case "bloq":
+
+					JOptionPane.showMessageDialog(apmlgui, "Bloq™ Document Loading...");
+
 					break;
 
 				case "bodi":
+
+					JOptionPane.showMessageDialog(apmlgui, "Bodi™ Document Loading...");
+
 					break;
 
 				case "munction":
+
+					JOptionPane.showMessageDialog(apmlgui, "Munction™ Document Loading...");
+
 					break;
 
 				case "runyn":
+
+					JOptionPane.showMessageDialog(apmlgui, "Runyn™ Document Loading...");
+
 					break;
 
 				case "sprung":
+
+					JOptionPane.showMessageDialog(apmlgui, "Sprung™ Document Loading...");
+
 					break;
 
 				case "falthruu":
+
+					JOptionPane.showMessageDialog(apmlgui, "Falthruu™ Document Loading...");
+
 					break;
 
 				default:
 
-					JOptionPane.showMessageDialog(apmlgui, "Unknown file type; no can help.");
+					JOptionPane.showMessageDialog(apmlgui, "Unknown file type; unable to help.");
+
 					return;
 			}
 
 			//
 
-			JOptionPane.showMessageDialog(apmlgui, event.fileType+"™ Document found; loading...");
+
 
 			//
 
@@ -1934,7 +1956,7 @@ class OpenDocumentRequest
 
 					break;
 
-				case "munction_analysis":
+				case "munction":
 
 					this.processor.update(new LoadMunctionDocumentEvent(event, event.fileRef));
 
