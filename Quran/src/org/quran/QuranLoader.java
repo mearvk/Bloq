@@ -1,15 +1,35 @@
 package org.quran;
 
+import org.quran.org.widgets.JTree_Quran_000;
+
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
 import java.io.File;
 
 public class QuranLoader
 {
-	public String file = "/Users/mrupplin/IdeaProjects/bloq/Quran/lib/Dutch-15.xml";
+	public File file = null;
 
-	public File fileRef = null;
+	public String fileRef = "/Users/mrupplin/IdeaProjects/bloq/Quran/lib/Dutch-15.xml";
+
+	public XPath xpath;
 
 	public QuranLoader()
 	{
+		try
+		{
+			this.file = new File(fileRef);
+		}
+		catch(Exception e)
+		{
+			//
+		}
+	}
 
+	public void init()
+	{
+		JTree_Quran_000 jtree;
+
+		this.xpath = XPathFactory.newInstance().newXPath();
 	}
 }
