@@ -1,6 +1,6 @@
 package org.quran;
 
-import org.quran.org.widgets.JTree_Quran_000;
+import org.quran.widgets.JTree_Quran_000;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
