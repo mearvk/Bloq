@@ -12,6 +12,7 @@ import org.listeners.*;
 import org.quran.events.CloseQuranDocumentEvent;
 import org.quran.events.LoadQuranTreeEvent;
 import org.quran.events.ReloadQuranTreeEvent;
+import org.quran.listeners.QuranJTreeSelectionListener;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -95,15 +96,9 @@ public class JTree_Quran_000 extends JTree
 
 		// listeners
 
-		this.addTreeSelectionListener(new JTreeSelectionListener(this));
+		this.addMouseListener(new QuranJTreeSelectionListener(this));
 
-		this.addMouseListener(new JTreeMouseListener((this)));
-
-		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
+		this.addTreeSelectionListener(new QuranJTreeSelectionListener(this));
 
 		// bodi
 
@@ -138,15 +133,7 @@ public class JTree_Quran_000 extends JTree
 
 		// listeners
 
-		this.addTreeSelectionListener(new JTreeSelectionListener(this));
-
-		this.addMouseListener(new JTreeMouseListener((this)));
-
-		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
+		this.addMouseListener(new QuranJTreeSelectionListener(this));
 
 		// bodi
 
@@ -315,7 +302,7 @@ public class JTree_Quran_000 extends JTree
 
 				DefaultMutableTreeNode treenode;
 
-				treenode = new ApmlJTreeNode(node);
+				treenode = new QuranJTreeNode(node);
 
 				treenode.setAllowsChildren(true);
 

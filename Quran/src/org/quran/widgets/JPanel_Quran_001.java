@@ -34,7 +34,7 @@ public class JPanel_Quran_001 extends JPanel
 
 	public JEditorPane_000 editorpane;
 
-	public RSTextPane_Apml_000 rstextpane;
+	public RSTextPane_Quran_000 rstextpane;
 
 	public RTextScrollPane_000 rstextscrollpane;
 
@@ -82,7 +82,7 @@ public class JPanel_Quran_001 extends JPanel
 
 		// instantiation
 
-		this.rstextpane = new RSTextPane_Apml_000(this);
+		this.rstextpane = new RSTextPane_Quran_000(this);
 
 		this.rstextscrollpane = new RTextScrollPane_000(this);
 
@@ -126,7 +126,7 @@ public class JPanel_Quran_001 extends JPanel
 
 		// instantiation
 
-		this.rstextpane = new RSTextPane_Apml_000(this);
+		this.rstextpane = new RSTextPane_Quran_000(this);
 
 		this.rstextscrollpane = new RTextScrollPane_000(this);
 
@@ -169,7 +169,7 @@ public class JPanel_Quran_001 extends JPanel
 
 		// instantiation
 
-		this.rstextpane = new RSTextPane_Apml_000(this);
+		this.rstextpane = new RSTextPane_Quran_000(this);
 
 		this.rstextscrollpane = new RTextScrollPane_000(this);
 
@@ -216,7 +216,7 @@ public class JPanel_Quran_001 extends JPanel
 
 		// instantiation
 
-		this.rstextpane = new RSTextPane_Apml_000(this);
+		this.rstextpane = new RSTextPane_Quran_000(this);
 
 		this.rstextscrollpane = new RTextScrollPane_000(this);
 

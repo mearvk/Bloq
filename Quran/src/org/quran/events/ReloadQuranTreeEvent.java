@@ -13,14 +13,14 @@ public class ReloadQuranTreeEvent extends ActionEvent
 
 	public ReloadQuranTreeEvent(ActionEvent event, File fileRef)
 	{
-		super(event.getSource(), event.getID(), "load_apml_tree_event");
+		super(event.getSource(), event.getID(), "reload_quran_tree_event");
 
 		this.fileRef = fileRef;
 	}
 
 	public ReloadQuranTreeEvent(ActionEvent event, ByteArrayInputStream byteRef)
 	{
-		super(event.getSource(), event.getID(), "load_apml_tree_event");
+		super(event.getSource(), event.getID(), "reload_quran_tree_event");
 
 		this.byteRef = byteRef;
 	}

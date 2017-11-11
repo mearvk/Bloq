@@ -12,14 +12,14 @@ public class LoadQuranTreeEvent extends ActionEvent
 
 	public LoadQuranTreeEvent(ActionEvent event, File fileRef)
 	{
-		super(event.getSource(), event.getID(), "load_apml_tree_event");
+		super(event.getSource(), event.getID(), "load_quran_tree_event");
 
 		this.fileRef = fileRef;
 	}
 
 	public LoadQuranTreeEvent(ActionEvent event, ByteArrayInputStream byteRef)
 	{
-		super(event.getSource(), event.getID(), "load_apml_tree_event");
+		super(event.getSource(), event.getID(), "load_quran_tree_event");
 
 		this.byteRef = byteRef;
 	}

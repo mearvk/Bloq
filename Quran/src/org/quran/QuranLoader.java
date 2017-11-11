@@ -41,6 +41,8 @@ public class QuranLoader extends Thread
 		jtree = (JTree_Quran_000) Bodi.context("editor").pull("//editor/ui/jtree_quran_000");
 
 		jtree.update(new LoadQuranTreeEvent(new ActionEvent(jtree, 0, "load_quran_tree_event"), this.file));
+
+		jtree.removenewlinetextnodes();
 	}
 
 	public void init()
