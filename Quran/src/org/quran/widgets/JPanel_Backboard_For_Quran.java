@@ -3,6 +3,7 @@ package org.quran.widgets;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import org.widgets.*;
+import org.widgets.JPanel_Tree_Quran_000;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
