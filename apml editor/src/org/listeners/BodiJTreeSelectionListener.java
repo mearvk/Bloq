@@ -56,8 +56,6 @@ public class BodiJTreeSelectionListener implements TreeSelectionListener, MouseL
 
 		APMLGui apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
 
-		//JOptionPane.showMessageDialog(apmlgui, "File reference is: "+fileRef);
-
 		//
 
 		rstextpane_bodi_000 = (RSTextPane_Bodi_000)Bodi.context("editor").pull("//editor/ui/rstextpane_bodi_000");

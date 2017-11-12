@@ -14,23 +14,27 @@ public class ApmlDocumentElementCountListener implements DocumentListener
 		//bodi
 
 		Bodi.context("system").put("//ui/listeners/apml_document_element_count_listener", this);
+
+		//
+
+		/* Go check ModelInterfaceObserver for the day */
 	}
 
 	@Override
 	public void insertUpdate(DocumentEvent e)
 	{
-
+		//
 	}
 
 	@Override
 	public void removeUpdate(DocumentEvent e)
 	{
-
+		//
 	}
 
 	@Override
 	public void changedUpdate(DocumentEvent e)
 	{
-
+		//
 	}
 }

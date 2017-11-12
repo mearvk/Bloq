@@ -61,8 +61,6 @@ public class CustomKeyEventListener implements KeyListener
 
 			this.textarea.select(start, end);
 
-			//System.out.println("Set caret at character position ["+(position-delta)+"]");
-
 			return;
 		}
 
@@ -80,8 +78,6 @@ public class CustomKeyEventListener implements KeyListener
 
 			this.textarea.setCaretPosition(caretposition);
 
-			//System.out.println("Set caret at character position ["+(position-delta)+"]");
-
 			return;
 		}
 
@@ -98,8 +94,6 @@ public class CustomKeyEventListener implements KeyListener
 			//
 
 			this.textarea.setCaretPosition(caretposition);
-
-			//System.out.println("Set caret at character position ["+(caretposition)+"]")
 
 			return;
 		}

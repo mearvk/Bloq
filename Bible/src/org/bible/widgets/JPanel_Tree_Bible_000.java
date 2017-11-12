@@ -204,17 +204,6 @@ public class JPanel_Tree_Bible_000 extends JPanel
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-
-		try
-		{
-			//this.backgroundimage = ImageIO.read(new File(backgroundimagename));
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		//g.drawImage(backgroundimage, 0, 0, this);
 	}
 
 	public Dimension getPreferredSize()

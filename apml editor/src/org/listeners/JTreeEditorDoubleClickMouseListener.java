@@ -25,7 +25,7 @@ public class JTreeEditorDoubleClickMouseListener implements MouseListener
 
 		//
 
-		System.out.println("Double mouse button click detected!");
+		//System.out.println("Double mouse button click detected!");
 	}
 
 	@Override

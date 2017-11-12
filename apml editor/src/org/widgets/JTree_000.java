@@ -90,16 +90,6 @@ public class JTree_000 extends JTree
 
 		// listeners
 
-		this.addTreeSelectionListener(new JTreeSelectionListener(this));
-
-		this.addMouseListener(new JTreeMouseListener((this)));
-
-		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
-
 		// bodi
 
 		Bodi.context("editor").put(this.bodi, this);
@@ -132,16 +122,6 @@ public class JTree_000 extends JTree
 		this.setVisible(true);
 
 		// listeners
-
-		this.addTreeSelectionListener(new JTreeSelectionListener(this));
-
-		this.addMouseListener(new JTreeMouseListener((this)));
-
-		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
 
 		// bodi
 

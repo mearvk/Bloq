@@ -138,17 +138,6 @@ public class JPanel_Backboard_For_Bible extends JPanel
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-
-		try
-		{
-			//this.backgroundimage = ImageIO.read(new File("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/hexagon_wallpaper.jpg"));
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		//g.drawImage(backgroundimage, 0, 0, this);
 	}
 
 	public Dimension getPreferredSize()

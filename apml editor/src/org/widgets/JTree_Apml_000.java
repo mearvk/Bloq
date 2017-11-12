@@ -367,17 +367,8 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			if (current_object instanceof String)
+			if (current_type == Node.TEXT_NODE)
 			{
-				System.out.println(current_object);
-			}
-
-			//
-
-			else if (current_type == Node.TEXT_NODE)
-			{
-				//System.out.println("Removing carriage return: "+((Node)current_object).getNodeName()+" : "+((Node)current_object).getNodeValue().replace("\n","\\n"));
-
 				remove.add(current_child);
 			}
 		}

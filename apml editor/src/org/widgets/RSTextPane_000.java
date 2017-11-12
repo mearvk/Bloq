@@ -57,10 +57,6 @@ public class RSTextPane_000 extends RSyntaxTextArea
 		this.parent = parent;
 
 		//listeners
-
-		this.document.addDocumentListener(new LineCountDocumentListener(this));
-
-		this.addKeyListener(new CustomKeyEventListener(this));
 	}
 
 	//
@@ -101,10 +97,6 @@ public class RSTextPane_000 extends RSyntaxTextArea
 		this.monitor = monitor;
 
 		//listeners
-
-		this.document.addDocumentListener(new LineCountDocumentListener(this));
-
-		this.addKeyListener(new CustomKeyEventListener(this));
 	}
 
 	//

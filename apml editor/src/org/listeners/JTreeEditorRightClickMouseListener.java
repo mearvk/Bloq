@@ -25,7 +25,7 @@ public class JTreeEditorRightClickMouseListener implements MouseListener
 
 		//
 
-		System.out.println("Right mouse button click detected!");
+		//System.out.println("Right mouse button click detected!");
 	}
 
 	@Override

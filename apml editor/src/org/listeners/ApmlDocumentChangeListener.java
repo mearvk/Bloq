@@ -16,6 +16,10 @@ public class ApmlDocumentChangeListener implements DocumentListener
 		//bodi
 
 		Bodi.context("system").put("//ui/listeners/apml_document_change_listener", this);
+
+		//
+
+		/* Go check ModelInterfaceObserver for the day */
 	}
 
 	@Override
@@ -33,35 +37,6 @@ public class ApmlDocumentChangeListener implements DocumentListener
 	@Override
 	public void changedUpdate(DocumentEvent e)
 	{
-		javax.swing.text.Document plain_doc;
-
-		org.w3c.dom.Document xml_doc;
-
-		Integer count;
-
-		String text;
-
-		//
-
-		plain_doc = e.getDocument();
-
-		count = plain_doc.getLength();
-
-		try
-		{
-			text = plain_doc.getText(0, count);
-
-			xml_doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(text.getBytes()));
-
-			count = xml_doc.getDocumentElement().getChildNodes().getLength();
-
-			System.out.println(count);
-		}
-		catch (Exception exception)
-		{
-			exception.printStackTrace();
-		}
-
 		//
 	}
 }
