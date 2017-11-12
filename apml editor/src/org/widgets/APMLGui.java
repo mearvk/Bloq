@@ -25,7 +25,6 @@ import java.net.URL;
  */
 public class APMLGui extends JFrame
 {
-
 	public Integer marginleft = 10;
 	public Integer margintop = 10;
 	public Integer marginright = 10;
@@ -87,6 +86,11 @@ public class APMLGui extends JFrame
 
 	//
 
+	public static void main(String... args)
+	{
+		new APMLGui(null);
+	}
+
 	//
 	public APMLGui()
 	{
@@ -98,12 +102,6 @@ public class APMLGui extends JFrame
 				try
 				{
 					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-
-					//UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-
-					//UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-
-					//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 
 					//
 
@@ -121,22 +119,21 @@ public class APMLGui extends JFrame
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].backgroundPainter", new BackgroundPainter(new Color(0xac,0xac,0xac))); //86,198,192
 
-					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+MouseOver].backgroundPainter", new BackgroundPainter(new Color(0x9c,0x9c,0x9c))); //52, 168, 171
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+MouseOver].backgroundPainter", new BackgroundPainter(new Color(0x8c, 0x8c, 0x8c))); //52, 168, 171
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+Pressed].backgroundPainter", new BackgroundPainter(new Color(0x4f, 0x5a, 0x5a)));
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+Selected].backgroundPainter", new BackgroundPainter(new Color(0x4f, 0x5a, 0x5a)));
 
 
-
-					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+MouseOver+Selected].backgroundPainter", new BackgroundPainter(new Color(0x9c, 0x9c, 0x9c))); //56, 160, 161
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+MouseOver+Selected].backgroundPainter", new BackgroundPainter(new Color(0x7c, 0x7c, 0x7c))); //56, 160, 161
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Pressed+Selected].backgroundPainter", new BackgroundPainter(new Color(56, 160, 161)));
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Selected].backgroundPainter", new BackgroundPainter(new Color(62, 172, 176)));
 
 
-					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[MouseOver+Selected].backgroundPainter", new BackgroundPainter(new Color(0xfa,0xfa,0xfa)));
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[MouseOver+Selected].backgroundPainter", new BackgroundPainter(new Color(62, 172, 176)));
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Pressed+Selected].backgroundPainter", new BackgroundPainter(new Color(0xfa,0xfa,0xfa)));
 
@@ -305,6 +302,10 @@ public class APMLGui extends JFrame
 
 		this.jpanel_backboard_for_quran = new JPanel_Backboard_For_Quran(this);
 
+		//
+
+		this.jpanel_backboard_for_bible = new JPanel_Backboard_For_Bible(this);
+
 		// hierarchy
 
 		this.setJMenuBar(jmenubar_000);
@@ -332,10 +333,7 @@ public class APMLGui extends JFrame
 		Bodi.context("editor").put(this.bodi, this);
 	}
 
-	public static void main(String... args)
-	{
-		new APMLGui(null);
-	}
+
 
 }
 
@@ -357,29 +355,7 @@ class BackgroundPainter implements Painter<JComponent>
 
 			g.fillRect(0, 0, width - 1, height - 1);
 
-			/*for(int i=0; i<height-20; i++)
-			{
-				Color newcolor = new Color(color.getRed()-(3*i), color.getGreen()-(3*i), color.getBlue()-(3*i));
-
-				g.setColor(newcolor);
-
-				g.drawLine(8,11-i, width-8, 11-i);
-			}*/
-
-			/*for(int i=0; i<height/2; i++)
-			{
-				int red = (color.getRed()-(1*i)) < 0 ? 0 : color.getRed()-(1*i);
-
-				int green = (color.getGreen()-(1*i)) < 0 ? 0 : color.getGreen()-(1*i);
-
-				int blue = (color.getBlue()-(1*i)) < 0 ? 0 : color.getBlue()-(1*i);
-
-				Color newcolor = new Color(red, green, blue);
-
-				g.setColor(newcolor);
-
-				g.drawLine(0,i, width-1, height-1);
-			}*/
+			//
 
 			for(int i=height; i>0; i--)
 			{
@@ -436,9 +412,13 @@ class BackgroundPainter implements Painter<JComponent>
 
 			g.fillRect(0,height-16,1,13);
 
+			//
+
 			g.setColor(new Color(45,180,190).darker().darker()); //bottom
 
 			g.fillRect(0,12,1,10);
+
+			//
 
 			g.setColor(new Color(45,180,190)); //bottom
 

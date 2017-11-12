@@ -39,12 +39,19 @@ public class JMenu_000 extends JMenu
 	public Rectangle importref_014;
 	public ImageIO importref_015;
 	public File importref_016;
+
+	//
+
 	public Component parent;
 	public Apmlbasesystem system;
-	JMenuItem_000 jmenuitem_000;
-	JMenuItem_001 jmenuitem_001;
-	JMenuItem_018 jmenuitem_018;
-	JMenuItem_019 jmenuitem_019;
+
+	//
+
+	public JMenuItem_000 jmenuitem_000;
+	public JMenuItem_001 jmenuitem_001;
+	public JMenuItem_018 jmenuitem_018;
+	public JMenuItem_016 jmenuitem_016;
+	public JMenuItem_019 jmenuitem_019;
 	/**
 	 * @param parent : The tree AWT object.
 	 */
@@ -64,6 +71,8 @@ public class JMenu_000 extends JMenu
 
 		this.jmenuitem_018 = new JMenuItem_018(this);
 
+		this.jmenuitem_016 = new JMenuItem_016(this);
+
 		this.jmenuitem_019 = new JMenuItem_019(this);
 
 		// hierarchy
@@ -73,6 +82,8 @@ public class JMenu_000 extends JMenu
 		this.add(jmenuitem_001);
 
 		this.add(jmenuitem_018);
+
+		this.add(jmenuitem_016);
 
 		this.add(jmenuitem_019);
 
@@ -105,6 +116,8 @@ public class JMenu_000 extends JMenu
 
 		this.jmenuitem_018 = new JMenuItem_018(this);
 
+		this.jmenuitem_016 = new JMenuItem_016(this);
+
 		this.jmenuitem_019 = new JMenuItem_019(this);
 
 		// hierarchy
@@ -114,6 +127,10 @@ public class JMenu_000 extends JMenu
 		this.add(jmenuitem_001);
 
 		this.add(jmenuitem_018);
+
+		this.add(jmenuitem_016);
+
+		this.add(jmenuitem_019);
 
 		// devolvement
 

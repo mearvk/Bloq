@@ -22,7 +22,6 @@ import java.net.URL;
  */
 public class JMenuItem_016 extends JMenuItem
 {
-
 	public KeyEvent importref_001;
 	public KeyStroke importref_002;
 	public ActionEvent importref_003;
@@ -49,7 +48,7 @@ public class JMenuItem_016 extends JMenuItem
 	{
 		// setters
 
-		this.setText("Item 1");
+		this.setText("Save All");
 
 		// instantiation
 
@@ -73,7 +72,7 @@ public class JMenuItem_016 extends JMenuItem
 	{
 		// setters
 
-		this.setText("Item 1");
+		this.setText("Save All");
 
 		// instantiation
 
@@ -90,6 +89,4 @@ public class JMenuItem_016 extends JMenuItem
 		// listeners
 
 	}
-
-
 }

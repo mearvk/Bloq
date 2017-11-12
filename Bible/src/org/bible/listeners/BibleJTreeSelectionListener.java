@@ -79,6 +79,10 @@ public class BibleJTreeSelectionListener implements TreeSelectionListener, Mouse
 
 			rstextpane_bible_000.setText(clickednode._toString());
 		}
+		catch (NullPointerException npe)
+		{
+			System.err.println(npe.getCause());
+		}
 		catch (Exception exception)
 		{
 			exception.printStackTrace();

@@ -19,44 +19,44 @@ import java.util.Map;
 
 public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 {
+	public final Integer hash = 0x00888FE8;
+
 	//
 	public static Map map = null;
+
 	//
-	public static ArrayList<Apmlsystem> _systems = new ArrayList();
-	//
-	public static ArrayList<Apmlobject> _objects = new ArrayList();
-	//
-	public static ArrayList<Apmllistener> _listeners = new ArrayList();
-	//
-	public static ArrayList<Apmlsubscriber> _subscribers = new ArrayList();
-	//
-	public final Integer hash = 0x00888FE8;
-	//
+
 	public ApmlKernelThread runner;
+
 	//
+
 	public ArrayList<Apmlsystem> systems = new ArrayList();
-	//
 	public ArrayList<Apmlobject> objects = new ArrayList();
-	//
 	public ArrayList<Apmllistener> listeners = new ArrayList();
-	//
 	public ArrayList<Apmlsubscriber> subscribers = new ArrayList();
+
 	//
+
 	public Map properties = new HashMap<Object, Object>();
 
 	//
+
 	public Stddriver driver;
 
 	//
+
 	public String apmlfile;
 
 	//
+
 	public String basedir;
 
 	//
+
 	public ArrayList<Class> classes = new ArrayList();
 
 	//
+
 	public ArrayList<String> classnames = new ArrayList();
 
 
@@ -183,7 +183,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	//
 	public Object preload(Object o, Boolean register)
 	{
-		System.out.println("Apmlbasesystem doinstantiation() called...");
+		//System.out.println("Apmlbasesystem doinstantiation() called...");
 
 		Object retval = null;
 
@@ -239,7 +239,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 
 	public Object postload(Class c, Boolean register)
 	{
-		System.out.println("Apmlbasesystem postloads " + c.getName());
+		//System.out.println("Apmlbasesystem postloads " + c.getName());
 
 		Object retval = null;
 
@@ -326,7 +326,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	//
 	public Object preload(Class c, Boolean register)
 	{
-		System.out.println("Apmlbasesystem preloads " + c.getName());
+		//System.out.println("Apmlbasesystem preloads " + c.getName());
 
 		Object retval = null;
 
