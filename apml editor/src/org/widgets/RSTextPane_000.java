@@ -3,9 +3,7 @@ package org.widgets;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import org.events.TreeStructureUpdatedEvent;
-import org.fife.ui.rsyntaxtextarea.RSyntaxDocument;
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rsyntaxtextarea.*;
 import org.listeners.CustomKeyEventListener;
 import org.listeners.LineCountDocumentListener;
 
@@ -32,11 +30,23 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 		this.setCurrentLineHighlightColor(new Color(225, 225, 225));
 
-		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
+		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 
 		//instantiation
 
-		this.document = new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_XML);
+		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
+
+		//
+
+		SyntaxScheme scheme = this.getSyntaxScheme();
+
+		scheme.getStyle(Token.MARKUP_TAG_NAME).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE).foreground = Color.DARK_GRAY.brighter();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE_VALUE).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_DELIMITER).foreground = Color.DARK_GRAY.darker();
 
 		//bodi
 
@@ -67,6 +77,18 @@ public class RSTextPane_000 extends RSyntaxTextArea
 		//instantiation
 
 		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
+
+		//
+
+		SyntaxScheme scheme = this.getSyntaxScheme();
+
+		scheme.getStyle(Token.MARKUP_TAG_NAME).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE).foreground = Color.DARK_GRAY.brighter();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE_VALUE).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_DELIMITER).foreground = Color.DARK_GRAY.darker();
 
 		//bodi
 
@@ -100,15 +122,25 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
 
+		//
+
+		SyntaxScheme scheme = this.getSyntaxScheme();
+
+		scheme.getStyle(Token.MARKUP_TAG_NAME).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE).foreground = Color.DARK_GRAY.brighter();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE_VALUE).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_DELIMITER).foreground = Color.DARK_GRAY.darker();
+
 		//bodi
 
-		Bodi.context("editor").put(bodi, this);
+		Bodi.context("editor").put(this.bodi, this);
 
 		//devolvement
 
 		this.parent = parent;
-
-		this.monitor = monitor;
 
 		this.bodi = bodi;
 
@@ -134,9 +166,21 @@ public class RSTextPane_000 extends RSyntaxTextArea
 
 		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
 
+		//
+
+		SyntaxScheme scheme = this.getSyntaxScheme();
+
+		scheme.getStyle(Token.MARKUP_TAG_NAME).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE).foreground = Color.DARK_GRAY.brighter();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE_VALUE).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_DELIMITER).foreground = Color.DARK_GRAY.darker();
+
 		//bodi
 
-		Bodi.context("editor").put(bodi, this);
+		Bodi.context("editor").put(this.bodi, this);
 
 		//devolvement
 
@@ -157,12 +201,6 @@ public class RSTextPane_000 extends RSyntaxTextArea
 	public void setscrollpane(RTextScrollPane_000 scrollpane)
 	{
 		this.scrollpane = scrollpane;
-	}
-
-	//
-	public void processtreechange(TreeStructureUpdatedEvent event)
-	{
-		System.err.println("Possible errant call: "+this.getClass()+" processtreechange");
 	}
 
 	@Override

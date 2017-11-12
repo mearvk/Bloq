@@ -59,8 +59,12 @@ public class JTree_Quran_000 extends JTree
 	public ImageIO importref_015;
 	public File importref_016;
 
+	//
+
 	public Component parent;
 	public Apmlbasesystem system;
+
+	//
 
 	public Integer selected_child_index;
 

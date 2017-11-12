@@ -20,11 +20,7 @@ public class RTextScrollPane_000 extends RTextScrollPane
 
 		this.setLineNumbersEnabled(true);
 
-		this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
-
-
-		this.getGutter().setPreferredSize(new Dimension(40,600));
+		this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 		this.revalidate();
 
@@ -44,7 +40,7 @@ public class RTextScrollPane_000 extends RTextScrollPane
 
 		this.setLineNumbersEnabled(true);
 
-		this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 		this.revalidate();
 

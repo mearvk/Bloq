@@ -29,15 +29,15 @@ public class RSTextPane_Bodi_000 extends RSyntaxTextArea
 
 		this.setCurrentLineHighlightColor(new Color(225, 225, 225));
 
-		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
+		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 
 		//instantiation
 
-		this.document = new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_XML);
-
-		SyntaxScheme scheme = this.getSyntaxScheme();
+		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
 
 		//
+
+		SyntaxScheme scheme = this.getSyntaxScheme();
 
 		scheme.getStyle(Token.MARKUP_TAG_NAME).foreground = Color.DARK_GRAY.darker().darker();
 
@@ -54,6 +54,8 @@ public class RSTextPane_Bodi_000 extends RSyntaxTextArea
 		//devolvement
 
 		this.parent = parent;
+
+		this.monitor = monitor;
 
 		//listeners
 
@@ -76,6 +78,18 @@ public class RSTextPane_Bodi_000 extends RSyntaxTextArea
 		//instantiation
 
 		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
+
+		//
+
+		SyntaxScheme scheme = this.getSyntaxScheme();
+
+		scheme.getStyle(Token.MARKUP_TAG_NAME).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE).foreground = Color.DARK_GRAY.brighter();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE_VALUE).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_DELIMITER).foreground = Color.DARK_GRAY.darker();
 
 		//bodi
 

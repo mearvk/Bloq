@@ -45,6 +45,9 @@ public class JSplitPane_000 extends JSplitPane
 	public Rectangle importref_014;
 	public ImageIO importref_015;
 	public File importref_016;
+
+	//
+
 	public Component parent;
 	public Apmlbasesystem system;
 
@@ -64,23 +67,15 @@ public class JSplitPane_000 extends JSplitPane
 
 		// setters
 
-		//this.setResizeWeight(50f);
-
 		this.setBackground(new Color(0xff, 0xff, 0xff));
 
 		this.setDividerLocation(250);
-
-		//this.setBorder(new EmptyBorder(0, 0, 0, 0));
 
 		// instantiation
 
 		this.jpanel_000 = (JPanel) component_000;
 
 		this.jpanel_001 = (JPanel) component_001;
-
-		//this.jpanel_000.parent = this;
-
-		//this.jpanel_001.parent = this;
 
 		// hierarchy
 
@@ -110,17 +105,11 @@ public class JSplitPane_000 extends JSplitPane
 
 		this.setDividerLocation(250);
 
-		//this.setBorder(new EmptyBorder(0, 0, 0, 0));
-
 		// instantiation
 
 		this.jpanel_000 = (JPanel_000) component_000;
 
 		this.jpanel_001 = (JPanel_001) component_001;
-
-		//this.jpanel_000.parent = this;
-
-		//this.jpanel_001.parent = this;
 
 		// hierarchy
 

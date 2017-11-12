@@ -1732,7 +1732,7 @@ class TreeStructureUpdatedRequest
 
 		rstextpane_000 = (RSTextPane_000) Bodi.context("editor").pull("//editor/ui/rstextpane_000");
 
-		rstextpane_000.processtreechange(event);
+		// rstextpane_000.processtreechange(event);
 	}
 }
 

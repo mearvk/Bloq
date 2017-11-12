@@ -37,15 +37,15 @@ public class RSTextPane_Falthruu_000 extends RSyntaxTextArea
 
 		this.setCurrentLineHighlightColor(new Color(225, 225, 225));
 
-		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
+		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 
 		//instantiation
 
-		this.document = new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_XML);
-
-		SyntaxScheme scheme = this.getSyntaxScheme();
+		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
 
 		//
+
+		SyntaxScheme scheme = this.getSyntaxScheme();
 
 		scheme.getStyle(Token.MARKUP_TAG_NAME).foreground = Color.DARK_GRAY.darker().darker();
 
@@ -62,6 +62,8 @@ public class RSTextPane_Falthruu_000 extends RSyntaxTextArea
 		//devolvement
 
 		this.parent = parent;
+
+		this.monitor = monitor;
 
 		//listeners
 
@@ -85,6 +87,18 @@ public class RSTextPane_Falthruu_000 extends RSyntaxTextArea
 
 		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
 
+		//
+
+		SyntaxScheme scheme = this.getSyntaxScheme();
+
+		scheme.getStyle(Token.MARKUP_TAG_NAME).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE).foreground = Color.DARK_GRAY.brighter();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE_VALUE).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_DELIMITER).foreground = Color.DARK_GRAY.darker();
+
 		//bodi
 
 		Bodi.context("editor").put(this.bodi, this);
@@ -106,103 +120,6 @@ public class RSTextPane_Falthruu_000 extends RSyntaxTextArea
 	public void setscrollpane(RTextScrollPane_000 scrollpane)
 	{
 		this.scrollpane = scrollpane;
-	}
-
-	//
-	public void loaddocument(LoadApmlDocumentEvent event)
-	{
-		try
-		{
-			BufferedReader reader = new BufferedReader(new FileReader(event.getFileRef()));
-
-			String line = null;
-
-			String buffer = new String();
-
-			//
-
-			while ((line = reader.readLine()) != null)
-			{
-				buffer = buffer + line + "\n";
-			}
-
-			//this.document.insertString(0, buffer+"\n", new SimpleAttributeSet());
-
-			this.setText(buffer + "\n");
-
-			//
-
-			//this.setDocument(document);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	//
-	public void closedocument(CloseApmlDocumentEvent event)
-	{
-		try
-		{
-			this.setText("");
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	//
-	public void savedocument(SaveApmlDocumentEvent event)
-	{
-		try
-		{
-			JFileChooser chooser = new JFileChooser();
-
-			int retval = chooser.showSaveDialog(this);
-
-			if (retval == JFileChooser.APPROVE_OPTION)
-			{
-				File file = chooser.getSelectedFile();
-
-				BufferedWriter writer;
-
-				writer = new BufferedWriter(new FileWriter(file));
-
-				writer.write(this.getText(), 0, this.getText().length());
-
-				writer.flush();
-
-				writer.close();
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	//
-	public void processtreechange(TreeStructureUpdatedEvent event)
-	{
-		TreeSelectionEvent treeevent;
-
-		treeevent = (TreeSelectionEvent) event.getSource();
-
-		System.out.println("JTree updated ");
-
-		//finish
-
-		/*
-
-		1. find pertinent line number
-
-		2. insert new line
-
-		3. insert new node
-
-		 */
 	}
 
 	@Override
