@@ -155,13 +155,13 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 	{
 		try
 		{
-			//System.out.println("TOTAL ELEMENT COUNT: "+this.requestUpdateOnElementCountChange());
+			this.requestUpdateOnElementCountChange();
 
-			//this.requestUpdateOnAttributeCountChange();
+			this.requestUpdateOnAttributeCountChange();
 		}
 		catch(Exception ex)
 		{
-			//
+			ex.printStackTrace();
 		}
 	}
 
@@ -224,15 +224,11 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 
 			int _new_ = walk_document_element_count(this.document, this.document.getDocumentElement(), null, 1);
 
-			//System.out.println("Total elements found: "+_new_);
-
 			//
 
 			if(_old_ != _new_)
 			{
 				this.counted_nodes.put("//apml/tags", _new_);
-
-				//JOptionPane.showMessageDialog(null, "Elements: "+_new_);
 
 				mis.update(new ActionEvent(this,0,"apml_structure_updated_event"));
 			}
@@ -280,23 +276,15 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 
 	protected Integer walk_document_attribute_count(Document document, Node current, Node next, Integer count)
 	{
-		int prior_count = count;
-
-		int node_count = current.getChildNodes().getLength();
-
-		//
-
 		for(int i=0; i<current.getChildNodes().getLength(); i++)
 		{
 			Node iterative_current = current.getChildNodes().item(i);
 
-			if(iterative_current.getChildNodes().getLength()>0)
+			if (iterative_current.getNodeType() == Node.ATTRIBUTE_NODE && iterative_current.getChildNodes().getLength() > 0)
 			{
-				count += this.walk_document_element_count(document, iterative_current, next, node_count);
+				count = this.walk_document_attribute_count(document, iterative_current, next, count + 1);
 			}
 		}
-
-		//
 
 		return count;
 	}
@@ -489,23 +477,15 @@ class BloqTextPaneObserver extends Thread implements DocumentListener
 
 	protected Integer walk_document_attribute_count(Document document, Node current, Node next, Integer count)
 	{
-		int prior_count = count;
-
-		int node_count = current.getChildNodes().getLength();
-
-		//
-
 		for (int i = 0; i < current.getChildNodes().getLength(); i++)
 		{
 			Node iterative_current = current.getChildNodes().item(i);
 
-			if (iterative_current.getChildNodes().getLength() > 0)
+			if (iterative_current.getNodeType() == Node.ATTRIBUTE_NODE && iterative_current.getChildNodes().getLength() > 0)
 			{
-				count += this.walk_document_element_count(document, iterative_current, next, node_count);
+				count = this.walk_document_attribute_count(document, iterative_current, next, count + 1);
 			}
 		}
-
-		//
 
 		return count;
 	}
@@ -683,23 +663,15 @@ class BodiTextPaneObserver extends Thread implements DocumentListener
 
 	protected Integer walk_document_attribute_count(Document document, Node current, Node next, Integer count)
 	{
-		int prior_count = count;
-
-		int node_count = current.getChildNodes().getLength();
-
-		//
-
 		for (int i = 0; i < current.getChildNodes().getLength(); i++)
 		{
 			Node iterative_current = current.getChildNodes().item(i);
 
-			if (iterative_current.getChildNodes().getLength() > 0)
+			if (iterative_current.getNodeType() == Node.ATTRIBUTE_NODE && iterative_current.getChildNodes().getLength() > 0)
 			{
-				count += this.walk_document_element_count(document, iterative_current, next, node_count);
+				count = this.walk_document_attribute_count(document, iterative_current, next, count + 1);
 			}
 		}
-
-		//
 
 		return count;
 	}
@@ -877,23 +849,15 @@ class MunctionTextPaneObserver extends Thread implements DocumentListener
 
 	protected Integer walk_document_attribute_count(Document document, Node current, Node next, Integer count)
 	{
-		int prior_count = count;
-
-		int node_count = current.getChildNodes().getLength();
-
-		//
-
 		for (int i = 0; i < current.getChildNodes().getLength(); i++)
 		{
 			Node iterative_current = current.getChildNodes().item(i);
 
-			if (iterative_current.getChildNodes().getLength() > 0)
+			if (iterative_current.getNodeType() == Node.ATTRIBUTE_NODE && iterative_current.getChildNodes().getLength() > 0)
 			{
-				count += this.walk_document_element_count(document, iterative_current, next, node_count);
+				count = this.walk_document_attribute_count(document, iterative_current, next, count + 1);
 			}
 		}
-
-		//
 
 		return count;
 	}
@@ -1071,23 +1035,15 @@ class RunynTextPaneObserver extends Thread implements DocumentListener
 
 	protected Integer walk_document_attribute_count(Document document, Node current, Node next, Integer count)
 	{
-		int prior_count = count;
-
-		int node_count = current.getChildNodes().getLength();
-
-		//
-
 		for (int i = 0; i < current.getChildNodes().getLength(); i++)
 		{
 			Node iterative_current = current.getChildNodes().item(i);
 
-			if (iterative_current.getChildNodes().getLength() > 0)
+			if (iterative_current.getNodeType() == Node.ATTRIBUTE_NODE && iterative_current.getChildNodes().getLength() > 0)
 			{
-				count += this.walk_document_element_count(document, iterative_current, next, node_count);
+				count = this.walk_document_attribute_count(document, iterative_current, next, count + 1);
 			}
 		}
-
-		//
 
 		return count;
 	}
@@ -1265,23 +1221,15 @@ class SprungTextPaneObserver extends Thread implements DocumentListener
 
 	protected Integer walk_document_attribute_count(Document document, Node current, Node next, Integer count)
 	{
-		int prior_count = count;
-
-		int node_count = current.getChildNodes().getLength();
-
-		//
-
 		for (int i = 0; i < current.getChildNodes().getLength(); i++)
 		{
 			Node iterative_current = current.getChildNodes().item(i);
 
-			if (iterative_current.getChildNodes().getLength() > 0)
+			if (iterative_current.getNodeType() == Node.ATTRIBUTE_NODE && iterative_current.getChildNodes().getLength() > 0)
 			{
-				count += this.walk_document_element_count(document, iterative_current, next, node_count);
+				count = this.walk_document_attribute_count(document, iterative_current, next, count + 1);
 			}
 		}
-
-		//
 
 		return count;
 	}
@@ -1459,23 +1407,15 @@ class FalthruuTextPaneObserver extends Thread implements DocumentListener
 
 	protected Integer walk_document_attribute_count(Document document, Node current, Node next, Integer count)
 	{
-		int prior_count = count;
-
-		int node_count = current.getChildNodes().getLength();
-
-		//
-
 		for (int i = 0; i < current.getChildNodes().getLength(); i++)
 		{
 			Node iterative_current = current.getChildNodes().item(i);
 
-			if (iterative_current.getChildNodes().getLength() > 0)
+			if (iterative_current.getNodeType() == Node.ATTRIBUTE_NODE && iterative_current.getChildNodes().getLength() > 0)
 			{
-				count += this.walk_document_element_count(document, iterative_current, next, node_count);
+				count = this.walk_document_attribute_count(document, iterative_current, next, count + 1);
 			}
 		}
-
-		//
 
 		return count;
 	}
