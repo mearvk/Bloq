@@ -174,7 +174,7 @@ public class JTree_Quran_000 extends JTree
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 
-		System.out.println("ReloadQuranTreeEvent :: _update called...");
+		//System.out.println("ReloadQuranTreeEvent :: _update called...");
 
 		ByteArrayInputStream bytes = event.byteRef;
 
@@ -356,14 +356,7 @@ public class JTree_Quran_000 extends JTree
 
 			//
 
-			if (current_object instanceof String)
-			{
-				System.out.println(current_object);
-			}
-
-			//
-
-			else if (current_type == Node.TEXT_NODE)
+			if (current_type == Node.TEXT_NODE)
 			{
 				//System.out.println("Removing carriage return: "+((Node)current_object).getNodeName()+" : "+((Node)current_object).getNodeValue().replace("\n","\\n"));
 

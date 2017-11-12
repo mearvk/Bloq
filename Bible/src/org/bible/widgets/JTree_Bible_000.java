@@ -170,7 +170,7 @@ public class JTree_Bible_000 extends JTree
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 
-		System.out.println("ReloadBibleTreeEvent :: _update called...");
+		//System.out.println("ReloadBibleTreeEvent :: _update called...");
 
 		ByteArrayInputStream bytes = event.byteRef;
 

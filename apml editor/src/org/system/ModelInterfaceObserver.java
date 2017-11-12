@@ -108,7 +108,7 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 	{
 		try
 		{
-			System.out.println("TOTAL ELEMENT COUNT: "+this.requestUpdateOnElementCountChange());
+			//System.out.println("TOTAL ELEMENT COUNT: "+this.requestUpdateOnElementCountChange());
 
 			//this.requestUpdateOnAttributeCountChange();
 		}

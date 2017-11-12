@@ -256,8 +256,6 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 					String panetitle = selectedPane.getTitleAt(selectedIndex);
 
-					System.out.println("oh oh oh oh");
-
 					selectedPane.setForeground(Color.WHITE);
 
 					selectedPane.setBackground(Color.WHITE);

@@ -185,7 +185,7 @@ public class JTree_Apml_000 extends JTree
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 
-		System.out.println("ReloadApmlTreeEvent :: _update called...");
+		//System.out.println("ReloadApmlTreeEvent :: _update called...");
 
 		ByteArrayInputStream bytes = event.byteRef;
 

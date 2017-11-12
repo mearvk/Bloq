@@ -596,7 +596,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	@Override
 	public void run()
 	{
-		System.out.println("Apmlbasesystem run() called...");
+		//System.out.println("Apmlbasesystem run() called...");
 
 		if (this.runner == null)
 			return;
