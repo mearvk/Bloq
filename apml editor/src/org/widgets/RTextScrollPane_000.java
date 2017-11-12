@@ -13,6 +13,8 @@ public class RTextScrollPane_000 extends RTextScrollPane
 
 	public Component parent;
 
+	public Apmlbasesystem monitor;
+
 	//
 	public RTextScrollPane_000(Component parent)
 	{
@@ -51,6 +53,8 @@ public class RTextScrollPane_000 extends RTextScrollPane
 		//devolvement
 
 		this.parent = parent;
+
+		this.monitor = monitor;
 	}
 
 

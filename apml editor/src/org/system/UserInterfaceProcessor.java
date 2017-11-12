@@ -11,6 +11,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.widgets.*;
+import org.xml.sax.InputSource;
 
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -65,6 +66,12 @@ public class UserInterfaceProcessor extends Apmlobject
 				break;
 
 			case "save_document_event":
+
+				new SaveDocumentRequest(this, event).run();
+
+				break;
+
+			case "save_all_documents_event":
 
 				new SaveDocumentRequest(this, event).run();
 
@@ -1733,6 +1740,95 @@ class TreeStructureUpdatedRequest
 		rstextpane_000 = (RSTextPane_000) Bodi.context("editor").pull("//editor/ui/rstextpane_000");
 
 		// rstextpane_000.processtreechange(event);
+	}
+}
+
+class SaveAllDocumentsRequest
+{
+	private UserInterfaceProcessor processor;
+
+	private APMLGui apmlgui;
+
+	//
+
+	private RSTextPane_Apml_000 rsTextPane_apml_000;
+
+	private RSTextPane_Bloq_000 rsTextPane_bloq_000;
+
+	private RSTextPane_Bodi_000 rsTextPane_bodi_000;
+
+	private RSTextPane_Munction_000 rsTextPane_munction_000;
+
+	private RSTextPane_Runyn_000 rsTextPane_runyn_000;
+
+	private RSTextPane_Sprung_000 rsTextPane_sprung_000;
+
+	private RSTextPane_Falthruu_000 rsTextPane_falthruu_000;
+
+	//
+
+	public SaveAllDocumentsRequest()
+	{
+		this.processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
+
+		this.apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+		//
+
+		this.rsTextPane_apml_000 = (RSTextPane_Apml_000) Bodi.context("editor").pull("//editor/ui/rstextpane_apml_000");
+
+		this.rsTextPane_bloq_000 = (RSTextPane_Bloq_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bloq_000");
+
+		this.rsTextPane_bodi_000 = (RSTextPane_Bodi_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bodi_000");
+
+		this.rsTextPane_munction_000 = (RSTextPane_Munction_000) Bodi.context("editor").pull("//editor/ui/rstextpane_munction_000");
+
+		this.rsTextPane_runyn_000 = (RSTextPane_Runyn_000) Bodi.context("editor").pull("//editor/ui/rstextpane_runyn_000");
+
+		this.rsTextPane_sprung_000 = (RSTextPane_Sprung_000) Bodi.context("editor").pull("//editor/ui/rstextpane_sprung_000");
+
+		this.rsTextPane_falthruu_000 = (RSTextPane_Falthruu_000) Bodi.context("editor").pull("//editor/ui/rstextpane_falthruu_000");
+	}
+
+	public SaveAllDocumentsRequest(ActionEvent event)
+	{
+		this.processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
+
+		this.apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+		//
+
+		this.rsTextPane_apml_000 = (RSTextPane_Apml_000) Bodi.context("editor").pull("//editor/ui/rstextpane_apml_000");
+
+		this.rsTextPane_bloq_000 = (RSTextPane_Bloq_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bloq_000");
+
+		this.rsTextPane_bodi_000 = (RSTextPane_Bodi_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bodi_000");
+
+		this.rsTextPane_munction_000 = (RSTextPane_Munction_000) Bodi.context("editor").pull("//editor/ui/rstextpane_munction_000");
+
+		this.rsTextPane_runyn_000 = (RSTextPane_Runyn_000) Bodi.context("editor").pull("//editor/ui/rstextpane_runyn_000");
+
+		this.rsTextPane_sprung_000 = (RSTextPane_Sprung_000) Bodi.context("editor").pull("//editor/ui/rstextpane_sprung_000");
+
+		this.rsTextPane_falthruu_000 = (RSTextPane_Falthruu_000) Bodi.context("editor").pull("//editor/ui/rstextpane_falthruu_000");
+	}
+
+
+	public void run()
+	{
+		this.processor.update(new SaveApmlDocumentEvent(new ByteArrayInputStream(this.rsTextPane_apml_000.getText().getBytes())));
+
+		this.processor.update(new SaveBloqDocumentEvent(new ByteArrayInputStream(this.rsTextPane_bloq_000.getText().getBytes())));
+
+		this.processor.update(new SaveBodiDocumentEvent(new ByteArrayInputStream(this.rsTextPane_bodi_000.getText().getBytes())));
+
+		this.processor.update(new SaveMunctionDocumentEvent(new ByteArrayInputStream(this.rsTextPane_munction_000.getText().getBytes())));
+
+		this.processor.update(new SaveRunynDocumentEvent(new ByteArrayInputStream(this.rsTextPane_runyn_000.getText().getBytes())));
+
+		this.processor.update(new SaveSprungDocumentEvent(new ByteArrayInputStream(this.rsTextPane_sprung_000.getText().getBytes())));
+
+		this.processor.update(new SaveFalthruuDocumentEvent(new ByteArrayInputStream(this.rsTextPane_falthruu_000.getText().getBytes())));
 	}
 }
 

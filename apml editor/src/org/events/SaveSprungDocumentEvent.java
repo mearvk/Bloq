@@ -1,6 +1,7 @@
 package org.events;
 
 import java.awt.event.ActionEvent;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 
 public class SaveSprungDocumentEvent extends ActionEvent
@@ -8,6 +9,8 @@ public class SaveSprungDocumentEvent extends ActionEvent
 	public ActionEvent event;
 
 	public File fileRef;
+
+	public ByteArrayInputStream byteRef;
 
 	public SaveSprungDocumentEvent(Object source, int id, String command)
 	{
@@ -31,5 +34,19 @@ public class SaveSprungDocumentEvent extends ActionEvent
 		this.event = event;
 
 		this.fileRef = fileRef;
+	}
+
+	public SaveSprungDocumentEvent(ActionEvent event, ByteArrayInputStream byteRef)
+	{
+		super(event.getSource(), event.getID(), "save_sprung_document_event");
+
+		this.byteRef = byteRef;
+	}
+
+	public SaveSprungDocumentEvent(ByteArrayInputStream byteRef)
+	{
+		super(new Object(), 0, "save_sprung_document_event");
+
+		this.byteRef = byteRef;
 	}
 }

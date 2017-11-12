@@ -114,27 +114,5 @@ public class RSTextPane_Bloq_000 extends RSyntaxTextArea
 	{
 		this.scrollpane = scrollpane;
 	}
-
-	@Override
-	public Dimension getPreferredSize()
-	{
-		Element element;
-
-		element = this.getDocument().getDefaultRootElement();
-
-		//
-
-		int lineheight = 15; //12 + 3
-
-		int linecount = element.getElementCount();
-
-		//
-
-		Dimension calculated;
-
-		calculated = new Dimension(this.parent.getWidth(), (linecount * lineheight));
-
-		return calculated;
-	}
 }
 

@@ -491,7 +491,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	@Override
 	public void init()
 	{
-		System.out.println("Apmlbasesystem init() called...");
+		//System.out.println("Apmlbasesystem init() called...");
 
 		if (this.apmlfile == null)
 			return;
@@ -515,7 +515,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	@Override
 	public void pause()
 	{
-		System.out.println("Apmlbasesystem pause() called...");
+		//System.out.println("Apmlbasesystem pause() called...");
 
 		if (this.runner == null)
 			return;
@@ -542,7 +542,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	@Override
 	public void restart()
 	{
-		System.out.println("Apmlbasesystem restart() called...");
+		//System.out.println("Apmlbasesystem restart() called...");
 
 		if (this.runner == null)
 			return;
@@ -615,7 +615,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	@Override
 	public void start()
 	{
-		System.out.println("Apmlbasesystem start() called...");
+		//System.out.println("Apmlbasesystem start() called...");
 
 		if (this.runner == null)
 			return;
@@ -634,7 +634,7 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	@Override
 	public void stop()
 	{
-		System.out.println("Apmlbasesystem stop() called...");
+		//System.out.println("Apmlbasesystem stop() called...");
 
 		if (this.runner == null)
 			return;
