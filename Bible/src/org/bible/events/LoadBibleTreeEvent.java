@@ -12,14 +12,14 @@ public class LoadBibleTreeEvent extends ActionEvent
 
 	public LoadBibleTreeEvent(ActionEvent event, File fileRef)
 	{
-		super(event.getSource(), event.getID(), "load_quran_tree_event");
+		super(event.getSource(), event.getID(), "load_bible_tree_event");
 
 		this.fileRef = fileRef;
 	}
 
 	public LoadBibleTreeEvent(ActionEvent event, ByteArrayInputStream byteRef)
 	{
-		super(event.getSource(), event.getID(), "load_quran_tree_event");
+		super(event.getSource(), event.getID(), "load_bible_tree_event");
 
 		this.byteRef = byteRef;
 	}

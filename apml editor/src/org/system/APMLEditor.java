@@ -2,12 +2,13 @@ package org.system;
 
 import apml.drivers.Stdbloqdriver;
 import apml.system.Apmlbasesystem;
+import org.bible.BibleLoader;
 import org.quran.QuranLoader;
 import org.widgets.APMLGui;
 
 public class APMLEditor extends apml.modeling.Apmlsystem
 {
-	public final String bodi = "//events/system/{id}/apmleditor";
+	public final String bodi = "//editor/ui/apmleditor";
 
 	//
 	public final String id = "apmleditor";
@@ -59,5 +60,9 @@ public class APMLEditor extends apml.modeling.Apmlsystem
 		//
 
 		apmlsystem.postload(QuranLoader.class, true);
+
+		//
+
+		apmlsystem.postload(BibleLoader.class, true);
 	}
 }

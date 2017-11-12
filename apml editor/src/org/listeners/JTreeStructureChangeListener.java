@@ -17,7 +17,7 @@ public class JTreeStructureChangeListener implements TreeSelectionListener, Tree
 	{
 		//bodi
 
-		Bodi.context("system").put("//ui/listeners/JTreeStructureChangeListener", this);
+		Bodi.context("system").put("//ui/listeners/jtree_structure_change_listener", this);
 	}
 
 	@Override

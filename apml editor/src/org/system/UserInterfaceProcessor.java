@@ -535,11 +535,17 @@ class SaveBloqDocumentRequest
 			e.printStackTrace();
 
 			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
+			}
 			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			}
 			else
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+			}
 		}
 	}
 }
@@ -687,11 +693,17 @@ class SaveFalthruuDocumentRequest
 			e.printStackTrace();
 
 			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
+			}
 			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			}
 			else
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+			}
 		}
 	}
 }
@@ -840,11 +852,17 @@ class SaveMunctionDocumentRequest
 			e.printStackTrace();
 
 			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
+			}
 			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			}
 			else
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+			}
 		}
 	}
 }
@@ -993,11 +1011,17 @@ class SaveRunynDocumentRequest
 			e.printStackTrace();
 
 			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
+			}
 			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			}
 			else
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+			}
 		}
 	}
 }
@@ -1144,12 +1168,18 @@ class SaveSprungDocumentRequest
 		{
 			e.printStackTrace();
 
-			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+			if (e.getMessage() != null && e.getMessage().contains("Aborted"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
-			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+			}
+			else if (e.getMessage() != null && e.getMessage().contains("No data"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			}
 			else
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+			}
 		}
 	}
 }
@@ -1220,11 +1250,17 @@ class SaveBodiDocumentRequest
 			e.printStackTrace();
 
 			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
-			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+			}
+			else if (e.getMessage() != null && e.getMessage().contains("No data"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			}
 			else
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+			}
 		}
 	}
 }
@@ -1422,11 +1458,17 @@ class SaveApmlDocumentRequest
 			e.printStackTrace();
 
 			if(e.getMessage()!=null && e.getMessage().contains("Aborted"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Document was not saved.");
+			}
 			else if(e.getMessage()!=null && e.getMessage().contains("No data"))
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "No data loaded; document was not saved.");
+			}
 			else
+			{
 				JOptionPane.showMessageDialog(this.apmlgui, "Error saving document.");
+			}
 		}
 	}
 }
@@ -1836,10 +1878,14 @@ class OpenDocumentRequest
 			//
 
 			if (this.nodes.getLength() == 0)
+			{
 				JOptionPane.showMessageDialog(apmlgui, "Unable to locate any document type; make sure you have a project type set ( //project[@type] ).");
+			}
 
 			if (this.nodes.getLength() > 1)
+			{
 				JOptionPane.showMessageDialog(apmlgui, "Unable to locate unambiguous document type; make sure you have a single project type set ( //project[@type] ).");
+			}
 
 			//
 
@@ -1901,10 +1947,6 @@ class OpenDocumentRequest
 
 					return;
 			}
-
-			//
-
-
 
 			//
 

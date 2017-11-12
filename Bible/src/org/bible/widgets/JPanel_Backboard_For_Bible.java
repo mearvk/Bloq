@@ -27,7 +27,7 @@ import java.net.URL;
 public class JPanel_Backboard_For_Bible extends JPanel
 {
 
-	public String bodi = "//editor/ui/jpanel_backboard_for_quran";
+	public String bodi = "//editor/ui/jpanel_backboard_for_bible";
 
 	public Integer marginleft = 10;
 	public Integer margintop = 10;

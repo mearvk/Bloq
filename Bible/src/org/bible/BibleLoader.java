@@ -3,22 +3,20 @@ package org.bible;
 import apml.system.bodi.Bodi;
 import org.bible.events.LoadBibleTreeEvent;
 import org.bible.widgets.JTree_Bible_000;
-import org.bible.events.LoadBibleTreeEvent;
-import org.bible.widgets.JTree_Bible_000;
 
 import javax.xml.xpath.XPath;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
-public class QuranLoader extends Thread
+public class BibleLoader extends Thread
 {
 	public File file = null;
 
-	public String fileRef = "/Users/mrupplin/IdeaProjects/bloq/Quran/lib/Dutch-15.xml";
+	public String fileRef = "/Users/mrupplin/IdeaProjects/bloq/Bible/NIV/NIV.xml";
 
 	public XPath xpath;
 
-	public QuranLoader()
+	public BibleLoader()
 	{
 		try
 		{
@@ -39,9 +37,9 @@ public class QuranLoader extends Thread
 	{
 		JTree_Bible_000 jtree;
 
-		jtree = (JTree_Bible_000) Bodi.context("editor").pull("//editor/ui/jtree_quran_000");
+		jtree = (JTree_Bible_000) Bodi.context("editor").pull("//editor/ui/jtree_bible_000");
 
-		jtree.update(new LoadBibleTreeEvent(new ActionEvent(jtree, 0, "load_quran_tree_event"), this.file));
+		jtree.update(new LoadBibleTreeEvent(new ActionEvent(jtree, 0, "load_bible_tree_event"), this.file));
 
 		jtree.removenewlinetextnodes();
 	}

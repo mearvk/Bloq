@@ -26,7 +26,7 @@ public class SaveMunctionDocumentEvent extends ActionEvent
 
 	public SaveMunctionDocumentEvent(SaveDocumentEvent event, File fileRef)
 	{
-		super(event.getSource(), event.getID(), "save_sprung_document_event");
+		super(event.getSource(), event.getID(), "save_munction_document_event");
 
 		this.event = event;
 

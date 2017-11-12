@@ -1,23 +1,15 @@
 package org.quran.listeners;
 
 import apml.system.bodi.Bodi;
-import org.custom.ui.BodiJTreeNode;
 import org.quran.widgets.JTree_Quran_000;
 import org.quran.widgets.QuranJTreeNode;
 import org.quran.widgets.RSTextPane_Quran_000;
-import org.widgets.APMLGui;
-import org.widgets.JTree_Bodi_000;
-import org.widgets.RSTextPane_Bodi_000;
 
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 
 public class QuranJTreeSelectionListener implements TreeSelectionListener, MouseListener
 {

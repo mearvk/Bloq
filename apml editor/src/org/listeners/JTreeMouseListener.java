@@ -27,21 +27,11 @@ public class JTreeMouseListener implements MouseListener
 
 		//
 
-		//RSTextPane_000 textpane;
-
-		//textpane = (RSTextPane_000) Bodi.context("editor").pull("//editor/ui/rstextpane_000");
-
-		//
-
 		LineNumberFinder linenumberfinder;
 
 		linenumberfinder = new LineNumberFinder();
 
-		//linenumberfinder.processByClick(selected, textpane, e);
-
 		//
-
-		//textpane.setCaretPosition(linenumberfinder.charcount);
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package org.quran.widgets;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import org.widgets.JEditorPane_000;
-import org.widgets.RSTextPane_Apml_000;
 import org.widgets.RTextScrollPane_000;
 
 import javax.imageio.ImageIO;

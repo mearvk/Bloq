@@ -40,14 +40,19 @@ public class BibleJTreeNode extends DefaultMutableTreeNode
 
 		if (node.getNodeType() == Node.ELEMENT_NODE)
 		{
+			if (node.getNodeName().contains("b"))
+			{
+				return "Book: " + ((Element) node).getAttribute("n");
+			}
+
 			if (node.getNodeName().contains("v"))
 			{
-				return "Verse: " + ((Element) node).getAttribute("VerseID");
+				return "Verse: " + ((Element) node).getAttribute("n");
 			}
 
 			if (node.getNodeName().contains("c"))
 			{
-				return "Chapter: " + ((Element) node).getAttribute("ChapterID");
+				return "Chapter: " + ((Element) node).getAttribute("n");
 			}
 
 			return node.getNodeName();

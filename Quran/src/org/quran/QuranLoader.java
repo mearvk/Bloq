@@ -5,7 +5,6 @@ import org.quran.events.LoadQuranTreeEvent;
 import org.quran.widgets.JTree_Quran_000;
 
 import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathFactory;
 import java.awt.event.ActionEvent;
 import java.io.File;
 

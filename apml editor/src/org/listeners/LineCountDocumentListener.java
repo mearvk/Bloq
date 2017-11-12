@@ -24,11 +24,13 @@ public class LineCountDocumentListener implements DocumentListener
 	{
 		Element element;
 
+		APMLGui apmlgui;
+
+		//
+
 		element = this.textarea.getDocument().getDefaultRootElement();
 
-		APMLGui apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
-
-		JOptionPane.showMessageDialog(apmlgui, "TEST");
+		apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
 		//
 	}

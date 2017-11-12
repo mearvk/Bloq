@@ -160,8 +160,6 @@ class ApmlStructureUpdateRequest implements Runnable
 
 		//
 
-		//TreePath path = new TreePath(array);
-
 		for(int i=0; i<array.length; i++)
 		{
 			if(!array[i].isLeaf())
@@ -169,8 +167,6 @@ class ApmlStructureUpdateRequest implements Runnable
 				this.jtree.expandPath(new TreePath(array[i].getPath()));
 			}
 		}
-
-		//this.jtree.
 	}
 }
 

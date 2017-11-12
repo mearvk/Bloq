@@ -1,8 +1,8 @@
 package org.bible.listeners;
 
 import apml.system.bodi.Bodi;
-import org.bible.widgets.JTree_Bible_000;
 import org.bible.widgets.BibleJTreeNode;
+import org.bible.widgets.JTree_Bible_000;
 import org.bible.widgets.RSTextPane_Bible_000;
 
 import javax.swing.event.TreeSelectionEvent;
@@ -61,7 +61,7 @@ public class BibleJTreeSelectionListener implements TreeSelectionListener, Mouse
 	{
 		BibleJTreeNode clickednode;
 
-		RSTextPane_Bible_000 rstextpane_quran_000;
+		RSTextPane_Bible_000 rstextpane_bible_000;
 
 		//
 
@@ -69,7 +69,7 @@ public class BibleJTreeSelectionListener implements TreeSelectionListener, Mouse
 
 		//
 
-		rstextpane_quran_000 = (RSTextPane_Bible_000) Bodi.context("editor").pull("//editor/ui/rstextpane_quran_000");
+		rstextpane_bible_000 = (RSTextPane_Bible_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bible_000");
 
 		try
 		{
@@ -77,7 +77,7 @@ public class BibleJTreeSelectionListener implements TreeSelectionListener, Mouse
 
 			String text = "";
 
-			rstextpane_quran_000.setText(clickednode._toString());
+			rstextpane_bible_000.setText(clickednode._toString());
 		}
 		catch (Exception exception)
 		{

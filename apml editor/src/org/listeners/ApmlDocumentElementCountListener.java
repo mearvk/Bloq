@@ -13,7 +13,7 @@ public class ApmlDocumentElementCountListener implements DocumentListener
 	{
 		//bodi
 
-		Bodi.context("system").put("//ui/listeners/ApmlDocumentElementCountListener", this);
+		Bodi.context("system").put("//ui/listeners/apml_document_element_count_listener", this);
 	}
 
 	@Override

@@ -3,11 +3,11 @@ package org.bible.widgets;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.xpath.helpers.Xpathquick;
-import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.bible.events.CloseBibleDocumentEvent;
 import org.bible.events.LoadBibleTreeEvent;
 import org.bible.events.ReloadBibleTreeEvent;
 import org.bible.listeners.BibleJTreeSelectionListener;
+import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -40,7 +40,7 @@ import java.util.Enumeration;
  */
 public class JTree_Bible_000 extends JTree
 {
-	public String bodi = "//editor/ui/jtree_quran_000";
+	public String bodi = "//editor/ui/jtree_bible_000";
 
 	public KeyEvent importref_001;
 	public KeyStroke importref_002;
@@ -151,7 +151,7 @@ public class JTree_Bible_000 extends JTree
 		{
 			root.removeAllChildren();
 
-			root.setUserObject("Al Quran");
+			root.setUserObject("NIV Bible");
 
 			model.reload();
 		}

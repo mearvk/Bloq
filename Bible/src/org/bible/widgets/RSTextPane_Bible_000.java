@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class RSTextPane_Bible_000 extends RSyntaxTextArea
 {
-	public String bodi = "//editor/ui/rstextpane_quran_000";
+	public String bodi = "//editor/ui/rstextpane_bible_000";
 
 	public RTextScrollPane_000 scrollpane;
 
@@ -30,6 +30,10 @@ public class RSTextPane_Bible_000 extends RSyntaxTextArea
 
 		this.setCurrentLineHighlightColor(new Color(225, 225, 225));
 
+		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+
+		this.setEditable(false);
+
 		//instantiation
 
 		this.document = new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_XML);
@@ -46,9 +50,9 @@ public class RSTextPane_Bible_000 extends RSyntaxTextArea
 
 		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
 
-		SyntaxScheme scheme = this.getSyntaxScheme();
-
 		//
+
+		SyntaxScheme scheme = this.getSyntaxScheme();
 
 		scheme.getStyle(Token.MARKUP_TAG_NAME).foreground = Color.DARK_GRAY.darker().darker();
 
@@ -80,9 +84,13 @@ public class RSTextPane_Bible_000 extends RSyntaxTextArea
 
 		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 
+		this.setEditable(false);
+
 		//instantiation
 
-		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
+		this.document = new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_XML);
+
+		this.setCodeFoldingEnabled(true);
 
 		//bodi
 
@@ -93,6 +101,22 @@ public class RSTextPane_Bible_000 extends RSyntaxTextArea
 		this.parent = parent;
 
 		this.monitor = monitor;
+
+		//
+
+		SyntaxScheme scheme = this.getSyntaxScheme();
+
+		scheme.getStyle(Token.MARKUP_TAG_NAME).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE).foreground = Color.DARK_GRAY.brighter();
+
+		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE_VALUE).foreground = Color.DARK_GRAY.darker().darker();
+
+		scheme.getStyle(Token.MARKUP_TAG_DELIMITER).foreground = Color.DARK_GRAY.darker();
+
+		//
+
+		this.revalidate();
 
 		//listeners
 

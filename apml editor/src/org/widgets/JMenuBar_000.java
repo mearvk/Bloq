@@ -39,17 +39,23 @@ public class JMenuBar_000 extends JMenuBar
 	public Rectangle importref_014;
 	public ImageIO importref_015;
 	public File importref_016;
+
+	//
+
 	public Component parent;
 	public Apmlbasesystem system;
-	JMenu_000 jmenu_000;
-	JMenu_001 jmenu_001;
-	JMenu_002 jmenu_002;
-	JMenu_003 jmenu_003;
-	JMenu_004 jmenu_004;
-	JMenu_005 jmenu_005;
-	JMenu_006 jmenu_006;
-	JMenu_007 jmenu_007;
-	JMenu_008 jmenu_008;
+
+	//
+
+	public JMenu_000 jmenu_000;
+	public JMenu_001 jmenu_001;
+	public JMenu_002 jmenu_002;
+	public JMenu_003 jmenu_003;
+	public JMenu_004 jmenu_004;
+	public JMenu_005 jmenu_005;
+	public JMenu_006 jmenu_006;
+	public JMenu_007 jmenu_007;
+	public JMenu_008 jmenu_008;
 	/**
 	 * @param parent : The tree AWT object.
 	 */

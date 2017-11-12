@@ -15,7 +15,7 @@ public class ApmlDocumentChangeListener implements DocumentListener
 	{
 		//bodi
 
-		Bodi.context("system").put("//ui/listeners/ApmlDocumentChangeListener", this);
+		Bodi.context("system").put("//ui/listeners/apml_document_change_listener", this);
 	}
 
 	@Override

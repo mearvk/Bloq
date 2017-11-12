@@ -238,7 +238,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 	public Dimension getPreferredSize()
 	{
-		return new Dimension(((int) (parent.getWidth() * 1.0) - this.marginleft), 272);
+		return new Dimension(((int) (parent.getWidth() * 1.0) - this.marginleft), 200);
 	}
 
 	public void stateChanged(ChangeEvent event)
