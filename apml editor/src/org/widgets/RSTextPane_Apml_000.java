@@ -29,11 +29,11 @@ public class RSTextPane_Apml_000 extends RSyntaxTextArea
 
 		this.setCurrentLineHighlightColor(new Color(225, 225, 225));
 
-		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
 
 		//instantiation
 
-		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
+		this.document = new RSyntaxDocument(SYNTAX_STYLE_XML);
 
 		//
 

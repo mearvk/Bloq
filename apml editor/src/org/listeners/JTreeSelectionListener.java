@@ -21,21 +21,5 @@ public class JTreeSelectionListener implements TreeSelectionListener
 	public void valueChanged(TreeSelectionEvent event)
 	{
 
-		RSTextPane_000 textpane;
-
-		textpane = (RSTextPane_000) Bodi.context("system").pull("//ui/system/rstextpane_000");
-
-		//
-
-		try
-		{
-			DefaultMutableTreeNode treenode;
-
-			treenode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-		}
-		catch (Exception e)
-		{
-			//
-		}
 	}
 }

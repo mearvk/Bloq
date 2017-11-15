@@ -181,7 +181,7 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 
 			int _new_ = walk_document_attribute_count(this.document, this.document.getDocumentElement(), null, 0);
 
-			System.out.println("Total attributes found: "+_new_);
+			//System.out.println("Total attributes found: "+_new_);
 
 			//
 

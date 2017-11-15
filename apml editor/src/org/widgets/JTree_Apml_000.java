@@ -3,13 +3,13 @@ package org.widgets;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.xpath.helpers.Xpathquick;
-import org.custom.ui.ApmlJTreeNode;
-import org.custom.ui.TranslucentJTreeCellRenderer;
+import org.custom.ui.*;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlTreeEvent;
 import org.events.ReloadApmlTreeEvent;
 import org.listeners.*;
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -76,7 +76,9 @@ public class JTree_Apml_000 extends JTree
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 10));
 
-		this.setCellRenderer(new TranslucentJTreeCellRenderer());
+		//this.setCellRenderer(new TranslucentJTreeCellRenderer());
+
+		this.setCellRenderer(new AttributeSensitiveJTreeCellRenderer());
 
 		// instantiation
 
@@ -91,16 +93,6 @@ public class JTree_Apml_000 extends JTree
 		this.setVisible(true);
 
 		// listeners
-
-		this.addTreeSelectionListener(new JTreeSelectionListener(this));
-
-		this.addMouseListener(new JTreeMouseListener((this)));
-
-		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
 
 		// bodi
 
@@ -117,7 +109,9 @@ public class JTree_Apml_000 extends JTree
 
 		this.setBackground(new Color(223,223,223));
 
-		this.setCellRenderer(new TranslucentJTreeCellRenderer());
+		//this.setCellRenderer(new TranslucentJTreeCellRenderer());
+
+		this.setCellRenderer(new AttributeSensitiveJTreeCellRenderer());
 
 		// instantiation
 
@@ -134,16 +128,6 @@ public class JTree_Apml_000 extends JTree
 		this.setVisible(true);
 
 		// listeners
-
-		this.addTreeSelectionListener(new JTreeSelectionListener(this));
-
-		this.addMouseListener(new JTreeMouseListener((this)));
-
-		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
 
 		// bodi
 
@@ -166,7 +150,7 @@ public class JTree_Apml_000 extends JTree
 		{
 			root.removeAllChildren();
 
-			root.setUserObject("APML Design Area");
+			root.setUserObject("APML Informatics");
 
 			model.reload();
 		}
@@ -183,11 +167,7 @@ public class JTree_Apml_000 extends JTree
 
 	public void _update(ReloadApmlTreeEvent event)
 	{
-		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
-
-		//System.out.println("ReloadApmlTreeEvent :: _update called...");
-
-		ByteArrayInputStream bytes = event.byteRef;
+		ByteArrayInputStream bytes = event.getByteRef();
 
 		Document document;
 
@@ -195,7 +175,11 @@ public class JTree_Apml_000 extends JTree
 
 		DefaultMutableTreeNode root;
 
-		DefaultMutableTreeNode treenode;
+		DefaultMutableTreeNode manifestnode;
+
+		DefaultMutableTreeNode packagesnode;
+
+		DefaultMutableTreeNode childnode;
 
 		XPath xpath;
 
@@ -205,6 +189,8 @@ public class JTree_Apml_000 extends JTree
 
 		try
 		{
+
+
 			document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(bytes);
 
 			xpath = XPathFactory.newInstance().newXPath();
@@ -217,15 +203,35 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			treenode = new DefaultMutableTreeNode("APML Projects", true);
+			((DefaultMutableTreeNode) model.getRoot()).removeAllChildren();
 
 			//
 
-			model.insertNodeInto(treenode, root, 0);
+			manifestnode = new DefaultMutableTreeNode("manifest", true);
+
+			packagesnode = new DefaultMutableTreeNode("packages", true);
 
 			//
 
-			this.update(model, root, root, treenode, nodes, 0);
+			manifestnode.setAllowsChildren(true);
+
+			packagesnode.setAllowsChildren(true);
+
+			//
+
+			childnode = new DefaultMutableTreeNode(nodes.item(0));
+
+			childnode.setAllowsChildren(true);
+
+			//
+
+			model.insertNodeInto(manifestnode, root, 0);
+
+			model.insertNodeInto(packagesnode, root, 1);
+
+			//
+
+			this.update(model, root, packagesnode, childnode, nodes, 0);
 
 			//
 
@@ -247,7 +253,13 @@ public class JTree_Apml_000 extends JTree
 
 		DefaultMutableTreeNode root;
 
-		DefaultMutableTreeNode treenode;
+		DefaultMutableTreeNode manifestnode;
+
+		DefaultMutableTreeNode packagesnode;
+
+		DefaultMutableTreeNode attributesnode;
+
+		DefaultMutableTreeNode childnode;
 
 		XPath xpath;
 
@@ -269,19 +281,39 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			treenode = new DefaultMutableTreeNode("APML Projects", true);
+			manifestnode = new DefaultMutableTreeNode("manifest", true);
+
+			packagesnode = new DefaultMutableTreeNode("packages", true);
 
 			//
 
-			model.insertNodeInto(treenode, root, 0);
+			manifestnode.setAllowsChildren(true);
+
+			packagesnode.setAllowsChildren(true);
 
 			//
 
-			this.update(model, root, root, treenode, nodes, 0);
+			childnode = new ApmlJTreeNode(nodes.item(0));
+
+			childnode.setAllowsChildren(true);
 
 			//
 
-			model.reload();
+			manifestnode.insert(new DefaultMutableTreeNode("manifest.xml"), manifestnode.getChildCount() == 0 ? 0 : manifestnode.getChildCount() - 1);
+
+			//
+
+			model.insertNodeInto(manifestnode, root, 0);
+
+			model.insertNodeInto(packagesnode, root, 1);
+
+			//
+
+			this.update(model, root, packagesnode, childnode, nodes, 0);
+
+			//
+
+			//model.reload();
 		}
 		catch (Exception e)
 		{
@@ -290,7 +322,7 @@ public class JTree_Apml_000 extends JTree
 	}
 
 	//
-	private void update(DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode child, NodeList children, Integer depth)
+	private void update(DefaultTreeModel model, DefaultMutableTreeNode root /*root*/, DefaultMutableTreeNode parent /*packages*/, DefaultMutableTreeNode child /*project*/, NodeList children, Integer depth)
 	{
 		try
 		{
@@ -306,27 +338,57 @@ public class JTree_Apml_000 extends JTree
 
 			for (int i = 0; i < children.getLength(); i++)
 			{
+				//
+
 				Node node = children.item(i);
 
 				//
 
-				DefaultMutableTreeNode treenode;
+				DefaultMutableTreeNode element_node;
 
-				treenode = new ApmlJTreeNode(node);
+				element_node = new ApmlJTreeNode(node);
 
-				treenode.setAllowsChildren(true);
-
-				//
-
-				model.insertNodeInto(treenode, child, i);
+				element_node.setAllowsChildren(true);
 
 				//
 
-				NodeList rawnodes = children.item(i).getChildNodes();
+				AttributeFolderJTreeNode attr_element_folder;
 
-				update(model, root, child, treenode, rawnodes, depth + 1);
+				attr_element_folder = new AttributeFolderJTreeNode("attributes");
+
+				attr_element_folder.setAllowsChildren(true);
 
 				//
+
+				AttributeLeafJTreeNode attr_element_node;
+
+				//attr_element_node = new AttributeLeafJTreeNode("00");
+
+				//attr_element_node.setAllowsChildren(true);
+
+				//
+
+				if (node != null && node.getNodeType() == Node.ELEMENT_NODE)
+					for (int j = 0; j < node.getAttributes().getLength(); j++)
+					{
+						attr_element_node = new AttributeLeafJTreeNode(node.getAttributes().item(j).getNodeName() + " : " + node.getAttributes().item(j).getNodeValue());
+
+						attr_element_node.setAllowsChildren(false);
+
+						attr_element_folder.insert(attr_element_node, attr_element_folder.getChildCount() == 0 ? 0 : attr_element_folder.getChildCount() - 1);
+					}
+
+				//
+
+
+				model.insertNodeInto(attr_element_folder, element_node, element_node.getChildCount() == 0 ? 0 : element_node.getChildCount() - 1);
+
+
+				model.insertNodeInto(element_node, parent, parent.getChildCount() == 0 ? 0 : parent.getChildCount() - 1);
+
+				//
+
+				update(model, root, element_node, element_node, children.item(i).getChildNodes(), depth + 1);
 			}
 
 			//
