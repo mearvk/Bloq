@@ -157,6 +157,23 @@ public class Bodicontext
 	}
 
 	/**
+	 * @param key
+	 * @param value
+	 * @throws Exception
+	 */
+	public void softput(String key, Object value) //throws Exception
+	{
+		try
+		{
+			this.namemap.put(key, value);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * Can equality produce errant result early such that we care? /ok /mr /ss
 	 *
 	 * @param object

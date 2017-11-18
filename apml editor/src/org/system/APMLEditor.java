@@ -39,9 +39,9 @@ public class APMLEditor extends apml.modeling.Apmlsystem
 
 		//
 
-		apmlsystem.preload(APMLEditor.class, true,0L,2000L);
+		apmlsystem.preload(APMLEditor.class, true, 0L, 3000L);
 
-		apmlsystem.preload(APMLGui.class, true,0L,2000L);
+		apmlsystem.preload(APMLGui.class, true, 0L, 3000L);
 
 		apmlsystem.preload(UserInterfaceProcessor.class, true, 0L,1000L);
 
@@ -59,10 +59,10 @@ public class APMLEditor extends apml.modeling.Apmlsystem
 
 		//
 
-		apmlsystem.postload(QuranLoader.class, true);
+		//apmlsystem.postload(QuranLoader.class, true);
 
 		//
 
-		apmlsystem.postload(BibleLoader.class, true);
+		//apmlsystem.postload(BibleLoader.class, true);
 	}
 }

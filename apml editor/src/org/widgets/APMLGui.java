@@ -107,7 +107,7 @@ public class APMLGui extends JFrame
 
 					UIManager.put("nimbusBase", Color.DARK_GRAY.brighter()); //menuitems, jfilechooser //new Color(0x61, 0x61, 0x61)
 
-					UIManager.put("nimbusBlueGrey", new Color(0xd1, 0xd1, 0xd1)); //jmenubar
+					UIManager.put("nimbusBlueGrey", new Color(0xa1, 0xa1, 0xa1)); //jmenubar
 
 					UIManager.put("control", new Color(0xdf, 0xdf, 0xdf)); //jframe background
 
@@ -117,7 +117,7 @@ public class APMLGui extends JFrame
 
 					//
 
-					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].backgroundPainter", new BackgroundPainter(new Color(0xac,0xac,0xac))); //86,198,192
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].backgroundPainter", new BackgroundPainter(new Color(0xbc, 0xbc, 0xbc))); //86,198,192
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+MouseOver].backgroundPainter", new BackgroundPainter(new Color(0x8c, 0x8c, 0x8c))); //52, 168, 171
 
@@ -142,7 +142,7 @@ public class APMLGui extends JFrame
 
 					//
 
-					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].textForeground", Color.BLACK);
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].textForeground", Color.WHITE);
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+Selected].textForeground", Color.WHITE);
 
@@ -398,7 +398,7 @@ class BackgroundPainter implements Painter<JComponent>
 
 			//
 
-			g.setColor(Color.LIGHT_GRAY);
+			g.setColor(Color.LIGHT_GRAY.brighter());
 
 			g.fillRect(2,height-6,2,4); //highlight 1
 

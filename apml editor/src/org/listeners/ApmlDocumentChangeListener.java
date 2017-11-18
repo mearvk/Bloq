@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 
 public class ApmlDocumentChangeListener implements DocumentListener
 {
-	public static Integer DOM_element_count = 0;
+
 
 	public ApmlDocumentChangeListener()
 	{
@@ -37,6 +37,6 @@ public class ApmlDocumentChangeListener implements DocumentListener
 	@Override
 	public void changedUpdate(DocumentEvent e)
 	{
-		//
+
 	}
 }

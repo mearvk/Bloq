@@ -1,6 +1,8 @@
 package org.listeners;
 
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -16,16 +18,43 @@ public class JTreeEditorRightClickMouseListener implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
+		//
+
 		if (e.getClickCount() == 1 && SwingUtilities.isRightMouseButton(e))
 		{
-			e.consume();
+			//e.consume();
 		}
 		else
 			return;
 
 		//
 
-		//System.out.println("Right mouse button click detected!");
+		int row;
+
+		TreePath path;
+
+		//
+
+		//row = tree.getClosestRowForLocation(e.getX(), e.getY());
+
+		//tree.setSelectionRow(row);
+
+		path = tree.getClosestPathForLocation(e.getX(), e.getY());
+
+		tree.startEditingAtPath(path);
+
+		//
+
+		JPopupMenu popupMenu = new JPopupMenu();
+
+		popupMenu.add("Edit");
+
+		popupMenu.show(e.getComponent(), e.getX(), e.getY());
+
+		//
+
+
+		System.out.println("Right mouse button click detected!");
 	}
 
 	@Override

@@ -2,8 +2,9 @@ package org.system;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
+import apml.xpath.helpers.Xpathquick;
+import org.events.ReloadApmlTreeEvent;
+import org.w3c.dom.*;
 import org.widgets.*;
 import org.xml.sax.InputSource;
 
@@ -14,6 +15,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
 import java.awt.event.ActionEvent;
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
@@ -130,6 +132,11 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 		this.counted_nodes.put("//apml/attributes", 0);
 
 		this.counted_nodes.put("//apml/errors", 0);
+
+		//
+
+		if (this.xpath == null)
+			this.xpath = XPathFactory.newInstance().newXPath();
 	}
 
 	@Override
@@ -155,15 +162,135 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 	{
 		try
 		{
-			this.requestUpdateOnElementCountChange();
+			this.requestUpdateOnAttributeValueChange();
 
-			this.requestUpdateOnAttributeCountChange();
+			//this.requestUpdateOnElementCountChange();
+
+			//this.requestUpdateOnAttributeCountChange();
 		}
 		catch(Exception ex)
 		{
 			ex.printStackTrace();
 		}
 	}
+
+	private int requestUpdateOnAttributeValueChange()
+	{
+		NodeList new_nodes;
+
+		NodeList old_nodes;
+
+		Document old_document;
+
+		Document new_document;
+
+		ModelInterfaceSystem mis = (ModelInterfaceSystem) Bodi.context("editor").pull("//editor/ui/observers/model_interface_system");
+
+		try
+		{
+			new_document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new ByteArrayInputStream(this.textpane.getText().getBytes())));
+
+			old_document = (Document) Bodi.context("editor").pull("//editor/mis/apmlchangelistener/docref");
+
+			//
+
+			if (old_document == null)
+			{
+				Bodi.context("editor").put("//editor/mis/apmlchangelistener/docref", new_document);
+
+				//
+
+				old_document = new_document;
+			}
+
+			//
+
+			new_nodes = Xpathquick.evaluate(new_document, this.xpath, "/*");
+
+			old_nodes = Xpathquick.evaluate(old_document, this.xpath, "/*");
+
+			//
+
+			int new_node_count = 0;
+
+			int old_node_count = 0;
+
+			//
+
+			for (int i = 0; i < new_nodes.getLength(); i++)
+			{
+				Node node = new_nodes.item(i);
+
+				if (node.getNodeType() == Node.TEXT_NODE)
+				{
+					//add future impl for carriage returns or actual text nodes
+				}
+				else
+				{
+					new_node_count++;
+				}
+			}
+
+			for (int i = 0; i < old_nodes.getLength(); i++)
+			{
+				Node node = old_nodes.item(i);
+
+				if (node.getNodeType() == Node.TEXT_NODE)
+				{
+					//add future impl for carriage returns or actual text nodes
+				}
+				else
+				{
+					old_node_count++;
+				}
+			}
+
+			if (new_node_count != old_node_count)
+			{
+				//call update on tree
+
+				System.err.println("Total node count has changed.");
+			}
+
+			//
+
+			for (int i = 0; i < new_nodes.getLength(); i++)
+			{
+				Node new_node = new_nodes.item(i);
+
+				Node old_node = old_nodes.item(i);
+
+				if (new_node.getNodeType() == Node.TEXT_NODE)
+				{
+					continue;
+				}
+
+				if (!new_node.isEqualNode(old_node))
+				{
+					//call update on tree
+
+					System.err.println("Some particular node has changed.");
+
+					mis.update(new ActionEvent(this, 0, "apml_structure_updated_event"));
+				}
+			}
+
+			//
+
+			Bodi.context("editor").put("//editor/mis/apmlchangelistener/docref", new_document);
+		}
+		catch (org.xml.sax.SAXParseException spe)
+		{
+			System.err.println(spe.getMessage());
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+
 
 	private int requestUpdateOnAttributeCountChange()
 	{

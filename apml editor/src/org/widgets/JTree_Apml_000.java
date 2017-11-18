@@ -9,7 +9,6 @@ import org.events.LoadApmlTreeEvent;
 import org.events.ReloadApmlTreeEvent;
 import org.listeners.*;
 import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -17,8 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
@@ -76,15 +74,19 @@ public class JTree_Apml_000 extends JTree
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 10));
 
-		//this.setCellRenderer(new TranslucentJTreeCellRenderer());
+		this.setEditable(Boolean.TRUE);
 
 		this.setCellRenderer(new AttributeSensitiveJTreeCellRenderer());
+
+		this.setCellEditor(new DefaultTreeCellEditor(this, new AttributeSensitiveJTreeCellRenderer()));
 
 		// instantiation
 
 		this.init();
 
 		// hierarchy
+
+		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
 
 		// devolvement
 
@@ -109,9 +111,13 @@ public class JTree_Apml_000 extends JTree
 
 		this.setBackground(new Color(223,223,223));
 
-		//this.setCellRenderer(new TranslucentJTreeCellRenderer());
+		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 10));
+
+		this.setEditable(Boolean.TRUE);
 
 		this.setCellRenderer(new AttributeSensitiveJTreeCellRenderer());
+
+		this.setCellEditor(new DefaultTreeCellEditor(this, new AttributeSensitiveJTreeCellRenderer()));
 
 		// instantiation
 
@@ -128,6 +134,8 @@ public class JTree_Apml_000 extends JTree
 		this.setVisible(true);
 
 		// listeners
+
+		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
 
 		// bodi
 
@@ -203,7 +211,9 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			((DefaultMutableTreeNode) model.getRoot()).removeAllChildren();
+			root.removeAllChildren();
+
+			model.reload();
 
 			//
 
@@ -231,11 +241,20 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
+			model.reload();
+
+			//
+
 			this.update(model, root, packagesnode, childnode, nodes, 0);
 
 			//
 
-			model.reload();
+			for (int i = 0; i < this.getRowCount(); i++)
+			{
+				this.expandRow(i);
+			}
+
+			//
 		}
 		catch (Exception e)
 		{
@@ -336,6 +355,8 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
+			//
+
 			for (int i = 0; i < children.getLength(); i++)
 			{
 				//
@@ -344,51 +365,55 @@ public class JTree_Apml_000 extends JTree
 
 				//
 
-				DefaultMutableTreeNode element_node;
+				ApmlJTreeNode apml_node;
 
-				element_node = new ApmlJTreeNode(node);
+				apml_node = new ApmlJTreeNode(node);
 
-				element_node.setAllowsChildren(true);
-
-				//
-
-				AttributeFolderJTreeNode attr_element_folder;
-
-				attr_element_folder = new AttributeFolderJTreeNode("attributes");
-
-				attr_element_folder.setAllowsChildren(true);
+				apml_node.setAllowsChildren(true);
 
 				//
 
-				AttributeLeafJTreeNode attr_element_node;
+				AttributeFolderJTreeNode attr_folder;
 
-				//attr_element_node = new AttributeLeafJTreeNode("00");
+				attr_folder = new AttributeFolderJTreeNode("attributes");
 
-				//attr_element_node.setAllowsChildren(true);
+				attr_folder.setAllowsChildren(true);
 
 				//
 
-				if (node != null && node.getNodeType() == Node.ELEMENT_NODE)
+				AttributeLeafJTreeNode attr_node;
+
+				//
+
+				if (node.getNodeType() == Node.ELEMENT_NODE)
+				{
 					for (int j = 0; j < node.getAttributes().getLength(); j++)
 					{
-						attr_element_node = new AttributeLeafJTreeNode(node.getAttributes().item(j).getNodeName() + " : " + node.getAttributes().item(j).getNodeValue());
+						attr_node = new AttributeLeafJTreeNode(node.getAttributes().item(j).getNodeName() + " : " + node.getAttributes().item(j).getNodeValue());
 
-						attr_element_node.setAllowsChildren(false);
+						attr_node.setAllowsChildren(false);
 
-						attr_element_folder.insert(attr_element_node, attr_element_folder.getChildCount() == 0 ? 0 : attr_element_folder.getChildCount() - 1);
+						attr_folder.insert(attr_node, attr_folder.getChildCount() == 0 ? 0 : attr_folder.getChildCount() - 1);
 					}
+				}
 
 				//
 
+				int parent_insertion_index = parent.getChildCount() == 0 ? 0 : parent.getChildCount() - 1;
 
-				model.insertNodeInto(attr_element_folder, element_node, element_node.getChildCount() == 0 ? 0 : element_node.getChildCount() - 1);
-
-
-				model.insertNodeInto(element_node, parent, parent.getChildCount() == 0 ? 0 : parent.getChildCount() - 1);
+				int apml_insertion_index = apml_node.getChildCount() == 0 ? 0 : apml_node.getChildCount() - 1;
 
 				//
 
-				update(model, root, element_node, element_node, children.item(i).getChildNodes(), depth + 1);
+				update(model, root, apml_node, apml_node, children.item(i).getChildNodes(), depth + 1);
+
+				//
+
+				model.insertNodeInto(apml_node, parent, parent_insertion_index);
+
+				model.insertNodeInto(attr_folder, apml_node, apml_insertion_index);
+
+				//
 			}
 
 			//
@@ -444,6 +469,6 @@ public class JTree_Apml_000 extends JTree
 
 		//
 
-		model.reload();
+		//model.reload();
 	}
 }

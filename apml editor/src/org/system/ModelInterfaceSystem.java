@@ -132,7 +132,7 @@ class ApmlStructureUpdateRequest implements Runnable
 
 		bais = new ByteArrayInputStream(this.textpane.getText().getBytes());
 
-		reload_tree_event = new ReloadApmlTreeEvent(new ActionEvent(this.jtree, 0, "reload_apml_jtree_event"),bais);
+		reload_tree_event = new ReloadApmlTreeEvent(new ActionEvent(this, 0, "reload_apml_tree_event"), bais);
 
 		//
 
@@ -141,32 +141,6 @@ class ApmlStructureUpdateRequest implements Runnable
 		this.jtree.removenewlinetextnodes();
 
 		//
-
-		Enumeration <DefaultMutableTreeNode> enumeration;
-
-		enumeration = ((DefaultMutableTreeNode)this.jtree.getModel().getRoot()).depthFirstEnumeration();
-
-		//
-
-		List<DefaultMutableTreeNode> list = Collections.list(enumeration);
-
-		//
-
-		DefaultMutableTreeNode[] array;
-
-		array = new DefaultMutableTreeNode[list.size()];
-
-		array = list.toArray(array);
-
-		//
-
-		for(int i=0; i<array.length; i++)
-		{
-			if(!array[i].isLeaf())
-			{
-				this.jtree.expandPath(new TreePath(array[i].getPath()));
-			}
-		}
 	}
 }
 
