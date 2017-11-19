@@ -19,9 +19,17 @@ public class AttributeSensitiveJTreeCellRenderer extends DefaultTreeCellRenderer
 
 		if (value instanceof AttributeFolderJTreeNode || value instanceof AttributeLeafJTreeNode)
 		{
-			setOpenIcon(new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/orange_folder_open.png"));
+			setOpenIcon(new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/teal_folder_open.png"));
 
-			setClosedIcon(new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/orange_folder_closed.png"));
+			setClosedIcon(new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/teal_folder_closed.png"));
+
+			//setLeafIcon("");
+		}
+		else if (value instanceof AttributeFolderJTreeNode || value instanceof AttributeLeafJTreeNode)
+		{
+			setOpenIcon(new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/teal_folder_open.png"));
+
+			setClosedIcon(new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/teal_folder_closed.png"));
 
 			//setLeafIcon("");
 		}

@@ -3,6 +3,7 @@ package org.widgets;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.xpath.helpers.Xpathquick;
+import org.custom.ui.BloqJTreeNode;
 import org.custom.ui.BodiJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseBodiDocumentEvent;
@@ -153,7 +154,7 @@ public class JTree_Bodi_000 extends JTree
 		{
 			root.removeAllChildren();
 
-			root.setUserObject("Bodi Design Area");
+			root.setUserObject("Bodi Informatics");
 
 			model.reload();
 		}
@@ -178,7 +179,7 @@ public class JTree_Bodi_000 extends JTree
 
 		DefaultMutableTreeNode root;
 
-		DefaultMutableTreeNode treenode;
+		DefaultMutableTreeNode manifests;
 
 		XPath xpath;
 
@@ -200,15 +201,15 @@ public class JTree_Bodi_000 extends JTree
 
 			//
 
-			treenode = new DefaultMutableTreeNode("Bodi Projects", true);
+			manifests = new DefaultMutableTreeNode("manifests", true);
 
 			//
 
-			model.insertNodeInto(treenode, root, 0);
+			model.insertNodeInto(manifests, root, 0);
 
 			//
 
-			this.update(event.getFileRef(), event, document, model, root, treenode, treenode, nodes, 0);
+			this.update(event.getFileRef(), event, document, model, root, root, manifests, nodes, 0);
 
 			//
 
@@ -221,69 +222,69 @@ public class JTree_Bodi_000 extends JTree
 	}
 
 	//
-	private void update(File file, LoadBodiTreeEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode child, NodeList children, Integer depth)
+	private void update(File file, LoadBodiTreeEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
 	{
-		try
+		if (manifest == null)
+			return;
+
+		if (parent == null)
+			return;
+
+		//
+
+		DefaultMutableTreeNode item_previous = null;
+
+		//
+
+		File[] files = file.isDirectory() ? file.listFiles() : new File(file.getParent()).listFiles();
+
+		//
+
+		for (int j = 0; j < files.length; j++)
 		{
-			if (child == null) return;
+			System.out.println(files[j].getName());
 
-			if (parent == null) return;
+			Node node = children.item(j);
 
-			//
-
-			BodiJTreeNode item_previous = null;
-
-			//
-
-			File[] files = file.isDirectory() ? file.listFiles() : new File(file.getParent()).listFiles();
-
-			//
-
-			for(int j=0; j<files.length; j++)
+			try
 			{
-				System.out.println(files[j].getName());
+				DefaultMutableTreeNode item;
 
-				try
+				//
+
+				item = new BloqJTreeNode(document.createElement(files[j].getName()));
+
+				item.setAllowsChildren(true);
+
+				//
+
+				model.insertNodeInto(item, parent, parent.getChildCount() == 0 ? 0 : parent.getChildCount() - 1);
+
+				//
+
+				if (files[j].isDirectory())
 				{
-					BodiJTreeNode item;
-
-					//
-
-					item = new BodiJTreeNode(document.createElement(files[j].getName()), files[j]);
-
-					item.setAllowsChildren(true);
-
-					//
-
-					model.insertNodeInto(item, parent, 0);
-
-					//
-
-					if(files[j].isDirectory())
-					{
-						System.out.println(files[j].getName()+" isDirectory :"+files[j].isDirectory());
-
-						this.update(files[j], event, document, model, root, item, child, children, depth);
-					}
-
-					//
+					this.update(files[j], event, document, model, root, item, manifest, children, depth);
 				}
-				catch (DOMException dom_exception)
+				else if (files[j].getName().endsWith("txt"))
 				{
-					//dom_exception.printStackTrace();
+
+					model.insertNodeInto(item, manifest, manifest.getChildCount() == 0 ? 0 : manifest.getChildCount() - 1);
 				}
-				catch(Exception exception)
-				{
-					exception.printStackTrace();
-				}
+
+				//
 			}
+			catch (DOMException dom_exception)
+			{
+				//
+			}
+			catch (Exception exception)
+			{
+				exception.printStackTrace();
+			}
+		}
 
-			model.reload();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		model.reload();
 	}
 
 	public void removenewlinetextnodes()

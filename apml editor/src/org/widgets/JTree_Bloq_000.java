@@ -3,8 +3,7 @@ package org.widgets;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.xpath.helpers.Xpathquick;
-import org.custom.ui.BloqJTreeNode;
-import org.custom.ui.TranslucentJTreeCellRenderer;
+import org.custom.ui.*;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadBloqTreeEvent;
 import org.listeners.*;
@@ -77,6 +76,8 @@ public class JTree_Bloq_000 extends JTree
 
 		this.setCellRenderer(new TranslucentJTreeCellRenderer());
 
+		this.setCellRenderer(new AttributeSensitiveJTreeCellRenderer());
+
 		// instantiation
 
 		this.init();
@@ -95,12 +96,6 @@ public class JTree_Bloq_000 extends JTree
 
 		this.addMouseListener(new JTreeMouseListener((this)));
 
-		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
-
 		// bodi
 
 		Bodi.context("editor").put(this.bodi, this);
@@ -117,6 +112,8 @@ public class JTree_Bloq_000 extends JTree
 		this.setBackground(null);
 
 		this.setCellRenderer(new TranslucentJTreeCellRenderer());
+
+		this.setCellRenderer(new AttributeSensitiveJTreeCellRenderer());
 
 		// instantiation
 
@@ -137,12 +134,6 @@ public class JTree_Bloq_000 extends JTree
 		this.addTreeSelectionListener(new JTreeSelectionListener(this));
 
 		this.addMouseListener(new JTreeMouseListener((this)));
-
-		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
 
 		// bodi
 
@@ -165,7 +156,7 @@ public class JTree_Bloq_000 extends JTree
 		{
 			root.removeAllChildren();
 
-			root.setUserObject("Bloq Design Area");
+			root.setUserObject("Bloq Informatics");
 
 			model.reload();
 		}
@@ -192,7 +183,7 @@ public class JTree_Bloq_000 extends JTree
 
 		DefaultMutableTreeNode parent;
 
-		DefaultMutableTreeNode treenode;
+		DefaultMutableTreeNode manifest;
 
 		XPath xpath;
 
@@ -210,19 +201,19 @@ public class JTree_Bloq_000 extends JTree
 
 			model = (DefaultTreeModel) this.getModel();
 
-			parent = root = (DefaultMutableTreeNode) model.getRoot();
+			root = (DefaultMutableTreeNode) model.getRoot();
 
 			//
 
-			treenode = new DefaultMutableTreeNode("Bloq Projects", true);
+			manifest = new DefaultMutableTreeNode("manifests", true);
 
 			//
 
-			model.insertNodeInto(treenode, root, 0);
+			model.insertNodeInto(manifest, root, 0);
 
 			//
 
-			this.update(event.getFileRef(), event, document, model, root, treenode, treenode, nodes, 0);
+			this.update(event.getFileRef(), event, document, model, root, root, manifest, nodes, 0);
 
 			//
 
@@ -235,11 +226,12 @@ public class JTree_Bloq_000 extends JTree
 	}
 
 	//
-	private void update(File file, LoadBloqTreeEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode child, NodeList children, Integer depth)
+	private void update(File file, LoadBloqTreeEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
 	{
 		try
 		{
-			if (child == null) return;
+			if (manifest == null)
+				return;
 
 			if (parent == null) return;
 
@@ -257,6 +249,8 @@ public class JTree_Bloq_000 extends JTree
 			{
 				System.out.println(files[j].getName());
 
+				Node node = children.item(j);
+
 				try
 				{
 					DefaultMutableTreeNode item;
@@ -269,22 +263,25 @@ public class JTree_Bloq_000 extends JTree
 
 					//
 
-					model.insertNodeInto(item, parent, 0);
+					model.insertNodeInto(item, parent, parent.getChildCount() == 0 ? 0 : parent.getChildCount() - 1);
 
 					//
 
 					if(files[j].isDirectory())
 					{
-						System.out.println(files[j].getName()+" isDirectory :"+files[j].isDirectory());
+						this.update(files[j], event, document, model, root, item, manifest, children, depth);
+					}
+					else if (files[j].getName().endsWith("txt"))
+					{
 
-						this.update(files[j], event, document, model, root, item, child, children, depth);
+						model.insertNodeInto(item, manifest, manifest.getChildCount() == 0 ? 0 : manifest.getChildCount() - 1);
 					}
 
 					//
 				}
 				catch (DOMException dom_exception)
 				{
-					//dom_exception.printStackTrace();
+					//
 				}
 				catch(Exception exception)
 				{
