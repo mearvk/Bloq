@@ -165,7 +165,7 @@ public class JTree_Sprung_000 extends JTree
 		{
 			root.removeAllChildren();
 
-			root.setUserObject("Sprung Design Area");
+			root.setUserObject("Sprung Informatics");
 
 			model.reload();
 		}

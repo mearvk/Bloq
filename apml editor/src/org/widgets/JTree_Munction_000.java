@@ -165,7 +165,7 @@ public class JTree_Munction_000 extends JTree
 		{
 			root.removeAllChildren();
 
-			root.setUserObject("Munction Design Area");
+			root.setUserObject("Munction Informatics");
 
 			model.reload();
 		}

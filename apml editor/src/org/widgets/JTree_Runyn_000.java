@@ -165,7 +165,7 @@ public class JTree_Runyn_000 extends JTree
 		{
 			root.removeAllChildren();
 
-			root.setUserObject("Runyn Design Area");
+			root.setUserObject("Runyn Informatics");
 
 			model.reload();
 		}

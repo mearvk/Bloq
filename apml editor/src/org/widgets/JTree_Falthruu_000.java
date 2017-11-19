@@ -165,7 +165,7 @@ public class JTree_Falthruu_000 extends JTree
 		{
 			root.removeAllChildren();
 
-			root.setUserObject("Falthruu Design Area");
+			root.setUserObject("Falthruu Informatics");
 
 			model.reload();
 		}
