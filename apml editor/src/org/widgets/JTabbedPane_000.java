@@ -67,31 +67,31 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		//
 
-		this.addTab("      Apml ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Apml  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Bloq ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Bloq  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Bodi ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Bodi  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Munction ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Munction  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Runyn ☬", null);
+		this.addTab("      Runyn  ☬", null);
 
 		//
 
-		this.addTab("      Sprung ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Sprung  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Falthruu ☬", new JTabbedPaneJPanel(this));
+		this.addTab("      Falthruu  ☬", new JTabbedPaneJPanel(this));
 
 		//
 
