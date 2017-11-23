@@ -222,3 +222,55 @@ public class JPanel_Tree_Bodi_000 extends JPanel
 		return new Dimension(((int) (parent.getWidth() * 0.3) - this.marginleft), ((int) (parent.getHeight() * 1.0) - this.margintop));
 	}
 }
+
+class JScrollpane_Tree_Bodi extends JScrollPane
+{
+	public Component parent;
+
+	public JTree jtree;
+
+	public String bodi = "//editor/ui/bodi/jscrollpane";
+
+	JScrollpane_Tree_Bodi(JTree jtree, Component parent)
+	{
+		//super
+
+		super(jtree);
+
+		//setters
+
+		this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+		this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		this.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+
+		//devolvement
+
+		this.parent = parent;
+
+		this.jtree = jtree;
+
+		this.setVisible(true);
+	}
+
+	@Override
+	public Dimension getPreferredSize()
+	{
+
+		JPanel_Backboard_For_Bodi bodi_backboard = (JPanel_Backboard_For_Bodi) Bodi.context("editor").pull("//editor/ui/jpanel_backboard_for_bodi");
+
+		//
+
+		int dividerlocation = bodi_backboard.jsplitpane_000.getDividerLocation();
+
+		//
+
+		return new Dimension(dividerlocation - 10, this.parent.getHeight() - 280);
+	}
+
+	public Dimension getMinimumSize()
+	{
+		return new Dimension(250, this.parent.getHeight() - 280);
+	}
+}

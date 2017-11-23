@@ -200,9 +200,10 @@ public class APMLGui extends JFrame
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-		this.setTitle("Kuanta :: Apml Style Editor");
+		this.setTitle("Quanta :: Apml Style Editor");
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 		// instantiation
 

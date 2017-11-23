@@ -65,6 +65,8 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		this.setTabPlacement(JTabbedPane.BOTTOM);
 
+		this.setBackground(new Color(0x6f, 0x6f, 0x6f));
+
 		//
 
 		this.addTab("      Apml  ☬", new JTabbedPaneJPanel(this));

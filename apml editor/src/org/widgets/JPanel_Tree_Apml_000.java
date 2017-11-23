@@ -74,6 +74,8 @@ public class JPanel_Tree_Apml_000 extends JPanel
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
+		this.setMinimumSize(new Dimension());
+
 		this.backgroundimagename = "";
 
 		// instantiation
@@ -82,7 +84,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 
 		// hierarchy
 
-		this.add(jtree_000);
+		this.add(new JScrollpane_Tree_Apml(jtree_000, parent));
 
 		// devolvement
 
@@ -116,7 +118,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 
 		// hierarchy
 
-		this.add(jtree_000);
+		this.add(new JScrollpane_Tree_Apml(jtree_000, parent));
 
 		// devolvement
 
@@ -149,7 +151,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 
 		// hierarchy
 
-		this.add(jtree_000);
+		this.add(new JScrollpane_Tree_Apml(jtree_000, parent));
 
 		// devolvement
 
@@ -186,7 +188,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 
 		// hierarchy
 
-		this.add(jtree_000);
+		this.add(new JScrollpane_Tree_Apml(jtree_000, parent));
 
 		// devolvement
 
@@ -201,24 +203,60 @@ public class JPanel_Tree_Apml_000 extends JPanel
 		Bodi.context("editor").put(this.bodi, this);
 	}
 
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-
-		try
-		{
-			//this.backgroundimage = ImageIO.read(new File(backgroundimagename));
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		//g.drawImage(backgroundimage, 0, 0, this);
-	}
-
 	public Dimension getPreferredSize()
 	{
 		return new Dimension(((int) (parent.getWidth() * 0.3) - this.marginleft), ((int) (parent.getHeight() * 1.0) - this.margintop));
+	}
+}
+
+class JScrollpane_Tree_Apml extends JScrollPane
+{
+	public Component parent;
+
+	public JTree jtree;
+
+	public String bodi = "//editor/ui/apml/jscrollpane";
+
+	JScrollpane_Tree_Apml(JTree jtree, Component parent)
+	{
+		//super
+
+		super(jtree);
+
+		//setters
+
+		this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+		this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		this.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+
+		//devolvement
+
+		this.parent = parent;
+
+		this.jtree = jtree;
+
+		this.setVisible(true);
+	}
+
+	@Override
+	public Dimension getPreferredSize()
+	{
+
+		JPanel_Backboard_For_Apml apml_backboard = (JPanel_Backboard_For_Apml) Bodi.context("editor").pull("//editor/ui/jpanel_backboard_for_apml");
+
+		//
+
+		int dividerlocation = apml_backboard.jsplitpane_000.getDividerLocation();
+
+		//
+
+		return new Dimension(dividerlocation - 10, this.parent.getHeight() - 280);
+	}
+
+	public Dimension getMinimumSize()
+	{
+		return new Dimension(250, this.parent.getHeight() - 280);
 	}
 }
