@@ -82,7 +82,7 @@ public class JPanel_Tree_Bloq_000 extends JPanel
 
 		// hierarchy
 
-		this.add(jtree_000);
+		this.add(new JScrollpane_Tree_Bloq(jtree_000, parent));
 
 		// devolvement
 
@@ -116,7 +116,7 @@ public class JPanel_Tree_Bloq_000 extends JPanel
 
 		// hierarchy
 
-		this.add(jtree_000);
+		this.add(new JScrollpane_Tree_Bloq(jtree_000, parent));
 
 		// devolvement
 

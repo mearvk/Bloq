@@ -82,7 +82,7 @@ public class JPanel_Tree_Bodi_000 extends JPanel
 
 		// hierarchy
 
-		this.add(jtree_000);
+		this.add(new JScrollpane_Tree_Bodi(jtree_000, parent));
 
 		// devolvement
 
@@ -116,7 +116,7 @@ public class JPanel_Tree_Bodi_000 extends JPanel
 
 		// hierarchy
 
-		this.add(jtree_000);
+		this.add(new JScrollpane_Tree_Bodi(jtree_000, parent));
 
 		// devolvement
 
@@ -149,7 +149,7 @@ public class JPanel_Tree_Bodi_000 extends JPanel
 
 		// hierarchy
 
-		this.add(jtree_000);
+		this.add(new JScrollpane_Tree_Bodi(jtree_000, parent));
 
 		// devolvement
 
@@ -186,7 +186,7 @@ public class JPanel_Tree_Bodi_000 extends JPanel
 
 		// hierarchy
 
-		this.add(jtree_000);
+		this.add(new JScrollpane_Tree_Bodi(jtree_000, parent));
 
 		// devolvement
 

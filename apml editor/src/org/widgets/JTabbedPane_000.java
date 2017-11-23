@@ -266,7 +266,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 					switch (panetitle)
 					{
-						case "      Apml ☬":
+						case "      Apml  ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -284,7 +284,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "      Bloq ☬":
+						case "      Bloq  ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -302,7 +302,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "      Bodi ☬":
+						case "      Bodi  ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -320,7 +320,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "      Munction ☬":
+						case "      Munction  ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -338,7 +338,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "      Sprung ☬":
+						case "      Sprung  ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -356,7 +356,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "      Runyn ☬":
+						case "      Runyn  ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -374,7 +374,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "      Falthruu ☬":
+						case "      Falthruu  ☬":
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
