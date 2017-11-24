@@ -1,6 +1,8 @@
 package org.listeners;
 
 import apml.system.bodi.Bodi;
+import org.custom.ui.ApmlJTreeNode;
+import org.custom.ui.AttributeFolderJTreeNode;
 import org.custom.ui.BodiJTreeNode;
 import org.custom.ui.FalthruuJTreeNode;
 import org.widgets.APMLGui;
@@ -49,32 +51,29 @@ public class FalthruuJTreeOnClickListener implements TreeSelectionListener, Mous
 
 		//
 
-		clickednode = (DefaultMutableTreeNode) this.jtree.getLastSelectedPathComponent();
+		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode)
+			return;
+
+		if (!(this.jtree.getLastSelectedPathComponent() instanceof FalthruuJTreeNode))
+			return;
+
+		//
 
 		falthruunode = (FalthruuJTreeNode) this.jtree.getLastSelectedPathComponent();
 
 		//
 
-		if (this.jtree.getLastSelectedPathComponent() instanceof FalthruuJTreeNode)
+		File fileRef = falthruunode.getFileRef();
+
+		if (this.jtree.getLastSelectedPathComponent() instanceof ApmlJTreeNode)
 		{
 			//JOptionPane.showMessageDialog(null, "Oddly, the bodi file itself wasn't passed to the listener onload function.");
 
-			System.err.println("Class is right actually: " + this.jtree.getClass());
+			System.err.println("Class is right actually: " + this.jtree.getLastSelectedPathComponent().getClass());
 		}
 		else
 		{
-			System.err.println("Class is actually: " + this.jtree.getClass());
-		}
-
-		//
-
-		File fileRef = falthruunode.getFileRef();
-
-		if (fileRef == null)
-		{
-			JOptionPane.showMessageDialog(null, "Oddly, the bodi file itself wasn't passed to the listener onload function.");
-
-			return;
+			System.err.println("Class is strangely actually: " + this.jtree.getLastSelectedPathComponent().getClass());
 		}
 
 		APMLGui apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");

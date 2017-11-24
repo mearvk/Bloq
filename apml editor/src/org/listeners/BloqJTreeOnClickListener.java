@@ -1,6 +1,8 @@
 package org.listeners;
 
 import apml.system.bodi.Bodi;
+import org.custom.ui.ApmlJTreeNode;
+import org.custom.ui.AttributeFolderJTreeNode;
 import org.custom.ui.BloqJTreeNode;
 import org.custom.ui.BodiJTreeNode;
 import org.widgets.*;
@@ -46,32 +48,29 @@ public class BloqJTreeOnClickListener implements TreeSelectionListener, MouseLis
 
 		//
 
-		clickednode = (DefaultMutableTreeNode) this.jtree.getLastSelectedPathComponent();
+		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode)
+			return;
+
+		if (!(this.jtree.getLastSelectedPathComponent() instanceof BloqJTreeNode))
+			return;
+
+		//
 
 		bloqnode = (BloqJTreeNode) this.jtree.getLastSelectedPathComponent();
 
 		//
 
+		File fileRef = bloqnode.getFileRef();
+
 		if (this.jtree.getLastSelectedPathComponent() instanceof BloqJTreeNode)
 		{
 			//JOptionPane.showMessageDialog(null, "Oddly, the bodi file itself wasn't passed to the listener onload function.");
 
-			System.err.println("Class is right actually: " + this.jtree.getClass());
+			System.err.println("Class is right actually: " + this.jtree.getLastSelectedPathComponent().getClass());
 		}
 		else
 		{
-			System.err.println("Class is actually: " + this.jtree.getClass());
-		}
-
-		//
-
-		File fileRef = bloqnode.getFileRef();
-
-		if (fileRef == null)
-		{
-			JOptionPane.showMessageDialog(null, "Oddly, the bodi file itself wasn't passed to the listener onload function.");
-
-			return;
+			System.err.println("Class is strangely actually: " + this.jtree.getLastSelectedPathComponent().getClass());
 		}
 
 		APMLGui apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");

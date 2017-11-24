@@ -1,6 +1,8 @@
 package org.listeners;
 
 import apml.system.bodi.Bodi;
+import org.custom.ui.ApmlJTreeNode;
+import org.custom.ui.AttributeFolderJTreeNode;
 import org.custom.ui.BodiJTreeNode;
 import org.custom.ui.RunynJTreeNode;
 import org.widgets.APMLGui;
@@ -49,32 +51,27 @@ public class RunynJTreeOnClickListener implements TreeSelectionListener, MouseLi
 
 		//
 
-		clickednode = (DefaultMutableTreeNode) this.jtree.getLastSelectedPathComponent();
+		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode)
+			return;
+
+		if (!(this.jtree.getLastSelectedPathComponent() instanceof RunynJTreeNode))
+			return;
 
 		runynnode = (RunynJTreeNode) this.jtree.getLastSelectedPathComponent();
 
 		//
 
-		if (this.jtree.getLastSelectedPathComponent() instanceof BodiJTreeNode)
+		File fileRef = runynnode.getFileRef();
+
+		if (this.jtree.getLastSelectedPathComponent() instanceof RunynJTreeNode)
 		{
 			//JOptionPane.showMessageDialog(null, "Oddly, the bodi file itself wasn't passed to the listener onload function.");
 
-			System.err.println("Class is right actually: " + this.jtree.getClass());
+			System.err.println("Class is right actually: " + this.jtree.getLastSelectedPathComponent().getClass());
 		}
 		else
 		{
-			System.err.println("Class is actually: " + this.jtree.getClass());
-		}
-
-		//
-
-		File fileRef = runynnode.getFileRef();
-
-		if (fileRef == null)
-		{
-			JOptionPane.showMessageDialog(null, "Oddly, the bodi file itself wasn't passed to the listener onload function.");
-
-			return;
+			System.err.println("Class is strangely actually: " + this.jtree.getLastSelectedPathComponent().getClass());
 		}
 
 		APMLGui apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
