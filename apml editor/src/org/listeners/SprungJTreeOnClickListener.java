@@ -48,10 +48,7 @@ public class SprungJTreeOnClickListener implements TreeSelectionListener, MouseL
 
 		//
 
-		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode)
-			return;
-
-		if (!(this.jtree.getLastSelectedPathComponent() instanceof SprungJTreeNode))
+		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode || (!(this.jtree.getLastSelectedPathComponent() instanceof SprungJTreeNode)))
 			return;
 
 		//
@@ -61,6 +58,13 @@ public class SprungJTreeOnClickListener implements TreeSelectionListener, MouseL
 		//
 
 		File fileRef = sprungnode.getFileRef();
+
+		if (fileRef == null)
+		{
+			System.err.println("File was null; returning.");
+
+			return;
+		}
 
 		if (this.jtree.getLastSelectedPathComponent() instanceof SprungJTreeNode)
 		{

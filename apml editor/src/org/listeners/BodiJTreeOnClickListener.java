@@ -49,10 +49,7 @@ public class BodiJTreeOnClickListener implements TreeSelectionListener, MouseLis
 
 		//
 
-		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode)
-			return;
-
-		if (!(this.jtree.getLastSelectedPathComponent() instanceof BodiJTreeNode))
+		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode || (!(this.jtree.getLastSelectedPathComponent() instanceof BodiJTreeNode)))
 			return;
 
 		//
@@ -62,6 +59,13 @@ public class BodiJTreeOnClickListener implements TreeSelectionListener, MouseLis
 		//
 
 		File fileRef = bodinode.getFileRef();
+
+		if (fileRef == null)
+		{
+			System.err.println("File was null; returning.");
+
+			return;
+		}
 
 		if (this.jtree.getLastSelectedPathComponent() instanceof BodiJTreeNode)
 		{

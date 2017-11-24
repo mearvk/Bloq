@@ -45,10 +45,7 @@ public class ApmlJTreeOnClickListener implements TreeSelectionListener, MouseLis
 
 		//
 
-		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode)
-			return;
-
-		if (!(this.jtree.getLastSelectedPathComponent() instanceof ApmlJTreeNode))
+		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode || (!(this.jtree.getLastSelectedPathComponent() instanceof ApmlJTreeNode)))
 			return;
 
 		//
@@ -58,6 +55,13 @@ public class ApmlJTreeOnClickListener implements TreeSelectionListener, MouseLis
 		//
 
 		File fileRef = apmlnode.getFileRef();
+
+		if (fileRef == null)
+		{
+			System.err.println("File was null; returning.");
+
+			return;
+		}
 
 		if (this.jtree.getLastSelectedPathComponent() instanceof ApmlJTreeNode)
 		{

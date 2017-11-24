@@ -51,10 +51,7 @@ public class FalthruuJTreeOnClickListener implements TreeSelectionListener, Mous
 
 		//
 
-		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode)
-			return;
-
-		if (!(this.jtree.getLastSelectedPathComponent() instanceof FalthruuJTreeNode))
+		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode || (!(this.jtree.getLastSelectedPathComponent() instanceof FalthruuJTreeNode)))
 			return;
 
 		//
@@ -64,6 +61,13 @@ public class FalthruuJTreeOnClickListener implements TreeSelectionListener, Mous
 		//
 
 		File fileRef = falthruunode.getFileRef();
+
+		if (fileRef == null)
+		{
+			System.err.println("File was null; returning.");
+
+			return;
+		}
 
 		if (this.jtree.getLastSelectedPathComponent() instanceof ApmlJTreeNode)
 		{

@@ -51,17 +51,23 @@ public class RunynJTreeOnClickListener implements TreeSelectionListener, MouseLi
 
 		//
 
-		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode)
+		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode || (!(this.jtree.getLastSelectedPathComponent() instanceof RunynJTreeNode)))
 			return;
 
-		if (!(this.jtree.getLastSelectedPathComponent() instanceof RunynJTreeNode))
-			return;
+		//
 
 		runynnode = (RunynJTreeNode) this.jtree.getLastSelectedPathComponent();
 
 		//
 
 		File fileRef = runynnode.getFileRef();
+
+		if (fileRef == null)
+		{
+			System.err.println("File was null; returning.");
+
+			return;
+		}
 
 		if (this.jtree.getLastSelectedPathComponent() instanceof RunynJTreeNode)
 		{

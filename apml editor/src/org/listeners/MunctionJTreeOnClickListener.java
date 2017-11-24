@@ -48,10 +48,7 @@ public class MunctionJTreeOnClickListener implements TreeSelectionListener, Mous
 
 		//
 
-		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode)
-			return;
-
-		if (!(this.jtree.getLastSelectedPathComponent() instanceof MunctionJTreeNode))
+		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode || (!(this.jtree.getLastSelectedPathComponent() instanceof MunctionJTreeNode)))
 			return;
 
 		//
@@ -61,6 +58,13 @@ public class MunctionJTreeOnClickListener implements TreeSelectionListener, Mous
 		//
 
 		File fileRef = munctionnode.getFileRef();
+
+		if (fileRef == null)
+		{
+			System.err.println("File was null; returning.");
+
+			return;
+		}
 
 		if (this.jtree.getLastSelectedPathComponent() instanceof MunctionJTreeNode)
 		{

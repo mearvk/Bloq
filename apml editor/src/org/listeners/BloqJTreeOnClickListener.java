@@ -48,10 +48,7 @@ public class BloqJTreeOnClickListener implements TreeSelectionListener, MouseLis
 
 		//
 
-		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode)
-			return;
-
-		if (!(this.jtree.getLastSelectedPathComponent() instanceof BloqJTreeNode))
+		if (this.jtree.getLastSelectedPathComponent() instanceof AttributeFolderJTreeNode || (!(this.jtree.getLastSelectedPathComponent() instanceof BloqJTreeNode)))
 			return;
 
 		//
@@ -61,6 +58,13 @@ public class BloqJTreeOnClickListener implements TreeSelectionListener, MouseLis
 		//
 
 		File fileRef = bloqnode.getFileRef();
+
+		if (fileRef == null)
+		{
+			System.err.println("File was null; returning.");
+
+			return;
+		}
 
 		if (this.jtree.getLastSelectedPathComponent() instanceof BloqJTreeNode)
 		{
