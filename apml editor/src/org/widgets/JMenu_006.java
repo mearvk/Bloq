@@ -188,7 +188,7 @@ class BuildApmlStandaloneListener implements ActionListener
 
 		processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
-		processor.update(new BuildApmlSubsystemEvent(ae));
+		processor.enact(new BuildApmlSubsystemEvent(ae));
 	}
 
 	//
@@ -198,7 +198,7 @@ class BuildApmlStandaloneListener implements ActionListener
 
 		processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
-		processor.update(new BuildApmlUisubsystemEvent(ae));
+		processor.enact(new BuildApmlUisubsystemEvent(ae));
 	}
 
 	//
@@ -208,6 +208,6 @@ class BuildApmlStandaloneListener implements ActionListener
 
 		processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
-		processor.update(new RebuildApmlSystemEvent(ae));
+		processor.enact(new RebuildApmlSystemEvent(ae));
 	}
 }

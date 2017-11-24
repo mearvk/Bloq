@@ -92,9 +92,9 @@ public class JTree_Bloq_000 extends JTree
 
 		// listeners
 
-		this.addTreeSelectionListener(new JTreeSelectionListener(this));
+		this.addTreeSelectionListener(new BloqJTreeOnClickListener(this));
 
-		this.addMouseListener(new JTreeMouseListener((this)));
+		this.addMouseListener(new BloqJTreeOnClickListener(this));
 
 		// bodi
 
@@ -131,9 +131,9 @@ public class JTree_Bloq_000 extends JTree
 
 		// listeners
 
-		this.addTreeSelectionListener(new JTreeSelectionListener(this));
+		this.addTreeSelectionListener(new BloqJTreeOnClickListener(this));
 
-		this.addMouseListener(new JTreeMouseListener((this)));
+		this.addMouseListener(new BloqJTreeOnClickListener(this));
 
 		// bodi
 

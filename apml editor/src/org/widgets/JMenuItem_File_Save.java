@@ -2,7 +2,7 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import org.events.CloseApmlDocumentEvent;
+import org.events.SaveDocumentEvent;
 import org.system.UserInterfaceProcessor;
 
 import javax.imageio.ImageIO;
@@ -16,17 +16,8 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.net.URL;
 
-
-/**
- * Software programmatically produced by Bloq implementation version 1.05 - Bodi Remote Version
- *
- * @author
- * @see
- * @since
- */
-public class JMenuItem_001 extends JMenuItem
+public class JMenuItem_File_Save extends JMenuItem
 {
-
 	public KeyEvent importref_001;
 	public KeyStroke importref_002;
 	public ActionEvent importref_003;
@@ -46,20 +37,16 @@ public class JMenuItem_001 extends JMenuItem
 	public Component parent;
 	public Apmlbasesystem system;
 
-	public JMenuItem_001_ActionListener actionlistener;
-
 	/**
 	 * @param parent : The tree AWT object.
 	 */
-	public JMenuItem_001(Component parent)
+	public JMenuItem_File_Save(Component parent)
 	{
 		// setters
 
-		this.setText("Close");
+		this.setText("Save");
 
 		// instantiation
-
-		this.actionlistener = new JMenuItem_001_ActionListener(this);
 
 		// hierarchy
 
@@ -71,7 +58,7 @@ public class JMenuItem_001 extends JMenuItem
 
 		// listeners
 
-		this.addActionListener(actionlistener);
+		this.addActionListener(new JMenuItem_018_ActionListener(this));
 
 	}
 
@@ -79,15 +66,13 @@ public class JMenuItem_001 extends JMenuItem
 	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JMenuItem_001(Component parent, Apmlbasesystem system)
+	public JMenuItem_File_Save(Component parent, Apmlbasesystem system)
 	{
 		// setters
 
-		this.setText("Close");
+		this.setText("Save");
 
 		// instantiation
-
-		this.actionlistener = new JMenuItem_001_ActionListener(this);
 
 		// hierarchy
 
@@ -101,26 +86,27 @@ public class JMenuItem_001 extends JMenuItem
 
 		// listeners
 
-		this.addActionListener(actionlistener);
+		this.addActionListener(new JMenuItem_018_ActionListener(this));
 
 	}
 }
 
-class JMenuItem_001_ActionListener implements ActionListener
+class JMenuItem_018_ActionListener implements ActionListener
 {
 	JComponent source;
 
-	public JMenuItem_001_ActionListener(JComponent source)
+	public JMenuItem_018_ActionListener(JComponent source)
 	{
 		this.source = source;
 	}
 
-	public void actionPerformed(ActionEvent event)
+	@Override
+	public void actionPerformed(ActionEvent e)
 	{
 		UserInterfaceProcessor processor;
 
-		processor = ((UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000"));
+		processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
-		processor.update(new CloseApmlDocumentEvent(this.source));
+		processor.enact(new SaveDocumentEvent(e, null));
 	}
 }

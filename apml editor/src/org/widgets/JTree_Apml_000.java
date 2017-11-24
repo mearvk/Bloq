@@ -70,7 +70,7 @@ public class JTree_Apml_000 extends JTree
 	{
 		// setters
 
-		this.setBackground(new Color(223,223,223));
+		this.setBackground(new Color(213, 213, 213));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 10));
 
@@ -86,7 +86,7 @@ public class JTree_Apml_000 extends JTree
 
 		// hierarchy
 
-		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
+
 
 		// devolvement
 
@@ -95,6 +95,12 @@ public class JTree_Apml_000 extends JTree
 		this.setVisible(true);
 
 		// listeners
+
+		this.addTreeSelectionListener(new ApmlJTreeOnClickListener(this));
+
+		this.addMouseListener(new ApmlJTreeOnClickListener(this));
+
+		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
 
 		// bodi
 
@@ -109,7 +115,7 @@ public class JTree_Apml_000 extends JTree
 	{
 		// setters
 
-		this.setBackground(new Color(223,223,223));
+		this.setBackground(new Color(213, 213, 213));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 10));
 
@@ -136,6 +142,10 @@ public class JTree_Apml_000 extends JTree
 		// listeners
 
 		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
+
+		this.addTreeSelectionListener(new ApmlJTreeOnClickListener(this));
+
+		this.addMouseListener(new ApmlJTreeOnClickListener(this));
 
 		// bodi
 
@@ -168,12 +178,12 @@ public class JTree_Apml_000 extends JTree
 		}
 	}
 
-	public void update(CloseApmlDocumentEvent event)
+	public void removeallchildren(CloseApmlDocumentEvent event)
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void _update(ReloadApmlTreeEvent event)
+	public void reloadfrombytes(ReloadApmlTreeEvent event)
 	{
 		ByteArrayInputStream bytes = event.getByteRef();
 
@@ -245,13 +255,13 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			this.update(model, root, packagesnode, childnode, nodes, 0);
+			this.recursiveloadfromnodelist(model, root, packagesnode, childnode, nodes, 0);
 
 			//
 
 			for (int i = 0; i < this.getRowCount(); i++)
 			{
-				this.expandRow(i);
+				this.expandRow(i); //TODO fix this with persistent jtree restoration logic
 			}
 
 			//
@@ -262,7 +272,7 @@ public class JTree_Apml_000 extends JTree
 		}
 	}
 
-	public void update(LoadApmlTreeEvent event)
+	public void reloadfromfile(LoadApmlTreeEvent event)
 	{
 		File file = event.getFileRef();
 
@@ -271,6 +281,8 @@ public class JTree_Apml_000 extends JTree
 		DefaultTreeModel model;
 
 		DefaultMutableTreeNode root;
+
+		DefaultMutableTreeNode apmlnode;
 
 		DefaultMutableTreeNode manifestnode;
 
@@ -300,6 +312,8 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
+			apmlnode = new DefaultMutableTreeNode("apml", true);
+
 			manifestnode = new DefaultMutableTreeNode("manifest", true);
 
 			packagesnode = new DefaultMutableTreeNode("packages", true);
@@ -322,13 +336,15 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			model.insertNodeInto(manifestnode, root, 0);
+			model.insertNodeInto(apmlnode, root, 0);
 
-			model.insertNodeInto(packagesnode, root, 1);
+			model.insertNodeInto(manifestnode, root, 1);
+
+			model.insertNodeInto(packagesnode, root, 2);
 
 			//
 
-			this.update(model, root, packagesnode, childnode, nodes, 0);
+			this.recursiveloadfromnodelist(model, root, packagesnode, childnode, nodes, 0);
 
 			//
 
@@ -341,7 +357,7 @@ public class JTree_Apml_000 extends JTree
 	}
 
 	//
-	private void update(DefaultTreeModel model, DefaultMutableTreeNode root /*root*/, DefaultMutableTreeNode parent /*packages*/, DefaultMutableTreeNode child /*project*/, NodeList children, Integer depth)
+	private void recursiveloadfromnodelist(DefaultTreeModel model, DefaultMutableTreeNode root /*root*/, DefaultMutableTreeNode parent /*packages*/, DefaultMutableTreeNode child /*project*/, NodeList children, Integer depth)
 	{
 		try
 		{
@@ -405,7 +421,7 @@ public class JTree_Apml_000 extends JTree
 
 				//
 
-				update(model, root, apml_node, apml_node, children.item(i).getChildNodes(), depth + 1);
+				recursiveloadfromnodelist(model, root, apml_node, apml_node, children.item(i).getChildNodes(), depth + 1);
 
 				//
 

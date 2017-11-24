@@ -23,7 +23,7 @@ import java.net.URL;
  * @see
  * @since
  */
-public class JMenuItem_016 extends JMenuItem implements ActionListener
+public class JMenuItem_File_SaveAll extends JMenuItem implements ActionListener
 {
 	//munction //function //classname //bytes //realname //componentname //indexattr //componentclass //origincomponent(s)
 
@@ -49,7 +49,7 @@ public class JMenuItem_016 extends JMenuItem implements ActionListener
 	/**
 	 * @param parent : The tree AWT object.
 	 */
-	public JMenuItem_016(Component parent)
+	public JMenuItem_File_SaveAll(Component parent)
 	{
 		// setters
 
@@ -73,7 +73,7 @@ public class JMenuItem_016 extends JMenuItem implements ActionListener
 	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JMenuItem_016(Component parent, Apmlbasesystem system)
+	public JMenuItem_File_SaveAll(Component parent, Apmlbasesystem system)
 	{
 		// setters
 
@@ -102,6 +102,6 @@ public class JMenuItem_016 extends JMenuItem implements ActionListener
 
 		processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
-		processor.update(new ActionEvent(this, 0, "save_all_documents_event"));
+		processor.enact(new ActionEvent(this, 0, "save_all_documents_event"));
 	}
 }

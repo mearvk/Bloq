@@ -13,6 +13,11 @@ public class BodiJTreeNode extends DefaultMutableTreeNode
 
 	//
 
+	public BodiJTreeNode(String name)
+	{
+		super(name, false);
+	}
+
 	public BodiJTreeNode(String name, File fileRef)
 	{
 		super(name, false);

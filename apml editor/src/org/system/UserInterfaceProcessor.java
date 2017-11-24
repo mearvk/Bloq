@@ -11,7 +11,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.widgets.*;
-import org.xml.sax.InputSource;
 
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -49,7 +48,7 @@ public class UserInterfaceProcessor extends Apmlobject
 
 	//
 
-	public void update(ActionEvent event)
+	public void enact(ActionEvent event)
 	{
 		String action = event.getActionCommand();
 
@@ -1293,7 +1292,7 @@ class ReloadApmlTreeRequest
 
 		jtree_apml_000.init();
 
-		jtree_apml_000._update((ReloadApmlTreeEvent) event);
+		jtree_apml_000.reloadfrombytes((ReloadApmlTreeEvent) event);
 
 		jtree_apml_000.removenewlinetextnodes();
 	}
@@ -1320,7 +1319,7 @@ class LoadApmlTreeRequest
 
 		jtree_apml_000.init();
 
-		jtree_apml_000.update((LoadApmlTreeEvent) event);
+		jtree_apml_000.reloadfromfile((LoadApmlTreeEvent) event);
 
 		jtree_apml_000.removenewlinetextnodes();
 	}
@@ -1816,19 +1815,19 @@ class SaveAllDocumentsRequest
 
 	public void run()
 	{
-		this.processor.update(new SaveApmlDocumentEvent(new ByteArrayInputStream(this.rsTextPane_apml_000.getText().getBytes())));
+		this.processor.enact(new SaveApmlDocumentEvent(new ByteArrayInputStream(this.rsTextPane_apml_000.getText().getBytes())));
 
-		this.processor.update(new SaveBloqDocumentEvent(new ByteArrayInputStream(this.rsTextPane_bloq_000.getText().getBytes())));
+		this.processor.enact(new SaveBloqDocumentEvent(new ByteArrayInputStream(this.rsTextPane_bloq_000.getText().getBytes())));
 
-		this.processor.update(new SaveBodiDocumentEvent(new ByteArrayInputStream(this.rsTextPane_bodi_000.getText().getBytes())));
+		this.processor.enact(new SaveBodiDocumentEvent(new ByteArrayInputStream(this.rsTextPane_bodi_000.getText().getBytes())));
 
-		this.processor.update(new SaveMunctionDocumentEvent(new ByteArrayInputStream(this.rsTextPane_munction_000.getText().getBytes())));
+		this.processor.enact(new SaveMunctionDocumentEvent(new ByteArrayInputStream(this.rsTextPane_munction_000.getText().getBytes())));
 
-		this.processor.update(new SaveRunynDocumentEvent(new ByteArrayInputStream(this.rsTextPane_runyn_000.getText().getBytes())));
+		this.processor.enact(new SaveRunynDocumentEvent(new ByteArrayInputStream(this.rsTextPane_runyn_000.getText().getBytes())));
 
-		this.processor.update(new SaveSprungDocumentEvent(new ByteArrayInputStream(this.rsTextPane_sprung_000.getText().getBytes())));
+		this.processor.enact(new SaveSprungDocumentEvent(new ByteArrayInputStream(this.rsTextPane_sprung_000.getText().getBytes())));
 
-		this.processor.update(new SaveFalthruuDocumentEvent(new ByteArrayInputStream(this.rsTextPane_falthruu_000.getText().getBytes())));
+		this.processor.enact(new SaveFalthruuDocumentEvent(new ByteArrayInputStream(this.rsTextPane_falthruu_000.getText().getBytes())));
 	}
 }
 
@@ -1874,49 +1873,49 @@ class SaveDocumentRequest
 				//apml
 				case 0:
 
-					this.processor.update(new SaveApmlDocumentEvent(event, event.fileRef));
+					this.processor.enact(new SaveApmlDocumentEvent(event, event.fileRef));
 
 					break;
 
 				//bloq
 				case 1:
 
-					this.processor.update(new SaveBloqDocumentEvent(event, event.fileRef));
+					this.processor.enact(new SaveBloqDocumentEvent(event, event.fileRef));
 
 					break;
 
 				//bodi
 				case 2:
 
-					this.processor.update(new SaveBodiDocumentEvent(event, event.fileRef));
+					this.processor.enact(new SaveBodiDocumentEvent(event, event.fileRef));
 
 					break;
 
 				//munction_analysis
 				case 3:
 
-					this.processor.update(new SaveMunctionDocumentEvent(event, event.fileRef));
+					this.processor.enact(new SaveMunctionDocumentEvent(event, event.fileRef));
 
 					break;
 
 				//runyn
 				case 4:
 
-					this.processor.update(new SaveRunynDocumentEvent(event, event.fileRef));
+					this.processor.enact(new SaveRunynDocumentEvent(event, event.fileRef));
 
 					break;
 
 				//sprung
 				case 5:
 
-					this.processor.update(new SaveSprungDocumentEvent(event, event.fileRef));
+					this.processor.enact(new SaveSprungDocumentEvent(event, event.fileRef));
 
 					break;
 
 				//falthruu
 				case 6:
 
-					this.processor.update(new SaveFalthruuDocumentEvent(event, event.fileRef));
+					this.processor.enact(new SaveFalthruuDocumentEvent(event, event.fileRef));
 
 					break;
 
@@ -2054,9 +2053,9 @@ class OpenDocumentRequest
 			{
 				case "apml":
 
-					this.processor.update(new LoadApmlDocumentEvent(event, event.fileRef));
+					this.processor.enact(new LoadApmlDocumentEvent(event, event.fileRef));
 
-					this.processor.update(new LoadApmlTreeEvent(event, event.fileRef));
+					this.processor.enact(new LoadApmlTreeEvent(event, event.fileRef));
 
 					//
 
@@ -2068,9 +2067,9 @@ class OpenDocumentRequest
 
 				case "bloq":
 
-					this.processor.update(new LoadBloqDocumentEvent(event, event.fileRef));
+					this.processor.enact(new LoadBloqDocumentEvent(event, event.fileRef));
 
-					this.processor.update(new LoadBloqTreeEvent(event, event.fileRef));
+					this.processor.enact(new LoadBloqTreeEvent(event, event.fileRef));
 
 					//
 
@@ -2082,9 +2081,9 @@ class OpenDocumentRequest
 
 				case "bodi":
 
-					this.processor.update(new LoadBodiDocumentEvent(event, event.fileRef));
+					this.processor.enact(new LoadBodiDocumentEvent(event, event.fileRef));
 
-					this.processor.update(new LoadBodiTreeEvent(event,event.fileRef));
+					this.processor.enact(new LoadBodiTreeEvent(event, event.fileRef));
 
 					//
 
@@ -2096,9 +2095,9 @@ class OpenDocumentRequest
 
 				case "munction":
 
-					this.processor.update(new LoadMunctionDocumentEvent(event, event.fileRef));
+					this.processor.enact(new LoadMunctionDocumentEvent(event, event.fileRef));
 
-					this.processor.update(new LoadMunctionTreeEvent(event,event.fileRef));
+					this.processor.enact(new LoadMunctionTreeEvent(event, event.fileRef));
 
 					//
 
@@ -2110,9 +2109,9 @@ class OpenDocumentRequest
 
 				case "runyn":
 
-					this.processor.update(new LoadRunynDocumentEvent(event, event.fileRef));
+					this.processor.enact(new LoadRunynDocumentEvent(event, event.fileRef));
 
-					this.processor.update(new LoadRunynTreeEvent(event,event.fileRef));
+					this.processor.enact(new LoadRunynTreeEvent(event, event.fileRef));
 
 					//
 
@@ -2124,9 +2123,9 @@ class OpenDocumentRequest
 
 				case "sprung":
 
-					this.processor.update(new LoadSprungDocumentEvent(event, event.fileRef));
+					this.processor.enact(new LoadSprungDocumentEvent(event, event.fileRef));
 
-					this.processor.update(new LoadSprungTreeEvent(event,event.fileRef));
+					this.processor.enact(new LoadSprungTreeEvent(event, event.fileRef));
 
 					//
 
@@ -2138,9 +2137,9 @@ class OpenDocumentRequest
 
 				case "falthruu":
 
-					this.processor.update(new LoadFalthruuDocumentEvent(event, event.fileRef));
+					this.processor.enact(new LoadFalthruuDocumentEvent(event, event.fileRef));
 
-					this.processor.update(new LoadFalthruuTreeEvent(event,event.fileRef));
+					this.processor.enact(new LoadFalthruuTreeEvent(event, event.fileRef));
 
 					//
 

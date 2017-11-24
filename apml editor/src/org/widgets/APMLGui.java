@@ -106,7 +106,7 @@ public class APMLGui extends JFrame
 
 					//
 
-					UIManager.put("nimbusBase", Color.DARK_GRAY.brighter()); //menuitems, jfilechooser //new Color(0x61, 0x61, 0x61)
+					UIManager.put("nimbusBase", Color.GRAY); //menuitems, jfilechooser //new Color(0x61, 0x61, 0x61)
 
 					UIManager.put("nimbusBlueGrey", new Color(0xa1, 0xa1, 0xa1)); //jmenubar
 
@@ -120,14 +120,14 @@ public class APMLGui extends JFrame
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].backgroundPainter", new BackgroundPainter(new Color(73, 79, 79))); //86,198,192
 
-					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+MouseOver].backgroundPainter", new BackgroundPainter(new Color(0x8c, 0x8c, 0x8c))); //52, 168, 171
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+MouseOver].backgroundPainter", new BackgroundPainter(new Color(0x6c, 0x6c, 0x6c))); //52, 168, 171 //mouseover
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+Pressed].backgroundPainter", new BackgroundPainter(new Color(0x4f, 0x5a, 0x5a)));
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+Selected].backgroundPainter", new BackgroundPainter(new Color(56, 160, 161)));
 
 
-					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+MouseOver+Selected].backgroundPainter", new BackgroundPainter(new Color(0x7c, 0x7c, 0x7c))); //56, 160, 161
+					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+MouseOver+Selected].backgroundPainter", new BackgroundPainter(new Color(0x5c, 0x5c, 0x5c))); //56, 160, 161
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Pressed+Selected].backgroundPainter", new BackgroundPainter(new Color(56, 160, 161)));
 
@@ -433,11 +433,13 @@ class BackgroundPainter implements Painter<JComponent>
 
 			//
 
-			g.setColor(new Color(141, 68, 19)); //yellow
+			g.setColor(Color.GRAY); //yellow new Color(141, 68, 19) //new Color(92, 120, 95)
 
-			g.fillRect(5, -2, width - 10, 3); //highlight 1
+			g.fillRect(20, -5, width - 40, 5); //highlight 1
 
-			g.fillRect(5, height, width - 10, 3); //highlight 1
+			g.setColor(new Color(80, 80, 80));
+
+			g.fillRect(1, height, width - 1, 3); //highlight 1
 
 			//
 
@@ -445,23 +447,23 @@ class BackgroundPainter implements Painter<JComponent>
 
 			//
 
-			g.setColor(Color.BLACK); //bottom
+			g.setColor(Color.GRAY); //bottom
 
-			g.fillRect(0, height, 1, 13);
-
-			//
-
-			g.setColor(Color.BLACK); //bottom
-
-			g.fillRect(0, height - 12, 1, 10);
+			g.fillRect(0, 0, 1, 12);
 
 			//
 
-			g.setColor(Color.BLACK); //bottom
+			g.setColor(Color.GRAY.brighter()); //bottom
 
-			g.fillRect(0,2,1,6);
+			g.fillRect(0, 12, 1, 2);
 
-			g.fillRect(width,2,1,6);
+			//
+
+			g.setColor(Color.GRAY.brighter().brighter()); //bottom
+
+			g.fillRect(0, 16, 1, 4);
+
+			//g.fillRect(width,2,1,6);
 		}
 	}
 }

@@ -8,7 +8,7 @@ import org.custom.ui.BodiJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseBodiDocumentEvent;
 import org.events.LoadBodiTreeEvent;
-import org.listeners.BodiJTreeSelectionListener;
+import org.listeners.BodiJTreeOnClickListener;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -92,9 +92,9 @@ public class JTree_Bodi_000 extends JTree
 
 		// listeners
 
-		this.addTreeSelectionListener(new BodiJTreeSelectionListener(this));
+		this.addTreeSelectionListener(new BodiJTreeOnClickListener(this));
 
-		this.addMouseListener(new BodiJTreeSelectionListener(this));
+		this.addMouseListener(new BodiJTreeOnClickListener(this));
 
 		// bodi
 
@@ -129,9 +129,9 @@ public class JTree_Bodi_000 extends JTree
 
 		// listeners
 
-		this.addTreeSelectionListener(new BodiJTreeSelectionListener(this));
+		this.addTreeSelectionListener(new BodiJTreeOnClickListener(this));
 
-		this.addMouseListener(new BodiJTreeSelectionListener(this));
+		this.addMouseListener(new BodiJTreeOnClickListener(this));
 
 		// bodi
 
@@ -252,7 +252,7 @@ public class JTree_Bodi_000 extends JTree
 
 				//
 
-				item = new BloqJTreeNode(document.createElement(files[j].getName()));
+				item = new BodiJTreeNode(document.createElement(files[j].getName()), files[j]);
 
 				item.setAllowsChildren(true);
 

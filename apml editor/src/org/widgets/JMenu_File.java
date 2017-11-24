@@ -20,7 +20,7 @@ import java.net.URL;
  * @see
  * @since
  */
-public class JMenu_000 extends JMenu
+public class JMenu_File extends JMenu
 {
 
 	public KeyEvent importref_001;
@@ -47,15 +47,15 @@ public class JMenu_000 extends JMenu
 
 	//
 
-	public JMenuItem_000 jmenuitem_000;
-	public JMenuItem_001 jmenuitem_001;
-	public JMenuItem_018 jmenuitem_018;
-	public JMenuItem_016 jmenuitem_016;
-	public JMenuItem_019 jmenuitem_019;
+	public JMenuItem_File_Open jmenuitem_000;
+	public JMenuItem_File_Close jmenuitem_001;
+	public JMenuItem_File_Save jmenuitem_018;
+	public JMenuItem_File_SaveAll jmenuitem_016;
+	public JMenuItem_File_Exit jmenuitem_019;
 	/**
 	 * @param parent : The tree AWT object.
 	 */
-	public JMenu_000(Component parent)
+	public JMenu_File(Component parent)
 	{
 		// setters
 
@@ -65,15 +65,15 @@ public class JMenu_000 extends JMenu
 
 		// instantiation
 
-		this.jmenuitem_000 = new JMenuItem_000(this);
+		this.jmenuitem_000 = new JMenuItem_File_Open(this);
 
-		this.jmenuitem_001 = new JMenuItem_001(this);
+		this.jmenuitem_001 = new JMenuItem_File_Close(this);
 
-		this.jmenuitem_018 = new JMenuItem_018(this);
+		this.jmenuitem_018 = new JMenuItem_File_Save(this);
 
-		this.jmenuitem_016 = new JMenuItem_016(this);
+		this.jmenuitem_016 = new JMenuItem_File_SaveAll(this);
 
-		this.jmenuitem_019 = new JMenuItem_019(this);
+		this.jmenuitem_019 = new JMenuItem_File_Exit(this);
 
 		// hierarchy
 
@@ -100,7 +100,7 @@ public class JMenu_000 extends JMenu
 	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JMenu_000(Component parent, Apmlbasesystem system)
+	public JMenu_File(Component parent, Apmlbasesystem system)
 	{
 		// setters
 
@@ -110,15 +110,15 @@ public class JMenu_000 extends JMenu
 
 		// instantiation
 
-		this.jmenuitem_000 = new JMenuItem_000(this);
+		this.jmenuitem_000 = new JMenuItem_File_Open(this);
 
-		this.jmenuitem_001 = new JMenuItem_001(this);
+		this.jmenuitem_001 = new JMenuItem_File_Close(this);
 
-		this.jmenuitem_018 = new JMenuItem_018(this);
+		this.jmenuitem_018 = new JMenuItem_File_Save(this);
 
-		this.jmenuitem_016 = new JMenuItem_016(this);
+		this.jmenuitem_016 = new JMenuItem_File_SaveAll(this);
 
-		this.jmenuitem_019 = new JMenuItem_019(this);
+		this.jmenuitem_019 = new JMenuItem_File_Exit(this);
 
 		// hierarchy
 

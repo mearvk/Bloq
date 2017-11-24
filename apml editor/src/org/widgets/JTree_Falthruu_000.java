@@ -91,15 +91,9 @@ public class JTree_Falthruu_000 extends JTree
 
 		// listeners
 
-		this.addTreeSelectionListener(new JTreeSelectionListener(this));
+		this.addTreeSelectionListener(new FalthruuJTreeOnClickListener(this));
 
-		this.addMouseListener(new JTreeMouseListener((this)));
-
-		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
+		this.addMouseListener(new FalthruuJTreeOnClickListener(this));
 
 		// bodi
 
@@ -134,15 +128,9 @@ public class JTree_Falthruu_000 extends JTree
 
 		// listeners
 
-		this.addTreeSelectionListener(new JTreeSelectionListener(this));
+		this.addTreeSelectionListener(new FalthruuJTreeOnClickListener(this));
 
-		this.addMouseListener(new JTreeMouseListener((this)));
-
-		this.addMouseListener(new JTreeEditorDoubleClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorLeftClickMouseListener(this));
-
-		this.addMouseListener(new JTreeEditorRightClickMouseListener(this));
+		this.addMouseListener(new FalthruuJTreeOnClickListener(this));
 
 		// bodi
 

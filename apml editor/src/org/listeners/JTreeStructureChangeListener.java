@@ -57,6 +57,6 @@ public class JTreeStructureChangeListener implements TreeSelectionListener, Tree
 
 		processor = (UserInterfaceProcessor) Bodi.context("system").pull("//events/system/{id}/uiprocessor");
 
-		processor.update(new TreeStructureUpdatedEvent(e, e.hashCode(), "tree_structure_updated_event"));
+		processor.enact(new TreeStructureUpdatedEvent(e, e.hashCode(), "tree_structure_updated_event"));
 	}
 }

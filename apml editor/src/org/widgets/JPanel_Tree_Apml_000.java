@@ -2,9 +2,11 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
+import com.sun.java.swing.plaf.windows.WindowsBorders;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import java.awt.*;
@@ -70,7 +72,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(223,223,223));
+		this.setBackground(new Color(203, 203, 203));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -104,7 +106,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(223,223,223));
+		this.setBackground(new Color(203, 203, 203));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -139,7 +141,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0xff, 0xff, 0xff));
+		this.setBackground(new Color(203, 203, 203));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -174,7 +176,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(0xff, 0xff, 0xff));
+		this.setBackground(new Color(203, 203, 203));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -230,6 +232,8 @@ class JScrollpane_Tree_Apml extends JScrollPane
 		this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		this.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+
+		this.setBorder(BorderFactory.createEmptyBorder());
 
 		//devolvement
 

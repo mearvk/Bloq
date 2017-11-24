@@ -2,7 +2,7 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import org.events.OpenDocumentEvent;
+import org.events.CloseApmlDocumentEvent;
 import org.system.UserInterfaceProcessor;
 
 import javax.imageio.ImageIO;
@@ -24,7 +24,7 @@ import java.net.URL;
  * @see
  * @since
  */
-public class JMenuItem_000 extends JMenuItem
+public class JMenuItem_File_Close extends JMenuItem
 {
 
 	public KeyEvent importref_001;
@@ -46,20 +46,20 @@ public class JMenuItem_000 extends JMenuItem
 	public Component parent;
 	public Apmlbasesystem system;
 
-	public JMenuItem_000_ActionListener actionlistener;
+	public JMenuItem_001_ActionListener actionlistener;
 
 	/**
 	 * @param parent : The tree AWT object.
 	 */
-	public JMenuItem_000(Component parent)
+	public JMenuItem_File_Close(Component parent)
 	{
 		// setters
 
-		this.setText("Open");
+		this.setText("Close");
 
 		// instantiation
 
-		this.actionlistener = new JMenuItem_000_ActionListener(this);
+		this.actionlistener = new JMenuItem_001_ActionListener(this);
 
 		// hierarchy
 
@@ -79,15 +79,15 @@ public class JMenuItem_000 extends JMenuItem
 	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JMenuItem_000(Component parent, Apmlbasesystem system)
+	public JMenuItem_File_Close(Component parent, Apmlbasesystem system)
 	{
 		// setters
 
-		this.setText("Open");
+		this.setText("Close");
 
 		// instantiation
 
-		this.actionlistener = new JMenuItem_000_ActionListener(this);
+		this.actionlistener = new JMenuItem_001_ActionListener(this);
 
 		// hierarchy
 
@@ -106,48 +106,21 @@ public class JMenuItem_000 extends JMenuItem
 	}
 }
 
-class JMenuItem_000_ActionListener implements ActionListener
+class JMenuItem_001_ActionListener implements ActionListener
 {
-	public Component parent;
+	JComponent source;
 
-	public JMenuItem_000_ActionListener(Component parent)
+	public JMenuItem_001_ActionListener(JComponent source)
 	{
-		this.parent = parent;
+		this.source = source;
 	}
 
 	public void actionPerformed(ActionEvent event)
 	{
-		JFileChooser chooser = new JFileChooser();
+		UserInterfaceProcessor processor;
 
-		File file;
+		processor = ((UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000"));
 
-		//
-
-		int retval = chooser.showOpenDialog(this.parent);
-
-		if (retval == JFileChooser.APPROVE_OPTION)
-		{
-			try
-			{
-				file = chooser.getSelectedFile();
-
-				//
-
-				UserInterfaceProcessor processor;
-
-				processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
-
-				processor.update(new OpenDocumentEvent(event, file));
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-
-		if (retval == JFileChooser.CANCEL_OPTION)
-		{
-			return;
-		}
+		processor.enact(new CloseApmlDocumentEvent(this.source));
 	}
 }

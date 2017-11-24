@@ -4,8 +4,10 @@ import apml.system.bodi.Bodi;
 import org.custom.ui.BodiJTreeNode;
 import org.widgets.APMLGui;
 import org.widgets.JTree_Bodi_000;
+import org.widgets.JTree_Sprung_000;
 import org.widgets.RSTextPane_Bodi_000;
 
+import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -16,15 +18,17 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-public class BodiJTreeSelectionListener implements TreeSelectionListener, MouseListener
+public class SprungJTreeOnClickListener implements TreeSelectionListener, MouseListener
 {
-	public JTree_Bodi_000 jtree;
+	public JTree_Sprung_000 jtree;
+
+	public File selected;
 
 	public DefaultMutableTreeNode selectednode;
 
 	//
 
-	public BodiJTreeSelectionListener(JTree_Bodi_000 jtree)
+	public SprungJTreeOnClickListener(JTree_Sprung_000 jtree)
 	{
 		this.jtree = jtree;
 	}
@@ -44,21 +48,39 @@ public class BodiJTreeSelectionListener implements TreeSelectionListener, MouseL
 
 		//
 
-		clickednode = (DefaultMutableTreeNode)	this.jtree.getLastSelectedPathComponent();
+		clickednode = (DefaultMutableTreeNode) this.jtree.getLastSelectedPathComponent();
 
-		bodinode = (BodiJTreeNode)(DefaultMutableTreeNode) this.jtree.getLastSelectedPathComponent();
+		bodinode = (BodiJTreeNode) this.jtree.getLastSelectedPathComponent();
+
+		//
+
+		if (this.jtree.getLastSelectedPathComponent() instanceof BodiJTreeNode)
+		{
+			//JOptionPane.showMessageDialog(null, "Oddly, the bodi file itself wasn't passed to the listener onload function.");
+
+			System.err.println("Class is right actually: " + this.jtree.getClass());
+		}
+		else
+		{
+			System.err.println("Class is actually: " + this.jtree.getClass());
+		}
 
 		//
 
 		File fileRef = bodinode.getFileRef();
 
-		if(fileRef==null) return;
+		if (fileRef == null)
+		{
+			JOptionPane.showMessageDialog(null, "Oddly, the bodi file itself wasn't passed to the listener onload function.");
 
-		APMLGui apmlgui = (APMLGui)Bodi.context("editor").pull("//editor/ui/apmlgui");
+			return;
+		}
+
+		APMLGui apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
 		//
 
-		rstextpane_bodi_000 = (RSTextPane_Bodi_000)Bodi.context("editor").pull("//editor/ui/rstextpane_bodi_000");
+		rstextpane_bodi_000 = (RSTextPane_Bodi_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bodi_000");
 
 		try
 		{
@@ -68,14 +90,14 @@ public class BodiJTreeSelectionListener implements TreeSelectionListener, MouseL
 
 			String text = "";
 
-			while((line=reader.readLine())!=null)
+			while ((line = reader.readLine()) != null)
 			{
 				text += line + "\n";
 			}
 
 			rstextpane_bodi_000.setText(text);
 		}
-		catch(Exception exception)
+		catch (Exception exception)
 		{
 			exception.printStackTrace();
 		}

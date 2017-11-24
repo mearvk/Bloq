@@ -16,7 +16,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.net.URL;
 
-public class JMenuItem_019 extends JMenuItem
+public class JMenuItem_File_Exit extends JMenuItem
 {
 	public KeyEvent importref_001;
 	public KeyStroke importref_002;
@@ -40,7 +40,7 @@ public class JMenuItem_019 extends JMenuItem
 	/**
 	 * @param parent : The tree AWT object.
 	 */
-	public JMenuItem_019(Component parent)
+	public JMenuItem_File_Exit(Component parent)
 	{
 		// setters
 
@@ -65,7 +65,7 @@ public class JMenuItem_019 extends JMenuItem
 	 * @param parent : The tree AWT object.
 	 * @param system : The APML system object.
 	 */
-	public JMenuItem_019(Component parent, Apmlbasesystem system)
+	public JMenuItem_File_Exit(Component parent, Apmlbasesystem system)
 	{
 		// setters
 
@@ -105,6 +105,6 @@ class JMenuItem_019_ActionListener implements ActionListener
 
 		processor = (UserInterfaceProcessor) Bodi.context("editor").pull("//editor/ui/uiprocessor_000");
 
-		processor.update(new ExitProgramEvent(event));
+		processor.enact(new ExitProgramEvent(event));
 	}
 }

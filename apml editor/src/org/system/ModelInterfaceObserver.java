@@ -247,7 +247,7 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 
 			if (new_node_count != old_node_count)
 			{
-				//call update on tree
+				//call reloadfromfile on tree
 
 				System.err.println("Total node count has changed.");
 			}
@@ -267,7 +267,7 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 
 				if (!new_node.isEqualNode(old_node))
 				{
-					//call update on tree
+					//call reloadfromfile on tree
 
 					System.err.println("Some particular node has changed.");
 

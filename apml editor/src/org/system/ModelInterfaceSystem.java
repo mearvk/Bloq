@@ -7,13 +7,8 @@ import org.events.ReloadApmlTreeEvent;
 import org.widgets.*;
 
 import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
 import java.awt.event.ActionEvent;
 import java.io.ByteArrayInputStream;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
 
 public class ModelInterfaceSystem extends Apmlsystem
 {
@@ -136,7 +131,7 @@ class ApmlStructureUpdateRequest implements Runnable
 
 		//
 
-		this.jtree._update(reload_tree_event);
+		this.jtree.reloadfrombytes(reload_tree_event);
 
 		this.jtree.removenewlinetextnodes();
 

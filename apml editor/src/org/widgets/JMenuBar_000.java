@@ -47,7 +47,7 @@ public class JMenuBar_000 extends JMenuBar
 
 	//
 
-	public JMenu_000 jmenu_000;
+	public JMenu_File jmenu_000;
 	public JMenu_001 jmenu_001;
 	public JMenu_002 jmenu_002;
 	public JMenu_003 jmenu_003;
@@ -65,7 +65,7 @@ public class JMenuBar_000 extends JMenuBar
 
 		// instantiation
 
-		this.jmenu_000 = new JMenu_000(this);
+		this.jmenu_000 = new JMenu_File(this);
 
 		this.jmenu_001 = new JMenu_001(this);
 
@@ -122,7 +122,7 @@ public class JMenuBar_000 extends JMenuBar
 
 		// instantiation
 
-		this.jmenu_000 = new JMenu_000(this);
+		this.jmenu_000 = new JMenu_File(this);
 
 		this.jmenu_001 = new JMenu_001(this);
 

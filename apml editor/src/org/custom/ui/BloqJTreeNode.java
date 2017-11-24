@@ -3,10 +3,13 @@ package org.custom.ui;
 import org.w3c.dom.Node;
 
 import javax.swing.tree.DefaultMutableTreeNode;
+import java.io.File;
 
 public class BloqJTreeNode extends DefaultMutableTreeNode
 {
-	Integer my_index;
+	public Integer my_index;
+
+	public File fileRef;
 
 	public BloqJTreeNode(String name)
 	{
