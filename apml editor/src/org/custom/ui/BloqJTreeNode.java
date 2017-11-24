@@ -16,6 +16,13 @@ public class BloqJTreeNode extends DefaultMutableTreeNode
 		super(name, false);
 	}
 
+	public BloqJTreeNode(Node node, File fileRef)
+	{
+		super(node, false);
+
+		this.fileRef = fileRef;
+	}
+
 	public BloqJTreeNode(Node node)
 	{
 		super(node, false);

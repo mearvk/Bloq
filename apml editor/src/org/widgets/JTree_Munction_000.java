@@ -251,7 +251,7 @@ public class JTree_Munction_000 extends JTree
 
 				//
 
-				item = new BloqJTreeNode(document.createElement(files[j].getName()));
+				item = new BloqJTreeNode(document.createElement(files[j].getName()), files[j]);
 
 				item.setAllowsChildren(true);
 

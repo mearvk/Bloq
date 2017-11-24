@@ -251,7 +251,7 @@ public class JTree_Falthruu_000 extends JTree
 
 				//
 
-				item = new BloqJTreeNode(document.createElement(files[j].getName()));
+				item = new BloqJTreeNode(document.createElement(files[j].getName()), files[j]);
 
 				item.setAllowsChildren(true);
 
