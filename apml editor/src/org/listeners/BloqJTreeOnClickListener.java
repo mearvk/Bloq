@@ -1,11 +1,9 @@
 package org.listeners;
 
 import apml.system.bodi.Bodi;
+import org.custom.ui.BloqJTreeNode;
 import org.custom.ui.BodiJTreeNode;
-import org.widgets.APMLGui;
-import org.widgets.JTree_Bloq_000;
-import org.widgets.JTree_Bodi_000;
-import org.widgets.RSTextPane_Bodi_000;
+import org.widgets.*;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -42,19 +40,19 @@ public class BloqJTreeOnClickListener implements TreeSelectionListener, MouseLis
 
 		DefaultMutableTreeNode clickednode;
 
-		BodiJTreeNode bodinode;
+		BloqJTreeNode bloqnode;
 
-		RSTextPane_Bodi_000 rstextpane_bodi_000;
+		RSTextPane_Bloq_000 rstextpane_bloq_000;
 
 		//
 
 		clickednode = (DefaultMutableTreeNode) this.jtree.getLastSelectedPathComponent();
 
-		bodinode = (BodiJTreeNode) this.jtree.getLastSelectedPathComponent();
+		bloqnode = (BloqJTreeNode) this.jtree.getLastSelectedPathComponent();
 
 		//
 
-		if (this.jtree.getLastSelectedPathComponent() instanceof BodiJTreeNode)
+		if (this.jtree.getLastSelectedPathComponent() instanceof BloqJTreeNode)
 		{
 			//JOptionPane.showMessageDialog(null, "Oddly, the bodi file itself wasn't passed to the listener onload function.");
 
@@ -67,7 +65,7 @@ public class BloqJTreeOnClickListener implements TreeSelectionListener, MouseLis
 
 		//
 
-		File fileRef = bodinode.getFileRef();
+		File fileRef = bloqnode.getFileRef();
 
 		if (fileRef == null)
 		{
@@ -80,7 +78,7 @@ public class BloqJTreeOnClickListener implements TreeSelectionListener, MouseLis
 
 		//
 
-		rstextpane_bodi_000 = (RSTextPane_Bodi_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bodi_000");
+		rstextpane_bloq_000 = (RSTextPane_Bloq_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bloq_000");
 
 		try
 		{
@@ -95,7 +93,7 @@ public class BloqJTreeOnClickListener implements TreeSelectionListener, MouseLis
 				text += line + "\n";
 			}
 
-			rstextpane_bodi_000.setText(text);
+			rstextpane_bloq_000.setText(text);
 		}
 		catch (Exception exception)
 		{

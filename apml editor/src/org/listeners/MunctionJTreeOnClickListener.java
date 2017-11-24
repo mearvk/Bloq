@@ -2,10 +2,8 @@ package org.listeners;
 
 import apml.system.bodi.Bodi;
 import org.custom.ui.BodiJTreeNode;
-import org.widgets.APMLGui;
-import org.widgets.JTree_Bodi_000;
-import org.widgets.JTree_Munction_000;
-import org.widgets.RSTextPane_Bodi_000;
+import org.custom.ui.MunctionJTreeNode;
+import org.widgets.*;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -42,15 +40,15 @@ public class MunctionJTreeOnClickListener implements TreeSelectionListener, Mous
 
 		DefaultMutableTreeNode clickednode;
 
-		BodiJTreeNode bodinode;
+		MunctionJTreeNode munctionnode;
 
-		RSTextPane_Bodi_000 rstextpane_bodi_000;
+		RSTextPane_Munction_000 rstextpane_munction_000;
 
 		//
 
 		clickednode = (DefaultMutableTreeNode) this.jtree.getLastSelectedPathComponent();
 
-		bodinode = (BodiJTreeNode) this.jtree.getLastSelectedPathComponent();
+		munctionnode = (MunctionJTreeNode) this.jtree.getLastSelectedPathComponent();
 
 		//
 
@@ -67,7 +65,7 @@ public class MunctionJTreeOnClickListener implements TreeSelectionListener, Mous
 
 		//
 
-		File fileRef = bodinode.getFileRef();
+		File fileRef = munctionnode.getFileRef();
 
 		if (fileRef == null)
 		{
@@ -80,7 +78,7 @@ public class MunctionJTreeOnClickListener implements TreeSelectionListener, Mous
 
 		//
 
-		rstextpane_bodi_000 = (RSTextPane_Bodi_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bodi_000");
+		rstextpane_munction_000 = (RSTextPane_Munction_000) Bodi.context("editor").pull("//editor/ui/rstextpane_munction_000");
 
 		try
 		{
@@ -95,7 +93,7 @@ public class MunctionJTreeOnClickListener implements TreeSelectionListener, Mous
 				text += line + "\n";
 			}
 
-			rstextpane_bodi_000.setText(text);
+			rstextpane_munction_000.setText(text);
 		}
 		catch (Exception exception)
 		{

@@ -5,35 +5,35 @@ import org.w3c.dom.Node;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.File;
 
-public class BloqJTreeNode extends DefaultMutableTreeNode
+public class RunynJTreeNode extends DefaultMutableTreeNode
 {
 	public Integer my_index;
 
 	public File fileRef;
 
-	public BloqJTreeNode(String name)
+	public RunynJTreeNode(String name)
 	{
 		super(name, false);
 	}
 
-	public BloqJTreeNode(Node node)
+	public RunynJTreeNode(Node node)
 	{
 		super(node, false);
 	}
 
-	public BloqJTreeNode(Node node, Integer child_index)
+	public RunynJTreeNode(Node node, Integer child_index)
 	{
 		super(node, false);
 
 		this.my_index = child_index;
 	}
 
-	public BloqJTreeNode(Node node, Boolean allowsChildren)
+	public RunynJTreeNode(Node node, Boolean allowsChildren)
 	{
 		super(node, allowsChildren);
 	}
 
-	public BloqJTreeNode(String object, Boolean allowsChildren)
+	public RunynJTreeNode(String object, Boolean allowsChildren)
 	{
 		super(object, allowsChildren);
 	}

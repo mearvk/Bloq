@@ -2,6 +2,7 @@ package org.listeners;
 
 import apml.system.bodi.Bodi;
 import org.custom.ui.BodiJTreeNode;
+import org.custom.ui.RunynJTreeNode;
 import org.widgets.APMLGui;
 import org.widgets.JTree_Bodi_000;
 import org.widgets.JTree_Runyn_000;
@@ -42,7 +43,7 @@ public class RunynJTreeOnClickListener implements TreeSelectionListener, MouseLi
 
 		DefaultMutableTreeNode clickednode;
 
-		BodiJTreeNode bodinode;
+		RunynJTreeNode runynnode;
 
 		RSTextPane_Bodi_000 rstextpane_bodi_000;
 
@@ -50,7 +51,7 @@ public class RunynJTreeOnClickListener implements TreeSelectionListener, MouseLi
 
 		clickednode = (DefaultMutableTreeNode) this.jtree.getLastSelectedPathComponent();
 
-		bodinode = (BodiJTreeNode) this.jtree.getLastSelectedPathComponent();
+		runynnode = (RunynJTreeNode) this.jtree.getLastSelectedPathComponent();
 
 		//
 
@@ -67,7 +68,7 @@ public class RunynJTreeOnClickListener implements TreeSelectionListener, MouseLi
 
 		//
 
-		File fileRef = bodinode.getFileRef();
+		File fileRef = runynnode.getFileRef();
 
 		if (fileRef == null)
 		{

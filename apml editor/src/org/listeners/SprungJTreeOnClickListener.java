@@ -2,10 +2,8 @@ package org.listeners;
 
 import apml.system.bodi.Bodi;
 import org.custom.ui.BodiJTreeNode;
-import org.widgets.APMLGui;
-import org.widgets.JTree_Bodi_000;
-import org.widgets.JTree_Sprung_000;
-import org.widgets.RSTextPane_Bodi_000;
+import org.custom.ui.SprungJTreeNode;
+import org.widgets.*;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -42,15 +40,15 @@ public class SprungJTreeOnClickListener implements TreeSelectionListener, MouseL
 
 		DefaultMutableTreeNode clickednode;
 
-		BodiJTreeNode bodinode;
+		SprungJTreeNode sprungnode;
 
-		RSTextPane_Bodi_000 rstextpane_bodi_000;
+		RSTextPane_Sprung_000 rstextpane_sprung_000;
 
 		//
 
 		clickednode = (DefaultMutableTreeNode) this.jtree.getLastSelectedPathComponent();
 
-		bodinode = (BodiJTreeNode) this.jtree.getLastSelectedPathComponent();
+		sprungnode = (SprungJTreeNode) this.jtree.getLastSelectedPathComponent();
 
 		//
 
@@ -67,7 +65,7 @@ public class SprungJTreeOnClickListener implements TreeSelectionListener, MouseL
 
 		//
 
-		File fileRef = bodinode.getFileRef();
+		File fileRef = sprungnode.getFileRef();
 
 		if (fileRef == null)
 		{
@@ -80,7 +78,7 @@ public class SprungJTreeOnClickListener implements TreeSelectionListener, MouseL
 
 		//
 
-		rstextpane_bodi_000 = (RSTextPane_Bodi_000) Bodi.context("editor").pull("//editor/ui/rstextpane_bodi_000");
+		rstextpane_sprung_000 = (RSTextPane_Sprung_000) Bodi.context("editor").pull("//editor/ui/rstextpane_sprung_000");
 
 		try
 		{
@@ -95,7 +93,7 @@ public class SprungJTreeOnClickListener implements TreeSelectionListener, MouseL
 				text += line + "\n";
 			}
 
-			rstextpane_bodi_000.setText(text);
+			rstextpane_sprung_000.setText(text);
 		}
 		catch (Exception exception)
 		{

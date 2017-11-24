@@ -2,6 +2,7 @@ package org.listeners;
 
 import apml.system.bodi.Bodi;
 import org.custom.ui.BodiJTreeNode;
+import org.custom.ui.FalthruuJTreeNode;
 import org.widgets.APMLGui;
 import org.widgets.JTree_Bodi_000;
 import org.widgets.JTree_Falthruu_000;
@@ -42,7 +43,7 @@ public class FalthruuJTreeOnClickListener implements TreeSelectionListener, Mous
 
 		DefaultMutableTreeNode clickednode;
 
-		BodiJTreeNode bodinode;
+		FalthruuJTreeNode falthruunode;
 
 		RSTextPane_Bodi_000 rstextpane_bodi_000;
 
@@ -50,11 +51,11 @@ public class FalthruuJTreeOnClickListener implements TreeSelectionListener, Mous
 
 		clickednode = (DefaultMutableTreeNode) this.jtree.getLastSelectedPathComponent();
 
-		bodinode = (BodiJTreeNode) this.jtree.getLastSelectedPathComponent();
+		falthruunode = (FalthruuJTreeNode) this.jtree.getLastSelectedPathComponent();
 
 		//
 
-		if (this.jtree.getLastSelectedPathComponent() instanceof BodiJTreeNode)
+		if (this.jtree.getLastSelectedPathComponent() instanceof FalthruuJTreeNode)
 		{
 			//JOptionPane.showMessageDialog(null, "Oddly, the bodi file itself wasn't passed to the listener onload function.");
 
@@ -67,7 +68,7 @@ public class FalthruuJTreeOnClickListener implements TreeSelectionListener, Mous
 
 		//
 
-		File fileRef = bodinode.getFileRef();
+		File fileRef = falthruunode.getFileRef();
 
 		if (fileRef == null)
 		{

@@ -3,10 +3,13 @@ package org.custom.ui;
 import org.w3c.dom.Node;
 
 import javax.swing.tree.DefaultMutableTreeNode;
+import java.io.File;
 
 public class ApmlJTreeNode extends DefaultMutableTreeNode
 {
-	Integer my_index;
+	public Integer my_index;
+
+	public File fileRef;
 
 	public ApmlJTreeNode(Node node)
 	{
@@ -34,5 +37,10 @@ public class ApmlJTreeNode extends DefaultMutableTreeNode
 	public String toString()
 	{
 		return ((Node) this.getUserObject()).getNodeName();
+	}
+
+	public File getFileRef()
+	{
+		return this.fileRef;
 	}
 }
