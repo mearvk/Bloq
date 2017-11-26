@@ -11,6 +11,13 @@ public class MunctionJTreeNode extends DefaultMutableTreeNode
 
 	public File fileRef;
 
+	public MunctionJTreeNode(String filename, File fileRef)
+	{
+		this.userObject = filename;
+
+		this.fileRef = fileRef;
+	}
+
 	public MunctionJTreeNode(String name)
 	{
 		super(name, false);
@@ -41,6 +48,9 @@ public class MunctionJTreeNode extends DefaultMutableTreeNode
 	@Override
 	public String toString()
 	{
+		if (this.userObject instanceof String)
+			return (String) this.userObject;
+
 		return ((Node) this.getUserObject()).getNodeName();
 	}
 

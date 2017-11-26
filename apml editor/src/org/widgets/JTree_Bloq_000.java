@@ -7,6 +7,7 @@ import org.custom.ui.*;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadBloqTreeEvent;
 import org.listeners.*;
+import org.system.ModelInterfaceSystem;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -166,12 +167,12 @@ public class JTree_Bloq_000 extends JTree
 		}
 	}
 
-	public void update(CloseApmlDocumentEvent event)
+	public void rloadfromnodelist(CloseApmlDocumentEvent event)
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void update(LoadBloqTreeEvent event)
+	public void rloadfromnodelist(LoadBloqTreeEvent event)
 	{
 		File file = event.getFileRef();
 
@@ -181,9 +182,15 @@ public class JTree_Bloq_000 extends JTree
 
 		DefaultMutableTreeNode root;
 
-		DefaultMutableTreeNode parent;
+		ApmlJTreeNode bloqnode;
 
-		DefaultMutableTreeNode manifest;
+		DefaultMutableTreeNode manifestnode;
+
+		DefaultMutableTreeNode packagesnode;
+
+		DefaultMutableTreeNode attributesnode;
+
+		DefaultMutableTreeNode childnode;
 
 		XPath xpath;
 
@@ -205,15 +212,47 @@ public class JTree_Bloq_000 extends JTree
 
 			//
 
-			manifest = new DefaultMutableTreeNode("manifests", true);
+			bloqnode = new ApmlJTreeNode("bloq", true);
+
+			manifestnode = new DefaultMutableTreeNode("manifest", true);
+
+			packagesnode = new DefaultMutableTreeNode("packages", true);
 
 			//
 
-			model.insertNodeInto(manifest, root, 0);
+			manifestnode.setAllowsChildren(true);
+
+			packagesnode.setAllowsChildren(true);
 
 			//
 
-			this.update(event.getFileRef(), event, document, model, root, root, manifest, nodes, 0);
+			childnode = new ApmlJTreeNode(nodes.item(0));
+
+			childnode.setAllowsChildren(true);
+
+			//
+
+			manifestnode.insert(new DefaultMutableTreeNode("manifest.xml"), manifestnode.getChildCount() == 0 ? 0 : manifestnode.getChildCount() - 1);
+
+			//
+
+			model.insertNodeInto(bloqnode, root, 0);
+
+			model.insertNodeInto(manifestnode, root, 1);
+
+			model.insertNodeInto(packagesnode, root, 2);
+
+			//
+
+			this.rloadfromnodelist(file, event, document, model, root, packagesnode, childnode, nodes, 0);
+
+			//
+
+			BloqJTreeNode bloqfilenode = new BloqJTreeNode(file.getName(), file);
+
+			model.insertNodeInto(bloqfilenode, bloqnode, 0);
+
+			//model.reload();
 
 			//
 
@@ -226,14 +265,15 @@ public class JTree_Bloq_000 extends JTree
 	}
 
 	//
-	private void update(File file, LoadBloqTreeEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
+	private void rloadfromnodelist(File file, LoadBloqTreeEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
 	{
 		try
 		{
 			if (manifest == null)
 				return;
 
-			if (parent == null) return;
+			if (parent == null)
+				return;
 
 			//
 
@@ -257,6 +297,9 @@ public class JTree_Bloq_000 extends JTree
 
 					//
 
+					if (files[j].getName().endsWith("txt"))
+						continue; //TODO outsource for checking against formal manifest file value
+
 					item = new BloqJTreeNode(document.createElement(files[j].getName()), files[j]);
 
 					item.setAllowsChildren(true);
@@ -267,14 +310,9 @@ public class JTree_Bloq_000 extends JTree
 
 					//
 
-					if(files[j].isDirectory())
+					if (files[j].isDirectory())
 					{
-						this.update(files[j], event, document, model, root, item, manifest, children, depth);
-					}
-					else if (files[j].getName().endsWith("txt"))
-					{
-
-						model.insertNodeInto(item, manifest, manifest.getChildCount() == 0 ? 0 : manifest.getChildCount() - 1);
+						this.rloadfromnodelist(files[j], event, document, model, root, item, manifest, children, depth);
 					}
 
 					//

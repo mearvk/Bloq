@@ -4,6 +4,7 @@ import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.xpath.helpers.Xpathquick;
 import org.custom.ui.BloqJTreeNode;
+import org.custom.ui.SprungJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadSprungTreeEvent;
@@ -163,12 +164,12 @@ public class JTree_Sprung_000 extends JTree
 		}
 	}
 
-	public void update(CloseApmlDocumentEvent event)
+	public void rloadfromnodelist(CloseApmlDocumentEvent event)
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void update(LoadSprungTreeEvent event)
+	public void rloadfromnodelist(LoadSprungTreeEvent event)
 	{
 		File file = event.getFileRef();
 
@@ -208,7 +209,13 @@ public class JTree_Sprung_000 extends JTree
 
 			//
 
-			this.update(event.getFileRef(), event, document, model, root, root, manifests, nodes, 0);
+			this.rloadfromnodelist(event.getFileRef(), event, document, model, root, root, manifests, nodes, 0);
+
+			//
+
+			SprungJTreeNode filenode = new SprungJTreeNode(file.getName(), file);
+
+			model.insertNodeInto(filenode, manifests, 0);
 
 			//
 
@@ -221,7 +228,7 @@ public class JTree_Sprung_000 extends JTree
 	}
 
 	//
-	private void update(File file, ActionEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
+	private void rloadfromnodelist(File file, ActionEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
 	{
 		if (manifest == null)
 			return;
@@ -251,6 +258,9 @@ public class JTree_Sprung_000 extends JTree
 
 				//
 
+				if (files[j].getName().endsWith("txt"))
+					continue;
+
 				item = new BloqJTreeNode(document.createElement(files[j].getName()), files[j]);
 
 				item.setAllowsChildren(true);
@@ -263,12 +273,7 @@ public class JTree_Sprung_000 extends JTree
 
 				if (files[j].isDirectory())
 				{
-					this.update(files[j], event, document, model, root, item, manifest, children, depth);
-				}
-				else if (files[j].getName().endsWith("txt"))
-				{
-
-					model.insertNodeInto(item, manifest, manifest.getChildCount() == 0 ? 0 : manifest.getChildCount() - 1);
+					this.rloadfromnodelist(files[j], event, document, model, root, item, manifest, children, depth);
 				}
 
 				//

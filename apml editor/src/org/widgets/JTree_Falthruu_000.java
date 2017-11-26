@@ -4,6 +4,7 @@ import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.xpath.helpers.Xpathquick;
 import org.custom.ui.BloqJTreeNode;
+import org.custom.ui.FalthruuJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadFalthruuTreeEvent;
@@ -163,12 +164,12 @@ public class JTree_Falthruu_000 extends JTree
 		}
 	}
 
-	public void update(CloseApmlDocumentEvent event)
+	public void rloadfromnodelist(CloseApmlDocumentEvent event)
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void update(LoadFalthruuTreeEvent event)
+	public void rloadfromnodelist(LoadFalthruuTreeEvent event)
 	{
 		File file = event.getFileRef();
 
@@ -178,7 +179,7 @@ public class JTree_Falthruu_000 extends JTree
 
 		DefaultMutableTreeNode root;
 
-		DefaultMutableTreeNode treenode;
+		DefaultMutableTreeNode manifests;
 
 		XPath xpath;
 
@@ -200,15 +201,21 @@ public class JTree_Falthruu_000 extends JTree
 
 			//
 
-			treenode = new DefaultMutableTreeNode("manifests", true);
+			manifests = new DefaultMutableTreeNode("manifests", true);
 
 			//
 
-			model.insertNodeInto(treenode, root, 0);
+			model.insertNodeInto(manifests, root, 0);
 
 			//
 
-			this.update(event.getFileRef(), event, document, model, root, treenode, treenode, nodes, 0);
+			this.rloadfromnodelist(event.getFileRef(), event, document, model, root, manifests, manifests, nodes, 0);
+
+			//
+
+			FalthruuJTreeNode filenode = new FalthruuJTreeNode(file.getName(), file);
+
+			model.insertNodeInto(filenode, manifests, 0);
 
 			//
 
@@ -221,7 +228,7 @@ public class JTree_Falthruu_000 extends JTree
 	}
 
 	//
-	private void update(File file, ActionEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
+	private void rloadfromnodelist(File file, ActionEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
 	{
 		if (manifest == null)
 			return;
@@ -251,6 +258,9 @@ public class JTree_Falthruu_000 extends JTree
 
 				//
 
+				if (files[j].getName().endsWith("txt"))
+					continue;
+
 				item = new BloqJTreeNode(document.createElement(files[j].getName()), files[j]);
 
 				item.setAllowsChildren(true);
@@ -263,12 +273,7 @@ public class JTree_Falthruu_000 extends JTree
 
 				if (files[j].isDirectory())
 				{
-					this.update(files[j], event, document, model, root, item, manifest, children, depth);
-				}
-				else if (files[j].getName().endsWith("txt"))
-				{
-
-					model.insertNodeInto(item, manifest, manifest.getChildCount() == 0 ? 0 : manifest.getChildCount() - 1);
+					this.rloadfromnodelist(files[j], event, document, model, root, item, manifest, children, depth);
 				}
 
 				//

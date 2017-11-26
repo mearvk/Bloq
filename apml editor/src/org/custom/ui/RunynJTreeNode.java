@@ -11,6 +11,11 @@ public class RunynJTreeNode extends DefaultMutableTreeNode
 
 	public File fileRef;
 
+	public RunynJTreeNode(String filename, File fileRef)
+	{
+		this.fileRef = fileRef;
+	}
+
 	public RunynJTreeNode(String name)
 	{
 		super(name, false);
@@ -41,6 +46,9 @@ public class RunynJTreeNode extends DefaultMutableTreeNode
 	@Override
 	public String toString()
 	{
+		if (this.userObject instanceof String)
+			return (String) this.userObject;
+
 		return ((Node) this.getUserObject()).getNodeName();
 	}
 

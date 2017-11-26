@@ -11,6 +11,13 @@ public class ApmlJTreeNode extends DefaultMutableTreeNode
 
 	public File fileRef;
 
+	public ApmlJTreeNode(String filename, File fileRef)
+	{
+		this.userObject = filename;
+
+		this.fileRef = fileRef;
+	}
+
 	public ApmlJTreeNode(Node node)
 	{
 		super(node, false);
@@ -36,6 +43,9 @@ public class ApmlJTreeNode extends DefaultMutableTreeNode
 	@Override
 	public String toString()
 	{
+		if (this.userObject instanceof String)
+			return (String) this.userObject;
+
 		return ((Node) this.getUserObject()).getNodeName();
 	}
 

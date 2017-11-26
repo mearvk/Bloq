@@ -63,6 +63,9 @@ public class BodiJTreeNode extends DefaultMutableTreeNode
 	@Override
 	public String toString()
 	{
+		if (this.userObject instanceof String)
+			return (String) this.userObject;
+
 		return ((Node) this.getUserObject()).getNodeName();
 	}
 }

@@ -9,6 +9,7 @@ import org.events.LoadApmlTreeEvent;
 import org.events.ReloadApmlTreeEvent;
 import org.listeners.*;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -58,10 +59,22 @@ public class JTree_Apml_000 extends JTree
 	public ImageIO importref_015;
 	public File importref_016;
 
+	//
+
 	public Component parent;
 	public Apmlbasesystem system;
 
+	//
+
 	public Integer selected_child_index;
+
+	//
+
+	public File last_selected_manifest_file = null;
+
+	public File last_selected_basedir = null;
+
+	//
 
 	/**
 	 * @param parent : The tree AWT object.
@@ -183,17 +196,21 @@ public class JTree_Apml_000 extends JTree
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void reloadfrombytes(ReloadApmlTreeEvent event)
+	public void loadfromtextpane(ReloadApmlTreeEvent event)
 	{
 		ByteArrayInputStream bytes = event.getByteRef();
 
 		Document document;
 
+		Document manifestdocument;
+
 		DefaultTreeModel model;
 
 		DefaultMutableTreeNode root;
 
-		DefaultMutableTreeNode manifestnode;
+		ApmlJTreeNode apmlnode;
+
+		DefaultMutableTreeNode manifestfoldernode;
 
 		DefaultMutableTreeNode packagesnode;
 
@@ -211,6 +228,8 @@ public class JTree_Apml_000 extends JTree
 
 			document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(bytes);
 
+			manifestdocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(this.last_selected_manifest_file);
+
 			xpath = XPathFactory.newInstance().newXPath();
 
 			nodes = Xpathquick.evaluate(document, xpath, "/*");
@@ -227,13 +246,17 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			manifestnode = new DefaultMutableTreeNode("manifest", true);
+			apmlnode = new ApmlJTreeNode(document.createElement("apml"), true);
+
+			manifestfoldernode = new DefaultMutableTreeNode("manifest", true);
 
 			packagesnode = new DefaultMutableTreeNode("packages", true);
 
 			//
 
-			manifestnode.setAllowsChildren(true);
+			manifestfoldernode.setAllowsChildren(true);
+
+			apmlnode.setAllowsChildren(true);
 
 			packagesnode.setAllowsChildren(true);
 
@@ -245,9 +268,11 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			model.insertNodeInto(manifestnode, root, 0);
+			model.insertNodeInto(manifestfoldernode, root, 0);
 
-			model.insertNodeInto(packagesnode, root, 1);
+			model.insertNodeInto(apmlnode, root, 1);
+
+			model.insertNodeInto(packagesnode, root, 2);
 
 			//
 
@@ -255,7 +280,64 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			this.recursiveloadfromnodelist(model, root, packagesnode, childnode, nodes, 0);
+			this.rloadfromnodelist(model, root, packagesnode, childnode, nodes, 0);
+
+			//
+
+			//
+
+			ApmlJTreeNode manifestnode = new ApmlJTreeNode(this.last_selected_manifest_file.getName(), this.last_selected_manifest_file);
+
+			model.insertNodeInto(manifestnode, manifestfoldernode, 0);
+
+			//
+
+			NodeList apmlxmldocumentnodelist;
+
+			apmlxmldocumentnodelist = Xpathquick.evaluate(manifestdocument, xpath, "//document[@type='apml']");
+
+			if (apmlxmldocumentnodelist.getLength() == 0)
+			{
+				System.out.println("No APML XML document found.");
+
+				ApmlJTreeNode emptyxmlnode = new ApmlJTreeNode(document.createElement("empty"));
+
+				model.insertNodeInto(emptyxmlnode, apmlnode, 0);
+			}
+			else
+			{
+				NodeList path;
+
+				NodeList name;
+
+				path = Xpathquick.evaluate(manifestdocument, xpath, "//document[@type='apml']/@path");
+
+				name = Xpathquick.evaluate(manifestdocument, xpath, "//document[@type='apml']/@name");
+
+				if (path.getLength() == 1 && name.getLength() == 1)
+				{
+
+					String directory = path.item(0).getNodeValue();
+
+					String filename = name.item(0).getNodeValue();
+
+					System.out.println("Oh look, APML XML document found.");
+
+					//
+
+					String filepath = directory + System.getProperty("file.separator") + filename;
+
+					System.err.println("Filepath: " + filepath);
+
+					File apmlxmlfile = new File(filepath);
+
+					ApmlJTreeNode apmlxmlnode = new ApmlJTreeNode(apmlxmlfile.getName(), apmlxmlfile);
+
+					model.insertNodeInto(apmlxmlnode, apmlnode, 0);
+				}
+				else
+					System.out.println("Error in XML manifest file for APML :: file name and/or path not given.");
+			}
 
 			//
 
@@ -272,9 +354,17 @@ public class JTree_Apml_000 extends JTree
 		}
 	}
 
-	public void reloadfromfile(LoadApmlTreeEvent event)
+	public void loadfromfile(LoadApmlTreeEvent event)
 	{
 		File file = event.getFileRef();
+
+		//
+
+		this.last_selected_manifest_file = event.getFileRef();
+
+		this.last_selected_basedir = new File(event.getFileRef().getParent());
+
+		//
 
 		Document document;
 
@@ -282,7 +372,7 @@ public class JTree_Apml_000 extends JTree
 
 		DefaultMutableTreeNode root;
 
-		DefaultMutableTreeNode apmlnode;
+		ApmlJTreeNode apmlnode;
 
 		DefaultMutableTreeNode manifestnode;
 
@@ -312,7 +402,7 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			apmlnode = new DefaultMutableTreeNode("apml", true);
+			apmlnode = new ApmlJTreeNode(document.createElement("apml"), true);
 
 			manifestnode = new DefaultMutableTreeNode("manifest", true);
 
@@ -332,23 +422,75 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			manifestnode.insert(new DefaultMutableTreeNode("manifest.xml"), manifestnode.getChildCount() == 0 ? 0 : manifestnode.getChildCount() - 1);
+			model.insertNodeInto(manifestnode, root, 0);
 
-			//
-
-			model.insertNodeInto(apmlnode, root, 0);
-
-			model.insertNodeInto(manifestnode, root, 1);
+			model.insertNodeInto(apmlnode, root, 1);
 
 			model.insertNodeInto(packagesnode, root, 2);
 
 			//
 
-			this.recursiveloadfromnodelist(model, root, packagesnode, childnode, nodes, 0);
+			this.rloadfromnodelist(model, root, packagesnode, childnode, nodes, 0);
 
 			//
 
-			//model.reload();
+			ApmlJTreeNode apmlmanifestnode = new ApmlJTreeNode(file.getName(), file);
+
+			model.insertNodeInto(apmlmanifestnode, manifestnode, 0);
+
+			//TODO move out to load APML XML document subroutine
+
+			NodeList apmlxmldocumentnodelist;
+
+			apmlxmldocumentnodelist = Xpathquick.evaluate(document, xpath, "//document[@type='apml']");
+
+			if (apmlxmldocumentnodelist.getLength() == 0)
+			{
+				System.out.println("No APML XML document found.");
+
+				ApmlJTreeNode emptyxmlnode = new ApmlJTreeNode(document.createElement("empty"));
+
+				model.insertNodeInto(emptyxmlnode, apmlnode, 0);
+			}
+			else
+			{
+				NodeList path;
+
+				NodeList name;
+
+				path = Xpathquick.evaluate(document, xpath, "//document[@type='apml']/@path");
+
+				name = Xpathquick.evaluate(document, xpath, "//document[@type='apml']/@name");
+
+				if (path.getLength() == 1 && name.getLength() == 1)
+				{
+
+					String directory = path.item(0).getNodeValue();
+
+					String filename = name.item(0).getNodeValue();
+
+					System.out.println("Oh look, APML XML document found.");
+
+					//
+
+					String filepath = directory + System.getProperty("file.separator") + filename;
+
+					System.err.println("Filepath :" + filepath);
+
+					File apmlxmlfile = new File(filepath);
+
+					ApmlJTreeNode apmlxmlnode = new ApmlJTreeNode(apmlxmlfile.getName(), apmlxmlfile);
+
+					model.insertNodeInto(apmlxmlnode, apmlnode, 0);
+				}
+				else
+					System.out.println("Error in XML manifest file for APML :: file name and/or path not given.");
+
+
+				//model.reload();
+			}
+
+			//TODO move out to load Manifest XML document subroutine
 		}
 		catch (Exception e)
 		{
@@ -357,7 +499,7 @@ public class JTree_Apml_000 extends JTree
 	}
 
 	//
-	private void recursiveloadfromnodelist(DefaultTreeModel model, DefaultMutableTreeNode root /*root*/, DefaultMutableTreeNode parent /*packages*/, DefaultMutableTreeNode child /*project*/, NodeList children, Integer depth)
+	private void rloadfromnodelist(DefaultTreeModel model, DefaultMutableTreeNode root /*root*/, DefaultMutableTreeNode parent /*packages*/, DefaultMutableTreeNode child /*project*/, NodeList children, Integer depth)
 	{
 		try
 		{
@@ -421,7 +563,7 @@ public class JTree_Apml_000 extends JTree
 
 				//
 
-				recursiveloadfromnodelist(model, root, apml_node, apml_node, children.item(i).getChildNodes(), depth + 1);
+				rloadfromnodelist(model, root, apml_node, apml_node, children.item(i).getChildNodes(), depth + 1);
 
 				//
 

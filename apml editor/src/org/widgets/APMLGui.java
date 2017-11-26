@@ -149,13 +149,13 @@ public class APMLGui extends JFrame
 
 					UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Selected].textForeground", new Color(230, 230, 230));
 
-					UIManager.put("TabbedPane:TabbedPaneTab[Enabled].font", new FontUIResource(new Font("HeadLineA", Font.ITALIC, 14)));
+					UIManager.put("TabbedPane:TabbedPaneTab[Enabled].font", new FontUIResource(new Font("HeadLineA", Font.ITALIC, 13)));
 
-					UIManager.put("TabbedPane:TabbedPaneTab[Enabled+Selected].font", new FontUIResource(new Font("HeadLineA", Font.ITALIC, 14)));
+					UIManager.put("TabbedPane:TabbedPaneTab[Enabled+Selected].font", new FontUIResource(new Font("HeadLineA", Font.ITALIC, 13)));
 
-					UIManager.put("TabbedPane:TabbedPaneTab[Focused+Selected].font", new FontUIResource(new Font("HeadLineA", Font.ITALIC, 14)));
+					UIManager.put("TabbedPane:TabbedPaneTab[Focused+Selected].font", new FontUIResource(new Font("HeadLineA", Font.ITALIC, 13)));
 
-					UIManager.put("TabbedPane.font", new FontUIResource(new Font("HeadLineA", Font.ITALIC, 14)));
+					UIManager.put("TabbedPane.font", new FontUIResource(new Font("HeadLineA", Font.ITALIC, 13)));
 
 					//
 
@@ -363,55 +363,20 @@ class BackgroundPainter implements Painter<JComponent>
 
 			for (int i = 0; i < height; i++)
 			{
-				//int red = 	(color.getRed()+(2*i)) 		> 255 ? 255 : 	(color.getRed()+(2*i));
-
-				//int green = (color.getGreen()+(2*i)) 	> 255 ? 255 : 	(color.getGreen()+(2*i));
-
-				//int blue = 	(color.getBlue()+(2*i)) 	> 255 ? 255 : 	(color.getBlue()+(2*i)) ;
-
 				int red = (color.getRed() - (2 * i)) < 0 ? 0 : (color.getRed() - (2 * i));
 
 				int green = (color.getGreen() - (2 * i)) < 0 ? 0 : (color.getGreen() - (2 * i));
 
 				int blue = (color.getBlue() - (2 * i)) < 0 ? 0 : (color.getBlue() - (2 * i));
 
+				//
+
 				Color newcolor = new Color(red, green, blue);
 
 				g.setColor(newcolor);
 
 				g.drawLine(0, height - i, width - 1, height - i);
-
-				//g.drawLine(0,height-1,width/4, i);
-
-				//g.setColor(Color.RED);
-
-				//g.drawLine(width-1, height, i,i);
-
-				//g.drawLine(0,i,width-1,0); //g.drawLine(0, 1,width-i, height-i);
 			}
-
-
-			/*
-			for(int i=height; i>0; i--)
-			{
-				int red = (color.getRed()-(1*i)) < 0 ? 0 : color.getRed()-(1*i);
-
-				int green = (color.getGreen()-(1*i)) < 0 ? 0 : color.getGreen()-(1*i);
-
-				int blue = (color.getBlue()-(1*i)) < 0 ? 0 : color.getBlue()-(1*i);
-
-				Color newcolor = new Color(red, green, blue);
-
-				g.setColor(newcolor);
-
-				g.drawLine(0, i, width-1, height-i);
-			}*/
-
-			//
-
-			g.setColor(Color.WHITE.darker()); //top
-
-			//g.drawLine(0,height-1,width-1,height-1);
 
 			//
 
@@ -433,13 +398,39 @@ class BackgroundPainter implements Painter<JComponent>
 
 			//
 
-			g.setColor(Color.GRAY); //yellow new Color(141, 68, 19) //new Color(92, 120, 95)
+			g.setColor(new Color(56, 160, 161)); //yellow new Color(141, 68, 19) //new Color(92, 120, 95)
 
-			g.fillRect(20, -5, width - 40, 5); //highlight 1
+			g.fillRect(2, -5, 10, 5);            //bottom highlight 1
 
-			g.setColor(new Color(80, 80, 80));
+			//
 
-			g.fillRect(1, height, width - 1, 3); //highlight 1
+			g.setColor(new Color(56, 160, 161).darker()); //yellow new Color(141, 68, 19) //new Color(92, 120, 95)
+
+			g.fillRect(12, -5, 10, 5);            //bottom highlight 1
+
+			//
+
+			g.setColor(new Color(56, 160, 161).darker().darker()); //yellow new Color(141, 68, 19) //new Color(92, 120, 95)
+
+			g.fillRect(22, -5, 10, 5);            //bottom highlight 1
+
+			//
+
+			g.setColor(Color.WHITE.darker().darker().darker()); //yellow new Color(141, 68, 19) //new Color(92, 120, 95)
+
+			g.fillRect(32, -5, width - 30, 5);            //bottom highlight 1
+
+			//
+
+			g.setColor(Color.GRAY.brighter()); //
+
+			//g.fillRect(22, -5, width-22, 5); 	//bottom highlight 2
+
+			//
+
+			g.setColor(Color.WHITE); //new Color(80, 80, 80)
+
+			g.fillRect(0, height, width, 3);                //bottom highlight 3
 
 			//
 

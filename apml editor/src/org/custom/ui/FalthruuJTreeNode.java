@@ -16,6 +16,13 @@ public class FalthruuJTreeNode extends DefaultMutableTreeNode
 		super(name, false);
 	}
 
+	public FalthruuJTreeNode(String filename, File fileRef)
+	{
+		this.userObject = filename;
+
+		this.fileRef = fileRef;
+	}
+
 	public FalthruuJTreeNode(Node node)
 	{
 		super(node, false);
@@ -41,6 +48,9 @@ public class FalthruuJTreeNode extends DefaultMutableTreeNode
 	@Override
 	public String toString()
 	{
+		if (this.userObject instanceof String)
+			return (String) this.userObject;
+
 		return ((Node) this.getUserObject()).getNodeName();
 	}
 

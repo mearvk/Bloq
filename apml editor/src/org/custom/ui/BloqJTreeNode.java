@@ -11,6 +11,13 @@ public class BloqJTreeNode extends DefaultMutableTreeNode
 
 	public File fileRef;
 
+	public BloqJTreeNode(String filename, File fileRef)
+	{
+		this.userObject = filename;
+
+		this.fileRef = fileRef;
+	}
+
 	public BloqJTreeNode(String name)
 	{
 		super(name, false);
@@ -48,6 +55,9 @@ public class BloqJTreeNode extends DefaultMutableTreeNode
 	@Override
 	public String toString()
 	{
+		if (this.userObject instanceof String)
+			return (String) this.userObject;
+
 		return ((Node) this.getUserObject()).getNodeName();
 	}
 

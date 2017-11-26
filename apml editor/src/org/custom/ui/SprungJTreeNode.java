@@ -11,6 +11,13 @@ public class SprungJTreeNode extends DefaultMutableTreeNode
 
 	public File fileRef;
 
+	public SprungJTreeNode(String filename, File fileRef)
+	{
+		this.userObject = filename;
+
+		this.fileRef = fileRef;
+	}
+
 	public SprungJTreeNode(String name)
 	{
 		super(name, false);
@@ -41,6 +48,9 @@ public class SprungJTreeNode extends DefaultMutableTreeNode
 	@Override
 	public String toString()
 	{
+		if (this.userObject instanceof String)
+			return (String) this.userObject;
+
 		return ((Node) this.getUserObject()).getNodeName();
 	}
 

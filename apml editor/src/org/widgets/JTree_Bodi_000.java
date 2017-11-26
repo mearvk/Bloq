@@ -3,7 +3,7 @@ package org.widgets;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.xpath.helpers.Xpathquick;
-import org.custom.ui.BloqJTreeNode;
+import org.custom.ui.ApmlJTreeNode;
 import org.custom.ui.BodiJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseBodiDocumentEvent;
@@ -164,12 +164,12 @@ public class JTree_Bodi_000 extends JTree
 		}
 	}
 
-	public void update(CloseBodiDocumentEvent event)
+	public void rloadfromnodelist(CloseBodiDocumentEvent event)
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void update(LoadBodiTreeEvent event)
+	public void rloadfromnodelist(LoadBodiTreeEvent event)
 	{
 		File file = event.getFileRef();
 
@@ -209,7 +209,13 @@ public class JTree_Bodi_000 extends JTree
 
 			//
 
-			this.update(event.getFileRef(), event, document, model, root, root, manifests, nodes, 0);
+			this.rloadfromnodelist(event.getFileRef(), event, document, model, root, root, manifests, nodes, 0);
+
+			//
+
+			BodiJTreeNode filenode = new BodiJTreeNode(file.getName(), file);
+
+			model.insertNodeInto(filenode, manifests, 0);
 
 			//
 
@@ -222,7 +228,7 @@ public class JTree_Bodi_000 extends JTree
 	}
 
 	//
-	private void update(File file, LoadBodiTreeEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
+	private void rloadfromnodelist(File file, LoadBodiTreeEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
 	{
 		if (manifest == null)
 			return;
@@ -252,6 +258,9 @@ public class JTree_Bodi_000 extends JTree
 
 				//
 
+				if (files[j].getName().endsWith("txt"))
+					continue;
+
 				item = new BodiJTreeNode(document.createElement(files[j].getName()), files[j]);
 
 				item.setAllowsChildren(true);
@@ -264,12 +273,7 @@ public class JTree_Bodi_000 extends JTree
 
 				if (files[j].isDirectory())
 				{
-					this.update(files[j], event, document, model, root, item, manifest, children, depth);
-				}
-				else if (files[j].getName().endsWith("txt"))
-				{
-
-					model.insertNodeInto(item, manifest, manifest.getChildCount() == 0 ? 0 : manifest.getChildCount() - 1);
+					this.rloadfromnodelist(files[j], event, document, model, root, item, manifest, children, depth);
 				}
 
 				//

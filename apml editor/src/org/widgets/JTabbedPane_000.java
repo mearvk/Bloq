@@ -56,6 +56,22 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 	public Component parent;
 	public Apmlbasesystem system;
 
+	//
+
+	public final String apmltitlestring = "☬      Apml";
+
+	public final String bloqtitlestring = "☬      Bloq";
+
+	public final String bodititlestring = "☬      Bodi";
+
+	public final String munctiontitlestring = "☬      Munction";
+
+	public final String runyntitlestring = "☬      Runyn";
+
+	public final String sprungtitlestring = "☬      Sprung";
+
+	public final String falthruutitlestring = "☬      Falthruu";
+
 	/**
 	 * @param parent : The tree AWT object.
 	 */
@@ -69,31 +85,31 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		//
 
-		this.addTab("      Apml  ☬", new JTabbedPaneJPanel(this));
+		this.addTab(apmltitlestring, new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Bloq  ☬", new JTabbedPaneJPanel(this));
+		this.addTab(bloqtitlestring, new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Bodi  ☬", new JTabbedPaneJPanel(this));
+		this.addTab(bodititlestring, new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Munction  ☬", new JTabbedPaneJPanel(this));
+		this.addTab(munctiontitlestring, new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Runyn  ☬", null);
+		this.addTab(runyntitlestring, null);
 
 		//
 
-		this.addTab("      Sprung  ☬", new JTabbedPaneJPanel(this));
+		this.addTab(sprungtitlestring, new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Falthruu  ☬", new JTabbedPaneJPanel(this));
+		this.addTab(falthruutitlestring, new JTabbedPaneJPanel(this));
 
 		//
 
@@ -158,31 +174,31 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 		//
 
-		this.addTab("      Apml  ☬", new JTabbedPaneJPanel(this));
+		this.addTab(apmltitlestring, new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Bloq  ☬", new JTabbedPaneJPanel(this));
+		this.addTab(bloqtitlestring, new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Bodi  ☬", new JTabbedPaneJPanel(this));
+		this.addTab(bodititlestring, new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Munction  ☬", new JTabbedPaneJPanel(this));
+		this.addTab(munctiontitlestring, new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Runyn  ☬", null);
+		this.addTab(runyntitlestring, null);
 
 		//
 
-		this.addTab("      Sprung  ☬", new JTabbedPaneJPanel(this));
+		this.addTab(sprungtitlestring, new JTabbedPaneJPanel(this));
 
 		//
 
-		this.addTab("      Falthruu  ☬", new JTabbedPaneJPanel(this));
+		this.addTab(falthruutitlestring, new JTabbedPaneJPanel(this));
 
 		//
 
@@ -266,7 +282,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 					switch (panetitle)
 					{
-						case "      Apml  ☬":
+						case apmltitlestring:
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -284,7 +300,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "      Bloq  ☬":
+						case bloqtitlestring:
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -302,7 +318,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "      Bodi  ☬":
+						case bodititlestring:
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -320,7 +336,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "      Munction  ☬":
+						case munctiontitlestring:
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -338,7 +354,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "      Sprung  ☬":
+						case sprungtitlestring:
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -356,7 +372,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "      Runyn  ☬":
+						case runyntitlestring:
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
@@ -374,7 +390,7 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 							break;
 
-						case "      Falthruu  ☬":
+						case falthruutitlestring:
 
 							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 

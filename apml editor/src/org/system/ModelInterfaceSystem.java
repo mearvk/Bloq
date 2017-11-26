@@ -4,15 +4,24 @@ import apml.modeling.Apmlsystem;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import org.events.ReloadApmlTreeEvent;
+import org.system.interfaces.BooleanRunnable;
 import org.widgets.*;
 
 import javax.swing.*;
+import javax.xml.xpath.XPathFactory;
 import java.awt.event.ActionEvent;
 import java.io.ByteArrayInputStream;
 
 public class ModelInterfaceSystem extends Apmlsystem
 {
 	public final String bodi = "//editor/ui/observers/model_interface_system";
+
+	//
+
+	public static final String static_bodi = "//editor/ui/observers/model_interface_system";
+
+	//
+
 	public final String id = "userinterfacesystem";
 	public final String tag = "system";
 	public ModelInterfaceObserver object_000 = null;
@@ -44,6 +53,11 @@ public class ModelInterfaceSystem extends Apmlsystem
 		// bodi
 
 		Bodi.context("editor").put("//editor/ui/observers/model_interface_system", this);
+	}
+
+	public static ModelInterfaceSystem ref()
+	{
+		return (ModelInterfaceSystem) Bodi.context("editor").pull(ModelInterfaceSystem.static_bodi);
 	}
 
 	public void update(ActionEvent event)
@@ -99,6 +113,33 @@ public class ModelInterfaceSystem extends Apmlsystem
 	}
 }
 
+class GradeAsManifestFile implements BooleanRunnable
+{
+	@Override
+	public Boolean run()
+	{
+		return null;
+	}
+
+	@Override
+	public Boolean run(Object object)
+	{
+		return false;
+	}
+
+	@Override
+	public Boolean ex_run() throws Exception
+	{
+		return null;
+	}
+
+	@Override
+	public Boolean ex_run(Object object) throws Exception
+	{
+		return null;
+	}
+}
+
 class ApmlStructureUpdateRequest implements Runnable
 {
 	public RSTextPane_Apml_000 textpane;
@@ -131,7 +172,7 @@ class ApmlStructureUpdateRequest implements Runnable
 
 		//
 
-		this.jtree.reloadfrombytes(reload_tree_event);
+		this.jtree.loadfromtextpane(reload_tree_event);
 
 		this.jtree.removenewlinetextnodes();
 
