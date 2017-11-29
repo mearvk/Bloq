@@ -59,8 +59,12 @@ public class JTree_Bloq_000 extends JTree_000
 	public ImageIO importref_015;
 	public File importref_016;
 
+	//
+
 	public Component parent;
 	public Apmlbasesystem system;
+
+	//
 
 	public Integer selected_child_index;
 
@@ -337,60 +341,5 @@ public class JTree_Bloq_000 extends JTree_000
 		{
 			e.printStackTrace();
 		}
-	}
-
-	public void removenewlinetextnodes()
-	{
-		DefaultMutableTreeNode root = (DefaultMutableTreeNode) this.getModel().getRoot();
-
-		DefaultTreeModel model = (DefaultTreeModel) this.getModel();
-
-		Enumeration children = root.breadthFirstEnumeration();
-
-		//
-
-		DefaultMutableTreeNode current_child;
-
-		Object current_object;
-
-		Short current_type;
-
-		ArrayList<DefaultMutableTreeNode> remove = new ArrayList<>(500);
-
-		for (; children.hasMoreElements(); )
-		{
-			current_child = (DefaultMutableTreeNode) children.nextElement();
-
-			current_object = current_child.getUserObject();
-
-			current_type = current_object instanceof Node ? ((Node) current_object).getNodeType() : -1;
-
-			//
-
-			if (current_object instanceof String)
-			{
-				System.out.println(current_object);
-			}
-
-			//
-
-			else if (current_type == Node.TEXT_NODE)
-			{
-				//System.out.println("Removing carriage return: "+((Node)current_object).getNodeName()+" : "+((Node)current_object).getNodeValue().replace("\n","\\n"));
-
-				remove.add(current_child);
-			}
-		}
-
-		//
-
-		for (int i = 0; i < remove.size(); i++)
-		{
-			model.removeNodeFromParent(remove.get(i));
-		}
-
-		//
-
-		model.reload();
 	}
 }

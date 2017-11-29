@@ -59,8 +59,12 @@ public class JTree_Bodi_000 extends JTree_000
 	public ImageIO importref_015;
 	public File importref_016;
 
+	//
+
 	public Component parent;
 	public Apmlbasesystem system;
+
+	//
 
 	public Integer selected_child_index;
 
@@ -141,6 +145,9 @@ public class JTree_Bodi_000 extends JTree_000
 		Bodi.context("editor").put(this.bodi, this);
 	}
 
+	/**
+	 *
+	 */
 	public void init()
 	{
 		DefaultMutableTreeNode root = ((DefaultMutableTreeNode) this.getModel().getRoot());
@@ -167,11 +174,18 @@ public class JTree_Bodi_000 extends JTree_000
 		}
 	}
 
+	/**
+	 * @param event
+	 */
 	public void removeallchildren(CloseBodiDocumentEvent event)
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
+	/**
+	 *
+	 * @param event
+	 */
 	public void loadfromfile(LoadBodiTreeEvent event)
 	{
 		File file = event.getFileRef();
@@ -212,7 +226,7 @@ public class JTree_Bodi_000 extends JTree_000
 
 			//
 
-			this.loadfromfile(event.getFileRef(), event, document, model, root, root, manifests, nodes, 0);
+			this.rloadfromnodelist(event.getFileRef(), event, document, model, root, root, manifests, nodes, 0);
 
 			//
 
@@ -230,8 +244,18 @@ public class JTree_Bodi_000 extends JTree_000
 		}
 	}
 
-	//
-	private void loadfromfile(File file, LoadBodiTreeEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
+	/**
+	 * @param file
+	 * @param event
+	 * @param document
+	 * @param model
+	 * @param root
+	 * @param parent
+	 * @param manifest
+	 * @param children
+	 * @param depth
+	 */
+	private void rloadfromnodelist(File file, LoadBodiTreeEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
 	{
 		if (manifest == null)
 			return;
@@ -276,7 +300,7 @@ public class JTree_Bodi_000 extends JTree_000
 
 				if (files[j].isDirectory())
 				{
-					this.loadfromfile(files[j], event, document, model, root, item, manifest, children, depth);
+					this.rloadfromnodelist(files[j], event, document, model, root, item, manifest, children, depth);
 				}
 
 				//
@@ -290,61 +314,6 @@ public class JTree_Bodi_000 extends JTree_000
 				exception.printStackTrace();
 			}
 		}
-
-		model.reload();
-	}
-
-	public void removenewlinetextnodes()
-	{
-		DefaultMutableTreeNode root = (DefaultMutableTreeNode) this.getModel().getRoot();
-
-		DefaultTreeModel model = (DefaultTreeModel) this.getModel();
-
-		Enumeration children = root.breadthFirstEnumeration();
-
-		//
-
-		DefaultMutableTreeNode current_child;
-
-		Object current_object;
-
-		Short current_type;
-
-		ArrayList<DefaultMutableTreeNode> remove = new ArrayList<>(500);
-
-		for (; children.hasMoreElements(); )
-		{
-			current_child = (DefaultMutableTreeNode) children.nextElement();
-
-			current_object = current_child.getUserObject();
-
-			current_type = current_object instanceof Node ? ((Node) current_object).getNodeType() : -1;
-
-			//
-
-			if (current_object instanceof String)
-			{
-				System.out.println(current_object);
-			}
-
-			//
-
-			else if (current_type == Node.TEXT_NODE)
-			{
-				//System.out.println("Removing carriage return: "+((Node)current_object).getNodeName()+" : "+((Node)current_object).getNodeValue().replace("\n","\\n"));
-
-				remove.add(current_child);
-			}
-		}
-
-		//
-
-		for (int i = 0; i < remove.size(); i++)
-		{
-			model.removeNodeFromParent(remove.get(i));
-		}
-
-		//
 
 		model.reload();
 	}
