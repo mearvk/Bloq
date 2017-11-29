@@ -400,25 +400,31 @@ class BackgroundPainter implements Painter<JComponent>
 
 			g.setColor(new Color(56, 160, 161)); //yellow new Color(141, 68, 19) //new Color(92, 120, 95)
 
-			g.fillRect(2, -5, 10, 5);            //bottom highlight 1
+			g.fillRect(2, -4, 10, 5);            //bottom highlight 1
 
 			//
 
-			g.setColor(new Color(56, 160, 161).darker()); //yellow new Color(141, 68, 19) //new Color(92, 120, 95)
+			g.setColor(Color.DARK_GRAY); //yellow new Color(141, 68, 19) //new Color(92, 120, 95)
 
-			g.fillRect(12, -5, 10, 5);            //bottom highlight 1
+			g.fillRect(12, -4, 10, 5);            //bottom highlight 1
 
 			//
 
-			g.setColor(new Color(56, 160, 161).darker().darker()); //yellow new Color(141, 68, 19) //new Color(92, 120, 95)
+			g.setColor(Color.GRAY); //yellow new Color(141, 68, 19) //new Color(92, 120, 95)
 
-			g.fillRect(22, -5, 10, 5);            //bottom highlight 1
+			g.fillRect(22, -4, 10, 5);            //bottom highlight 1
 
 			//
 
 			g.setColor(Color.WHITE.darker().darker().darker()); //yellow new Color(141, 68, 19) //new Color(92, 120, 95)
 
-			g.fillRect(32, -5, width - 30, 5);            //bottom highlight 1
+			g.fillRect(32, -5, width - 30, 5);            //bottom highlight 1 (mid now)
+
+			//
+
+			g.setColor(Color.WHITE.darker().darker().darker()); //yellow new Color(141, 68, 19) //new Color(92, 120, 95)
+
+			//g.fillRect(32, -5, width - 30, 5);            //bottom highlight 1
 
 			//
 

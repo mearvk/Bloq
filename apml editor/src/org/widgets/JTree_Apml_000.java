@@ -8,10 +8,7 @@ import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlTreeEvent;
 import org.events.ReloadApmlTreeEvent;
 import org.listeners.*;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -38,7 +35,7 @@ import java.util.Enumeration;
  * @see
  * @since
  */
-public class JTree_Apml_000 extends JTree
+public class JTree_Apml_000 extends JTree_000
 {
 	public String bodi = "//editor/ui/jtree_apml_000";
 
@@ -70,17 +67,13 @@ public class JTree_Apml_000 extends JTree
 
 	//
 
-	public File last_selected_manifest_file = null;
-
-	public File last_selected_basedir = null;
-
-	//
-
 	/**
 	 * @param parent : The tree AWT object.
 	 */
 	public JTree_Apml_000(Component parent)
 	{
+		super(parent);
+
 		// setters
 
 		this.setBackground(new Color(213, 213, 213));
@@ -126,6 +119,8 @@ public class JTree_Apml_000 extends JTree
 	 */
 	public JTree_Apml_000(Component parent, Apmlbasesystem system)
 	{
+		super(parent, system);
+
 		// setters
 
 		this.setBackground(new Color(213, 213, 213));
@@ -165,6 +160,9 @@ public class JTree_Apml_000 extends JTree
 		Bodi.context("editor").put(this.bodi, this);
 	}
 
+	/**
+	 *
+	 */
 	public void init()
 	{
 		DefaultMutableTreeNode root = ((DefaultMutableTreeNode) this.getModel().getRoot());
@@ -191,48 +189,124 @@ public class JTree_Apml_000 extends JTree
 		}
 	}
 
-	public void removeallchildren(CloseApmlDocumentEvent event)
-	{
-		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
-	}
-
-	public void loadfromtextpane(ReloadApmlTreeEvent event)
+	/**
+	 * @param event
+	 */
+	public void loadfrombytes(ReloadApmlTreeEvent event)
 	{
 		ByteArrayInputStream bytes = event.getByteRef();
 
-		Document document;
+		Document document = null;
 
-		Document manifestdocument;
+		Document apmldocument = null;
+
+		Document manifestdocument = null;
 
 		DefaultTreeModel model;
 
 		DefaultMutableTreeNode root;
 
-		ApmlJTreeNode apmlnode;
+		DefaultMutableTreeNode apmlfoldernode;
 
 		DefaultMutableTreeNode manifestfoldernode;
 
-		DefaultMutableTreeNode packagesnode;
-
-		DefaultMutableTreeNode childnode;
+		DefaultMutableTreeNode packagesfoldernode;
 
 		XPath xpath;
 
-		NodeList nodes;
+		NodeList apmlnodes = null;
+
+		NodeList manifestnodes = null;
+
+		String doctypestring;
+
+		xpath = XPathFactory.newInstance().newXPath();
 
 		//
 
 		try
 		{
+			//
 
+			doctypestring = this.getdocumenttype(Xpathquick.evaluate(DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(bytes), xpath, "//project[@doctype]"));
 
-			document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(bytes);
+			bytes.reset();
 
-			manifestdocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(this.last_selected_manifest_file);
+			//
 
-			xpath = XPathFactory.newInstance().newXPath();
+			if (doctypestring.contains("apml"))
+			{
+				this.last_selected_apml_file_bytes = event.byteRef;
 
-			nodes = Xpathquick.evaluate(document, xpath, "/*");
+				//
+
+				apmldocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(bytes);
+
+				apmlnodes = Xpathquick.evaluate(apmldocument, xpath, "/*");
+
+				bytes.reset();
+
+				//
+
+				if (this.last_selected_manifest_file_bytes != null)
+				{
+					manifestdocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(last_selected_manifest_file_bytes);
+
+					manifestnodes = Xpathquick.evaluate(manifestdocument, xpath, "/*");
+
+					last_selected_manifest_file_bytes.reset();
+				}
+				else if (this.last_selected_manifest_file != null)
+				{
+					manifestdocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(last_selected_manifest_file);
+
+					manifestnodes = Xpathquick.evaluate(manifestdocument, xpath, "/*");
+				}
+				else
+				{
+					System.out.println("Unable to determine if there is an APML file for parsing; debug further.");
+
+					//return;
+				}
+			}
+
+			if (doctypestring.contains("manifest"))
+			{
+				this.last_selected_manifest_file_bytes = event.byteRef;
+
+				//
+
+				manifestdocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(bytes);
+
+				manifestnodes = Xpathquick.evaluate(manifestdocument, xpath, "/*");
+
+				bytes.reset();
+
+				//
+
+				if (this.last_selected_apml_file_bytes != null)
+				{
+					apmldocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(last_selected_apml_file_bytes);
+
+					apmlnodes = Xpathquick.evaluate(apmldocument, xpath, "/*");
+
+					last_selected_apml_file_bytes.reset();
+				}
+				else if (this.last_selected_apml_file != null)
+				{
+					apmldocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(last_selected_apml_file);
+
+					apmlnodes = Xpathquick.evaluate(apmldocument, xpath, "/*");
+				}
+				else
+				{
+					System.out.println("Unable to determine if there is a Manifest file for parsing; debug further.");
+
+					//return;
+				}
+			}
+
+			//
 
 			model = (DefaultTreeModel) this.getModel();
 
@@ -246,33 +320,33 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			apmlnode = new ApmlJTreeNode(document.createElement("apml"), true);
+			apmlfoldernode = new DefaultMutableTreeNode("apml", true);
 
 			manifestfoldernode = new DefaultMutableTreeNode("manifest", true);
 
-			packagesnode = new DefaultMutableTreeNode("packages", true);
+			packagesfoldernode = new DefaultMutableTreeNode("packages", true);
 
 			//
+
+			apmlfoldernode.setAllowsChildren(true);
 
 			manifestfoldernode.setAllowsChildren(true);
 
-			apmlnode.setAllowsChildren(true);
-
-			packagesnode.setAllowsChildren(true);
+			packagesfoldernode.setAllowsChildren(true);
 
 			//
 
-			childnode = new DefaultMutableTreeNode(nodes.item(0));
+			//childnode = new DefaultMutableTreeNode(nodes.item(0));
 
-			childnode.setAllowsChildren(true);
+			//childnode.setAllowsChildren(true);
 
 			//
 
-			model.insertNodeInto(manifestfoldernode, root, 0);
+			model.insertNodeInto(apmlfoldernode, root, 0);
 
-			model.insertNodeInto(apmlnode, root, 1);
+			model.insertNodeInto(manifestfoldernode, root, 1);
 
-			model.insertNodeInto(packagesnode, root, 2);
+			model.insertNodeInto(packagesfoldernode, root, 2);
 
 			//
 
@@ -280,9 +354,11 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			this.rloadfromnodelist(model, root, packagesnode, childnode, nodes, 0);
+			if (apmlnodes != null)
+				this.rloadfromnodelist(model, root, packagesfoldernode, null, apmlnodes, 0);
 
-			//
+			if (manifestnodes != null)
+				this.rloadfromnodelist(model, root, manifestfoldernode, null, manifestnodes, 0);
 
 			//
 
@@ -302,7 +378,7 @@ public class JTree_Apml_000 extends JTree
 
 				ApmlJTreeNode emptyxmlnode = new ApmlJTreeNode(document.createElement("empty"));
 
-				model.insertNodeInto(emptyxmlnode, apmlnode, 0);
+				model.insertNodeInto(emptyxmlnode, apmlfoldernode, 0);
 			}
 			else
 			{
@@ -333,7 +409,9 @@ public class JTree_Apml_000 extends JTree
 
 					ApmlJTreeNode apmlxmlnode = new ApmlJTreeNode(apmlxmlfile.getName(), apmlxmlfile);
 
-					model.insertNodeInto(apmlxmlnode, apmlnode, 0);
+					model.insertNodeInto(apmlxmlnode, apmlfoldernode, 0);
+
+					//
 				}
 				else
 					System.out.println("Error in XML manifest file for APML :: file name and/or path not given.");
@@ -341,10 +419,9 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			for (int i = 0; i < this.getRowCount(); i++)
-			{
-				this.expandRow(i); //TODO fix this with persistent jtree restoration logic
-			}
+			this.expandRow(1);
+
+			this.expandRow(2);
 
 			//
 		}
@@ -354,47 +431,121 @@ public class JTree_Apml_000 extends JTree
 		}
 	}
 
+	/**
+	 *
+	 * @param event
+	 */
 	public void loadfromfile(LoadApmlTreeEvent event)
 	{
 		File file = event.getFileRef();
 
-		//
+		Document document = null;
 
-		this.last_selected_manifest_file = event.getFileRef();
+		Document apmldocument = null;
 
-		this.last_selected_basedir = new File(event.getFileRef().getParent());
-
-		//
-
-		Document document;
+		Document manifestdocument = null;
 
 		DefaultTreeModel model;
 
 		DefaultMutableTreeNode root;
 
-		ApmlJTreeNode apmlnode;
+		DefaultMutableTreeNode apmlfoldernode;
 
-		DefaultMutableTreeNode manifestnode;
+		DefaultMutableTreeNode manifestfoldernode;
 
-		DefaultMutableTreeNode packagesnode;
-
-		DefaultMutableTreeNode attributesnode;
-
-		DefaultMutableTreeNode childnode;
+		DefaultMutableTreeNode packagesfoldernode;
 
 		XPath xpath;
 
-		NodeList nodes;
+		NodeList apmlnodes = null;
+
+		NodeList manifestnodes = null;
+
+		//
+
+		String doctypestring;
+
+		xpath = XPathFactory.newInstance().newXPath();
 
 		//
 
 		try
 		{
-			document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
+			//
 
-			xpath = XPathFactory.newInstance().newXPath();
+			doctypestring = this.getdocumenttype(Xpathquick.evaluate(DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file), xpath, "//project[@doctype]"));
 
-			nodes = Xpathquick.evaluate(document, xpath, "/*");
+			//
+
+			if (doctypestring.contains("apml"))
+			{
+				this.last_selected_apml_file = event.getFileRef();
+
+				//
+
+				apmldocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
+
+				apmlnodes = Xpathquick.evaluate(apmldocument, xpath, "/*");
+
+				//
+
+				if (this.last_selected_manifest_file_bytes != null)
+				{
+					manifestdocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(this.last_selected_manifest_file_bytes);
+
+					manifestnodes = Xpathquick.evaluate(manifestdocument, xpath, "/*");
+
+					this.last_selected_manifest_file_bytes.reset();
+				}
+				else if (this.last_selected_manifest_file != null)
+				{
+					manifestdocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(last_selected_manifest_file);
+
+					manifestnodes = Xpathquick.evaluate(manifestdocument, xpath, "/*");
+				}
+				else
+				{
+					System.out.println("Unable to determine if there is a Manifest file for parsing; debug further.");
+
+					//return;
+				}
+			}
+
+			if (doctypestring.contains("manifest"))
+			{
+				this.last_selected_manifest_file = event.getFileRef();
+
+				//
+
+				manifestdocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(last_selected_manifest_file);
+
+				manifestnodes = Xpathquick.evaluate(manifestdocument, xpath, "/*");
+
+				//
+
+				if (this.last_selected_apml_file_bytes != null)
+				{
+					apmldocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(last_selected_apml_file_bytes);
+
+					apmlnodes = Xpathquick.evaluate(apmldocument, xpath, "/*");
+
+					last_selected_apml_file_bytes.reset();
+				}
+				else if (this.last_selected_apml_file != null)
+				{
+					apmldocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(last_selected_apml_file);
+
+					apmlnodes = Xpathquick.evaluate(apmldocument, xpath, "/*");
+				}
+				else
+				{
+					System.out.println("Unable to determine if there is an APML file for parsing; debug further.");
+
+					//return;
+				}
+			}
+
+			//
 
 			model = (DefaultTreeModel) this.getModel();
 
@@ -402,47 +553,63 @@ public class JTree_Apml_000 extends JTree
 
 			//
 
-			apmlnode = new ApmlJTreeNode(document.createElement("apml"), true);
+			root.removeAllChildren();
 
-			manifestnode = new DefaultMutableTreeNode("manifest", true);
-
-			packagesnode = new DefaultMutableTreeNode("packages", true);
+			model.reload();
 
 			//
 
-			manifestnode.setAllowsChildren(true);
+			apmlfoldernode = new DefaultMutableTreeNode("apml", true);
 
-			packagesnode.setAllowsChildren(true);
+			manifestfoldernode = new DefaultMutableTreeNode("manifest", true);
 
-			//
-
-			childnode = new ApmlJTreeNode(nodes.item(0));
-
-			childnode.setAllowsChildren(true);
+			packagesfoldernode = new DefaultMutableTreeNode("packages", true);
 
 			//
 
-			model.insertNodeInto(manifestnode, root, 0);
+			apmlfoldernode.setAllowsChildren(true);
 
-			model.insertNodeInto(apmlnode, root, 1);
+			manifestfoldernode.setAllowsChildren(true);
 
-			model.insertNodeInto(packagesnode, root, 2);
-
-			//
-
-			this.rloadfromnodelist(model, root, packagesnode, childnode, nodes, 0);
+			packagesfoldernode.setAllowsChildren(true);
 
 			//
 
-			ApmlJTreeNode apmlmanifestnode = new ApmlJTreeNode(file.getName(), file);
+			//childnode = new DefaultMutableTreeNode(nodes.item(0));
 
-			model.insertNodeInto(apmlmanifestnode, manifestnode, 0);
+			//childnode.setAllowsChildren(true);
 
-			//TODO move out to load APML XML document subroutine
+			//
+
+			model.insertNodeInto(apmlfoldernode, root, 0);
+
+			model.insertNodeInto(manifestfoldernode, root, 1);
+
+			model.insertNodeInto(packagesfoldernode, root, 2);
+
+			//
+
+			model.reload();
+
+			//
+
+			if (apmlnodes != null)
+				this.rloadfromnodelist(model, root, packagesfoldernode, null, apmlnodes, 0);
+
+			if (manifestnodes != null)
+				this.rloadfromnodelist(model, root, manifestfoldernode, null, manifestnodes, 0);
+
+			//
+
+			ApmlJTreeNode manifestnode = new ApmlJTreeNode(this.last_selected_manifest_file.getName(), this.last_selected_manifest_file);
+
+			model.insertNodeInto(manifestnode, manifestfoldernode, 0);
+
+			//
 
 			NodeList apmlxmldocumentnodelist;
 
-			apmlxmldocumentnodelist = Xpathquick.evaluate(document, xpath, "//document[@type='apml']");
+			apmlxmldocumentnodelist = Xpathquick.evaluate(manifestdocument, xpath, "//document[@type='apml']");
 
 			if (apmlxmldocumentnodelist.getLength() == 0)
 			{
@@ -450,7 +617,7 @@ public class JTree_Apml_000 extends JTree
 
 				ApmlJTreeNode emptyxmlnode = new ApmlJTreeNode(document.createElement("empty"));
 
-				model.insertNodeInto(emptyxmlnode, apmlnode, 0);
+				model.insertNodeInto(emptyxmlnode, apmlfoldernode, 0);
 			}
 			else
 			{
@@ -458,9 +625,9 @@ public class JTree_Apml_000 extends JTree
 
 				NodeList name;
 
-				path = Xpathquick.evaluate(document, xpath, "//document[@type='apml']/@path");
+				path = Xpathquick.evaluate(manifestdocument, xpath, "//document[@type='apml']/@path");
 
-				name = Xpathquick.evaluate(document, xpath, "//document[@type='apml']/@name");
+				name = Xpathquick.evaluate(manifestdocument, xpath, "//document[@type='apml']/@name");
 
 				if (path.getLength() == 1 && name.getLength() == 1)
 				{
@@ -475,22 +642,38 @@ public class JTree_Apml_000 extends JTree
 
 					String filepath = directory + System.getProperty("file.separator") + filename;
 
-					System.err.println("Filepath :" + filepath);
+					System.err.println("Filepath: " + filepath);
 
 					File apmlxmlfile = new File(filepath);
 
 					ApmlJTreeNode apmlxmlnode = new ApmlJTreeNode(apmlxmlfile.getName(), apmlxmlfile);
 
-					model.insertNodeInto(apmlxmlnode, apmlnode, 0);
+					model.insertNodeInto(apmlxmlnode, apmlfoldernode, 0);
+
+					//
+
+					Xpathquick.evaluate(manifestdocument, xpath, "/*");
+
+					//
+
+					apmldocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(apmlxmlfile);
+
+					apmlnodes = Xpathquick.evaluate(apmldocument, xpath, "/*");
+
+					if (apmlnodes != null)
+						this.rloadfromnodelist(model, root, packagesfoldernode, null, apmlnodes, 0);
 				}
 				else
 					System.out.println("Error in XML manifest file for APML :: file name and/or path not given.");
-
-
-				//model.reload();
 			}
 
-			//TODO move out to load Manifest XML document subroutine
+			//
+
+			this.expandRow(1);
+
+			this.expandRow(2);
+
+			//
 		}
 		catch (Exception e)
 		{
@@ -498,13 +681,21 @@ public class JTree_Apml_000 extends JTree
 		}
 	}
 
-	//
+	/**
+	 *
+	 * @param model
+	 * @param root
+	 * @param parent
+	 * @param child
+	 * @param children
+	 * @param depth
+	 */
 	private void rloadfromnodelist(DefaultTreeModel model, DefaultMutableTreeNode root /*root*/, DefaultMutableTreeNode parent /*packages*/, DefaultMutableTreeNode child /*project*/, NodeList children, Integer depth)
 	{
 		try
 		{
-			if (child == null)
-				return;
+			//if (child == null)
+			//return;
 
 			//
 
@@ -582,51 +773,5 @@ public class JTree_Apml_000 extends JTree
 		{
 			e.printStackTrace();
 		}
-	}
-
-	public void removenewlinetextnodes()
-	{
-		DefaultMutableTreeNode root = (DefaultMutableTreeNode) this.getModel().getRoot();
-
-		DefaultTreeModel model = (DefaultTreeModel) this.getModel();
-
-		Enumeration children = root.breadthFirstEnumeration();
-
-		//
-
-		DefaultMutableTreeNode current_child;
-
-		Object current_object;
-
-		Short current_type;
-
-		ArrayList<DefaultMutableTreeNode> remove = new ArrayList<>(500);
-
-		for (; children.hasMoreElements(); )
-		{
-			current_child = (DefaultMutableTreeNode) children.nextElement();
-
-			current_object = current_child.getUserObject();
-
-			current_type = current_object instanceof Node ? ((Node) current_object).getNodeType() : -1;
-
-			//
-
-			if (current_type == Node.TEXT_NODE)
-			{
-				remove.add(current_child);
-			}
-		}
-
-		//
-
-		for (int i = 0; i < remove.size(); i++)
-		{
-			model.removeNodeFromParent(remove.get(i));
-		}
-
-		//
-
-		//model.reload();
 	}
 }

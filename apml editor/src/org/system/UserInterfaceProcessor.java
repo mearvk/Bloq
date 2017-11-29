@@ -338,7 +338,7 @@ class LoadBodiTreeRequest
 
 		jtree_bodi_000.init();
 
-		jtree_bodi_000.rloadfromnodelist(event);
+		jtree_bodi_000.loadfromfile(event);
 
 		jtree_bodi_000.removenewlinetextnodes();
 	}
@@ -418,7 +418,7 @@ class LoadBloqTreeRequest
 
 		jtree_bloq_000.init();
 
-		jtree_bloq_000.rloadfromnodelist(event);
+		jtree_bloq_000.loadfromfile(event);
 
 		jtree_bloq_000.removenewlinetextnodes();
 	}
@@ -629,7 +629,7 @@ class LoadFalthruuTreeRequest
 
 		jtree_falthruu_000.init();
 
-		jtree_falthruu_000.rloadfromnodelist(event);
+		jtree_falthruu_000.loadfromfile(event);
 
 		jtree_falthruu_000.removenewlinetextnodes();
 	}
@@ -787,11 +787,12 @@ class LoadMunctionTreeRequest
 
 		jtree_munction_000.init();
 
-		jtree_munction_000.rloadfromnodelist(event);
+		jtree_munction_000.loadfromfile(event);
 
 		jtree_munction_000.removenewlinetextnodes();
 	}
 }
+
 
 class SaveMunctionDocumentRequest
 {
@@ -946,7 +947,7 @@ class LoadRunynTreeRequest
 
 		jtree_runyn_000.init();
 
-		jtree_runyn_000.rloadfromnodelist(event);
+		jtree_runyn_000.loadfromfile(event);
 
 		jtree_runyn_000.removenewlinetextnodes();
 	}
@@ -1105,7 +1106,7 @@ class LoadSprungTreeRequest
 
 		jtree_sprung_000.init();
 
-		jtree_sprung_000.rloadfromnodelist(event);
+		jtree_sprung_000.loadfromfile(event);
 
 		jtree_sprung_000.removenewlinetextnodes();
 	}
@@ -1292,7 +1293,7 @@ class ReloadApmlTreeRequest
 
 		jtree_apml_000.init();
 
-		jtree_apml_000.loadfromtextpane((ReloadApmlTreeEvent) event);
+		jtree_apml_000.loadfrombytes((ReloadApmlTreeEvent) event);
 
 		jtree_apml_000.removenewlinetextnodes();
 	}

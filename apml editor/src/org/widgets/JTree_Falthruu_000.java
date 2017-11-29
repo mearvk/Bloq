@@ -39,7 +39,7 @@ import java.util.Enumeration;
  * @see
  * @since
  */
-public class JTree_Falthruu_000 extends JTree
+public class JTree_Falthruu_000 extends JTree_000
 {
 	public String bodi = "//editor/ui/jtree_falthruu_000";
 
@@ -70,6 +70,8 @@ public class JTree_Falthruu_000 extends JTree
 	 */
 	public JTree_Falthruu_000(Component parent)
 	{
+		super(parent);
+
 		// setters
 
 		this.setBackground(null);
@@ -107,6 +109,8 @@ public class JTree_Falthruu_000 extends JTree
 	 */
 	public JTree_Falthruu_000(Component parent, Apmlbasesystem system)
 	{
+		super(parent, system);
+
 		// setters
 
 		this.setBackground(null);
@@ -164,12 +168,12 @@ public class JTree_Falthruu_000 extends JTree
 		}
 	}
 
-	public void rloadfromnodelist(CloseApmlDocumentEvent event)
+	public void removeallchildren(CloseApmlDocumentEvent event)
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void rloadfromnodelist(LoadFalthruuTreeEvent event)
+	public void loadfromfile(LoadFalthruuTreeEvent event)
 	{
 		File file = event.getFileRef();
 
@@ -209,7 +213,7 @@ public class JTree_Falthruu_000 extends JTree
 
 			//
 
-			this.rloadfromnodelist(event.getFileRef(), event, document, model, root, manifests, manifests, nodes, 0);
+			this.loadfromfile(event.getFileRef(), event, document, model, root, manifests, manifests, nodes, 0);
 
 			//
 
@@ -228,7 +232,7 @@ public class JTree_Falthruu_000 extends JTree
 	}
 
 	//
-	private void rloadfromnodelist(File file, ActionEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
+	private void loadfromfile(File file, ActionEvent event, Document document, DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode manifest, NodeList children, Integer depth)
 	{
 		if (manifest == null)
 			return;
@@ -273,7 +277,7 @@ public class JTree_Falthruu_000 extends JTree
 
 				if (files[j].isDirectory())
 				{
-					this.rloadfromnodelist(files[j], event, document, model, root, item, manifest, children, depth);
+					this.loadfromfile(files[j], event, document, model, root, item, manifest, children, depth);
 				}
 
 				//

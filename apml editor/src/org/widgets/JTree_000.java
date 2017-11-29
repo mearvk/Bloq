@@ -4,11 +4,14 @@ import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.xpath.helpers.Xpathquick;
 import org.custom.ui.ApmlJTreeNode;
+import org.custom.ui.AttributeFolderJTreeNode;
+import org.custom.ui.AttributeLeafJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlDocumentEvent;
 import org.listeners.*;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -24,6 +27,7 @@ import javax.xml.xpath.XPathFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -62,6 +66,20 @@ public class JTree_000 extends JTree
 	public Apmlbasesystem system;
 
 	public Integer selected_child_index;
+
+	//
+
+	public File last_selected_basedir = null;
+
+	public File last_selected_apml_file = null;
+
+	public File last_selected_manifest_file = null;
+
+	public ByteArrayInputStream last_selected_manifest_file_bytes = null;
+
+	public ByteArrayInputStream last_selected_apml_file_bytes = null;
+
+	//
 
 	/**
 	 * @param parent : The tree AWT object.
@@ -128,6 +146,9 @@ public class JTree_000 extends JTree
 		Bodi.context("editor").put(this.bodi, this);
 	}
 
+	/**
+	 *
+	 */
 	public void init()
 	{
 		DefaultMutableTreeNode root = ((DefaultMutableTreeNode) this.getModel().getRoot());
@@ -154,113 +175,9 @@ public class JTree_000 extends JTree
 		}
 	}
 
-	public void update(CloseApmlDocumentEvent event)
-	{
-		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
-	}
-
-	public void update(LoadApmlDocumentEvent event)
-	{
-		File file = event.getFileRef();
-
-		Document document;
-
-		DefaultTreeModel model;
-
-		DefaultMutableTreeNode root;
-
-		DefaultMutableTreeNode treenode;
-
-		XPath xpath;
-
-		NodeList nodes;
-
-		//
-
-		try
-		{
-			document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
-
-			xpath = XPathFactory.newInstance().newXPath();
-
-			nodes = Xpathquick.evaluate(document, xpath, "/*");
-
-			model = (DefaultTreeModel) this.getModel();
-
-			root = (DefaultMutableTreeNode) model.getRoot();
-
-			//
-
-			treenode = new DefaultMutableTreeNode("APML Projects", true);
-
-			//
-
-			model.insertNodeInto(treenode, root, 0);
-
-			//
-
-			this.update(model, root, root, treenode, nodes, 0);
-
-			//
-
-			model.reload();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	//
-	private void update(DefaultTreeModel model, DefaultMutableTreeNode root, DefaultMutableTreeNode parent, DefaultMutableTreeNode child, NodeList children, Integer depth)
-	{
-		try
-		{
-			if (child == null)
-				return;
-
-			//
-
-			if (parent == null)
-				return;
-
-			//
-
-			for (int i = 0; i < children.getLength(); i++)
-			{
-				Node node = children.item(i);
-
-				//
-
-				DefaultMutableTreeNode treenode;
-
-				treenode = new ApmlJTreeNode(node);
-
-				treenode.setAllowsChildren(true);
-
-				//
-
-				model.insertNodeInto(treenode, child, i);
-
-				//
-
-				NodeList rawnodes = children.item(i).getChildNodes();
-
-				update(model, root, child, treenode, rawnodes, depth + 1);
-
-				//
-			}
-
-			//
-
-			model.reload();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
+	/**
+	 *
+	 */
 	public void removenewlinetextnodes()
 	{
 		DefaultMutableTreeNode root = (DefaultMutableTreeNode) this.getModel().getRoot();
@@ -289,17 +206,8 @@ public class JTree_000 extends JTree
 
 			//
 
-			if (current_object instanceof String)
+			if (current_type == Node.TEXT_NODE)
 			{
-				System.out.println(current_object);
-			}
-
-			//
-
-			else if (current_type == Node.TEXT_NODE)
-			{
-				//System.out.println("Removing carriage return: "+((Node)current_object).getNodeName()+" : "+((Node)current_object).getNodeValue().replace("\n","\\n"));
-
 				remove.add(current_child);
 			}
 		}
@@ -313,6 +221,167 @@ public class JTree_000 extends JTree
 
 		//
 
-		model.reload();
+		//model.reload();
+	}
+
+	/**
+	 * @return
+	 */
+	public ByteArrayInputStream getlastselectedmanifestfilebytes()
+	{
+		this.last_selected_manifest_file_bytes.reset();
+
+		byte[] bytes = new byte[this.last_selected_manifest_file_bytes.available()];
+
+		try
+		{
+			this.last_selected_manifest_file_bytes.read(bytes);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		this.last_selected_manifest_file_bytes.reset();
+
+		return new ByteArrayInputStream(bytes);
+	}
+
+	/**
+	 * @param nodes
+	 * @return
+	 */
+	public String getdocumenttype(NodeList nodes)
+	{
+		if (nodes.getLength() == 0)
+		{
+			System.err.println("Unable to proceed; doctype attribute not found.");
+
+			return null;
+		}
+		else if (nodes.getLength() == 1)
+		{
+			Node doctypenode = nodes.item(0);
+
+			if (doctypenode.getNodeType() == Node.ELEMENT_NODE)
+			{
+				Element doctype = (Element) nodes.item(0);
+
+				return doctype.getAttributeNode("doctype").getNodeValue();
+			}
+			else
+			{
+				System.out.println("Unable to proceed; doctypenode is other type than Element.");
+
+				return null;
+			}
+		}
+		else
+		{
+			System.err.println("Unable to proceed; doctype attribute ambiguous.");
+
+			return null;
+		}
+	}
+
+	/**
+	 * @param event
+	 */
+	public void removeallchildren(CloseApmlDocumentEvent event)
+	{
+		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
+	}
+
+	/**
+	 * @param model
+	 * @param root
+	 * @param parent
+	 * @param child
+	 * @param children
+	 * @param depth
+	 */
+	private void rloadfromnodelist(DefaultTreeModel model, DefaultMutableTreeNode root /*root*/, DefaultMutableTreeNode parent /*packages*/, DefaultMutableTreeNode child /*project*/, NodeList children, Integer depth)
+	{
+		try
+		{
+			//if (child == null)
+			//return;
+
+			//
+
+			if (parent == null)
+				return;
+
+			//
+
+			//
+
+			for (int i = 0; i < children.getLength(); i++)
+			{
+				//
+
+				Node node = children.item(i);
+
+				//
+
+				ApmlJTreeNode apml_node;
+
+				apml_node = new ApmlJTreeNode(node);
+
+				apml_node.setAllowsChildren(true);
+
+				//
+
+				AttributeFolderJTreeNode attr_folder;
+
+				attr_folder = new AttributeFolderJTreeNode("attributes");
+
+				attr_folder.setAllowsChildren(true);
+
+				//
+
+				AttributeLeafJTreeNode attr_node;
+
+				//
+
+				if (node.getNodeType() == Node.ELEMENT_NODE)
+				{
+					for (int j = 0; j < node.getAttributes().getLength(); j++)
+					{
+						attr_node = new AttributeLeafJTreeNode(node.getAttributes().item(j).getNodeName() + " : " + node.getAttributes().item(j).getNodeValue());
+
+						attr_node.setAllowsChildren(false);
+
+						attr_folder.insert(attr_node, attr_folder.getChildCount() == 0 ? 0 : attr_folder.getChildCount() - 1);
+					}
+				}
+
+				//
+
+				int parent_insertion_index = parent.getChildCount() == 0 ? 0 : parent.getChildCount() - 1;
+
+				int apml_insertion_index = apml_node.getChildCount() == 0 ? 0 : apml_node.getChildCount() - 1;
+
+				//
+
+				rloadfromnodelist(model, root, apml_node, apml_node, children.item(i).getChildNodes(), depth + 1);
+
+				//
+
+				model.insertNodeInto(apml_node, parent, parent_insertion_index);
+
+				model.insertNodeInto(attr_folder, apml_node, apml_insertion_index);
+
+				//
+			}
+
+			//
+
+			model.reload();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

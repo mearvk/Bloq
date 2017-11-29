@@ -8,7 +8,6 @@ import org.system.interfaces.BooleanRunnable;
 import org.widgets.*;
 
 import javax.swing.*;
-import javax.xml.xpath.XPathFactory;
 import java.awt.event.ActionEvent;
 import java.io.ByteArrayInputStream;
 
@@ -172,7 +171,7 @@ class ApmlStructureUpdateRequest implements Runnable
 
 		//
 
-		this.jtree.loadfromtextpane(reload_tree_event);
+		this.jtree.loadfrombytes(reload_tree_event);
 
 		this.jtree.removenewlinetextnodes();
 

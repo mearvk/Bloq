@@ -12,6 +12,11 @@ import java.io.File;
 public class AttributeSensitiveJTreeCellRenderer extends DefaultTreeCellRenderer
 {
 
+	public AttributeSensitiveJTreeCellRenderer()
+	{
+
+	}
+
 	@Override
 	public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean exp, boolean leaf, int row, boolean hasFocus)
 	{

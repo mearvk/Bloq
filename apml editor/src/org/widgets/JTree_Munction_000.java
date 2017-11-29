@@ -39,7 +39,7 @@ import java.util.Enumeration;
  * @see
  * @since
  */
-public class JTree_Munction_000 extends JTree
+public class JTree_Munction_000 extends JTree_000
 {
 	public String bodi = "//editor/ui/jtree_munction_000";
 
@@ -70,6 +70,8 @@ public class JTree_Munction_000 extends JTree
 	 */
 	public JTree_Munction_000(Component parent)
 	{
+		super(parent);
+
 		// setters
 
 		this.setBackground(null);
@@ -107,6 +109,8 @@ public class JTree_Munction_000 extends JTree
 	 */
 	public JTree_Munction_000(Component parent, Apmlbasesystem system)
 	{
+		super(parent, system);
+
 		// setters
 
 		this.setBackground(null);
@@ -164,12 +168,12 @@ public class JTree_Munction_000 extends JTree
 		}
 	}
 
-	public void rloadfromnodelist(CloseApmlDocumentEvent event)
+	public void removeallchildren(CloseApmlDocumentEvent event)
 	{
 		((DefaultMutableTreeNode) this.getModel().getRoot()).removeAllChildren();
 	}
 
-	public void rloadfromnodelist(LoadMunctionTreeEvent event)
+	public void loadfromfile(LoadMunctionTreeEvent event)
 	{
 		File file = event.getFileRef();
 
