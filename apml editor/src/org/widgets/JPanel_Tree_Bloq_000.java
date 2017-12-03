@@ -258,7 +258,7 @@ class JScrollpane_Tree_Bloq extends JScrollPane
 	public Dimension getPreferredSize()
 	{
 
-		JPanel_Backboard_For_Bloq apml_backboard = (JPanel_Backboard_For_Bloq) Bodi.context("editor").pull("//editor/ui/jpanel_backboard_for_bloq");
+		BloqBackboard apml_backboard = (BloqBackboard) Bodi.context("editor").pull("//editor/ui/bloq_board");
 
 		//
 

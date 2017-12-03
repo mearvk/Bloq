@@ -78,7 +78,7 @@ public class JTree_Munction_000 extends JTree_000
 
 		// setters
 
-		this.setBackground(null);
+		this.setBackground(new Color(213, 213, 213));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 10));
 
@@ -117,7 +117,7 @@ public class JTree_Munction_000 extends JTree_000
 
 		// setters
 
-		this.setBackground(null);
+		this.setBackground(new Color(213, 213, 213));
 
 		this.setCellRenderer(new TranslucentJTreeCellRenderer());
 

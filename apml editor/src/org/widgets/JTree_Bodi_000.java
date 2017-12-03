@@ -3,15 +3,13 @@ package org.widgets;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.xpath.helpers.Xpathquick;
+import org.custom.ui.BloqJTreeNode;
 import org.custom.ui.BodiJTreeNode;
 import org.custom.ui.TranslucentJTreeCellRenderer;
 import org.events.CloseBodiDocumentEvent;
 import org.events.LoadBodiTreeEvent;
 import org.listeners.BodiJTreeOnClickListener;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -77,7 +75,7 @@ public class JTree_Bodi_000 extends JTree_000
 
 		// setters
 
-		this.setBackground(null);
+		this.setBackground(new Color(213, 213, 213));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 10));
 
@@ -116,7 +114,7 @@ public class JTree_Bodi_000 extends JTree_000
 
 		// setters
 
-		this.setBackground(null);
+		this.setBackground(new Color(213, 213, 213));
 
 		this.setCellRenderer(new TranslucentJTreeCellRenderer());
 
@@ -196,6 +194,12 @@ public class JTree_Bodi_000 extends JTree_000
 
 		DefaultMutableTreeNode root;
 
+		BloqJTreeNode bloqnode;
+
+		DefaultMutableTreeNode manifestnode;
+
+		DefaultMutableTreeNode packagesnode;
+
 		DefaultMutableTreeNode manifests;
 
 		XPath xpath;
@@ -218,9 +222,68 @@ public class JTree_Bodi_000 extends JTree_000
 
 			//
 
+			bloqnode = new BloqJTreeNode("☬ Bodi view", true);
+
+			manifestnode = new DefaultMutableTreeNode("☬ Manifest view", true);
+
+			packagesnode = new DefaultMutableTreeNode("☬ Packages view", true);
+
+			//
+
 			manifests = new DefaultMutableTreeNode("manifests", true);
 
 			//
+
+			model.insertNodeInto(bloqnode, root, 0);
+
+			model.insertNodeInto(manifestnode, root, 1);
+
+			model.insertNodeInto(packagesnode, root, 2);
+
+			//
+
+			NodeList basedirnodelist;
+
+			basedirnodelist = Xpathquick.evaluate(document, xpath, "//project/packages[@basedir]");
+
+			//
+
+			NodeList packagesnodelist;
+
+			packagesnodelist = Xpathquick.evaluate(document, xpath, "//project/packages/package");
+
+			//
+
+			String basedirstring;
+
+			if (basedirnodelist.getLength() == 0)
+			{
+				System.out.println("Bodi manifest document did not have a basedir value; debug before continuing.");
+
+				return;
+			}
+
+			if (basedirnodelist.getLength() == 1)
+			{
+				System.out.println("Bodi manifest document did have a basedir value; checked value was/is '" + ((Element) basedirnodelist.item(0)).getAttribute("basedir") + "' .");
+			}
+
+			if (basedirnodelist.getLength() > 1)
+			{
+				System.out.println("Bodi manifest document has ambiguous basedir value; debug before continuing.");
+
+				return;
+			}
+
+			//
+
+			System.out.println(basedirnodelist.item(0).getNodeType());
+
+			basedirstring = ((Element) basedirnodelist.item(0)).getAttribute("basedir");
+
+			File basedir = new File(basedirstring + "/source");
+
+			this.rloadfromnodelist(basedir, event, document, model, root, packagesnode, null, nodes, 0);
 
 			model.insertNodeInto(manifests, root, 0);
 

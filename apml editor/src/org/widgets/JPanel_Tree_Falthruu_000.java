@@ -258,7 +258,7 @@ class JScrollpane_Tree_Falthruu extends JScrollPane
 	public Dimension getPreferredSize()
 	{
 
-		JPanel_Backboard_For_Falthruu falthruu_backboard = (JPanel_Backboard_For_Falthruu) Bodi.context("editor").pull("//editor/ui/jpanel_backboard_for_falthruu");
+		FalthruuBackboard falthruu_backboard = (FalthruuBackboard) Bodi.context("editor").pull("//editor/ui/falthruu_board");
 
 		//
 

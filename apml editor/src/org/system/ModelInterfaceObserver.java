@@ -2,6 +2,7 @@ package org.system;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
+import apml.system.bodi.Bodicontext;
 import apml.xpath.helpers.Xpathquick;
 import org.events.ReloadApmlTreeEvent;
 import org.w3c.dom.*;
@@ -121,6 +122,8 @@ class ApmlTextPaneObserver extends Thread implements DocumentListener
 
 	public ApmlTextPaneObserver()
 	{
+		Bodicontext context = Bodi.context("editor");
+
 		this.textpane = (RSTextPane_Apml_000) Bodi.context("editor").pull("//editor/ui/rstextpane_apml_000");
 
 		this.textpane.getDocument().addDocumentListener(this);

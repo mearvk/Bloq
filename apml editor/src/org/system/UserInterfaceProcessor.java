@@ -396,7 +396,6 @@ class LoadBodiDocumentRequest
 	}
 }
 
-
 class LoadBloqTreeRequest
 {
 	public UserInterfaceProcessor processor;
@@ -792,7 +791,6 @@ class LoadMunctionTreeRequest
 		jtree_munction_000.removenewlinetextnodes();
 	}
 }
-
 
 class SaveMunctionDocumentRequest
 {
@@ -1892,7 +1890,7 @@ class SaveDocumentRequest
 
 					break;
 
-				//munction_analysis
+				//munction
 				case 3:
 
 					this.processor.enact(new SaveMunctionDocumentEvent(event, event.fileRef));

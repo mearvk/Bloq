@@ -7,6 +7,7 @@ import org.custom.ui.*;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadApmlTreeEvent;
 import org.events.ReloadApmlTreeEvent;
+import org.helpers.TreeExpansionUtil;
 import org.listeners.*;
 import org.w3c.dom.*;
 
@@ -76,7 +77,7 @@ public class JTree_Apml_000 extends JTree_000
 
 		// setters
 
-		this.setBackground(new Color(213, 213, 213));
+		this.setBackground(new Color(0xe8, 0xe8, 0xe8));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 10));
 
@@ -123,7 +124,7 @@ public class JTree_Apml_000 extends JTree_000
 
 		// setters
 
-		this.setBackground(new Color(213, 213, 213));
+		this.setBackground(new Color(0xe0, 0xf0, 0xf0));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 10));
 
@@ -224,6 +225,12 @@ public class JTree_Apml_000 extends JTree_000
 
 		//
 
+		TreeExpansionUtil util = new TreeExpansionUtil(this);
+
+		String state = util.getExpansionState();
+
+		//
+
 		try
 		{
 			//
@@ -320,11 +327,11 @@ public class JTree_Apml_000 extends JTree_000
 
 			//
 
-			apmlfoldernode = new DefaultMutableTreeNode("apml", true);
+			apmlfoldernode = new DefaultMutableTreeNode("☬ Apml view", true);
 
-			manifestfoldernode = new DefaultMutableTreeNode("manifest", true);
+			manifestfoldernode = new DefaultMutableTreeNode("☬ Manifest view", true);
 
-			packagesfoldernode = new DefaultMutableTreeNode("packages", true);
+			packagesfoldernode = new DefaultMutableTreeNode("☬ Packages view", true);
 
 			//
 
@@ -333,12 +340,6 @@ public class JTree_Apml_000 extends JTree_000
 			manifestfoldernode.setAllowsChildren(true);
 
 			packagesfoldernode.setAllowsChildren(true);
-
-			//
-
-			//childnode = new DefaultMutableTreeNode(nodes.item(0));
-
-			//childnode.setAllowsChildren(true);
 
 			//
 
@@ -362,7 +363,11 @@ public class JTree_Apml_000 extends JTree_000
 
 			//
 
-			ApmlJTreeNode manifestnode = new ApmlJTreeNode(this.last_selected_manifest_file.getName(), this.last_selected_manifest_file);
+			ApmlJTreeNode manifestnode;
+
+			manifestnode = new ApmlJTreeNode(this.last_selected_manifest_file.getName(), this.last_selected_manifest_file);
+
+			//
 
 			model.insertNodeInto(manifestnode, manifestfoldernode, 0);
 
@@ -376,7 +381,9 @@ public class JTree_Apml_000 extends JTree_000
 			{
 				System.out.println("No APML XML document found.");
 
-				ApmlJTreeNode emptyxmlnode = new ApmlJTreeNode(document.createElement("empty"));
+				ApmlJTreeNode emptyxmlnode;
+
+				emptyxmlnode = new ApmlJTreeNode(document.createElement("empty"));
 
 				model.insertNodeInto(emptyxmlnode, apmlfoldernode, 0);
 			}
@@ -407,7 +414,13 @@ public class JTree_Apml_000 extends JTree_000
 
 					File apmlxmlfile = new File(filepath);
 
-					ApmlJTreeNode apmlxmlnode = new ApmlJTreeNode(apmlxmlfile.getName(), apmlxmlfile);
+					//
+
+					ApmlJTreeNode apmlxmlnode;
+
+					apmlxmlnode = new ApmlJTreeNode(apmlxmlfile.getName(), apmlxmlfile);
+
+					//
 
 					model.insertNodeInto(apmlxmlnode, apmlfoldernode, 0);
 
@@ -419,9 +432,7 @@ public class JTree_Apml_000 extends JTree_000
 
 			//
 
-			this.expandRow(1);
-
-			this.expandRow(2);
+			util.setExpansionState(state);
 
 			//
 		}
@@ -559,11 +570,11 @@ public class JTree_Apml_000 extends JTree_000
 
 			//
 
-			apmlfoldernode = new DefaultMutableTreeNode("apml", true);
+			apmlfoldernode = new DefaultMutableTreeNode("☬ APML view", true);
 
-			manifestfoldernode = new DefaultMutableTreeNode("manifest", true);
+			manifestfoldernode = new DefaultMutableTreeNode("☬ Manifest view", true);
 
-			packagesfoldernode = new DefaultMutableTreeNode("packages", true);
+			packagesfoldernode = new DefaultMutableTreeNode("☬ XML view", true);
 
 			//
 
@@ -601,7 +612,11 @@ public class JTree_Apml_000 extends JTree_000
 
 			//
 
-			ApmlJTreeNode manifestnode = new ApmlJTreeNode(this.last_selected_manifest_file.getName(), this.last_selected_manifest_file);
+			ApmlJTreeNode manifestnode;
+
+			manifestnode = new ApmlJTreeNode(this.last_selected_manifest_file.getName(), this.last_selected_manifest_file);
+
+			//
 
 			model.insertNodeInto(manifestnode, manifestfoldernode, 0);
 

@@ -258,7 +258,7 @@ class JScrollpane_Tree_Bodi extends JScrollPane
 	public Dimension getPreferredSize()
 	{
 
-		JPanel_Backboard_For_Bodi bodi_backboard = (JPanel_Backboard_For_Bodi) Bodi.context("editor").pull("//editor/ui/jpanel_backboard_for_bodi");
+		BodiBackboard bodi_backboard = (BodiBackboard) Bodi.context("editor").pull("//editor/ui/bodi_board");
 
 		//
 

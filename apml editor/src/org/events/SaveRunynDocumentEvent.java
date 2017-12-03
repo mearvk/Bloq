@@ -29,7 +29,7 @@ public class SaveRunynDocumentEvent extends ActionEvent
 
 	public SaveRunynDocumentEvent(SaveDocumentEvent event, File fileRef)
 	{
-		super(event.getSource(), event.getID(), "save_sprung_document_event");
+		super(event.getSource(), event.getID(), "save_runyn_document_event");
 
 		this.event = event;
 
@@ -38,14 +38,14 @@ public class SaveRunynDocumentEvent extends ActionEvent
 
 	public SaveRunynDocumentEvent(ActionEvent event, ByteArrayInputStream byteRef)
 	{
-		super(event.getSource(), event.getID(), "save_sprung_document_event");
+		super(event.getSource(), event.getID(), "save_runyn_document_event");
 
 		this.byteRef = byteRef;
 	}
 
 	public SaveRunynDocumentEvent(ByteArrayInputStream byteRef)
 	{
-		super(new Object(), 0, "save_sprung_document_event");
+		super(new Object(), 0, "save_runyn_document_event");
 
 		this.byteRef = byteRef;
 	}

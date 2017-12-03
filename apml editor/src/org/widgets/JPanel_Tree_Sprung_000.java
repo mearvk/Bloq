@@ -258,7 +258,7 @@ class JScrollpane_Tree_Sprung extends JScrollPane
 	public Dimension getPreferredSize()
 	{
 
-		JPanel_Backboard_For_Sprung sprung_backboard = (JPanel_Backboard_For_Sprung) Bodi.context("editor").pull("//editor/ui/jpanel_backboard_for_sprung");
+		SprungBackboard sprung_backboard = (SprungBackboard) Bodi.context("editor").pull("//editor/ui/sprung_board");
 
 		//
 

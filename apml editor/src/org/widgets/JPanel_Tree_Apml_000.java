@@ -2,11 +2,9 @@ package org.widgets;
 
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
-import com.sun.java.swing.plaf.windows.WindowsBorders;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import java.awt.*;
@@ -72,7 +70,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(203, 203, 203));
+		this.setBackground(new Color(0xf8, 0xf8, 0xf8));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -106,7 +104,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(203, 203, 203));
+		this.setBackground(new Color(0xe8, 0xe8, 0xe8));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -141,7 +139,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(203, 203, 203));
+		this.setBackground(new Color(0xf8, 0xf8, 0xf8));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -176,7 +174,7 @@ public class JPanel_Tree_Apml_000 extends JPanel
 	{
 		// setters
 
-		this.setBackground(new Color(203, 203, 203));
+		this.setBackground(new Color(0xf8, 0xf8, 0xf8));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -248,7 +246,7 @@ class JScrollpane_Tree_Apml extends JScrollPane
 	public Dimension getPreferredSize()
 	{
 
-		JPanel_Backboard_For_Apml apml_backboard = (JPanel_Backboard_For_Apml) Bodi.context("editor").pull("//editor/ui/jpanel_backboard_for_apml");
+		ApmlBackboard apml_backboard = (ApmlBackboard) Bodi.context("editor").pull("//editor/ui/apml_board");
 
 		//
 

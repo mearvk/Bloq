@@ -2,8 +2,9 @@ package org.system;
 
 import apml.drivers.Stdbloqdriver;
 import apml.system.Apmlbasesystem;
-import org.bible.BibleLoader;
-import org.quran.QuranLoader;
+import apml.system.bodi.Bodi;
+import apml.system.bodi.Bodicontext;
+import org.helpers.Preloadable;
 import org.widgets.APMLGui;
 
 public class APMLEditor extends apml.modeling.Apmlsystem
@@ -25,12 +26,16 @@ public class APMLEditor extends apml.modeling.Apmlsystem
 	public APMLEditor(final Apmlbasesystem monitor)
 	{
 		this.monitor = monitor;
+
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	//
 	public APMLEditor()
 	{
-		this(null);
+		this.monitor = null;
+
+		Bodi.context("editor").put(this.bodi, this);
 	}
 
 	public static void main(String... args)
@@ -39,15 +44,29 @@ public class APMLEditor extends apml.modeling.Apmlsystem
 
 		//
 
-		apmlsystem.preload(APMLEditor.class, true, 0L, 4000L);
+		Bodicontext context;
 
-		apmlsystem.preload(APMLGui.class, true, 0L, 4000L);
+		context = Bodi.context("editor");
 
-		apmlsystem.preload(UserInterfaceProcessor.class, true, 0L,1000L);
+		apmlsystem.preloadables.add(new Preloadable(APMLEditor.class, true, 0L, 0L));
 
-		apmlsystem.preload(ModelInterfaceSystem.class, true,0L,1000L);
+		//context = Bodi.context("editor");
 
-		apmlsystem.preload(ModelInterfaceObserver.class, true,0L, 1000L);
+		apmlsystem.preloadables.add(new Preloadable(APMLGui.class, true, 0L, 0L));
+
+		//context = Bodi.context("editor");
+
+		apmlsystem.preloadables.add(new Preloadable(UserInterfaceProcessor.class, true, 0L, 0L));
+
+		//context = Bodi.context("editor");
+
+		apmlsystem.preloadables.add(new Preloadable(ModelInterfaceSystem.class, true, 0L, 0L));
+
+		//context = Bodi.context("editor");
+
+		apmlsystem.preloadables.add(new Preloadable(ModelInterfaceObserver.class, true, 0L, 0L));
+
+		//context = Bodi.context("editor");
 
 		//
 

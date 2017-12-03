@@ -258,7 +258,7 @@ class JScrollpane_Tree_Runyn extends JScrollPane
 	public Dimension getPreferredSize()
 	{
 
-		JPanel_Backboard_For_Runyn runyn_backboard = (JPanel_Backboard_For_Runyn) Bodi.context("editor").pull("//editor/ui/jpanel_backboard_for_runyn");
+		RunynBackboard runyn_backboard = (RunynBackboard) Bodi.context("editor").pull("//editor/ui/runyn_board");
 
 		//
 

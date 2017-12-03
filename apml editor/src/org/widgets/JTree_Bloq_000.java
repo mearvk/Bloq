@@ -1,17 +1,16 @@
 package org.widgets;
 
+import apml.helpers.Filegrepper;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.xpath.helpers.Xpathquick;
 import org.custom.ui.*;
 import org.events.CloseApmlDocumentEvent;
 import org.events.LoadBloqTreeEvent;
+import org.helpers.TreeExpansionUtil;
 import org.listeners.*;
 import org.system.ModelInterfaceSystem;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -77,7 +76,7 @@ public class JTree_Bloq_000 extends JTree_000
 
 		// setters
 
-		this.setBackground(null);
+		this.setBackground(new Color(213, 213, 213));
 
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 10));
 
@@ -118,7 +117,7 @@ public class JTree_Bloq_000 extends JTree_000
 
 		// setters
 
-		this.setBackground(null);
+		this.setBackground(new Color(213, 213, 213));
 
 		this.setCellRenderer(new TranslucentJTreeCellRenderer());
 
@@ -190,7 +189,7 @@ public class JTree_Bloq_000 extends JTree_000
 
 		DefaultMutableTreeNode root;
 
-		ApmlJTreeNode bloqnode;
+		BloqJTreeNode bloqnode;
 
 		DefaultMutableTreeNode manifestnode;
 
@@ -202,6 +201,14 @@ public class JTree_Bloq_000 extends JTree_000
 
 		XPath xpath;
 
+		//
+
+		TreeExpansionUtil util = new TreeExpansionUtil(this);
+
+		String state = util.getExpansionState();
+
+		//
+
 		NodeList nodes;
 
 		//
@@ -212,7 +219,7 @@ public class JTree_Bloq_000 extends JTree_000
 
 			xpath = XPathFactory.newInstance().newXPath();
 
-			nodes = Xpathquick.evaluate(document, xpath, "//project/packages/package[@default]");
+			nodes = Xpathquick.evaluate(document, xpath, "//project/packages/package[@name]");
 
 			model = (DefaultTreeModel) this.getModel();
 
@@ -220,11 +227,11 @@ public class JTree_Bloq_000 extends JTree_000
 
 			//
 
-			bloqnode = new ApmlJTreeNode("bloq", true);
+			bloqnode = new BloqJTreeNode("☬ Bloq view", true);
 
-			manifestnode = new DefaultMutableTreeNode("manifest", true);
+			manifestnode = new DefaultMutableTreeNode("☬ Manifest view", true);
 
-			packagesnode = new DefaultMutableTreeNode("packages", true);
+			packagesnode = new DefaultMutableTreeNode("☬ Packages view", true);
 
 			//
 
@@ -252,7 +259,48 @@ public class JTree_Bloq_000 extends JTree_000
 
 			//
 
-			this.rloadfromnodelist(file, event, document, model, root, packagesnode, childnode, nodes, 0);
+			NodeList basedirnodelist;
+
+			basedirnodelist = Xpathquick.evaluate(document, xpath, "//project/packages[@basedir]");
+
+			//
+
+			NodeList packagesnodelist;
+
+			packagesnodelist = Xpathquick.evaluate(document, xpath, "//project/packages/package");
+
+			//
+
+			String basedirstring;
+
+			if (basedirnodelist.getLength() == 0)
+			{
+				System.out.println("Bloq manifest document did not have a basedir value; debug before continuing.");
+
+				return;
+			}
+
+			if (basedirnodelist.getLength() == 1)
+			{
+				System.out.println("Bloq manifest document did have a basedir value; checked value was/is '" + ((Element) basedirnodelist.item(0)).getAttribute("basedir") + "' .");
+			}
+
+			if (basedirnodelist.getLength() > 1)
+			{
+				System.out.println("Bloq manifest document has ambiguous basedir value; debug before continuing.");
+
+				return;
+			}
+
+			//
+
+			System.out.println(basedirnodelist.item(0).getNodeType());
+
+			basedirstring = ((Element) basedirnodelist.item(0)).getAttribute("basedir");
+
+			File basedir = new File(basedirstring + "/source");
+
+			this.rloadfromnodelist(basedir, event, document, model, root, packagesnode, childnode, nodes, 0);
 
 			//
 
@@ -260,11 +308,7 @@ public class JTree_Bloq_000 extends JTree_000
 
 			model.insertNodeInto(bloqfilenode, bloqnode, 0);
 
-			//model.reload();
-
 			//
-
-			model.reload();
 		}
 		catch (Exception e)
 		{
@@ -295,7 +339,7 @@ public class JTree_Bloq_000 extends JTree_000
 
 			for(int j=0; j<files.length; j++)
 			{
-				System.out.println(files[j].getName());
+				//System.out.println(files[j].getName());
 
 				Node node = children.item(j);
 

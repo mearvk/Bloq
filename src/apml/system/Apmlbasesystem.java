@@ -8,8 +8,10 @@ import apml.modeling.Apmlobject;
 import apml.modeling.Apmlsubscriber;
 import apml.modeling.Apmlsystem;
 import apml.system.bodi.Bodi;
+import apml.system.bodi.Bodicontext;
 import apml.system.functions.DisplayMessage;
 import apml.system.work.Work;
+import org.helpers.Preloadable;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -58,6 +60,10 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	//
 
 	public ArrayList<String> classnames = new ArrayList();
+
+	//
+
+	public ArrayList<Preloadable> preloadables = new ArrayList<Preloadable>(0);
 
 
 	/**
@@ -181,60 +187,9 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	}
 
 	//
-	public Object preload(Object o, Boolean register)
+	public void queueforpreload(Class c/*class*/, Boolean r/*register*/, Long pre/*predelay*/, Long post/*postdelay*/)
 	{
-		//System.out.println("Apmlbasesystem doinstantiation() called...");
-
-		Object retval = null;
-
-		try
-		{
-			retval = o;
-		}
-		catch (Exception e)
-		{
-			//
-		}
-		finally
-		{
-			if (retval == null)
-				return null;
-
-			if (register == false)
-				return retval;
-
-			//
-
-			if (retval instanceof Apmlsystem)
-			{
-				((Apmlsystem) retval).monitor = this;
-
-				mountsystem((Apmlsystem) retval);
-			}
-
-			if (retval instanceof Apmlobject)
-			{
-				((Apmlobject) retval).monitor = this;
-
-				mountobject((Apmlobject) retval);
-			}
-
-			if (retval instanceof Apmllistener)
-			{
-				((Apmllistener) retval).monitor = this;
-
-				mountlistener((Apmllistener) retval);
-			}
-
-			if (retval instanceof Apmlsubscriber)
-			{
-				((Apmlsubscriber) retval).monitor = this;
-
-				mountsubscriber((Apmlsubscriber) retval);
-			}
-		}
-
-		return retval;
+		this.preloadables.add(new Preloadable(c, r, pre, post));
 	}
 
 	public Object postload(Class c, Boolean register)
@@ -293,92 +248,6 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 		return retval;
 	}
 
-	//
-	public Object preload(Class c, Boolean register, Long predelay, Long postdelay)
-	{
-		Object retval = null;
-
-		try
-		{
-			Thread.sleep(predelay);
-		}
-		catch(Exception predelayexception)
-		{
-			predelayexception.printStackTrace();
-		}
-		finally
-		{
-			retval = this.preload(c,register);
-
-			try
-			{
-				Thread.sleep(postdelay);
-			}
-			catch(Exception postdelayexception)
-			{
-				postdelayexception.printStackTrace();
-			}
-		}
-
-		return retval;
-	}
-
-	//
-	public Object preload(Class c, Boolean register)
-	{
-		//System.out.println("Apmlbasesystem preloads " + c.getName());
-
-		Object retval = null;
-
-		try
-		{
-			retval = c.newInstance();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			if (retval == null)
-				return null;
-
-			if (register == false)
-				return retval;
-
-			//
-
-			if (retval instanceof Apmlsystem)
-			{
-				((Apmlsystem) retval).monitor = this;
-
-				this.mountsystem((Apmlsystem) retval);
-			}
-
-			if (retval instanceof Apmlobject)
-			{
-				((Apmlobject) retval).monitor = this;
-
-				this.mountobject((Apmlobject) retval);
-			}
-
-			if (retval instanceof Apmllistener)
-			{
-				((Apmllistener) retval).monitor = this;
-
-				this.mountlistener((Apmllistener) retval);
-			}
-
-			if (retval instanceof Apmlsubscriber)
-			{
-				((Apmlsubscriber) retval).monitor = this;
-
-				this.mountsubscriber((Apmlsubscriber) retval);
-			}
-		}
-
-		return retval;
-	}
 
 	//
 	public final void setapmlfile(String apmlfile)
@@ -447,6 +316,31 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 	}
 
 	//
+
+	public void initpreloadables()
+	{
+		Bodicontext context;
+
+		for (Preloadable preloadable : preloadables)
+		{
+			try
+			{
+				preloadable.start();
+
+				preloadable.join();
+
+				context = Bodi.context("editor");
+
+				//preloadables.remove(preloadable);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+
+	//
 	public void initsystems()
 	{
 		for (Apmlsystem system : systems)
@@ -506,6 +400,10 @@ public class Apmlbasesystem implements apml.interfaces.BasicSystemElement
 		this.runner.init();
 
 		this.runner.start();
+
+		//
+
+		this.initpreloadables();
 
 		//
 

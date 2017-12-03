@@ -13,11 +13,11 @@ import java.io.ByteArrayInputStream;
 
 public class ModelInterfaceSystem extends Apmlsystem
 {
-	public final String bodi = "//editor/ui/observers/model_interface_system";
+	public final String bodi = "//editor/system/modelinterfacesystem";
 
 	//
 
-	public static final String static_bodi = "//editor/ui/observers/model_interface_system";
+	public static final String static_bodi = "//editor/system/modelinterfacesystem";
 
 	//
 
@@ -31,7 +31,7 @@ public class ModelInterfaceSystem extends Apmlsystem
 	{
 		//instantiation
 
-		this.object_000 = new ModelInterfaceObserver();
+		//this.object_000 = new ModelInterfaceObserver();
 
 		// bodi
 
@@ -47,7 +47,7 @@ public class ModelInterfaceSystem extends Apmlsystem
 	{
 		//instantiation
 
-		this.object_000 = new ModelInterfaceObserver();
+		//this.object_000 = new ModelInterfaceObserver();
 
 		// bodi
 

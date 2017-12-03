@@ -261,191 +261,200 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 	public void stateChanged(ChangeEvent event)
 	{
-		SwingUtilities.invokeLater(new Runnable()
+		try
 		{
-			@Override
-			public void run()
+			SwingUtilities.invokeLater(new Runnable()
 			{
-				if (event.getSource() instanceof JTabbedPane)
+				@Override
+				public void run()
 				{
-					JTabbedPane selectedPane = (JTabbedPane) event.getSource();
-
-					int selectedIndex = selectedPane.getSelectedIndex();
-
-					String panetitle = selectedPane.getTitleAt(selectedIndex);
-
-					selectedPane.setForeground(Color.WHITE);
-
-					selectedPane.setBackground(Color.WHITE);
-
-					APMLGui apmlgui;
-
-					switch (panetitle)
+					if (event.getSource() instanceof JTabbedPane)
 					{
-						case apmltitlestring:
+						JTabbedPane selectedPane = (JTabbedPane) event.getSource();
 
-							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+						int selectedIndex = selectedPane.getSelectedIndex();
 
-							apmlgui.remove(apmlgui.selected_panel);
+						String panetitle = selectedPane.getTitleAt(selectedIndex);
 
-							apmlgui.add(apmlgui.jpanel_backboard_for_apml);
+						selectedPane.setForeground(Color.WHITE);
 
-							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_apml;
+						selectedPane.setBackground(Color.WHITE);
 
-							apmlgui.jpanel_backboard_for_apml.revalidate();
+						APMLGui apmlgui;
 
-							apmlgui.jpanel_backboard_for_apml.invalidate();
+						switch (panetitle)
+						{
+							case apmltitlestring:
 
-							apmlgui.jpanel_backboard_for_apml.repaint();
+								apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
-							break;
+								apmlgui.remove(apmlgui.selected_panel);
 
-						case bloqtitlestring:
+								apmlgui.add(apmlgui.apml_board);
 
-							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+								apmlgui.selected_panel = apmlgui.apml_board;
 
-							apmlgui.remove(apmlgui.selected_panel);
+								apmlgui.apml_board.revalidate();
 
-							apmlgui.add(apmlgui.jpanel_backboard_for_bloq);
+								apmlgui.apml_board.invalidate();
 
-							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_bloq;
+								apmlgui.apml_board.repaint();
 
-							apmlgui.jpanel_backboard_for_bloq.revalidate();
+								break;
 
-							apmlgui.jpanel_backboard_for_bloq.invalidate();
+							case bloqtitlestring:
 
-							apmlgui.jpanel_backboard_for_bloq.repaint();
+								apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
-							break;
+								JPanel panel = apmlgui.selected_panel;
 
-						case bodititlestring:
+								apmlgui.remove(apmlgui.selected_panel);
 
-							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+								apmlgui.add(apmlgui.bloq_board);
 
-							apmlgui.remove(apmlgui.selected_panel);
+								apmlgui.selected_panel = apmlgui.bloq_board;
 
-							apmlgui.add(apmlgui.jpanel_backboard_for_bodi);
+								apmlgui.bloq_board.revalidate();
 
-							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_bodi;
+								apmlgui.bloq_board.invalidate();
 
-							apmlgui.jpanel_backboard_for_bodi.revalidate();
+								apmlgui.bloq_board.repaint();
 
-							apmlgui.jpanel_backboard_for_bodi.invalidate();
+								break;
 
-							apmlgui.jpanel_backboard_for_bodi.repaint();
+							case bodititlestring:
 
-							break;
+								apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
-						case munctiontitlestring:
+								apmlgui.remove(apmlgui.selected_panel);
 
-							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+								apmlgui.add(apmlgui.bodi_board);
 
-							apmlgui.remove(apmlgui.selected_panel);
+								apmlgui.selected_panel = apmlgui.bodi_board;
 
-							apmlgui.add(apmlgui.jpanel_backboard_for_munction);
+								apmlgui.bodi_board.revalidate();
 
-							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_munction;
+								apmlgui.bodi_board.invalidate();
 
-							apmlgui.jpanel_backboard_for_munction.revalidate();
+								apmlgui.bodi_board.repaint();
 
-							apmlgui.jpanel_backboard_for_munction.invalidate();
+								break;
 
-							apmlgui.jpanel_backboard_for_munction.repaint();
+							case munctiontitlestring:
 
-							break;
+								apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
-						case sprungtitlestring:
+								apmlgui.remove(apmlgui.selected_panel);
 
-							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+								apmlgui.add(apmlgui.munction_board);
 
-							apmlgui.remove(apmlgui.selected_panel);
+								apmlgui.selected_panel = apmlgui.munction_board;
 
-							apmlgui.add(apmlgui.jpanel_backboard_for_sprung);
+								apmlgui.munction_board.revalidate();
 
-							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_sprung;
+								apmlgui.munction_board.invalidate();
 
-							apmlgui.jpanel_backboard_for_sprung.revalidate();
+								apmlgui.munction_board.repaint();
 
-							apmlgui.jpanel_backboard_for_sprung.invalidate();
+								break;
 
-							apmlgui.jpanel_backboard_for_sprung.repaint();
+							case sprungtitlestring:
 
-							break;
+								apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
-						case runyntitlestring:
+								apmlgui.remove(apmlgui.selected_panel);
 
-							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+								apmlgui.add(apmlgui.sprung_board);
 
-							apmlgui.remove(apmlgui.selected_panel);
+								apmlgui.selected_panel = apmlgui.sprung_board;
 
-							apmlgui.add(apmlgui.jpanel_backboard_for_runyn);
+								apmlgui.sprung_board.revalidate();
 
-							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_runyn;
+								apmlgui.sprung_board.invalidate();
 
-							apmlgui.jpanel_backboard_for_runyn.revalidate();
+								apmlgui.sprung_board.repaint();
 
-							apmlgui.jpanel_backboard_for_runyn.invalidate();
+								break;
 
-							apmlgui.jpanel_backboard_for_runyn.repaint();
+							case runyntitlestring:
 
-							break;
+								apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
-						case falthruutitlestring:
+								apmlgui.remove(apmlgui.selected_panel);
 
-							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+								apmlgui.add(apmlgui.runyn_board);
 
-							apmlgui.remove(apmlgui.selected_panel);
+								apmlgui.selected_panel = apmlgui.runyn_board;
 
-							apmlgui.add(apmlgui.jpanel_backboard_for_falthruu);
+								apmlgui.runyn_board.revalidate();
 
-							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_falthruu;
+								apmlgui.runyn_board.invalidate();
 
-							apmlgui.jpanel_backboard_for_falthruu.revalidate();
+								apmlgui.runyn_board.repaint();
 
-							apmlgui.jpanel_backboard_for_falthruu.invalidate();
+								break;
 
-							apmlgui.jpanel_backboard_for_falthruu.repaint();
+							case falthruutitlestring:
 
-							break;
+								apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
-						case "      Bible  ☬":
+								apmlgui.remove(apmlgui.selected_panel);
 
-							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+								apmlgui.add(apmlgui.falthruu_board);
 
-							apmlgui.remove(apmlgui.selected_panel);
+								apmlgui.selected_panel = apmlgui.falthruu_board;
 
-							apmlgui.add(apmlgui.jpanel_backboard_for_bible);
+								apmlgui.falthruu_board.revalidate();
 
-							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_bible;
+								apmlgui.falthruu_board.invalidate();
 
-							apmlgui.jpanel_backboard_for_bible.revalidate();
+								apmlgui.falthruu_board.repaint();
 
-							apmlgui.jpanel_backboard_for_bible.invalidate();
+								break;
 
-							apmlgui.jpanel_backboard_for_bible.repaint();
+							case "      Bible  ☬":
 
-							break;
+								apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
 
-						case "      Quran  ☬":
+								apmlgui.remove(apmlgui.selected_panel);
 
-							apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+								apmlgui.add(apmlgui.jpanel_backboard_for_bible);
 
-							apmlgui.remove(apmlgui.selected_panel);
+								apmlgui.selected_panel = apmlgui.jpanel_backboard_for_bible;
 
-							apmlgui.add(apmlgui.jpanel_backboard_for_quran);
+								apmlgui.jpanel_backboard_for_bible.revalidate();
 
-							apmlgui.selected_panel = apmlgui.jpanel_backboard_for_quran;
+								apmlgui.jpanel_backboard_for_bible.invalidate();
 
-							apmlgui.jpanel_backboard_for_quran.revalidate();
+								apmlgui.jpanel_backboard_for_bible.repaint();
 
-							apmlgui.jpanel_backboard_for_quran.invalidate();
+								break;
 
-							apmlgui.jpanel_backboard_for_quran.repaint();
+							case "      Quran  ☬":
 
-							break;
+								apmlgui = (APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui");
+
+								apmlgui.remove(apmlgui.selected_panel);
+
+								apmlgui.add(apmlgui.jpanel_backboard_for_quran);
+
+								apmlgui.selected_panel = apmlgui.jpanel_backboard_for_quran;
+
+								apmlgui.jpanel_backboard_for_quran.revalidate();
+
+								apmlgui.jpanel_backboard_for_quran.invalidate();
+
+								apmlgui.jpanel_backboard_for_quran.repaint();
+
+								break;
+						}
 					}
 				}
-			}
-		});
+			});
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

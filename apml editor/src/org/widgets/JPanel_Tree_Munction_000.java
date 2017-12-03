@@ -258,7 +258,7 @@ class JScrollpane_Tree_Munction extends JScrollPane
 	public Dimension getPreferredSize()
 	{
 
-		JPanel_Backboard_For_Munction munction_backboard = (JPanel_Backboard_For_Munction) Bodi.context("editor").pull("//editor/ui/jpanel_backboard_for_munction");
+		MunctionBackboard munction_backboard = (MunctionBackboard) Bodi.context("editor").pull("//editor/ui/munction_board");
 
 		//
 
