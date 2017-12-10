@@ -23,13 +23,23 @@ public class Bloqinputmanager
 
     /*--------------------------------------------------------------------------*/
 	private final Integer hash = 0x00888fe8;
-	public ArrayList<Apmlmodelfile> factorymodels;
+
 	public ArrayList<Apmlmodelfile> apmlmodels;
+
 	public ArrayList<Apmlmodelfile> callbackmodels;
+
 	public ArrayList<Apmlmodelfile> definitionmodels;
+
+	public ArrayList<Apmlmodelfile> drivermodels;
+
 	public ArrayList<Apmlmodelfile> dynamiclistenermodels;
+
+	public ArrayList<Apmlmodelfile> factorymodels;
+
 	public ArrayList<Apmlmodelfile> listenermodels;
+
 	public ArrayList<Apmlmodelfile> objectmodels;
+
 	public ArrayList<Apmlmodelfile> subscribermodels;
     
     /*--------------------------------------------------------------------------*/
@@ -84,6 +94,10 @@ public class Bloqinputmanager
 		{
 			switch (apmltag)
 			{
+				case "//driver":
+					this.drivermodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
+					break;
+
 				case "//events":
 					this.apmlmodels = apmlmodelfiles = apmlmodelpopulator.getapmlmodelfiles(apmlxmlfile, apmltag);
 					break;

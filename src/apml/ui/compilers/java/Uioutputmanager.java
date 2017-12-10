@@ -3,12 +3,15 @@ package apml.ui.compilers.java;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.ui.compilers.java.builders.Jcmabstractbuilder;
+import apml.xpath.helpers.Xpathquick;
 import com.sun.codemodel.*;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -45,6 +48,8 @@ public class Uioutputmanager
 			{
 				Uiparameter uip = (Uiparameter) Bodi.context("widgets").pull(jcodemodel);
 
+				this.setpackage(uip);
+
 				this.setuisetters(uip);
 
 				this.setfields(uip);
@@ -57,13 +62,53 @@ public class Uioutputmanager
 
 				this.setconstructorcomments(uip);
 
-				uip.jcm.build(this.compiler.fileguardian.outputdir);
+				System.out.println("outputdir: " + new File(this.compiler.fileguardian.outputdir.getAbsolutePath() + "/project/source").getAbsolutePath());
+
+				//jcodemodel.build(new File(this.compiler.fileguardian.outputdir.getAbsolutePath()+"/project/source"));
+
+				uip.jcm.build(new File(this.compiler.fileguardian.outputdir.getAbsolutePath() + "/project/source"));
 			}
 		}
 		catch (Exception e)
 		{
 			//e.printStackTrace();
 		}
+	}
+
+	private void setpackage(Uiparameter uip)
+	{
+		return;
+
+		/*
+
+		None of this works; mystery as to why. Presume that Uioutputmanager has final say but apparently here this is not the case.
+
+		XPath xpath;
+
+		xpath = XPathFactory.newInstance().newXPath();
+
+		try
+		{
+			NodeList packagename;
+
+			packagename = Xpathquick.evaluate(DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(this.compiler.inputmanager.file), xpath, "//package[@default]");
+
+			if(packagename.getLength()==1)
+			{
+				String pname = ((Element)packagename.item(0)).getAttribute("default").trim().toLowerCase();
+
+				//
+
+				uip.jcm.packages().remove();
+
+				uip.jcm._package(pname);
+			}
+		}
+		catch(Exception e)
+		{
+			System.err.println("Error setting package in Uioutputmanager:setpackage");
+		}
+		*/
 	}
 
 	/**

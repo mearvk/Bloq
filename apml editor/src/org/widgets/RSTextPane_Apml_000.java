@@ -3,6 +3,7 @@ package org.widgets;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import org.fife.ui.rsyntaxtextarea.*;
+import org.helpers.ApmlKeyWordTokenMap;
 import org.listeners.CustomKeyEventListener;
 import org.listeners.LineCountDocumentListener;
 
@@ -33,7 +34,7 @@ public class RSTextPane_Apml_000 extends RSyntaxTextArea
 
 		//instantiation
 
-		this.document = new RSyntaxDocument(SYNTAX_STYLE_XML);
+		this.document = new RSyntaxDocument(SyntaxConstants.SYNTAX_STYLE_XML);
 
 		//
 
@@ -46,6 +47,8 @@ public class RSTextPane_Apml_000 extends RSyntaxTextArea
 		scheme.getStyle(Token.MARKUP_TAG_ATTRIBUTE_VALUE).foreground = Color.DARK_GRAY.darker().darker();
 
 		scheme.getStyle(Token.MARKUP_TAG_DELIMITER).foreground = Color.DARK_GRAY.darker();
+
+		this.setSyntaxScheme(scheme);
 
 		//bodi
 
@@ -73,11 +76,21 @@ public class RSTextPane_Apml_000 extends RSyntaxTextArea
 
 		this.setCurrentLineHighlightColor(new Color(225, 225, 225));
 
-		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+		this.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
+
+		//
+
+		AbstractTokenMakerFactory atmf;
+
+		atmf = (AbstractTokenMakerFactory) TokenMakerFactory.getDefaultInstance();
+
+		atmf.putMapping("text/apml", "org.helpers.ApmlKeyWordTokenMap");
+
+		this.setSyntaxEditingStyle("text/apml");
 
 		//instantiation
 
-		this.document = new RSyntaxDocument(SYNTAX_STYLE_HTML);
+		this.document = new RSyntaxDocument(SYNTAX_STYLE_XML);
 
 		//
 

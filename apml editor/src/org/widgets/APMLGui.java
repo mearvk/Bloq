@@ -298,80 +298,9 @@ public class APMLGui extends JFrame
 
 						//
 
-						UIManager.put("nimbusBase", Color.GRAY); //menuitems, jfilechooser //new Color(0x61, 0x61, 0x61)
-
-						UIManager.put("nimbusBlueGrey", new Color(0xa1, 0xa1, 0xa1)); //jmenubar
-
-						UIManager.put("control", new Color(0xef, 0xef, 0xef)); //jframe background
-
-						UIManager.put("nimbusFocus", new Color(0xff, 0xff, 0xff, Color.TRANSLUCENT));
-
-						UIManager.put("nimbusSelectionBackground", new Color(0x61, 0x61, 0x61));
+						UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Optima", Font.PLAIN, 12));
 
 						//
-
-						UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].backgroundPainter", new BackgroundPainter(new Color(73, 79, 79))); //86,198,192
-
-						UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+MouseOver].backgroundPainter", new BackgroundPainter(new Color(0x6c, 0x6c, 0x6c))); //52, 168, 171 //mouseover
-
-						UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+Pressed].backgroundPainter", new BackgroundPainter(new Color(0x4f, 0x5a, 0x5a)));
-
-						UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+Selected].backgroundPainter", new BackgroundPainter(new Color(56, 160, 161)));
-
-
-						UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+MouseOver+Selected].backgroundPainter", new BackgroundPainter(new Color(0x5c, 0x5c, 0x5c))); //56, 160, 161
-
-						UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Pressed+Selected].backgroundPainter", new BackgroundPainter(new Color(56, 160, 161)));
-
-						UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Selected].backgroundPainter", new BackgroundPainter(Color.GRAY)); //new Color(62, 172, 176)
-
-
-						UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[MouseOver+Selected].backgroundPainter", new BackgroundPainter(Color.GRAY)); //new Color(62, 172, 176)
-
-						UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Pressed+Selected].backgroundPainter", new BackgroundPainter(new Color(0xfa, 0xfa, 0xfa)));
-
-						UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Selected].backgroundPainter", new BackgroundPainter(new Color(0xfa, 0xfa, 0xfa)));
-
-
-						//
-
-						UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled].textForeground", new Color(250, 250, 250));
-
-						UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Enabled+Selected].textForeground", new Color(240, 240, 240));
-
-						UIManager.getLookAndFeelDefaults().put("TabbedPane:TabbedPaneTab[Focused+Selected].textForeground", new Color(230, 230, 230));
-
-						UIManager.put("TabbedPane:TabbedPaneTab[Enabled].font", new FontUIResource(new Font("HeadLineA", Font.ITALIC, 13)));
-
-						UIManager.put("TabbedPane:TabbedPaneTab[Enabled+Selected].font", new FontUIResource(new Font("HeadLineA", Font.ITALIC, 13)));
-
-						UIManager.put("TabbedPane:TabbedPaneTab[Focused+Selected].font", new FontUIResource(new Font("HeadLineA", Font.ITALIC, 13)));
-
-						UIManager.put("TabbedPane.font", new FontUIResource(new Font("HeadLineA", Font.ITALIC, 13)));
-
-						//
-
-						ImageIcon open = null;
-
-						ImageIcon closed = null;
-
-						ImageIcon leaf = null;
-
-						try
-						{
-							open = new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/folder_icon_open_20x20.png");
-
-							closed = new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/folder_icon_closed_20x20.png");
-
-							leaf = new ImageIcon("/Users/mrupplin/IdeaProjects/bloq/apml editor/src/org/widgets/images/java_icon.png");
-						}
-						catch (Exception e)
-						{
-							e.printStackTrace();
-						}
-
-
-						//SwingUtilities.updateComponentTreeUI(null);
 					}
 					catch (Exception e)
 					{
@@ -426,7 +355,7 @@ class BackgroundPainter implements Painter<JComponent>
 
 			//
 
-			g.setColor(Color.WHITE); //
+			g.setColor(Color.LIGHT_GRAY); //
 
 			g.fillRect(2, -4, width - 2, 5);
 

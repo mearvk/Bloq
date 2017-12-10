@@ -63,7 +63,11 @@ public abstract class Standardabstractapmlcompiler
 				this.fileguardian.tempdirfile.mkdirs();
 
 			if (!this.fileguardian.apmlinputfile.exists())
-				throw new Exception("ApmlTagHandler::constructor:Could not find the system's APML file");
+			{
+				//System.out.println("APML source file supposedly is: "+this.fileguardian.apmlinputfile.getAbsolutePath());
+
+				//throw new Exception("ApmlTagHandler::constructor:Could not find the system's APML file");
+			}
 		}
 		catch (Exception exception)
 		{

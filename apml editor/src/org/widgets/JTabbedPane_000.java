@@ -58,19 +58,19 @@ public class JTabbedPane_000 extends JTabbedPane implements ChangeListener
 
 	//
 
-	public final String apmltitlestring = "☬      Apml";
+	public final String apmltitlestring = "☬  Apml               ";
 
-	public final String bloqtitlestring = "☬      Bloq";
+	public final String bloqtitlestring = "☬  Bloq               ";
 
-	public final String bodititlestring = "☬      Bodi";
+	public final String bodititlestring = "☬  Bodi               ";
 
-	public final String munctiontitlestring = "☬      Munction";
+	public final String munctiontitlestring = "☬  Munction               ";
 
-	public final String runyntitlestring = "☬      Runyn";
+	public final String runyntitlestring = "☬  Runyn               ";
 
-	public final String sprungtitlestring = "☬      Sprung";
+	public final String sprungtitlestring = "☬  Sprung               ";
 
-	public final String falthruutitlestring = "☬      Falthruu";
+	public final String falthruutitlestring = "☬  Falthruu               ";
 
 	/**
 	 * @param parent : The tree AWT object.

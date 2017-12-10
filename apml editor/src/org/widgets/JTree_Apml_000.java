@@ -41,30 +41,52 @@ public class JTree_Apml_000 extends JTree_000
 	public String bodi = "//editor/ui/jtree_apml_000";
 
 	public KeyEvent importref_001;
+
 	public KeyStroke importref_002;
+
 	public ActionEvent importref_003;
+
 	public ImageIcon importref_004;
+
 	public URL importref_005;
+
 	public Color importref_006;
+
 	public BorderLayout importref_007;
+
 	public FlowLayout importref_008;
+
 	public GridLayout importref_009;
+
 	public Color importref_010;
+
 	public EmptyBorder importref_011;
+
 	public ChangeEvent importref_012;
+
 	public Dimension importref_013;
+
 	public Rectangle importref_014;
+
 	public ImageIO importref_015;
+
 	public File importref_016;
 
 	//
 
 	public Component parent;
+
 	public Apmlbasesystem system;
 
 	//
 
 	public Integer selected_child_index;
+
+	//
+
+	public File apmlfile;
+
+	public File manifestfile;
 
 	//
 
@@ -414,6 +436,7 @@ public class JTree_Apml_000 extends JTree_000
 
 					File apmlxmlfile = new File(filepath);
 
+
 					//
 
 					ApmlJTreeNode apmlxmlnode;
@@ -448,7 +471,7 @@ public class JTree_Apml_000 extends JTree_000
 	 */
 	public void loadfromfile(LoadApmlTreeEvent event)
 	{
-		File file = event.getFileRef();
+		File file = this.manifestfile = event.getFileRef();
 
 		Document document = null;
 
@@ -659,9 +682,19 @@ public class JTree_Apml_000 extends JTree_000
 
 					System.err.println("Filepath: " + filepath);
 
-					File apmlxmlfile = new File(filepath);
+					//
 
-					ApmlJTreeNode apmlxmlnode = new ApmlJTreeNode(apmlxmlfile.getName(), apmlxmlfile);
+					File apmlxmlfile;
+
+					apmlxmlfile = new File(filepath);
+
+					this.apmlfile = apmlxmlfile;
+
+					//
+
+					ApmlJTreeNode apmlxmlnode;
+
+					apmlxmlnode = new ApmlJTreeNode(apmlxmlfile.getName(), apmlxmlfile);
 
 					model.insertNodeInto(apmlxmlnode, apmlfoldernode, 0);
 

@@ -229,6 +229,10 @@ public class Bloqjcmpopulator
 					docallbackbloqs(param);
 					break;
 
+				case "driver":
+					dodriverbloqs(param);
+					break;
+
 				case "dynamiclistener":
 					dodynamiclistenerbloqs(param);
 					break;
@@ -254,6 +258,49 @@ public class Bloqjcmpopulator
 		{
 			//e.printStackTrace(System.err);
 		}
+	}
+
+	private void dodriverbloqs(Bloqconvenienceparameter param)
+	{
+		JDefinedClass theclass = param.classref;
+
+		//
+
+		JMethod constructor1;
+
+		constructor1 = param.classref.constructor(JMod.PUBLIC);
+
+		constructor1.param(JMod.FINAL, Apmlbasesystem.class, "monitor");
+
+		constructor1.body().directStatement("\n");
+
+		constructor1.body().directStatement("this.monitor = monitor;\n");
+
+		for (int i = 0; i < param.apmlmodelfile.apmlsystems.size(); i++)
+		{
+			constructor1.body().directStatement("this.system_" + String.format("%03d", i) + " = new " + param.apmlmodelfile.apmlsystems.get(i).classname + "();\n");
+		}
+
+		//
+
+		JMethod constructor2;
+
+		constructor2 = param.classref.constructor(JMod.PUBLIC);
+
+		constructor2.body().directStatement("\n");
+
+		for (int i = 0; i < param.apmlmodelfile.apmlsystems.size(); i++)
+		{
+			constructor2.body().directStatement("this.system_" + String.format("%03d", i) + " = new " + param.apmlmodelfile.apmlsystems.get(i).classname + "();\n");
+		}
+
+		//
+
+		theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\"" + param.apmlmodelfile.bodi + "\"");
+
+		theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "id=\"" + param.apmlmodelfile.id + "\"");
+
+		theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "tag=\"" + param.apmlmodelfile.tagname + "\"");
 	}
 
 	private void doapmlbloqs(Bloqconvenienceparameter param)
@@ -294,12 +341,12 @@ public class Bloqjcmpopulator
 
 		JMethod callback;
 
-		callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
+		//callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
 
-		callback.param(JMod.FINAL, java.lang.Object.class, "event");
+		//callback.param(JMod.FINAL, java.lang.Object.class, "event");
 
-		callback.body().directStatement("return null;\n");
-        
+		//callback.body().directStatement("return null;\n");
+
         /*---------------------------------------------------------------------*/
 
 		theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\"" + param.apmlmodelfile.bodi + "\"");
@@ -310,7 +357,7 @@ public class Bloqjcmpopulator
         
         /*---------------------------------------------------------------------*/
 
-		param.classref.direct("\t\n\n//TODO: finish adding support...");
+		//param.classref.direct("\t\n\n//TODO: finish adding support...");
 	}
 
 	private void docallbackbloqs(Bloqconvenienceparameter param)
@@ -341,12 +388,12 @@ public class Bloqjcmpopulator
 
 		JMethod callback;
 
-		callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
+		//callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
 
-		callback.param(JMod.FINAL, java.lang.Object.class, "event");
+		//callback.param(JMod.FINAL, java.lang.Object.class, "event");
 
-		callback.body().directStatement("return null;\n");
-        
+		//callback.body().directStatement("return null;\n");
+
         /*---------------------------------------------------------------------*/
 
 		theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\"" + param.apmlmodelfile.bodi + "\"");
@@ -357,7 +404,7 @@ public class Bloqjcmpopulator
         
         /*---------------------------------------------------------------------*/
 
-		param.classref.direct("\t\n\n//TODO: finish adding support...");
+		//param.classref.direct("\t\n\n//TODO: finish adding support...");
 	}
 
 	private void dodynamiclistenerbloqs(Bloqconvenienceparameter param)
@@ -388,12 +435,12 @@ public class Bloqjcmpopulator
 
 		JMethod callback;
 
-		callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
+		//callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
 
-		callback.param(JMod.FINAL, java.lang.Object.class, "event");
+		//callback.param(JMod.FINAL, java.lang.Object.class, "event");
 
-		callback.body().directStatement("return null;\n");
-        
+		//callback.body().directStatement("return null;\n");
+
         /*---------------------------------------------------------------------*/
 
 		theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\"" + param.apmlmodelfile.bodi + "\"");
@@ -404,7 +451,7 @@ public class Bloqjcmpopulator
         
         /*---------------------------------------------------------------------*/
 
-		param.classref.direct("\t\n\n//TODO: finish adding support...");
+		//param.classref.direct("\t\n\n//TODO: finish adding support...");
 	}
 
 	private void dolistenerbloqs(Bloqconvenienceparameter param)
@@ -447,12 +494,12 @@ public class Bloqjcmpopulator
 
 		JMethod callback;
 
-		callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
+		//callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
 
-		callback.param(JMod.FINAL, java.lang.Object.class, "event");
+		//callback.param(JMod.FINAL, java.lang.Object.class, "event");
 
-		callback.body().directStatement("return null;\n");
-        
+		//callback.body().directStatement("return null;\n");
+
         /*---------------------------------------------------------------------*/
 
 		theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\"" + param.apmlmodelfile.bodi + "\"");
@@ -463,7 +510,7 @@ public class Bloqjcmpopulator
         
         /*---------------------------------------------------------------------*/
 
-		param.classref.direct("\t\n\n//TODO: finish adding support...");
+		//param.classref.direct("\t\n\n//TODO: finish adding support...");
 	}
 
 	/**
@@ -530,12 +577,12 @@ public class Bloqjcmpopulator
 
 		JMethod callback;
 
-		callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
+		//callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
 
-		callback.param(JMod.FINAL, java.lang.Object.class, "event");
+		//callback.param(JMod.FINAL, java.lang.Object.class, "event");
 
-		callback.body().directStatement("return null;\n");
-        
+		//callback.body().directStatement("return null;\n");
+
         /*---------------------------------------------------------------------*/
 
 		jcmclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\"" + param.apmlmodelfile.bodi + "\"");
@@ -546,7 +593,7 @@ public class Bloqjcmpopulator
         
         /*---------------------------------------------------------------------*/
 
-		param.classref.direct("\t\n\n//TODO: finish adding support...");
+		//param.classref.direct("\t\n\n//TODO: finish adding support...");
 	}
 
 	private void dosubscriberbloqs(Bloqconvenienceparameter param)
@@ -577,12 +624,12 @@ public class Bloqjcmpopulator
 
 		JMethod callback;
 
-		callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
+		//callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
 
-		callback.param(JMod.FINAL, java.lang.Object.class, "event");
+		//callback.param(JMod.FINAL, java.lang.Object.class, "event");
 
-		callback.body().directStatement("return null;\n");
-        
+		//callback.body().directStatement("return null;\n");
+
         /*---------------------------------------------------------------------*/
 
 		theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\"" + param.apmlmodelfile.bodi + "\"");
@@ -593,7 +640,7 @@ public class Bloqjcmpopulator
         
         /*---------------------------------------------------------------------*/
 
-		param.classref.direct("\t\n\n//TODO: finish adding support...");
+		//param.classref.direct("\t\n\n//TODO: finish adding support...");
 	}
 
 	private void dosystembloqs(Bloqconvenienceparameter param)
@@ -634,12 +681,12 @@ public class Bloqjcmpopulator
 
 		JMethod callback;
 
-		callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
+		//callback = param.classref.method(JMod.PUBLIC, java.lang.Object.class, "callback");
 
-		callback.param(JMod.FINAL, java.lang.Object.class, "event");
+		//callback.param(JMod.FINAL, java.lang.Object.class, "event");
 
-		callback.body().directStatement("return null;\n");
-        
+		//callback.body().directStatement("return null;\n");
+
         /*---------------------------------------------------------------------*/
 
 		theclass.field(JMod.PUBLIC | JMod.FINAL, java.lang.String.class, "bodi=\"" + param.apmlmodelfile.bodi + "\"");
@@ -650,7 +697,7 @@ public class Bloqjcmpopulator
         
         /*---------------------------------------------------------------------*/
 
-		param.classref.direct("\t\n\n//TODO: finish adding support...");
+		//param.classref.direct("\t\n\n//TODO: finish adding support...");
 	}
 
 	private void addjcmbodi(Bloqconvenienceparameter param)

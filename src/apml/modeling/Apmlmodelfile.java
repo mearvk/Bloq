@@ -20,6 +20,8 @@ public class Apmlmodelfile
 
 	public ArrayList<String> subscribers = new ArrayList();
 
+	public ArrayList<String> startables = new ArrayList();
+
 	public ArrayList<String> localinterfaces = new ArrayList();
 
 	public ArrayList<String> localclasses = new ArrayList();
@@ -27,6 +29,8 @@ public class Apmlmodelfile
 	public ArrayList<String> nestedclasses = new ArrayList();
 
 	//
+
+	public ArrayList<Apmldriver> apmldrivers = new ArrayList();
 
 	public ArrayList<Apmlimplement> apmlimplements = new ArrayList();
 

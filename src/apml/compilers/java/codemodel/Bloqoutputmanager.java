@@ -24,14 +24,25 @@ public class Bloqoutputmanager
 	public static final Logger LOGGER = Logger.getLogger(Bloqoutputmanager.class.getName());
 
     /*--------------------------------------------------------------------------*/
-	private final Integer hash = 0x00888fe8;
-	public ArrayList<JCodeModel> factorymodels;
+	private final Integer hash = 0x00888FE8;
+
+
 	public ArrayList<JCodeModel> apmlmodels;
+
 	public ArrayList<JCodeModel> callbackmodels;
+
 	public ArrayList<JCodeModel> definitionmodels;
+
+	public ArrayList<JCodeModel> drivermodels;
+
 	public ArrayList<JCodeModel> dynamiclistenermodels;
+
+	public ArrayList<JCodeModel> factorymodels;
+
 	public ArrayList<JCodeModel> listenermodels;
+
 	public ArrayList<JCodeModel> objectmodels;
+
 	public ArrayList<JCodeModel> subscribermodels;
     
     /*--------------------------------------------------------------------------*/
@@ -80,6 +91,10 @@ public class Bloqoutputmanager
 		{
 			switch (apmltag)
 			{
+				case "//driver":
+					jcmmanager.drivermodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
+					break;
+
 				case "//events":
 					jcmmanager.apmlmodels = jcmmodels_genericfiles = jcmmodelpopulator.getjcmmodelfiles(apmlmodelfiles);
 					break;

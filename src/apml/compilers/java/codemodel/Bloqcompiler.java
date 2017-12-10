@@ -18,8 +18,8 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
 	public static final Logger LOGGER = Logger.getLogger(Bloqcompiler.class.getName());
 
     /*--------------------------------------------------------------------------*/
-	private final Integer hash = 0x00888fe8;
-    
+	private final Integer hash = 0x00888FE8;
+
     /*--------------------------------------------------------------------------*/
 
 	public Bloqcompiler()
@@ -56,6 +56,8 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
 	{
 		try
 		{
+			this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//driver");
+
 			this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//factory");
 
 			this.inputmanager.dosetapmlfiles(fileguardian.apmlinputfile, "//events");
@@ -89,7 +91,13 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
 
 			this.inputmanager.dosettempfiles(bloqapmlmanager.callbackmodels);
 
+			this.inputmanager.dosettempfiles(bloqapmlmanager.drivermodels);
+
 			this.inputmanager.dosettempfiles(bloqapmlmanager.dynamiclistenermodels);
+
+			//this.inputmanager.dosettempfiles(bloqapmlmanager.eventmodels);
+
+			//this.inputmanager.dosettempfiles(bloqapmlmanager.factorymodels);
 
 			this.inputmanager.dosettempfiles(bloqapmlmanager.listenermodels);
 
@@ -112,13 +120,17 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
 	{
 		try
 		{
-			this.outputmanager.dosetoutputfiles(bloqapmlmanager.factorymodels, "//factory");
-
-			this.outputmanager.dosetoutputfiles(bloqapmlmanager.apmlmodels, "//events");
+			//this.outputmanager.dosetoutputfiles(bloqapmlmanager.callbackmodels, "//apml");
 
 			this.outputmanager.dosetoutputfiles(bloqapmlmanager.callbackmodels, "//callback");
 
+			this.outputmanager.dosetoutputfiles(bloqapmlmanager.drivermodels, "//driver");
+
 			this.outputmanager.dosetoutputfiles(bloqapmlmanager.dynamiclistenermodels, "//dynamiclistener");
+
+			this.outputmanager.dosetoutputfiles(bloqapmlmanager.apmlmodels, "//events");
+
+			this.outputmanager.dosetoutputfiles(bloqapmlmanager.factorymodels, "//factory");
 
 			this.outputmanager.dosetoutputfiles(bloqapmlmanager.listenermodels, "//listener");
 
@@ -141,13 +153,17 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
 	{
 		try
 		{
-			this.outputmanager.dosetsourcefiles(bloqjcmmanager.factorymodels);
-
 			this.outputmanager.dosetsourcefiles(bloqjcmmanager.apmlmodels);
 
 			this.outputmanager.dosetsourcefiles(bloqjcmmanager.callbackmodels);
 
+			this.outputmanager.dosetsourcefiles(bloqjcmmanager.drivermodels);
+
 			this.outputmanager.dosetsourcefiles(bloqjcmmanager.dynamiclistenermodels);
+
+			//this.outputmanager.dosetsourcefiles(bloqjcmmanager.eventmodels);
+
+			this.outputmanager.dosetsourcefiles(bloqjcmmanager.factorymodels);
 
 			this.outputmanager.dosetsourcefiles(bloqjcmmanager.listenermodels);
 
@@ -169,13 +185,17 @@ public class Bloqcompiler extends Standardabstractapmlcompiler
 	{
 		try
 		{
-			this.outputmanager.dowriteclassfiles(bloqapmlmanager.factorymodels);
-
 			this.outputmanager.dowriteclassfiles(bloqapmlmanager.apmlmodels);
 
 			this.outputmanager.dowriteclassfiles(bloqapmlmanager.callbackmodels);
 
+			this.outputmanager.dowriteclassfiles(bloqapmlmanager.drivermodels);
+
 			this.outputmanager.dowriteclassfiles(bloqapmlmanager.dynamiclistenermodels);
+
+			//this.outputmanager.dowriteclassfiles(bloqapmlmanager.eventmodels);
+
+			this.outputmanager.dowriteclassfiles(bloqapmlmanager.factorymodels);
 
 			this.outputmanager.dowriteclassfiles(bloqapmlmanager.listenermodels);
 

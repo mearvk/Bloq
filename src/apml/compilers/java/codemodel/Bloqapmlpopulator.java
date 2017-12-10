@@ -3,6 +3,7 @@ package apml.compilers.java.codemodel;
 import apml.helpers.Filegrepper;
 import apml.modeling.*;
 import apml.system.bodi.Bodi;
+import apml.xpath.helpers.Xpathquick;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -101,6 +102,9 @@ public final class Bloqapmlpopulator
 		{
 			switch (apmltag) //would probably need a 'parent' reference is all these cases given how it's been implemented
 			{
+				case "//driver":
+					return dodrivertags(xparam);
+
 				case "//events":
 					return doapmltags(xparam);
 
@@ -128,6 +132,132 @@ public final class Bloqapmlpopulator
 		}
 
 		return null;
+	}
+
+	private ArrayList<Apmlmodelfile> dodrivertags(Bloqxpathparameter xparam) throws Exception
+	{
+		ArrayList<Apmlmodelfile> modelfiles = new ArrayList();
+
+		for (int index = 0; index < xparam.getnodecount(); index++)
+		{
+			Apmlmodelfile modelfile = new Apmlmodelfile();
+
+			try
+			{
+				modelfile.startables = this.getstartables(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.apmlimplements = this.getimplements(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.autostart = this.getautostarttag(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.bodi = this.getbodi(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.builddir = this.getbuilddir(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.classname = this.getclassname(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.defaultdir = this.getdefaultdir(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.id = this.getidtag(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.init = this.getinittag(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.packagename = this.getpackagename(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.run = this.getruntag(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.start = this.getstarttag(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.sourcedir = this.getsourcedir(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.superclass = this.getsuperclass(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.apmlsystems = this.getsystems(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			try
+			{
+				modelfile.tagname = this.gettagname(xparam, index);
+			}
+			catch (Exception e)
+			{/*LOGGER.log(Level.WARNING, e.getMessage(), e);*/}
+
+			modelfiles.add(modelfile);
+		}
+
+		return modelfiles;
 	}
 
 	private ArrayList<Apmlmodelfile> doapmltags(Bloqxpathparameter xparam) throws Exception
@@ -1238,6 +1368,27 @@ public final class Bloqapmlpopulator
 		}
 
 		return systems;
+	}
+
+	private ArrayList<String> getstartables(Bloqxpathparameter xparam, Integer index)
+	{
+		ArrayList<String> startables = new ArrayList<String>();
+
+		try
+		{
+			NodeList drivertags = (NodeList) xparam.xpath.evaluate("./startable", xparam.n0001_tagname.item(index), XPathConstants.NODESET);
+
+			for (int i = 0; i < drivertags.getLength(); i++)
+			{
+				startables.add(drivertags.item(i).getNodeName());
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return startables;
 	}
 
 	private ArrayList<Apmlimplement> getimplements(Bloqxpathparameter xparam, Integer index)

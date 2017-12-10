@@ -48,6 +48,8 @@ public class RSTextPane_Bloq_000 extends RSyntaxTextArea
 
 		scheme.getStyle(Token.MARKUP_TAG_DELIMITER).foreground = Color.DARK_GRAY.darker();
 
+		this.setSyntaxScheme(scheme);
+
 		//bodi
 
 		Bodi.context("editor").put(this.bodi, this);

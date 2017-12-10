@@ -1603,7 +1603,7 @@ class BuildApmlStandaloneRequest
 
 		//
 
-		this.bloq_compiler = new Bloqcompiler();
+
 
 		//
 
@@ -1638,6 +1638,8 @@ class BuildApmlStandaloneRequest
 			this.output.showSaveDialog((APMLGui) Bodi.context("editor").pull("//editor/ui/apmlgui"));
 
 			//
+
+			this.bloq_compiler = new Bloqcompiler();
 
 			this.bloq_compiler.fileguardian.basedirurl = this.output.getSelectedFile().getPath().toString() + "/";
 
@@ -1690,9 +1692,11 @@ class BuildApmlStandaloneRequest
 
 			//
 
-			processor.last_loaded_file = this.bloq_compiler.fileguardian.apmlinputfile;
+			JTree_Apml_000 jtree = (JTree_Apml_000) Bodi.context("editor").pull("//editor/ui/jtree_apml_000");
 
-			processor.last_loaded_file_url = this.bloq_compiler.fileguardian.apmlfilename;
+			processor.last_loaded_file = this.bloq_compiler.fileguardian.apmlinputfile = jtree.apmlfile;
+
+			processor.last_loaded_file_url = this.bloq_compiler.fileguardian.apmlfilename = jtree.apmlfile.getPath();
 
 			if (processor.last_loaded_file == null || processor.last_loaded_file_url == null || processor.last_loaded_file_url.length() == 0)
 			{

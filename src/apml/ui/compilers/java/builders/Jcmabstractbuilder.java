@@ -3,6 +3,7 @@ package apml.ui.compilers.java.builders;
 import apml.system.Apmlbasesystem;
 import apml.system.bodi.Bodi;
 import apml.ui.compilers.java.Uiparameter;
+import apml.xpath.helpers.Xpathquick;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMethod;
@@ -375,7 +376,28 @@ public class Jcmabstractbuilder
 	 */
 	public void setjcmpackage(Uiparameter uip) throws Exception
 	{
-		uip.jcm._package("org.widgets");
+
+		try
+		{
+			NodeList packagename;
+
+			packagename = Xpathquick.evaluate(DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(this.apml), xpath, "//package[@default]");
+
+			if (packagename.getLength() == 1)
+			{
+				String pname = ((Element) packagename.item(0)).getAttribute("default").trim().toLowerCase();
+
+				//
+
+				//uip.jcm.packages().remove();
+
+				uip.jcm._package(pname);
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("Error setting package in Uioutputmanager:setpackage");
+		}
 	}
 
 	/**
